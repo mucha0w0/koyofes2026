@@ -23,8 +23,8 @@ const sponsors: Sponsor[] = [
 
 function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
   return (
-    <div className="flex items-center justify-center h-16 px-8 bg-white border-2 border-foreground rounded shrink-0 hover:bg-primary hover:border-primary transition-all group" style={{ borderRadius: '5px' }}>
-      <span className="text-sm font-bold text-foreground group-hover:text-white whitespace-nowrap transition-colors">
+    <div className="flex items-center justify-center h-16 px-8 bg-card/50 border border-border rounded-lg shrink-0">
+      <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
         {sponsor.name}
       </span>
     </div>
@@ -72,13 +72,13 @@ export function Sponsors() {
   }, [])
 
   return (
-    <section className="py-12 md:py-16 bg-slate-100 overflow-hidden">
+    <section className="py-12 md:py-16 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4 mb-8">
         <div className="text-center">
-          <h2 className="text-xl md:text-2xl font-bold mb-2 section-h2-jp">
-            協賛企業
+          <h2 className="text-xl md:text-2xl font-bold mb-2">
+            <span className="text-primary">協賛</span>企業
           </h2>
-          <p className="text-sm text-foreground opacity-70">こうよう祭を支えてくださる企業様</p>
+          <p className="text-sm text-muted-foreground">こうよう祭を支えてくださる企業様</p>
         </div>
       </div>
 

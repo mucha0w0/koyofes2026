@@ -69,7 +69,7 @@ function DropdownMenu({ item }: { item: NavItem }) {
       onMouseLeave={() => setIsOpen(false)}
     >
       <button
-        className="flex items-center gap-1 px-4 py-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+        className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -81,7 +81,7 @@ function DropdownMenu({ item }: { item: NavItem }) {
         />
       </button>
       <div
-        className={`absolute top-full left-0 min-w-[200px] bg-white border border-border rounded-lg shadow-lg overflow-hidden transition-all duration-200 ${
+        className={`absolute top-full left-0 min-w-[200px] bg-popover border border-border rounded-lg shadow-xl overflow-hidden transition-all duration-200 ${
           isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible"
@@ -92,7 +92,7 @@ function DropdownMenu({ item }: { item: NavItem }) {
             <Link
               key={subItem.href}
               href={subItem.href}
-              className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors font-medium"
+              className="block px-4 py-2.5 text-sm text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               {subItem.label}
             </Link>
@@ -118,11 +118,11 @@ function MobileMenu({
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="flex items-center justify-between px-4 h-16 border-b border-border bg-background">
+      <div className="flex items-center justify-between px-4 h-16 border-b border-border">
         <span className="font-bold text-lg text-primary">こうよう祭 2026</span>
         <button
           onClick={onClose}
-          className="p-2 hover:bg-muted rounded transition-colors"
+          className="p-2 hover:bg-secondary rounded-lg transition-colors"
           aria-label="メニューを閉じる"
         >
           <X className="h-6 w-6" />
@@ -135,7 +135,7 @@ function MobileMenu({
               onClick={() =>
                 setOpenSection(openSection === item.label ? null : item.label)
               }
-              className="flex items-center justify-between w-full py-4 text-left font-bold text-foreground"
+              className="flex items-center justify-between w-full py-4 text-left font-medium"
             >
               {item.label}
               <ChevronDown
@@ -154,7 +154,7 @@ function MobileMenu({
                   key={subItem.href}
                   href={subItem.href}
                   onClick={onClose}
-                  className="block py-2.5 pl-4 text-foreground hover:text-primary transition-colors font-medium"
+                  className="block py-2.5 pl-4 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {subItem.label}
                 </Link>
@@ -171,14 +171,14 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-black tracking-tight text-foreground">
+          <div className="flex items-center gap-1">
+            <span className="text-2xl font-black tracking-tighter text-primary">
               こうよう祭
             </span>
-            <span className="text-xs font-bold text-white bg-primary px-2 py-1 rounded" style={{ borderRadius: '5px' }}>
+            <span className="text-xs font-bold text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">
               2026
             </span>
           </div>
@@ -194,7 +194,7 @@ export function SiteHeader() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(true)}
-          className="lg:hidden p-2 hover:bg-muted rounded transition-colors"
+          className="lg:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
           aria-label="メニューを開く"
         >
           <Menu className="h-6 w-6" />

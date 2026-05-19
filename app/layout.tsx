@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Noto_Sans_JP, Inter } from 'next/font/google'
+import { Geist, Geist_Mono, Noto_Sans_JP } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin", "latin-ext"], weight: ["400", "500", "700", "900"], variable: "--font-noto-sans-jp" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["400", "500", "700", "900"], variable: "--font-noto-sans-jp" });
 
 export const metadata: Metadata = {
   title: 'こうよう祭 2026 | 公式ウェブサイト',
@@ -37,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className={`${geist.variable} ${geistMono.variable} ${notoSansJP.variable} ${inter.variable} bg-background`}>
+    <html lang="ja" className={`${geist.variable} ${geistMono.variable} ${notoSansJP.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

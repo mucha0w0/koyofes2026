@@ -70,83 +70,81 @@ const news = [
 
 export function ContentSection() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         {/* Guide & About Links */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {/* ご案内 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold text-foreground section-h2-jp">
-                ご案内
+              <h2 className="text-xl md:text-2xl font-bold">
+                <span className="text-primary">ご</span>案内
               </h2>
               <Link
                 href="/guide"
-                className="flex items-center gap-1 text-sm text-primary hover:opacity-80 transition-opacity font-medium"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 すべて見る
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               {guideLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-4 p-4 bg-white border-2 border-foreground rounded hover:bg-primary hover:text-white hover:border-primary transition-all group"
-                  style={{ borderRadius: '5px' }}
+                  className="flex items-center gap-4 p-3 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-secondary/30 transition-all group"
                 >
-                  <div className="p-2 rounded text-primary group-hover:text-white transition-colors shrink-0">
-                    <link.icon className="h-5 w-5" />
+                  <div className="p-2 rounded-lg bg-secondary text-chart-2 group-hover:text-primary transition-colors">
+                    <link.icon className="h-4 w-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-bold text-sm group-hover:text-white transition-colors">
+                    <span className="font-medium text-sm group-hover:text-primary transition-colors">
                       {link.label}
                     </span>
-                    <p className="text-xs text-foreground opacity-70 truncate">
+                    <p className="text-xs text-muted-foreground truncate">
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-foreground group-hover:text-white transition-all shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
                 </Link>
               ))}
             </div>
           </div>
 
           {/* こうよう祭について */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold text-foreground section-h2-jp">
-                こうよう祭について
+              <h2 className="text-xl md:text-2xl font-bold">
+                <span className="text-primary">こうよう祭</span>について
               </h2>
               <Link
                 href="/about"
-                className="flex items-center gap-1 text-sm text-secondary hover:opacity-80 transition-opacity font-medium"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 すべて見る
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="grid gap-3">
+            <div className="grid gap-2">
               {aboutLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-4 p-4 bg-white border-2 border-foreground rounded hover:bg-secondary hover:text-white hover:border-secondary transition-all group"
-                  style={{ borderRadius: '5px' }}
+                  className="flex items-center gap-4 p-3 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-secondary/30 transition-all group"
                 >
-                  <div className="p-2 rounded text-secondary group-hover:text-white transition-colors shrink-0">
-                    <link.icon className="h-5 w-5" />
+                  <div className="p-2 rounded-lg bg-secondary text-chart-4 group-hover:text-primary transition-colors">
+                    <link.icon className="h-4 w-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-bold text-sm group-hover:text-white transition-colors">
+                    <span className="font-medium text-sm group-hover:text-primary transition-colors">
                       {link.label}
                     </span>
-                    <p className="text-xs text-foreground opacity-70 truncate">
+                    <p className="text-xs text-muted-foreground truncate">
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-foreground group-hover:text-white transition-all shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
                 </Link>
               ))}
             </div>
@@ -154,14 +152,14 @@ export function ContentSection() {
         </div>
 
         {/* News Section */}
-        <div className="space-y-6 border-t border-border pt-12">
+        <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl md:text-2xl font-bold text-foreground section-h2-jp">
+            <h2 className="text-xl md:text-2xl font-bold">
               お知らせ
             </h2>
             <Link
               href="/news"
-              className="flex items-center gap-1 text-sm text-primary hover:opacity-80 transition-opacity font-medium"
+              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               すべて見る
               <ArrowRight className="h-4 w-4" />
@@ -172,21 +170,20 @@ export function ContentSection() {
               <Link
                 key={index}
                 href="/news"
-                className="flex items-center gap-4 p-4 bg-white border-2 border-foreground rounded hover:bg-primary hover:text-white hover:border-primary transition-all group"
-                style={{ borderRadius: '5px' }}
+                className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors group"
               >
-                <span className="text-sm text-foreground group-hover:text-white font-bold shrink-0">
+                <span className="text-sm text-muted-foreground font-mono shrink-0">
                   {item.date}
                 </span>
                 {item.isNew && (
-                  <span className="text-xs font-bold text-white bg-secondary px-2 py-1 rounded shrink-0">
+                  <span className="text-xs font-bold text-accent px-2 py-0.5 bg-accent/10 rounded shrink-0">
                     NEW
                   </span>
                 )}
-                <span className="text-sm font-medium group-hover:text-white transition-colors truncate flex-1">
+                <span className="text-sm font-medium group-hover:text-primary transition-colors truncate">
                   {item.title}
                 </span>
-                <ArrowRight className="h-4 w-4 text-foreground group-hover:text-white shrink-0" />
+                <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground group-hover:text-primary shrink-0" />
               </Link>
             ))}
           </div>

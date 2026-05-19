@@ -34,55 +34,57 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative overflow-hidden bg-white border-b border-border">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 overflow-hidden opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
+    <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-secondary/30">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative container mx-auto px-4 py-16 md:py-24">
-        <div className="text-center space-y-6">
+      <div className="relative container mx-auto px-4 py-20 md:py-32">
+        <div className="text-center space-y-8">
           {/* Main Title */}
-          <div className="space-y-2">
-            <p className="text-sm md:text-base font-bold text-primary tracking-widest uppercase" style={{ fontSize: '12px' }}>
+          <div className="space-y-4">
+            <p className="text-sm md:text-base font-medium text-primary tracking-widest uppercase">
               令和8年度 文化祭
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-balance text-foreground hero-display">
-              こうよう祭 2026
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-balance">
+              <span className="text-primary">こうよう祭</span>
+              <span className="text-foreground"> 2026</span>
             </h1>
           </div>
 
           {/* Theme */}
-          <div className="inline-block pt-4">
-            <div className="bg-white border-2 border-primary rounded px-6 py-3 md:px-8 md:py-4" style={{ borderRadius: '5px' }}>
-              <p className="text-xs text-foreground mb-1 opacity-70">テーマ</p>
-              <p className="text-xl md:text-2xl font-bold text-foreground">
+          <div className="inline-block">
+            <div className="bg-card border border-border rounded-xl px-6 py-4 md:px-8 md:py-5">
+              <p className="text-xs text-muted-foreground mb-1">テーマ</p>
+              <p className="text-2xl md:text-3xl font-bold text-foreground">
                 「輝け、青春の一ページ」
               </p>
             </div>
           </div>
 
           {/* Event Info */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base pt-4">
-            <div className="flex items-center gap-2 text-foreground font-medium">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Calendar className="h-5 w-5 text-primary" />
               <span>2026年9月12日(土)・13日(日)</span>
             </div>
-            <div className="flex items-center gap-2 text-foreground font-medium">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Clock className="h-5 w-5 text-primary" />
               <span>9:00 〜 16:00</span>
             </div>
-            <div className="flex items-center gap-2 text-foreground font-medium">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <MapPin className="h-5 w-5 text-primary" />
               <span>紅葉高等学校</span>
             </div>
           </div>
 
           {/* Countdown */}
-          <div className="pt-6">
-            <p className="text-sm text-foreground font-medium mb-4">開催まで</p>
-            <div className="flex justify-center gap-2 md:gap-3">
+          <div className="pt-8">
+            <p className="text-sm text-muted-foreground mb-4">開催まで</p>
+            <div className="flex justify-center gap-3 md:gap-4">
               {[
                 { value: countdown.days, label: "日" },
                 { value: countdown.hours, label: "時間" },
@@ -91,19 +93,21 @@ export function HeroSection() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="bg-white border-2 border-foreground rounded p-2 md:p-3 min-w-[60px] md:min-w-[80px]"
-                  style={{ borderRadius: '5px' }}
+                  className="bg-card border border-border rounded-lg p-3 md:p-4 min-w-[70px] md:min-w-[90px]"
                 >
-                  <div className="text-xl md:text-3xl font-black text-primary tabular-nums">
+                  <div className="text-2xl md:text-4xl font-black text-primary tabular-nums">
                     {String(item.value).padStart(2, "0")}
                   </div>
-                  <div className="text-xs text-foreground font-medium">{item.label}</div>
+                  <div className="text-xs text-muted-foreground">{item.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   )
 }
