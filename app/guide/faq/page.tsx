@@ -1,0 +1,55 @@
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { PageLayout } from "@/components/page-layout"
+import { ChevronDown } from "lucide-react"
+
+const faqs = [
+  {
+    question: "入場料はかかりますか？",
+    answer: "入場料は無料です。どなたでもご来場いただけます。"
+  },
+  {
+    question: "駐車場はありますか？",
+    answer: "駐車場には限りがあるため、公共交通機関でのご来場をお願いしております。"
+  },
+  {
+    question: "雨天の場合は開催されますか？",
+    answer: "雨天でも開催いたします。ただし、屋外企画は中止となる場合があります。"
+  },
+  {
+    question: "飲食物の持ち込みはできますか？",
+    answer: "飲み物の持ち込みは可能です。校内に飲食企画もございますのでぜひご利用ください。"
+  },
+  {
+    question: "ベビーカーの利用はできますか？",
+    answer: "ご利用いただけます。ただし、混雑時は階段のみのルートとなる場合があります。"
+  },
+  {
+    question: "落とし物をした場合はどうすればよいですか？",
+    answer: "本館1階の受付にて落とし物の対応をしております。"
+  },
+]
+
+export default function FAQPage() {
+  return (
+    <>
+      <SiteHeader />
+      <PageLayout title="よくある質問" subtitle="お問い合わせの多いご質問にお答えします">
+        <div className="space-y-4 max-w-3xl">
+          {faqs.map((faq, i) => (
+            <details key={i} className="group bg-card border border-border rounded-xl overflow-hidden">
+              <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-secondary/50 transition-colors">
+                <span className="font-medium pr-4">{faq.question}</span>
+                <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0 group-open:rotate-180 transition-transform" />
+              </summary>
+              <div className="px-5 pb-5 text-muted-foreground">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </PageLayout>
+      <SiteFooter />
+    </>
+  )
+}
