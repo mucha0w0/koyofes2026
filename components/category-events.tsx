@@ -64,6 +64,9 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const scrollPositionRef = useRef(0)
   const isHoveredRef = useRef(false)
+  const isTouchingRef = useRef(false)
+  const touchStartXRef = useRef(0)
+  const scrollStartRef = useRef(0)
 
   useEffect(() => {
     const scrollContainer = scrollRef.current
@@ -73,16 +76,18 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     const speed = 0.3 // ゆっくりスクロール（遅くしました）
 
     const animate = () => {
-      if (!isHoveredRef.current) {
+      if (!isHoveredRef.current && !isTouchingRef.current) {
         scrollPositionRef.current += speed
 
         const firstSet = scrollContainer.querySelector('[data-event-set="1"]') as HTMLElement
         if (firstSet) {
           const setWidth = firstSet.offsetWidth
+          const setGap = 16 // gap-4 = 1rem = 16px
+          const totalSetWidth = setWidth + setGap
           
-          // セット幅で無限ループ（モジュロ演算）
-          if (scrollPositionRef.current >= setWidth) {
-            scrollPositionRef.current = scrollPositionRef.current % setWidth
+          // セット幅 + ギャップで無限ループ
+          if (scrollPositionRef.current >= totalSetWidth) {
+            scrollPositionRef.current -= totalSetWidth
           }
         }
 
@@ -101,13 +106,37 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       isHoveredRef.current = false
     }
 
+    // タッチイベント
+    const handleTouchStart = (e: TouchEvent) => {
+      isTouchingRef.current = true
+      touchStartXRef.current = e.touches[0].clientX
+      scrollStartRef.current = scrollContainer.scrollLeft
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isTouchingRef.current) return
+      const diff = e.touches[0].clientX - touchStartXRef.current
+      scrollContainer.scrollLeft = scrollStartRef.current - diff
+      scrollPositionRef.current = scrollContainer.scrollLeft
+    }
+
+    const handleTouchEnd = () => {
+      isTouchingRef.current = false
+    }
+
     scrollContainer.addEventListener('mouseenter', handleMouseEnter)
     scrollContainer.addEventListener('mouseleave', handleMouseLeave)
+    scrollContainer.addEventListener('touchstart', handleTouchStart)
+    scrollContainer.addEventListener('touchmove', handleTouchMove)
+    scrollContainer.addEventListener('touchend', handleTouchEnd)
 
     return () => {
       cancelAnimationFrame(animationId)
       scrollContainer.removeEventListener('mouseenter', handleMouseEnter)
       scrollContainer.removeEventListener('mouseleave', handleMouseLeave)
+      scrollContainer.removeEventListener('touchstart', handleTouchStart)
+      scrollContainer.removeEventListener('touchmove', handleTouchMove)
+      scrollContainer.removeEventListener('touchend', handleTouchEnd)
     }
   }, [events.length])
 
