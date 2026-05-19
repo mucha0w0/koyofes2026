@@ -18,14 +18,14 @@ export default function NewsPage() {
       <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
         <div className="space-y-4 max-w-3xl">
           {newsItems.map((item, i) => (
-            <article key={i} className="bg-card border border-border rounded-xl p-6">
+            <article key={i} className="bg-card p-6">
               <div className="flex items-center gap-3 mb-3">
                 <time className="text-sm text-muted-foreground font-mono">{item.date}</time>
                 {i === 0 && (
-                  <span className="text-xs font-bold text-accent px-2 py-0.5 bg-accent/10 rounded">NEW</span>
+                  <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary">NEW</span>
                 )}
               </div>
-              <h2 className="font-bold text-lg mb-2">{item.title}</h2>
+              <h2 className="font-medium text-lg mb-2">{item.title}</h2>
               <p className="text-muted-foreground text-sm">{item.content}</p>
             </article>
           ))}

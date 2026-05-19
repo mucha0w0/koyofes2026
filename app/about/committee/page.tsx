@@ -24,35 +24,35 @@ export default function CommitteePage() {
       <PageLayout title="実行委員会" subtitle="こうよう祭を運営する実行委員会のご紹介" backHref="/about" backLabel="こうよう祭についてに戻る">
         <div className="space-y-8">
           <div>
-            <h2 className="font-bold text-lg mb-4">執行部</h2>
+            <h2 className="font-medium text-lg mb-4">執行部</h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {executives.map((exec, i) => (
-                <div key={i} className="bg-card border border-border rounded-xl p-5 text-center">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                    <User className="h-8 w-8 text-primary" />
+                <div key={i} className="bg-card p-5 text-center">
+                  <div className="w-16 h-16 bg-muted flex items-center justify-center mx-auto mb-3">
+                    <User className="h-8 w-8 text-foreground" />
                   </div>
                   <p className="text-sm text-muted-foreground">{exec.role}</p>
-                  <p className="font-bold">{exec.name}</p>
+                  <p className="font-medium">{exec.name}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h2 className="font-bold text-lg mb-4">各局紹介</h2>
+            <h2 className="font-medium text-lg mb-4">各局紹介</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {departments.map((dept, i) => (
-                <div key={i} className="bg-card border border-border rounded-xl p-5">
-                  <h3 className="font-bold text-primary mb-2">{dept.name}</h3>
+                <div key={i} className="bg-card p-5">
+                  <h3 className="font-medium text-foreground mb-2">{dept.name}</h3>
                   <p className="text-sm text-muted-foreground">{dept.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-secondary rounded-xl p-6">
-            <h2 className="font-bold text-lg mb-4">組織図</h2>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
+          <div className="bg-muted p-6">
+            <h2 className="font-medium text-lg mb-4">組織図</h2>
+            <div className="aspect-video bg-background flex items-center justify-center text-muted-foreground">
               組織図画像エリア
             </div>
           </div>

@@ -15,9 +15,6 @@ interface CategoryData {
   id: string
   title: string
   Icon: React.ElementType
-  color: string
-  bgColor: string
-  borderColor: string
   events: Event[]
 }
 
@@ -26,9 +23,6 @@ const categoryData: CategoryData[] = [
     id: "class",
     title: "クラス・学科展示",
     Icon: School,
-    color: "text-chart-1",
-    bgColor: "bg-chart-1/10",
-    borderColor: "border-chart-1/30",
     events: [
       { id: "c1", title: "お化け屋敷「闘の回廊」", organizer: "3年A組", icon: "/events/haunted.jpg" },
       { id: "c2", title: "カフェ「Sunset」", organizer: "2年B組", icon: "/events/cafe.jpg" },
@@ -41,9 +35,6 @@ const categoryData: CategoryData[] = [
     id: "club",
     title: "有志展示",
     Icon: Users,
-    color: "text-chart-2",
-    bgColor: "bg-chart-2/10",
-    borderColor: "border-chart-2/30",
     events: [
       { id: "v1", title: "写真部展示会", organizer: "写真部", icon: "/events/photo.jpg" },
       { id: "v2", title: "イラスト同好会", organizer: "イラスト同好会", icon: "/events/illust.jpg" },
@@ -56,9 +47,6 @@ const categoryData: CategoryData[] = [
     id: "stage",
     title: "ステージイベント",
     Icon: Mic2,
-    color: "text-chart-3",
-    bgColor: "bg-chart-3/10",
-    borderColor: "border-chart-3/30",
     events: [
       { id: "s1", title: "軽音楽部ライブ", organizer: "軽音楽部", icon: "/events/band.jpg" },
       { id: "s2", title: "演劇部公演", organizer: "演劇部", icon: "/events/drama.jpg" },
@@ -71,9 +59,6 @@ const categoryData: CategoryData[] = [
     id: "official",
     title: "公式イベント",
     Icon: Flag,
-    color: "text-chart-4",
-    bgColor: "bg-chart-4/10",
-    borderColor: "border-chart-4/30",
     events: [
       { id: "o1", title: "開会式", organizer: "実行委員会", icon: "/events/opening.jpg" },
       { id: "o2", title: "ミスコン", organizer: "実行委員会", icon: "/events/contest.jpg" },
@@ -90,13 +75,13 @@ function EventCard({ event }: { event: Event }) {
       href={`/events/${event.id}`}
       className="flex flex-col items-center gap-2 shrink-0 group"
     >
-      <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-secondary border border-border overflow-hidden group-hover:border-primary/50 transition-colors">
-        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-secondary text-muted-foreground text-2xl font-bold">
+      <div className="w-20 h-20 md:w-24 md:h-24 bg-muted overflow-hidden">
+        <div className="w-full h-full flex items-center justify-center bg-background text-muted-foreground text-2xl font-medium">
           {event.title.charAt(0)}
         </div>
       </div>
       <div className="text-center max-w-24">
-        <p className="text-xs font-medium truncate group-hover:text-primary transition-colors">
+        <p className="text-xs font-medium truncate">
           {event.title}
         </p>
         <p className="text-xs text-muted-foreground truncate">
@@ -177,8 +162,8 @@ export function CategoryEvents() {
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            <span className="text-primary">カテゴリ別</span>企画一覧
+          <h2 className="text-2xl md:text-3xl font-medium mb-2">
+            カテゴリ別企画一覧
           </h2>
           <p className="text-muted-foreground">4つのカテゴリから企画をチェック</p>
         </div>
@@ -187,14 +172,14 @@ export function CategoryEvents() {
           {categoryData.map((category) => (
             <div
               key={category.id}
-              className={`bg-card border ${category.borderColor} rounded-2xl overflow-hidden`}
+              className="bg-card"
             >
               {/* Category Header */}
-              <div className={`flex items-center gap-3 p-4 ${category.bgColor}`}>
-                <div className={`p-2 rounded-lg bg-background/50 ${category.color}`}>
+              <div className="flex items-center gap-3 p-4 bg-muted">
+                <div className="p-2 bg-background text-foreground">
                   <category.Icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-bold">{category.title}</h3>
+                <h3 className="text-lg font-medium">{category.title}</h3>
                 <Link
                   href={`/events/category/${category.id}`}
                   className="ml-auto text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"

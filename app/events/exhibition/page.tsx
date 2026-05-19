@@ -19,11 +19,11 @@ export default function ExhibitionPage() {
       <PageLayout title="展示企画" subtitle="教室や特別教室で行われる展示企画の一覧です">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {exhibitions.map((event) => (
-            <div key={event.id} className="bg-card border border-border rounded-xl p-5 hover:border-primary/50 transition-colors">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-chart-2 to-chart-3 flex items-center justify-center text-white font-bold text-lg mb-4">
+            <div key={event.id} className="bg-card p-5 hover:opacity-80 transition-opacity">
+              <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground font-medium text-lg mb-4">
                 {event.name.charAt(0)}
               </div>
-              <h3 className="font-bold text-lg mb-1">{event.name}</h3>
+              <h3 className="font-medium text-lg mb-1">{event.name}</h3>
               <p className="text-sm text-muted-foreground mb-3">{event.organizer}</p>
               <div className="space-y-1 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">

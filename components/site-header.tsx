@@ -81,7 +81,7 @@ function DropdownMenu({ item }: { item: NavItem }) {
         />
       </button>
       <div
-        className={`absolute top-full left-0 min-w-[200px] bg-popover border border-border rounded-lg shadow-xl overflow-hidden transition-all duration-200 ${
+        className={`absolute top-full left-0 min-w-[200px] bg-popover border border-border rounded-none overflow-hidden transition-all duration-200 ${
           isOpen
             ? "opacity-100 translate-y-0 visible"
             : "opacity-0 -translate-y-2 invisible"
@@ -119,10 +119,10 @@ function MobileMenu({
       }`}
     >
       <div className="flex items-center justify-between px-4 h-16 border-b border-border">
-        <span className="font-bold text-lg text-primary">こうよう祭 2026</span>
+        <span className="text-lg font-medium text-foreground">こうよう祭 2026</span>
         <button
           onClick={onClose}
-          className="p-2 hover:bg-secondary rounded-lg transition-colors"
+          className="p-2 hover:bg-muted transition-colors"
           aria-label="メニューを閉じる"
         >
           <X className="h-6 w-6" />
@@ -154,7 +154,7 @@ function MobileMenu({
                   key={subItem.href}
                   href={subItem.href}
                   onClick={onClose}
-                  className="block py-2.5 pl-4 text-muted-foreground hover:text-primary transition-colors"
+                  className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {subItem.label}
                 </Link>
@@ -171,14 +171,14 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex items-center gap-1">
-            <span className="text-2xl font-black tracking-tighter text-primary">
+            <span className="text-2xl font-medium tracking-[0.08em] text-foreground">
               こうよう祭
             </span>
-            <span className="text-xs font-bold text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">
+            <span className="text-xs font-medium text-muted-foreground bg-secondary px-2 py-0.5 border border-border">
               2026
             </span>
           </div>
@@ -194,7 +194,7 @@ export function SiteHeader() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(true)}
-          className="lg:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+          className="lg:hidden p-2 hover:bg-muted transition-colors"
           aria-label="メニューを開く"
         >
           <Menu className="h-6 w-6" />

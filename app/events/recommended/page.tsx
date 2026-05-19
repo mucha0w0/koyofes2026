@@ -20,12 +20,12 @@ export default function RecommendedEventsPage() {
       <PageLayout title="おすすめ企画" subtitle="実行委員会がピックアップした注目の企画です">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {recommendedEvents.map((event) => (
-            <div key={event.id} className="bg-card border border-border rounded-xl p-5 hover:border-primary/50 transition-colors">
+            <div key={event.id} className="bg-card p-5 hover:opacity-80 transition-opacity">
               <div className="flex items-start justify-between mb-3">
-                <span className="text-xs font-medium px-2 py-1 bg-primary/10 text-primary rounded">{event.tag}</span>
-                <Star className="h-5 w-5 text-primary fill-primary" />
+                <span className="text-xs font-medium px-2 py-1 bg-muted text-foreground">{event.tag}</span>
+                <Star className="h-5 w-5 text-foreground fill-current" />
               </div>
-              <h3 className="font-bold text-lg mb-1">{event.name}</h3>
+              <h3 className="font-medium text-lg mb-1">{event.name}</h3>
               <p className="text-sm text-muted-foreground mb-3">{event.organizer}</p>
               <div className="space-y-1 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export default function RecommendedEventsPage() {
           ))}
         </div>
         <div className="mt-8 text-center">
-          <Link href="/events/list" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-colors">
+          <Link href="/events/list" className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity">
             すべての企画を見る
           </Link>
         </div>

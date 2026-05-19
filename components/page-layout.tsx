@@ -20,21 +20,20 @@ export function PageLayout({
 }: PageLayoutProps) {
   return (
     <main className="min-h-screen">
-      <div className="bg-gradient-to-b from-secondary to-background py-12 md:py-20 border-b border-border">
+      <div className="bg-background py-12 md:py-20 border-b border-border">
         <div className="container mx-auto px-4">
           <Link 
             href={backHref}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
           >
             <ArrowLeft className="h-4 w-4" />
             {backLabel}
           </Link>
-          <h1 className="text-3xl md:text-4xl font-black">
-            <span className="text-primary">{title.charAt(0)}</span>
-            {title.slice(1)}
+          <h1 className="text-3xl md:text-4xl font-normal tracking-[0.05em]">
+            {title}
           </h1>
           {subtitle && (
-            <p className="mt-2 text-muted-foreground">{subtitle}</p>
+            <p className="mt-3 text-muted-foreground">{subtitle}</p>
           )}
         </div>
       </div>

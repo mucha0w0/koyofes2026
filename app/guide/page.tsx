@@ -22,12 +22,12 @@ export default function GuidePage() {
             <Link
               key={page.href}
               href={page.href}
-              className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 transition-colors group"
+              className="bg-card p-6 hover:opacity-80 transition-opacity group"
             >
-              <div className="p-3 rounded-lg bg-secondary w-fit mb-4 group-hover:bg-primary/10 transition-colors">
-                <page.icon className="h-6 w-6 text-chart-2 group-hover:text-primary transition-colors" />
+              <div className="p-3 bg-muted w-fit mb-4">
+                <page.icon className="h-6 w-6 text-foreground" />
               </div>
-              <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{page.label}</h3>
+              <h3 className="font-medium text-lg mb-1">{page.label}</h3>
               <p className="text-sm text-muted-foreground">{page.description}</p>
             </Link>
           ))}

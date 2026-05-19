@@ -27,21 +27,21 @@ export default function EventListPage() {
             <input
               type="text"
               placeholder="企画名・団体名で検索..."
-              className="w-full pl-10 pr-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full pl-10 pr-4 py-3 bg-input border border-border focus:outline-none focus:border-ring"
             />
           </div>
         </div>
         <div className="space-y-3">
           {allEvents.map((event) => (
-            <div key={event.id} className="flex items-center gap-4 bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
+            <div key={event.id} className="flex items-center gap-4 bg-card p-4 hover:opacity-80 transition-opacity">
+              <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground font-medium shrink-0">
                 {event.name.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold truncate">{event.name}</h3>
+                <h3 className="font-medium truncate">{event.name}</h3>
                 <p className="text-sm text-muted-foreground">{event.organizer}</p>
               </div>
-              <span className="hidden sm:block text-xs px-2 py-1 bg-secondary rounded">{event.category}</span>
+              <span className="hidden sm:block text-xs px-2 py-1 bg-muted">{event.category}</span>
               <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1"><MapPin className="h-4 w-4" />{event.location}</span>
                 <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{event.time}</span>

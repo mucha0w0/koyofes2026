@@ -34,32 +34,24 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-secondary/30">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative container mx-auto px-4 py-20 md:py-32">
+    <section className="relative bg-background">
+      <div className="container mx-auto px-4 py-20 md:py-32">
         <div className="text-center space-y-8">
           {/* Main Title */}
           <div className="space-y-4">
-            <p className="text-sm md:text-base font-medium text-primary tracking-widest uppercase">
+            <p className="text-sm md:text-base text-muted-foreground tracking-[0.2em]">
               令和8年度 文化祭
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-balance">
-              <span className="text-primary">こうよう祭</span>
-              <span className="text-foreground"> 2026</span>
+            <h1 className="hero-display text-4xl md:text-6xl lg:text-7xl text-balance">
+              <span className="text-foreground">こうよう祭 2026</span>
             </h1>
           </div>
 
           {/* Theme */}
           <div className="inline-block">
-            <div className="bg-card border border-border rounded-xl px-6 py-4 md:px-8 md:py-5">
-              <p className="text-xs text-muted-foreground mb-1">テーマ</p>
-              <p className="text-2xl md:text-3xl font-bold text-foreground">
+            <div className="bg-card px-6 py-4 md:px-8 md:py-5">
+              <p className="text-xs text-muted-foreground mb-2 tracking-[0.2em]">テーマ</p>
+              <p className="text-2xl md:text-3xl font-medium text-foreground">
                 「輝け、青春の一ページ」
               </p>
             </div>
@@ -93,9 +85,9 @@ export function HeroSection() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="bg-card border border-border rounded-lg p-3 md:p-4 min-w-[70px] md:min-w-[90px]"
+                  className="bg-card p-3 md:p-4 min-w-[70px] md:min-w-[90px]"
                 >
-                  <div className="text-2xl md:text-4xl font-black text-primary tabular-nums">
+                  <div className="text-2xl md:text-4xl font-medium text-foreground tabular-nums">
                     {String(item.value).padStart(2, "0")}
                   </div>
                   <div className="text-xs text-muted-foreground">{item.label}</div>
@@ -105,9 +97,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   )
 }

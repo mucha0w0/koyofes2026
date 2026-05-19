@@ -16,7 +16,7 @@ export default function GoodsPage() {
       <SiteHeader />
       <PageLayout title="公式グッズ" subtitle="こうよう祭2026オリジナルグッズ">
         <div className="space-y-8">
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-6">
+          <div className="bg-muted p-6">
             <p className="text-muted-foreground">
               公式グッズは当日、本館1階の受付横で販売いたします。
               数量限定のため、お早めにお求めください。
@@ -25,14 +25,14 @@ export default function GoodsPage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {goods.map((item, i) => (
-              <div key={i} className="bg-card border border-border rounded-xl overflow-hidden">
+              <div key={i} className="bg-card">
                 <div className="aspect-square bg-secondary flex items-center justify-center">
                   <ShoppingBag className="h-12 w-12 text-muted-foreground" />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold">{item.name}</h3>
+                  <h3 className="font-medium">{item.name}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-                  <p className="text-lg font-bold text-primary">{item.price}</p>
+                  <p className="text-lg font-medium text-foreground">{item.price}</p>
                 </div>
               </div>
             ))}

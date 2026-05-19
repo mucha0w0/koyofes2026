@@ -37,8 +37,8 @@ export default function FAQPage() {
       <PageLayout title="よくある質問" subtitle="お問い合わせの多いご質問にお答えします">
         <div className="space-y-4 max-w-3xl">
           {faqs.map((faq, i) => (
-            <details key={i} className="group bg-card border border-border rounded-xl overflow-hidden">
-              <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-secondary/50 transition-colors">
+            <details key={i} className="group bg-card overflow-hidden">
+              <summary className="flex items-center justify-between p-5 cursor-pointer hover:bg-muted transition-colors">
                 <span className="font-medium pr-4">{faq.question}</span>
                 <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0 group-open:rotate-180 transition-transform" />
               </summary>

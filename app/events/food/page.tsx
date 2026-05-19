@@ -16,20 +16,20 @@ export default function FoodEventsPage() {
     <>
       <SiteHeader />
       <PageLayout title="飲食企画" subtitle="美味しい食べ物・飲み物を提供する企画の一覧です">
-        <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 mb-8 text-sm">
-          <p className="text-accent-foreground">飲食企画は売り切れ次第終了となる場合があります。ご了承ください。</p>
+        <div className="bg-muted p-4 mb-8 text-sm">
+          <p className="text-foreground">飲食企画は売り切れ次第終了となる場合があります。ご了承ください。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           {foodEvents.map((event) => (
-            <div key={event.id} className="bg-card border border-border rounded-xl p-5 hover:border-primary/50 transition-colors">
+            <div key={event.id} className="bg-card p-5 hover:opacity-80 transition-opacity">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-accent to-chart-1 flex items-center justify-center shrink-0">
-                  <Utensils className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 bg-muted flex items-center justify-center shrink-0">
+                  <Utensils className="h-6 w-6 text-foreground" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-lg mb-1">{event.name}</h3>
+                  <h3 className="font-medium text-lg mb-1">{event.name}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{event.organizer}</p>
-                  <p className="text-sm text-primary mb-3">{event.menu}</p>
+                  <p className="text-sm text-foreground mb-3">{event.menu}</p>
                   <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <MapPin className="h-4 w-4" />{event.location}

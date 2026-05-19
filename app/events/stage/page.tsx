@@ -27,15 +27,15 @@ export default function StageEventsPage() {
           <div className="space-y-6">
             {stageEvents.map((event) => (
               <div key={event.id} className="relative flex gap-4 pl-12">
-                <div className="absolute left-4 w-4 h-4 rounded-full bg-primary border-4 border-background" />
-                <div className="flex-1 bg-card border border-border rounded-lg p-4">
+                <div className="absolute left-4 w-3 h-3 bg-primary" />
+                <div className="flex-1 bg-card p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <span className="text-lg font-bold text-primary">{event.time}</span>
+                    <span className="text-lg font-medium text-foreground">{event.time}</span>
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
                       <Clock className="h-3 w-3" />{event.duration}
                     </span>
                   </div>
-                  <h3 className="font-bold">{event.name}</h3>
+                  <h3 className="font-medium">{event.name}</h3>
                   <p className="text-sm text-muted-foreground">{event.organizer}</p>
                 </div>
               </div>

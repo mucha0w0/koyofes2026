@@ -10,12 +10,12 @@ export default function ContactPage() {
       <PageLayout title="お問い合わせ" subtitle="ご質問・ご要望はこちらから" backHref="/about" backLabel="こうよう祭についてに戻る">
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
-            <div className="bg-card border border-border rounded-xl p-6">
-              <h2 className="font-bold text-lg mb-4">連絡先</h2>
+            <div className="bg-card p-6">
+              <h2 className="font-medium text-lg mb-4">連絡先</h2>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <Mail className="h-5 w-5 text-primary" />
+                  <div className="p-2 bg-muted">
+                    <Mail className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">メール</p>
@@ -23,8 +23,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-chart-2/10">
-                    <Phone className="h-5 w-5 text-chart-2" />
+                  <div className="p-2 bg-muted">
+                    <Phone className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">電話（学校代表）</p>
@@ -32,8 +32,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-chart-3/10">
-                    <MapPin className="h-5 w-5 text-chart-3" />
+                  <div className="p-2 bg-muted">
+                    <MapPin className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">住所</p>
@@ -43,7 +43,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-accent/10 border border-accent/30 rounded-xl p-6">
+            <div className="bg-muted p-6">
               <p className="text-sm text-muted-foreground">
                 お問い合わせへの回答には数日いただく場合がございます。
                 よくある質問もご確認ください。
@@ -51,26 +51,26 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="font-bold text-lg mb-4">お問い合わせフォーム</h2>
+          <div className="bg-card p-6">
+            <h2 className="font-medium text-lg mb-4">お問い合わせフォーム</h2>
             <form className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">お名前</label>
-                <input type="text" className="w-full px-4 py-2 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                <input type="text" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">メールアドレス</label>
-                <input type="email" className="w-full px-4 py-2 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                <input type="email" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">件名</label>
-                <input type="text" className="w-full px-4 py-2 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                <input type="text" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">お問い合わせ内容</label>
-                <textarea rows={5} className="w-full px-4 py-2 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
+                <textarea rows={5} className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring resize-none" />
               </div>
-              <button type="submit" className="w-full py-3 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-colors">
+              <button type="submit" className="w-full py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity">
                 送信する
               </button>
             </form>

@@ -26,25 +26,25 @@ export default function TimetablePage() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 font-bold">時間</th>
-                <th className="text-left py-3 px-4 font-bold">イベント</th>
-                <th className="text-left py-3 px-4 font-bold hidden sm:table-cell">場所</th>
-                <th className="text-left py-3 px-4 font-bold hidden md:table-cell">種類</th>
+                <th className="text-left py-3 px-4 font-medium">時間</th>
+                <th className="text-left py-3 px-4 font-medium">イベント</th>
+                <th className="text-left py-3 px-4 font-medium hidden sm:table-cell">場所</th>
+                <th className="text-left py-3 px-4 font-medium hidden md:table-cell">種類</th>
               </tr>
             </thead>
             <tbody>
               {timetable.map((slot, i) => (
                 slot.events.map((event, j) => (
-                  <tr key={`${i}-${j}`} className="border-b border-border hover:bg-secondary/50 transition-colors">
+                  <tr key={`${i}-${j}`} className="border-b border-border hover:bg-muted transition-colors">
                     {j === 0 && (
-                      <td className="py-3 px-4 font-bold text-primary align-top" rowSpan={slot.events.length}>
+                      <td className="py-3 px-4 font-medium text-foreground align-top" rowSpan={slot.events.length}>
                         {slot.time}
                       </td>
                     )}
                     <td className="py-3 px-4">{event.name}</td>
                     <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">{event.location}</td>
                     <td className="py-3 px-4 hidden md:table-cell">
-                      <span className="text-xs px-2 py-1 bg-secondary rounded">{event.type}</span>
+                      <span className="text-xs px-2 py-1 bg-secondary">{event.type}</span>
                     </td>
                   </tr>
                 ))

@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Noto_Sans_JP } from 'next/font/google'
+import { Josefin_Sans, Zen_Kaku_Gothic_New } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["400", "500", "700", "900"], variable: "--font-noto-sans-jp" });
+const zenKakuGothic = Zen_Kaku_Gothic_New({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-zen-kaku",
+})
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-josefin",
+})
 
 export const metadata: Metadata = {
   title: 'こうよう祭 2026 | 公式ウェブサイト',
@@ -36,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className={`${geist.variable} ${geistMono.variable} ${notoSansJP.variable} bg-background`}>
+    <html lang="ja" className={`${zenKakuGothic.variable} ${josefinSans.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

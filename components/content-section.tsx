@@ -77,12 +77,12 @@ export function ContentSection() {
           {/* ご案内 */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold">
-                <span className="text-primary">ご</span>案内
+              <h2 className="text-xl md:text-2xl font-medium">
+                ご案内
               </h2>
               <Link
                 href="/guide"
-                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 すべて見る
                 <ArrowRight className="h-4 w-4" />
@@ -93,20 +93,20 @@ export function ContentSection() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-4 p-3 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-secondary/30 transition-all group"
+                  className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
                 >
-                  <div className="p-2 rounded-lg bg-secondary text-chart-2 group-hover:text-primary transition-colors">
+                  <div className="p-2 bg-muted text-foreground">
                     <link.icon className="h-4 w-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-medium text-sm group-hover:text-primary transition-colors">
+                    <span className="font-medium text-sm">
                       {link.label}
                     </span>
                     <p className="text-xs text-muted-foreground truncate">
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
                 </Link>
               ))}
             </div>
@@ -115,12 +115,12 @@ export function ContentSection() {
           {/* こうよう祭について */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-bold">
-                <span className="text-primary">こうよう祭</span>について
+              <h2 className="text-xl md:text-2xl font-medium">
+                こうよう祭について
               </h2>
               <Link
                 href="/about"
-                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 すべて見る
                 <ArrowRight className="h-4 w-4" />
@@ -131,20 +131,20 @@ export function ContentSection() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-4 p-3 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-secondary/30 transition-all group"
+                  className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
                 >
-                  <div className="p-2 rounded-lg bg-secondary text-chart-4 group-hover:text-primary transition-colors">
+                  <div className="p-2 bg-muted text-foreground">
                     <link.icon className="h-4 w-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="font-medium text-sm group-hover:text-primary transition-colors">
+                    <span className="font-medium text-sm">
                       {link.label}
                     </span>
                     <p className="text-xs text-muted-foreground truncate">
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
                 </Link>
               ))}
             </div>
@@ -154,12 +154,12 @@ export function ContentSection() {
         {/* News Section */}
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl md:text-2xl font-bold">
+            <h2 className="text-xl md:text-2xl font-medium">
               お知らせ
             </h2>
             <Link
               href="/news"
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               すべて見る
               <ArrowRight className="h-4 w-4" />
@@ -170,20 +170,20 @@ export function ContentSection() {
               <Link
                 key={index}
                 href="/news"
-                className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
               >
                 <span className="text-sm text-muted-foreground font-mono shrink-0">
                   {item.date}
                 </span>
                 {item.isNew && (
-                  <span className="text-xs font-bold text-accent px-2 py-0.5 bg-accent/10 rounded shrink-0">
+                  <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary shrink-0">
                     NEW
                   </span>
                 )}
-                <span className="text-sm font-medium group-hover:text-primary transition-colors truncate">
+                <span className="text-sm font-medium truncate">
                   {item.title}
                 </span>
-                <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground group-hover:text-primary shrink-0" />
+                <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
               </Link>
             ))}
           </div>
