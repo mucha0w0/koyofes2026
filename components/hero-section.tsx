@@ -35,48 +35,41 @@ export function HeroSection() {
 
   return (
     <section className="relative bg-background">
-      <div className="container mx-auto px-4 py-20 md:py-32">
-        <div className="text-center space-y-8">
+      <div className="container mx-auto px-4 py-24 md:py-40">
+        <div className="text-center space-y-12">
           {/* Main Title */}
-          <div className="space-y-4">
-            <p className="text-sm md:text-base text-muted-foreground tracking-[0.2em]">
+          <div className="space-y-6">
+            <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-[0.15em]">
               令和8年度 文化祭
             </p>
-            <h1 className="hero-display text-4xl md:text-6xl lg:text-7xl text-balance">
-              <span className="text-foreground">こうよう祭 2026</span>
+            <h1 className="hero-display text-5xl md:text-6xl lg:text-7xl font-normal">
+              今年のテーマ名
             </h1>
-          </div>
-
-          {/* Theme */}
-          <div className="inline-block">
-            <div className="bg-card px-6 py-4 md:px-8 md:py-5">
-              <p className="text-xs text-muted-foreground mb-2 tracking-[0.2em]">テーマ</p>
-              <p className="text-2xl md:text-3xl font-medium text-foreground">
-                「輝け、青春の一ページ」
-              </p>
-            </div>
+            <h2 className="text-2xl md:text-4xl font-normal text-foreground">
+              こうよう祭 2026
+            </h2>
           </div>
 
           {/* Event Info */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="h-5 w-5 text-primary" />
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-foreground" />
               <span>2026年9月12日(土)・13日(日)</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2">
+              <Clock className="h-5 w-5 text-foreground" />
               <span>9:00 〜 16:00</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-foreground" />
               <span>紅葉高等学校</span>
             </div>
           </div>
 
           {/* Countdown */}
-          <div className="pt-8">
-            <p className="text-sm text-muted-foreground mb-4">開催まで</p>
-            <div className="flex justify-center gap-3 md:gap-4">
+          <div className="pt-8 md:pt-12">
+            <p className="text-xs md:text-sm text-muted-foreground mb-6">開催まで</p>
+            <div className="flex justify-center gap-3 md:gap-6">
               {[
                 { value: countdown.days, label: "日" },
                 { value: countdown.hours, label: "時間" },
@@ -85,12 +78,12 @@ export function HeroSection() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="bg-card p-3 md:p-4 min-w-[70px] md:min-w-[90px]"
+                  className="bg-card p-4 md:p-6 min-w-[80px] md:min-w-[100px]"
                 >
-                  <div className="text-2xl md:text-4xl font-medium text-foreground tabular-nums">
+                  <div className="text-3xl md:text-5xl font-normal text-foreground tabular-nums">
                     {String(item.value).padStart(2, "0")}
                   </div>
-                  <div className="text-xs text-muted-foreground">{item.label}</div>
+                  <div className="text-xs md:text-sm text-muted-foreground mt-1">{item.label}</div>
                 </div>
               ))}
             </div>
