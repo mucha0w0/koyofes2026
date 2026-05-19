@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useMemo, useState } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import Link from "next/link"
 import { ArrowRight, Building2, Users, Mic2, Palette } from "lucide-react"
 import eventsData from "@/lib/events.json"
@@ -41,16 +41,16 @@ function EventCard({ event }: EventCardProps) {
 
   return (
     <Link href={`/events/${event.slug}`} className="flex flex-col items-center gap-2 shrink-0 group">
-      <div className="w-20 h-20 md:w-24 md:h-24 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
+      <div className="w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
         {IconComponent ? (
-          <IconComponent className="h-10 w-10 md:h-12 md:w-12 text-foreground" />
+          <IconComponent className="h-10 w-10 md:h-16 md:w-16 text-foreground" />
         ) : (
           <span className="text-xs text-muted-foreground">No image</span>
         )}
       </div>
-      <div className="text-center max-w-24">
-        <p className="text-xs font-medium truncate">{event.title}</p>
-        <p className="text-xs text-muted-foreground truncate">{event.organization}</p>
+      <div className="text-center max-w-24 md:max-w-32">
+        <p className="text-xs md:text-sm font-medium truncate">{event.title}</p>
+        <p className="text-xs md:text-sm text-muted-foreground truncate">{event.organization}</p>
       </div>
     </Link>
   )
@@ -62,29 +62,31 @@ interface ScrollingEventsProps {
 
 function ScrollingEvents({ events }: ScrollingEventsProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollStart, setScrollStart] = useState(0)
+  const scrollPositionRef = useRef(0)
+  const isHoveredRef = useRef(false)
 
   useEffect(() => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer || events.length === 0) return
 
     let animationId: number
-    let scrollPosition = 0
-    const speed = 0.5 // ゆっくりスクロール
+    const speed = 0.3 // ゆっくりスクロール（遅くしました）
 
     const animate = () => {
-      if (!isHovered && !isDragging) {
-        scrollPosition += speed
+      if (!isHoveredRef.current) {
+        scrollPositionRef.current += speed
 
         const firstSet = scrollContainer.querySelector('[data-event-set="1"]') as HTMLElement
-        if (firstSet && scrollPosition >= firstSet.offsetWidth + 16) {
-          scrollPosition = 0
+        if (firstSet) {
+          const setWidth = firstSet.offsetWidth
+          
+          // セット幅で無限ループ（モジュロ演算）
+          if (scrollPositionRef.current >= setWidth) {
+            scrollPositionRef.current = scrollPositionRef.current % setWidth
+          }
         }
 
-        scrollContainer.scrollLeft = scrollPosition
+        scrollContainer.scrollLeft = scrollPositionRef.current
       }
       animationId = requestAnimationFrame(animate)
     }
@@ -92,37 +94,22 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     animationId = requestAnimationFrame(animate)
 
     // マウスイベント
-    const handleMouseEnter = () => setIsHovered(true)
+    const handleMouseEnter = () => {
+      isHoveredRef.current = true
+    }
     const handleMouseLeave = () => {
-      setIsHovered(false)
-      setIsDragging(false)
-    }
-
-    // タッチイベント（スマホ対応）
-    const handleTouchStart = (e: TouchEvent) => {
-      setStartX(e.touches[0].clientX)
-      setScrollStart(scrollContainer.scrollLeft)
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!scrollRef.current) return
-      const diff = e.touches[0].clientX - startX
-      scrollContainer.scrollLeft = scrollStart - diff
+      isHoveredRef.current = false
     }
 
     scrollContainer.addEventListener('mouseenter', handleMouseEnter)
     scrollContainer.addEventListener('mouseleave', handleMouseLeave)
-    scrollContainer.addEventListener('touchstart', handleTouchStart)
-    scrollContainer.addEventListener('touchmove', handleTouchMove)
 
     return () => {
       cancelAnimationFrame(animationId)
       scrollContainer.removeEventListener('mouseenter', handleMouseEnter)
       scrollContainer.removeEventListener('mouseleave', handleMouseLeave)
-      scrollContainer.removeEventListener('touchstart', handleTouchStart)
-      scrollContainer.removeEventListener('touchmove', handleTouchMove)
     }
-  }, [isHovered, isDragging, events.length, startX, scrollStart])
+  }, [events.length])
 
   if (events.length === 0) {
     return (
@@ -135,7 +122,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
   return (
     <div
       ref={scrollRef}
-      className="flex gap-4 overflow-x-auto py-2 scroll-smooth"
+      className="flex gap-4 overflow-x-auto py-2 scroll-smooth scrollbar-hide"
       style={{ scrollBehavior: 'auto', WebkitOverflowScrolling: 'touch' }}
     >
       {/* Set 1 - オリジナル */}
@@ -145,19 +132,14 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
         ))}
       </div>
 
-      {/* Set 2 - 繰り返し */}
-      <div data-event-set="2" className="flex gap-4 shrink-0">
-        {events.map((event) => (
-          <EventCard key={`dup-${event.id}`} event={event} />
-        ))}
-      </div>
-
-      {/* Set 3 - 繰り返し */}
-      <div data-event-set="3" className="flex gap-4 shrink-0">
-        {events.map((event) => (
-          <EventCard key={`dup2-${event.id}`} event={event} />
-        ))}
-      </div>
+      {/* Set 2-6 - 繰り返し（無限スクロール化） */}
+      {[2, 3, 4, 5, 6].map((setNum) => (
+        <div key={`set-${setNum}`} className="flex gap-4 shrink-0">
+          {events.map((event) => (
+            <EventCard key={`dup-${setNum}-${event.id}`} event={event} />
+          ))}
+        </div>
+      ))}
     </div>
   )
 }
