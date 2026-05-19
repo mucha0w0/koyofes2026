@@ -1,155 +1,160 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, School, Users, Mic2, Flag } from "lucide-react"
+import { ArrowRight, Building2, Users, Mic2, Palette } from "lucide-react"
+import eventsData from "@/lib/events.json"
+import { Event } from "@/lib/types/event"
+import { getLucideIcon } from "@/lib/lucide-icons"
 
-interface Event {
-  id: string
-  title: string
-  organizer: string
-  icon: string
-}
+type EventCategory = "exhibition" | "food" | "stage" | "performance" | "workshop"
 
-interface CategoryData {
-  id: string
-  title: string
-  Icon: React.ElementType
-  events: Event[]
-}
-
-const categoryData: CategoryData[] = [
-  {
-    id: "class",
-    title: "クラス・学科展示",
-    Icon: School,
-    events: [
-      { id: "c1", title: "お化け屋敷「闘の回廊」", organizer: "3年A組", icon: "/events/haunted.jpg" },
-      { id: "c2", title: "カフェ「Sunset」", organizer: "2年B組", icon: "/events/cafe.jpg" },
-      { id: "c3", title: "縁日「祭りの宴」", organizer: "1年C組", icon: "/events/festival.jpg" },
-      { id: "c4", title: "脱出ゲーム", organizer: "3年D組", icon: "/events/escape.jpg" },
-      { id: "c5", title: "プラネタリウム", organizer: "2年E組", icon: "/events/planetarium.jpg" },
-    ],
+const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
+  exhibition: {
+    title: "展示企画",
+    Icon: Building2,
   },
-  {
-    id: "club",
-    title: "有志展示",
+  food: {
+    title: "飲食企画",
     Icon: Users,
-    events: [
-      { id: "v1", title: "写真部展示会", organizer: "写真部", icon: "/events/photo.jpg" },
-      { id: "v2", title: "イラスト同好会", organizer: "イラスト同好会", icon: "/events/illust.jpg" },
-      { id: "v3", title: "鉄道研究会", organizer: "鉄道研究会", icon: "/events/train.jpg" },
-      { id: "v4", title: "書道部展示", organizer: "書道部", icon: "/events/calligraphy.jpg" },
-      { id: "v5", title: "華道部展示", organizer: "華道部", icon: "/events/flower.jpg" },
-    ],
   },
-  {
-    id: "stage",
-    title: "ステージイベント",
+  stage: {
+    title: "ステージ",
     Icon: Mic2,
-    events: [
-      { id: "s1", title: "軽音楽部ライブ", organizer: "軽音楽部", icon: "/events/band.jpg" },
-      { id: "s2", title: "演劇部公演", organizer: "演劇部", icon: "/events/drama.jpg" },
-      { id: "s3", title: "ダンス部", organizer: "ダンス部", icon: "/events/dance.jpg" },
-      { id: "s4", title: "吹奏楽部", organizer: "吹奏楽部", icon: "/events/brass.jpg" },
-      { id: "s5", title: "合唱部", organizer: "合唱部", icon: "/events/choir.jpg" },
-    ],
   },
-  {
-    id: "official",
-    title: "公式イベント",
-    Icon: Flag,
-    events: [
-      { id: "o1", title: "開会式", organizer: "実行委員会", icon: "/events/opening.jpg" },
-      { id: "o2", title: "ミスコン", organizer: "実行委員会", icon: "/events/contest.jpg" },
-      { id: "o3", title: "後夜祭", organizer: "実行委員会", icon: "/events/closing.jpg" },
-      { id: "o4", title: "抽選会", organizer: "実行委員会", icon: "/events/lottery.jpg" },
-      { id: "o5", title: "スタンプラリー", organizer: "実行委員会", icon: "/events/stamp.jpg" },
-    ],
+  performance: {
+    title: "パフォーマンス",
+    Icon: Palette,
   },
-]
+  workshop: {
+    title: "ワークショップ",
+    Icon: Building2,
+  },
+}
 
-function EventCard({ event }: { event: Event }) {
+interface EventCardProps {
+  event: Event
+}
+
+function EventCard({ event }: EventCardProps) {
+  const IconComponent = getLucideIcon(event.icon)
+
   return (
-    <Link
-      href={`/events/${event.id}`}
-      className="flex flex-col items-center gap-2 shrink-0 group"
-    >
-      <div className="w-20 h-20 md:w-24 md:h-24 bg-muted overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center bg-background text-muted-foreground text-2xl font-medium">
-          {event.title.charAt(0)}
-        </div>
+    <Link href={`/events/${event.slug}`} className="flex flex-col items-center gap-2 shrink-0 group">
+      <div className="w-20 h-20 md:w-24 md:h-24 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
+        {IconComponent ? (
+          <IconComponent className="h-10 w-10 md:h-12 md:w-12 text-foreground" />
+        ) : (
+          <span className="text-xs text-muted-foreground">No image</span>
+        )}
       </div>
       <div className="text-center max-w-24">
-        <p className="text-xs font-medium truncate">
-          {event.title}
-        </p>
-        <p className="text-xs text-muted-foreground truncate">
-          {event.organizer}
-        </p>
+        <p className="text-xs font-medium truncate">{event.title}</p>
+        <p className="text-xs text-muted-foreground truncate">{event.organization}</p>
       </div>
     </Link>
   )
 }
 
-function ScrollingEvents({ category }: { category: CategoryData }) {
+interface ScrollingEventsProps {
+  events: Event[]
+}
+
+function ScrollingEvents({ events }: ScrollingEventsProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollStart, setScrollStart] = useState(0)
 
   useEffect(() => {
     const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
+    if (!scrollContainer || events.length === 0) return
 
     let animationId: number
     let scrollPosition = 0
-    const speed = 0.3
+    const speed = 0.5 // ゆっくりスクロール
 
     const animate = () => {
-      scrollPosition += speed
-      
-      const firstSet = scrollContainer.querySelector('[data-event-set="1"]') as HTMLElement
-      if (firstSet && scrollPosition >= firstSet.offsetWidth + 16) {
-        scrollPosition = 0
+      if (!isHovered && !isDragging) {
+        scrollPosition += speed
+
+        const firstSet = scrollContainer.querySelector('[data-event-set="1"]') as HTMLElement
+        if (firstSet && scrollPosition >= firstSet.offsetWidth + 16) {
+          scrollPosition = 0
+        }
+
+        scrollContainer.scrollLeft = scrollPosition
       }
-      
-      scrollContainer.scrollLeft = scrollPosition
       animationId = requestAnimationFrame(animate)
     }
 
     animationId = requestAnimationFrame(animate)
 
-    const handleMouseEnter = () => cancelAnimationFrame(animationId)
+    // マウスイベント
+    const handleMouseEnter = () => setIsHovered(true)
     const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(animate)
+      setIsHovered(false)
+      setIsDragging(false)
     }
 
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter)
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave)
+    // タッチイベント（スマホ対応）
+    const handleTouchStart = (e: TouchEvent) => {
+      setStartX(e.touches[0].clientX)
+      setScrollStart(scrollContainer.scrollLeft)
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!scrollRef.current) return
+      const diff = e.touches[0].clientX - startX
+      scrollContainer.scrollLeft = scrollStart - diff
+    }
+
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter)
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave)
+    scrollContainer.addEventListener('touchstart', handleTouchStart)
+    scrollContainer.addEventListener('touchmove', handleTouchMove)
 
     return () => {
       cancelAnimationFrame(animationId)
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter)
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave)
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter)
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave)
+      scrollContainer.removeEventListener('touchstart', handleTouchStart)
+      scrollContainer.removeEventListener('touchmove', handleTouchMove)
     }
-  }, [])
+  }, [isHovered, isDragging, events.length, startX, scrollStart])
+
+  if (events.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-8 text-muted-foreground">
+        企画は準備中です
+      </div>
+    )
+  }
 
   return (
-    <div 
+    <div
       ref={scrollRef}
-      className="flex gap-4 overflow-x-hidden py-2"
-      style={{ scrollBehavior: "auto" }}
+      className="flex gap-4 overflow-x-auto py-2 scroll-smooth"
+      style={{ scrollBehavior: 'auto', WebkitOverflowScrolling: 'touch' }}
     >
+      {/* Set 1 - オリジナル */}
       <div data-event-set="1" className="flex gap-4 shrink-0">
-        {category.events.map((event) => (
+        {events.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>
+
+      {/* Set 2 - 繰り返し */}
       <div data-event-set="2" className="flex gap-4 shrink-0">
-        {category.events.map((event) => (
+        {events.map((event) => (
           <EventCard key={`dup-${event.id}`} event={event} />
         ))}
       </div>
+
+      {/* Set 3 - 繰り返し */}
       <div data-event-set="3" className="flex gap-4 shrink-0">
-        {category.events.map((event) => (
+        {events.map((event) => (
           <EventCard key={`dup2-${event.id}`} event={event} />
         ))}
       </div>
@@ -158,22 +163,31 @@ function ScrollingEvents({ category }: { category: CategoryData }) {
 }
 
 export function CategoryEvents() {
+  const categories = useMemo(() => {
+    const events = (eventsData.events as Event[]) || []
+    const uniqueCategories = [...new Set(events.map((e) => e.category))] as EventCategory[]
+
+    return uniqueCategories
+      .map((cat) => ({
+        id: cat,
+        title: categoryConfig[cat].title,
+        Icon: categoryConfig[cat].Icon,
+        events: events.filter((e) => e.category === cat),
+      }))
+      .sort((a, b) => a.title.localeCompare(b.title))
+  }, [])
+
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-medium mb-2">
-            カテゴリ別企画一覧
-          </h2>
-          <p className="text-muted-foreground">4つのカテゴリから企画をチェック</p>
+          <h2 className="text-2xl md:text-3xl font-medium mb-2">カテゴリ別企画一覧</h2>
+          <p className="text-muted-foreground">様々な企画から選んでチェック</p>
         </div>
 
         <div className="space-y-8">
-          {categoryData.map((category) => (
-            <div
-              key={category.id}
-              className="bg-card"
-            >
+          {categories.map((category) => (
+            <div key={category.id} className="bg-card">
               {/* Category Header */}
               <div className="flex items-center gap-3 p-4 bg-muted">
                 <div className="p-2 bg-background text-foreground">
@@ -181,7 +195,7 @@ export function CategoryEvents() {
                 </div>
                 <h3 className="text-lg font-medium">{category.title}</h3>
                 <Link
-                  href={`/events/category/${category.id}`}
+                  href="/events/list"
                   className="ml-auto text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
                 >
                   すべて見る
@@ -191,7 +205,7 @@ export function CategoryEvents() {
 
               {/* Scrolling Events */}
               <div className="px-4 pb-4">
-                <ScrollingEvents category={category} />
+                <ScrollingEvents events={category.events} />
               </div>
             </div>
           ))}

@@ -2,19 +2,17 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import { MapPin, Clock, Search } from "lucide-react"
+import Link from "next/link"
+import eventsData from "@/lib/events.json"
+import { Event } from "@/lib/types/event"
 
-const allEvents = [
-  { id: 1, name: "お化け屋敷", organizer: "3年A組", location: "本館3階", time: "10:00-16:00", category: "クラス展示" },
-  { id: 2, name: "ライブステージ", organizer: "軽音楽部", location: "体育館", time: "13:00-15:00", category: "ステージ" },
-  { id: 3, name: "カフェ", organizer: "2年B組", location: "調理室", time: "10:00-15:00", category: "クラス展示" },
-  { id: 4, name: "プラネタリウム", organizer: "科学部", location: "理科室", time: "10:30-15:30", category: "有志展示" },
-  { id: 5, name: "縁日", organizer: "1年C組", location: "中庭", time: "10:00-16:00", category: "クラス展示" },
-  { id: 6, name: "書道パフォーマンス", organizer: "書道部", location: "体育館", time: "11:00-11:30", category: "ステージ" },
-  { id: 7, name: "写真展", organizer: "写真部", location: "美術室", time: "10:00-16:00", category: "有志展示" },
-  { id: 8, name: "ダンスステージ", organizer: "ダンス部", location: "体育館", time: "14:00-14:30", category: "ステージ" },
-  { id: 9, name: "模擬店", organizer: "3年B組", location: "中庭", time: "10:00-15:00", category: "クラス展示" },
-  { id: 10, name: "開会式", organizer: "実行委員会", location: "体育館", time: "09:00-09:30", category: "公式" },
-]
+const categoryLabels: Record<string, string> = {
+  exhibition: "展示",
+  food: "飲食",
+  stage: "ステージ",
+  performance: "パフォーマンス",
+  workshop: "ワークショップ",
+}
 
 export default function EventListPage() {
   return (
@@ -32,21 +30,31 @@ export default function EventListPage() {
           </div>
         </div>
         <div className="space-y-3">
-          {allEvents.map((event) => (
-            <div key={event.id} className="flex items-center gap-4 bg-card p-4 hover:opacity-80 transition-opacity">
-              <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground font-medium shrink-0">
-                {event.name.charAt(0)}
+          {(eventsData.events as Event[]).map((event) => (
+            <Link key={event.id} href={`/events/${event.slug}`}>
+              <div className="flex items-center gap-4 bg-card p-4 hover:bg-muted transition-colors cursor-pointer">
+                <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground font-medium shrink-0">
+                  {event.title.charAt(0)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium truncate">{event.title}</h3>
+                  <p className="text-sm text-muted-foreground">{event.organization}</p>
+                </div>
+                <span className="hidden sm:block text-xs px-2 py-1 bg-muted">
+                  {categoryLabels[event.category] || event.category}
+                </span>
+                <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="h-4 w-4" />
+                    {event.location}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    {event.time.day1}
+                  </span>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-medium truncate">{event.name}</h3>
-                <p className="text-sm text-muted-foreground">{event.organizer}</p>
-              </div>
-              <span className="hidden sm:block text-xs px-2 py-1 bg-muted">{event.category}</span>
-              <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1"><MapPin className="h-4 w-4" />{event.location}</span>
-                <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{event.time}</span>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </PageLayout>
