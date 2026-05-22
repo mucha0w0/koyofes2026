@@ -33,41 +33,61 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
 
 export function Sponsors() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollPositionRef = useRef(0)
+  const isHoveredRef = useRef(false)
 
   useEffect(() => {
     const scrollContainer = scrollRef.current
     if (!scrollContainer) return
 
     let animationId: number
-    let scrollPosition = 0
     const speed = 0.5
 
     const animate = () => {
-      scrollPosition += speed
-      
-      const firstSet = scrollContainer.querySelector('[data-sponsor-set="1"]') as HTMLElement
-      if (firstSet && scrollPosition >= firstSet.offsetWidth + 24) {
-        scrollPosition = 0
+      if (!isHoveredRef.current) {
+        scrollPositionRef.current += speed
+        
+        const firstSet = scrollContainer.querySelector('[data-sponsor-set="1"]') as HTMLElement
+        if (firstSet) {
+          const setWidth = firstSet.offsetWidth
+          const setGap = 24 // gap-6 = 1.5rem = 24px
+          const totalSetWidth = setWidth + setGap
+          
+          // セット幅 + ギャップで無限ループ
+          if (scrollPositionRef.current >= totalSetWidth) {
+            scrollPositionRef.current -= totalSetWidth
+          }
+        }
+        
+        scrollContainer.scrollLeft = scrollPositionRef.current
       }
-      
-      scrollContainer.scrollLeft = scrollPosition
       animationId = requestAnimationFrame(animate)
     }
 
     animationId = requestAnimationFrame(animate)
 
-    const handleMouseEnter = () => cancelAnimationFrame(animationId)
+    const handleMouseEnter = () => {
+      isHoveredRef.current = true
+    }
     const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(animate)
+      isHoveredRef.current = false
+    }
+
+    // ウィンドウリサイズ時にスクロール位置をリセット（レスポンシブ対応）
+    const handleResize = () => {
+      scrollPositionRef.current = 0
+      scrollContainer.scrollLeft = 0
     }
 
     scrollContainer.addEventListener("mouseenter", handleMouseEnter)
     scrollContainer.addEventListener("mouseleave", handleMouseLeave)
+    window.addEventListener("resize", handleResize)
 
     return () => {
       cancelAnimationFrame(animationId)
       scrollContainer.removeEventListener("mouseenter", handleMouseEnter)
       scrollContainer.removeEventListener("mouseleave", handleMouseLeave)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 

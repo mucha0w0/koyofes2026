@@ -106,6 +106,12 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       isHoveredRef.current = false
     }
 
+    // ウィンドウリサイズ時にスクロール位置をリセット（PC/モバイル切り替え対応）
+    const handleResize = () => {
+      scrollPositionRef.current = 0
+      scrollContainer.scrollLeft = 0
+    }
+
     // タッチイベント
     const handleTouchStart = (e: TouchEvent) => {
       isTouchingRef.current = true
@@ -129,6 +135,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     scrollContainer.addEventListener('touchstart', handleTouchStart)
     scrollContainer.addEventListener('touchmove', handleTouchMove)
     scrollContainer.addEventListener('touchend', handleTouchEnd)
+    window.addEventListener('resize', handleResize)
 
     return () => {
       cancelAnimationFrame(animationId)
@@ -137,6 +144,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       scrollContainer.removeEventListener('touchstart', handleTouchStart)
       scrollContainer.removeEventListener('touchmove', handleTouchMove)
       scrollContainer.removeEventListener('touchend', handleTouchEnd)
+      window.removeEventListener('resize', handleResize)
     }
   }, [events.length])
 
