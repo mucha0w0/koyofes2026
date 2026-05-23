@@ -7,7 +7,7 @@ export default function ThemePage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="テーマ" subtitle="こうよう祭2026のテーマについて" backHref="/about" backLabel="こうよう祭についてに戻る">
+      <PageLayout title="テーマ" subtitle="こうよう祭2026のテーマについて">
         <div className="space-y-8 max-w-3xl mx-auto text-center">
           <div className="py-12">
             <Sparkles className="h-12 w-12 text-foreground mx-auto mb-6" />

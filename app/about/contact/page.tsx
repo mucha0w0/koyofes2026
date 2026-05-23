@@ -7,7 +7,7 @@ export default function ContactPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="お問い合わせ" subtitle="ご質問・ご要望はこちらから" backHref="/about" backLabel="こうよう祭についてに戻る">
+      <PageLayout title="お問い合わせ" subtitle="ご質問・ご要望はこちらから">
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="bg-card p-6">

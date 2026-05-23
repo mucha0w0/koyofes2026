@@ -21,7 +21,7 @@ export default function CommitteePage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="パート" subtitle="こうよう祭を運営するパートのご紹介" backHref="/about" backLabel="こうよう祭についてに戻る">
+      <PageLayout title="パート" subtitle="こうよう祭を運営するパートのご紹介">
         <div className="space-y-8">
           <div>
             <h2 className="font-medium text-lg mb-4">執行部</h2>

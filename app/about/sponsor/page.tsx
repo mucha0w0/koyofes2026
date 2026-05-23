@@ -18,7 +18,7 @@ export default function SponsorPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="協賛" subtitle="こうよう祭をご支援いただいている企業・団体様" backHref="/about" backLabel="こうよう祭についてに戻る">
+      <PageLayout title="協賛" subtitle="こうよう祭をご支援いただいている企業・団体様">
         <div className="space-y-8">
           <div className="bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
