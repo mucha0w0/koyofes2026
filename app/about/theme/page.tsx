@@ -12,10 +12,10 @@ export default function ThemePage() {
           <div className="py-12">
             <Sparkles className="h-12 w-12 text-foreground mx-auto mb-6" />
             <h2 className="hero-display text-3xl md:text-4xl mb-4">
-              輝け、青春の1ページ
+              今年のテーマ
             </h2>
             <p className="text-xl text-muted-foreground">
-              Shine, a page of youth
+              Kotoshi no theme
             </p>
           </div>
 
@@ -32,23 +32,7 @@ export default function ThemePage() {
             </p>
           </div>
 
-          <div className="bg-muted p-8">
-            <h3 className="font-medium text-lg mb-4">テーマカラー</h3>
-            <div className="flex justify-center gap-4">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary mx-auto mb-2" />
-                <span className="text-sm">ゴールド</span>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-muted mx-auto mb-2" />
-                <span className="text-sm">エメラルド</span>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-background border border-border mx-auto mb-2" />
-                <span className="text-sm">ダークネイビー</span>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </PageLayout>
       <SiteFooter />

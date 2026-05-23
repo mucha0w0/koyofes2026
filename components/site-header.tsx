@@ -18,12 +18,21 @@ const navItems: NavItem[] = [
   {
     label: "企画情報",
     items: [
-      { label: "おすすめ企画", href: "/events/recommended" },
       { label: "企画一覧", href: "/events/list" },
+      { label: "おすすめ企画", href: "/events/recommended" },
       { label: "ステージ企画", href: "/events/stage" },
       { label: "展示企画", href: "/events/exhibition" },
       { label: "飲食企画", href: "/events/food" },
       { label: "タイムテーブル", href: "/events/timetable" },
+    ],
+  },
+  {
+    label: "公式コンテンツ",
+    items: [
+      { label: "お知らせ", href: "/official/news" },
+      { label: "公式SNS", href: "/official/social" },
+      { label: "公式グッズ", href: "/official/goods" },
+      { label: "パンフレット", href: "/official/pamphlet" },
     ],
   },
   {
@@ -41,22 +50,12 @@ const navItems: NavItem[] = [
     items: [
       { label: "こうよう祭とは", href: "/about" },
       { label: "テーマ", href: "/about/theme" },
-      { label: "実行委員会", href: "/about/committee" },
-      { label: "お問い合わせ", href: "/about/contact" },
+      { label: "パート", href: "/about/committee" },
       { label: "協賛", href: "/about/sponsor" },
+      { label: "お問い合わせ", href: "/about/contact" },
     ],
   },
-  {
-    label: "公式コンテンツ",
-    items: [
-      { label: "公式Instagram", href: "/official/instagram" },
-      { label: "公式X (Twitter)", href: "/official/twitter" },
-      { label: "公式YouTube", href: "/official/youtube" },
-      { label: "フォトギャラリー", href: "/official/gallery" },
-      { label: "公式グッズ", href: "/official/goods" },
-      { label: "パンフレット", href: "/official/pamphlet" },
-    ],
-  },
+
 ]
 
 function DropdownMenu({ item }: { item: NavItem }) {
@@ -177,9 +176,6 @@ export function SiteHeader() {
           <div className="flex items-center gap-1">
             <span className="text-2xl font-medium tracking-[0.08em] text-foreground">
               こうよう祭
-            </span>
-            <span className="text-xs font-medium text-muted-foreground bg-secondary px-2 py-0.5 border border-border">
-              2026
             </span>
           </div>
         </Link>

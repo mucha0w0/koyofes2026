@@ -51,30 +51,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-card p-6">
-            <h2 className="font-medium text-lg mb-4">お問い合わせフォーム</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">お名前</label>
-                <input type="text" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">メールアドレス</label>
-                <input type="email" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">件名</label>
-                <input type="text" className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">お問い合わせ内容</label>
-                <textarea rows={5} className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring resize-none" />
-              </div>
-              <button type="submit" className="w-full py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity">
-                送信する
-              </button>
-            </form>
-          </div>
         </div>
       </PageLayout>
       <SiteFooter />

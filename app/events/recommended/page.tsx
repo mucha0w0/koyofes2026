@@ -17,7 +17,7 @@ export default function RecommendedEventsPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="おすすめ企画" subtitle="実行委員会がピックアップした注目の企画です">
+      <PageLayout title="おすすめ企画" subtitle="各パートリーダーがピックアップした、おすすめの企画です">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {recommendedEvents.map((event) => (
             <div key={event.id} className="bg-card p-5 hover:opacity-80 transition-opacity">

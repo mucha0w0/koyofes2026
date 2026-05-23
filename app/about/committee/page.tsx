@@ -21,7 +21,7 @@ export default function CommitteePage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="実行委員会" subtitle="こうよう祭を運営する実行委員会のご紹介" backHref="/about" backLabel="こうよう祭についてに戻る">
+      <PageLayout title="パート" subtitle="こうよう祭を運営するパートのご紹介" backHref="/about" backLabel="こうよう祭についてに戻る">
         <div className="space-y-8">
           <div>
             <h2 className="font-medium text-lg mb-4">執行部</h2>
@@ -50,12 +50,6 @@ export default function CommitteePage() {
             </div>
           </div>
 
-          <div className="bg-muted p-6">
-            <h2 className="font-medium text-lg mb-4">組織図</h2>
-            <div className="aspect-video bg-background flex items-center justify-center text-muted-foreground">
-              組織図画像エリア
-            </div>
-          </div>
         </div>
       </PageLayout>
       <SiteFooter />

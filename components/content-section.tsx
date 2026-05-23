@@ -158,7 +158,7 @@ export function ContentSection() {
               お知らせ
             </h2>
             <Link
-              href="/news"
+              href="/official/news"
               className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               すべて見る
@@ -169,7 +169,7 @@ export function ContentSection() {
             {news.map((item, index) => (
               <Link
                 key={index}
-                href="/news"
+                href="/official/news"
                 className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
               >
                 <span className="text-sm text-muted-foreground font-mono shrink-0">
