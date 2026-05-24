@@ -25,7 +25,7 @@ export default function AdmissionPage() {
             <div className="bg-card p-6 text-center">
               <Ticket className="h-8 w-8 text-foreground mx-auto mb-3" />
               <h3 className="font-medium mb-2">受付</h3>
-              <p className="text-2xl font-medium text-foreground">本館1階</p>
+              <p className="text-2xl font-medium text-foreground">正門</p>
               <p className="text-sm text-muted-foreground">パンフレット配布</p>
             </div>
           </div>
