@@ -6,7 +6,7 @@ import { AlertTriangle, Ban, Camera, Cigarette, Dog } from "lucide-react"
 const notices = [
   { icon: Cigarette, title: "喫煙禁止", description: "校内は全面禁煙です" },
   { icon: Dog, title: "ペット同伴禁止", description: "補助犬を除き、ペットの入場はご遠慮ください" },
-  { icon: Camera, title: "撮影について", description: "企画によっては撮影禁止の場合があります" },
+  { icon: Camera, title: "撮影について", description: "撮影は自由ですが、SNSへの投稿はご遠慮ください。" },
   { icon: Ban, title: "危険物持ち込み禁止", description: "刃物・火器等の持ち込みは禁止です" },
 ]
 
@@ -48,7 +48,6 @@ export default function NoticePage() {
               <li>・貴重品の管理は各自でお願いします</li>
               <li>・体調不良の場合は救護室へお越しください</li>
               <li>・緊急時は係員の指示に従ってください</li>
-              <li>・お車でのご来場はご遠慮ください</li>
             </ul>
           </div>
         </div>
