@@ -40,7 +40,7 @@ export function SiteFooter() {
           <div>
             <h4 className="font-medium mb-4 text-sm">こうよう祭について</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
-              <li><Link href="/about" className="hover:text-primary-foreground transition-colors">こうよう祭とは</Link></li>
+              <li><Link href="/about/overview" className="hover:text-primary-foreground transition-colors">こうよう祭とは</Link></li>
               <li><Link href="/about/sponsor" className="hover:text-primary-foreground transition-colors">協賛</Link></li>
               <li><Link href="/about/contact" className="hover:text-primary-foreground transition-colors">お問い合わせ</Link></li>
             </ul>

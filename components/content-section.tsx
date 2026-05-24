@@ -12,7 +12,7 @@ const guideLinks = [
     icon: MapPin,
     label: "会場マップ",
     href: "/guide/map",
-    description: "校内マップ・施設案内",
+    description: "構内図",
   },
   {
     icon: Clock,
@@ -38,7 +38,7 @@ const aboutLinks = [
   {
     icon: Info,
     label: "こうよう祭とは",
-    href: "/about",
+    href: "/about/overview",
     description: "歴史と概要",
   },
   {
@@ -49,15 +49,15 @@ const aboutLinks = [
   },
   {
     icon: Users,
-    label: "実行委員会",
+    label: "パート",
     href: "/about/committee",
-    description: "委員会紹介・組織図",
+    description: "仕事内容とパートリーダーの紹介",
   },
   {
     icon: Mail,
     label: "お問い合わせ",
     href: "/about/contact",
-    description: "連絡先・フォーム",
+    description: "連絡先",
   },
 ]
 

@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
   {
     label: "企画情報",
     items: [
-      { label: "企画一覧", href: "/events/list" },
+      { label: "企画一覧・検索", href: "/events/list" },
       { label: "おすすめ企画", href: "/events/recommended" },
       { label: "ステージ企画", href: "/events/stage" },
       { label: "展示企画", href: "/events/exhibition" },
@@ -48,7 +48,7 @@ const navItems: NavItem[] = [
   {
     label: "こうよう祭について",
     items: [
-      { label: "こうよう祭とは", href: "/about" },
+      { label: "こうよう祭とは", href: "/about/overview" },
       { label: "テーマ", href: "/about/theme" },
       { label: "パート", href: "/about/committee" },
       { label: "協賛", href: "/about/sponsor" },

@@ -18,7 +18,7 @@ export default function EventListPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="企画一覧" subtitle="こうよう祭2026のすべての企画をご覧いただけます">
+      <PageLayout title="企画一覧・検索" subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます">
         <div className="mb-8">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
