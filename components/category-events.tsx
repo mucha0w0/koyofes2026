@@ -8,36 +8,18 @@ import { Event } from "@/lib/types/event";
 import { getLucideIcon } from "@/lib/lucide-icons";
 
 type EventCategory =
-  | "exhibition"
+  | "class-exhibit"
+  | "volunteer-exhibit"
   | "booth"
   | "stage"
-  | "performance"
-  | "workshop";
+  | "food-truck";
 
-const categoryConfig: Record<
-  EventCategory,
-  { title: string; Icon: React.ElementType }
-> = {
-  exhibition: {
-    title: "展示企画",
-    Icon: Building2,
-  },
-  booth: {
-    title: "模擬店",
-    Icon: Users,
-  },
-  stage: {
-    title: "ステージ",
-    Icon: Mic2,
-  },
-  performance: {
-    title: "パフォーマンス",
-    Icon: Palette,
-  },
-  workshop: {
-    title: "ワークショップ",
-    Icon: Building2,
-  },
+const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
+  "class-exhibit":     { title: "クラス・学科展示",     Icon: Building2 },
+  "volunteer-exhibit": { title: "有志展示",           Icon: Users },
+  "booth":             { title: "模擬店",         Icon: Users     },
+  "stage":             { title: "ステージ",       Icon: Mic2      },
+  "food-truck":       { title: "キッチンカー", Icon: Palette   },
 };
 
 interface EventCardProps {
@@ -86,7 +68,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     if (!scrollContainer || events.length === 0) return;
 
     let animationId: number;
-    const speed = 0.3; // ゆっくりスクロール（遅くしました）
+    const speed = 0.3;
 
     const animate = () => {
       if (!isHoveredRef.current && !isTouchingRef.current) {
@@ -97,10 +79,9 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
         ) as HTMLElement;
         if (firstSet) {
           const setWidth = firstSet.offsetWidth;
-          const setGap = 16; // gap-4 = 1rem = 16px
+          const setGap = 16;
           const totalSetWidth = setWidth + setGap;
 
-          // セット幅 + ギャップで無限ループ
           if (scrollPositionRef.current >= totalSetWidth) {
             scrollPositionRef.current -= totalSetWidth;
           }
@@ -113,37 +94,24 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
 
     animationId = requestAnimationFrame(animate);
 
-    // マウスイベント
-    const handleMouseEnter = () => {
-      isHoveredRef.current = true;
-    };
-    const handleMouseLeave = () => {
-      isHoveredRef.current = false;
-    };
-
-    // ウィンドウリサイズ時にスクロール位置をリセット（PC/モバイル切り替え対応）
+    const handleMouseEnter = () => { isHoveredRef.current = true; };
+    const handleMouseLeave = () => { isHoveredRef.current = false; };
     const handleResize = () => {
       scrollPositionRef.current = 0;
       scrollContainer.scrollLeft = 0;
     };
-
-    // タッチイベント
     const handleTouchStart = (e: TouchEvent) => {
       isTouchingRef.current = true;
       touchStartXRef.current = e.touches[0].clientX;
       scrollStartRef.current = scrollContainer.scrollLeft;
     };
-
     const handleTouchMove = (e: TouchEvent) => {
       if (!isTouchingRef.current) return;
       const diff = e.touches[0].clientX - touchStartXRef.current;
       scrollContainer.scrollLeft = scrollStartRef.current - diff;
       scrollPositionRef.current = scrollContainer.scrollLeft;
     };
-
-    const handleTouchEnd = () => {
-      isTouchingRef.current = false;
-    };
+    const handleTouchEnd = () => { isTouchingRef.current = false; };
 
     scrollContainer.addEventListener("mouseenter", handleMouseEnter);
     scrollContainer.addEventListener("mouseleave", handleMouseLeave);
@@ -177,14 +145,11 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       className="flex gap-4 overflow-x-auto py-2 scroll-smooth scrollbar-hide"
       style={{ scrollBehavior: "auto", WebkitOverflowScrolling: "touch" }}
     >
-      {/* Set 1 - オリジナル */}
       <div data-event-set="1" className="flex gap-4 shrink-0">
         {events.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>
-
-      {/* Set 2-6 - 繰り返し（無限スクロール化） */}
       {[2, 3, 4, 5, 6].map((setNum) => (
         <div key={`set-${setNum}`} className="flex gap-4 shrink-0">
           {events.map((event) => (
@@ -199,21 +164,16 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
 export function CategoryEvents() {
   const categories = useMemo(() => {
     const events = (eventsData.events as Event[]) || [];
-    const uniqueCategories = [
-      ...new Set(events.map((e) => e.category)),
-    ] as EventCategory[];
+    const uniqueCategories = new Set(events.map((e) => e.category));
 
-    console.log("uniqueCategories:", uniqueCategories); // ← 追加
-    console.log("categoryConfig keys:", Object.keys(categoryConfig)); // ← 追加
-
-    return uniqueCategories
+    return (Object.keys(categoryConfig) as EventCategory[])
+      .filter((cat) => uniqueCategories.has(cat))
       .map((cat) => ({
         id: cat,
         title: categoryConfig[cat].title,
         Icon: categoryConfig[cat].Icon,
         events: events.filter((e) => e.category === cat),
-      }))
-      .sort((a, b) => a.title.localeCompare(b.title));
+      }));
   }, []);
 
   return (
@@ -229,7 +189,6 @@ export function CategoryEvents() {
         <div className="space-y-8">
           {categories.map((category) => (
             <div key={category.id} className="bg-card">
-              {/* Category Header */}
               <div className="flex items-center gap-3 p-4 bg-muted">
                 <div className="p-2 bg-background text-foreground">
                   <category.Icon className="h-5 w-5" />
@@ -243,8 +202,6 @@ export function CategoryEvents() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-
-              {/* Scrolling Events */}
               <div className="px-4 pb-4">
                 <ScrollingEvents events={category.events} />
               </div>
