@@ -16,13 +16,13 @@ export default function PamphletPage() {
             {/* PDFビューア */}
             <div className="w-full mb-6 aspect-[1/1.414]">
               <iframe
-                src="/pamphlet.pdf"
+                src="/koyofes2026_pamphlet.pdf"
                 className="w-full h-full"
                 style={{ border: 0 }}
               />
             </div>
             <a
-              href="/pamphlet.pdf"
+              href="/koyofes2026_pamphlet.pdf"
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity"
             >
