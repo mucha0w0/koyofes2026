@@ -10,7 +10,7 @@ export function HeroSection() {
           {/* Main Title */}
           <div className="space-y-6">
             <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-[0.15em]">
-              令和8年度 文化祭
+              令和8年度 豊田高専文化祭
             </p>
             <h1 className="hero-display text-5xl md:text-6xl lg:text-7xl font-normal">
               今年のテーマ名
@@ -32,7 +32,7 @@ export function HeroSection() {
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-5 w-5 text-foreground" />
-              <span>紅葉高等学校</span>
+              <span>豊田高専</span>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ const categories = [
   { id: "class", label: "クラス・学科展示" },
   { id: "club", label: "有志展示" },
   { id: "stage", label: "ステージイベント" },
-  { id: "official", label: "公式イベント" },
+  { id: "official", label: "模擬店" },
 ]
 
 const filters = [

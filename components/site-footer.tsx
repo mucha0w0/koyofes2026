@@ -5,14 +5,14 @@ export function SiteFooter() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-14">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-5 gap-8 mb-8">
           {/* Logo & Info */}
           <div className="md:col-span-1">
             <Link href="/" className="inline-block mb-4">
               <span className="text-xl font-medium tracking-[0.08em]">こうよう祭 2026</span>
             </Link>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              紅葉高等学校の文化祭。
+              豊田高専の文化祭。
               <br />
               2026年9月12日(土)・13日(日)開催
             </p>
@@ -22,8 +22,8 @@ export function SiteFooter() {
           <div>
             <h4 className="font-medium mb-4 text-sm">企画情報</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
-              <li><Link href="/events/recommended" className="hover:text-primary-foreground transition-colors">おすすめ企画</Link></li>
               <li><Link href="/events/list" className="hover:text-primary-foreground transition-colors">企画一覧</Link></li>
+              <li><Link href="/events/recommended" className="hover:text-primary-foreground transition-colors">おすすめ企画</Link></li>
               <li><Link href="/events/timetable" className="hover:text-primary-foreground transition-colors">タイムテーブル</Link></li>
             </ul>
           </div>
@@ -34,6 +34,15 @@ export function SiteFooter() {
               <li><Link href="/guide/access" className="hover:text-primary-foreground transition-colors">アクセス</Link></li>
               <li><Link href="/guide/map" className="hover:text-primary-foreground transition-colors">会場マップ</Link></li>
               <li><Link href="/guide/faq" className="hover:text-primary-foreground transition-colors">よくある質問</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-4 text-sm">こうよう祭について</h4>
+            <ul className="space-y-2 text-sm text-primary-foreground/70">
+              <li><Link href="/about" className="hover:text-primary-foreground transition-colors">こうよう祭とは</Link></li>
+              <li><Link href="/about/sponsor" className="hover:text-primary-foreground transition-colors">協賛</Link></li>
+              <li><Link href="/about/contact" className="hover:text-primary-foreground transition-colors">お問い合わせ</Link></li>
             </ul>
           </div>
 
@@ -67,8 +76,8 @@ export function SiteFooter() {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-primary-foreground/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/70">
-          <p>こうよう祭 2026 実行委員会</p>
-          <p>&copy; 2026 Kouyousai Executive Committee</p>
+          <p>こうよう祭 2026 システムパート</p>
+          <p>&copy; 2026 Kouyousai System Part</p>
         </div>
       </div>
     </footer>
