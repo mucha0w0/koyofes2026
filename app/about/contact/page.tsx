@@ -19,7 +19,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">メール</p>
-                    <p className="font-medium">kouyousai@example.com</p>
+                    <p className="font-medium">gakusei☆toyota-ct.ac.jp （☆マークを@に変えて送信ください）</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -27,8 +27,8 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">電話（学校代表）</p>
-                    <p className="font-medium">03-XXXX-XXXX</p>
+                    <p className="text-sm text-muted-foreground">電話（学生課学生支援係）</p>
+                    <p className="font-medium">0565-36-5913</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">住所</p>
-                    <p className="font-medium">〒000-0000 東京都○○区○○町1-2-3</p>
+                    <p className="font-medium">〒471-0067 愛知県豊田市栄生町２丁目１−１</p>
                   </div>
                 </div>
               </div>
