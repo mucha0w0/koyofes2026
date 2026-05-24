@@ -22,7 +22,7 @@ const navItems: NavItem[] = [
       { label: "おすすめ企画", href: "/events/recommended" },
       { label: "ステージ企画", href: "/events/stage" },
       { label: "展示企画", href: "/events/exhibition" },
-      { label: "飲食企画", href: "/events/food" },
+      { label: "模擬店", href: "/events/booth" },
       { label: "タイムテーブル", href: "/events/timetable" },
     ],
   },

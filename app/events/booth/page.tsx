@@ -15,9 +15,9 @@ export default function FoodEventsPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="飲食企画" subtitle="美味しい食べ物・飲み物を提供する企画の一覧です">
+      <PageLayout title="模擬店" subtitle="美味しい食べ物・飲み物を提供したり、ワークショップを開催しています">
         <div className="bg-muted p-4 mb-8 text-sm">
-          <p className="text-foreground">飲食企画は売り切れ次第終了となる場合があります。ご了承ください。</p>
+          <p className="text-foreground">売り切れ次第終了となります。あらかじめご了承ください。</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           {foodEvents.map((event) => (

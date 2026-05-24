@@ -21,7 +21,7 @@ export interface Event {
   recommendedParticipants: string // e.g., "2-4人" or "グループ向け"
   description: string // markdown
   organizationDescription: string // markdown
-  category: "exhibition" | "food" | "stage" | "performance" | "workshop"
+  category: "exhibition" | "booth" | "stage" | "performance" | "workshop"
 }
 
 export interface EventsData {
