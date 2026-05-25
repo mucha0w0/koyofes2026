@@ -35,6 +35,21 @@ function formatParticipants(event: Event): string {
   if (!event.participantsUL && !event.participantsLL) {
     return '制限なし'
   }
+  
+  // Only lower limit exists
+  if (!event.participantsUL && event.participantsLL) {
+    return `${event.participantsLL}人`
+  }
+  
+  // Only upper limit exists
+  if (event.participantsUL && !event.participantsLL) {
+    if (event.participantsUL >= 9999) {
+      return '一般（制限なし）'
+    }
+    return `${event.participantsUL}人`
+  }
+  
+  // Both exist
   if (event.participantsUL >= 9999) {
     return '一般（制限なし）'
   }
