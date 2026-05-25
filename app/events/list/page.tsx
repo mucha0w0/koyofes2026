@@ -255,7 +255,7 @@ export default function EventListPage() {
                   : ''
                 return (
                   <Link key={event.slug} href={`/events/${event.slug}`}>
-                    <div className="flex gap-4 bg-card p-5 hover:bg-muted transition-colors cursor-pointer">
+                    <div className="flex gap-4 bg-card p-6 hover:bg-muted transition-colors cursor-pointer border border-[#e6e9ed]">
                       {/* アイコン */}
                       <div className="w-16 h-16 bg-muted flex items-center justify-center shrink-0">
                         {IconComponent ? (
