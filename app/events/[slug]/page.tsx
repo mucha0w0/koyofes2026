@@ -4,8 +4,7 @@ import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { EventMarkdown } from '@/components/event-markdown'
 import { EventCarousel } from '@/components/event-carousel'
-import { getLucideIcon } from '@/lib/lucide-icons'
-import eventsData from '@/lib/events.json'
+import { getEvents } from '@/lib/microcms'
 import { Event } from '@/lib/types/event'
 import { Clock, MapPin, Users, Building2, ArrowRight } from 'lucide-react'
 
@@ -20,15 +19,22 @@ function formatTimeDisplay(timeStr: string): string {
 }
 
 // Format location display with floor and classroom
-function formatLocation(event: Event): string {
-  const parts = [event.location]
-  if (event.floor) parts.push(event.floor)
-  if (event.classroom) parts.push(event.classroom)
-  return parts.join(' ')
+function formatLocation(event: Event): { firstLine: string; secondLine?: string } {
+  const firstLine = [event.location]
+  if (event.floor) firstLine.push(event.floor)
+  
+  return {
+    firstLine: firstLine.join(' '),
+    secondLine: event.classroom
+  }
 }
 
 // Format participants display
 function formatParticipants(event: Event): string {
+  // Both empty/undefined = unlimited
+  if (!event.participantsUL && !event.participantsLL) {
+    return '制限なし'
+  }
   if (event.participantsUL >= 9999) {
     return '一般（制限なし）'
   }
@@ -53,14 +59,26 @@ interface PageProps {
 }
 
 async function getEvent(slug: string): Promise<Event | null> {
-  const event = (eventsData.events as Event[]).find((e) => e.slug === slug)
-  return event || null
+  try {
+    const events = await getEvents()
+    const event = (events as Event[]).find((e) => e.slug === slug)
+    return event || null
+  } catch (error) {
+    console.error("イベント取得エラー:", error)
+    return null
+  }
 }
 
 export async function generateStaticParams() {
-  return (eventsData.events as Event[]).map((event) => ({
-    slug: event.slug,
-  }))
+  try {
+    const events = await getEvents()
+    return (events as Event[]).map((event) => ({
+      slug: event.slug,
+    }))
+  } catch (error) {
+    console.error("静的パラメータ生成エラー:", error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -87,12 +105,14 @@ export default async function EventPage({ params }: PageProps) {
     notFound()
   }
 
-  const IconComponent = getLucideIcon(event.icon)
   const timeDay1 = formatTimeDisplay(event['time-day1'])
   const timeDay2 = formatTimeDisplay(event['time-day2'])
   const locationDisplay = formatLocation(event)
   const participantsDisplay = formatParticipants(event)
   const durationDisplay = formatDuration(event.duration)
+  
+  // アイコンが URL か判定（http/https で始まるか）
+  const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'))
 
   return (
     <>
@@ -106,9 +126,15 @@ export default async function EventPage({ params }: PageProps) {
           <div className="mb-12 md:mb-16">
             <div className="flex items-start gap-4 md:gap-8 mb-6">
               {/* Icon */}
-              <div className="shrink-0 w-16 h-16 md:w-24 md:h-24 bg-muted flex items-center justify-center">
-                {IconComponent ? (
-                  <IconComponent className="h-8 w-8 md:h-12 md:w-12 text-foreground" />
+              <div className="shrink-0 w-16 h-16 md:w-24 md:h-24 bg-muted flex items-center justify-center overflow-hidden">
+                {isIconUrl ? (
+                  <Image
+                    src={event.icon}
+                    alt={event.title}
+                    width={96}
+                    height={96}
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
                   <span className="text-sm text-muted-foreground">No icon</span>
                 )}
@@ -135,7 +161,12 @@ export default async function EventPage({ params }: PageProps) {
                     <MapPin className="h-4 w-4" />
                     <span className="text-xs font-medium">場所</span>
                   </div>
-                  <p className="text-sm font-medium text-foreground">{locationDisplay}</p>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium text-foreground">{locationDisplay.firstLine}</p>
+                    {locationDisplay.secondLine && (
+                      <p className="text-sm font-medium text-foreground">{locationDisplay.secondLine}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="bg-card p-4">

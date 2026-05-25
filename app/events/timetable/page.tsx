@@ -2,7 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import { Clock } from "lucide-react"
-import eventsData from "@/lib/events.json"
+import { getEvents } from "@/lib/microcms"
 import { Event } from "@/lib/types/event"
 
 // Convert time format from HHMMMM to HH:MM~HH:MM
@@ -22,9 +22,16 @@ interface ScheduleEvent {
   duration: number
 }
 
-export default function StageEventsPage() {
-  // Get all stage events from events.json
-  const stageEvents = (eventsData.events as Event[]).filter((e) => e.category === "stage")
+export default async function StageEventsPage() {
+  // Get all stage events from microCMS
+  let stageEvents: Event[] = []
+  
+  try {
+    const events = await getEvents()
+    stageEvents = (events as Event[]).filter((e) => e.category === "stage")
+  } catch (error) {
+    console.error("イベント取得エラー:", error)
+  }
 
   // Group events by day
   const day1Events: ScheduleEvent[] = stageEvents

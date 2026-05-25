@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -11,18 +11,6 @@ interface EventCarouselProps {
 
 export function EventCarousel({ images, title }: EventCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlay, setIsAutoPlay] = useState(true)
-
-  // 自動スライドショー
-  useEffect(() => {
-    if (!isAutoPlay || images.length === 0) return
-
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length)
-    }, 5000) // 5秒ごとに切り替え
-
-    return () => clearInterval(timer)
-  }, [isAutoPlay, images.length])
 
   if (images.length === 0) {
     return (
@@ -36,12 +24,10 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
   }
 
   const goToPrevious = () => {
-    setIsAutoPlay(false)
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
   }
 
   const goToNext = () => {
-    setIsAutoPlay(false)
     setCurrentIndex((prev) => (prev + 1) % images.length)
   }
 
@@ -50,8 +36,6 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
   return (
     <div
       className="relative aspect-video w-full bg-muted overflow-hidden group"
-      onMouseEnter={() => setIsAutoPlay(false)}
-      onMouseLeave={() => setIsAutoPlay(true)}
     >
       {/* Main Image */}
       {currentImage && (
@@ -88,10 +72,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
             {images.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => {
-                  setIsAutoPlay(false)
-                  setCurrentIndex(idx)
-                }}
+                onClick={() => setCurrentIndex(idx)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/70'
                 }`}
