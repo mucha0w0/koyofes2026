@@ -1,31 +1,33 @@
-"use client"
+"use client";
 
-import { useState, useMemo, useEffect, Suspense } from "react"
-import { useSearchParams } from "next/navigation"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { Search, ChevronDown, RotateCcw } from "lucide-react"
-import Link from "next/link"
-import eventsData from "@/lib/events.json"
-import { Event } from "@/lib/types/event"
-import { getLucideIcon } from "@/lib/lucide-icons"
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { PageLayout } from "@/components/page-layout";
+import { Search, ChevronDown, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import eventsData from "@/lib/events.json";
+import { Event } from "@/lib/types/event";
+import { getLucideIcon } from "@/lib/lucide-icons";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
   "class-exhibit": "クラス・学科展",
   "volunteer-exhibit": "有志展示",
-  "booth": "模擬店",
-  "stage": "ステージ",
-  "performance": "パフォーマンス",
-}
+  booth: "模擬店",
+  stage: "ステージ",
+  performance: "パフォーマンス",
+};
 
 // ロケーションラベル（データベースから一意に抽出）
 function getUniqueLocations(events: Event[]): string[] {
-  const locations = new Set(events.map((e) => e.location || ""))
-  return Array.from(locations).filter((l) => l).sort()
+  const locations = new Set(events.map((e) => e.location || ""));
+  return Array.from(locations)
+    .filter((l) => l)
+    .sort();
 }
 
 export default function EventListPage() {
@@ -33,90 +35,107 @@ export default function EventListPage() {
     <Suspense fallback={<div>読み込み中...</div>}>
       <EventListContent />
     </Suspense>
-  )
+  );
 }
 
 function EventListContent() {
-  const searchParams = useSearchParams()
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([])
-  const [participantMax, setParticipantMax] = useState(5)
-  const [durationMax, setDurationMax] = useState(30)
-  const [selectedLocation, setSelectedLocation] = useState("")
-  const [showAdvanced, setShowAdvanced] = useState(false)
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [participantMax, setParticipantMax] = useState(1);
+  const [enableParticipantFilter, setEnableParticipantFilter] = useState(false);
+  const [durationValue, setDurationValue] = useState(15);
+  const [enableDurationFilter, setEnableDurationFilter] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   // URLクエリパラメータから検索文字を取得
   useEffect(() => {
-    const q = searchParams.get("q")
+    const q = searchParams.get("q");
     if (q) {
-      setSearchQuery(decodeURIComponent(q))
+      setSearchQuery(decodeURIComponent(q));
     }
-  }, [searchParams])
+  }, [searchParams]);
 
-  const events = (eventsData.events as Event[]) || []
-  const uniqueLocations = useMemo(() => getUniqueLocations(events), [])
+  const events = (eventsData.events as Event[]) || [];
+  const uniqueLocations = useMemo(() => getUniqueLocations(events), []);
 
   // フィルタリングロジック
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       // 検索クエリ（企画名優先）
       if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase()
-        const titleMatch = event.title.toLowerCase().includes(query)
-        const orgMatch = event.organization.toLowerCase().includes(query)
-        if (!titleMatch && !orgMatch) return false
+        const query = searchQuery.toLowerCase();
+        const titleMatch = event.title.toLowerCase().includes(query);
+        const orgMatch = event.organization.toLowerCase().includes(query);
+        if (!titleMatch && !orgMatch) return false;
       }
 
       // ジャンルフィルター
-      if (selectedGenres.length > 0 && !selectedGenres.includes(event.category)) {
-        return false
+      if (
+        selectedGenres.length > 0 &&
+        !selectedGenres.includes(event.category)
+      ) {
+        return false;
       }
 
-      // 参加人数フィルター（下限値~上限値の間に選択値が入っていれば表示）
-      if (participantMax < 5) {
-        // participantMax が 1-4 の場合、参加人数が selectedValue と一致または範囲内か確認
-        // 1-2人 → 1か2が選択されていたら表示
-        const participantsLL = event.participantsLL || 1
-        const participantsUL = event.participantsUL || 1
-        if (participantMax < participantsLL || participantMax > participantsUL) {
-          return false
+      // 参加人数フィルター（チェックボックスがオンの場合のみ）
+      if (enableParticipantFilter) {
+        const participantsLL = event.participantsLL || 1;
+        const participantsUL = event.participantsUL || 1;
+        if (
+          participantMax < participantsLL ||
+          participantMax > participantsUL
+        ) {
+          return false;
         }
       }
 
-      // 所要時間フィルター（duration分）
-      if (event.duration && event.duration > durationMax) {
-        return false
+      // 所要時間フィルター（チェックボックスがオンの場合のみ）
+      if (enableDurationFilter) {
+        if (event.duration) {
+          if (
+            event.duration < durationValue - 3 ||
+            event.duration > durationValue + 3
+          ) {
+            return false;
+          }
+        }
       }
 
       // 設営場所フィルター
       if (selectedLocation && event.location !== selectedLocation) {
-        return false
+        return false;
       }
 
-      return true
-    })
+      return true;
+    });
   }, [
     events,
     searchQuery,
     selectedGenres,
     participantMax,
-    durationMax,
+    enableParticipantFilter,
+    durationValue,
+    enableDurationFilter,
     selectedLocation,
-  ])
+  ]);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres((prev) =>
-      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
-    )
-  }
+      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre],
+    );
+  };
 
   const handleResetFilters = () => {
-    setSearchQuery("")
-    setSelectedGenres([])
-    setParticipantMax(5)
-    setDurationMax(30)
-    setSelectedLocation("")
-  }
+    setSearchQuery("");
+    setSelectedGenres([]);
+    setParticipantMax(1);
+    setEnableParticipantFilter(false);
+    setDurationValue(15);
+    setEnableDurationFilter(false);
+    setSelectedLocation("");
+  };
 
   return (
     <>
@@ -178,9 +197,23 @@ function EventListContent() {
               <div className="mt-6 space-y-8">
                 {/* 参加人数フィルター */}
                 <div>
-                  <p className="text-sm font-medium text-foreground mb-4">
-                    参加人数（おすすめ）
-                  </p>
+                  <div className="flex items-center gap-3 mb-4">
+                    <input
+                      type="checkbox"
+                      id="enable-participant"
+                      checked={enableParticipantFilter}
+                      onChange={(e) =>
+                        setEnableParticipantFilter(e.target.checked)
+                      }
+                      className="w-4 h-4"
+                    />
+                    <label
+                      htmlFor="enable-participant"
+                      className="text-sm font-medium text-foreground cursor-pointer"
+                    >
+                      参加人数（おすすめ）
+                    </label>
+                  </div>
                   <input
                     type="range"
                     min="1"
@@ -200,24 +233,36 @@ function EventListContent() {
 
                 {/* 所要時間フィルター */}
                 <div>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-xs text-muted-foreground">さくっと</span>
-                    <p className="text-sm font-medium text-foreground">
+                  <div className="flex items-center gap-3 mb-4">
+                    <input
+                      type="checkbox"
+                      id="enable-duration"
+                      checked={enableDurationFilter}
+                      onChange={(e) =>
+                        setEnableDurationFilter(e.target.checked)
+                      }
+                      className="w-4 h-4"
+                    />
+                    <label
+                      htmlFor="enable-duration"
+                      className="text-sm font-medium text-foreground cursor-pointer"
+                    >
                       所要時間
-                    </p>
-                    <span className="text-xs text-muted-foreground">じっくり</span>
+                    </label>
                   </div>
                   <input
                     type="range"
                     min="5"
                     max="30"
-                    value={durationMax}
-                    onChange={(e) => setDurationMax(Number(e.target.value))}
+                    value={durationValue}
+                    onChange={(e) => setDurationValue(Number(e.target.value))}
                     className="w-full"
                   />
-                  <p className="text-xs text-muted-foreground text-center mt-2">
-                    {durationMax === 30 ? "30分以上" : `${durationMax}分まで`}
-                  </p>
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <span>さくっと</span>
+                    <span className="mx-auto">{durationValue}分程度</span>
+                    <span>じっくり</span>
+                  </div>
                 </div>
 
                 {/* 設営場所フィルター */}
@@ -249,8 +294,8 @@ function EventListContent() {
             </p>
             {(searchQuery ||
               selectedGenres.length > 0 ||
-              participantMax < 5 ||
-              durationMax < 30 ||
+              enableParticipantFilter ||
+              enableDurationFilter ||
               selectedLocation) && (
               <button
                 onClick={handleResetFilters}
@@ -266,13 +311,13 @@ function EventListContent() {
           <div className="space-y-6">
             {filteredEvents.length > 0 ? (
               filteredEvents.map((event) => {
-                const IconComponent = getLucideIcon(event.icon)
+                const IconComponent = getLucideIcon(event.icon);
                 // キャッチフレーズを1行にする（長い場合は省略）
                 const displayCatchphrase = event.catchphrase
-                  ? event.catchphrase.split('\n')[0].length > 40
-                    ? event.catchphrase.split('\n')[0].substring(0, 40) + '...'
-                    : event.catchphrase.split('\n')[0]
-                  : ''
+                  ? event.catchphrase.split("\n")[0].length > 40
+                    ? event.catchphrase.split("\n")[0].substring(0, 40) + "..."
+                    : event.catchphrase.split("\n")[0]
+                  : "";
                 return (
                   <Link key={event.slug} href={`/events/${event.slug}`}>
                     <div className="flex gap-4 bg-card p-6 hover:bg-muted transition-colors cursor-pointer border border-[#e6e9ed]">
@@ -311,7 +356,7 @@ function EventListContent() {
                       </div>
                     </div>
                   </Link>
-                )
+                );
               })
             ) : (
               <div className="text-center py-12">
@@ -325,5 +370,5 @@ function EventListContent() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }
