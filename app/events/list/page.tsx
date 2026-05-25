@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
@@ -9,6 +10,8 @@ import Link from "next/link"
 import eventsData from "@/lib/events.json"
 import { Event } from "@/lib/types/event"
 import { getLucideIcon } from "@/lib/lucide-icons"
+
+export const dynamic = "force-dynamic"
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
@@ -26,12 +29,29 @@ function getUniqueLocations(events: Event[]): string[] {
 }
 
 export default function EventListPage() {
+  return (
+    <Suspense fallback={<div>読み込み中...</div>}>
+      <EventListContent />
+    </Suspense>
+  )
+}
+
+function EventListContent() {
+  const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
   const [participantMax, setParticipantMax] = useState(5)
   const [durationMax, setDurationMax] = useState(30)
   const [selectedLocation, setSelectedLocation] = useState("")
   const [showAdvanced, setShowAdvanced] = useState(false)
+
+  // URLクエリパラメータから検索文字を取得
+  useEffect(() => {
+    const q = searchParams.get("q")
+    if (q) {
+      setSearchQuery(decodeURIComponent(q))
+    }
+  }, [searchParams])
 
   const events = (eventsData.events as Event[]) || []
   const uniqueLocations = useMemo(() => getUniqueLocations(events), [])
