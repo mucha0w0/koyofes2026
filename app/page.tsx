@@ -6,6 +6,9 @@ import { ContentSection } from "@/components/content-section"
 import { Sponsors } from "@/components/sponsors"
 import { SiteFooter } from "@/components/site-footer"
 
+// 常に最新データを動的にレンダリング（microCMS更新を反映）
+export const dynamic = 'force-dynamic'
+
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">

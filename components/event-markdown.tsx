@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import parse from 'html-react-parser'
+import parse, { domToReact, Element } from 'html-react-parser'
 
 interface MarkdownProps {
   content: string
@@ -16,8 +16,11 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
   // HTML コンテンツの処理
   const htmlContent = parse(content, {
     replace: (domNode: any) => {
+      // テキストノード・コメント以外をチェック
+      if (!(domNode instanceof Element)) return domNode
+
       // 画像タグのスタイル調整
-      if (domNode.type === 'tag' && domNode.name === 'img') {
+      if (domNode.name === 'img') {
         return React.createElement('img', {
           ...domNode.attribs,
           className: 'max-w-full h-auto rounded-lg',
@@ -25,38 +28,39 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
       }
 
       // リンクタグのスタイル調整
-      if (domNode.type === 'tag' && domNode.name === 'a') {
+      if (domNode.name === 'a') {
         return React.createElement(
           'a',
           {
             ...domNode.attribs,
             className: 'text-blue-600 hover:underline',
           },
-          domNode.children,
+          domToReact(domNode.children),
         )
       }
 
       // テーブルのスタイル調整
-      if (domNode.type === 'tag' && domNode.name === 'table') {
+      if (domNode.name === 'table') {
         return React.createElement(
           'table',
           {
             className: 'w-full border-collapse border border-border',
           },
-          domNode.children,
+          domToReact(domNode.children),
         )
       }
 
-      if (domNode.type === 'tag' && (domNode.name === 'th' || domNode.name === 'td')) {
+      if (domNode.name === 'th' || domNode.name === 'td') {
         return React.createElement(
           domNode.name,
           {
             className: 'border border-border px-3 py-2',
           },
-          domNode.children,
+          domToReact(domNode.children),
         )
       }
 
+      // その他のタグはデフォルトレンダリング
       return undefined
     },
   })

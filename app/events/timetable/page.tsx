@@ -5,6 +5,9 @@ import { Clock } from "lucide-react"
 import { getEvents } from "@/lib/microcms"
 import { Event } from "@/lib/types/event"
 
+// 常に最新データを動的にレンダリング（microCMS更新を反映）
+export const dynamic = 'force-dynamic'
+
 // Convert time format from HHMMMM to HH:MM~HH:MM
 function formatTimeDisplay(timeStr: string): string {
   if (!timeStr || timeStr.length !== 8) return timeStr

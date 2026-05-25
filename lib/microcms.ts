@@ -65,8 +65,8 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
       headers: {
         "X-MICROCMS-API-KEY": apiKey,
       },
-      // ISR: 1時間ごとに再検証
-      next: { revalidate: 3600 },
+      // 常に最新データを取得（キャッシュなし）
+      cache: 'no-store',
     })
 
     if (!response.ok) {
