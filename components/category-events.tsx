@@ -12,14 +12,14 @@ type EventCategory =
   | "volunteer-exhibit"
   | "booth"
   | "stage"
-  | "food-truck";
+  | "performance";
 
 const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
   "class-exhibit":     { title: "クラス・学科展示",     Icon: Building2 },
   "volunteer-exhibit": { title: "有志展示",           Icon: Users },
   "booth":             { title: "模擬店",         Icon: Users     },
   "stage":             { title: "ステージ",       Icon: Mic2      },
-  "food-truck":       { title: "キッチンカー", Icon: Palette   },
+  "performance":       { title: "パフォーマンス", Icon: Palette   },
 };
 
 interface EventCardProps {
@@ -147,13 +147,13 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     >
       <div data-event-set="1" className="flex gap-4 shrink-0">
         {events.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard key={event.slug} event={event} />
         ))}
       </div>
       {[2, 3, 4, 5, 6].map((setNum) => (
         <div key={`set-${setNum}`} className="flex gap-4 shrink-0">
           {events.map((event) => (
-            <EventCard key={`dup-${setNum}-${event.id}`} event={event} />
+            <EventCard key={`dup-${setNum}-${event.slug}`} event={event} />
           ))}
         </div>
       ))}

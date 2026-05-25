@@ -9,6 +9,45 @@ import eventsData from '@/lib/events.json'
 import { Event } from '@/lib/types/event'
 import { Clock, MapPin, Users, Building2, ArrowRight } from 'lucide-react'
 
+// Convert time format from HHMMMM to HH:MM~HH:MM
+function formatTimeDisplay(timeStr: string): string {
+  if (!timeStr || timeStr.length !== 8) return timeStr
+  const startHour = timeStr.substring(0, 2)
+  const startMin = timeStr.substring(2, 4)
+  const endHour = timeStr.substring(4, 6)
+  const endMin = timeStr.substring(6, 8)
+  return `${startHour}:${startMin}~${endHour}:${endMin}`
+}
+
+// Format location display with floor and classroom
+function formatLocation(event: Event): string {
+  const parts = [event.location]
+  if (event.floor) parts.push(event.floor)
+  if (event.classroom) parts.push(event.classroom)
+  return parts.join(' ')
+}
+
+// Format participants display
+function formatParticipants(event: Event): string {
+  if (event.participantsUL >= 9999) {
+    return '一般（制限なし）'
+  }
+  if (event.participantsUL === event.participantsLL) {
+    return `${event.participantsLL}人`
+  }
+  return `${event.participantsLL}-${event.participantsUL}人`
+}
+
+// Format duration display
+function formatDuration(minutes: number): string {
+  if (minutes === 0) return '時間未定'
+  if (minutes < 60) return `${minutes}分`
+  const hours = Math.floor(minutes / 60)
+  const mins = minutes % 60
+  if (mins === 0) return `${hours}時間`
+  return `${hours}時間${mins}分`
+}
+
 interface PageProps {
   params: Promise<{ slug: string }>
 }
@@ -36,7 +75,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   return {
     title: `${event.title} | こうよう祭`,
-    description: event.description.split('\n')[0],
+    description: event.catchphrase || event.description.split('\n')[0],
   }
 }
 
@@ -49,6 +88,11 @@ export default async function EventPage({ params }: PageProps) {
   }
 
   const IconComponent = getLucideIcon(event.icon)
+  const timeDay1 = formatTimeDisplay(event['time-day1'])
+  const timeDay2 = formatTimeDisplay(event['time-day2'])
+  const locationDisplay = formatLocation(event)
+  const participantsDisplay = formatParticipants(event)
+  const durationDisplay = formatDuration(event.duration)
 
   return (
     <>
@@ -57,55 +101,68 @@ export default async function EventPage({ params }: PageProps) {
         {/* Banner Carousel */}
         <EventCarousel images={event.images} title={event.title} />
 
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          {/* Title Section with Icon */}
-          <div className="mb-12 flex items-start gap-6">
-            {/* Icon */}
-            <div className="shrink-0 w-20 h-20 bg-muted flex items-center justify-center">
-              {IconComponent ? (
-                <IconComponent className="h-10 w-10 text-foreground" />
-              ) : (
-                <span className="text-sm text-muted-foreground">No icon</span>
-              )}
+        <div className="container mx-auto px-4 py-8 md:py-16">
+          {/* Hero Title Section with Catchphrase - Full Width */}
+          <div className="mb-12 md:mb-16">
+            <div className="flex items-start gap-4 md:gap-8 mb-6">
+              {/* Icon */}
+              <div className="shrink-0 w-16 h-16 md:w-24 md:h-24 bg-muted flex items-center justify-center">
+                {IconComponent ? (
+                  <IconComponent className="h-8 w-8 md:h-12 md:w-12 text-foreground" />
+                ) : (
+                  <span className="text-sm text-muted-foreground">No icon</span>
+                )}
+              </div>
+
+              {/* Title and Organization */}
+              <div className="flex-1">
+                <h1 className="text-2xl md:text-3xl font-medium text-foreground mb-2">{event.title}</h1>
+                <p className="text-base md:text-lg text-muted-foreground">{event.organization}</p>
+              </div>
             </div>
 
-            {/* Title and Organization */}
-            <div>
-              <h1 className="text-4xl md:text-5xl font-medium text-foreground mb-2">{event.title}</h1>
-              <p className="text-lg text-muted-foreground">{event.organization}</p>
-            </div>
+            {/* Catchphrase */}
+            <p className="text-lg md:text-xl font-medium text-foreground">{event.catchphrase}</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">
-              {/* Quick Info Cards - 3等分 */}
-              <div className="grid grid-cols-3 gap-4">
+              {/* Quick Info Cards - 4等分 */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div className="bg-card p-4">
                   <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                     <MapPin className="h-4 w-4" />
                     <span className="text-xs font-medium">場所</span>
                   </div>
-                  <p className="text-sm font-medium text-foreground">{event.location}</p>
+                  <p className="text-sm font-medium text-foreground">{locationDisplay}</p>
                 </div>
 
                 <div className="bg-card p-4">
                   <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                     <Clock className="h-4 w-4" />
-                    <span className="text-xs font-medium">開催時間</span>
+                    <span className="text-xs font-medium">時間</span>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-xs font-medium text-foreground">{event.time.day1}</p>
-                    <p className="text-xs font-medium text-foreground">{event.time.day2}</p>
+                    <p className="text-xs font-medium text-foreground">{timeDay1}</p>
+                    <p className="text-xs font-medium text-foreground">{timeDay2}</p>
                   </div>
                 </div>
 
                 <div className="bg-card p-4">
                   <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                     <Users className="h-4 w-4" />
-                    <span className="text-xs font-medium">推奨人数</span>
+                    <span className="text-xs font-medium">人数</span>
                   </div>
-                  <p className="text-sm font-medium text-foreground">{event.recommendedParticipants}</p>
+                  <p className="text-sm font-medium text-foreground">{participantsDisplay}</p>
+                </div>
+
+                <div className="bg-card p-4">
+                  <div className="flex items-center gap-2 mb-2 text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span className="text-xs font-medium">所要時間</span>
+                  </div>
+                  <p className="text-sm font-medium text-foreground">{durationDisplay}</p>
                 </div>
               </div>
 
@@ -115,32 +172,13 @@ export default async function EventPage({ params }: PageProps) {
                 <div className="prose max-w-none">
                   <EventMarkdown content={event.description} />
                 </div>
+                {/* Author Info - Desktop */}
+                <div className="hidden lg:block mt-6 pt-6 border-t border-border">
+                  <p className="text-xs text-muted-foreground">執筆者: {event.author}</p>
+                </div>
               </section>
 
-              {/* Image Gallery */}
-              {event.images.length > 1 && (
-                <section>
-                  <h2 className="text-2xl font-medium mb-6 text-foreground">ギャラリー</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {event.images.slice(1).map((img, idx) => (
-                      <div key={idx} className="overflow-hidden">
-                        <div className="relative aspect-square">
-                          {img.url ? (
-                            <Image src={img.url} alt={img.alt} fill className="object-cover" />
-                          ) : (
-                            <div className="flex items-center justify-center bg-muted h-full text-muted-foreground">
-                              No image
-                            </div>
-                          )}
-                        </div>
-                        {img.caption && (
-                          <p className="text-sm text-muted-foreground mt-2 italic">{img.caption}</p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
+
             </div>
 
             {/* Sidebar */}
@@ -154,7 +192,12 @@ export default async function EventPage({ params }: PageProps) {
                 <p className="text-2xl font-medium text-foreground mb-6">{event.organization}</p>
 
                 <div className="prose max-w-none">
-                  <EventMarkdown content={event.organizationDescription} className="text-sm" />
+                  <EventMarkdown content={event['organ-description']} className="text-sm" />
+                </div>
+
+                {/* Author Info - Mobile/Tablet */}
+                <div className="lg:hidden mt-6 pt-6 border-t border-border">
+                  <p className="text-xs text-muted-foreground">執筆者: {event.author}</p>
                 </div>
               </div>
             </aside>

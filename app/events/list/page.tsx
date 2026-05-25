@@ -14,6 +14,16 @@ const categoryLabels: Record<string, string> = {
   workshop: "ワークショップ",
 }
 
+// Convert time format from HHMMMM to HH:MM~HH:MM
+function formatTimeDisplay(timeStr: string): string {
+  if (!timeStr || timeStr.length !== 8) return timeStr
+  const startHour = timeStr.substring(0, 2)
+  const startMin = timeStr.substring(2, 4)
+  const endHour = timeStr.substring(4, 6)
+  const endMin = timeStr.substring(6, 8)
+  return `${startHour}:${startMin}~${endHour}:${endMin}`
+}
+
 export default function EventListPage() {
   return (
     <>
@@ -31,7 +41,7 @@ export default function EventListPage() {
         </div>
         <div className="space-y-3">
           {(eventsData.events as Event[]).map((event) => (
-            <Link key={event.id} href={`/events/${event.slug}`}>
+            <Link key={event.slug} href={`/events/${event.slug}`}>
               <div className="flex items-center gap-4 bg-card p-4 hover:bg-muted transition-colors cursor-pointer">
                 <div className="w-12 h-12 bg-muted flex items-center justify-center text-foreground font-medium shrink-0">
                   {event.title.charAt(0)}
@@ -50,7 +60,7 @@ export default function EventListPage() {
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
-                    {event.time.day1}
+                    {formatTimeDisplay(event['time-day1'])}
                   </span>
                 </div>
               </div>

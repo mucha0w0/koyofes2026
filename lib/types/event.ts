@@ -1,27 +1,22 @@
-export interface EventTime {
-  day1: string // "10:00-15:00" format
-  day2: string
-}
-
-export interface EventImage {
-  url: string
-  alt: string
-  caption?: string
-}
-
 export interface Event {
-  id: string
   slug: string
   title: string
+  catchphrase: string
   icon: string // lucide icon name (e.g., "Music", "Utensils")
-  images: EventImage[]
+  images: string[] // URLs only
   organization: string
   location: string
-  time: EventTime
-  recommendedParticipants: string // e.g., "2-4人" or "グループ向け"
+  floor: string
+  classroom: string
+  "time-day1": string // "10001600" format (HHMMMM)
+  "time-day2": string // "10001600" format (HHMMMM)
+  duration: number // minutes
+  participantsUL: number // upper limit
+  participantsLL: number // lower limit
   description: string // markdown
-  organizationDescription: string // markdown
-  category: "class-exhibit" | "volunteer-exhibit" | "booth" | "stage" | "food-truck"
+  "organ-description": string // markdown
+  author: string
+  category: "class-exhibit" | "volunteer-exhibit" | "booth" | "stage" | "performance"
 }
 
 export interface EventsData {
