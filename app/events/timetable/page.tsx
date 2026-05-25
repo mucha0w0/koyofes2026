@@ -1,56 +1,90 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
+import { Clock } from "lucide-react"
+import eventsData from "@/lib/events.json"
+import { Event } from "@/lib/types/event"
 
-const timetable = [
-  { time: "09:00", events: [{ name: "開会式", location: "体育館", type: "公式" }] },
-  { time: "10:00", events: [
-    { name: "吹奏楽部演奏", location: "体育館", type: "ステージ" },
-    { name: "企画開始", location: "各教室", type: "展示" },
-  ]},
-  { time: "11:00", events: [{ name: "書道パフォーマンス", location: "体育館", type: "ステージ" }] },
-  { time: "12:00", events: [{ name: "昼休憩", location: "-", type: "休憩" }] },
-  { time: "13:00", events: [{ name: "ライブステージ", location: "体育館", type: "ステージ" }] },
-  { time: "14:00", events: [{ name: "ダンスステージ", location: "体育館", type: "ステージ" }] },
-  { time: "15:00", events: [{ name: "有志バンド", location: "体育館", type: "ステージ" }] },
-  { time: "16:00", events: [{ name: "企画終了", location: "各教室", type: "展示" }] },
-  { time: "16:30", events: [{ name: "閉会式", location: "体育館", type: "公式" }] },
-]
+// Convert time format from HHMMMM to HH:MM~HH:MM
+function formatTimeDisplay(timeStr: string): string {
+  if (!timeStr || timeStr.length !== 8) return timeStr
+  const startHour = timeStr.substring(0, 2)
+  const startMin = timeStr.substring(2, 4)
+  const endHour = timeStr.substring(4, 6)
+  const endMin = timeStr.substring(6, 8)
+  return `${startHour}:${startMin}~${endHour}:${endMin}`
+}
 
-export default function TimetablePage() {
+interface ScheduleEvent {
+  title: string
+  timeRange: string
+  organization: string
+  duration: number
+}
+
+export default function StageEventsPage() {
+  // Get all stage events from events.json
+  const stageEvents = (eventsData.events as Event[]).filter((e) => e.category === "stage")
+
+  // Group events by day
+  const day1Events: ScheduleEvent[] = stageEvents
+    .map((event) => ({
+      title: event.title,
+      timeRange: formatTimeDisplay(event["time-day1"]),
+      organization: event.organization,
+      duration: event.duration,
+    }))
+    .sort((a, b) => a.timeRange.localeCompare(b.timeRange))
+
+  const day2Events: ScheduleEvent[] = stageEvents
+    .map((event) => ({
+      title: event.title,
+      timeRange: formatTimeDisplay(event["time-day2"]),
+      organization: event.organization,
+      duration: event.duration,
+    }))
+    .sort((a, b) => a.timeRange.localeCompare(b.timeRange))
+
+  const renderEventList = (events: ScheduleEvent[]) => (
+    <div className="relative">
+      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
+      <div className="space-y-6">
+        {events.map((event, idx) => (
+          <div key={idx} className="relative flex gap-4 pl-12">
+            <div className="absolute left-4 w-3 h-3 bg-primary" />
+            <div className="flex-1 bg-card p-4">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-lg font-medium text-foreground">{event.timeRange}</span>
+                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Clock className="h-3 w-3" />
+                  {event.duration}分
+                </span>
+              </div>
+              <h3 className="font-medium">{event.title}</h3>
+              <p className="text-sm text-muted-foreground">{event.organization}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
   return (
     <>
       <SiteHeader />
-      <PageLayout title="タイムテーブル" subtitle="こうよう祭当日のスケジュールです">
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 font-medium">時間</th>
-                <th className="text-left py-3 px-4 font-medium">イベント</th>
-                <th className="text-left py-3 px-4 font-medium hidden sm:table-cell">場所</th>
-                <th className="text-left py-3 px-4 font-medium hidden md:table-cell">種類</th>
-              </tr>
-            </thead>
-            <tbody>
-              {timetable.map((slot, i) => (
-                slot.events.map((event, j) => (
-                  <tr key={`${i}-${j}`} className="border-b border-border hover:bg-muted transition-colors">
-                    {j === 0 && (
-                      <td className="py-3 px-4 font-medium text-foreground align-top" rowSpan={slot.events.length}>
-                        {slot.time}
-                      </td>
-                    )}
-                    <td className="py-3 px-4">{event.name}</td>
-                    <td className="py-3 px-4 text-muted-foreground hidden sm:table-cell">{event.location}</td>
-                    <td className="py-3 px-4 hidden md:table-cell">
-                      <span className="text-xs px-2 py-1 bg-secondary">{event.type}</span>
-                    </td>
-                  </tr>
-                ))
-              ))}
-            </tbody>
-          </table>
+      <PageLayout title="タイムテーブル" subtitle="2日間のタイムテーブルです">
+        <div className="space-y-12">
+          {/* Day 1 */}
+          <div>
+            <h2 className="text-2xl font-medium mb-6 text-foreground">1日目</h2>
+            {renderEventList(day1Events)}
+          </div>
+
+          {/* Day 2 */}
+          <div>
+            <h2 className="text-2xl font-medium mb-6 text-foreground">2日目</h2>
+            {renderEventList(day2Events)}
+          </div>
         </div>
       </PageLayout>
       <SiteFooter />
