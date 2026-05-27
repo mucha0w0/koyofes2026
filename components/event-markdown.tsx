@@ -35,7 +35,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
             ...domNode.attribs,
             className: 'text-blue-600 hover:underline',
           },
-          domToReact(domNode.children),
+          domToReact(domNode.children as any),
         )
       }
 
@@ -46,7 +46,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
           {
             className: 'w-full border-collapse border border-border',
           },
-          domToReact(domNode.children),
+          domToReact(domNode.children as any),
         )
       }
 
@@ -56,7 +56,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
           {
             className: 'border border-border px-3 py-2',
           },
-          domToReact(domNode.children),
+          domToReact(domNode.children as any),
         )
       }
 
