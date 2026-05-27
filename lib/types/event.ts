@@ -16,7 +16,7 @@ export interface Event {
   description: string // markdown
   "organ-description": string // markdown
   author: string
-  category: "class-exhibit" | "volunteer-exhibit" | "booth" | "stage" | "performance"
+  category: "class-exhibit" | "volunteer-exhibit" | "booth" | "stage" | "food-truck"
 }
 
 export interface EventsData {

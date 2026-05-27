@@ -16,7 +16,7 @@ const genreLabels: Record<string, string> = {
   "volunteer-exhibit": "有志展示",
   booth: "模擬店",
   stage: "ステージ",
-  performance: "パフォーマンス",
+  "food-truck": "キッチンカー",
 };
 
 // ロケーションラベル（データベースから一意に抽出）

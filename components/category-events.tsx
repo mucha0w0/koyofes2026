@@ -7,14 +7,14 @@ type EventCategory =
   | "volunteer-exhibit"
   | "booth"
   | "stage"
-  | "performance";
+  | "food-truck";
 
 const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
   "class-exhibit":     { title: "クラス・学科展示",     Icon: () => null },
   "volunteer-exhibit": { title: "有志展示",           Icon: () => null },
   "booth":             { title: "模擬店",         Icon: () => null },
   "stage":             { title: "ステージ",       Icon: () => null },
-  "performance":       { title: "パフォーマンス", Icon: () => null },
+  "food-truck":       { title: "キッチンカー", Icon: () => null },
 };
 
 export async function CategoryEvents() {

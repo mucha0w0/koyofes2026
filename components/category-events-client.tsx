@@ -11,14 +11,14 @@ type EventCategory =
   | "volunteer-exhibit"
   | "booth"
   | "stage"
-  | "performance";
+  | "food-truck";
 
 const categoryIconConfig: Record<EventCategory, React.ElementType> = {
   "class-exhibit": Building2,
   "volunteer-exhibit": Users,
   "booth": Users,
   "stage": Mic2,
-  "performance": Palette,
+  "food-truck": Palette,
 };
 
 interface EventCardProps {
