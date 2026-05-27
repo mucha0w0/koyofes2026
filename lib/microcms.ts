@@ -47,6 +47,24 @@ export interface MicroCMSEventResponse {
   limit: number
 }
 
+export interface MicroCMSNews {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  date: string
+  title: string
+  content: string
+}
+
+export interface MicroCMSNewsResponse {
+  contents: MicroCMSNews[]
+  totalCount: number
+  offset: number
+  limit: number
+}
+
 /**
  * microCMS から全イベントを取得
  */
@@ -135,6 +153,68 @@ export async function getEvents() {
     return microCMSEvents.map(transformMicroCMSEvent)
   } catch (error) {
     console.error("イベント取得に失敗しました:", error)
+    throw error
+  }
+}
+
+/**
+ * microCMS からニュース（お知らせ）を全件取得
+ */
+export async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
+  const apiKey = process.env.MICROCMS_API_KEY
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN
+
+  if (!apiKey || !serviceDomain) {
+    throw new Error("microCMS 環境変数が設定されていません")
+  }
+
+  const url = `https://${serviceDomain}.microcms.io/api/v1/news`
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "X-MICROCMS-API-KEY": apiKey,
+      },
+      cache: 'no-store',
+    })
+
+    if (!response.ok) {
+      throw new Error(
+        `microCMS API エラー: ${response.status} ${response.statusText}`
+      )
+    }
+
+    const data: MicroCMSNewsResponse = await response.json()
+    return data.contents
+  } catch (error) {
+    console.error("microCMS ニュースデータ取得エラー:", error)
+    throw error
+  }
+}
+
+/**
+ * microCMS からニュースを取得
+ */
+export async function getNews() {
+  try {
+    const news = await fetchNewsFromMicroCMS()
+    // 新しい順でソート（最新のものを最初に）
+    return news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  } catch (error) {
+    console.error("ニュース取得に失敗しました:", error)
+    throw error
+  }
+}
+
+/**
+ * microCMS からニュースを ID で取得
+ */
+export async function getNewsByID(id: string) {
+  try {
+    const news = await fetchNewsFromMicroCMS()
+    return news.find(item => item.id === id)
+  } catch (error) {
+    console.error("ニュース取得に失敗しました:", error)
     throw error
   }
 }

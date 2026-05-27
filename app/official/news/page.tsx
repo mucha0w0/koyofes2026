@@ -2,35 +2,65 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import Link from "next/link"
+import { getNews } from "@/lib/microcms"
 
-const newsItems = [
-  { id: "1", date: "2026.09.01", title: "当日のタイムテーブルを公開しました", content: "こうよう祭当日のステージイベントのタイムテーブルを公開しました。詳しくはタイムテーブルページをご覧ください。" },
-  { id: "2", date: "2026.08.25", title: "企画一覧を更新しました", content: "新たに10件の企画を追加しました。今年は過去最多となる50以上の企画が出展予定です。" },
-  { id: "3", date: "2026.08.15", title: "公式ウェブサイトをリニューアルしました", content: "こうよう祭2026の公式ウェブサイトをリニューアルオープンしました。企画検索機能など、新機能を追加しています。" },
-  { id: "4", date: "2026.08.01", title: "こうよう祭2026の開催が決定しました", content: "今年度のこうよう祭は9月14日（土）・15日（日）の2日間開催となります。皆様のご来場をお待ちしております。" },
-]
+export const revalidate = 60 // 1分ごとにISR
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  let newsItems = []
+  let error: string | null = null
+
+  try {
+    newsItems = await getNews()
+  } catch (err) {
+    error = err instanceof Error ? err.message : "ニュースの取得に失敗しました"
+    console.error("ニュース取得エラー:", err)
+  }
+
   return (
     <>
       <SiteHeader />
       <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
-        <div className="space-y-4 max-w-3xl">
-          {newsItems.map((item, i) => (
-            <Link href={`/official/news/${item.id}`} key={i}>
-              <article className="bg-card p-6 cursor-pointer transition-colors hover:bg-muted border border-[#e6e9ed]">
-                <div className="flex items-center gap-3 mb-3">
-                  <time className="text-sm text-muted-foreground font-mono">{item.date}</time>
-                  {i === 0 && (
-                    <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary">NEW</span>
-                  )}
-                </div>
-                <h2 className="font-medium text-lg mb-2">{item.title}</h2>
-                <p className="text-muted-foreground text-sm line-clamp-1">{item.content}</p>
-              </article>
-            </Link>
-          ))}
-        </div>
+        {error ? (
+          <div className="max-w-3xl text-center py-12">
+            <p className="text-red-500">{error}</p>
+          </div>
+        ) : newsItems.length === 0 ? (
+          <div className="max-w-3xl text-center py-12">
+            <p className="text-muted-foreground">ニュースはまだ投稿されていません。</p>
+          </div>
+        ) : (
+          <div className="space-y-4 max-w-3xl">
+            {newsItems.map((item, i) => {
+              // dateを表示用にフォーマット
+              const formattedDate = new Date(item.date).toLocaleDateString('ja-JP', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }).replace(/\//g, '.')
+
+              // contentからHTMLタグを削除して、1行に省略
+              const plainContent = item.content
+                .replace(/<[^>]*>/g, '')
+                .trim()
+
+              return (
+                <Link href={`/official/news/${item.id}`} key={item.id}>
+                  <article className="bg-card p-6 cursor-pointer transition-colors hover:bg-muted border border-[#e6e9ed]">
+                    <div className="flex items-center gap-3 mb-3">
+                      <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+                      {i === 0 && (
+                        <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary">NEW</span>
+                      )}
+                    </div>
+                    <h2 className="font-medium text-lg mb-2">{item.title}</h2>
+                    <p className="text-muted-foreground text-sm line-clamp-1">{plainContent}</p>
+                  </article>
+                </Link>
+              )
+            })}
+          </div>
+        )}
       </PageLayout>
       <SiteFooter />
     </>

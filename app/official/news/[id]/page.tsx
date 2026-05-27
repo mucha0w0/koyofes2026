@@ -5,20 +5,49 @@ import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import { use } from "react"
-
-const newsItems = [
-  { id: "1", date: "2026.09.01", title: "当日のタイムテーブルを公開しました", content: "こうよう祭当日のステージイベントのタイムテーブルを公開しました。詳しくはタイムテーブルページをご覧ください。" },
-  { id: "2", date: "2026.08.25", title: "企画一覧を更新しました", content: "新たに10件の企画を追加しました。今年は過去最多となる50以上の企画が出展予定です。" },
-  { id: "3", date: "2026.08.15", title: "公式ウェブサイトをリニューアルしました", content: "こうよう祭2026の公式ウェブサイトをリニューアルオープンしました。企画検索機能など、新機能を追加しています。" },
-  { id: "4", date: "2026.08.01", title: "こうよう祭2026の開催が決定しました", content: "今年度のこうよう祭は9月14日（土）・15日（日）の2日間開催となります。皆様のご来場をお待ちしております。" },
-]
+import { use, useState, useEffect } from "react"
+import { MicroCMSNews } from "@/lib/microcms"
 
 export default function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const news = newsItems.find(item => item.id === id)
+  const [news, setNews] = useState<MicroCMSNews | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  if (!news) {
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(`/api/news/${id}`)
+        if (!response.ok) {
+          throw new Error("ニュースが見つかりません")
+        }
+        const data = await response.json()
+        setNews(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "ニュースの取得に失敗しました")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchNews()
+  }, [id])
+
+  if (loading) {
+    return (
+      <>
+        <SiteHeader />
+        <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
+          <div className="max-w-3xl text-center py-12">
+            <p className="text-muted-foreground">読み込み中...</p>
+          </div>
+        </PageLayout>
+        <SiteFooter />
+      </>
+    )
+  }
+
+  if (error || !news) {
     return (
       <>
         <SiteHeader />
@@ -36,6 +65,13 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
     )
   }
 
+  // dateを表示用にフォーマット
+  const formattedDate = new Date(news.date).toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/\//g, '.')
+
   return (
     <>
       <SiteHeader />
@@ -48,12 +84,13 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
 
           <article className="bg-card p-8">
             <div className="flex items-center gap-3 mb-3">
-              <time className="text-sm text-muted-foreground font-mono">{news.date}</time>
+              <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
             </div>
             <h2 className="font-medium text-lg mb-2">{news.title}</h2>
-            <p className="text-muted-foreground text-sm">
-              {news.content}
-            </p>
+            <div 
+              className="text-muted-foreground text-sm whitespace-pre-wrap break-words"
+              dangerouslySetInnerHTML={{ __html: news.content }}
+            />
           </article>
         </div>
       </PageLayout>
