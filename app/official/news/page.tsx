@@ -2,12 +2,12 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import Link from "next/link"
-import { getNews } from "@/lib/microcms"
+import { getNews, MicroCMSNews } from "@/lib/microcms"
 
 export const revalidate = 60 // 1分ごとにISR
 
 export default async function NewsPage() {
-  let newsItems = []
+  let newsItems: MicroCMSNews[] = []
   let error: string | null = null
 
   try {

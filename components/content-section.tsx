@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, MapPin, Clock, HelpCircle, AlertTriangle, Info, Users, Heart, Mail } from "lucide-react"
+import { MicroCMSNews } from "@/lib/microcms"
 
 const guideLinks = [
   {
@@ -61,14 +62,11 @@ const aboutLinks = [
   },
 ]
 
-const news = [
-  { date: "2026.09.01", title: "当日のタイムテーブルを公開しました", isNew: true },
-  { date: "2026.08.25", title: "企画一覧を更新しました", isNew: true },
-  { date: "2026.08.15", title: "公式ウェブサイトをリニューアルしました", isNew: false },
-  { date: "2026.08.01", title: "こうよう祭2026の開催が決定しました", isNew: false },
-]
+interface ContentSectionProps {
+  news?: MicroCMSNews[]
+}
 
-export function ContentSection() {
+export function ContentSection({ news = [] }: ContentSectionProps) {
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -166,26 +164,41 @@ export function ContentSection() {
             </Link>
           </div>
           <div className="space-y-3">
-            {news.map((item, index) => (
-              <Link
-                key={index}
-                href="/official/news"
-                className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
-              >
-                <span className="text-sm text-muted-foreground font-mono shrink-0">
-                  {item.date}
-                </span>
-                {item.isNew && (
-                  <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary shrink-0">
-                    NEW
-                  </span>
-                )}
-                <span className="text-sm font-medium truncate">
-                  {item.title}
-                </span>
-                <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
-              </Link>
-            ))}
+            {news.length > 0 ? (
+              news.map((item, index) => {
+                // dateを表示用にフォーマット
+                const formattedDate = new Date(item.date).toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                }).replace(/\//g, '.')
+
+                return (
+                  <Link
+                    key={item.id}
+                    href={`/official/news/${item.id}`}
+                    className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+                  >
+                    <span className="text-sm text-muted-foreground font-mono shrink-0">
+                      {formattedDate}
+                    </span>
+                    {index === 0 && (
+                      <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary shrink-0">
+                        NEW
+                      </span>
+                    )}
+                    <span className="text-sm font-medium truncate">
+                      {item.title}
+                    </span>
+                    <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
+                  </Link>
+                )
+              })
+            ) : (
+              <div className="text-center p-4 text-muted-foreground">
+                ニュースはまだ投稿されていません。
+              </div>
+            )}
           </div>
         </div>
       </div>

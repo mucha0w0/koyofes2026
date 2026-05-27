@@ -5,11 +5,21 @@ import { CategoryEvents } from "@/components/category-events"
 import { ContentSection } from "@/components/content-section"
 import { Sponsors } from "@/components/sponsors"
 import { SiteFooter } from "@/components/site-footer"
+import { getNews, MicroCMSNews } from "@/lib/microcms"
 
 // 常に最新データを動的にレンダリング（microCMS更新を反映）
 export const dynamic = 'force-dynamic'
 
-export default function HomePage() {
+export default async function HomePage() {
+  let newsItems: MicroCMSNews[] = []
+  try {
+    const allNews = await getNews()
+    // 最新3件のみ取得
+    newsItems = allNews.slice(0, 3)
+  } catch (error) {
+    console.error("ニュース取得エラー:", error)
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
@@ -17,7 +27,7 @@ export default function HomePage() {
         <HeroSection />
         <EventSearch />
         <CategoryEvents />
-        <ContentSection />
+        <ContentSection news={newsItems} />
         <Sponsors />
       </main>
       <SiteFooter />
