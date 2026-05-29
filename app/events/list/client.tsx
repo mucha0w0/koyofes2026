@@ -13,8 +13,8 @@ import { ExhibitionCard } from "@/components/ui/exhibition-card";
 const genreLabels: Record<string, string> = {
   "class-exhibit": "クラス・学科展",
   "volunteer-exhibit": "有志展示",
-  booth: "模擬店",
-  stage: "ステージ",
+  "booth": "模擬店",
+  "stage": "ステージ",
   "food-truck": "キッチンカー",
 };
 
@@ -173,7 +173,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
           <div className="space-y-3">
             <p className="text-sm font-medium text-foreground">ジャンル</p>
             <div className="flex flex-wrap gap-2">
-              {["class-exhibit", "volunteer-exhibit", "booth"].map((genre) => (
+              {Object.keys(genreLabels).map((genre) => (
                 <button
                   key={genre}
                   onClick={() => handleGenreToggle(genre)}
