@@ -2,17 +2,12 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageLayout } from "@/components/page-layout";
 import { Search, ChevronDown, RotateCcw } from "lucide-react";
-import Link from "next/link";
 import { Event } from "@/lib/types/event";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { ExhibitionCard } from "@/components/ui/exhibition-card";
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
@@ -323,74 +318,19 @@ export function EventListClient({ events, error }: EventListClientProps) {
           </div>
 
           {/* 企画カード */}
-<div className="space-y-6">
-  {filteredEvents.length > 0 ? (
-    filteredEvents.map((event) => {
-      const isIconUrl =
-        event.icon &&
-        (event.icon.startsWith("http://") ||
-          event.icon.startsWith("https://"));
-      const displayCatchphrase = event.catchphrase
-        ? event.catchphrase.split("\n")[0].length > 40
-          ? event.catchphrase.split("\n")[0].substring(0, 40) + "..."
-          : event.catchphrase.split("\n")[0]
-        : "";
-      return (
-        <Link key={event.slug} href={`/events/${event.slug}`}>
-          <Card className="hover:bg-muted transition-colors cursor-pointer border border-[#e6e9ed] py-0">
-            <CardContent className="flex gap-4 p-6">
-              {/* アイコン */}
-              <div className="w-16 h-16 bg-muted flex items-center justify-center shrink-0 overflow-hidden">
-                {isIconUrl ? (
-                  <Image
-                    src={event.icon}
-                    alt={event.title}
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-xs text-muted-foreground">
-                    No image
-                  </span>
-                )}
-              </div>
-
-              {/* コンテンツ */}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-foreground text-lg">
-                  {event.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {event.organization}
+          <div className="space-y-4">
+            {filteredEvents.length > 0 ? (
+              filteredEvents.map((event) => (
+                <ExhibitionCard key={event.slug} event={event} />
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">
+                  検索条件に該当する企画が見つかりません。
                 </p>
-                {displayCatchphrase && (
-                  <p className="text-xs text-muted-foreground mt-1 truncate">
-                    {displayCatchphrase}
-                  </p>
-                )}
-                <div className="flex gap-3 mt-3 flex-wrap text-xs">
-                  <span className="px-2 py-1 bg-muted text-foreground">
-                    {genreLabels[event.category] || event.category}
-                  </span>
-                  <span className="px-2 py-1 bg-muted text-foreground">
-                    {event.location}
-                  </span>
-                </div>
               </div>
-            </CardContent>
-          </Card>
-        </Link>
-      );
-    })
-  ) : (
-    <div className="text-center py-12">
-      <p className="text-muted-foreground">
-        検索条件に該当する企画が見つかりません。
-      </p>
-    </div>
-  )}
-</div>
+            )}
+          </div>
         </div>
       </PageLayout>
       <SiteFooter />
