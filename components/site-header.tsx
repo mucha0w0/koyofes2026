@@ -21,8 +21,6 @@ const navItems: NavItem[] = [
       { label: "企画一覧・検索", href: "/events/list" },
       { label: "おすすめ企画", href: "/events/recommended" },
       { label: "タイムテーブル", href: "/events/timetable" },
-      { label: "展示企画", href: "/events/exhibition" },
-      { label: "模擬店", href: "/events/booth" },
     ],
   },
   {
