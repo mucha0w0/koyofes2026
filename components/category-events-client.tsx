@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Building2, Users, Mic2, Palette } from "lucide-react";
+import { ArrowRight, Building2, Users, Mic2, ShoppingBag, Truck } from "lucide-react";
 import { Event } from "@/lib/types/event";
 
 type EventCategory =
@@ -16,9 +16,9 @@ type EventCategory =
 const categoryIconConfig: Record<EventCategory, React.ElementType> = {
   "class-exhibit": Building2,
   "volunteer-exhibit": Users,
-  "booth": Users,
+  "booth": ShoppingBag,
   "stage": Mic2,
-  "food-truck": Palette,
+  "food-truck": Truck,
 };
 
 interface EventCardProps {
@@ -26,8 +26,9 @@ interface EventCardProps {
 }
 
 function EventCard({ event }: EventCardProps) {
-  // アイコンが URL か判定（http/https で始まるか）
-  const isIconUrl = event.icon && (event.icon.startsWith("http://") || event.icon.startsWith("https://"));
+  const isIconUrl =
+    event.icon &&
+    (event.icon.startsWith("http://") || event.icon.startsWith("https://"));
 
   return (
     <Link
@@ -62,84 +63,85 @@ interface ScrollingEventsProps {
 }
 
 function ScrollingEvents({ events }: ScrollingEventsProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollPositionRef = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const animationIdRef = useRef<number>(0);
   const isHoveredRef = useRef(false);
   const isTouchingRef = useRef(false);
   const touchStartXRef = useRef(0);
-  const scrollStartRef = useRef(0);
+  const touchOffsetRef = useRef(0);
+  const lastTimeRef = useRef<number | null>(null);
+  const SPEED = 20; // px/秒
 
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || events.length === 0) return;
+    const track = trackRef.current;
+    if (!track || events.length === 0) return;
 
-    let animationId: number;
-    const speed = 0.3;
+    const getSingleSetWidth = (): number => {
+      const firstSet = track.querySelector<HTMLElement>('[data-event-set="1"]');
+      if (!firstSet) return 0;
+      // getBoundingClientRect でgap込みの実幅を取得
+      const allSets = track.querySelectorAll<HTMLElement>("[data-event-set]");
+      if (allSets.length < 2) return firstSet.getBoundingClientRect().width;
+      const rect1 = allSets[0].getBoundingClientRect();
+      const rect2 = allSets[1].getBoundingClientRect();
+      return rect2.left - rect1.left;
+    };
 
-    const animate = () => {
+    const animate = (time: number) => {
+      if (lastTimeRef.current === null) lastTimeRef.current = time;
+      const delta = (time - lastTimeRef.current) / 1000; // 秒
+      lastTimeRef.current = time;
+
       if (!isHoveredRef.current && !isTouchingRef.current) {
-        scrollPositionRef.current += speed;
-
-        const firstSet = scrollContainer.querySelector(
-          '[data-event-set="1"]',
-        ) as HTMLElement;
-        if (firstSet) {
-          const setWidth = firstSet.offsetWidth;
-          const setGap = 16;
-          const totalSetWidth = setWidth + setGap;
-
-          if (scrollPositionRef.current >= totalSetWidth) {
-            scrollPositionRef.current -= totalSetWidth;
+        const setWidth = getSingleSetWidth();
+        if (setWidth > 0) {
+          offsetRef.current += SPEED * delta;
+          if (offsetRef.current >= setWidth) {
+            offsetRef.current -= setWidth;
           }
         }
-
-        scrollContainer.scrollLeft = scrollPositionRef.current;
       }
-      animationId = requestAnimationFrame(animate);
+
+      // scrollLeft ではなく transform で移動（ページスクロールと競合しない）
+      track.style.transform = `translateX(-${offsetRef.current}px)`;
+      animationIdRef.current = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(animate);
+    animationIdRef.current = requestAnimationFrame(animate);
 
-    const handleMouseEnter = () => {
-      isHoveredRef.current = true;
-    };
-    const handleMouseLeave = () => {
-      isHoveredRef.current = false;
-    };
-    const handleResize = () => {
-      scrollPositionRef.current = 0;
-      scrollContainer.scrollLeft = 0;
-    };
+    const handleMouseEnter = () => { isHoveredRef.current = true; };
+    const handleMouseLeave = () => { isHoveredRef.current = false; };
+
     const handleTouchStart = (e: TouchEvent) => {
       isTouchingRef.current = true;
       touchStartXRef.current = e.touches[0].clientX;
-      scrollStartRef.current = scrollContainer.scrollLeft;
+      touchOffsetRef.current = offsetRef.current;
     };
     const handleTouchMove = (e: TouchEvent) => {
       if (!isTouchingRef.current) return;
-      const diff = e.touches[0].clientX - touchStartXRef.current;
-      scrollContainer.scrollLeft = scrollStartRef.current - diff;
-      scrollPositionRef.current = scrollContainer.scrollLeft;
+      const diff = touchStartXRef.current - e.touches[0].clientX;
+      const setWidth = getSingleSetWidth();
+      if (setWidth > 0) {
+        offsetRef.current = ((touchOffsetRef.current + diff) % setWidth + setWidth) % setWidth;
+        track.style.transform = `translateX(-${offsetRef.current}px)`;
+      }
     };
-    const handleTouchEnd = () => {
-      isTouchingRef.current = false;
-    };
+    const handleTouchEnd = () => { isTouchingRef.current = false; };
 
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
-    scrollContainer.addEventListener("touchstart", handleTouchStart);
-    scrollContainer.addEventListener("touchmove", handleTouchMove);
-    scrollContainer.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("resize", handleResize);
+    track.addEventListener("mouseenter", handleMouseEnter);
+    track.addEventListener("mouseleave", handleMouseLeave);
+    track.addEventListener("touchstart", handleTouchStart, { passive: true });
+    track.addEventListener("touchmove", handleTouchMove, { passive: true });
+    track.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      cancelAnimationFrame(animationId);
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
-      scrollContainer.removeEventListener("touchstart", handleTouchStart);
-      scrollContainer.removeEventListener("touchmove", handleTouchMove);
-      scrollContainer.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationIdRef.current);
+      track.removeEventListener("mouseenter", handleMouseEnter);
+      track.removeEventListener("mouseleave", handleMouseLeave);
+      track.removeEventListener("touchstart", handleTouchStart);
+      track.removeEventListener("touchmove", handleTouchMove);
+      track.removeEventListener("touchend", handleTouchEnd);
     };
   }, [events.length]);
 
@@ -152,23 +154,21 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
   }
 
   return (
-    <div
-      ref={scrollRef}
-      className="flex gap-4 overflow-x-auto py-2 scroll-smooth scrollbar-hide"
-      style={{ scrollBehavior: "auto", WebkitOverflowScrolling: "touch" }}
-    >
-      <div data-event-set="1" className="flex gap-4 shrink-0">
-        {events.map((event) => (
-          <EventCard key={event.slug} event={event} />
+    // overflow-hidden でトラックのはみ出しを隠す
+    <div className="overflow-hidden py-2">
+      {/* トラック：transform で動かす。幅はコンテンツ分必要なので width-max */}
+      <div
+        ref={trackRef}
+        className="flex gap-4 w-max will-change-transform"
+      >
+        {[1, 2, 3].map((setNum) => (
+          <div key={`set-${setNum}`} data-event-set={setNum} className="flex gap-4 shrink-0">
+            {events.map((event) => (
+              <EventCard key={`set${setNum}-${event.slug}`} event={event} />
+            ))}
+          </div>
         ))}
       </div>
-      {[2, 3, 4, 5, 6].map((setNum) => (
-        <div key={`set-${setNum}`} className="flex gap-4 shrink-0">
-          {events.map((event) => (
-            <EventCard key={`dup-${setNum}-${event.slug}`} event={event} />
-          ))}
-        </div>
-      ))}
     </div>
   );
 }
@@ -183,7 +183,9 @@ interface CategoryEventsContentProps {
   categories: Category[];
 }
 
-export function CategoryEventsContent({ categories }: CategoryEventsContentProps) {
+export function CategoryEventsContent({
+  categories,
+}: CategoryEventsContentProps) {
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
