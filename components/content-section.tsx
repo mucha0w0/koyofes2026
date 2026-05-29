@@ -78,13 +78,7 @@ export function ContentSection({ news = [] }: ContentSectionProps) {
               <h2 className="text-xl md:text-2xl font-medium">
                 ご案内
               </h2>
-              <Link
-                href="/guide"
-                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                すべて見る
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              
             </div>
             <div className="grid gap-2">
               {guideLinks.map((link) => (
@@ -116,13 +110,7 @@ export function ContentSection({ news = [] }: ContentSectionProps) {
               <h2 className="text-xl md:text-2xl font-medium">
                 こうよう祭について
               </h2>
-              <Link
-                href="/about"
-                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                すべて見る
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              
             </div>
             <div className="grid gap-2">
               {aboutLinks.map((link) => (
