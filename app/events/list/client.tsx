@@ -5,16 +5,22 @@ import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageLayout } from "@/components/page-layout";
-import { Search, ChevronDown, RotateCcw } from "lucide-react";
+import { Search, RotateCcw } from "lucide-react";
 import { Event } from "@/lib/types/event";
 import { ExhibitionCard } from "@/components/ui/exhibition-card";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
   "class-exhibit": "クラス・学科展",
   "volunteer-exhibit": "有志展示",
-  "booth": "模擬店",
-  "stage": "ステージ",
+  booth: "模擬店",
+  stage: "ステージ",
   "food-truck": "キッチンカー",
 };
 
@@ -40,7 +46,6 @@ export function EventListClient({ events, error }: EventListClientProps) {
   const [durationValue, setDurationValue] = useState(15);
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [showAdvanced, setShowAdvanced] = useState(false);
 
   // URLクエリパラメータから検索文字を取得
   useEffect(() => {
@@ -55,23 +60,18 @@ export function EventListClient({ events, error }: EventListClientProps) {
   // フィルタリングロジック
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
-      // 検索クエリ（企画名優先）
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const titleMatch = event.title.toLowerCase().includes(query);
         const orgMatch = event.organization.toLowerCase().includes(query);
         if (!titleMatch && !orgMatch) return false;
       }
-
-      // ジャンルフィルター
       if (
         selectedGenres.length > 0 &&
         !selectedGenres.includes(event.category)
       ) {
         return false;
       }
-
-      // 参加人数フィルター（チェックボックスがオンの場合のみ）
       if (enableParticipantFilter) {
         const participantsLL = event.participantsLL || 1;
         const participantsUL = event.participantsUL || 1;
@@ -82,8 +82,6 @@ export function EventListClient({ events, error }: EventListClientProps) {
           return false;
         }
       }
-
-      // 所要時間フィルター（チェックボックスがオンの場合のみ）
       if (enableDurationFilter) {
         if (event.duration) {
           if (
@@ -94,12 +92,9 @@ export function EventListClient({ events, error }: EventListClientProps) {
           }
         }
       }
-
-      // 設営場所フィルター
       if (selectedLocation && event.location !== selectedLocation) {
         return false;
       }
-
       return true;
     });
   }, [
@@ -129,7 +124,6 @@ export function EventListClient({ events, error }: EventListClientProps) {
     setSelectedLocation("");
   };
 
-  // エラー表示
   if (error) {
     return (
       <>
@@ -190,112 +184,110 @@ export function EventListClient({ events, error }: EventListClientProps) {
           </div>
 
           {/* 詳細検索（アコーディオン） */}
-          <div className="border-t border-b border-border py-4">
-            <button
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+          <Accordion type="single" collapsible>
+            <AccordionItem
+              value="advanced"
+              className="border-t border-b border-border last:border-b"
             >
-              詳細検索
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${
-                  showAdvanced ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {showAdvanced && (
-              <div className="mt-6 space-y-8">
-                {/* 参加人数フィルター */}
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
+              <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline hover:text-muted-foreground py-4">
+                詳細検索
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-8 pt-2">
+                  {/* 参加人数フィルター */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <input
+                        type="checkbox"
+                        id="enable-participant"
+                        checked={enableParticipantFilter}
+                        onChange={(e) =>
+                          setEnableParticipantFilter(e.target.checked)
+                        }
+                        className="w-4 h-4"
+                      />
+                      <label
+                        htmlFor="enable-participant"
+                        className="text-sm font-medium text-foreground cursor-pointer"
+                      >
+                        参加人数
+                      </label>
+                    </div>
                     <input
-                      type="checkbox"
-                      id="enable-participant"
-                      checked={enableParticipantFilter}
+                      type="range"
+                      min="1"
+                      max="5"
+                      value={participantMax}
                       onChange={(e) =>
-                        setEnableParticipantFilter(e.target.checked)
+                        setParticipantMax(Number(e.target.value))
                       }
-                      className="w-4 h-4"
+                      className="w-full"
                     />
-                    <label
-                      htmlFor="enable-participant"
-                      className="text-sm font-medium text-foreground cursor-pointer"
-                    >
-                      参加人数（おすすめ）
-                    </label>
+                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                      <span>1</span>
+                      <span>2</span>
+                      <span>3</span>
+                      <span>4</span>
+                      <span>5〜</span>
+                    </div>
                   </div>
-                  <input
-                    type="range"
-                    min="1"
-                    max="5"
-                    value={participantMax}
-                    onChange={(e) => setParticipantMax(Number(e.target.value))}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5〜</span>
-                  </div>
-                </div>
 
-                {/* 所要時間フィルター */}
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
+                  {/* 所要時間フィルター */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <input
+                        type="checkbox"
+                        id="enable-duration"
+                        checked={enableDurationFilter}
+                        onChange={(e) =>
+                          setEnableDurationFilter(e.target.checked)
+                        }
+                        className="w-4 h-4"
+                      />
+                      <label
+                        htmlFor="enable-duration"
+                        className="text-sm font-medium text-foreground cursor-pointer"
+                      >
+                        所要時間
+                      </label>
+                    </div>
                     <input
-                      type="checkbox"
-                      id="enable-duration"
-                      checked={enableDurationFilter}
-                      onChange={(e) =>
-                        setEnableDurationFilter(e.target.checked)
-                      }
-                      className="w-4 h-4"
+                      type="range"
+                      min="5"
+                      max="30"
+                      value={durationValue}
+                      onChange={(e) => setDurationValue(Number(e.target.value))}
+                      className="w-full"
                     />
-                    <label
-                      htmlFor="enable-duration"
-                      className="text-sm font-medium text-foreground cursor-pointer"
-                    >
-                      所要時間
-                    </label>
+                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                      <span>さくっと</span>
+                      <span className="mx-auto">{durationValue}分程度</span>
+                      <span>じっくり</span>
+                    </div>
                   </div>
-                  <input
-                    type="range"
-                    min="5"
-                    max="30"
-                    value={durationValue}
-                    onChange={(e) => setDurationValue(Number(e.target.value))}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>さくっと</span>
-                    <span className="mx-auto">{durationValue}分程度</span>
-                    <span>じっくり</span>
-                  </div>
-                </div>
 
-                {/* 設営場所フィルター */}
-                <div>
-                  <label className="text-sm font-medium text-foreground block mb-3">
-                    設営場所
-                  </label>
-                  <select
-                    value={selectedLocation}
-                    onChange={(e) => setSelectedLocation(e.target.value)}
-                    className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring text-foreground"
-                  >
-                    <option value="">すべて</option>
-                    {uniqueLocations.map((location) => (
-                      <option key={location} value={location}>
-                        {location}
-                      </option>
-                    ))}
-                  </select>
+                  {/* 設営場所フィルター */}
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-3">
+                      設営場所
+                    </label>
+                    <select
+                      value={selectedLocation}
+                      onChange={(e) => setSelectedLocation(e.target.value)}
+                      className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring text-foreground"
+                    >
+                      <option value="">すべて</option>
+                      {uniqueLocations.map((location) => (
+                        <option key={location} value={location}>
+                          {location}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
 
           {/* ヒット件数とリセットボタン */}
           <div className="flex items-center justify-between">
