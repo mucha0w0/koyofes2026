@@ -3,6 +3,15 @@ import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
 import Link from "next/link"
 import { getNews, MicroCMSNews } from "@/lib/microcms"
+// 👇 ここで UI コンポーネントをインポートします
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardAction,
+} from "@/components/ui/card"
 
 export const revalidate = 60 // 1分ごとにISR
 
@@ -45,17 +54,38 @@ export default async function NewsPage() {
                 .trim()
 
               return (
-                <Link href={`/official/news/${item.id}`} key={item.id}>
-                  <article className="bg-card p-6 cursor-pointer transition-colors hover:bg-muted border border-[#e6e9ed]">
-                    <div className="flex items-center gap-3 mb-3">
-                      <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+                <Link href={`/official/news/${item.id}`} key={item.id} className="block group">
+                  {/* 👇 <article> を <Card> に変更 */}
+                  <Card className="border border-[#e6e9ed] transition-colors group-hover:bg-muted cursor-pointer">
+                    
+                    {/* 👇 ヘッダー部分に日付とタイトル、NEWバッジを配置 */}
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+                      </div>
+                      
+                      <CardTitle className="font-medium text-lg mt-1">
+                        {item.title}
+                      </CardTitle>
+
+                      {/* 👇 NEWバッジを CardAction (右上・端の要素用) に入れると綺麗に収まります */}
                       {i === 0 && (
-                        <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary">NEW</span>
+                        <CardAction>
+                          <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary rounded-sm">
+                            NEW
+                          </span>
+                        </CardAction>
                       )}
-                    </div>
-                    <h2 className="font-medium text-lg mb-2">{item.title}</h2>
-                    <p className="text-muted-foreground text-sm line-clamp-1">{plainContent}</p>
-                  </article>
+                    </CardHeader>
+
+                    {/* 👇 本文を CardContent に配置 */}
+                    <CardContent className="pb-6">
+                      <CardDescription className="text-muted-foreground text-sm line-clamp-1">
+                        {plainContent}
+                      </CardDescription>
+                    </CardContent>
+
+                  </Card>
                 </Link>
               )
             })}

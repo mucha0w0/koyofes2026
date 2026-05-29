@@ -7,6 +7,13 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { use, useState, useEffect } from "react"
 import { MicroCMSNews } from "@/lib/microcms"
+// 👇 ここで UI コンポーネントをインポートします
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card"
 
 export default function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -82,16 +89,31 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
             お知らせ一覧に戻る
           </Link>
 
-          <article className="bg-card p-8">
-            <div className="flex items-center gap-3 mb-3">
-              <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
-            </div>
-            <h2 className="font-medium text-lg mb-2">{news.title}</h2>
-            <div 
-              className="text-muted-foreground text-sm whitespace-pre-wrap break-words"
-              dangerouslySetInnerHTML={{ __html: news.content }}
-            />
-          </article>
+          {/* 👇 <article className="bg-card p-8"> を <Card> に変更 */}
+          {/* 元々の p-8（上下左右 2rem の余白）に合わせるため、少し微調整しています */}
+          <Card className="border border-[#e6e9ed] pt-2">
+            
+            <CardHeader className="px-8 pt-6 pb-2">
+              {/* 日付 */}
+              <div className="flex items-center gap-3">
+                <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+              </div>
+              
+              {/* 記事タイトル (詳細画面なので文字サイズを大きめの text-2xl に変更しても格好いいです) */}
+              <CardTitle className="font-medium text-xl mt-1">
+                {news.title}
+              </CardTitle>
+            </CardHeader>
+
+            {/* 👇 本文全体を CardContent に配置 */}
+            <CardContent className="px-8 pb-8">
+              <div 
+                className="text-muted-foreground text-sm whitespace-pre-wrap break-words prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: news.content }}
+              />
+            </CardContent>
+
+          </Card>
         </div>
       </PageLayout>
       <SiteFooter />
