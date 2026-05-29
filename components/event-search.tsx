@@ -55,7 +55,7 @@ export function EventSearch() {
         <div className="flex justify-center">
           <button
             onClick={handleSearch}
-            className="px-8 py-3 bg-foreground text-background font-medium hover:bg-muted transition-colors"
+            className="px-8 py-3 bg-foreground text-background font-medium hover:opacity-80 cursor-pointer transition-opacity"
           >
             検索する
           </button>
