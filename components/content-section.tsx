@@ -51,7 +51,7 @@ const aboutLinks = [
   {
     icon: Users,
     label: "パート",
-    href: "/about/committee",
+    href: "/about/part",
     description: "仕事内容とパートリーダーの紹介",
   },
   {

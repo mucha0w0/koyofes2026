@@ -4,9 +4,9 @@ import { PageLayout } from "@/components/page-layout"
 import Link from "next/link"
 
 const recommendedEvents = [
-  { id: 1, recommender: "実行委員長", ID: "3年A組" },
-  { id: 2, recommender: "副実行委員長", ID: "軽音楽部" },
-  { id: 3, recommender: "システムパート", ID: "2年B組" },
+  { id: 1, recommender: "実行委員長", ID: "2E" },
+  { id: 2, recommender: "副実行委員長", ID: "1I" },
+  { id: 3, recommender: "システムパート", ID: "kyudobu" },
   { id: 4, recommender: "マネジメントパート", ID: "科学部" },
   { id: 5, recommender: "司会", ID: "1年C組" },
   { id: 6, recommender: "ステージパート", ID: "書道部" },
