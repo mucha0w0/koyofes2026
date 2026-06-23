@@ -31,7 +31,7 @@ export default function AboutPage() {
             <dl className="grid sm:grid-cols-2 gap-4 text-sm">
               <div>
                 <dt className="text-muted-foreground">開催日</dt>
-                <dd className="font-medium text-lg">2026年9月14日（土）・15日（日）</dd>
+                <dd className="font-medium text-lg">2026年10月31日(土)・11月1日(日)</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">開催時間</dt>

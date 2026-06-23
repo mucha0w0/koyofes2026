@@ -14,7 +14,7 @@ export function SiteFooter() {
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
               豊田高専の文化祭。
               <br />
-              2026年9月12日(土)・13日(日)開催
+              2026年10月31日(土)・11月1日(日)開催
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export function SiteFooter() {
         {/* Bottom */}
         <div className="pt-8 border-t border-primary-foreground/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/70">
           <p>こうよう祭 2026 システムパート</p>
-          <p>&copy; 2026 Kouyousai System Part</p>
+          <p>&copy; 2026 KoyoFes System Part</p>
         </div>
       </div>
     </footer>
