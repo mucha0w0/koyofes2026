@@ -1,11 +1,23 @@
-"use client"
+"use client";
 
-import { Calendar, MapPin, Clock } from "lucide-react"
+import Image from "next/image";
+import { Calendar, MapPin, Clock } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative bg-background h-[calc(100vh-64px)] flex items-center justify-center">
-      <div className="container mx-auto px-4 w-full">
+    <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+      <Image
+        src="/20251106soumukikaku2-1024x768.jpg"
+        alt="background"
+        fill
+        className="object-cover"
+        style={{ zIndex: 0 }}
+        priority
+      />
+      <div
+        className="container mx-auto px-4 w-full"
+        style={{ position: "relative", zIndex: 1 }}
+      >
         <div className="text-center space-y-12">
           {/* Main Title */}
           <div className="space-y-6">
@@ -38,5 +50,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
