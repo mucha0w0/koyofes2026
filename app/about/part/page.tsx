@@ -1,56 +1,58 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
-import { User } from "lucide-react"
+import { PartCard } from "@/components/part-card"
+import { getPartSections } from "@/lib/parts"
+import type { PartSection } from "@/lib/types/part"
 
-const executives = [
-  { role: "実行委員長", name: "山田 太郎" },
-  { role: "副実行委員長", name: "鈴木 花子" },
-  { role: "副実行委員長", name: "佐藤 一郎" },
-]
+export const revalidate = 60
 
-const departments = [
-  { name: "総務局", description: "全体の統括・運営" },
-  { name: "企画局", description: "企画の審査・管理" },
-  { name: "広報局", description: "宣伝・SNS運営" },
-  { name: "制作局", description: "装飾・ステージ設営" },
-  { name: "渉外局", description: "協賛・外部連携" },
-]
+export default async function PartPage() {
+  let sections: PartSection[] = []
+  let error: string | null = null
 
-export default function CommitteePage() {
+  try {
+    sections = await getPartSections()
+  } catch (err) {
+    error = err instanceof Error ? err.message : "パート情報の取得に失敗しました"
+    console.error("パート取得エラー:", err)
+  }
+
   return (
     <>
       <SiteHeader />
       <PageLayout title="パート" subtitle="こうよう祭を運営するパートのご紹介">
-        <div className="space-y-8">
-          <div>
-            <h2 className="font-medium text-lg mb-4">執行部</h2>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {executives.map((exec, i) => (
-                <div key={i} className="bg-card p-5 text-center">
-                  <div className="w-16 h-16 bg-muted flex items-center justify-center mx-auto mb-3">
-                    <User className="h-8 w-8 text-foreground" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">{exec.role}</p>
-                  <p className="font-medium">{exec.name}</p>
-                </div>
-              ))}
-            </div>
+        {error ? (
+          <div className="max-w-4xl mx-auto text-center py-12">
+            <p className="text-destructive">{error}</p>
           </div>
-
-          <div>
-            <h2 className="font-medium text-lg mb-4">各局紹介</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {departments.map((dept, i) => (
-                <div key={i} className="bg-card p-5">
-                  <h3 className="font-medium text-foreground mb-2">{dept.name}</h3>
-                  <p className="text-sm text-muted-foreground">{dept.description}</p>
-                </div>
-              ))}
-            </div>
+        ) : sections.length === 0 ? (
+          <div className="max-w-4xl mx-auto text-center py-12">
+            <p className="text-muted-foreground">パート情報はまだ登録されていません。</p>
           </div>
+        ) : (
+          <div className="max-w-4xl mx-auto space-y-12">
+            {sections.map((section) => (
+              <section key={section.id} aria-labelledby={`section-${section.id}`}>
+                <div className="mb-5">
+                  <p
+                    id={`section-${section.id}`}
+                    className="label-en text-sm text-muted-foreground"
+                  >
+                    {section.labelEn}
+                  </p>
+                  <h2 className="font-medium text-xl mt-1">{section.label}</h2>
+                </div>
 
-        </div>
+                <div className="flex flex-col gap-3">
+                  {section.items.map((item) => (
+                    <PartCard key={item.id} item={item} />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
       </PageLayout>
       <SiteFooter />
     </>
