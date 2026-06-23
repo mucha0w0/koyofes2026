@@ -87,6 +87,26 @@ export interface MicroCMSPartResponse {
   limit: number
 }
 
+export interface MicroCMSSponsor {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  name: string
+  icon?: MicroCMSImageField
+  link?: string
+  explanation: string
+  category: string[]
+}
+
+export interface MicroCMSSponsorResponse {
+  contents: MicroCMSSponsor[]
+  totalCount: number
+  offset: number
+  limit: number
+}
+
 /**
  * microCMS から全イベントを取得
  */
@@ -272,6 +292,41 @@ export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
     return data.contents
   } catch (error) {
     console.error("microCMS パートデータ取得エラー:", error)
+    throw error
+  }
+}
+
+/**
+ * microCMS から全協賛を取得
+ */
+export async function fetchSponsorsFromMicroCMS(): Promise<MicroCMSSponsor[]> {
+  const apiKey = process.env.MICROCMS_API_KEY
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN
+
+  if (!apiKey || !serviceDomain) {
+    throw new Error("microCMS 環境変数が設定されていません")
+  }
+
+  const url = `https://${serviceDomain}.microcms.io/api/v1/sponsors`
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "X-MICROCMS-API-KEY": apiKey,
+      },
+      next: { revalidate: 60 },
+    })
+
+    if (!response.ok) {
+      throw new Error(
+        `microCMS API エラー: ${response.status} ${response.statusText}`
+      )
+    }
+
+    const data: MicroCMSSponsorResponse = await response.json()
+    return data.contents
+  } catch (error) {
+    console.error("microCMS 協賛データ取得エラー:", error)
     throw error
   }
 }

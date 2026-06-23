@@ -1,57 +1,82 @@
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
-import { Heart } from "lucide-react"
+import { SponsorCard } from "@/components/sponsor-card"
+import { getSponsorSections } from "@/lib/sponsors"
+import type { SponsorSection } from "@/lib/types/sponsor"
 
-const sponsors = [
-  "株式会社○○商事",
-  "△△銀行",
-  "□□不動産",
-  "◇◇食品",
-  "○○電機",
-  "△△書店",
-  "□□スポーツ",
-  "◇◇薬局",
-]
+export const revalidate = 60
 
-export default function SponsorPage() {
+export default async function SponsorPage() {
+  let sections: SponsorSection[] = []
+  let error: string | null = null
+
+  try {
+    sections = await getSponsorSections()
+  } catch (err) {
+    error = err instanceof Error ? err.message : "協賛情報の取得に失敗しました"
+    console.error("協賛取得エラー:", err)
+  }
+
   return (
     <>
       <SiteHeader />
       <PageLayout title="協賛" subtitle="こうよう祭をご支援いただいている企業・団体様">
-        <div className="space-y-8">
-          <div className="bg-card p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Heart className="h-6 w-6 text-foreground" />
-              <h2 className="font-medium text-lg">協賛企業・団体一覧</h2>
-            </div>
-            <p className="text-muted-foreground mb-6">
+        {error ? (
+          <div className="max-w-4xl mx-auto text-center py-12">
+            <p className="text-destructive">{error}</p>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto space-y-12">
+            <p className="text-muted-foreground leading-relaxed">
               こうよう祭の開催にあたり、多くの企業・団体様にご協賛いただいております。
               心より感謝申し上げます。
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {sponsors.map((sponsor, i) => (
-                <div key={i} className="bg-secondary p-4 text-center">
-                  <div className="w-16 h-16 bg-muted mx-auto mb-2 flex items-center justify-center text-muted-foreground text-xs">
-                    LOGO
+
+            {sections.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">
+                  協賛企業・団体はまだ登録されていません。
+                </p>
+              </div>
+            ) : (
+              sections.map((section) => (
+                <section key={section.id} aria-labelledby={`section-${section.id}`}>
+                  <div className="mb-5">
+                    <p
+                      id={`section-${section.id}`}
+                      className="label-en text-sm text-muted-foreground"
+                    >
+                      {section.labelEn}
+                    </p>
+                    <h2 className="font-medium text-xl mt-1">{section.label}</h2>
                   </div>
-                  <p className="text-sm font-medium truncate">{sponsor}</p>
-                </div>
-              ))}
+
+                  <div className="flex flex-col gap-3">
+                    {section.items.map((item) => (
+                      <SponsorCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                </section>
+              ))
+            )}
+
+            <div className="bg-muted p-6">
+              <h2 className="font-medium text-lg mb-4">協賛のお願い</h2>
+              <p className="text-muted-foreground mb-4">
+                こうよう祭では、協賛いただける企業・団体様を募集しております。
+                ご興味のある方は、お問い合わせフォームよりご連絡ください。
+              </p>
+              <Link
+                href="/about/contact"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity text-sm"
+              >
+                お問い合わせ
+              </Link>
             </div>
           </div>
-
-          <div className="bg-muted p-6">
-            <h2 className="font-medium text-lg mb-4">協賛のお願い</h2>
-            <p className="text-muted-foreground mb-4">
-              こうよう祭では、協賛いただける企業・団体様を募集しております。
-              ご興味のある方は、お問い合わせフォームよりご連絡ください。
-            </p>
-            <a href="/about/contact" className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity">
-              お問い合わせ
-            </a>
-          </div>
-        </div>
+        )}
       </PageLayout>
       <SiteFooter />
     </>
