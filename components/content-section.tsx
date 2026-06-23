@@ -52,7 +52,7 @@ const aboutLinks = [
     icon: Users,
     label: "パート",
     href: "/about/part",
-    description: "仕事内容とパートリーダーの紹介",
+    description: "こうよう祭を運営するパートのご紹介",
   },
   {
     icon: Mail,
