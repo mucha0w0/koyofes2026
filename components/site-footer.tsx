@@ -12,9 +12,9 @@ export function SiteFooter() {
               <span className="text-xl font-medium tracking-[0.08em]">こうよう祭 2026</span>
             </Link>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              豊田高専の文化祭。
+              豊田高専の文化祭
               <br />
-              2026年10月31日(土)・11月1日(日)開催
+              2026年 10月31日(土)・11月1日(日)
             </p>
           </div>
 

@@ -58,7 +58,7 @@ const aboutLinks = [
     icon: Users,
     label: "協賛",
     href: "/about/sponsor",
-    description: "こうよう祭を運営するパートのご紹介",
+    description: "ご協賛いただいている企業・団体様",
   },
   {
     icon: Mail,
