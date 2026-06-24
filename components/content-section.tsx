@@ -55,6 +55,12 @@ const aboutLinks = [
     description: "こうよう祭を運営するパートのご紹介",
   },
   {
+    icon: Users,
+    label: "協賛",
+    href: "/about/sponsor",
+    description: "こうよう祭を運営するパートのご紹介",
+  },
+  {
     icon: Mail,
     label: "お問い合わせ",
     href: "/about/contact",
