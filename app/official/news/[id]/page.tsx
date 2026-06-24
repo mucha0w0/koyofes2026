@@ -112,7 +112,9 @@ export default function NewsDetailPage({
               </div>
 
               {/* 記事タイトル (詳細画面なので文字サイズを大きめの text-2xl に変更しても格好いいです) */}
-              <CardTitle className="font-medium text-xl mt-1"></CardTitle>
+              <CardTitle className="font-medium text-xl mt-1">
+                {news.title}
+              </CardTitle>
             </CardHeader>
 
             {/* 👇 本文全体を CardContent に配置 */}
