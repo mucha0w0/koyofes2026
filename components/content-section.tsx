@@ -56,7 +56,7 @@ const aboutLinks = [
   },
   {
     icon: Users,
-    label: "協賛",
+    label: "ご協賛",
     href: "/about/sponsor",
     description: "ご協賛いただいている企業・団体様",
   },

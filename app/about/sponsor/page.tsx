@@ -22,7 +22,7 @@ export default async function SponsorPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="協賛" subtitle="こうよう祭をご支援いただいている企業・団体様">
+      <PageLayout title="ご協賛" subtitle="こうよう祭をご支援いただいている企業・団体様">
         {error ? (
           <div className="max-w-4xl mx-auto text-center py-12">
             <p className="text-destructive">{error}</p>

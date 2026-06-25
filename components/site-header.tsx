@@ -48,7 +48,7 @@ const navItems: NavItem[] = [
       { label: "こうよう祭とは", href: "/about/overview" },
       { label: "テーマ", href: "/about/theme" },
       { label: "パート", href: "/about/part" },
-      { label: "協賛", href: "/about/sponsor" },
+      { label: "ご協賛", href: "/about/sponsor" },
       { label: "お問い合わせ", href: "/about/contact" },
     ],
   },
