@@ -1,103 +1,232 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { Clock } from "lucide-react"
-import { getEvents } from "@/lib/microcms"
-import { Event } from "@/lib/types/event"
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { PageLayout } from "@/components/page-layout";
+import { Clock } from "lucide-react";
+import { getEvents } from "@/lib/microcms";
+import { Event } from "@/lib/types/event";
+import Link from "next/link";
 
-// 常に最新データを動的にレンダリング（microCMS更新を反映）
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
-// Convert time format from HHMMMM to HH:MM~HH:MM
-function formatTimeDisplay(timeStr: string): string {
-  if (!timeStr || timeStr.length !== 8) return timeStr
-  const startHour = timeStr.substring(0, 2)
-  const startMin = timeStr.substring(2, 4)
-  const endHour = timeStr.substring(4, 6)
-  const endMin = timeStr.substring(6, 8)
-  return `${startHour}:${startMin}~${endHour}:${endMin}`
+const DAY1_START_HOUR = 9;
+const DAY1_END_HOUR = 18;
+const DAY2_START_HOUR = 9;
+const DAY2_END_HOUR = 18;
+const PX_PER_HOUR = 80;
+const PX_PER_MIN = PX_PER_HOUR / 60;
+const CARD_HEIGHT = 88;
+
+function parseTime(
+  timeStr: string,
+): { startMin: number; endMin: number } | null {
+  if (!timeStr || timeStr.length !== 8) return null;
+  const sh = parseInt(timeStr.substring(0, 2), 10);
+  const sm = parseInt(timeStr.substring(2, 4), 10);
+  const eh = parseInt(timeStr.substring(4, 6), 10);
+  const em = parseInt(timeStr.substring(6, 8), 10);
+  if (isNaN(sh) || isNaN(sm) || isNaN(eh) || isNaN(em)) return null;
+  return {
+    startMin: sh * 60 + sm,
+    endMin: eh * 60 + em,
+  };
+}
+
+// 分 → "HH:MM" 変換
+function minToTimeStr(min: number): string {
+  const h = Math.floor(min / 60)
+    .toString()
+    .padStart(2, "0");
+  const m = (min % 60).toString().padStart(2, "0");
+  return `${h}:${m}`;
+}
+
+function calcDuration(startMin: number, endMin: number): number {
+  return endMin - startMin;
 }
 
 interface ScheduleEvent {
-  title: string
-  timeRange: string
-  organization: string
-  duration: number
+  title: string;
+  organization: string;
+  icon?: string;
+  slug: string; // 追加
+  startMin: number;
+  endMin: number;
+  duration: number;
+  topPx: number;
+  timeRange: string;
 }
 
-export default async function StageEventsPage() {
-  // Get all stage events from microCMS
-  let stageEvents: Event[] = []
-  
-  try {
-    const events = await getEvents()
-    stageEvents = (events as Event[]).filter((e) => e.category === "stage")
-  } catch (error) {
-    console.error("イベント取得エラー:", error)
+function TimelineView({
+  events,
+  startHour,
+  endHour,
+}: {
+  events: ScheduleEvent[];
+  startHour: number;
+  endHour: number;
+}) {
+  const totalHeight = (endHour - startHour) * PX_PER_HOUR;
+  const timeLabels: string[] = [];
+  for (let h = startHour; h <= endHour; h++) {
+    timeLabels.push(`${h}:00`);
+    if (h < endHour) timeLabels.push(`${h}:30`);
   }
 
-  // Group events by day
-  const day1Events: ScheduleEvent[] = stageEvents
-    .map((event) => ({
-      title: event.title,
-      timeRange: formatTimeDisplay(event["time-day1"]),
-      organization: event.organization,
-      duration: event.duration,
-    }))
-    .sort((a, b) => a.timeRange.localeCompare(b.timeRange))
-
-  const day2Events: ScheduleEvent[] = stageEvents
-    .map((event) => ({
-      title: event.title,
-      timeRange: formatTimeDisplay(event["time-day2"]),
-      organization: event.organization,
-      duration: event.duration,
-    }))
-    .sort((a, b) => a.timeRange.localeCompare(b.timeRange))
-
-  const renderEventList = (events: ScheduleEvent[]) => (
-    <div className="relative">
-      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
-      <div className="space-y-6">
-        {events.map((event, idx) => (
-          <div key={idx} className="relative flex gap-4 pl-12">
-            <div className="absolute left-4 w-3 h-3 bg-primary" />
-            <div className="flex-1 bg-card p-4">
-              <div className="flex items-start justify-between mb-2">
-                <span className="text-lg font-medium text-foreground">{event.timeRange}</span>
-                <span className="text-xs text-muted-foreground flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {event.duration}分
-                </span>
-              </div>
-              <h3 className="font-medium">{event.title}</h3>
-              <p className="text-sm text-muted-foreground">{event.organization}</p>
-            </div>
+  return (
+    <div className="relative flex gap-4">
+      {/* 時間ラベル列 */}
+      <div
+        className="relative shrink-0 w-12"
+        style={{ height: `${totalHeight}px` }}
+      >
+        {timeLabels.map((label, i) => (
+          <div
+            key={label}
+            className="absolute right-0 text-xs text-muted-foreground"
+            style={{
+              top: `${i * (PX_PER_HOUR / 2) - 8}px`,
+              lineHeight: "16px",
+            }}
+          >
+            {label}
           </div>
         ))}
       </div>
+
+      {/* 軸エリア（縦線 + 正方形ドット） */}
+      <div
+        className="relative w-6 shrink-0"
+        style={{ height: `${totalHeight}px` }}
+      >
+        <div className="absolute left-[11px] top-0 bottom-0 w-px bg-border" />
+        {events.map((event, idx) => (
+          <div
+            key={idx}
+            className="absolute w-2 h-2 bg-foreground"
+            style={{ left: "7px", top: `${event.topPx - 4}px` }}
+          />
+        ))}
+      </div>
+
+      {/* タイムライン本体 */}
+      <div className="relative flex-1" style={{ height: `${totalHeight}px` }}>
+        {/* グリッド線 */}
+        {timeLabels.map((label, i) => (
+          <div
+            key={label}
+            className="absolute left-0 right-0"
+            style={{
+              top: `${i * (PX_PER_HOUR / 2)}px`,
+              borderTop:
+                i % 2 === 0
+                  ? "1px solid hsl(var(--border))"
+                  : "1px dashed hsl(var(--border) / 0.5)",
+            }}
+          />
+        ))}
+
+        {/* カード */}
+        {events.map((event, idx) => (
+          <Link
+            key={idx}
+            href={`/events/${event.slug}`}
+            className="absolute left-0 right-0 bg-card px-4 flex items-center gap-3"
+            style={{ top: `${event.topPx-16}px`, height: `${CARD_HEIGHT}px` }}
+          >
+            {event.icon && (
+              <img
+                src={event.icon}
+                alt={event.title}
+                className="w-10 h-10 object-contain shrink-0"
+              />
+            )}
+            <div className="min-w-0">
+              <h3 className="font-medium text-foreground leading-snug truncate">
+                {event.title}
+              </h3>
+              <p className="text-sm text-muted-foreground mt-0.5 truncate">
+                {event.organization}
+              </p>
+            </div>
+            <div className="ml-auto flex items-center gap-2 shrink-0">
+              <span className="text-xs text-muted-foreground">
+                {event.timeRange}
+              </span>
+              <span className="text-xs text-muted-foreground flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {event.duration}分
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
-  )
+  );
+}
+
+export default async function StageEventsPage() {
+  let stageEvents: Event[] = [];
+  try {
+    const events = await getEvents();
+    stageEvents = (events as Event[]).filter((e) => e.category === "stage");
+  } catch (error) {
+    console.error("イベント取得エラー:", error);
+  }
+
+  const toScheduleEvents = (
+    timeKey: "time-day1" | "time-day2",
+    startHour: number,
+  ) =>
+    stageEvents
+      .map((event): ScheduleEvent | null => {
+        const parsed = parseTime(event[timeKey]);
+        if (!parsed) return null;
+        return {
+          title: event.title,
+          organization: event.organization,
+          icon: event.icon ?? undefined,
+          slug: event.slug,
+          startMin: parsed.startMin,
+          endMin: parsed.endMin,
+          duration: calcDuration(parsed.startMin, parsed.endMin),
+          topPx: (parsed.startMin - startHour * 60) * PX_PER_MIN,
+          timeRange: `${minToTimeStr(parsed.startMin)}~${minToTimeStr(parsed.endMin)}`,
+        };
+      })
+      .filter((e): e is ScheduleEvent => e !== null)
+      .sort((a, b) => a.startMin - b.startMin);
+
+  const day1Events = toScheduleEvents("time-day1", DAY1_START_HOUR);
+  const day2Events = toScheduleEvents("time-day2", DAY2_START_HOUR);
 
   return (
     <>
       <SiteHeader />
       <PageLayout title="タイムテーブル" subtitle="2日間のタイムテーブルです">
         <div className="space-y-12">
-          {/* Day 1 */}
           <div>
-            <h2 className="text-2xl font-medium mb-6 text-foreground">1日目</h2>
-            {renderEventList(day1Events)}
+            <div className="flex items-center gap-3 mb-6">
+              <h2 className="text-xl font-medium text-foreground">1日目</h2>
+            </div>
+            <TimelineView
+              events={day1Events}
+              startHour={DAY1_START_HOUR}
+              endHour={DAY1_END_HOUR}
+            />
           </div>
-
-          {/* Day 2 */}
           <div>
-            <h2 className="text-2xl font-medium mb-6 text-foreground">2日目</h2>
-            {renderEventList(day2Events)}
+            <div className="flex items-center gap-3 mb-6">
+              <h2 className="text-xl font-medium text-foreground">2日目</h2>
+            </div>
+            <TimelineView
+              events={day2Events}
+              startHour={DAY2_START_HOUR}
+              endHour={DAY2_END_HOUR}
+            />
           </div>
         </div>
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }
