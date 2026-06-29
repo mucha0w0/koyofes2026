@@ -140,7 +140,7 @@ export function Sponsors({ sponsors }: SponsorsProps) {
 
       <div className="text-center mt-6">
         <Link
-          href="/official/news"
+          href="/about/sponsor"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           すべて見る
