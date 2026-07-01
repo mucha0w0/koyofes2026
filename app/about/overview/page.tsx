@@ -9,13 +9,13 @@ export default function AboutPage() {
     <>
       <SiteHeader />
       <PageLayout title="こうよう祭とは" subtitle="豊田高専の文化祭について">
-        <div className="space-y-8 max-w-3xl">
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            こうよう祭は、豊田高専で毎年秋に開催される文化祭です。
-            日頃の教育・文化活動の展示、豊田高専ならではのステージイベント及び、スペシャルゲストによるオンステージなどの企画を多数予定しています。
-          </p>
-          <AboutSection />
-          <EventDetails />
+        <div className="flex flex-col md:flex-row md:gap-12 md:items-start">
+          <div className="flex-1 min-w-0">
+            <AboutSection />
+          </div>
+          <div className="md:w-72 md:shrink-0">
+            <EventDetails />
+          </div>
         </div>
       </PageLayout>
       <SiteFooter />
