@@ -29,9 +29,9 @@ export function PageLayout({
             <ArrowLeft className="h-4 w-4" />
             {backLabel}
           </Link>
-          <h1 className="text-3xl md:text-4xl font-normal tracking-[0.05em]">
-            {title}
-          </h1>
+           <h1 className="text-3xl md:text-4xl font-normal tracking-wider">
+             {title}
+           </h1>
           {subtitle && (
             <p className="mt-3 text-muted-foreground">{subtitle}</p>
           )}
