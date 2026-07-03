@@ -123,17 +123,17 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
   const url = `https://${serviceDomain}.microcms.io/api/v1/events?limit=100`;
 
   try {
-const cacheOption =
-process.env.NODE_ENV === "development"
-  ? { cache: "no-store" as const }
-  : { cache: "force-cache" as const }; 
+    const cacheOption =
+      process.env.NODE_ENV === "development"
+        ? { cache: "no-store" as const }
+        : { cache: "force-cache" as const };
 
-const response = await fetch(url, {
-headers: {
-  "X-MICROCMS-API-KEY": apiKey,
-},
-...cacheOption, 
-});
+    const response = await fetch(url, {
+      headers: {
+        "X-MICROCMS-API-KEY": apiKey,
+      },
+      ...cacheOption,
+    });
 
     if (!response.ok) {
       throw new Error(
@@ -161,7 +161,8 @@ function formatTimeFromNumber(timeNum: number): string {
 /**
  * microCMS イベントを フロントエンド型に変換
  */
-export function transformMicroCMSEvent(event: MicroCMSEvent): any {
+import type { Event } from "@/lib/types/event";
+export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   return {
     slug: event.slug,
     title: event.title,
@@ -185,8 +186,8 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): any {
     "organ-description": event["organ-description"],
     author: event.author,
     category: Array.isArray(event.category)
-      ? event.category[0] || "booth"
-      : event.category, // 配列の最初の要素を取得、デフォルト"booth"
+      ? (event.category[0] as Event["category"]) || "booth"
+      : (event.category as Event["category"]), // 配列の最初の要素を取得、デフォルト"booth"
   };
 }
 

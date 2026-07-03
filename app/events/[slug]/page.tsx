@@ -7,6 +7,7 @@ import { EventCarousel } from '@/components/event-carousel'
 import { getEvents } from '@/lib/microcms'
 import { Event } from '@/lib/types/event'
 import { Clock, MapPin, Users, Building2, ArrowRight } from 'lucide-react'
+import { isImageUrl } from '@/lib/utils'
 
 // Convert time format from HHMMMM to HH:MM~HH:MM
 function formatTimeDisplay(timeStr: string): string {
@@ -126,8 +127,7 @@ export default async function EventPage({ params }: PageProps) {
   const participantsDisplay = formatParticipants(event)
   const durationDisplay = formatDuration(event.duration)
   
-  // アイコンが URL か判定（http/https で始まるか）
-  const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'))
+  const isIconUrl = isImageUrl(event.icon)
 
   return (
     <>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Event } from "@/lib/types/event";
+import { isImageUrl } from "@/lib/utils"
 
 interface RecommendedEventCardProps {
   recommender: string;
@@ -16,9 +17,7 @@ export function RecommendedEventCard({
   whyRecom,
   event,
 }: RecommendedEventCardProps) {
-  const isEventIconUrl =
-    event.icon &&
-    (event.icon.startsWith("http://") || event.icon.startsWith("https://"));
+  const isEventIconUrl = isImageUrl(event.icon);
 
   return (
     <div className="bg-card p-5 space-y-4">
