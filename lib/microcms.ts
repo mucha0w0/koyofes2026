@@ -221,7 +221,7 @@ export async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
       headers: {
         "X-MICROCMS-API-KEY": apiKey,
       },
-      cache: "no-store",
+      next: { revalidate: false },
     });
 
     if (!response.ok) {
@@ -285,7 +285,7 @@ export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
       headers: {
         "X-MICROCMS-API-KEY": apiKey,
       },
-      next: { revalidate: 60 },
+      next: { revalidate: false },
     });
 
     if (!response.ok) {
