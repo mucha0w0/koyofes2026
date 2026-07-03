@@ -278,7 +278,7 @@ export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
     throw new Error("microCMS 環境変数が設定されていません");
   }
 
-  const url = `https://${serviceDomain}.microcms.io/api/v1/parts`;
+  const url = `https://${serviceDomain}.microcms.io/api/v1/parts?limit=100`;
 
   try {
     const response = await fetch(url, {
@@ -313,7 +313,7 @@ export async function fetchSponsorsFromMicroCMS(): Promise<MicroCMSSponsor[]> {
     throw new Error("microCMS 環境変数が設定されていません");
   }
 
-  const url = `https://${serviceDomain}.microcms.io/api/v1/sponsors`;
+  const url = `https://${serviceDomain}.microcms.io/api/v1/sponsors?limit=100`;
 
   try {
     const response = await fetch(url, {
