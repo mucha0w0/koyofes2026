@@ -122,12 +122,17 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
   const url = `https://${serviceDomain}.microcms.io/api/v1/events?limit=100`;
 
   try {
-    const response = await fetch(url, {
-      headers: {
-        "X-MICROCMS-API-KEY": apiKey,
-      },
-      next: { revalidate: false }, // 静的キャッシュ、Webhookで手動再検証
-    });
+const cacheOption =
+process.env.NODE_ENV === "development"
+  ? { cache: "no-store" as const }
+  : { cache: "force-cache" as const }; 
+
+const response = await fetch(url, {
+headers: {
+  "X-MICROCMS-API-KEY": apiKey,
+},
+...cacheOption, 
+});
 
     if (!response.ok) {
       throw new Error(
