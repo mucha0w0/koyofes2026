@@ -14,17 +14,14 @@ function getPartCategory(part: MicroCMSPart): PartCategory {
   const category = Array.isArray(part.category)
     ? part.category[0]
     : part.category
-
   if (category && category in PART_CATEGORY_CONFIG) {
     return category as PartCategory
   }
-
   return "PARTS"
 }
 
 export function transformMicroCMSPart(part: MicroCMSPart): PartItem {
   const social: PartSocialLink[] = []
-
   if (part.instaID) {
     const handle = part.instaID.replace(/^@/, "")
     social.push({
@@ -34,7 +31,6 @@ export function transformMicroCMSPart(part: MicroCMSPart): PartItem {
       handle: `@${handle}`,
     })
   }
-
   return {
     id: part.id,
     name: part.name,
@@ -55,15 +51,12 @@ export async function getPartSections(): Promise<PartSection[]> {
           PART_CATEGORY_CONFIG[b.category].order ||
         a.name.localeCompare(b.name, "ja")
     )
-
   const grouped = new Map<PartCategory, PartItem[]>()
-
   for (const item of items) {
     const sectionItems = grouped.get(item.category) ?? []
     sectionItems.push(item)
     grouped.set(item.category, sectionItems)
   }
-
   return (Object.keys(PART_CATEGORY_CONFIG) as PartCategory[])
     .sort(
       (a, b) => PART_CATEGORY_CONFIG[a].order - PART_CATEGORY_CONFIG[b].order

@@ -78,6 +78,7 @@ export interface MicroCMSPart {
   instaID?: string;
   explanation: string;
   category: MicroCMSPartCategory[];
+  recommend?: string;
 }
 
 export interface MicroCMSPartResponse {
