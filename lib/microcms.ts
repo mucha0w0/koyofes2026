@@ -215,7 +215,7 @@ export async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
     throw new Error("microCMS 環境変数が設定されていません");
   }
 
-  const url = `https://${serviceDomain}.microcms.io/api/v1/news`;
+  const url = `https://${serviceDomain}.microcms.io/api/v1/news?limit=100`;
 
   try {
     const response = await fetch(url, {
