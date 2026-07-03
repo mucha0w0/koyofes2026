@@ -5,9 +5,6 @@ import { RecommendedEventCard } from "@/components/recommended-event-card"
 import { getRecommendedEvents } from "@/lib/recommended-events"
 import Link from "next/link"
 
-// 常に最新データを動的にレンダリング（microCMS更新を反映）
-export const dynamic = "force-dynamic"
-
 export default async function RecommendedEventsPage() {
   const recommendedEvents = await getRecommendedEvents()
 

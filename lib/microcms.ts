@@ -126,8 +126,7 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
       headers: {
         "X-MICROCMS-API-KEY": apiKey,
       },
-      // 常に最新データを取得（キャッシュなし）
-      cache: "no-store",
+      next: { revalidate: false }, // 静的キャッシュ、Webhookで手動再検証
     });
 
     if (!response.ok) {
