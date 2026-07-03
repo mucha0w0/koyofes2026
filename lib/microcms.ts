@@ -79,6 +79,7 @@ export interface MicroCMSPart {
   explanation: string;
   category: MicroCMSPartCategory[];
   recommend?: string;
+  whyrecom?: string;
 }
 
 export interface MicroCMSPartResponse {

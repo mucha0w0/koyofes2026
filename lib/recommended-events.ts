@@ -4,6 +4,8 @@ import type { Event } from "@/lib/types/event"
 export interface RecommendedEvent {
   partId: string
   recommender: string
+  recommenderIcon: string
+  whyRecom: string
   event: Event
 }
 
@@ -32,6 +34,8 @@ export async function getRecommendedEvents(): Promise<RecommendedEvent[]> {
       return {
         partId: part.id,
         recommender: part.name,
+        recommenderIcon: part.icon?.url ?? "",
+        whyRecom: part.whyrecom ?? "",
         event,
       }
     })

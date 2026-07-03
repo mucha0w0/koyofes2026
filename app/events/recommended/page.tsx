@@ -1,21 +1,32 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { RecommendedEventCard } from "@/components/recommended-event-card"
-import { getRecommendedEvents } from "@/lib/recommended-events"
-import Link from "next/link"
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { PageLayout } from "@/components/page-layout";
+import { RecommendedEventCard } from "@/components/recommended-event-card";
+import { getRecommendedEvents } from "@/lib/recommended-events";
+import Link from "next/link";
 
 export default async function RecommendedEventsPage() {
-  const recommendedEvents = await getRecommendedEvents()
+  const recommendedEvents = await getRecommendedEvents();
 
   return (
     <>
       <SiteHeader />
-      <PageLayout title="おすすめ企画" subtitle="各パートリーダーがピックアップした、おすすめの企画です">
+      <PageLayout
+        title="おすすめ企画"
+        subtitle="各パートリーダーがピックアップした、おすすめの企画です"
+      >
         <div className="flex flex-col gap-4">
-          {recommendedEvents.map(({ partId, recommender, event }) => (
-            <RecommendedEventCard key={partId} recommender={recommender} event={event} />
-          ))}
+          {recommendedEvents.map(
+            ({ partId, recommender, recommenderIcon, whyRecom, event }) => (
+              <RecommendedEventCard
+                key={partId}
+                recommender={recommender}
+                recommenderIcon={recommenderIcon}
+                whyRecom={whyRecom}
+                event={event}
+              />
+            ),
+          )}
         </div>
         <div className="mt-8 text-center">
           <Link
@@ -28,5 +39,5 @@ export default async function RecommendedEventsPage() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }
