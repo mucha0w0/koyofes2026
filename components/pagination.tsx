@@ -7,8 +7,29 @@ interface PaginationProps {
   basePath: string // 例: "/official/news"
 }
 
+// 表示するページ番号と省略記号の配列を生成
+function getPageNumbers(currentPage: number, totalPages: number): (number | "ellipsis")[] {
+  const pages: (number | "ellipsis")[] = []
+  const showRange = 1 // 現在ページの前後に表示する件数
+
+  for (let i = 1; i <= totalPages; i++) {
+    const isFirstOrLast = i === 1 || i === totalPages
+    const isNearCurrent = Math.abs(i - currentPage) <= showRange
+
+    if (isFirstOrLast || isNearCurrent) {
+      pages.push(i)
+    } else if (pages[pages.length - 1] !== "ellipsis") {
+      pages.push("ellipsis")
+    }
+  }
+
+  return pages
+}
+
 export function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
   if (totalPages <= 1) return null
+
+  const pageNumbers = getPageNumbers(currentPage, totalPages)
 
   return (
     <nav className="flex items-center justify-center gap-2 mt-8" aria-label="ページネーション">
@@ -25,19 +46,28 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         <ArrowLeft className="h-4 w-4" />
       </Link>
 
-      {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => (
-        <Link
-          key={pageNum}
-          href={`${basePath}?page=${pageNum}`}
-          className={`w-9 h-9 flex items-center justify-center text-sm font-medium transition-colors ${
-            pageNum === currentPage
-              ? "bg-primary text-primary-foreground"
-              : "text-foreground hover:opacity-70"
-          }`}
-        >
-          {pageNum}
-        </Link>
-      ))}
+      {pageNumbers.map((page, idx) =>
+        page === "ellipsis" ? (
+          <span
+            key={`ellipsis-${idx}`}
+            className="w-9 h-9 flex items-center justify-center text-sm text-muted-foreground/60"
+          >
+            ...
+          </span>
+        ) : (
+          <Link
+            key={page}
+            href={`${basePath}?page=${page}`}
+            className={`w-9 h-9 flex items-center justify-center text-sm font-medium transition-colors ${
+              page === currentPage
+                ? "bg-primary text-primary-foreground"
+                : "text-foreground hover:opacity-70"
+            }`}
+          >
+            {page}
+          </Link>
+        )
+      )}
 
       <Link
         href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}

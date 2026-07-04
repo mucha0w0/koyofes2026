@@ -1,7 +1,6 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageLayout } from "@/components/page-layout";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Pagination } from "@/components/pagination"
 import Link from "next/link";
 import { getNews, MicroCMSNews } from "@/lib/microcms";
