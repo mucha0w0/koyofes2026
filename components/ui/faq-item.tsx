@@ -22,7 +22,6 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       >
         {/* Qマークとテキストのコンテナ */}
         <span className="flex items-start gap-3 flex-1 min-w-0">
-          {/* 高さをテキストの 1 行目と合わせるため、h-[28px]（text-lg の行高相当）の中心に配置 */}
           <span className="text-xl font-bold text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
@@ -41,7 +40,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         </span>
       </button>
 
-      {/* 回答エリア（アニメーション付き） */}
+      {/* 回答エリア */}
       <div
         className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
@@ -50,7 +49,6 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         <div className="overflow-hidden">
           {/* Aマークとテキストのコンテナ */}
           <div className="flex items-start gap-3 pb-2 pt-3">
-            {/* Q. と綺麗に縦ラインが揃うように w-6 で幅を固定 */}
             <span className="text-xl font-bold text-muted-foreground w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
               A.
             </span>
