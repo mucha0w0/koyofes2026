@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageLayout } from "@/components/page-layout";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Pagination } from "@/components/pagination"
 import Link from "next/link";
 import { getNews, MicroCMSNews } from "@/lib/microcms";
 import {
@@ -106,54 +107,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               })}
             </div>
 
-            {totalPages > 1 && (
-              <nav
-                className="flex items-center justify-center gap-2 mt-8"
-                aria-label="ページネーション"
-              >
-                <Link
-                  href={`/official/news?page=${Math.max(1, safePage - 1)}`}
-                  aria-disabled={safePage === 1}
-                  aria-label="前のページへ"
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    safePage === 1
-                      ? "pointer-events-none text-muted-foreground/40"
-                      : "text-foreground hover:opacity-70"
-                  }`}
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                </Link>
-
-                {Array.from({ length: totalPages }, (_, idx) => idx + 1).map(
-                  (pageNum) => (
-                    <Link
-                      key={pageNum}
-                      href={`/official/news?page=${pageNum}`}
-                      className={`w-9 h-9 flex items-center justify-center text-sm font-medium transition-colors ${
-                        pageNum === safePage
-                          ? "bg-primary text-primary-foreground"
-                          : "text-foreground hover:opacity-70"
-                      }`}
-                    >
-                      {pageNum}
-                    </Link>
-                  ),
-                )}
-
-                <Link
-                  href={`/official/news?page=${Math.min(totalPages, safePage + 1)}`}
-                  aria-disabled={safePage === totalPages}
-                  aria-label="次のページへ"
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    safePage === totalPages
-                      ? "pointer-events-none text-muted-foreground/40"
-                      : "text-foreground hover:opacity-70"
-                  }`}
-                >
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </nav>
-            )}
+            <Pagination currentPage={safePage} totalPages={totalPages} basePath="/official/news" />
           </>
         )}
       </PageLayout>
