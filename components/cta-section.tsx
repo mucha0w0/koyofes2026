@@ -1,34 +1,36 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Search, X, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Search, X, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function CtaSection() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
 
   const handleSearch = () => {
-    router.push(`/events/list?q=${encodeURIComponent(searchQuery)}`)
-  }
+    router.push(`/events/list?q=${encodeURIComponent(searchQuery)}`);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      handleSearch()
+      handleSearch();
     }
-  }
+  };
 
   return (
     <section className="py-10 md:py-16 bg-muted">
       <div className="container mx-auto px-4">
-        {/* テキストエリア */}
         <div className="text-center flex flex-col gap-2 mb-8">
-          <h2 className="text-xl md:text-2xl font-medium tracking-tight">企画を探す</h2>
-          <p className="text-foreground/70 text-sm md:text-base">他の企画もチェックしましょう</p>
+          <h2 className="text-xl md:text-2xl font-medium tracking-tight">
+            企画を探す
+          </h2>
+          <p className="text-foreground/70 text-sm md:text-base">
+            他の企画もチェックしましょう
+          </p>
         </div>
 
-        {/* 検索フォーム：flex-row で常に横並びを強制 */}
         <div className="max-w-2xl mx-auto flex flex-row items-stretch gap-2 sm:gap-3">
           <div className="relative flex-1">
             <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -59,7 +61,6 @@ export function CtaSection() {
           </button>
         </div>
 
-        {/* 下部リンク */}
         <div className="mt-6 text-center">
           <Link
             href="/events/list"
@@ -71,5 +72,5 @@ export function CtaSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
