@@ -1,31 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Search, X, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Search, X, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function CtaSection() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
 
   const handleSearch = () => {
-    router.push(`/events/list?q=${encodeURIComponent(searchQuery)}`)
-  }
+    router.push(`/events/list?q=${encodeURIComponent(searchQuery)}`);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      handleSearch()
+      handleSearch();
     }
-  }
+  };
 
   return (
     <section className="py-10 md:py-16 bg-muted">
       <div className="container mx-auto px-4">
-        {/* テキスト全体のバランスと下部への余白を調整 */}
         <div className="text-center flex flex-col gap-2 mb-8">
-          <h2 className="text-xl md:text-2xl font-medium tracking-tight">企画を探す</h2>
-          <p className="text-foreground/70 text-sm md:text-base">他の企画もチェックしましょう</p>
+          <h2 className="text-xl md:text-2xl font-medium tracking-tight">
+            企画を探す
+          </h2>
+          <p className="text-foreground/70 text-sm md:text-base">
+            他の企画もチェックしましょう
+          </p>
         </div>
 
         {/* 検索フォーム */}
@@ -59,7 +62,6 @@ export function CtaSection() {
           </button>
         </div>
 
-        {/* 下部リンクを中央揃えに修正 */}
         <div className="mt-6 text-center">
           <Link
             href="/events/list"
@@ -71,5 +73,5 @@ export function CtaSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
