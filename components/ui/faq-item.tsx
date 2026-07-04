@@ -22,10 +22,10 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       >
         {/* Qマークとテキストのコンテナ */}
         <span className="flex items-start gap-3 flex-1 min-w-0">
-          <span className="text-xl font-bold text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
+          <span className="text-xl  text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
-          <span className="text-lg font-medium text-primary leading-relaxed flex-1 pt-[1px]">
+          <span className="text-lg  text-primary leading-relaxed flex-1 pt-[1px]">
             {question}
           </span>
         </span>
@@ -49,7 +49,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         <div className="overflow-hidden">
           {/* Aマークとテキストのコンテナ */}
           <div className="flex items-start gap-3 pb-2 pt-3">
-            <span className="text-xl font-bold text-muted-foreground w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
+            <span className="text-xl text-muted-foreground w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
               A.
             </span>
             <p className="text-muted-foreground leading-relaxed flex-1 pt-[2px]">
