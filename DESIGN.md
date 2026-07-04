@@ -1,13 +1,11 @@
-# DESIGN.md — BOTANIST（ボタニスト）
-
-> BOTANIST（https://botanistofficial.com/）のデザイン仕様書。
-> 2026-05-09 取得の computed style に基づく。
+# DESIGN.md
 
 ---
 
 ## 1. Visual Theme & Atmosphere
 
-- **デザイン方針**: ボタニカルヘア・ボディケアブランド。ブランドタグライン「答えはきっと自然の中にある。」を体現する、自然と洗練が融合したエディトリアルデザイン。**二書体システム（Yu Gothic Pr6N + new-atten）** でジャポニスムとモダニズムを共存させる。全面写真に半透明のテキストオーバーレイを重ねる雑誌的な構成が特徴
+- **デザイン方針**: 自然と洗練が融合したエディトリアルデザイン。
+- **二書体システム（Yu Gothic Pr6N + new-atten）** でジャポニスムとモダニズムを共存させる。全面写真に半透明のテキストオーバーレイを重ねる雑誌的な構成が特徴
 - **密度**: ゆったりとしたフルブリード写真主体のショーケース型。大きな余白とミューテッドカラーで「植物の静謐さ」を演出。写真とテキストが空間を共有し、読むというより眺める体験を設計している
 - **キーワード**: ボタニカル、グレーブルー、二書体システム、エディトリアル、写真オーバーレイ、半透明CTA、ワイドスペーシング
 - **特徴**: **欧文ディスプレイ（new-atten）と和文テキスト（Yu Gothic Pr6N）の二書体システム**が最大の特徴。セクションラベルやカテゴリ名は new-atten で幾何学的なクリーンさを出し、ブランドメッセージや商品名は Yu Gothic Pr6N の Medium / Bold で品格を添える。背景はグレーブルー `#e6e9ed` が支配的で、ダークチャコール `#1f2529` との明暗コントラストで空間を構成。CTAは半透明の `rgba(255,255,255,0.2)` でガラス質の浮遊感を表現する。本文 line-height 2.0、letter-spacing 0.05em の広い組版が植物的な「呼吸」を感じさせる
@@ -18,7 +16,7 @@
 
 ### Primary（ブランドカラー）
 
-BOTANIST のカラーパレットはナチュラルで抑制的。ブランドを象徴する色は **グレーブルー #e6e9ed**（面の色）と **ダークチャコール #1f2529**（文字・ダークセクション）。鮮やかなアクセントカラーは存在せず、自然界の無彩色で世界観を構築する。
+カラーパレットはナチュラルで抑制的。ブランドを象徴する色は **グレーブルー #e6e9ed**（面の色）と **ダークチャコール #1f2529**（文字・ダークセクション）。鮮やかなアクセントカラーは存在せず、自然界の無彩色で世界観を構築する。
 
 - **Gray Blue** (`#e6e9ed`): ページ全体の支配的な背景色。ボタニカルな静けさを表現（rgb 230, 233, 237）
 - **Dark Charcoal** (`#1f2529`): フッター・ダークセクション背景、深い落ち着き（rgb 31, 37, 41）
@@ -48,7 +46,7 @@ BOTANIST のカラーパレットはナチュラルで抑制的。ブランド�
 
 ### 3.1 和文フォント
 
-BOTANIST は **Yu Gothic Pr6N**（Adobe Fonts / Morisawa）を使用。標準の游ゴシックではなく、ProN（JIS2004 字形）の Medium / Bold ウェイト。
+**Yu Gothic Pr6N**（Adobe Fonts / Morisawa）を使用。標準の游ゴシックではなく、ProN（JIS2004 字形）の Medium / Bold ウェイト。
 
 - **Yu Gothic Pr6N M**: 本文・ナビ・キャプション（Medium ウェイト相当）
 - **Yu Gothic Pr6N B**: 見出し・商品名（Bold ウェイト相当）
@@ -81,7 +79,7 @@ font-family: "new-atten", "Josefin Sans", sans-serif;
 
 | Role | Font | Size | Weight | Line Height | Letter Spacing | 備考 |
 |------|------|------|--------|-------------|----------------|------|
-| Hero Display | Yu Gothic Pr6N M | 52px | 400 | 1.35 | 0.1em | ブランドタグライン「答えはきっと自然の中にある。」 |
+| Hero Display | Yu Gothic Pr6N M | 52px | 400 | 1.35 | 0.1em | ブランドタグライン|
 | Section Display EN | new-atten | 32px | 400 | 1.1 | 0.03em | "SPECIAL" 等の英字大見出し |
 | Footer Tagline | Yu Gothic Pr6N M | 40px | 400 | 1.35 | 0.15em | ダーク背景上のブランドメッセージ |
 | Category Label EN | new-atten | 21px | 400 | 1.6 | 0 | "HAIRCARE" 等のカテゴリ名 |
@@ -103,7 +101,7 @@ font-family: "new-atten", "Josefin Sans", sans-serif;
 - **フッタータグラインの字間**: `letter-spacing: 0.15em` — 最もワイドなスペーシング
 
 **ガイドライン**:
-- BOTANIST の letter-spacing は **3段階**: フッタータグライン 0.15em（ワイド）/ ヒーロー 0.1em（中間）/ 本文 0.05em（控えめ）
+- letter-spacing は **3段階**: フッタータグライン 0.15em（ワイド）/ ヒーロー 0.1em（中間）/ 本文 0.05em（控えめ）
 - 欧文ディスプレイ（new-atten）は letter-spacing 0 または 0.03em で、フォント自体のスペーシングに任せる
 - line-height 2.0 は BOTANIST の本文に特徴的。行間の広さが「自然」を表現する重要な要素
 
@@ -118,9 +116,9 @@ font-family: "new-atten", "Josefin Sans", sans-serif;
 font-feature-settings: normal; /* palt 不使用 */
 ```
 
-- **palt は適用しない**: BOTANIST は `font-feature-settings: normal` で、プロポーショナル字詰めを使用しない
+- **palt は適用しない**: `font-feature-settings: normal` で、プロポーショナル字詰めを使用しない
 - 字間調整は letter-spacing のみで行い、フォントの固有間隔を尊重するアプローチ
-- SHIRO や note と異なり、palt を使わないのが BOTANIST の特徴
+- palt を使わないのがの特徴
 
 ### 3.8 縦書き
 
@@ -134,7 +132,7 @@ font-feature-settings: normal; /* palt 不使用 */
 
 **Primary CTA（半透明ガラス — ダーク背景上）**
 
-BOTANIST の CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶け込むように設計されている。
+CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶け込むように設計されている。
 
 - Background: `rgba(255,255,255,0.2)`
 - Text: `#ffffff`
@@ -225,7 +223,7 @@ BOTANIST の CTA は **半透明の白ガラス** が基本。写真やダーク
 
 ## 6. Depth & Elevation
 
-BOTANIST はシャドウを使わない。グレーブルー面（#e6e9ed）、ニアホワイト面（#fcfcfc）、ダークチャコール面（#1f2529）の色コントラストと、半透明オーバーレイで空間を構成する。
+はシャドウを使わない。グレーブルー面（#e6e9ed）、ニアホワイト面（#fcfcfc）、ダークチャコール面（#1f2529）の色コントラストと、半透明オーバーレイで空間を構成する。
 
 | Level | Shadow | 用途 |
 |-------|--------|------|
@@ -258,9 +256,9 @@ BOTANIST はシャドウを使わない。グレーブルー面（#e6e9ed）、�
 - 欧文ラベルに Yu Gothic Pr6N を使わない（和文テキスト専用）
 - 鮮やかなアクセントカラー（赤・青・緑等）を使わない
 - pill ボタン（radius 9999px）や角丸ボタン（radius 8px 等）を使わない（0px がルール）
-- 背景を純白 `#ffffff` にしない（`#e6e9ed` か `#fcfcfc` が BOTANIST のトーン）
+- 背景を純白 `#ffffff` にしない（`#e6e9ed` か `#fcfcfc`）
 - テキストに純黒 `#000000` を使わない（`#222222` が標準）
-- `font-feature-settings: "palt"` を適用しない（BOTANIST は palt 不使用）
+- `font-feature-settings: "palt"` を適用しない
 - 本文の line-height を 1.5 以下にしない（2.0 が標準）
 - テキストを詰め込まない（余白と写真が主役）
 - box-shadow を使わない（色面と透明度のみで奥行きを表現）
@@ -297,8 +295,6 @@ BOTANIST はシャドウを使わない。グレーブルー面（#e6e9ed）、�
 ### クイックリファレンス
 
 ```
-Brand: BOTANIST（ボタニスト）
-Tagline: 答えはきっと自然の中にある。
 Gray Blue BG: #e6e9ed
 Dark Charcoal: #1f2529
 Near White: #fcfcfc
@@ -320,7 +316,7 @@ Shadow: 使用しない
 ### プロンプト例
 
 ```
-BOTANIST（ボタニスト）のデザインシステムに従って、新商品の紹介ページを作成してください。
+デザインシステムに従って、新商品の紹介ページを作成してください。
 - 和文フォントは "Yu Gothic Pr6N M" / "Yu Gothic Pr6N B"（代替: "Zen Kaku Gothic New"）
 - 欧文ディスプレイは "new-atten"（代替: "Josefin Sans"）
 - font-feature-settings: normal（palt は使わない）
@@ -338,15 +334,11 @@ BOTANIST（ボタニスト）のデザインシステムに従って、新商品
 ### 字詰め・組版の重要ポイント
 
 1. **二書体システム**: Yu Gothic Pr6N（和文）と new-atten（欧文ディスプレイ）の明確な使い分けが核心。セクションラベルやカテゴリ名は必ず new-atten、ブランドメッセージや商品名は Yu Gothic Pr6N
-2. **palt 不使用**: `font-feature-settings: normal` が全体に適用され、プロポーショナル字詰めを行わない。SHIRO や note とは対照的なアプローチ
-3. **line-height 2.0**: 本文の行間が極めて広い。この余白が「植物的な呼吸」を生み出す BOTANIST の核心的要素
+2. **palt 不使用**: `font-feature-settings: normal` が全体に適用され、プロポーショナル字詰めを行わない。
+3. **line-height 2.0**: 本文の行間が極めて広い。この余白が「植物的な呼吸」を生み出す核心的要素
 4. **グレーブルー #e6e9ed**: 純白でも純灰でもない、ほのかに青みがかった背景色。自然の空気感を表現する
 5. **半透明ガラス CTA**: `rgba(255,255,255,0.2)` の CTA は写真やダーク背景に溶け込み、UI が環境の一部になる設計思想
 6. **radius 0px**: すべてのコンポーネントがシャープエッジ。自然素材の「生」の質感を UI に反映している
 7. **Adobe Fonts 依存**: Yu Gothic Pr6N と new-atten はいずれも Adobe Fonts。プレビューやローカル開発では Zen Kaku Gothic New + Josefin Sans で代替する
 
 ---
-
-**取得日**: 2026-05-09
-**出典**: https://botanistofficial.com/
-**抽出方法**: Headless Chrome (Puppeteer) による computed style 実測 + CSS Custom Properties 抽出
