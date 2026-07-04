@@ -7,7 +7,6 @@ interface FAQItemProps {
 
 export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   return (
-    // 区切り線の色を #1f2529 に変更。最後のアイテムの線は非表示に
     <div className="border-b py-8 last:border-b-0" >
       
       {/* 質問（Q）セクション */}

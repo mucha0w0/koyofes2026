@@ -26,9 +26,6 @@ export function CtaSection() {
           <h2 className="text-xl md:text-2xl font-medium tracking-tight">
             企画を探す
           </h2>
-          <p className="text-foreground/70 text-sm md:text-base">
-            他の企画もチェックしましょう
-          </p>
         </div>
 
         <div className="max-w-2xl mx-auto flex flex-row items-stretch gap-2 sm:gap-3">

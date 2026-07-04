@@ -10,7 +10,7 @@ export default function FAQPage() {
       <SiteHeader />
       <PageLayout title="よくある質問" subtitle="お問い合わせの多いご質問にお答えします">
         <div className="space-y-4 max-w-3xl">
-          {faqData.map((faq, i) => (  // faqs → faqData に変更
+          {faqData.map((faq, i) => (
             <FAQItem key={i} question={faq.question} answer={faq.answer} />
           ))}
         </div>
