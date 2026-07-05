@@ -2,7 +2,8 @@ import { SiteHeader } from "@/components/site-header"
 import { HeroSection } from "@/components/hero-section"
 import { EventSearch } from "@/components/event-search"
 import { CategoryEvents } from "@/components/category-events"
-import { ContentSection } from "@/components/content-section"
+import { LinksSection } from "@/components/LinksSection"
+import { NewsSection } from "@/components/NewsSection"
 import { Sponsors } from "@/components/sponsors"
 import { SiteFooter } from "@/components/site-footer"
 import { getNews, MicroCMSNews, fetchSponsorsFromMicroCMS } from "@/lib/microcms"
@@ -38,7 +39,8 @@ export default async function HomePage() {
         <HeroSection />
         <EventSearch />
         <CategoryEvents />
-        <ContentSection news={newsItems} />
+        <LinksSection />
+        <NewsSection news={newsItems}  />
         <Sponsors sponsors={sponsorItems} />
       </main>
       <SiteFooter />
