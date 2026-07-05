@@ -14,7 +14,7 @@ export function SiteFooter() {
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
               豊田高専の文化祭
               <br />
-              2026年 10月31日(土)・11月1日(日)
+              10/31(土)・11/1(日)
             </p>
           </div>
 
