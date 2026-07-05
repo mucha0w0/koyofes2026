@@ -10,8 +10,8 @@ import { getNews, MicroCMSNews, fetchSponsorsFromMicroCMS } from "@/lib/microcms
 import { transformMicroCMSSponsor } from "@/lib/sponsors"
 import type { SponsorItem } from "@/lib/types/sponsor"
 
-// 常に最新データを動的にレンダリング（microCMS更新を反映）
-export const dynamic = 'force-dynamic'
+// 常に最新データを動的にレンダリング（microCMS更新を反映） を一旦コメントアウト
+// export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   let newsItems: MicroCMSNews[] = []
