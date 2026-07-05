@@ -1,13 +1,14 @@
 import Image from "next/image"
-import { Instagram, Twitter, Youtube, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { SiInstagram, SiX, SiYoutube } from "react-icons/si"
 import { Card, CardContent } from "@/components/ui/card"
 import { getLucideIcon } from "@/lib/lucide-icons"
 import type { PartItem, SocialPlatform } from "@/lib/types/part"
 
-const socialIcons: Record<SocialPlatform, typeof Instagram> = {
-  instagram: Instagram,
-  twitter: Twitter,
-  youtube: Youtube,
+const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
+  instagram: SiInstagram,
+  twitter: SiX,
+  youtube: SiYoutube,
 }
 
 interface PartCardProps {
