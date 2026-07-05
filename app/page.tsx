@@ -4,7 +4,7 @@ import { EventSearch } from "@/components/event-search"
 import { CategoryEvents } from "@/components/category-events"
 import { LinksSection } from "@/components/LinksSection"
 import { NewsSection } from "@/components/NewsSection"
-import { Sponsors } from "@/components/sponsors" // ここで呼び出すだけ
+import { Sponsors } from "@/components/sponsors"
 import { SiteFooter } from "@/components/site-footer"
 
 export default async function HomePage() {
