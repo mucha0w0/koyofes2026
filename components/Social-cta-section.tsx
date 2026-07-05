@@ -53,8 +53,8 @@ export function SocialCtaSection() {
     <section className="bg-primary py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-primary-foreground/70 tracking-wide text-center sm:text-left shrink-0">
-            最新情報は公式SNSをチェック
+          <p className="text-sm text-muted tracking-wide text-center sm:text-left shrink-0">
+            最新情報は公式SNSをチェック！
           </p>
           <div className="flex w-full sm:w-auto sm:flex-1 justify-end gap-3">
             {SOCIAL_LINKS.map((link) => (
