@@ -93,7 +93,8 @@ export function LinksSection() {
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
+                  {/* group-hover:translate-x-1 と transition-transform を削除 */}
+                  <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </Link>
               ))}
             </div>
@@ -120,7 +121,8 @@ export function LinksSection() {
                       {link.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
+                  {/* group-hover:translate-x-1 と transition-transform を削除 */}
+                  <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </Link>
               ))}
             </div>

@@ -75,7 +75,7 @@ function EventRow({
             {duration}分
           </p>
         </div>
-        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform shrink-0" />
+        <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
       </div>
     </Link>
   );
@@ -91,7 +91,7 @@ function DaySection({ label, events }: DaySectionProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl md:text-2xl font-medium">{label}</h2>
+        <h2 className="text-sm font-normal text-muted-foreground">{label}</h2>
       </div>
       <div className="grid gap-2">
         {events.map((event) => (
@@ -142,7 +142,8 @@ export async function TimetablePreview() {
   const day2Rows = toRowsSorted("time-day2");
 
   return (
-    <section className="bg-muted pt-16 md:pt-24">
+    /* pt-16 md:pt-24 から py-16 md:py-24 に変更し、上下の余白を均等にしました */
+    <section className="bg-muted py-16 md:py-24">
       <div className="container mx-auto px-4">
         {/* セクションヘッダー */}
         <div className="mb-10">
