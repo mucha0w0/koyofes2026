@@ -106,8 +106,13 @@ function useCountdown() {
 
 // ── サブコンポーネント ───────────────────────────────────
 function Divider() {
-  return <div className="h-8 w-px bg-white/20" aria-hidden />;
-}
+    return (
+      <div
+        className="hidden md:block h-8 w-px bg-white/20"
+        aria-hidden
+      />
+    );
+  }
 
 function ErrorMessage() {
   return (
@@ -156,10 +161,10 @@ function TimeCounter({
     <div className="flex items-baseline gap-4" style={fontDisplay}>
       {units.map((unit, index) => (
         <div key={unit.label} className="flex items-baseline gap-1.5">
-          <span className="w-[56px] text-center text-[40px] font-normal leading-none tracking-[0.05em] lining-nums">
+          <span className="w-[56px] text-center text-[40px] font-normal leading-none tracking-wider lining-nums">
             {String(unit.value).padStart(2, "0")}
           </span>
-          <span className="text-[11px] tracking-[0.05em] uppercase text-white/70">
+          <span className="text-[11px] tracking-wider uppercase text-white/70">
             {unit.label}
           </span>
           {index < units.length - 1 && (
