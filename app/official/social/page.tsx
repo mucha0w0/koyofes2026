@@ -1,12 +1,13 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { PageLayout } from "@/components/page-layout"
-import { Instagram, Twitter, Youtube, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { SiInstagram, SiX, SiYoutube } from "react-icons/si"
 
 const socialPlatforms = [
   {
     name: "Instagram",
-    icon: Instagram,
+    icon: SiInstagram,
     handle: "@kouyousai2026",
     description: "こうよう祭の準備風景や企画紹介、当日の様子などをお届けします。",
     buttonText: "Instagramをフォロー",
@@ -14,7 +15,7 @@ const socialPlatforms = [
   },
   {
     name: "X (Twitter)",
-    icon: Twitter,
+    icon: SiX,
     handle: "@kouyousai2026",
     description: "当日のリアルタイム情報、混雑状況、緊急のお知らせなどをお届けします。",
     buttonText: "Xをフォロー",
@@ -22,7 +23,7 @@ const socialPlatforms = [
   },
   {
     name: "YouTube",
-    icon: Youtube,
+    icon: SiYoutube,
     handle: "こうよう祭公式チャンネル",
     description: "ステージイベントのダイジェスト、企画紹介動画などを配信します。",
     buttonText: "チャンネル登録",
