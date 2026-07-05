@@ -1,11 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@plugin "@tailwindcss/typography";
-
-@custom-variant dark (&:is(.dark *));
+@plugin '@tailwindcss/typography';
 
 :root {
-  /* BOTANIST palette and typography */
   --background: #e6e9ed;
   --foreground: #222222;
   --card: #fcfcfc;
