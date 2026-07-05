@@ -6,7 +6,7 @@ import { LinksSection } from "@/components/LinksSection"
 import { NewsSection } from "@/components/NewsSection"
 import { Sponsors } from "@/components/sponsors"
 import { SiteFooter } from "@/components/site-footer"
-import { getNews, MicroCMSNews, fetchSponsorsFromMicroCMS } from "@/lib/microcms"
+import { fetchSponsorsFromMicroCMS } from "@/lib/microcms"
 import { transformMicroCMSSponsor } from "@/lib/sponsors"
 import type { SponsorItem } from "@/lib/types/sponsor"
 
@@ -14,16 +14,7 @@ import type { SponsorItem } from "@/lib/types/sponsor"
 // export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  let newsItems: MicroCMSNews[] = []
   let sponsorItems: SponsorItem[] = []
-
-  try {
-    const allNews = await getNews()
-    // 最新3件のみ取得
-    newsItems = allNews.slice(0, 3)
-  } catch (error) {
-    console.error("ニュース取得エラー:", error)
-  }
 
   try {
     const sponsors = await fetchSponsorsFromMicroCMS()
@@ -40,7 +31,7 @@ export default async function HomePage() {
         <EventSearch />
         <CategoryEvents />
         <LinksSection />
-        <NewsSection news={newsItems}  />
+        <NewsSection />
         <Sponsors sponsors={sponsorItems} />
       </main>
       <SiteFooter />

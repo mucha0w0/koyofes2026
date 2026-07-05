@@ -1,12 +1,18 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { MicroCMSNews } from "@/lib/microcms"
+import { getNews, MicroCMSNews } from "@/lib/microcms"
 
-interface NewsSectionProps {
-  news?: MicroCMSNews[]
-}
+export async function NewsSection() {
+  let news: MicroCMSNews[] = []
 
-export function NewsSection({ news = [] }: NewsSectionProps) {
+  try {
+    const allNews = await getNews()
+    // トップページ用の最新3件のみにスライス
+    news = allNews.slice(0, 3)
+  } catch (error) {
+    console.error("ニュース取得エラー(NewsSection):", error)
+  }
+
   return (
     <section className="pb-16 md:pb-24">
       <div className="container mx-auto px-4">
