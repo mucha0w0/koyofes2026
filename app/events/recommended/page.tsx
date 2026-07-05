@@ -3,7 +3,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { PageLayout } from "@/components/page-layout";
 import { RecommendedEventCard } from "@/components/recommended-event-card";
 import { getRecommendedEvents } from "@/lib/recommended-events";
-import { CtaSection } from "@/components/cta-section";
+import { CtaSection } from "@/components/Simple-serch";
 
 export default async function RecommendedEventsPage() {
   const recommendedEvents = await getRecommendedEvents();

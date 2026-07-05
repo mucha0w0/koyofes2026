@@ -8,7 +8,7 @@ import { getEvents } from "@/lib/microcms";
 import { Event } from "@/lib/types/event";
 import { Clock, MapPin, Users, Building2} from "lucide-react";
 import { isImageUrl } from "@/lib/utils";
-import { CtaSection } from "@/components/cta-section";
+import { SimpleSerch } from "@/components/Simple-serch";
 
 // Convert time format from HHMMMM to HH:MM~HH:MM
 function formatTimeDisplay(timeStr: string): string {
@@ -283,7 +283,7 @@ export default async function EventPage({ params }: PageProps) {
           </div>
         </div>
 
-        <CtaSection />
+        <SimpleSerch />
       </main>
       <SiteFooter />
     </>

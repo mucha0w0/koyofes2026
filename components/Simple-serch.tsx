@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Search, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export function CtaSection() {
+export function SimpleSerch() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 

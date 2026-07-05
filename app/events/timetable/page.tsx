@@ -4,7 +4,7 @@ import { PageLayout } from "@/components/page-layout";
 import { Clock } from "lucide-react";
 import { getEvents } from "@/lib/microcms";
 import { Event } from "@/lib/types/event";
-import { CtaSection } from "@/components/cta-section";
+import { SimpleSerch } from "@/components/Simple-serch";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -227,7 +227,7 @@ export default async function StageEventsPage() {
           </div>
         </div>
       </PageLayout>
-      <CtaSection />
+      <SimpleSerch />
       <SiteFooter />
     </>
   );
