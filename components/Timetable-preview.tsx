@@ -91,7 +91,7 @@ function DaySection({ label, events }: DaySectionProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-normal text-muted-foreground">{label}</h2>
+        <h2 className="text-sm font-medium text-foreground">{label}</h2>
       </div>
       <div className="grid gap-2">
         {events.map((event) => (
@@ -142,11 +142,9 @@ export async function TimetablePreview() {
   const day2Rows = toRowsSorted("time-day2");
 
   return (
-    /* pt-16 md:pt-24 から py-16 md:py-24 に変更し、上下の余白を均等にしました */
-    <section className="bg-muted py-16 md:py-24">
+    <section className="bg-muted py-10 md:py-14">
       <div className="container mx-auto px-4">
-        {/* セクションヘッダー */}
-        <div className="mb-10">
+        <div className="mb-6 text-center">
           <h2 className="text-xl md:text-2xl font-medium text-foreground">
             タイムテーブル
           </h2>
@@ -164,7 +162,7 @@ export async function TimetablePreview() {
             href="/events/timetable"
             className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            すべて見る
+            タイムテーブルを見る
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
