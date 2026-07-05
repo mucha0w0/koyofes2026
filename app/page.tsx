@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/hero-section"
 import { FestivalCountdown } from "@/components/Festivalcountdown"
 import { EventSearch } from "@/components/event-search"
 import { CategoryEvents } from "@/components/category-events"
+import { TimetablePreview } from "@/components/Timetable-preview"
 import { LinksSection } from "@/components/LinksSection"
 import { NewsSection } from "@/components/NewsSection"
 import { Sponsors } from "@/components/sponsors"
@@ -17,6 +18,7 @@ export default async function HomePage() {
         <FestivalCountdown />
         <EventSearch />
         <CategoryEvents />
+        <TimetablePreview />
         <LinksSection />
         <NewsSection />
         <Sponsors /> 
