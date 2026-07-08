@@ -127,7 +127,7 @@ function EventMeta() {
         {CONFIG.name}
       </span>
       <span className="text-[11px] tracking-[0.15em]">
-        {DATE_LABEL} まで残り⋯
+        {DATE_LABEL} まで残り
       </span>
     </div>
   );
