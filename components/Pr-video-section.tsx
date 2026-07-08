@@ -3,15 +3,16 @@ import Script from "next/script";
 import { ArrowRight, Instagram } from "lucide-react";
 
 // ── config ──────────────────────────────────────────────
-const INSTAGRAM_POST_URL =
-  "https://www.instagram.com/p/DZZpnTuAJZp/";
-const INSTAGRAM_PROFILE_URL =
-  "https://www.instagram.com/YOUR_ACCOUNT/";
+const INSTAGRAM_POST_URL = "https://www.instagram.com/p/DZZpnTuAJZp/";
+const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/YOUR_ACCOUNT/";
 // ────────────────────────────────────────────────────────
 
 function SectionHeading() {
   return (
-    <h2 className="text-2xl font-medium text-foreground" style={{ letterSpacing: 0 }}>
+    <h2
+      className="text-2xl font-medium text-foreground"
+      style={{ letterSpacing: 0 }}
+    >
       PR動画第１弾！
     </h2>
   );
@@ -24,12 +25,12 @@ function InstagramEmbed() {
         className="
           w-full max-w-[540px] mx-auto 
           overflow-hidden 
-          [&_.instagram-media]:!min-w-0 
-          [&_.instagram-media]:!w-full 
-          [&_.instagram-media]:!max-w-full 
-          [&_.instagram-media]:!border-0 
-          [&_.instagram-media]:!bg-transparent 
-          [&_.instagram-media]:!m-0
+          [&_.instagram-media]:min-w-0!
+          [&_.instagram-media]:w-full!
+          [&_.instagram-media]:max-w-full!
+          [&_.instagram-media]:border-0!
+          [&_.instagram-media]:bg-transparent!
+          [&_.instagram-media]:m-0!
         "
       >
         <blockquote
@@ -45,10 +46,7 @@ function InstagramEmbed() {
         />
       </div>
 
-      <Script
-        src="//www.instagram.com/embed.js"
-        strategy="lazyOnload"
-      />
+      <Script src="//www.instagram.com/embed.js" strategy="lazyOnload" />
     </>
   );
 }
