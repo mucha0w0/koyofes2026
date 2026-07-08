@@ -68,15 +68,13 @@ function InstagramLink() {
 
 export function PrVideoSection() {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-muted">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-2 text-center">
             <SectionHeading />
           </div>
-
           <InstagramEmbed />
-
           <InstagramLink />
         </div>
       </div>
