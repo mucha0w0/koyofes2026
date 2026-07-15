@@ -1,17 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { ChevronDown, Menu, X } from "lucide-react"
+import Link from "next/link";
+import { useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface DropdownItem {
-  label: string
-  href: string
+  label: string;
+  href: string;
 }
 
 interface NavItem {
-  label: string
-  items: DropdownItem[]
+  label: string;
+  items: DropdownItem[];
 }
 
 const navItems: NavItem[] = [
@@ -50,11 +56,10 @@ const navItems: NavItem[] = [
       { label: "お問い合わせ", href: "/about/contact" },
     ],
   },
-
-]
+];
 
 function DropdownMenu({ item }: { item: NavItem }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div
@@ -94,18 +99,16 @@ function DropdownMenu({ item }: { item: NavItem }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function MobileMenu({
   isOpen,
   onClose,
 }: {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }) {
-  const [openSection, setOpenSection] = useState<string | null>(null)
-
   return (
     <div
       className={`fixed inset-0 z-50 bg-background transition-transform duration-300 ${
@@ -113,7 +116,9 @@ function MobileMenu({
       }`}
     >
       <div className="flex items-center justify-between px-4 h-16 border-b border-border">
-        <span className="text-lg font-medium text-foreground">こうよう祭 2026</span>
+        <span className="text-lg font-medium text-foreground">
+          こうよう祭 2026
+        </span>
         <button
           onClick={onClose}
           className="p-2 hover:bg-muted transition-colors"
@@ -123,46 +128,38 @@ function MobileMenu({
         </button>
       </div>
       <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
-        {navItems.map((item) => (
-          <div key={item.label} className="border-b border-border">
-            <button
-              onClick={() =>
-                setOpenSection(openSection === item.label ? null : item.label)
-              }
-              className="flex items-center justify-between w-full py-4 text-left font-medium"
+        <Accordion type="single" collapsible className="w-full">
+          {navItems.map((item) => (
+            <AccordionItem
+              key={item.label}
+              value={item.label}
+              className="last:border-b-0"
             >
-              {item.label}
-              <ChevronDown
-                className={`h-5 w-5 transition-transform ${
-                  openSection === item.label ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-200 ${
-                openSection === item.label ? "max-h-96 pb-4" : "max-h-0"
-              }`}
-            >
-              {item.items.map((subItem) => (
-                <Link
-                  key={subItem.href}
-                  href={subItem.href}
-                  onClick={onClose}
-                  className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {subItem.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
+              <AccordionTrigger className="text-base font-medium py-4">
+                {item.label}
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                {item.items.map((subItem) => (
+                  <Link
+                    key={subItem.href}
+                    href={subItem.href}
+                    onClick={onClose}
+                    className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {subItem.label}
+                  </Link>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </nav>
     </div>
-  )
+  );
 }
 
 export function SiteHeader() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
@@ -176,7 +173,10 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="メインナビゲーション">
+        <nav
+          className="hidden lg:flex items-center gap-1"
+          aria-label="メインナビゲーション"
+        >
           {navItems.map((item) => (
             <DropdownMenu key={item.label} item={item} />
           ))}
@@ -198,5 +198,5 @@ export function SiteHeader() {
         onClose={() => setMobileMenuOpen(false)}
       />
     </header>
-  )
+  );
 }
