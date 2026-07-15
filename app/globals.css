@@ -2,6 +2,8 @@
 @import 'tw-animate-css';
 @plugin '@tailwindcss/typography';
 
+@variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #e6e9ed;
   --foreground: #222222;
