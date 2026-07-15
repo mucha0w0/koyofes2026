@@ -1,24 +1,25 @@
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import js from '@eslint/js';
+import nextPlugin from '@next/eslint-plugin-next';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
+import pluginReact from 'eslint-plugin-react';
+import tailwindcss from 'eslint-plugin-tailwindcss';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
 
 // @ts-ignore: @next/eslint-plugin-next has no type definitions
-import nextPlugin from '@next/eslint-plugin-next';
 
 // @ts-ignore: eslint-plugin-unused-imports has no type definitions
-import unusedImports from 'eslint-plugin-unused-imports';
 
 // @ts-ignore: eslint-plugin-import has no type definitions
-import importPlugin from 'eslint-plugin-import';
 
 // @ts-ignore: eslint-plugin-tailwindcss has no type definitions
-import tailwindcss from 'eslint-plugin-tailwindcss';
 
 // @ts-ignore: eslint-config-prettier has no type definitions
-import eslintConfigPrettier from 'eslint-config-prettier';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
