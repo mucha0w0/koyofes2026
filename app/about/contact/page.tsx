@@ -1,13 +1,15 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { Mail, Phone, MapPin } from 'lucide-react';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 
 export default function ContactPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="お問い合わせ" subtitle="ご質問・ご要望はこちらから">
+      <PageLayout subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="bg-card p-6">

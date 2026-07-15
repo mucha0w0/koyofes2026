@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+
 import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
 import { SponsorCard } from '@/components/sponsor-card';
-import { getSponsorSections } from '@/lib/sponsors';
+
 import type { SponsorSection } from '@/lib/types/sponsor';
+
+import { getSponsorSections } from '@/lib/sponsors';
 
 export const revalidate = 60;
 
@@ -22,7 +25,7 @@ export default async function SponsorPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="ご協賛" subtitle="こうよう祭をご支援いただいている企業・団体様">
+      <PageLayout subtitle="こうよう祭をご支援いただいている企業・団体様" title="ご協賛">
         {error ? (
           <div className="max-w-4xl mx-auto text-center py-12">
             <p className="text-destructive">{error}</p>
@@ -41,7 +44,7 @@ export default async function SponsorPage() {
               sections.map((section) => (
                 <section key={section.id} aria-labelledby={`section-${section.id}`}>
                   <div className="mb-5">
-                    <p id={`section-${section.id}`} className="label-en text-sm text-muted-foreground">
+                    <p className="label-en text-sm text-muted-foreground" id={`section-${section.id}`}>
                       {section.labelEn}
                     </p>
                     <h2 className="font-medium text-xl mt-1">{section.label}</h2>
@@ -63,8 +66,8 @@ export default async function SponsorPage() {
                 ご興味のある方は、お問い合わせフォームよりご連絡ください。
               </p>
               <Link
-                href="/about/contact"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity text-sm"
+                href="/about/contact"
               >
                 お問い合わせ
               </Link>

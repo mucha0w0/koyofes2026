@@ -1,8 +1,9 @@
 'use client';
 
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface DropdownItem {
@@ -59,9 +60,9 @@ function DropdownMenu({ item }: { item: NavItem }) {
   return (
     <div className="relative" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
       <button
-        className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
       >
         {item.label}
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
@@ -75,8 +76,8 @@ function DropdownMenu({ item }: { item: NavItem }) {
           {item.items.map((subItem) => (
             <Link
               key={subItem.href}
-              href={subItem.href}
               className="block px-4 py-2.5 text-sm text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+              href={subItem.href}
             >
               {subItem.label}
             </Link>
@@ -96,22 +97,22 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     >
       <div className="flex items-center justify-between px-4 h-16 border-b border-border">
         <span className="text-lg font-medium text-foreground">こうよう祭 2026</span>
-        <button onClick={onClose} className="p-2 hover:bg-muted transition-colors" aria-label="メニューを閉じる">
+        <button aria-label="メニューを閉じる" className="p-2 hover:bg-muted transition-colors" onClick={onClose}>
           <X className="h-6 w-6" />
         </button>
       </div>
       <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion collapsible className="w-full" type="single">
           {navItems.map((item) => (
-            <AccordionItem key={item.label} value={item.label} className="last:border-b-0">
+            <AccordionItem key={item.label} className="last:border-b-0" value={item.label}>
               <AccordionTrigger className="text-base font-medium py-4">{item.label}</AccordionTrigger>
               <AccordionContent className="pb-4">
                 {item.items.map((subItem) => (
                   <Link
                     key={subItem.href}
+                    className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
                     href={subItem.href}
                     onClick={onClose}
-                    className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {subItem.label}
                   </Link>
@@ -131,14 +132,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link className="flex items-center gap-2" href="/">
           <div className="flex items-center gap-1">
             <span className="text-2xl font-medium tracking-[0.08em] text-foreground">こうよう祭</span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="メインナビゲーション">
+        <nav aria-label="メインナビゲーション" className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
             <DropdownMenu key={item.label} item={item} />
           ))}
@@ -146,9 +147,9 @@ export function SiteHeader() {
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setMobileMenuOpen(true)}
-          className="lg:hidden p-2 hover:bg-muted transition-colors"
           aria-label="メニューを開く"
+          className="lg:hidden p-2 hover:bg-muted transition-colors"
+          onClick={() => setMobileMenuOpen(true)}
         >
           <Menu className="h-6 w-6" />
         </button>

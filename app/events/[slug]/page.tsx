@@ -1,14 +1,17 @@
-import { notFound } from 'next/navigation';
+import { Clock, MapPin, Users, Building2 } from 'lucide-react';
 import Image from 'next/image';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { EventMarkdown } from '@/components/event-markdown';
+import { notFound } from 'next/navigation';
+
+import { SimpleSerch } from '@/components/Simple-serch';
 import { EventCarousel } from '@/components/event-carousel';
+import { EventMarkdown } from '@/components/event-markdown';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
-import { Clock, MapPin, Users, Building2 } from 'lucide-react';
 import { isImageUrl } from '@/lib/utils';
-import { SimpleSerch } from '@/components/Simple-serch';
+
 
 // Convert time format from HHMMMM to HH:MM~HH:MM
 function formatTimeDisplay(timeStr: string): string {
@@ -81,7 +84,7 @@ interface PageProps {
 async function getEvent(slug: string): Promise<Event | null> {
   try {
     const events = await getEvents();
-    const event = (events as Event[]).find((e) => e.slug === slug);
+    const event = (events).find((e) => e.slug === slug);
     return event || null;
   } catch (error) {
     console.error('イベント取得エラー:', error);
@@ -92,7 +95,7 @@ async function getEvent(slug: string): Promise<Event | null> {
 export async function generateStaticParams() {
   try {
     const events = await getEvents();
-    return (events as Event[]).map((event) => ({
+    return (events).map((event) => ({
       slug: event.slug,
     }));
   } catch (error) {
@@ -148,11 +151,11 @@ export default async function EventPage({ params }: PageProps) {
               <div className="shrink-0 w-16 h-16 md:w-24 md:h-24 bg-muted flex items-center justify-center overflow-hidden">
                 {isIconUrl ? (
                   <Image
-                    src={event.icon}
                     alt={event.title}
-                    width={96}
-                    height={96}
                     className="w-full h-full object-cover"
+                    height={96}
+                    src={event.icon}
+                    width={96}
                   />
                 ) : (
                   <span className="text-sm text-muted-foreground">No icon</span>
@@ -240,7 +243,7 @@ export default async function EventPage({ params }: PageProps) {
                 <p className="text-2xl font-medium text-foreground mb-6">{event.organization}</p>
 
                 <div className="prose max-w-none">
-                  <EventMarkdown content={event['organ-description']} className="text-sm" />
+                  <EventMarkdown className="text-sm" content={event['organ-description']} />
                 </div>
 
                 {/* Author Info - Mobile/Tablet */}

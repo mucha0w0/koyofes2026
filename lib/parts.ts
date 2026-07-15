@@ -10,7 +10,7 @@ import {
 function getPartCategory(part: MicroCMSPart): PartCategory {
   const category = Array.isArray(part.category) ? part.category[0] : part.category;
   if (category && category in PART_CATEGORY_CONFIG) {
-    return category as PartCategory;
+    return category;
   }
   return 'PARTS';
 }

@@ -1,6 +1,6 @@
+import { ArrowRight, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import Script from 'next/script';
-import { ArrowRight, Instagram } from 'lucide-react';
 
 // ── config ──────────────────────────────────────────────
 const INSTAGRAM_POST_URL = 'https://www.instagram.com/p/DZZpnTuAJZp/';
@@ -51,10 +51,10 @@ function InstagramEmbed() {
 function InstagramLink() {
   return (
     <Link
-      href={INSTAGRAM_PROFILE_URL}
-      target="_blank"
-      rel="noopener noreferrer"
       className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      href={INSTAGRAM_PROFILE_URL}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       <Instagram className="h-4 w-4" />
       全てのPR動画をInstagramで見る

@@ -1,13 +1,15 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { Train, Bus, Car, MapPin } from 'lucide-react';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 
 export default function AccessPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="アクセス" subtitle="会場までのアクセス方法をご案内します">
+      <PageLayout subtitle="会場までのアクセス方法をご案内します" title="アクセス">
         <div className="space-y-8">
           <div className="bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -65,13 +67,13 @@ export default function AccessPage() {
             <h3 className="font-medium mb-4">地図（Google Maps）</h3>
             <div className="aspect-video">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13056.517005433541!2d137.1309265!3d35.1034833!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60035ff6c15d45cf%3A0xd87866e720aee934!2z6LGK55Sw5bel5qWt6auY562J5bCC6ZaA5a2m5qCh!5e0!3m2!1sja!2sjp!4v1779592691840!5m2!1sja!2sjp"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
                 allowFullScreen
+                height="100%"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13056.517005433541!2d137.1309265!3d35.1034833!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60035ff6c15d45cf%3A0xd87866e720aee934!2z6LGK55Sw5bel5qWt6auY562J5bCC6ZaA5a2m5qCh!5e0!3m2!1sja!2sjp!4v1779592691840!5m2!1sja!2sjp"
+                style={{ border: 0 }}
+                width="100%"
               />
             </div>
           </div>

@@ -1,10 +1,12 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import Link from 'next/link';
+
 import { PageLayout } from '@/components/page-layout';
 import { Pagination } from '@/components/pagination';
-import Link from 'next/link';
-import { getNews, MicroCMSNews } from '@/lib/microcms';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
+
+import { getNews, MicroCMSNews } from '@/lib/microcms';
 
 export const revalidate = 60; // 1分ごとにISR
 
@@ -35,7 +37,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
+      <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
         {error ? (
           <div className="max-w-3xl text-center py-12">
             <p className="text-red-500">{error}</p>
@@ -58,7 +60,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                   .replace(/\//g, '.');
                 const plainContent = item.content.replace(/<[^>]*>/g, '').trim();
                 return (
-                  <Link href={`/official/news/${item.id}`} key={item.id} className="block group">
+                  <Link key={item.id} className="block group" href={`/official/news/${item.id}`}>
                     <Card className="border border-[#e6e9ed] transition-colors group-hover:bg-muted cursor-pointer">
                       <CardHeader>
                         <div className="flex items-center gap-3">
@@ -84,7 +86,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               })}
             </div>
 
-            <Pagination currentPage={safePage} totalPages={totalPages} basePath="/official/news" />
+            <Pagination basePath="/official/news" currentPage={safePage} totalPages={totalPages} />
           </>
         )}
       </PageLayout>

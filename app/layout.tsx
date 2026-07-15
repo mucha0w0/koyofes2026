@@ -1,6 +1,7 @@
-import type { Metadata } from 'next';
-import { Josefin_Sans, Zen_Kaku_Gothic_New } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { Josefin_Sans, Zen_Kaku_Gothic_New } from 'next/font/google';
+
+import type { Metadata } from 'next';
 import './globals.css';
 
 const zenKakuGothic = Zen_Kaku_Gothic_New({
@@ -44,9 +45,9 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="ja"
       suppressHydrationWarning
       className={`${zenKakuGothic.variable} ${josefinSans.variable} bg-background`}
+      lang="ja"
     >
       <body className="font-sans antialiased min-h-screen">
         {children}

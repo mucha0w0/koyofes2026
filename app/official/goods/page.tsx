@@ -1,7 +1,9 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { ShoppingBag } from 'lucide-react';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 
 const goods = [
   { name: '公式Tシャツ', price: '¥2,000', description: '今年のテーマをデザイン' },
@@ -14,7 +16,7 @@ export default function GoodsPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="公式グッズ" subtitle="こうよう祭2026オリジナルグッズ">
+      <PageLayout subtitle="こうよう祭2026オリジナルグッズ" title="公式グッズ">
         <div className="space-y-8">
           <div className="bg-muted p-6">
             <p className="text-muted-foreground">

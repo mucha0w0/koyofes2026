@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface FAQItemProps {
   question: string;
@@ -15,10 +15,10 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     <div className="border-b py-5 first:pt-2">
       {/* 質問ボタン */}
       <button
+        aria-expanded={isOpen}
+        className="group w-full flex items-start justify-between gap-4 text-left py-1"
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="group w-full flex items-start justify-between gap-4 text-left py-1"
-        aria-expanded={isOpen}
       >
         {/* Qマークとテキストのコンテナ */}
         <span className="flex items-start gap-3 flex-1 min-w-0">

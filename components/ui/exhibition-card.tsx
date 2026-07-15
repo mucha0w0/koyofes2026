@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Card, CardContent } from '@/components/ui/card';
+
 import { Event } from '@/lib/types/event';
 
 const genreLabels: Record<string, string> = {
@@ -22,13 +24,13 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
   const displayCatchphrase = rawLine.length > 40 ? rawLine.substring(0, 40) + '...' : rawLine;
 
   return (
-    <Link href={`/events/${event.slug}`} className="block">
+    <Link className="block" href={`/events/${event.slug}`}>
       <Card className="hover:bg-muted transition-colors cursor-pointer py-0">
         <CardContent className="flex gap-4 p-6">
           {/* アイコン */}
           <div className="w-16 h-16 bg-muted flex items-center justify-center shrink-0 overflow-hidden">
             {isIconUrl ? (
-              <Image src={event.icon} alt={event.title} width={64} height={64} className="w-full h-full object-cover" />
+              <Image alt={event.title} className="w-full h-full object-cover" height={64} src={event.icon} width={64} />
             ) : (
               <span className="text-xs text-muted-foreground">No image</span>
             )}

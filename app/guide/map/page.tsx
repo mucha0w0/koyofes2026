@@ -1,19 +1,22 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import Image from 'next/image';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
+
 import kounaizu from './kounaizu.jpg'; // ← インポート追加
 
 export default function MapPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="会場マップ" subtitle="校内の各施設・企画の配置図です">
+      <PageLayout subtitle="校内の各施設・企画の配置図です" title="会場マップ">
         <div className="space-y-8">
           <div className="bg-card p-6">
             <h2 className="font-medium text-lg mb-4">構内図</h2>
             <div className="bg-white overflow-hidden flex items-center justify-center">
-              <Image src={kounaizu} alt="構内図" className="w-full h-auto" />
+              <Image alt="構内図" className="w-full h-auto" src={kounaizu} />
             </div>
           </div>
 

@@ -110,7 +110,7 @@ function useCountdown(): CountdownStatus {
 
 // ── サブコンポーネント ───────────────────────────────────
 function Divider() {
-  return <div className="hidden md:block h-8 w-px bg-white/20" aria-hidden />;
+  return <div aria-hidden className="hidden md:block h-8 w-px bg-white/20" />;
 }
 
 function ErrorMessage() {
@@ -148,8 +148,8 @@ function TimeCounter({ timeLeft }: { timeLeft: TimeLeft }) {
           <span className="text-[10px] md:text-[11px] tracking-wider uppercase text-white/70">{unit.label}</span>
           {index < units.length - 1 && (
             <span
-              className="text-[16px] md:text-[20px] font-light text-white/30 ml-1 md:ml-2 select-none"
               aria-hidden="true"
+              className="text-[16px] md:text-[20px] font-light text-white/30 ml-1 md:ml-2 select-none"
             >
               :
             </span>

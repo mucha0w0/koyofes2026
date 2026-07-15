@@ -1,7 +1,8 @@
 // @/components/sponsors-client.tsx
 'use client';
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+
 import type { SponsorItem } from '@/lib/types/sponsor';
 
 interface SponsorsClientProps {
@@ -11,12 +12,12 @@ interface SponsorsClientProps {
 function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
   return (
     <Link
-      href="/about/sponsor"
       className="flex flex-col items-center justify-center gap-2 h-20 px-8 shrink-0 cursor-pointer"
+      href="/about/sponsor"
     >
       {sponsor.icon ? (
         <>
-          <img src={sponsor.icon} alt={sponsor.name} className="max-h-14 max-w-[160px] object-contain" />
+          <img alt={sponsor.name} className="max-h-14 max-w-[160px] object-contain" src={sponsor.icon} />
           <span className="text-xs text-muted-foreground whitespace-nowrap">{sponsor.name}</span>
         </>
       ) : (
@@ -94,12 +95,12 @@ export function SponsorsClient({ sponsors }: SponsorsClientProps) {
   return (
     <div className="overflow-hidden">
       <div ref={trackRef} className="flex will-change-transform" style={{ gap: '24px' }}>
-        <div data-sponsor-set="1" className="flex shrink-0" style={{ gap: '24px' }}>
+        <div className="flex shrink-0" data-sponsor-set="1" style={{ gap: '24px' }}>
           {sponsors.map((sponsor) => (
             <SponsorLogo key={sponsor.id} sponsor={sponsor} />
           ))}
         </div>
-        <div data-sponsor-set="2" className="flex shrink-0" style={{ gap: '24px' }}>
+        <div className="flex shrink-0" data-sponsor-set="2" style={{ gap: '24px' }}>
           {sponsors.map((sponsor) => (
             <SponsorLogo key={`dup-${sponsor.id}`} sponsor={sponsor} />
           ))}

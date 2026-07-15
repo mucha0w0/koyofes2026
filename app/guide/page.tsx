@@ -1,20 +1,16 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
-import Link from 'next/link';
 import {
-  ArrowRight,
   MapPin,
-  Clock,
   HelpCircle,
   AlertTriangle,
-  Info,
-  Users,
-  Heart,
-  Mail,
   Train,
   Ticket,
 } from 'lucide-react';
+import Link from 'next/link';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 
 const guidePages = [
   { icon: Train, label: 'アクセス', href: '/guide/access', description: '電車・バス・車でのアクセス方法' },
@@ -28,10 +24,10 @@ export default function GuidePage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="ご案内" subtitle="来場者の皆様へのご案内です">
+      <PageLayout subtitle="来場者の皆様へのご案内です" title="ご案内">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {guidePages.map((page) => (
-            <Link key={page.href} href={page.href} className="bg-card p-6 hover:opacity-80 transition-opacity group">
+            <Link key={page.href} className="bg-card p-6 hover:opacity-80 transition-opacity group" href={page.href}>
               <div className="p-3 bg-muted w-fit mb-4">
                 <page.icon className="h-6 w-6 text-foreground" />
               </div>

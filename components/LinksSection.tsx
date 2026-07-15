@@ -1,5 +1,5 @@
+import { ArrowRight, MapPin, HelpCircle, Info, Users, Heart, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Clock, HelpCircle, AlertTriangle, Info, Users, Heart, Mail } from 'lucide-react';
 
 const aboutLinks = [
   {
@@ -69,8 +69,8 @@ export function LinksSection() {
               {aboutLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
                   className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+                  href={link.href}
                 >
                   <div className="p-2 bg-muted text-foreground">
                     <link.icon className="h-4 w-4" />
@@ -94,8 +94,8 @@ export function LinksSection() {
               {guideLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
                   className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+                  href={link.href}
                 >
                   <div className="p-2 bg-muted text-foreground">
                     <link.icon className="h-4 w-4" />

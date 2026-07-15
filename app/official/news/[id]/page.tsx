@@ -1,14 +1,18 @@
 'use client';
 
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
-import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 import { use, useState, useEffect } from 'react';
-import { MicroCMSNews } from '@/lib/microcms';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
+
 // 👇 ここで UI コンポーネントをインポートします
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+
+import { MicroCMSNews } from '@/lib/microcms';
 
 export default function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -39,7 +43,7 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
     return (
       <>
         <SiteHeader />
-        <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
+        <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
           <div className="max-w-3xl text-center py-12">
             <p className="text-muted-foreground">読み込み中...</p>
           </div>
@@ -53,12 +57,12 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
     return (
       <>
         <SiteHeader />
-        <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
+        <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
           <div className="max-w-3xl text-center">
             <p className="text-muted-foreground mb-6">申し訳ございません。お探しのお知らせは見つかりませんでした。</p>
             <Link
-              href="/official/news"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              href="/official/news"
             >
               <ArrowLeft className="h-4 w-4" />
               お知らせ一覧に戻る
@@ -82,11 +86,11 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
   return (
     <>
       <SiteHeader />
-      <PageLayout title="お知らせ" subtitle="こうよう祭に関するお知らせ一覧">
+      <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
         <div className="max-w-3xl">
           <Link
-            href="/official/news"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+            href="/official/news"
           >
             <ArrowLeft className="h-4 w-4" />
             お知らせ一覧に戻る

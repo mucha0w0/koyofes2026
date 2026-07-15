@@ -1,9 +1,12 @@
-import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
+
 import { Card, CardContent } from '@/components/ui/card';
-import { getLucideIcon } from '@/lib/lucide-icons';
+
 import type { PartItem, SocialPlatform } from '@/lib/types/part';
+
+import { getLucideIcon } from '@/lib/lucide-icons';
 
 const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
   instagram: SiInstagram,
@@ -24,7 +27,7 @@ export function PartCard({ item }: PartCardProps) {
       <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
         <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-muted flex items-center justify-center overflow-hidden mt-0.5">
           {isIconUrl ? (
-            <Image src={item.icon} alt={item.name} width={56} height={56} className="w-full h-full object-cover" />
+            <Image alt={item.name} className="w-full h-full object-cover" height={56} src={item.icon} width={56} />
           ) : IconComponent ? (
             <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-foreground" />
           ) : (
@@ -42,11 +45,11 @@ export function PartCard({ item }: PartCardProps) {
                 return (
                   <a
                     key={`${item.id}-${link.platform}`}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     aria-label={`${item.name}の${link.label}`}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    href={link.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     <SocialIcon className="h-3.5 w-3.5" />
                     {link.handle ?? link.label}

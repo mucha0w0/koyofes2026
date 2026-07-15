@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { SiteHeader } from '@/components/site-header';
+
 import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
 
 export default function NotFound() {
   return (
@@ -36,8 +37,8 @@ export default function NotFound() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/"
               className="inline-flex items-center justify-center px-8 py-3 bg-[#1f2529] text-white font-normal transition-all hover:opacity-90"
+              href="/"
               style={{ letterSpacing: '0.05em' }}
             >
               トップページに戻る

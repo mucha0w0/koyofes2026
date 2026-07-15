@@ -1,8 +1,9 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { ExternalLink } from 'lucide-react';
 import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
 
 const socialPlatforms = [
   {
@@ -35,7 +36,7 @@ export default function SocialPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="公式SNS" subtitle="最新情報をSNSでチェック">
+      <PageLayout subtitle="最新情報をSNSでチェック" title="公式SNS">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {socialPlatforms.map((platform) => {
@@ -53,10 +54,10 @@ export default function SocialPage() {
                     <p className="text-sm text-muted-foreground leading-relaxed">{platform.description}</p>
                   </div>
                   <a
-                    href={platform.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity text-sm"
+                    href={platform.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     {platform.buttonText}
                     <ExternalLink className="h-4 w-4" />

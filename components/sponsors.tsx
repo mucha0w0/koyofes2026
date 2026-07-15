@@ -1,9 +1,12 @@
 // @/components/sponsors.tsx
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+
+import { SponsorsClient } from './sponsors-client';
+
 import { fetchSponsorsFromMicroCMS } from '@/lib/microcms';
 import { transformMicroCMSSponsor } from '@/lib/sponsors';
-import { SponsorsClient } from './sponsors-client';
+
 
 // 1. 親：サーバーコンポーネント（ここでデータを取得する）
 export async function Sponsors() {
@@ -32,8 +35,8 @@ export async function Sponsors() {
 
       <div className="text-center mt-6">
         <Link
-          href="/about/sponsor"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          href="/about/sponsor"
         >
           すべて見る
           <ArrowRight className="h-4 w-4" />

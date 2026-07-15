@@ -1,9 +1,12 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
 import { PageLayout } from '@/components/page-layout';
 import { PartCard } from '@/components/part-card';
-import { getPartSections } from '@/lib/parts';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
+
 import type { PartSection } from '@/lib/types/part';
+
+import { getPartSections } from '@/lib/parts';
 
 export const revalidate = 60;
 
@@ -21,7 +24,7 @@ export default async function PartPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="パート" subtitle="こうよう祭を運営するパートのご紹介">
+      <PageLayout subtitle="こうよう祭を運営するパートのご紹介" title="パート">
         {error ? (
           <div className="max-w-4xl mx-auto text-center py-12">
             <p className="text-destructive">{error}</p>
@@ -35,7 +38,7 @@ export default async function PartPage() {
             {sections.map((section) => (
               <section key={section.id} aria-labelledby={`section-${section.id}`}>
                 <div className="mb-5">
-                  <p id={`section-${section.id}`} className="label-en text-sm text-muted-foreground">
+                  <p className="label-en text-sm text-muted-foreground" id={`section-${section.id}`}>
                     {section.labelEn}
                   </p>
                   <h2 className="font-medium text-xl mt-1">{section.label}</h2>

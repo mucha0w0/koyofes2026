@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface PaginationProps {
   currentPage: number;
@@ -32,14 +32,14 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
-    <nav className="flex items-center justify-center gap-2 mt-8" aria-label="ページネーション">
+    <nav aria-label="ページネーション" className="flex items-center justify-center gap-2 mt-8">
       <Link
-        href={`${basePath}?page=${Math.max(1, currentPage - 1)}`}
         aria-disabled={currentPage === 1}
         aria-label="前のページへ"
         className={`px-3 py-2 text-sm font-medium transition-colors ${
           currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'text-foreground hover:opacity-70'
         }`}
+        href={`${basePath}?page=${Math.max(1, currentPage - 1)}`}
       >
         <ArrowLeft className="h-4 w-4" />
       </Link>
@@ -55,10 +55,10 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         ) : (
           <Link
             key={page}
-            href={`${basePath}?page=${page}`}
             className={`w-9 h-9 flex items-center justify-center text-sm font-medium transition-colors ${
               page === currentPage ? 'bg-primary text-primary-foreground' : 'text-foreground hover:opacity-70'
             }`}
+            href={`${basePath}?page=${page}`}
           >
             {page}
           </Link>
@@ -66,7 +66,6 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
       )}
 
       <Link
-        href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}
         aria-disabled={currentPage === totalPages}
         aria-label="次のページへ"
         className={`px-3 py-2 text-sm font-medium transition-colors ${
@@ -74,6 +73,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
             ? 'pointer-events-none text-muted-foreground/40'
             : 'text-foreground hover:opacity-70'
         }`}
+        href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}
       >
         <ArrowRight className="h-4 w-4" />
       </Link>

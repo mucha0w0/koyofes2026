@@ -1,13 +1,13 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
 import { PageLayout } from '@/components/page-layout';
-import { Sparkles } from 'lucide-react';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
 
 export default function ThemePage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="テーマ" subtitle="こうよう祭2026のテーマについて">
+      <PageLayout subtitle="こうよう祭2026のテーマについて" title="テーマ">
         <div className="space-y-8 max-w-3xl mx-auto text-center">
           <div className="py-12">
             <h2 className="hero-display text-3xl md:text-4xl mb-4">1dearland</h2>

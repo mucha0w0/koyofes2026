@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
+import Link from 'next/link';
+
 import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
 
@@ -35,12 +36,12 @@ interface EventRowProps {
 function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
     <Link
-      href={`/events/${slug}`}
       className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+      href={`/events/${slug}`}
     >
       {/* アイコン画像：背景なし、最大サイズで表示 */}
       {icon ? (
-        <img src={icon} alt={title} className="w-10 h-10 object-contain shrink-0" />
+        <img alt={title} className="w-10 h-10 object-contain shrink-0" src={icon} />
       ) : (
         <div className="w-10 h-10 shrink-0" />
       )}
@@ -97,7 +98,7 @@ export async function TimetablePreview() {
   let stageEvents: Event[] = [];
   try {
     const events = await getEvents();
-    stageEvents = (events as Event[]).filter((e) => e.category === 'stage');
+    stageEvents = (events).filter((e) => e.category === 'stage');
   } catch (error) {
     console.error('イベント取得エラー:', error);
   }
@@ -135,15 +136,15 @@ export async function TimetablePreview() {
 
         {/* 2日分のグリッド */}
         <div className="grid md:grid-cols-2 gap-8 mb-10">
-          <DaySection label="DAY 1" events={day1Rows} />
-          <DaySection label="DAY 2" events={day2Rows} />
+          <DaySection events={day1Rows} label="DAY 1" />
+          <DaySection events={day2Rows} label="DAY 2" />
         </div>
 
         {/* 「すべて見る」リンク（中央揃え） */}
         <div className="flex justify-center">
           <Link
-            href="/events/timetable"
             className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            href="/events/timetable"
           >
             タイムテーブルを見る
             <ArrowRight className="h-4 w-4" />

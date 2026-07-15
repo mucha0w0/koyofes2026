@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Building2, Users, Mic2, ShoppingBag, Truck } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
+
 import { Event } from '@/lib/types/event';
 
 type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
@@ -24,10 +25,10 @@ function EventCard({ event }: EventCardProps) {
   const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'));
 
   return (
-    <Link href={`/events/${event.slug}`} className="flex flex-col items-center gap-2 shrink-0 group">
+    <Link className="flex flex-col items-center gap-2 shrink-0 group" href={`/events/${event.slug}`}>
       <div className="w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
         {isIconUrl ? (
-          <Image src={event.icon} alt={event.title} width={128} height={128} className="w-full h-full object-cover" />
+          <Image alt={event.title} className="w-full h-full object-cover" height={128} src={event.icon} width={128} />
         ) : (
           <span className="text-xs text-muted-foreground">No image</span>
         )}
@@ -143,7 +144,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       {/* トラック：transform で動かす。幅はコンテンツ分必要なので width-max */}
       <div ref={trackRef} className="flex gap-4 w-max will-change-transform">
         {[1, 2, 3].map((setNum) => (
-          <div key={`set-${setNum}`} data-event-set={setNum} className="flex gap-4 shrink-0">
+          <div key={`set-${setNum}`} className="flex gap-4 shrink-0" data-event-set={setNum}>
             {events.map((event) => (
               <EventCard key={`set${setNum}-${event.slug}`} event={event} />
             ))}
@@ -184,8 +185,8 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
                   </div>
                   <h3 className="text-lg font-medium">{category.title}</h3>
                   <Link
-                    href="/events/list"
                     className="ml-auto text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+                    href="/events/list"
                   >
                     すべて見る
                     <ArrowRight className="h-4 w-4" />

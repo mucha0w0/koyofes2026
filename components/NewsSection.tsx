@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+
 import { getNews, MicroCMSNews } from '@/lib/microcms';
 
 export async function NewsSection() {
@@ -20,8 +21,8 @@ export async function NewsSection() {
           <div className="flex items-center justify-between">
             <h2 className="text-xl md:text-2xl font-medium">お知らせ</h2>
             <Link
-              href="/official/news"
               className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              href="/official/news"
             >
               すべて見る
               <ArrowRight className="h-4 w-4" />
@@ -43,8 +44,8 @@ export async function NewsSection() {
                 return (
                   <Link
                     key={item.id}
-                    href={`/official/news/${item.id}`}
                     className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+                    href={`/official/news/${item.id}`}
                   >
                     <span className="text-sm text-muted-foreground font-mono shrink-0">{formattedDate}</span>
                     {index === 0 && (

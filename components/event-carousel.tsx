@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 interface EventCarouselProps {
   images: string[];
@@ -37,24 +37,24 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
     <div className="relative aspect-video w-full bg-muted overflow-hidden group">
       {/* Main Image */}
       {currentImage && (
-        <Image src={currentImage} alt={`${title} image ${currentIndex + 1}`} fill className="object-cover" priority />
+        <Image fill priority alt={`${title} image ${currentIndex + 1}`} className="object-cover" src={currentImage} />
       )}
 
       {/* Navigation Buttons */}
       {images.length > 1 && (
         <>
           <button
-            onClick={goToPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
             aria-label="Previous image"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
+            onClick={goToPrevious}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
 
           <button
-            onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
             aria-label="Next image"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
+            onClick={goToNext}
           >
             <ChevronRight className="h-6 w-6" />
           </button>
@@ -64,11 +64,11 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
             {images.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Go to image ${idx + 1}`}
                 className={`w-2 h-2 rounded-full transition-all ${
                   idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/70'
                 }`}
-                aria-label={`Go to image ${idx + 1}`}
+                onClick={() => setCurrentIndex(idx)}
               />
             ))}
           </div>

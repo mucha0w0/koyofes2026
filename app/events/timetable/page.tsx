@@ -1,11 +1,16 @@
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { Clock } from 'lucide-react';
+import Link from 'next/link';
+
+import { SimpleSerch } from '@/components/Simple-serch';
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
+
 import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
-import { SimpleSerch } from '@/components/Simple-serch';
-import Link from 'next/link';
+
+
 
 export const dynamic = 'force-dynamic';
 
@@ -111,11 +116,11 @@ function TimelineView({ events, startHour, endHour }: { events: ScheduleEvent[];
         {events.map((event, idx) => (
           <Link
             key={idx}
-            href={`/events/${event.slug}`}
             className="absolute left-0 right-0 bg-card px-4 flex items-center gap-3 transition-opacity hover:opacity-80"
+            href={`/events/${event.slug}`}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
-            {event.icon && <img src={event.icon} alt={event.title} className="w-10 h-10 object-contain shrink-0" />}
+            {event.icon && <img alt={event.title} className="w-10 h-10 object-contain shrink-0" src={event.icon} />}
             <div className="min-w-0">
               <h3 className="font-medium text-foreground leading-snug truncate">{event.title}</h3>
               <p className="text-sm text-muted-foreground mt-0.5 truncate">{event.organization}</p>
@@ -138,7 +143,7 @@ export default async function StageEventsPage() {
   let stageEvents: Event[] = [];
   try {
     const events = await getEvents();
-    stageEvents = (events as Event[]).filter((e) => e.category === 'stage');
+    stageEvents = (events).filter((e) => e.category === 'stage');
   } catch (error) {
     console.error('イベント取得エラー:', error);
   }
@@ -169,19 +174,19 @@ export default async function StageEventsPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="タイムテーブル" subtitle="2日間のタイムテーブルです">
+      <PageLayout subtitle="2日間のタイムテーブルです" title="タイムテーブル">
         <div className="space-y-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <h2 className="text-xl font-medium text-foreground">1日目</h2>
             </div>
-            <TimelineView events={day1Events} startHour={DAY1_START_HOUR} endHour={DAY1_END_HOUR} />
+            <TimelineView endHour={DAY1_END_HOUR} events={day1Events} startHour={DAY1_START_HOUR} />
           </div>
           <div>
             <div className="flex items-center gap-3 mb-6">
               <h2 className="text-xl font-medium text-foreground">2日目</h2>
             </div>
-            <TimelineView events={day2Events} startHour={DAY2_START_HOUR} endHour={DAY2_END_HOUR} />
+            <TimelineView endHour={DAY2_END_HOUR} events={day2Events} startHour={DAY2_START_HOUR} />
           </div>
         </div>
       </PageLayout>

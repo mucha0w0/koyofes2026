@@ -179,7 +179,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     author: event.author,
     category: Array.isArray(event.category)
       ? (event.category[0] as Event['category']) || 'booth'
-      : (event.category as Event['category']), // 配列の最初の要素を取得、デフォルト"booth"
+      : (event.category), // 配列の最初の要素を取得、デフォルト"booth"
   };
 }
 

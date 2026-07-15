@@ -13,8 +13,8 @@ export const FAQCategoryNav: React.FC<FAQCategoryNavProps> = ({ categories }) =>
           return (
             <li key={category} className="last:border-none">
               <a
-                href={`#${category}`}
                 className="flex items-center gap-4 py-4 text-lg font-medium text-foreground hover:text-primary transform hover:translate-x-1 transition-all duration-200 ease-in-out group"
+                href={`#${category}`}
               >
                 {/* ナンバリング（薄めの色でスタイリッシュに表示） */}
                 <span className="text-sm font-mono text-muted-foreground group-hover:text-primary transition-colors">

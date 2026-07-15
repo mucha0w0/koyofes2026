@@ -1,14 +1,16 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
-import { PageLayout } from '@/components/page-layout';
 import { Search, RotateCcw } from 'lucide-react';
-import { Event } from '@/lib/types/event';
-import { ExhibitionCard } from '@/components/ui/exhibition-card';
+import { useSearchParams } from 'next/navigation';
+import { useState, useMemo, useEffect } from 'react';
+
+import { PageLayout } from '@/components/page-layout';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { ExhibitionCard } from '@/components/ui/exhibition-card';
+
+import { Event } from '@/lib/types/event';
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
@@ -112,7 +114,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
     return (
       <>
         <SiteHeader />
-        <PageLayout title="企画一覧・検索" subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます">
+        <PageLayout subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます" title="企画一覧・検索">
           <div className="text-center py-12">
             <p className="text-red-500">{error}</p>
           </div>
@@ -125,18 +127,18 @@ export function EventListClient({ events, error }: EventListClientProps) {
   return (
     <>
       <SiteHeader />
-      <PageLayout title="企画一覧・検索" subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます">
+      <PageLayout subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます" title="企画一覧・検索">
         <div className="max-w-5xl mx-auto space-y-8">
           {/* 検索バー */}
           <div>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <input
-                type="text"
+                className="w-full pl-10 pr-4 py-3 bg-input border border-border focus:outline-none focus:border-ring"
                 placeholder="企画名・団体名で検索..."
+                type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-input border border-border focus:outline-none focus:border-ring"
               />
             </div>
           </div>
@@ -148,12 +150,12 @@ export function EventListClient({ events, error }: EventListClientProps) {
               {Object.keys(genreLabels).map((genre) => (
                 <button
                   key={genre}
-                  onClick={() => handleGenreToggle(genre)}
                   className={`px-4 py-2 text-sm transition-colors ${
                     selectedGenres.includes(genre)
                       ? 'bg-foreground text-background'
                       : 'bg-muted text-foreground hover:bg-muted/80'
                   }`}
+                  onClick={() => handleGenreToggle(genre)}
                 >
                   {genreLabels[genre]}
                 </button>
@@ -162,8 +164,8 @@ export function EventListClient({ events, error }: EventListClientProps) {
           </div>
 
           {/* 詳細検索（アコーディオン） */}
-          <Accordion type="single" collapsible>
-            <AccordionItem value="advanced" className="border-t border-b border-border last:border-b">
+          <Accordion collapsible type="single">
+            <AccordionItem className="border-t border-b border-border last:border-b" value="advanced">
               <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline hover:text-muted-foreground py-4">
                 詳細検索
               </AccordionTrigger>
@@ -173,26 +175,26 @@ export function EventListClient({ events, error }: EventListClientProps) {
                   <div>
                     <div className="flex items-center gap-3 mb-4">
                       <input
-                        type="checkbox"
-                        id="enable-participant"
                         checked={enableParticipantFilter}
-                        onChange={(e) => setEnableParticipantFilter(e.target.checked)}
                         className="w-4 h-4"
+                        id="enable-participant"
+                        type="checkbox"
+                        onChange={(e) => setEnableParticipantFilter(e.target.checked)}
                       />
                       <label
-                        htmlFor="enable-participant"
                         className="text-sm font-medium text-foreground cursor-pointer"
+                        htmlFor="enable-participant"
                       >
                         参加人数
                       </label>
                     </div>
                     <input
-                      type="range"
-                      min="1"
+                      className="w-full"
                       max="5"
+                      min="1"
+                      type="range"
                       value={participantMax}
                       onChange={(e) => setParticipantMax(Number(e.target.value))}
-                      className="w-full"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
                       <span>1</span>
@@ -207,23 +209,23 @@ export function EventListClient({ events, error }: EventListClientProps) {
                   <div>
                     <div className="flex items-center gap-3 mb-4">
                       <input
-                        type="checkbox"
-                        id="enable-duration"
                         checked={enableDurationFilter}
-                        onChange={(e) => setEnableDurationFilter(e.target.checked)}
                         className="w-4 h-4"
+                        id="enable-duration"
+                        type="checkbox"
+                        onChange={(e) => setEnableDurationFilter(e.target.checked)}
                       />
-                      <label htmlFor="enable-duration" className="text-sm font-medium text-foreground cursor-pointer">
+                      <label className="text-sm font-medium text-foreground cursor-pointer" htmlFor="enable-duration">
                         所要時間
                       </label>
                     </div>
                     <input
-                      type="range"
-                      min="5"
+                      className="w-full"
                       max="30"
+                      min="5"
+                      type="range"
                       value={durationValue}
                       onChange={(e) => setDurationValue(Number(e.target.value))}
-                      className="w-full"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-1">
                       <span>さくっと</span>
@@ -236,9 +238,9 @@ export function EventListClient({ events, error }: EventListClientProps) {
                   <div>
                     <label className="text-sm font-medium text-foreground block mb-3">設営場所</label>
                     <select
+                      className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring text-foreground"
                       value={selectedLocation}
                       onChange={(e) => setSelectedLocation(e.target.value)}
-                      className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring text-foreground"
                     >
                       <option value="">すべて</option>
                       {uniqueLocations.map((location) => (
@@ -262,8 +264,8 @@ export function EventListClient({ events, error }: EventListClientProps) {
               enableDurationFilter ||
               selectedLocation) && (
               <button
-                onClick={handleResetFilters}
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                onClick={handleResetFilters}
               >
                 <RotateCcw className="h-3 w-3" />
                 リセット

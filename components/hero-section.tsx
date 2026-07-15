@@ -1,18 +1,18 @@
 'use client';
 
-import Image from 'next/image';
 import { Calendar, MapPin, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 export function HeroSection() {
   return (
     <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
       <Image
-        src="/20251106soumukikaku2-1024x768.jpg"
-        alt="background"
         fill
-        className="object-cover"
-        style={{ zIndex: 0 }}
         priority
+        alt="background"
+        className="object-cover"
+        src="/20251106soumukikaku2-1024x768.jpg"
+        style={{ zIndex: 0 }}
       />
       <div className="container mx-auto px-4 w-full" style={{ position: 'relative', zIndex: 1 }}>
         <div className="text-center space-y-12">

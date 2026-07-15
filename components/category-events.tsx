@@ -1,6 +1,7 @@
+import { CategoryEventsContent } from './category-events-client';
+
 import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
-import { CategoryEventsContent } from './category-events-client';
 
 type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
 
@@ -17,7 +18,7 @@ export async function CategoryEvents() {
 
   try {
     const fetchedEvents = await getEvents();
-    events = fetchedEvents as Event[];
+    events = fetchedEvents;
   } catch (error) {
     console.error('イベント取得エラー:', error);
   }

@@ -1,7 +1,9 @@
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
 import type { Event } from '@/lib/types/event';
+
 import { isImageUrl } from '@/lib/utils';
 
 interface RecommendedEventCardProps {
@@ -21,11 +23,11 @@ export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, e
         <div className="shrink-0 w-10 h-10 bg-muted flex items-center justify-center overflow-hidden">
           {recommenderIcon ? (
             <Image
-              src={recommenderIcon}
               alt={recommender}
-              width={40}
-              height={40}
               className="w-full h-full object-cover"
+              height={40}
+              src={recommenderIcon}
+              width={40}
             />
           ) : (
             <span className="text-[10px] text-muted-foreground">No icon</span>
@@ -40,12 +42,12 @@ export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, e
       {/* 企画紹介カード（内側） */}
       {/* 企画紹介カード（内側） */}
       <Link
-        href={`/events/${event.slug}`}
         className="flex items-center gap-4 bg-muted p-4 hover:opacity-80 transition-opacity"
+        href={`/events/${event.slug}`}
       >
         <div className="shrink-0 w-16 h-16 bg-background flex items-center justify-center overflow-hidden">
           {isEventIconUrl ? (
-            <Image src={event.icon} alt={event.title} width={64} height={64} className="w-full h-full object-cover" />
+            <Image alt={event.title} className="w-full h-full object-cover" height={64} src={event.icon} width={64} />
           ) : (
             <span className="text-xs text-muted-foreground">No icon</span>
           )}

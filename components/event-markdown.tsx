@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import parse, { domToReact, Element } from 'html-react-parser';
+import React from 'react';
 
 interface MarkdownProps {
   content: string;

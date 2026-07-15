@@ -21,10 +21,10 @@ const SOCIAL_LINKS = [
 function SocialLink({ Icon, label, handle, url }: (typeof SOCIAL_LINKS)[number]) {
   return (
     <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
       className="flex-1 relative flex items-center gap-3 px-5 py-3.5 bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 transition-colors rounded-md max-w-[320px]"
+      href={url}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       {/* react-icons のブランドアイコン */}
       <Icon className="h-6 w-6 shrink-0" />

@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Search, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export function SimpleSerch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,18 +30,18 @@ export function SimpleSerch() {
           <div className="relative flex-1">
             <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <input
-              type="text"
+              className="w-full h-12 pl-10 sm:pl-12 pr-10 bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors text-sm sm:text-base"
               placeholder="企画名、キーワードで検索..."
+              type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full h-12 pl-10 sm:pl-12 pr-10 bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors text-sm sm:text-base"
             />
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="検索キーワードをクリア"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                onClick={() => setSearchQuery('')}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -49,8 +49,8 @@ export function SimpleSerch() {
           </div>
 
           <button
-            onClick={handleSearch}
             className="h-12 px-4 sm:px-8 bg-foreground text-background font-medium hover:opacity-80 cursor-pointer transition-opacity whitespace-nowrap text-sm sm:text-base面"
+            onClick={handleSearch}
           >
             検索する
           </button>
@@ -58,8 +58,8 @@ export function SimpleSerch() {
 
         <div className="mt-6 text-center">
           <Link
-            href="/events/list"
             className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            href="/events/list"
           >
             すべての企画を見る
             <ArrowRight className="h-4 w-4" />
