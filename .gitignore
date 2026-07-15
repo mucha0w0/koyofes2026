@@ -16,3 +16,6 @@ node_modules
 
 # TypeScript
 tsconfig.tsbuildinfo
+
+#Other
+DESIGN.md
