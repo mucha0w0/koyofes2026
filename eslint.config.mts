@@ -14,6 +14,9 @@ import unusedImports from 'eslint-plugin-unused-imports';
 // @ts-ignore: eslint-plugin-import has no type definitions
 import importPlugin from 'eslint-plugin-import';
 
+// @ts-ignore: eslint-plugin-tailwindcss has no type definitions
+import tailwindcss from 'eslint-plugin-tailwindcss';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -24,7 +27,7 @@ export default tseslint.config(
   // 2. TypeScriptの「型チェック付き」推奨ルール
   tseslint.configs.recommendedTypeChecked,
 
-  // 3. React of 推奨ルール（型エラー回避のために「as any」を追加）
+  // 3. Reactの推奨ルール（型エラー回避のために「as any」を追加）
   pluginReact.configs.flat.recommended as any,
 
   // 4. Next.jsのルール適用
@@ -86,7 +89,7 @@ export default tseslint.config(
     },
   },
 
-  // 7. ⬇️ 【新規追加】React JSX Props の自動ソート
+  // 7. React JSX Props の自動ソート
   {
     plugins: {
       react: pluginReact,
@@ -95,13 +98,9 @@ export default tseslint.config(
       'react/jsx-sort-props': [
         'error',
         {
-          // key や ref などの特殊な React 専用プロパティを最優先で一番上に置く
           reservedFirst: true,
-          // disabled のような、値の書かれていない省略形の props を上に集める
           shorthandFirst: true,
-          // onClick などのイベント（コールバック関数）は一番下に集める（見やすさが跳ね上がります！）
           callbacksLast: true,
-          // アルファベット順でソートする際、大文字小文字を区別しない
           ignoreCase: true,
           noSortAlphabetically: false,
         },
@@ -109,7 +108,10 @@ export default tseslint.config(
     },
   },
 
-  // 8. 対象ファイルと、TypeScriptの解析設定
+  // 8. ⬇️ 【修正箇所】プロパティにアクセスする前に (tailwindcss as any) にしました！
+  ...(tailwindcss as any).configs['flat/recommended'],
+
+  // 9. 対象ファイルと、TypeScriptの解析設定
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     languageOptions: {
