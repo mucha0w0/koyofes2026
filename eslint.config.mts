@@ -17,6 +17,10 @@ import importPlugin from 'eslint-plugin-import';
 // @ts-ignore: eslint-plugin-tailwindcss has no type definitions
 import tailwindcss from 'eslint-plugin-tailwindcss';
 
+// ⬇️ 1. 追加：Prettierの衝突防止設定をインポート
+// @ts-ignore: eslint-config-prettier has no type definitions
+import eslintConfigPrettier from 'eslint-config-prettier';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -108,7 +112,7 @@ export default tseslint.config(
     },
   },
 
-  // 8. ⬇️ 【修正箇所】プロパティにアクセスする前に (tailwindcss as any) にしました！
+  // 8. Tailwind CSS の推奨ルール
   ...(tailwindcss as any).configs['flat/recommended'],
 
   // 9. 対象ファイルと、TypeScriptの解析設定
@@ -125,4 +129,8 @@ export default tseslint.config(
       },
     },
   },
+
+  // 10. ⬇️ 【新規追加】Prettierと競合するルールをすべてOFFにする
+  // 型の競合を未然に防ぐため「as any」を当てています。必ず「一番最後」に置いてください！
+  eslintConfigPrettier as any,
 );
