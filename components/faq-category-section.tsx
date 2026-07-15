@@ -1,5 +1,5 @@
-import { FAQItem } from "@/components/ui/faq-item";
-import { FaqGroup } from "@/lib/types/faq";
+import { FAQItem } from '@/components/ui/faq-item';
+import { FaqGroup } from '@/lib/types/faq';
 
 interface FAQCategorySectionProps {
   group: FaqGroup;
@@ -11,7 +11,7 @@ export const FAQCategorySection: React.FC<FAQCategorySectionProps> = ({ group })
       <h2 className="text-2xl font-medium text-foreground tracking-tight mb-8 pb-4 border-b border-border/60">
         {group.category}
       </h2>
-      
+
       {/* 質問アイテム（FAQItem）のリスト */}
       <div className="flex flex-col gap-2">
         {group.items.map((faq, i) => (

@@ -1,39 +1,28 @@
-import Image from "next/image"
-import { ExternalLink } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import type { SponsorItem } from "@/lib/types/sponsor"
+import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import type { SponsorItem } from '@/lib/types/sponsor';
 
 interface SponsorCardProps {
-  item: SponsorItem
+  item: SponsorItem;
 }
 
 export function SponsorCard({ item }: SponsorCardProps) {
-  const isIconUrl =
-    item.icon.startsWith("http://") ||
-    item.icon.startsWith("https://") ||
-    item.icon.startsWith("/")
+  const isIconUrl = item.icon.startsWith('http://') || item.icon.startsWith('https://') || item.icon.startsWith('/');
 
   return (
     <Card className="py-0">
       <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
         <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-muted flex items-center justify-center overflow-hidden mt-0.5">
           {isIconUrl ? (
-            <Image
-              src={item.icon}
-              alt={item.name}
-              width={56}
-              height={56}
-              className="w-full h-full object-cover"
-            />
+            <Image src={item.icon} alt={item.name} width={56} height={56} className="w-full h-full object-cover" />
           ) : (
             <span className="text-xs text-muted-foreground">No logo</span>
           )}
         </div>
 
         <div className="row-start-1 col-start-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
-          <h3 className="font-medium text-base sm:text-lg text-foreground leading-snug">
-            {item.name}
-          </h3>
+          <h3 className="font-medium text-base sm:text-lg text-foreground leading-snug">{item.name}</h3>
 
           {item.link && (
             <a
@@ -54,5 +43,5 @@ export function SponsorCard({ item }: SponsorCardProps) {
         </p>
       </CardContent>
     </Card>
-  )
+  );
 }

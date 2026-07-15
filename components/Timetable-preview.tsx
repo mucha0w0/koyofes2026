@@ -1,13 +1,11 @@
-import Link from "next/link";
-import { Clock, ArrowRight, EllipsisVertical } from "lucide-react";
-import { getEvents } from "@/lib/microcms";
-import { Event } from "@/lib/types/event";
+import Link from 'next/link';
+import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
+import { getEvents } from '@/lib/microcms';
+import { Event } from '@/lib/types/event';
 
 const PREVIEW_COUNT = 3;
 
-function parseTime(
-  timeStr: string,
-): { startMin: number; endMin: number } | null {
+function parseTime(timeStr: string): { startMin: number; endMin: number } | null {
   if (!timeStr || timeStr.length !== 8) return null;
   const sh = parseInt(timeStr.substring(0, 2), 10);
   const sm = parseInt(timeStr.substring(2, 4), 10);
@@ -20,7 +18,7 @@ function parseTime(
 function minToTimeStr(min: number): string {
   return `${Math.floor(min / 60)
     .toString()
-    .padStart(2, "0")}:${(min % 60).toString().padStart(2, "0")}`;
+    .padStart(2, '0')}:${(min % 60).toString().padStart(2, '0')}`;
 }
 
 // ─── サブコンポーネント ──────────────────────────────
@@ -34,14 +32,7 @@ interface EventRowProps {
   duration: number;
 }
 
-function EventRow({
-  slug,
-  icon,
-  title,
-  organization,
-  timeRange,
-  duration,
-}: EventRowProps) {
+function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
     <Link
       href={`/events/${slug}`}
@@ -49,11 +40,7 @@ function EventRow({
     >
       {/* アイコン画像：背景なし、最大サイズで表示 */}
       {icon ? (
-        <img
-          src={icon}
-          alt={title}
-          className="w-10 h-10 object-contain shrink-0"
-        />
+        <img src={icon} alt={title} className="w-10 h-10 object-contain shrink-0" />
       ) : (
         <div className="w-10 h-10 shrink-0" />
       )}
@@ -61,9 +48,7 @@ function EventRow({
       {/* テキスト情報 */}
       <div className="flex-1 min-w-0">
         <span className="font-medium text-sm">{title}</span>
-        <p className="text-xs text-muted-foreground truncate mt-0.5">
-          {organization}
-        </p>
+        <p className="text-xs text-muted-foreground truncate mt-0.5">{organization}</p>
       </div>
 
       {/* 時間情報 + 矢印 */}
@@ -112,12 +97,12 @@ export async function TimetablePreview() {
   let stageEvents: Event[] = [];
   try {
     const events = await getEvents();
-    stageEvents = (events as Event[]).filter((e) => e.category === "stage");
+    stageEvents = (events as Event[]).filter((e) => e.category === 'stage');
   } catch (error) {
-    console.error("イベント取得エラー:", error);
+    console.error('イベント取得エラー:', error);
   }
 
-  function toRowsSorted(timeKey: "time-day1" | "time-day2"): EventRowProps[] {
+  function toRowsSorted(timeKey: 'time-day1' | 'time-day2'): EventRowProps[] {
     return stageEvents
       .map((event): (EventRowProps & { startMin: number }) | null => {
         const parsed = parseTime(event[timeKey]);
@@ -138,16 +123,14 @@ export async function TimetablePreview() {
       .map(({ startMin: _s, ...rest }) => rest);
   }
 
-  const day1Rows = toRowsSorted("time-day1");
-  const day2Rows = toRowsSorted("time-day2");
+  const day1Rows = toRowsSorted('time-day1');
+  const day2Rows = toRowsSorted('time-day2');
 
   return (
     <section className="bg-muted py-10 md:py-14">
       <div className="container mx-auto px-4">
         <div className="mb-6 text-center">
-          <h2 className="text-xl md:text-2xl font-medium text-foreground">
-            タイムテーブル
-          </h2>
+          <h2 className="text-xl md:text-2xl font-medium text-foreground">タイムテーブル</h2>
         </div>
 
         {/* 2日分のグリッド */}

@@ -21,7 +21,7 @@ import {
   Crown,
   Sparkles,
   LucideIcon,
-} from 'lucide-react'
+} from 'lucide-react';
 
 const iconMap: Record<string, LucideIcon> = {
   Ghost,
@@ -45,8 +45,8 @@ const iconMap: Record<string, LucideIcon> = {
   UserCog,
   Crown,
   Sparkles,
-}
+};
 
 export function getLucideIcon(iconName: string): LucideIcon | null {
-  return iconMap[iconName] || null
+  return iconMap[iconName] || null;
 }

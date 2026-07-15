@@ -1,8 +1,8 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import AboutSection from "@/components/about-section"
-import EventDetails from "@/components/event-details"
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import AboutSection from '@/components/about-section';
+import EventDetails from '@/components/event-details';
 
 export default function AboutPage() {
   return (
@@ -20,5 +20,5 @@ export default function AboutPage() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }

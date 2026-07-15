@@ -32,16 +32,9 @@ export default function AboutSection() {
   return (
     <div className="pb-6">
       {items.map((item, index) => (
-        <div
-          key={item.label}
-          className={`py-8 ${index !== 0 ? 'border-t border-border' : ''}`}
-        >
-          <h3 className="text-lg font-medium text-foreground mb-4">
-            {item.label}
-          </h3>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {item.content}
-          </p>
+        <div key={item.label} className={`py-8 ${index !== 0 ? 'border-t border-border' : ''}`}>
+          <h3 className="text-lg font-medium text-foreground mb-4">{item.label}</h3>
+          <p className="text-base leading-relaxed text-muted-foreground">{item.content}</p>
         </div>
       ))}
     </div>

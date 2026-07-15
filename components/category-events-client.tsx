@@ -1,24 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Building2, Users, Mic2, ShoppingBag, Truck } from "lucide-react";
-import { Event } from "@/lib/types/event";
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight, Building2, Users, Mic2, ShoppingBag, Truck } from 'lucide-react';
+import { Event } from '@/lib/types/event';
 
-type EventCategory =
-  | "class-exhibit"
-  | "volunteer-exhibit"
-  | "booth"
-  | "stage"
-  | "food-truck";
+type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
 
 const categoryIconConfig: Record<EventCategory, React.ElementType> = {
-  "class-exhibit": Building2,
-  "volunteer-exhibit": Users,
-  "booth": ShoppingBag,
-  "stage": Mic2,
-  "food-truck": Truck,
+  'class-exhibit': Building2,
+  'volunteer-exhibit': Users,
+  booth: ShoppingBag,
+  stage: Mic2,
+  'food-truck': Truck,
 };
 
 interface EventCardProps {
@@ -26,33 +21,20 @@ interface EventCardProps {
 }
 
 function EventCard({ event }: EventCardProps) {
-  const isIconUrl =
-    event.icon &&
-    (event.icon.startsWith("http://") || event.icon.startsWith("https://"));
+  const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'));
 
   return (
-    <Link
-      href={`/events/${event.slug}`}
-      className="flex flex-col items-center gap-2 shrink-0 group"
-    >
+    <Link href={`/events/${event.slug}`} className="flex flex-col items-center gap-2 shrink-0 group">
       <div className="w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
         {isIconUrl ? (
-          <Image
-            src={event.icon}
-            alt={event.title}
-            width={128}
-            height={128}
-            className="w-full h-full object-cover"
-          />
+          <Image src={event.icon} alt={event.title} width={128} height={128} className="w-full h-full object-cover" />
         ) : (
           <span className="text-xs text-muted-foreground">No image</span>
         )}
       </div>
       <div className="text-center max-w-24 md:max-w-32">
         <p className="text-xs md:text-sm font-medium truncate">{event.title}</p>
-        <p className="text-xs md:text-sm text-muted-foreground truncate">
-          {event.organization}
-        </p>
+        <p className="text-xs md:text-sm text-muted-foreground truncate">{event.organization}</p>
       </div>
     </Link>
   );
@@ -81,7 +63,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       const firstSet = track.querySelector<HTMLElement>('[data-event-set="1"]');
       if (!firstSet) return 0;
       // getBoundingClientRect でgap込みの実幅を取得
-      const allSets = track.querySelectorAll<HTMLElement>("[data-event-set]");
+      const allSets = track.querySelectorAll<HTMLElement>('[data-event-set]');
       if (allSets.length < 2) return firstSet.getBoundingClientRect().width;
       const rect1 = allSets[0].getBoundingClientRect();
       const rect2 = allSets[1].getBoundingClientRect();
@@ -110,8 +92,12 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
 
     animationIdRef.current = requestAnimationFrame(animate);
 
-    const handleMouseEnter = () => { isHoveredRef.current = true; };
-    const handleMouseLeave = () => { isHoveredRef.current = false; };
+    const handleMouseEnter = () => {
+      isHoveredRef.current = true;
+    };
+    const handleMouseLeave = () => {
+      isHoveredRef.current = false;
+    };
 
     const handleTouchStart = (e: TouchEvent) => {
       isTouchingRef.current = true;
@@ -123,44 +109,39 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       const diff = touchStartXRef.current - e.touches[0].clientX;
       const setWidth = getSingleSetWidth();
       if (setWidth > 0) {
-        offsetRef.current = ((touchOffsetRef.current + diff) % setWidth + setWidth) % setWidth;
+        offsetRef.current = (((touchOffsetRef.current + diff) % setWidth) + setWidth) % setWidth;
         track.style.transform = `translateX(-${offsetRef.current}px)`;
       }
     };
-    const handleTouchEnd = () => { isTouchingRef.current = false; };
+    const handleTouchEnd = () => {
+      isTouchingRef.current = false;
+    };
 
-    track.addEventListener("mouseenter", handleMouseEnter);
-    track.addEventListener("mouseleave", handleMouseLeave);
-    track.addEventListener("touchstart", handleTouchStart, { passive: true });
-    track.addEventListener("touchmove", handleTouchMove, { passive: true });
-    track.addEventListener("touchend", handleTouchEnd);
+    track.addEventListener('mouseenter', handleMouseEnter);
+    track.addEventListener('mouseleave', handleMouseLeave);
+    track.addEventListener('touchstart', handleTouchStart, { passive: true });
+    track.addEventListener('touchmove', handleTouchMove, { passive: true });
+    track.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       cancelAnimationFrame(animationIdRef.current);
-      track.removeEventListener("mouseenter", handleMouseEnter);
-      track.removeEventListener("mouseleave", handleMouseLeave);
-      track.removeEventListener("touchstart", handleTouchStart);
-      track.removeEventListener("touchmove", handleTouchMove);
-      track.removeEventListener("touchend", handleTouchEnd);
+      track.removeEventListener('mouseenter', handleMouseEnter);
+      track.removeEventListener('mouseleave', handleMouseLeave);
+      track.removeEventListener('touchstart', handleTouchStart);
+      track.removeEventListener('touchmove', handleTouchMove);
+      track.removeEventListener('touchend', handleTouchEnd);
     };
   }, [events.length]);
 
   if (events.length === 0) {
-    return (
-      <div className="flex items-center justify-center py-8 text-muted-foreground">
-        企画は準備中です
-      </div>
-    );
+    return <div className="flex items-center justify-center py-8 text-muted-foreground">企画は準備中です</div>;
   }
 
   return (
     // overflow-hidden でトラックのはみ出しを隠す
     <div className="overflow-hidden py-2">
       {/* トラック：transform で動かす。幅はコンテンツ分必要なので width-max */}
-      <div
-        ref={trackRef}
-        className="flex gap-4 w-max will-change-transform"
-      >
+      <div ref={trackRef} className="flex gap-4 w-max will-change-transform">
         {[1, 2, 3].map((setNum) => (
           <div key={`set-${setNum}`} data-event-set={setNum} className="flex gap-4 shrink-0">
             {events.map((event) => (
@@ -183,16 +164,12 @@ interface CategoryEventsContentProps {
   categories: Category[];
 }
 
-export function CategoryEventsContent({
-  categories,
-}: CategoryEventsContentProps) {
+export function CategoryEventsContent({ categories }: CategoryEventsContentProps) {
   return (
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-medium mb-2">
-            カテゴリ別企画一覧
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-medium mb-2">カテゴリ別企画一覧</h2>
           <p className="text-muted-foreground">様々な企画から選んでチェック</p>
         </div>
 

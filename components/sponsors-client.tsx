@@ -1,8 +1,8 @@
 // @/components/sponsors-client.tsx
-"use client";
-import { useEffect, useRef } from "react";
-import Link from "next/link";
-import type { SponsorItem } from "@/lib/types/sponsor";
+'use client';
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import type { SponsorItem } from '@/lib/types/sponsor';
 
 interface SponsorsClientProps {
   sponsors: SponsorItem[];
@@ -16,19 +16,11 @@ function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
     >
       {sponsor.icon ? (
         <>
-          <img
-            src={sponsor.icon}
-            alt={sponsor.name}
-            className="max-h-14 max-w-[160px] object-contain"
-          />
-          <span className="text-xs text-muted-foreground whitespace-nowrap">
-            {sponsor.name}
-          </span>
+          <img src={sponsor.icon} alt={sponsor.name} className="max-h-14 max-w-[160px] object-contain" />
+          <span className="text-xs text-muted-foreground whitespace-nowrap">{sponsor.name}</span>
         </>
       ) : (
-        <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
-          {sponsor.name}
-        </span>
+        <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">{sponsor.name}</span>
       )}
     </Link>
   );
@@ -48,9 +40,7 @@ export function SponsorsClient({ sponsors }: SponsorsClientProps) {
     const GAP = 24;
 
     const measureSetWidth = () => {
-      const firstSet = track.querySelector(
-        '[data-sponsor-set="1"]',
-      ) as HTMLElement;
+      const firstSet = track.querySelector('[data-sponsor-set="1"]') as HTMLElement;
       if (firstSet) {
         setWidthRef.current = firstSet.offsetWidth + GAP;
       }
@@ -89,39 +79,27 @@ export function SponsorsClient({ sponsors }: SponsorsClientProps) {
       }
     };
 
-    track.addEventListener("mouseenter", handleMouseEnter);
-    track.addEventListener("mouseleave", handleMouseLeave);
-    window.addEventListener("resize", handleResize);
+    track.addEventListener('mouseenter', handleMouseEnter);
+    track.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationIdRef.current);
-      track.removeEventListener("mouseenter", handleMouseEnter);
-      track.removeEventListener("mouseleave", handleMouseLeave);
-      window.removeEventListener("resize", handleResize);
+      track.removeEventListener('mouseenter', handleMouseEnter);
+      track.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   return (
     <div className="overflow-hidden">
-      <div
-        ref={trackRef}
-        className="flex will-change-transform"
-        style={{ gap: "24px" }}
-      >
-        <div
-          data-sponsor-set="1"
-          className="flex shrink-0"
-          style={{ gap: "24px" }}
-        >
+      <div ref={trackRef} className="flex will-change-transform" style={{ gap: '24px' }}>
+        <div data-sponsor-set="1" className="flex shrink-0" style={{ gap: '24px' }}>
           {sponsors.map((sponsor) => (
             <SponsorLogo key={sponsor.id} sponsor={sponsor} />
           ))}
         </div>
-        <div
-          data-sponsor-set="2"
-          className="flex shrink-0"
-          style={{ gap: "24px" }}
-        >
+        <div data-sponsor-set="2" className="flex shrink-0" style={{ gap: '24px' }}>
           {sponsors.map((sponsor) => (
             <SponsorLogo key={`dup-${sponsor.id}`} sponsor={sponsor} />
           ))}

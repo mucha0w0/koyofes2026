@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Search, X, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Search, X, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export function SimpleSerch() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
 
   const handleSearch = () => {
@@ -14,7 +14,7 @@ export function SimpleSerch() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSearch();
     }
   };
@@ -23,9 +23,7 @@ export function SimpleSerch() {
     <section className="py-10 md:py-16 bg-muted">
       <div className="container mx-auto px-4">
         <div className="text-center flex flex-col gap-2 mb-8">
-          <h2 className="text-xl md:text-2xl font-medium tracking-tight">
-            企画を探す
-          </h2>
+          <h2 className="text-xl md:text-2xl font-medium tracking-tight">企画を探す</h2>
         </div>
 
         <div className="max-w-2xl mx-auto flex flex-row items-stretch gap-2 sm:gap-3">
@@ -41,7 +39,7 @@ export function SimpleSerch() {
             />
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery("")}
+                onClick={() => setSearchQuery('')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="検索キーワードをクリア"
               >

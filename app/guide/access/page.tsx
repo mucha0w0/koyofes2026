@@ -1,16 +1,13 @@
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { PageLayout } from "@/components/page-layout";
-import { Train, Bus, Car, MapPin } from "lucide-react";
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { Train, Bus, Car, MapPin } from 'lucide-react';
 
 export default function AccessPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout
-        title="アクセス"
-        subtitle="会場までのアクセス方法をご案内します"
-      >
+      <PageLayout title="アクセス" subtitle="会場までのアクセス方法をご案内します">
         <div className="space-y-8">
           <div className="bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -20,9 +17,7 @@ export default function AccessPage() {
               <h2 className="font-medium text-lg">会場</h2>
             </div>
             <p className="text-lg font-medium">豊田高専</p>
-            <p className="text-muted-foreground">
-              〒471-0067 愛知県豊田市栄生町２丁目１−１
-            </p>
+            <p className="text-muted-foreground">〒471-0067 愛知県豊田市栄生町２丁目１−１</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">

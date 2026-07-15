@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface EventCarouselProps {
-  images: string[]
-  title: string
+  images: string[];
+  title: string;
 }
 
 export function EventCarousel({ images, title }: EventCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   if (images.length === 0) {
     return (
@@ -20,32 +20,24 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
           <p className="text-muted-foreground">No image</p>
         </div>
       </div>
-    )
+    );
   }
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
-  }
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
 
-  const currentImage = images[currentIndex]
+  const currentImage = images[currentIndex];
 
   return (
-    <div
-      className="relative aspect-video w-full bg-muted overflow-hidden group"
-    >
+    <div className="relative aspect-video w-full bg-muted overflow-hidden group">
       {/* Main Image */}
       {currentImage && (
-        <Image
-          src={currentImage}
-          alt={`${title} image ${currentIndex + 1}`}
-          fill
-          className="object-cover"
-          priority
-        />
+        <Image src={currentImage} alt={`${title} image ${currentIndex + 1}`} fill className="object-cover" priority />
       )}
 
       {/* Navigation Buttons */}
@@ -83,5 +75,5 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
         </>
       )}
     </div>
-  )
+  );
 }

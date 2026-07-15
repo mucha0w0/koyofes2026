@@ -1,8 +1,8 @@
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { PageLayout } from "@/components/page-layout";
-import Image from "next/image";
-import kounaizu from "./kounaizu.jpg"; // ← インポート追加
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import Image from 'next/image';
+import kounaizu from './kounaizu.jpg'; // ← インポート追加
 
 export default function MapPage() {
   return (
@@ -13,11 +13,7 @@ export default function MapPage() {
           <div className="bg-card p-6">
             <h2 className="font-medium text-lg mb-4">構内図</h2>
             <div className="bg-white overflow-hidden flex items-center justify-center">
-              <Image
-                src={kounaizu}
-                alt="構内図"
-                className="w-full h-auto"
-              />
+              <Image src={kounaizu} alt="構内図" className="w-full h-auto" />
             </div>
           </div>
 

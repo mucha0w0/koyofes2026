@@ -1,30 +1,30 @@
-'use client'
+'use client';
 
-import React from 'react'
-import parse, { domToReact, Element } from 'html-react-parser'
+import React from 'react';
+import parse, { domToReact, Element } from 'html-react-parser';
 
 interface MarkdownProps {
-  content: string
-  className?: string
+  content: string;
+  className?: string;
 }
 
 export function EventMarkdown({ content, className = '' }: MarkdownProps) {
   if (!content) {
-    return null
+    return null;
   }
 
   // HTML コンテンツの処理
   const htmlContent = parse(content, {
     replace: (domNode: any) => {
       // テキストノード・コメント以外をチェック
-      if (!(domNode instanceof Element)) return domNode
+      if (!(domNode instanceof Element)) return domNode;
 
       // 画像タグのスタイル調整
       if (domNode.name === 'img') {
         return React.createElement('img', {
           ...domNode.attribs,
           className: 'max-w-full h-auto rounded-lg',
-        })
+        });
       }
 
       // リンクタグのスタイル調整
@@ -36,7 +36,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
             className: 'text-blue-600 hover:underline',
           },
           domToReact(domNode.children as any),
-        )
+        );
       }
 
       // テーブルのスタイル調整
@@ -47,7 +47,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
             className: 'w-full border-collapse border border-border',
           },
           domToReact(domNode.children as any),
-        )
+        );
       }
 
       if (domNode.name === 'th' || domNode.name === 'td') {
@@ -57,13 +57,13 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
             className: 'border border-border px-3 py-2',
           },
           domToReact(domNode.children as any),
-        )
+        );
       }
 
       // その他のタグはデフォルトレンダリング
-      return undefined
+      return undefined;
     },
-  })
+  });
 
   return (
     <div
@@ -71,5 +71,5 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
     >
       {htmlContent}
     </div>
-  )
+  );
 }

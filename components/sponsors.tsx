@@ -1,9 +1,9 @@
 // @/components/sponsors.tsx
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { fetchSponsorsFromMicroCMS } from "@/lib/microcms";
-import { transformMicroCMSSponsor } from "@/lib/sponsors";
-import { SponsorsClient } from "./sponsors-client";
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { fetchSponsorsFromMicroCMS } from '@/lib/microcms';
+import { transformMicroCMSSponsor } from '@/lib/sponsors';
+import { SponsorsClient } from './sponsors-client';
 
 // 1. 親：サーバーコンポーネント（ここでデータを取得する）
 export async function Sponsors() {
@@ -13,7 +13,7 @@ export async function Sponsors() {
     const sponsors = await fetchSponsorsFromMicroCMS();
     sponsorItems = sponsors.map(transformMicroCMSSponsor);
   } catch (error) {
-    console.error("協賛取得エラー:", error);
+    console.error('協賛取得エラー:', error);
     return null; // エラー時はセクションごと非表示に
   }
 

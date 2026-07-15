@@ -1,16 +1,16 @@
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { getNews, MicroCMSNews } from "@/lib/microcms"
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { getNews, MicroCMSNews } from '@/lib/microcms';
 
 export async function NewsSection() {
-  let news: MicroCMSNews[] = []
+  let news: MicroCMSNews[] = [];
 
   try {
-    const allNews = await getNews()
+    const allNews = await getNews();
     // トップページ用の最新3件のみにスライス
-    news = allNews.slice(0, 3)
+    news = allNews.slice(0, 3);
   } catch (error) {
-    console.error("ニュース取得エラー(NewsSection):", error)
+    console.error('ニュース取得エラー(NewsSection):', error);
   }
 
   return (
@@ -33,12 +33,12 @@ export async function NewsSection() {
               news.map((item, index) => {
                 // dateを表示用にフォーマット
                 const formattedDate = new Date(item.date)
-                  .toLocaleDateString("ja-JP", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
+                  .toLocaleDateString('ja-JP', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
                   })
-                  .replace(/\//g, ".")
+                  .replace(/\//g, '.');
 
                 return (
                   <Link
@@ -46,29 +46,23 @@ export async function NewsSection() {
                     href={`/official/news/${item.id}`}
                     className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
                   >
-                    <span className="text-sm text-muted-foreground font-mono shrink-0">
-                      {formattedDate}
-                    </span>
+                    <span className="text-sm text-muted-foreground font-mono shrink-0">{formattedDate}</span>
                     {index === 0 && (
                       <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary shrink-0">
                         NEW
                       </span>
                     )}
-                    <span className="text-sm font-medium truncate">
-                      {item.title}
-                    </span>
+                    <span className="text-sm font-medium truncate">{item.title}</span>
                     <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
                   </Link>
-                )
+                );
               })
             ) : (
-              <div className="text-center p-4 text-muted-foreground">
-                ニュースはまだ投稿されていません。
-              </div>
+              <div className="text-center p-4 text-muted-foreground">ニュースはまだ投稿されていません。</div>
             )}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

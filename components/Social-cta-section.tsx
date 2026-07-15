@@ -1,29 +1,24 @@
-import { ExternalLink } from "lucide-react";
-import { SiInstagram, SiLine } from "react-icons/si";
+import { ExternalLink } from 'lucide-react';
+import { SiInstagram, SiLine } from 'react-icons/si';
 
 const SOCIAL_LINKS = [
   {
-    id: "instagram",
+    id: 'instagram',
     Icon: SiInstagram,
-    label: "Instagram",
-    handle: "@kouyousai2026",
-    url: "https://instagram.com/kouyousai2026",
+    label: 'Instagram',
+    handle: '@kouyousai2026',
+    url: 'https://instagram.com/kouyousai2026',
   },
   {
-    id: "line",
+    id: 'line',
     Icon: SiLine,
-    label: "LINE",
-    handle: "@kouyousai2026",
-    url: "https://line.me/kouyousai2026",
+    label: 'LINE',
+    handle: '@kouyousai2026',
+    url: 'https://line.me/kouyousai2026',
   },
 ] as const;
 
-function SocialLink({
-  Icon,
-  label,
-  handle,
-  url,
-}: (typeof SOCIAL_LINKS)[number]) {
+function SocialLink({ Icon, label, handle, url }: (typeof SOCIAL_LINKS)[number]) {
   return (
     <a
       href={url}
@@ -37,9 +32,7 @@ function SocialLink({
       {/* テキストエリア：縦2行 */}
       <div className="flex flex-col min-w-0">
         <span className="text-sm font-medium leading-tight">{label}</span>
-        <span className="text-xs text-primary-foreground/60 leading-tight">
-          {handle}
-        </span>
+        <span className="text-xs text-primary-foreground/60 leading-tight">{handle}</span>
       </div>
 
       {/* 右下の外部リンクアイコン */}

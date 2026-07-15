@@ -1,22 +1,22 @@
-import Link from "next/link"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { SponsorCard } from "@/components/sponsor-card"
-import { getSponsorSections } from "@/lib/sponsors"
-import type { SponsorSection } from "@/lib/types/sponsor"
+import Link from 'next/link';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { SponsorCard } from '@/components/sponsor-card';
+import { getSponsorSections } from '@/lib/sponsors';
+import type { SponsorSection } from '@/lib/types/sponsor';
 
-export const revalidate = 60
+export const revalidate = 60;
 
 export default async function SponsorPage() {
-  let sections: SponsorSection[] = []
-  let error: string | null = null
+  let sections: SponsorSection[] = [];
+  let error: string | null = null;
 
   try {
-    sections = await getSponsorSections()
+    sections = await getSponsorSections();
   } catch (err) {
-    error = err instanceof Error ? err.message : "協賛情報の取得に失敗しました"
-    console.error("協賛取得エラー:", err)
+    error = err instanceof Error ? err.message : '協賛情報の取得に失敗しました';
+    console.error('協賛取得エラー:', err);
   }
 
   return (
@@ -30,24 +30,18 @@ export default async function SponsorPage() {
         ) : (
           <div className="max-w-4xl mx-auto space-y-12">
             <p className="text-muted-foreground leading-relaxed">
-              こうよう祭の開催にあたり、多くの企業・団体様にご協賛いただいております。
-              心より感謝申し上げます。
+              こうよう祭の開催にあたり、多くの企業・団体様にご協賛いただいております。 心より感謝申し上げます。
             </p>
 
             {sections.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground">
-                  協賛企業・団体はまだ登録されていません。
-                </p>
+                <p className="text-muted-foreground">協賛企業・団体はまだ登録されていません。</p>
               </div>
             ) : (
               sections.map((section) => (
                 <section key={section.id} aria-labelledby={`section-${section.id}`}>
                   <div className="mb-5">
-                    <p
-                      id={`section-${section.id}`}
-                      className="label-en text-sm text-muted-foreground"
-                    >
+                    <p id={`section-${section.id}`} className="label-en text-sm text-muted-foreground">
                       {section.labelEn}
                     </p>
                     <h2 className="font-medium text-xl mt-1">{section.label}</h2>
@@ -80,5 +74,5 @@ export default async function SponsorPage() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }

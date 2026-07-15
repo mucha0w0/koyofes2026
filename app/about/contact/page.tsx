@@ -1,7 +1,7 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -45,15 +45,13 @@ export default function ContactPage() {
 
             <div className="bg-muted p-6">
               <p className="text-sm text-muted-foreground">
-                お問い合わせへの回答には数日いただく場合がございます。
-                よくある質問もご確認ください。
+                お問い合わせへの回答には数日いただく場合がございます。 よくある質問もご確認ください。
               </p>
             </div>
           </div>
-
         </div>
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }

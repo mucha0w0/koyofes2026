@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import { Josefin_Sans, Zen_Kaku_Gothic_New } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
+import type { Metadata } from 'next';
+import { Josefin_Sans, Zen_Kaku_Gothic_New } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import './globals.css';
 
 const zenKakuGothic = Zen_Kaku_Gothic_New({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-zen-kaku",
-})
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-zen-kaku',
+});
 const josefinSans = Josefin_Sans({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-josefin",
-})
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-josefin',
+});
 
 export const metadata: Metadata = {
   title: 'こうよう祭 2026 | 公式ウェブサイト',
@@ -35,19 +35,23 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-icon.png',
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning className={`${zenKakuGothic.variable} ${josefinSans.variable} bg-background`}>
+    <html
+      lang="ja"
+      suppressHydrationWarning
+      className={`${zenKakuGothic.variable} ${josefinSans.variable} bg-background`}
+    >
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
-  )
+  );
 }

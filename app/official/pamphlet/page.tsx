@@ -1,25 +1,18 @@
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { PageLayout } from "@/components/page-layout";
-import { FileText, Download } from "lucide-react";
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { FileText, Download } from 'lucide-react';
 
 export default function PamphletPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout
-        title="パンフレット"
-        subtitle="こうよう祭2026公式パンフレット"
-      >
+      <PageLayout title="パンフレット" subtitle="こうよう祭2026公式パンフレット">
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="bg-card p-8 text-center">
             {/* PDFビューア */}
             <div className="w-full mb-6 aspect-[1/1.414]">
-              <iframe
-                src="/koyofes2026_pamphlet.pdf"
-                className="w-full h-full"
-                style={{ border: 0 }}
-              />
+              <iframe src="/koyofes2026_pamphlet.pdf" className="w-full h-full" style={{ border: 0 }} />
             </div>
             <a
               href="/koyofes2026_pamphlet.pdf"

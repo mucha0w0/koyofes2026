@@ -1,67 +1,57 @@
-import Link from "next/link";
-import {
-  ArrowRight,
-  MapPin,
-  Clock,
-  HelpCircle,
-  AlertTriangle,
-  Info,
-  Users,
-  Heart,
-  Mail,
-} from "lucide-react";
+import Link from 'next/link';
+import { ArrowRight, MapPin, Clock, HelpCircle, AlertTriangle, Info, Users, Heart, Mail } from 'lucide-react';
 
 const aboutLinks = [
   {
     icon: Info,
-    label: "こうよう祭とは",
-    href: "/about/overview",
-    description: "歴史と概要",
+    label: 'こうよう祭とは',
+    href: '/about/overview',
+    description: '歴史と概要',
   },
   {
     icon: Heart,
-    label: "テーマ",
-    href: "/about/theme",
-    description: "今年のテーマについて",
+    label: 'テーマ',
+    href: '/about/theme',
+    description: '今年のテーマについて',
   },
   {
     icon: Users,
-    label: "パート",
-    href: "/about/part",
-    description: "こうよう祭を運営するパートのご紹介",
+    label: 'パート',
+    href: '/about/part',
+    description: 'こうよう祭を運営するパートのご紹介',
   },
   {
     icon: Users,
-    label: "ご協賛",
-    href: "/about/sponsor",
-    description: "ご協賛いただいている企業・団体様",
+    label: 'ご協賛',
+    href: '/about/sponsor',
+    description: 'ご協賛いただいている企業・団体様',
   },
   {
     icon: Mail,
-    label: "お問い合わせ",
-    href: "/about/contact",
-    description: "連絡先",
+    label: 'お問い合わせ',
+    href: '/about/contact',
+    description: '連絡先',
   },
 ];
 
 const guideLinks = [
   {
     icon: MapPin,
-    label: "アクセス",
-    href: "/guide/access",
-    description: "電車・バス・車でのアクセス方法",
+    label: 'アクセス',
+    href: '/guide/access',
+    description: '電車・バス・車でのアクセス方法',
   },
   {
     icon: MapPin,
-    label: "会場マップ",
-    href: "/guide/map",
-    description: "構内図",
+    label: '会場マップ',
+    href: '/guide/map',
+    description: '構内図',
   },
   {
     icon: HelpCircle,
-    label: "よくある質問",
-    href: "/guide/faq",
-    description: "FAQ・お問い合わせ前に",
+    label: 'よくある質問',
+    href: '/guide/faq',
+    description: 'FAQ・お問い合わせ前に',
   },
 ];
 
@@ -73,9 +63,7 @@ export function LinksSection() {
           {/* こうよう祭について */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-medium">
-                こうよう祭について
-              </h2>
+              <h2 className="text-xl md:text-2xl font-medium">こうよう祭について</h2>
             </div>
             <div className="grid gap-2">
               {aboutLinks.map((link) => (
@@ -89,9 +77,7 @@ export function LinksSection() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-medium text-sm">{link.label}</span>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {link.description}
-                    </p>
+                    <p className="text-xs text-muted-foreground truncate">{link.description}</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </Link>
@@ -116,9 +102,7 @@ export function LinksSection() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-medium text-sm">{link.label}</span>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {link.description}
-                    </p>
+                    <p className="text-xs text-muted-foreground truncate">{link.description}</p>
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
                 </Link>

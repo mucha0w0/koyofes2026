@@ -1,32 +1,27 @@
-"use client";
+'use client';
 
-import { useState, useMemo, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { PageLayout } from "@/components/page-layout";
-import { Search, RotateCcw } from "lucide-react";
-import { Event } from "@/lib/types/event";
-import { ExhibitionCard } from "@/components/ui/exhibition-card";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { Search, RotateCcw } from 'lucide-react';
+import { Event } from '@/lib/types/event';
+import { ExhibitionCard } from '@/components/ui/exhibition-card';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 // ジャンルマッピング
 const genreLabels: Record<string, string> = {
-  "class-exhibit": "クラス・学科展",
-  "volunteer-exhibit": "有志展示",
-  booth: "模擬店",
-  stage: "ステージ",
-  "food-truck": "キッチンカー",
+  'class-exhibit': 'クラス・学科展',
+  'volunteer-exhibit': '有志展示',
+  booth: '模擬店',
+  stage: 'ステージ',
+  'food-truck': 'キッチンカー',
 };
 
 // ロケーションラベル（データベースから一意に抽出）
 function getUniqueLocations(events: Event[]): string[] {
-  const locations = new Set(events.map((e) => e.location || ""));
+  const locations = new Set(events.map((e) => e.location || ''));
   return Array.from(locations)
     .filter((l) => l)
     .sort();
@@ -39,17 +34,17 @@ interface EventListClientProps {
 
 export function EventListClient({ events, error }: EventListClientProps) {
   const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [participantMax, setParticipantMax] = useState(1);
   const [enableParticipantFilter, setEnableParticipantFilter] = useState(false);
   const [durationValue, setDurationValue] = useState(15);
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   // URLクエリパラメータから検索文字を取得
   useEffect(() => {
-    const q = searchParams.get("q");
+    const q = searchParams.get('q');
     if (q) {
       setSearchQuery(decodeURIComponent(q));
     }
@@ -66,28 +61,19 @@ export function EventListClient({ events, error }: EventListClientProps) {
         const orgMatch = event.organization.toLowerCase().includes(query);
         if (!titleMatch && !orgMatch) return false;
       }
-      if (
-        selectedGenres.length > 0 &&
-        !selectedGenres.includes(event.category)
-      ) {
+      if (selectedGenres.length > 0 && !selectedGenres.includes(event.category)) {
         return false;
       }
       if (enableParticipantFilter) {
         const participantsLL = event.participantsLL || 1;
         const participantsUL = event.participantsUL || 1;
-        if (
-          participantMax < participantsLL ||
-          participantMax > participantsUL
-        ) {
+        if (participantMax < participantsLL || participantMax > participantsUL) {
           return false;
         }
       }
       if (enableDurationFilter) {
         if (event.duration) {
-          if (
-            event.duration < durationValue - 3 ||
-            event.duration > durationValue + 3
-          ) {
+          if (event.duration < durationValue - 3 || event.duration > durationValue + 3) {
             return false;
           }
         }
@@ -109,29 +95,24 @@ export function EventListClient({ events, error }: EventListClientProps) {
   ]);
 
   const handleGenreToggle = (genre: string) => {
-    setSelectedGenres((prev) =>
-      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre],
-    );
+    setSelectedGenres((prev) => (prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]));
   };
 
   const handleResetFilters = () => {
-    setSearchQuery("");
+    setSearchQuery('');
     setSelectedGenres([]);
     setParticipantMax(1);
     setEnableParticipantFilter(false);
     setDurationValue(15);
     setEnableDurationFilter(false);
-    setSelectedLocation("");
+    setSelectedLocation('');
   };
 
   if (error) {
     return (
       <>
         <SiteHeader />
-        <PageLayout
-          title="企画一覧・検索"
-          subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます"
-        >
+        <PageLayout title="企画一覧・検索" subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます">
           <div className="text-center py-12">
             <p className="text-red-500">{error}</p>
           </div>
@@ -144,10 +125,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
   return (
     <>
       <SiteHeader />
-      <PageLayout
-        title="企画一覧・検索"
-        subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます"
-      >
+      <PageLayout title="企画一覧・検索" subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます">
         <div className="max-w-5xl mx-auto space-y-8">
           {/* 検索バー */}
           <div>
@@ -173,8 +151,8 @@ export function EventListClient({ events, error }: EventListClientProps) {
                   onClick={() => handleGenreToggle(genre)}
                   className={`px-4 py-2 text-sm transition-colors ${
                     selectedGenres.includes(genre)
-                      ? "bg-foreground text-background"
-                      : "bg-muted text-foreground hover:bg-muted/80"
+                      ? 'bg-foreground text-background'
+                      : 'bg-muted text-foreground hover:bg-muted/80'
                   }`}
                 >
                   {genreLabels[genre]}
@@ -185,10 +163,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
 
           {/* 詳細検索（アコーディオン） */}
           <Accordion type="single" collapsible>
-            <AccordionItem
-              value="advanced"
-              className="border-t border-b border-border last:border-b"
-            >
+            <AccordionItem value="advanced" className="border-t border-b border-border last:border-b">
               <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline hover:text-muted-foreground py-4">
                 詳細検索
               </AccordionTrigger>
@@ -201,9 +176,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
                         type="checkbox"
                         id="enable-participant"
                         checked={enableParticipantFilter}
-                        onChange={(e) =>
-                          setEnableParticipantFilter(e.target.checked)
-                        }
+                        onChange={(e) => setEnableParticipantFilter(e.target.checked)}
                         className="w-4 h-4"
                       />
                       <label
@@ -218,9 +191,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
                       min="1"
                       max="5"
                       value={participantMax}
-                      onChange={(e) =>
-                        setParticipantMax(Number(e.target.value))
-                      }
+                      onChange={(e) => setParticipantMax(Number(e.target.value))}
                       className="w-full"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
@@ -239,15 +210,10 @@ export function EventListClient({ events, error }: EventListClientProps) {
                         type="checkbox"
                         id="enable-duration"
                         checked={enableDurationFilter}
-                        onChange={(e) =>
-                          setEnableDurationFilter(e.target.checked)
-                        }
+                        onChange={(e) => setEnableDurationFilter(e.target.checked)}
                         className="w-4 h-4"
                       />
-                      <label
-                        htmlFor="enable-duration"
-                        className="text-sm font-medium text-foreground cursor-pointer"
-                      >
+                      <label htmlFor="enable-duration" className="text-sm font-medium text-foreground cursor-pointer">
                         所要時間
                       </label>
                     </div>
@@ -268,9 +234,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
 
                   {/* 設営場所フィルター */}
                   <div>
-                    <label className="text-sm font-medium text-foreground block mb-3">
-                      設営場所
-                    </label>
+                    <label className="text-sm font-medium text-foreground block mb-3">設営場所</label>
                     <select
                       value={selectedLocation}
                       onChange={(e) => setSelectedLocation(e.target.value)}
@@ -291,9 +255,7 @@ export function EventListClient({ events, error }: EventListClientProps) {
 
           {/* ヒット件数とリセットボタン */}
           <div className="flex items-center justify-between">
-            <p className="text-xs text-muted-foreground">
-              {filteredEvents.length}件が見つかりました。
-            </p>
+            <p className="text-xs text-muted-foreground">{filteredEvents.length}件が見つかりました。</p>
             {(searchQuery ||
               selectedGenres.length > 0 ||
               enableParticipantFilter ||
@@ -312,14 +274,10 @@ export function EventListClient({ events, error }: EventListClientProps) {
           {/* 企画カード */}
           <div className="space-y-4">
             {filteredEvents.length > 0 ? (
-              filteredEvents.map((event) => (
-                <ExhibitionCard key={event.slug} event={event} />
-              ))
+              filteredEvents.map((event) => <ExhibitionCard key={event.slug} event={event} />)
             ) : (
               <div className="text-center py-12">
-                <p className="text-muted-foreground">
-                  検索条件に該当する企画が見つかりません。
-                </p>
+                <p className="text-muted-foreground">検索条件に該当する企画が見つかりません。</p>
               </div>
             )}
           </div>

@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import type { Event } from "@/lib/types/event";
-import { isImageUrl } from "@/lib/utils"
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import type { Event } from '@/lib/types/event';
+import { isImageUrl } from '@/lib/utils';
 
 interface RecommendedEventCardProps {
   recommender: string;
@@ -11,12 +11,7 @@ interface RecommendedEventCardProps {
   event: Event;
 }
 
-export function RecommendedEventCard({
-  recommender,
-  recommenderIcon,
-  whyRecom,
-  event,
-}: RecommendedEventCardProps) {
+export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, event }: RecommendedEventCardProps) {
   const isEventIconUrl = isImageUrl(event.icon);
 
   return (
@@ -36,15 +31,11 @@ export function RecommendedEventCard({
             <span className="text-[10px] text-muted-foreground">No icon</span>
           )}
         </div>
-        <p className="text-sm font-medium text-muted-foreground">
-          {recommender}
-        </p>
+        <p className="text-sm font-medium text-muted-foreground">{recommender}</p>
       </div>
 
       {/* おすすめ理由 */}
-      {whyRecom && (
-        <p className="text-sm text-foreground leading-relaxed">{whyRecom}</p>
-      )}
+      {whyRecom && <p className="text-sm text-foreground leading-relaxed">{whyRecom}</p>}
 
       {/* 企画紹介カード（内側） */}
       {/* 企画紹介カード（内側） */}
@@ -54,13 +45,7 @@ export function RecommendedEventCard({
       >
         <div className="shrink-0 w-16 h-16 bg-background flex items-center justify-center overflow-hidden">
           {isEventIconUrl ? (
-            <Image
-              src={event.icon}
-              alt={event.title}
-              width={64}
-              height={64}
-              className="w-full h-full object-cover"
-            />
+            <Image src={event.icon} alt={event.title} width={64} height={64} className="w-full h-full object-cover" />
           ) : (
             <span className="text-xs text-muted-foreground">No icon</span>
           )}
@@ -68,11 +53,7 @@ export function RecommendedEventCard({
 
         <div className="flex-1 min-w-0 space-y-1">
           <p className="font-medium truncate">{event.title}</p>
-          {event.catchphrase && (
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {event.catchphrase}
-            </p>
-          )}
+          {event.catchphrase && <p className="text-sm text-muted-foreground line-clamp-2">{event.catchphrase}</p>}
         </div>
 
         <span className="ml-auto shrink-0 text-sm text-muted-foreground flex items-center gap-1">

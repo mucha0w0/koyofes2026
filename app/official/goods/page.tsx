@@ -1,14 +1,14 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { ShoppingBag } from "lucide-react"
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { ShoppingBag } from 'lucide-react';
 
 const goods = [
-  { name: "公式Tシャツ", price: "¥2,000", description: "今年のテーマをデザイン" },
-  { name: "トートバッグ", price: "¥1,500", description: "A4サイズ対応" },
-  { name: "缶バッジセット", price: "¥500", description: "5個入り" },
-  { name: "ステッカー", price: "¥300", description: "3枚セット" },
-]
+  { name: '公式Tシャツ', price: '¥2,000', description: '今年のテーマをデザイン' },
+  { name: 'トートバッグ', price: '¥1,500', description: 'A4サイズ対応' },
+  { name: '缶バッジセット', price: '¥500', description: '5個入り' },
+  { name: 'ステッカー', price: '¥300', description: '3枚セット' },
+];
 
 export default function GoodsPage() {
   return (
@@ -18,8 +18,7 @@ export default function GoodsPage() {
         <div className="space-y-8">
           <div className="bg-muted p-6">
             <p className="text-muted-foreground">
-              公式グッズは当日、本館1階の受付横で販売いたします。
-              数量限定のため、お早めにお求めください。
+              公式グッズは当日、本館1階の受付横で販売いたします。 数量限定のため、お早めにお求めください。
             </p>
           </div>
 
@@ -41,5 +40,5 @@ export default function GoodsPage() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }

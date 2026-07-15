@@ -29,13 +29,13 @@ export interface MicroCMSEvent {
   location: string[]; // 配列
   floor: string[]; // 配列
   classroom: string;
-  "time-day1": number; // 数値型（例: 9001600）
-  "time-day2": number; // 数値型（例: 9001600）
+  'time-day1': number; // 数値型（例: 9001600）
+  'time-day2': number; // 数値型（例: 9001600）
   duration?: number; // オプション
   participantsUL: number;
   participantsLL?: number; // オプション
   description: string;
-  "organ-description": string;
+  'organ-description': string;
   author: string;
   category: string[]; // 配列
 }
@@ -65,7 +65,7 @@ export interface MicroCMSNewsResponse {
   limit: number;
 }
 
-export type MicroCMSPartCategory = "MC" | "PARTS" | "EXECUTIVE" | "HYPE CREW";
+export type MicroCMSPartCategory = 'MC' | 'PARTS' | 'EXECUTIVE' | 'HYPE CREW';
 
 export interface MicroCMSPart {
   id: string;
@@ -117,34 +117,30 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 
   if (!apiKey || !serviceDomain) {
-    throw new Error("microCMS 環境変数が設定されていません");
+    throw new Error('microCMS 環境変数が設定されていません');
   }
 
   const url = `https://${serviceDomain}.microcms.io/api/v1/events?limit=100`;
 
   try {
     const cacheOption =
-      process.env.NODE_ENV === "development"
-        ? { cache: "no-store" as const }
-        : { cache: "force-cache" as const };
+      process.env.NODE_ENV === 'development' ? { cache: 'no-store' as const } : { cache: 'force-cache' as const };
 
     const response = await fetch(url, {
       headers: {
-        "X-MICROCMS-API-KEY": apiKey,
+        'X-MICROCMS-API-KEY': apiKey,
       },
       ...cacheOption,
     });
 
     if (!response.ok) {
-      throw new Error(
-        `microCMS API エラー: ${response.status} ${response.statusText}`,
-      );
+      throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
     }
 
     const data: MicroCMSEventResponse = await response.json();
     return data.contents;
   } catch (error) {
-    console.error("microCMS データ取得エラー:", error);
+    console.error('microCMS データ取得エラー:', error);
     throw error;
   }
 }
@@ -153,41 +149,37 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
  * 数値型の時間フォーマットを文字列に変換（9001600 → "09001600"）
  */
 function formatTimeFromNumber(timeNum: number): string {
-  if (!timeNum) return "";
-  const timeStr = String(timeNum).padStart(8, "0");
+  if (!timeNum) return '';
+  const timeStr = String(timeNum).padStart(8, '0');
   return timeStr;
 }
 
 /**
  * microCMS イベントを フロントエンド型に変換
  */
-import type { Event } from "@/lib/types/event";
+import type { Event } from '@/lib/types/event';
 export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   return {
     slug: event.slug,
     title: event.title,
-    catchphrase: event.catchphrase ?? "", // オプションフィールド対応
-    icon: event.icon?.url ?? "", // Lucide icon name (URL文字列として保存)
-    images: event.images
-      .map((img) => img.url)
-      .filter((url) => url && url.length > 0), // URL配列
+    catchphrase: event.catchphrase ?? '', // オプションフィールド対応
+    icon: event.icon?.url ?? '', // Lucide icon name (URL文字列として保存)
+    images: event.images.map((img) => img.url).filter((url) => url && url.length > 0), // URL配列
     organization: event.organization,
-    location: Array.isArray(event.location)
-      ? event.location[0] || ""
-      : event.location, // 配列の最初の要素を取得
-    floor: Array.isArray(event.floor) ? event.floor[0] || "" : event.floor, // 配列の最初の要素を取得
+    location: Array.isArray(event.location) ? event.location[0] || '' : event.location, // 配列の最初の要素を取得
+    floor: Array.isArray(event.floor) ? event.floor[0] || '' : event.floor, // 配列の最初の要素を取得
     classroom: event.classroom,
-    "time-day1": formatTimeFromNumber(event["time-day1"]), // 数値を文字列に変換
-    "time-day2": formatTimeFromNumber(event["time-day2"]), // 数値を文字列に変換
+    'time-day1': formatTimeFromNumber(event['time-day1']), // 数値を文字列に変換
+    'time-day2': formatTimeFromNumber(event['time-day2']), // 数値を文字列に変換
     duration: event.duration ?? 0, // オプションフィールド、デフォルト0
     participantsUL: event.participantsUL,
     participantsLL: event.participantsLL ?? 1, // オプションフィールド、デフォルト1
     description: event.description,
-    "organ-description": event["organ-description"],
+    'organ-description': event['organ-description'],
     author: event.author,
     category: Array.isArray(event.category)
-      ? (event.category[0] as Event["category"]) || "booth"
-      : (event.category as Event["category"]), // 配列の最初の要素を取得、デフォルト"booth"
+      ? (event.category[0] as Event['category']) || 'booth'
+      : (event.category as Event['category']), // 配列の最初の要素を取得、デフォルト"booth"
   };
 }
 
@@ -199,7 +191,7 @@ export async function getEvents() {
     const microCMSEvents = await fetchEventsFromMicroCMS();
     return microCMSEvents.map(transformMicroCMSEvent);
   } catch (error) {
-    console.error("イベント取得に失敗しました:", error);
+    console.error('イベント取得に失敗しました:', error);
     throw error;
   }
 }
@@ -212,7 +204,7 @@ export async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 
   if (!apiKey || !serviceDomain) {
-    throw new Error("microCMS 環境変数が設定されていません");
+    throw new Error('microCMS 環境変数が設定されていません');
   }
 
   const url = `https://${serviceDomain}.microcms.io/api/v1/news?limit=100`;
@@ -220,21 +212,19 @@ export async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
   try {
     const response = await fetch(url, {
       headers: {
-        "X-MICROCMS-API-KEY": apiKey,
+        'X-MICROCMS-API-KEY': apiKey,
       },
       next: { revalidate: false },
     });
 
     if (!response.ok) {
-      throw new Error(
-        `microCMS API エラー: ${response.status} ${response.statusText}`,
-      );
+      throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
     }
 
     const data: MicroCMSNewsResponse = await response.json();
     return data.contents;
   } catch (error) {
-    console.error("microCMS ニュースデータ取得エラー:", error);
+    console.error('microCMS ニュースデータ取得エラー:', error);
     throw error;
   }
 }
@@ -246,11 +236,9 @@ export async function getNews() {
   try {
     const news = await fetchNewsFromMicroCMS();
     // 新しい順でソート（最新のものを最初に）
-    return news.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
+    return news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } catch (error) {
-    console.error("ニュース取得に失敗しました:", error);
+    console.error('ニュース取得に失敗しました:', error);
     throw error;
   }
 }
@@ -263,7 +251,7 @@ export async function getNewsByID(id: string) {
     const news = await fetchNewsFromMicroCMS();
     return news.find((item) => item.id === id);
   } catch (error) {
-    console.error("ニュース取得に失敗しました:", error);
+    console.error('ニュース取得に失敗しました:', error);
     throw error;
   }
 }
@@ -276,7 +264,7 @@ export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 
   if (!apiKey || !serviceDomain) {
-    throw new Error("microCMS 環境変数が設定されていません");
+    throw new Error('microCMS 環境変数が設定されていません');
   }
 
   const url = `https://${serviceDomain}.microcms.io/api/v1/parts?limit=100`;
@@ -284,21 +272,19 @@ export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
   try {
     const response = await fetch(url, {
       headers: {
-        "X-MICROCMS-API-KEY": apiKey,
+        'X-MICROCMS-API-KEY': apiKey,
       },
       next: { revalidate: false },
     });
 
     if (!response.ok) {
-      throw new Error(
-        `microCMS API エラー: ${response.status} ${response.statusText}`,
-      );
+      throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
     }
 
     const data: MicroCMSPartResponse = await response.json();
     return data.contents;
   } catch (error) {
-    console.error("microCMS パートデータ取得エラー:", error);
+    console.error('microCMS パートデータ取得エラー:', error);
     throw error;
   }
 }
@@ -311,7 +297,7 @@ export async function fetchSponsorsFromMicroCMS(): Promise<MicroCMSSponsor[]> {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 
   if (!apiKey || !serviceDomain) {
-    throw new Error("microCMS 環境変数が設定されていません");
+    throw new Error('microCMS 環境変数が設定されていません');
   }
 
   const url = `https://${serviceDomain}.microcms.io/api/v1/sponsors?limit=100`;
@@ -319,21 +305,19 @@ export async function fetchSponsorsFromMicroCMS(): Promise<MicroCMSSponsor[]> {
   try {
     const response = await fetch(url, {
       headers: {
-        "X-MICROCMS-API-KEY": apiKey,
+        'X-MICROCMS-API-KEY': apiKey,
       },
       next: { revalidate: 60 },
     });
 
     if (!response.ok) {
-      throw new Error(
-        `microCMS API エラー: ${response.status} ${response.statusText}`,
-      );
+      throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
     }
 
     const data: MicroCMSSponsorResponse = await response.json();
     return data.contents;
   } catch (error) {
-    console.error("microCMS 協賛データ取得エラー:", error);
+    console.error('microCMS 協賛データ取得エラー:', error);
     throw error;
   }
 }

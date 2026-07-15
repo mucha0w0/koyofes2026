@@ -1,18 +1,15 @@
-import Link from "next/link";
-import Script from "next/script";
-import { ArrowRight, Instagram } from "lucide-react";
+import Link from 'next/link';
+import Script from 'next/script';
+import { ArrowRight, Instagram } from 'lucide-react';
 
 // ── config ──────────────────────────────────────────────
-const INSTAGRAM_POST_URL = "https://www.instagram.com/p/DZZpnTuAJZp/";
-const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/YOUR_ACCOUNT/";
+const INSTAGRAM_POST_URL = 'https://www.instagram.com/p/DZZpnTuAJZp/';
+const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/YOUR_ACCOUNT/';
 // ────────────────────────────────────────────────────────
 
 function SectionHeading() {
   return (
-    <h2
-      className="text-2xl font-medium text-foreground"
-      style={{ letterSpacing: 0 }}
-    >
+    <h2 className="text-2xl font-medium text-foreground" style={{ letterSpacing: 0 }}>
       PR動画第１弾！
     </h2>
   );
@@ -41,7 +38,7 @@ function InstagramEmbed() {
             margin: 0,
             padding: 0,
             border: 0,
-            background: "transparent",
+            background: 'transparent',
           }}
         />
       </div>

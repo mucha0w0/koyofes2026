@@ -1,4 +1,4 @@
-import { Faq, FaqGroup } from "@/lib/types/faq";
+import { Faq, FaqGroup } from '@/lib/types/faq';
 
 export function groupFaqsByCategory(faqs: Faq[]): FaqGroup[] {
   const groups: FaqGroup[] = [];

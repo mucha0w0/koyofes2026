@@ -64,32 +64,33 @@
 
 ```css
 /* 和文テキスト（本文・見出し・商品名） */
-font-family: "Yu Gothic Pr6N M", "Yu Gothic Pr6N B", "Zen Kaku Gothic New", "Yu Gothic", "YuGothic", sans-serif;
+font-family: 'Yu Gothic Pr6N M', 'Yu Gothic Pr6N B', 'Zen Kaku Gothic New', 'Yu Gothic', 'YuGothic', sans-serif;
 
 /* 欧文ディスプレイ（セクションラベル・カテゴリ名） */
-font-family: "new-atten", "Josefin Sans", sans-serif;
+font-family: 'new-atten', 'Josefin Sans', sans-serif;
 ```
 
 **フォールバックの考え方**:
+
 - 和文テキストは Yu Gothic Pr6N を最優先。Google Fonts 代替 → 標準游ゴシック → generic の順
 - 欧文ディスプレイは new-atten を最優先。Google Fonts 代替 → generic の順
 - 二書体の使い分けが BOTANIST の核心。混在させない
 
 ### 3.4 文字サイズ・ウェイト階層
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | 備考 |
-|------|------|------|--------|-------------|----------------|------|
-| Hero Display | Yu Gothic Pr6N M | 52px | 400 | 1.35 | 0.1em | ブランドタグライン|
-| Section Display EN | new-atten | 32px | 400 | 1.1 | 0.03em | "SPECIAL" 等の英字大見出し |
-| Footer Tagline | Yu Gothic Pr6N M | 40px | 400 | 1.35 | 0.15em | ダーク背景上のブランドメッセージ |
-| Category Label EN | new-atten | 21px | 400 | 1.6 | 0 | "HAIRCARE" 等のカテゴリ名 |
-| Section Title JP | Yu Gothic Pr6N B | 18px | 400 | 1.5 | 0 | 「商品について知る」等の和文見出し |
-| Product Name | Yu Gothic Pr6N B | 16px | 400 | 1.6 | 0 | 商品名テキスト |
-| Section Label EN | new-atten | 15px | 400 | 1.6 | 0 | "MISSION" 等の小さなラベル |
-| Body | Yu Gothic Pr6N M | 16px | 400 | 2.0 | 0.05em | ミッション説明等の本文 |
-| Nav Brand EN | new-atten | 16px | 700 | 1.6 | 0 | "HOME" 等のナビゲーション |
-| Nav Label | Yu Gothic Pr6N M | 12px | 400 | 1.6 | 0 | ナビゲーションラベル |
-| Caption | Yu Gothic Pr6N M | 10px | 400 | normal | 0 | 最小テキスト・注釈 |
+| Role               | Font             | Size | Weight | Line Height | Letter Spacing | 備考                               |
+| ------------------ | ---------------- | ---- | ------ | ----------- | -------------- | ---------------------------------- |
+| Hero Display       | Yu Gothic Pr6N M | 52px | 400    | 1.35        | 0.1em          | ブランドタグライン                 |
+| Section Display EN | new-atten        | 32px | 400    | 1.1         | 0.03em         | "SPECIAL" 等の英字大見出し         |
+| Footer Tagline     | Yu Gothic Pr6N M | 40px | 400    | 1.35        | 0.15em         | ダーク背景上のブランドメッセージ   |
+| Category Label EN  | new-atten        | 21px | 400    | 1.6         | 0              | "HAIRCARE" 等のカテゴリ名          |
+| Section Title JP   | Yu Gothic Pr6N B | 18px | 400    | 1.5         | 0              | 「商品について知る」等の和文見出し |
+| Product Name       | Yu Gothic Pr6N B | 16px | 400    | 1.6         | 0              | 商品名テキスト                     |
+| Section Label EN   | new-atten        | 15px | 400    | 1.6         | 0              | "MISSION" 等の小さなラベル         |
+| Body               | Yu Gothic Pr6N M | 16px | 400    | 2.0         | 0.05em         | ミッション説明等の本文             |
+| Nav Brand EN       | new-atten        | 16px | 700    | 1.6         | 0              | "HOME" 等のナビゲーション          |
+| Nav Label          | Yu Gothic Pr6N M | 12px | 400    | 1.6         | 0              | ナビゲーションラベル               |
+| Caption            | Yu Gothic Pr6N M | 10px | 400    | normal      | 0              | 最小テキスト・注釈                 |
 
 ### 3.5 行間・字間
 
@@ -101,6 +102,7 @@ font-family: "new-atten", "Josefin Sans", sans-serif;
 - **フッタータグラインの字間**: `letter-spacing: 0.15em` — 最もワイドなスペーシング
 
 **ガイドライン**:
+
 - letter-spacing は **3段階**: フッタータグライン 0.15em（ワイド）/ ヒーロー 0.1em（中間）/ 本文 0.05em（控えめ）
 - 欧文ディスプレイ（new-atten）は letter-spacing 0 または 0.03em で、フォント自体のスペーシングに任せる
 - line-height 2.0 は BOTANIST の本文に特徴的。行間の広さが「自然」を表現する重要な要素
@@ -162,6 +164,7 @@ CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶�
 - Padding: 12px 32px
 
 **ボタンの考え方**:
+
 - ダーク背景上のメイン CTA は **半透明白 rgba(255,255,255,0.2)**。ガラス越しのような浮遊感
 - ライト背景上は **ダークチャコール #1f2529 の塗りつぶし**
 - radius は **0px** のシャープエッジ。自然素材の「生」の感触を表現
@@ -204,14 +207,14 @@ CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶�
 
 ### Spacing Scale（実測ベース）
 
-| Token | Value | 用途 |
-|-------|-------|------|
-| XS | 4px | ミクロ余白・ラベル間隔 |
-| S | 8px | カード内パディング |
-| M | 16px | 要素間余白 |
-| L | 32px | セクション内余白 |
-| XL | 64px | セクション間余白 |
-| XXL | 120px | ヒーロー上下余白 |
+| Token | Value | 用途                   |
+| ----- | ----- | ---------------------- |
+| XS    | 4px   | ミクロ余白・ラベル間隔 |
+| S     | 8px   | カード内パディング     |
+| M     | 16px  | 要素間余白             |
+| L     | 32px  | セクション内余白       |
+| XL    | 64px  | セクション間余白       |
+| XXL   | 120px | ヒーロー上下余白       |
 
 ### Grid
 
@@ -225,13 +228,13 @@ CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶�
 
 はシャドウを使わない。グレーブルー面（#e6e9ed）、ニアホワイト面（#fcfcfc）、ダークチャコール面（#1f2529）の色コントラストと、半透明オーバーレイで空間を構成する。
 
-| Level | Shadow | 用途 |
-|-------|--------|------|
-| 0 | none | 標準（すべての要素） |
-| 1 | background `#fcfcfc` | コンテンツカード面 |
-| 2 | background `#e6e9ed` | メイン背景面 |
-| 3 | background `#1f2529` | ダークセクション・フッター |
-| 4 | `rgba(255,255,255,0.2)` overlay | ガラス質 CTA・半透明要素 |
+| Level | Shadow                          | 用途                       |
+| ----- | ------------------------------- | -------------------------- |
+| 0     | none                            | 標準（すべての要素）       |
+| 1     | background `#fcfcfc`            | コンテンツカード面         |
+| 2     | background `#e6e9ed`            | メイン背景面               |
+| 3     | background `#1f2529`            | ダークセクション・フッター |
+| 4     | `rgba(255,255,255,0.2)` overlay | ガラス質 CTA・半透明要素   |
 
 ---
 
@@ -269,11 +272,11 @@ CTA は **半透明の白ガラス** が基本。写真やダーク背景に溶�
 
 ### Breakpoints（想定）
 
-| Name | Width | 説明 |
-|------|-------|------|
-| Mobile | ≤ 767px | スマートフォン |
-| Tablet | 768〜1024px | タブレット |
-| Desktop | > 1024px | デスクトップ |
+| Name    | Width       | 説明           |
+| ------- | ----------- | -------------- |
+| Mobile  | ≤ 767px     | スマートフォン |
+| Tablet  | 768〜1024px | タブレット     |
+| Desktop | > 1024px    | デスクトップ   |
 
 ### モバイル時の調整
 

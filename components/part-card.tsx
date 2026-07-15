@@ -1,37 +1,30 @@
-import Image from "next/image"
-import { ExternalLink } from "lucide-react"
-import { SiInstagram, SiX, SiYoutube } from "react-icons/si"
-import { Card, CardContent } from "@/components/ui/card"
-import { getLucideIcon } from "@/lib/lucide-icons"
-import type { PartItem, SocialPlatform } from "@/lib/types/part"
+import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
+import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
+import { Card, CardContent } from '@/components/ui/card';
+import { getLucideIcon } from '@/lib/lucide-icons';
+import type { PartItem, SocialPlatform } from '@/lib/types/part';
 
 const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
   instagram: SiInstagram,
   twitter: SiX,
   youtube: SiYoutube,
-}
+};
 
 interface PartCardProps {
-  item: PartItem
+  item: PartItem;
 }
 
 export function PartCard({ item }: PartCardProps) {
-  const IconComponent = getLucideIcon(item.icon)
-  const isIconUrl =
-    item.icon.startsWith("http://") || item.icon.startsWith("https://") || item.icon.startsWith("/")
+  const IconComponent = getLucideIcon(item.icon);
+  const isIconUrl = item.icon.startsWith('http://') || item.icon.startsWith('https://') || item.icon.startsWith('/');
 
   return (
     <Card className="py-0">
       <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
         <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-muted flex items-center justify-center overflow-hidden mt-0.5">
           {isIconUrl ? (
-            <Image
-              src={item.icon}
-              alt={item.name}
-              width={56}
-              height={56}
-              className="w-full h-full object-cover"
-            />
+            <Image src={item.icon} alt={item.name} width={56} height={56} className="w-full h-full object-cover" />
           ) : IconComponent ? (
             <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-foreground" />
           ) : (
@@ -40,14 +33,12 @@ export function PartCard({ item }: PartCardProps) {
         </div>
 
         <div className="row-start-1 col-start-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
-          <h3 className="font-medium text-base sm:text-lg text-foreground leading-snug">
-            {item.name}
-          </h3>
+          <h3 className="font-medium text-base sm:text-lg text-foreground leading-snug">{item.name}</h3>
 
           {item.social.length > 0 && (
             <div className="flex flex-wrap gap-2 shrink-0">
               {item.social.map((link) => {
-                const SocialIcon = socialIcons[link.platform]
+                const SocialIcon = socialIcons[link.platform];
                 return (
                   <a
                     key={`${item.id}-${link.platform}`}
@@ -61,7 +52,7 @@ export function PartCard({ item }: PartCardProps) {
                     {link.handle ?? link.label}
                     <ExternalLink className="h-3 w-3 opacity-60" />
                   </a>
-                )
+                );
               })}
             </div>
           )}
@@ -72,5 +63,5 @@ export function PartCard({ item }: PartCardProps) {
         </p>
       </CardContent>
     </Card>
-  )
+  );
 }

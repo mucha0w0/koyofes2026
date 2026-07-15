@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 interface FAQItemProps {
   question: string;
@@ -25,16 +25,14 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
           <span className="text-xl  text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
-          <span className="text-lg  text-primary leading-relaxed flex-1 pt-[1px]">
-            {question}
-          </span>
+          <span className="text-lg  text-primary leading-relaxed flex-1 pt-[1px]">{question}</span>
         </span>
-        
+
         {/* 矢印アイコン（items-start に合わせた位置調整） */}
         <span className="h-[28px] flex items-center shrink-0">
           <ChevronDown
             className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ease-in-out ${
-              isOpen ? "rotate-180" : ""
+              isOpen ? 'rotate-180' : ''
             }`}
           />
         </span>
@@ -43,7 +41,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       {/* 回答エリア */}
       <div
         className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
         <div className="overflow-hidden">
@@ -52,9 +50,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
             <span className="text-xl text-muted-foreground w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
               A.
             </span>
-            <p className="text-muted-foreground leading-relaxed flex-1 pt-[2px]">
-              {answer}
-            </p>
+            <p className="text-muted-foreground leading-relaxed flex-1 pt-[2px]">{answer}</p>
           </div>
         </div>
       </div>

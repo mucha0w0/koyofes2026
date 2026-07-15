@@ -1,21 +1,21 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { PageLayout } from "@/components/page-layout"
-import { PartCard } from "@/components/part-card"
-import { getPartSections } from "@/lib/parts"
-import type { PartSection } from "@/lib/types/part"
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { PageLayout } from '@/components/page-layout';
+import { PartCard } from '@/components/part-card';
+import { getPartSections } from '@/lib/parts';
+import type { PartSection } from '@/lib/types/part';
 
-export const revalidate = 60
+export const revalidate = 60;
 
 export default async function PartPage() {
-  let sections: PartSection[] = []
-  let error: string | null = null
+  let sections: PartSection[] = [];
+  let error: string | null = null;
 
   try {
-    sections = await getPartSections()
+    sections = await getPartSections();
   } catch (err) {
-    error = err instanceof Error ? err.message : "パート情報の取得に失敗しました"
-    console.error("パート取得エラー:", err)
+    error = err instanceof Error ? err.message : 'パート情報の取得に失敗しました';
+    console.error('パート取得エラー:', err);
   }
 
   return (
@@ -35,10 +35,7 @@ export default async function PartPage() {
             {sections.map((section) => (
               <section key={section.id} aria-labelledby={`section-${section.id}`}>
                 <div className="mb-5">
-                  <p
-                    id={`section-${section.id}`}
-                    className="label-en text-sm text-muted-foreground"
-                  >
+                  <p id={`section-${section.id}`} className="label-en text-sm text-muted-foreground">
                     {section.labelEn}
                   </p>
                   <h2 className="font-medium text-xl mt-1">{section.label}</h2>
@@ -56,5 +53,5 @@ export default async function PartPage() {
       </PageLayout>
       <SiteFooter />
     </>
-  )
+  );
 }
