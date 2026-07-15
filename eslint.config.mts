@@ -23,21 +23,35 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// ⬇️ 【超重要】CJSの二重底（.default）を安全にすり抜けるための設定抽出
-const tailwindConfig =
-  (tailwindcss as any).configs?.['flat/recommended'] ||
-  (tailwindcss as any).default?.configs?.['flat/recommended'] ||
-  [];
+// CJSの二重底（.default）を安全にすり抜けるための設定抽出
+const tailwindConfig = (tailwindcss as any).configs?.['flat/recommended']
+  || (tailwindcss as any).default?.configs?.['flat/recommended']
+  || [];
 
 export default tseslint.config(
-  // 1. JavaScriptの基本推奨ルール
+  // 1. 【最重要】ビルド成果物や設定ファイルを不要な警告から除外する（完全無視設定）
+  {
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      'dist/**',
+      'out/**',
+      'next.config.mjs',
+      'postcss.config.mjs',
+    ],
+  },
+
+  // 2. 基本的な推奨ルールセット
   js.configs.recommended,
-
-  // 2. TypeScriptの「型チェック付き」推奨ルール
   tseslint.configs.recommendedTypeChecked,
-
-  // 3. Reactの推奨ルール（型エラー回避のために「as any」を追加）
   pluginReact.configs.flat.recommended as any,
+
+  // 3. 【最重要】設定ファイルやJSファイルに対して型チェックルールを無効化する
+  // これにより、eslint.config.mts自身やJSファイルで「tsconfigにありません」エラーが出るのを防ぎます
+  {
+    files: ['**/*.js', '**/*.mjs', '**/*.cjs', 'eslint.config.mts'],
+    ...tseslint.configs.disableTypeChecked,
+  },
 
   // 4. Next.jsのルール適用
   {
@@ -98,7 +112,7 @@ export default tseslint.config(
     },
   },
 
-  // 7. React JSX Props の自動ソート
+  // 7. React JSX Props の自動ソート ＆ JSXでのReactインポート強制の無効化
   {
     plugins: {
       react: pluginReact,
@@ -114,20 +128,18 @@ export default tseslint.config(
           noSortAlphabetically: false,
         },
       ],
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
     },
   },
 
-  // 8. ⬇️ 先ほど抽出した安全な Tailwind 設定をここで展開します
+  // 8. Tailwind CSS の推奨ルール
   ...(tailwindConfig as any),
 
-  // 9. 対象ファイルと、TypeScriptの解析設定
+  // 9. TypeScriptの型情報が必要なアプリコード（TS/TSX）にのみtsconfigを紐付ける
   {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
       parserOptions: {
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
@@ -135,6 +147,31 @@ export default tseslint.config(
     },
   },
 
-  // 10. Prettierと競合するルールをすべてOFFにする
-  eslintConfigPrettier as any,
+  // 10. すべてのファイルに対する共通設定（グローバル変数の定義）
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+
+  // 11. 実開発を快適にするための、TypeScriptの「厳しすぎるルール」の緩和
+  {
+    files: ['**/*.{ts,tsx,mts,cts}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
+    },
+  },
+
+  // 12. Prettierと競合するルールをすべてOFFにする
+  eslintConfigPrettier as any
 );
