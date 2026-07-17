@@ -25,7 +25,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
           <span className="text-xl  text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
-          <span className="text-lg  text-primary leading-relaxed flex-1 pt-[1px]">{question}</span>
+          <span className="text-lg  text-primary leading-relaxed flex-1 pt-px">{question}</span>
         </span>
 
         {/* 矢印アイコン（items-start に合わせた位置調整） */}
