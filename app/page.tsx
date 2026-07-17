@@ -11,7 +11,7 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { Sponsors } from '@/components/sponsors';
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
