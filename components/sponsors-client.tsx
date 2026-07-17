@@ -1,5 +1,6 @@
 // @/components/sponsors-client.tsx
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
@@ -17,7 +18,13 @@ function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
     >
       {sponsor.icon ? (
         <>
-          <img alt={sponsor.name} className="max-h-14 max-w-[160px] object-contain" src={sponsor.icon} />
+          <Image
+            alt={sponsor.name}
+            className="max-h-14 max-w-[160px] object-contain"
+            height={56}
+            src={sponsor.icon}
+            width={160}
+          />
           <span className="text-xs text-muted-foreground whitespace-nowrap">{sponsor.name}</span>
         </>
       ) : (

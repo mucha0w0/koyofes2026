@@ -1,4 +1,5 @@
 import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { getEvents } from '@/lib/microcms';
@@ -41,7 +42,7 @@ function EventRow({ slug, icon, title, organization, timeRange, duration }: Even
     >
       {/* アイコン画像：背景なし、最大サイズで表示 */}
       {icon ? (
-        <img alt={title} className="w-10 h-10 object-contain shrink-0" src={icon} />
+        <Image alt={title} className="w-10 h-10 object-contain shrink-0" height={40} src={icon} width={40} />
       ) : (
         <div className="w-10 h-10 shrink-0" />
       )}
@@ -98,7 +99,7 @@ export async function TimetablePreview() {
   let stageEvents: Event[] = [];
   try {
     const events = await getEvents();
-    stageEvents = (events).filter((e) => e.category === 'stage');
+    stageEvents = events.filter((e) => e.category === 'stage');
   } catch (error) {
     console.error('イベント取得エラー:', error);
   }
