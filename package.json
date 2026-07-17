@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:html": "markuplint \"./{app,components}/**/*.{ts,tsx}\"",
+    "lint:html:fix": "markuplint \"./{app,components}/**/*.{ts,tsx}\" --fix",
     "prettier": "prettier --write ."
   },
   "dependencies": {
