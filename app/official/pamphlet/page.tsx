@@ -4,7 +4,6 @@ import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-
 export default function PamphletPage() {
   return (
     <>
@@ -14,7 +13,13 @@ export default function PamphletPage() {
           <div className="bg-card p-8 text-center">
             {/* PDFビューア */}
             <div className="w-full mb-6 aspect-[1/1.414]">
-              <iframe className="w-full h-full" src="/koyofes2026_pamphlet.pdf" style={{ border: 0 }} />
+              <iframe
+                className="w-full h-full"
+                loading="lazy"
+                src="/koyofes2026_pamphlet.pdf"
+                style={{ border: 0 }}
+                title="公式パンフレット PDF"
+              />
             </div>
             <a
               download

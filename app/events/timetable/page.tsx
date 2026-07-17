@@ -6,11 +6,8 @@ import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-
 import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
-
-
 
 export const dynamic = 'force-dynamic';
 
@@ -143,7 +140,7 @@ export default async function StageEventsPage() {
   let stageEvents: Event[] = [];
   try {
     const events = await getEvents();
-    stageEvents = (events).filter((e) => e.category === 'stage');
+    stageEvents = events.filter((e) => e.category === 'stage');
   } catch (error) {
     console.error('イベント取得エラー:', error);
   }
