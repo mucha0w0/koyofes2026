@@ -6,7 +6,6 @@ import { SiteHeader } from '@/components/site-header';
 
 import { getRecommendedEvents } from '@/lib/recommended-events';
 
-
 export default async function RecommendedEventsPage() {
   const recommendedEvents = await getRecommendedEvents();
 

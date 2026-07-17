@@ -3,7 +3,6 @@ import { PartCard } from '@/components/part-card';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-
 import type { PartSection } from '@/lib/types/part';
 
 import { getPartSections } from '@/lib/parts';

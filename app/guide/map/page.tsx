@@ -4,7 +4,6 @@ import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-
 import kounaizu from './kounaizu.jpg'; // ← インポート追加
 
 export default function MapPage() {

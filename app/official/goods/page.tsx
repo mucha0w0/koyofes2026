@@ -4,7 +4,6 @@ import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-
 const goods = [
   { name: '公式Tシャツ', price: '¥2,000', description: '今年のテーマをデザイン' },
   { name: 'トートバッグ', price: '¥1,500', description: 'A4サイズ対応' },

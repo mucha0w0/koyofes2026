@@ -12,7 +12,6 @@ import { getEvents } from '@/lib/microcms';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
 
-
 // Convert time format from HHMMMM to HH:MM~HH:MM
 function formatTimeDisplay(timeStr: string): string {
   if (!timeStr || timeStr.length !== 8) return timeStr;
@@ -84,7 +83,7 @@ interface PageProps {
 async function getEvent(slug: string): Promise<Event | null> {
   try {
     const events = await getEvents();
-    const event = (events).find((e) => e.slug === slug);
+    const event = events.find((e) => e.slug === slug);
     return event || null;
   } catch (error) {
     console.error('イベント取得エラー:', error);
@@ -95,7 +94,7 @@ async function getEvent(slug: string): Promise<Event | null> {
 export async function generateStaticParams() {
   try {
     const events = await getEvents();
-    return (events).map((event) => ({
+    return events.map((event) => ({
       slug: event.slug,
     }));
   } catch (error) {
