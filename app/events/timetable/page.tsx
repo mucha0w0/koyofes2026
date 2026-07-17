@@ -1,4 +1,5 @@
 import { Clock } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { SimpleSerch } from '@/components/Simple-serch';
@@ -118,12 +119,12 @@ function TimelineView({ events, startHour, endHour }: { events: ScheduleEvent[];
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
             {event.icon && (
-              <img
+              <Image
                 alt={event.title}
+                className="w-10 h-10 object-contain shrink-0"
+                height={40}
                 src={event.icon}
                 width={40}
-                height={40}
-                className="w-10 h-10 object-contain shrink-0"
               />
             )}
             <div className="min-w-0">
