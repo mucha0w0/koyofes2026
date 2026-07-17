@@ -117,7 +117,15 @@ function TimelineView({ events, startHour, endHour }: { events: ScheduleEvent[];
             href={`/events/${event.slug}`}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
-            {event.icon && <img alt={event.title} className="w-10 h-10 object-contain shrink-0" src={event.icon} />}
+            {event.icon && (
+              <img
+                alt={event.title}
+                src={event.icon}
+                width={40}
+                height={40}
+                className="w-10 h-10 object-contain shrink-0"
+              />
+            )}
             <div className="min-w-0">
               <h3 className="font-medium text-foreground leading-snug truncate">{event.title}</h3>
               <p className="text-sm text-muted-foreground mt-0.5 truncate">{event.organization}</p>
