@@ -9,6 +9,6 @@
         "markuplint:recommended-react"
     ],
     "ignoreFiles": [
-        "components/ui/**"
+        "**/components/ui/**"
     ]
 }
