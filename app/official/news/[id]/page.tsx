@@ -7,7 +7,6 @@ import { use, useState, useEffect } from 'react';
 import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
-
 // 👇 ここで UI コンポーネントをインポートします
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
@@ -35,7 +34,7 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
       }
     };
 
-    fetchNews();
+    void fetchNews(); // ← void を付けて浮きPromiseを明示的に無視
   }, [id]);
 
   if (loading) {
