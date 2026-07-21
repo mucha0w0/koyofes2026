@@ -68,7 +68,7 @@ function DropdownMenu({ item }: { item: NavItem }) {
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <div
-        className={`absolute top-full left-0 min-w-[200px] bg-popover border border-border rounded-none overflow-hidden transition-all duration-200 ${
+        className={`absolute top-full left-0 min-w-50 bg-popover border border-border rounded-none overflow-hidden transition-all duration-200 ${
           isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
         }`}
       >

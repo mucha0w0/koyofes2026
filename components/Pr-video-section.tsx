@@ -20,7 +20,7 @@ function InstagramEmbed() {
     <>
       <div
         className="
-          w-full max-w-[540px] mx-auto 
+          w-full max-w-135 mx-auto 
           overflow-hidden 
           [&_.instagram-media]:min-w-0!
           [&_.instagram-media]:w-full!

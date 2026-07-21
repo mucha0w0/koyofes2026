@@ -142,7 +142,7 @@ function TimeCounter({ timeLeft }: { timeLeft: TimeLeft }) {
     <div className="flex items-baseline gap-2 md:gap-4" style={fontDisplay}>
       {units.map((unit, index) => (
         <div key={unit.label} className="flex items-baseline gap-1">
-          <span className="w-[44px] md:w-[56px] text-center text-[28px] md:text-[40px] font-normal leading-none tracking-wider lining-nums">
+          <span className="w-11 md:w-14 text-center text-[28px] md:text-[40px] font-normal leading-none tracking-wider lining-nums">
             {String(unit.value).padStart(2, '0')}
           </span>
           <span className="text-[10px] md:text-[11px] tracking-wider uppercase text-white/70">{unit.label}</span>
