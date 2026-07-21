@@ -22,14 +22,14 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       >
         {/* Qマークとテキストのコンテナ */}
         <span className="flex items-start gap-3 flex-1 min-w-0">
-          <span className="text-xl  text-primary w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
+          <span className="text-xl  text-primary w-6 h-7 flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
           <span className="text-lg  text-primary leading-relaxed flex-1 pt-px">{question}</span>
         </span>
 
         {/* 矢印アイコン（items-start に合わせた位置調整） */}
-        <span className="h-[28px] flex items-center shrink-0">
+        <span className="h-7 flex items-center shrink-0">
           <ChevronDown
             className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ease-in-out ${
               isOpen ? 'rotate-180' : ''
@@ -47,10 +47,10 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         <div className="overflow-hidden">
           {/* Aマークとテキストのコンテナ */}
           <div className="flex items-start gap-3 pb-2 pt-3">
-            <span className="text-xl text-muted-foreground w-6 h-[28px] flex items-center justify-center shrink-0 select-none">
+            <span className="text-xl text-muted-foreground w-6 h-7 flex items-center justify-center shrink-0 select-none">
               A.
             </span>
-            <p className="text-muted-foreground leading-relaxed flex-1 pt-[2px]">{answer}</p>
+            <p className="text-muted-foreground leading-relaxed flex-1 pt-0.5">{answer}</p>
           </div>
         </div>
       </div>
