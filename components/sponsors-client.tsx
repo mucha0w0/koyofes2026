@@ -20,7 +20,7 @@ function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
         <>
           <Image
             alt={sponsor.name}
-            className="max-h-14 max-w-[160px] object-contain"
+            className="max-h-14 max-w-40 object-contain"
             height={56}
             src={sponsor.icon}
             width={160}
