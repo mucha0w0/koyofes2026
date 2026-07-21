@@ -13,7 +13,7 @@ export interface RecommendedEvent {
 export async function getRecommendedEvents(): Promise<RecommendedEvent[]> {
   const [parts, events] = await Promise.all([fetchPartsFromMicroCMS(), getEvents()]);
 
-  const eventMap = new Map<string, Event>((events).map((event) => [event.slug, event]));
+  const eventMap = new Map<string, Event>(events.map((event) => [event.slug, event]));
 
   return parts
     .filter((part): part is MicroCMSPart & { recommend: string } => Boolean(part.recommend))

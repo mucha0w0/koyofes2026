@@ -177,9 +177,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     description: event.description,
     'organ-description': event['organ-description'],
     author: event.author,
-    category: Array.isArray(event.category)
-      ? (event.category[0] as Event['category']) || 'booth'
-      : (event.category), // 配列の最初の要素を取得、デフォルト"booth"
+    category: Array.isArray(event.category) ? (event.category[0] as Event['category']) || 'booth' : event.category, // 配列の最初の要素を取得、デフォルト"booth"
   };
 }
 
