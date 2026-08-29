@@ -12,7 +12,8 @@
     "secretlint": "secretlint --maskSecrets --secretlintignore .gitignore \"**/*\"",
     "lint:html": "markuplint \"./{app,components}/**/*.{ts,tsx}\"",
     "lint:html:fix": "markuplint \"./{app,components}/**/*.{ts,tsx}\" --fix",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "stamp:generate-tokens": "node scripts/generate-stamp-tokens.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
