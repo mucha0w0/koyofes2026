@@ -29,8 +29,8 @@ const navItems: NavItem[] = [
     label: '公式コンテンツ',
     items: [
       { label: 'お知らせ', href: '/official/news' },
+      { label: 'スタンプラリー', href: '/stamp' },
       { label: '公式SNS', href: '/official/social' },
-      { label: '公式グッズ', href: '/official/goods' },
       { label: 'パンフレット', href: '/official/pamphlet' },
     ],
   },
@@ -39,7 +39,6 @@ const navItems: NavItem[] = [
     items: [
       { label: 'アクセス', href: '/guide/access' },
       { label: '会場マップ', href: '/guide/map' },
-      { label: 'スタンプラリー', href: '/stamp' },
       { label: 'よくある質問', href: '/guide/faq' },
     ],
   },
