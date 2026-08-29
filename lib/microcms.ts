@@ -109,10 +109,15 @@ export interface MicroCMSSponsorResponse {
   limit: number;
 }
 
+export type MicroCMSFetchCache = 'default' | 'no-store';
+
 /**
  * microCMS から全イベントを取得
+ * @param cacheMode `no-store` はスタンプ照合など最新データが必要な用途向け
  */
-export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
+export async function fetchEventsFromMicroCMS(
+  cacheMode: MicroCMSFetchCache = 'default',
+): Promise<MicroCMSEvent[]> {
   const apiKey = process.env.MICROCMS_API_KEY;
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 
@@ -124,7 +129,9 @@ export async function fetchEventsFromMicroCMS(): Promise<MicroCMSEvent[]> {
 
   try {
     const cacheOption =
-      process.env.NODE_ENV === 'development' ? { cache: 'no-store' as const } : { cache: 'force-cache' as const };
+      cacheMode === 'no-store' || process.env.NODE_ENV === 'development'
+        ? { cache: 'no-store' as const }
+        : { cache: 'force-cache' as const };
 
     const response = await fetch(url, {
       headers: {
@@ -184,9 +191,9 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
 /**
  * microCMS から全イベントを取得し、フロントエンド型に変換
  */
-export async function getEvents() {
+export async function getEvents(cacheMode: MicroCMSFetchCache = 'default') {
   try {
-    const microCMSEvents = await fetchEventsFromMicroCMS();
+    const microCMSEvents = await fetchEventsFromMicroCMS(cacheMode);
     return microCMSEvents.map(transformMicroCMSEvent);
   } catch (error) {
     console.error('イベント取得に失敗しました:', error);

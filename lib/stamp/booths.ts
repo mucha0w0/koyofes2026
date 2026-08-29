@@ -39,7 +39,8 @@ export async function getStampBooths(): Promise<StampBooth[]> {
 
 /** カテゴリ見出し付きで取得（クラス・学科 → 有志、各々50音順） */
 export async function getStampBoothGroups(): Promise<StampBoothGroup[]> {
-  const events = await getEvents();
+  // トークン照合と slug を一致させるため、スタンプ用途は常に最新の CMS を参照する
+  const events = await getEvents('no-store');
   const booths = events.map(toStampBooth).filter((booth): booth is StampBooth => booth !== null);
 
   const byCategory = new Map<StampSourceCategory, StampBooth[]>();
