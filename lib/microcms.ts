@@ -128,10 +128,12 @@ export async function fetchEventsFromMicroCMS(
   const url = `https://${serviceDomain}.microcms.io/api/v1/events?limit=100`;
 
   try {
+    // production の force-cache は再デプロイまで CMS 更新が反映されない。
+    // 既定は ISR（60秒）。スタンプ照合など即時性が必要な場合は no-store。
     const cacheOption =
       cacheMode === 'no-store' || process.env.NODE_ENV === 'development'
         ? { cache: 'no-store' as const }
-        : { cache: 'force-cache' as const };
+        : { next: { revalidate: 60 } };
 
     const response = await fetch(url, {
       headers: {
