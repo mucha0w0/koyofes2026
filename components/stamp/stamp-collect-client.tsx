@@ -31,7 +31,12 @@ export function StampCollectClient() {
   }, []);
 
   useEffect(() => {
+    // replaceState で token を URL から消すと searchParams が変わり effect が再実行される。
+    // 獲得処理中の再実行ではエラーにせず、ローディング表示を維持する。
     if (!token) {
+      if (started.current) {
+        return;
+      }
       setStatus('error');
       setErrorMessage('トークンが見つかりません。NFC / QR から読み取り直してください。');
       return;
