@@ -54,6 +54,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link className="hover:text-primary-foreground transition-colors" href="/stamp">
+                  スタンプラリー
+                </Link>
+              </li>
+              <li>
                 <Link className="hover:text-primary-foreground transition-colors" href="/guide/faq">
                   よくある質問
                 </Link>

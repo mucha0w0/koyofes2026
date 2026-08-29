@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, HelpCircle, Info, Users, Heart, Mail } from 'lucide-react';
+import { ArrowRight, MapPin, HelpCircle, Info, Users, Heart, Mail, Stamp } from 'lucide-react';
 import Link from 'next/link';
 
 const aboutLinks = [
@@ -46,6 +46,12 @@ const guideLinks = [
     label: '会場マップ',
     href: '/guide/map',
     description: '構内図',
+  },
+  {
+    icon: Stamp,
+    label: 'スタンプラリー',
+    href: '/stamp',
+    description: 'スタンプ帳・ふくびき参加券',
   },
   {
     icon: HelpCircle,

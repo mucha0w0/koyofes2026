@@ -43,3 +43,11 @@ export interface StampCollectError {
   error: string;
   code?: 'INVALID_TOKEN' | 'MISCONFIGURED' | 'BAD_REQUEST' | 'SERVER_ERROR';
 }
+
+/** POST /api/stamp/verify 成功レスポンス */
+export interface StampVerifySuccess {
+  validSlugs: string[];
+  validCount: number;
+  requiredCount: number;
+  isCleared: boolean;
+}

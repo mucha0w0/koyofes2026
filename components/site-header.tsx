@@ -39,6 +39,7 @@ const navItems: NavItem[] = [
     items: [
       { label: 'アクセス', href: '/guide/access' },
       { label: '会場マップ', href: '/guide/map' },
+      { label: 'スタンプラリー', href: '/stamp' },
       { label: 'よくある質問', href: '/guide/faq' },
     ],
   },
