@@ -1,15 +1,15 @@
 import { Suspense } from 'react';
 
-import { StampBook } from '@/components/stamp/stamp-book';
 import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import { StampBook } from '@/components/stamp/stamp-book';
 import { Spinner } from '@/components/ui/spinner';
 
 import { getStampBoothGroups } from '@/lib/stamp/booths';
 
 export const metadata = {
-  title: '企画展デジタルスタンプラリー | こうよう祭 2026',
+  title: 'スタンプラリー | こうよう祭 2026',
   description: 'クラス・学科・有志展示のデジタルスタンプラリー。スタンプ帳の確認とふくびき参加券の引き換えができます。',
 };
 
@@ -19,10 +19,7 @@ export default async function StampPage() {
   return (
     <>
       <SiteHeader />
-      <PageLayout
-        subtitle="展示ブースを巡ってスタンプを集め、ふくびきに参加しよう"
-        title="企画展 デジタルスタンプラリー"
-      >
+      <PageLayout subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー">
         <Suspense
           fallback={
             <div className="flex justify-center py-16">

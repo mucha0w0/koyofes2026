@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 
-import { StampCollectClient } from '@/components/stamp/stamp-collect-client';
 import { PageLayout } from '@/components/page-layout';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import { StampCollectClient } from '@/components/stamp/stamp-collect-client';
 import { Spinner } from '@/components/ui/spinner';
 
 export const metadata = {
