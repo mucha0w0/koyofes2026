@@ -19,7 +19,9 @@ interface StampRedeemPanelProps {
   collectedCount: number;
   requiredCount: number;
   isCleared: boolean;
+  isRedeemed: boolean;
   isVerifying: boolean;
+  redeemedAtLabel: string;
   onRedeem: () => void;
 }
 
@@ -27,11 +29,25 @@ export function StampRedeemPanel({
   collectedCount,
   requiredCount,
   isCleared,
+  isRedeemed,
   isVerifying,
+  redeemedAtLabel,
   onRedeem,
 }: StampRedeemPanelProps) {
   const [open, setOpen] = useState(false);
   const remaining = Math.max(requiredCount - collectedCount, 0);
+
+  if (isRedeemed) {
+    return (
+      <div className="bg-primary p-6 space-y-4 text-primary-foreground">
+        <p className="font-display text-[15px] tracking-[0.03em] text-white/70 uppercase">Lottery</p>
+        <p className="leading-loose tracking-wider">ふくびき参加券は引き換え済みです。スタンプ集めは引き続き楽しめます。</p>
+        {redeemedAtLabel ? (
+          <p className="text-sm text-white/80 leading-loose tracking-wider">引き換え日時: {redeemedAtLabel}</p>
+        ) : null}
+      </div>
+    );
+  }
 
   if (!isCleared) {
     return (
@@ -67,7 +83,7 @@ export function StampRedeemPanel({
           <AlertDialogHeader>
             <AlertDialogTitle className="font-medium tracking-wide">引き換えを実行しますか？</AlertDialogTitle>
             <AlertDialogDescription className="leading-loose tracking-wider">
-              スタッフの確認後に実行してください。引き換え後はこの端末ではスタンプ帳に戻れなくなります。
+              スタッフの確認後に実行してください。引き換え後もスタンプ集めは続けられます。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

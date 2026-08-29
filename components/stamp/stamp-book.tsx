@@ -130,20 +130,6 @@ export function StampBook({ groups }: StampBookProps) {
     setStorage(next);
   };
 
-  if (storage?.isRedeemed) {
-    return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center bg-primary text-primary-foreground px-6 py-16 text-center space-y-6">
-        <p className="font-display text-[15px] tracking-[0.03em] text-white/70 uppercase">Redeemed</p>
-        <h2 className="text-3xl md:text-5xl font-medium tracking-widest leading-[1.35]">引き換え済みです</h2>
-        {storage.redeemedAt && (
-          <p className="text-sm text-white/80 leading-loose tracking-wider">
-            引き換え日時: {formatRedeemedAt(storage.redeemedAt)}
-          </p>
-        )}
-      </div>
-    );
-  }
-
   const validSet = new Set(validSlugs);
 
   return (
@@ -186,7 +172,9 @@ export function StampBook({ groups }: StampBookProps) {
       <StampRedeemPanel
         collectedCount={collectedCount}
         isCleared={isCleared}
+        isRedeemed={storage?.isRedeemed ?? false}
         isVerifying={isVerifying}
+        redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
         requiredCount={requiredCount}
         onRedeem={handleRedeem}
       />
