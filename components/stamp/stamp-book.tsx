@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
@@ -10,14 +10,11 @@ import { StampProgress } from '@/components/stamp/stamp-progress';
 import { StampRedeemPanel } from '@/components/stamp/stamp-redeem-panel';
 import { Separator } from '@/components/ui/separator';
 
+import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
+
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
-import {
-  markStampRedeemed,
-  readStampStorage,
-  writeStampStorage,
-} from '@/lib/stamp/storage';
-import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
+import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
 
 interface StampBookProps {
   groups: StampBoothGroup[];

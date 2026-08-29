@@ -40,7 +40,7 @@ export function StampRedeemPanel({
         <p className="text-foreground leading-[2] tracking-[0.05em]">
           あと <span className="font-medium">{remaining}</span> 個でふくびき券 GET！
         </p>
-        <Button className="w-full rounded-none" disabled size="lg" type="button" variant="default">
+        <Button disabled className="w-full rounded-none" size="lg" type="button" variant="default">
           ふくびき参加券を表示する
         </Button>
       </div>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 
 import type { StampBooth } from '@/lib/types/stamp';
+
 import { isImageUrl } from '@/lib/utils';
 
 interface StampBoothCardProps {
@@ -29,13 +30,7 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
         }`}
       >
         {hasIcon ? (
-          <Image
-            alt={booth.title}
-            className="h-full w-full object-cover"
-            height={80}
-            src={booth.icon}
-            width={80}
-          />
+          <Image alt={booth.title} className="h-full w-full object-cover" height={80} src={booth.icon} width={80} />
         ) : (
           <span className="font-display text-[10px] uppercase tracking-[0.03em] text-muted-foreground">Stamp</span>
         )}

@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 
 interface StampEarnedDialogProps {
   open: boolean;
@@ -20,7 +20,7 @@ interface StampEarnedDialogProps {
 export function StampEarnedDialog({ open, title, alreadyOwned, onOpenChange }: StampEarnedDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-none border-border bg-card shadow-none sm:max-w-md" showCloseButton>
+      <DialogContent showCloseButton className="rounded-none border-border bg-card shadow-none sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="font-medium tracking-wide">
             {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました！'}

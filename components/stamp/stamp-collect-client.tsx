@@ -9,9 +9,10 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 
+import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
+
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { addStampEntry, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
-import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
 type CollectStatus = 'idle' | 'loading' | 'error';
 
