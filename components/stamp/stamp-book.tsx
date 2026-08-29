@@ -6,8 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
-import { StampProgress } from '@/components/stamp/stamp-progress';
-import { StampRedeemPanel } from '@/components/stamp/stamp-redeem-panel';
+import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
 import { Separator } from '@/components/ui/separator';
 
 import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
@@ -140,7 +139,16 @@ export function StampBook({ groups }: StampBookProps) {
 
       {showInAppNotice && <InAppBrowserNotice />}
 
-      <StampProgress collectedCount={collectedCount} totalCount={totalCount} />
+      <StampStatusPanel
+        collectedCount={collectedCount}
+        isCleared={isCleared}
+        isRedeemed={storage?.isRedeemed ?? false}
+        isVerifying={isVerifying}
+        redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
+        requiredCount={requiredCount}
+        totalCount={totalCount}
+        onRedeem={handleRedeem}
+      />
 
       {groups.length === 0 ? (
         <div className="bg-card p-6">
@@ -168,16 +176,6 @@ export function StampBook({ groups }: StampBookProps) {
           ))}
         </div>
       )}
-
-      <StampRedeemPanel
-        collectedCount={collectedCount}
-        isCleared={isCleared}
-        isRedeemed={storage?.isRedeemed ?? false}
-        isVerifying={isVerifying}
-        redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
-        requiredCount={requiredCount}
-        onRedeem={handleRedeem}
-      />
 
       <StampEarnedDialog
         alreadyOwned={alreadyOwned}
