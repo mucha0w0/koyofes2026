@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -32,23 +32,21 @@ export function StampResetClient() {
         {!done ? (
           <>
             <Spinner className="size-6" />
-            <p className="text-sm text-muted-foreground leading-[2] tracking-[0.05em]">記録をリセットしています…</p>
+            <p className="text-sm text-muted-foreground leading-loose tracking-wider">記録をリセットしています…</p>
           </>
         ) : (
           <>
             <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Reset</p>
-            <p className="text-foreground leading-[2] tracking-[0.05em]">スタンプ記録をリセットしました。</p>
-            <p className="text-sm text-muted-foreground leading-[2] tracking-[0.05em]">
-              スタンプ帳へ移動します…
-            </p>
+            <p className="text-foreground leading-loose tracking-wider">スタンプ記録をリセットしました。</p>
+            <p className="text-sm text-muted-foreground leading-loose tracking-wider">スタンプ帳へ移動します…</p>
             <Button asChild className="rounded-none" size="lg">
               <Link href="/stamp">今すぐスタンプ帳を開く</Link>
             </Button>
           </>
         )}
       </div>
-      <p className="text-xs text-muted-foreground leading-[2] tracking-[0.05em] text-center">
-        ※このページはこの端末・このブラウザの記録だけを消します（テスト用）。
+      <p className="text-xs text-muted-foreground leading-loose tracking-wider text-center">
+        ※このページはこの端末・このブラウザの記録だけを消します（デバッグ用）。
       </p>
     </div>
   );
