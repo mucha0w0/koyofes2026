@@ -4,6 +4,7 @@ import type { StampSourceCategory } from '@/lib/config/stampConfig';
 export interface StampBooth {
   slug: string;
   title: string;
+  organization: string;
   icon: string;
   category: StampSourceCategory;
 }

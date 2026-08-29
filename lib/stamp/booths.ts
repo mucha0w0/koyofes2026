@@ -22,6 +22,7 @@ function toStampBooth(event: Event): StampBooth | null {
   return {
     slug: event.slug,
     title: event.title,
+    organization: event.organization,
     icon: event.icon,
     category: event.category,
   };

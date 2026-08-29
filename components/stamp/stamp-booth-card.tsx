@@ -1,8 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-
-import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 import type { StampBooth } from '@/lib/types/stamp';
 
@@ -17,24 +16,34 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
   const hasIcon = isImageUrl(booth.icon);
 
   return (
-    <article className={`bg-card p-4 space-y-3 ${collected ? '' : 'opacity-70'}`}>
-      <div className="flex items-start justify-between gap-2">
-        <h3 className="text-sm font-medium leading-snug tracking-normal text-foreground">{booth.title}</h3>
-        <Badge className="rounded-none shrink-0" variant={collected ? 'default' : 'outline'}>
-          {collected ? '獲得済み' : '未獲得'}
-        </Badge>
-      </div>
+    <Link
+      className={`flex flex-col items-center gap-2 shrink-0 group ${collected ? '' : 'opacity-70'}`}
+      href={`/events/${booth.slug}`}
+    >
       <div
-        className={`mx-auto flex h-20 w-20 items-center justify-center overflow-hidden bg-muted ${
+        className={`relative w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center ${
           collected ? '' : 'grayscale'
         }`}
       >
         {hasIcon ? (
-          <Image alt={booth.title} className="h-full w-full object-cover" height={80} src={booth.icon} width={80} />
+          <Image alt={booth.title} className="w-full h-full object-cover" height={128} src={booth.icon} width={128} />
         ) : (
-          <span className="font-display text-[10px] uppercase tracking-[0.03em] text-muted-foreground">Stamp</span>
+          <span className="text-xs text-muted-foreground">No image</span>
         )}
+        <span
+          className={`absolute bottom-0 inset-x-0 py-0.5 text-center text-[10px] md:text-xs font-medium tracking-wider ${
+            collected ? 'bg-primary text-primary-foreground' : 'bg-background/85 text-muted-foreground'
+          }`}
+        >
+          {collected ? '獲得済み' : '未獲得'}
+        </span>
       </div>
-    </article>
+      <div className="text-center max-w-20 md:max-w-32">
+        <p className="text-xs md:text-sm font-medium truncate">{booth.title}</p>
+        {booth.organization ? (
+          <p className="text-xs md:text-sm text-muted-foreground truncate">{booth.organization}</p>
+        ) : null}
+      </div>
+    </Link>
   );
 }

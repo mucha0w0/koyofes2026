@@ -1,5 +1,6 @@
 'use client';
 
+import { Building2, Users } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -7,8 +8,8 @@ import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
 import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
-import { Separator } from '@/components/ui/separator';
 
+import type { StampSourceCategory } from '@/lib/config/stampConfig';
 import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
 
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
@@ -18,6 +19,11 @@ import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/st
 interface StampBookProps {
   groups: StampBoothGroup[];
 }
+
+const categoryIconConfig: Record<StampSourceCategory, React.ElementType> = {
+  'class-exhibit': Building2,
+  'volunteer-exhibit': Users,
+};
 
 function formatRedeemedAt(iso: string | null): string {
   if (!iso) {
@@ -132,13 +138,8 @@ export function StampBook({ groups }: StampBookProps) {
   const validSet = new Set(validSlugs);
 
   return (
-    <div className="space-y-10 max-w-3xl">
-      <p className="text-sm text-muted-foreground leading-loose tracking-wider">
-        ※通常のブラウザ（Safari / Chrome 等）でご参加ください
-      </p>
-
+    <div className="space-y-8 max-w-3xl">
       {showInAppNotice && <InAppBrowserNotice />}
-
       <StampStatusPanel
         collectedCount={collectedCount}
         isCleared={isCleared}
@@ -157,23 +158,25 @@ export function StampBook({ groups }: StampBookProps) {
           </p>
         </div>
       ) : (
-        <div className="space-y-10">
-          {groups.map((group) => (
-            <section key={group.category} className="space-y-4">
-              <div className="space-y-1">
-                <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">
-                  {group.category === 'class-exhibit' ? 'Class' : 'Volunteer'}
-                </p>
-                <h2 className="text-lg font-medium tracking-normal">{group.label}</h2>
+        <div className="space-y-8">
+          {groups.map((group) => {
+            const IconComponent = categoryIconConfig[group.category];
+            return (
+              <div key={group.category} className="bg-card">
+                <div className="flex items-center gap-3 p-4 bg-muted">
+                  <div className="p-2 bg-background text-foreground">
+                    <IconComponent className="h-5 w-5" />
+                  </div>
+                  <h2 className="text-lg font-medium">{group.label}</h2>
+                </div>
+                <div className="flex flex-wrap gap-4 p-4">
+                  {group.booths.map((booth) => (
+                    <StampBoothCard key={booth.slug} booth={booth} collected={validSet.has(booth.slug)} />
+                  ))}
+                </div>
               </div>
-              <Separator className="bg-border" />
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {group.booths.map((booth) => (
-                  <StampBoothCard key={booth.slug} booth={booth} collected={validSet.has(booth.slug)} />
-                ))}
-              </div>
-            </section>
-          ))}
+            );
+          })}
         </div>
       )}
 
