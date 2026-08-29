@@ -65,10 +65,10 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
       if (!firstSet) return 0;
       // getBoundingClientRect でgap込みの実幅を取得
       const allSets = track.querySelectorAll<HTMLElement>('[data-event-set]');
-      if (allSets.length < 2) return firstSet.getBoundingClientRect().width;
-      const rect1 = allSets[0].getBoundingClientRect();
-      const rect2 = allSets[1].getBoundingClientRect();
-      return rect2.left - rect1.left;
+      const set0 = allSets[0];
+      const set1 = allSets[1];
+      if (!set0 || !set1) return firstSet.getBoundingClientRect().width;
+      return set1.getBoundingClientRect().left - set0.getBoundingClientRect().left;
     };
 
     const animate = (time: number) => {
@@ -101,13 +101,17 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     };
 
     const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
       isTouchingRef.current = true;
-      touchStartXRef.current = e.touches[0].clientX;
+      touchStartXRef.current = touch.clientX;
       touchOffsetRef.current = offsetRef.current;
     };
     const handleTouchMove = (e: TouchEvent) => {
       if (!isTouchingRef.current) return;
-      const diff = touchStartXRef.current - e.touches[0].clientX;
+      const touch = e.touches[0];
+      if (!touch) return;
+      const diff = touchStartXRef.current - touch.clientX;
       const setWidth = getSingleSetWidth();
       if (setWidth > 0) {
         offsetRef.current = (((touchOffsetRef.current + diff) % setWidth) + setWidth) % setWidth;
