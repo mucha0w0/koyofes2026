@@ -25,7 +25,7 @@ export function StampEarnedDialog({ open, title, alreadyOwned, onOpenChange }: S
           <DialogTitle className="font-medium tracking-wide">
             {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました！'}
           </DialogTitle>
-          <DialogDescription className="leading-[2] tracking-[0.05em]">
+          <DialogDescription className="leading-loose tracking-wider">
             {title
               ? alreadyOwned
                 ? `「${title}」のスタンプはすでに持っています。`

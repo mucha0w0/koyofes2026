@@ -37,7 +37,7 @@ export function StampRedeemPanel({
     return (
       <div className="bg-card p-6 space-y-4">
         <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Lottery</p>
-        <p className="text-foreground leading-[2] tracking-[0.05em]">
+        <p className="text-foreground leading-loose tracking-wider">
           あと <span className="font-medium">{remaining}</span> 個でふくびき券 GET！
         </p>
         <Button disabled className="w-full rounded-none" size="lg" type="button" variant="default">
@@ -50,7 +50,7 @@ export function StampRedeemPanel({
   return (
     <div className="bg-primary p-6 space-y-4 text-primary-foreground">
       <p className="font-display text-[15px] tracking-[0.03em] text-white/70 uppercase">Lottery</p>
-      <p className="leading-[2] tracking-[0.05em]">条件達成です。ふくびき参加券を表示できます。</p>
+      <p className="leading-loose tracking-wider">条件達成です。ふくびき参加券を表示できます。</p>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
           <Button
@@ -66,7 +66,7 @@ export function StampRedeemPanel({
         <AlertDialogContent className="rounded-none border-border bg-card shadow-none">
           <AlertDialogHeader>
             <AlertDialogTitle className="font-medium tracking-wide">引き換えを実行しますか？</AlertDialogTitle>
-            <AlertDialogDescription className="leading-[2] tracking-[0.05em]">
+            <AlertDialogDescription className="leading-loose tracking-wider">
               スタッフの確認後に実行してください。引き換え後はこの端末ではスタンプ帳に戻れなくなります。
             </AlertDialogDescription>
           </AlertDialogHeader>

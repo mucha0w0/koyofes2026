@@ -91,14 +91,14 @@ export function StampCollectClient() {
       {status === 'loading' || status === 'idle' ? (
         <div className="bg-card p-8 flex flex-col items-center gap-4 text-center">
           <Spinner className="size-6" />
-          <p className="text-sm text-muted-foreground leading-[2] tracking-[0.05em]">スタンプを確認しています…</p>
+          <p className="text-sm text-muted-foreground leading-loose tracking-wider">スタンプを確認しています…</p>
         </div>
       ) : null}
 
       {status === 'error' && (
         <Alert className="rounded-none shadow-none" variant="destructive">
           <AlertTitle className="font-medium tracking-wide">獲得できませんでした</AlertTitle>
-          <AlertDescription className="leading-[2] tracking-[0.05em]">{errorMessage}</AlertDescription>
+          <AlertDescription className="leading-loose tracking-wider">{errorMessage}</AlertDescription>
         </Alert>
       )}
 

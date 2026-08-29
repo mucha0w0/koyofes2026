@@ -134,9 +134,9 @@ export function StampBook({ groups }: StampBookProps) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center bg-primary text-primary-foreground px-6 py-16 text-center space-y-6">
         <p className="font-display text-[15px] tracking-[0.03em] text-white/70 uppercase">Redeemed</p>
-        <h2 className="text-3xl md:text-5xl font-medium tracking-[0.1em] leading-[1.35]">引き換え済みです</h2>
+        <h2 className="text-3xl md:text-5xl font-medium tracking-widest leading-[1.35]">引き換え済みです</h2>
         {storage.redeemedAt && (
-          <p className="text-sm text-white/80 leading-[2] tracking-[0.05em]">
+          <p className="text-sm text-white/80 leading-loose tracking-wider">
             引き換え日時: {formatRedeemedAt(storage.redeemedAt)}
           </p>
         )}
@@ -148,7 +148,7 @@ export function StampBook({ groups }: StampBookProps) {
 
   return (
     <div className="space-y-10 max-w-3xl">
-      <p className="text-sm text-muted-foreground leading-[2] tracking-[0.05em]">
+      <p className="text-sm text-muted-foreground leading-loose tracking-wider">
         ※通常のブラウザ（Safari / Chrome 等）でご参加ください
       </p>
 
@@ -158,7 +158,7 @@ export function StampBook({ groups }: StampBookProps) {
 
       {groups.length === 0 ? (
         <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-[2] tracking-[0.05em]">
+          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
             現在表示できるスタンプ対象ブースがありません。
           </p>
         </div>
