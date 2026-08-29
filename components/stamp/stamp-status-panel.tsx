@@ -45,11 +45,7 @@ export function StampStatusPanel({
   const emphasized = isCleared || isRedeemed;
 
   return (
-    <div
-      className={`p-6 space-y-5 ${
-        emphasized ? 'bg-primary text-primary-foreground' : 'bg-card text-foreground'
-      }`}
-    >
+    <div className={`p-6 space-y-5 ${emphasized ? 'bg-primary text-primary-foreground' : 'bg-card text-foreground'}`}>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-1">
           <p
@@ -59,7 +55,9 @@ export function StampStatusPanel({
           >
             Rally
           </p>
-          <p className={`text-sm leading-loose tracking-wider ${emphasized ? 'text-white/85' : 'text-muted-foreground'}`}>
+          <p
+            className={`text-sm leading-loose tracking-wider ${emphasized ? 'text-white/85' : 'text-muted-foreground'}`}
+          >
             {isRedeemed
               ? 'ふくびき参加券は引き換え済みです'
               : isCleared
@@ -91,14 +89,11 @@ export function StampStatusPanel({
       </div>
 
       <p className={`text-xs tracking-wider ${emphasized ? 'text-white/65' : 'text-muted-foreground'}`}>
-        ふくびき条件 {requiredCount} 個
-        {isRedeemed && redeemedAtLabel ? ` · 引き換え ${redeemedAtLabel}` : null}
+        ふくびき条件 {requiredCount} 個{isRedeemed && redeemedAtLabel ? ` · 引き換え ${redeemedAtLabel}` : null}
       </p>
 
       {isRedeemed ? (
-        <p className="text-sm leading-loose tracking-wider text-white/85">
-          スタンプ集めは引き続き楽しめます。
-        </p>
+        <p className="text-sm leading-loose tracking-wider text-white/85">スタンプ集めは引き続き楽しめます。</p>
       ) : isCleared ? (
         <AlertDialog open={open} onOpenChange={setOpen}>
           <AlertDialogTrigger asChild>
