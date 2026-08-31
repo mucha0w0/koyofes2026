@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import type { PartItem, SocialPlatform } from '@/lib/types/part';
 
 import { getLucideIcon } from '@/lib/lucide-icons';
+import { isImageUrl } from '@/lib/utils';
 
 const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
   instagram: SiInstagram,
@@ -20,7 +21,7 @@ interface PartCardProps {
 
 export function PartCard({ item }: PartCardProps) {
   const IconComponent = getLucideIcon(item.icon);
-  const isIconUrl = item.icon.startsWith('http://') || item.icon.startsWith('https://') || item.icon.startsWith('/');
+  const isIconUrl = isImageUrl(item.icon);
 
   return (
     <Card className="py-0">

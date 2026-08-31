@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 import { Event } from '@/lib/types/event';
+import { isImageUrl } from '@/lib/utils';
 
 type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
 
@@ -22,7 +23,7 @@ interface EventCardProps {
 }
 
 function EventCard({ event }: EventCardProps) {
-  const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'));
+  const isIconUrl = isImageUrl(event.icon);
 
   return (
     <Link className="flex flex-col items-center gap-2 shrink-0 group" href={`/events/${event.slug}`}>

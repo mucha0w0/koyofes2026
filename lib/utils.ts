@@ -5,7 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// アイコンが URL か判定（http/https で始まるか）
+/** `<Image src>` に使える値か判定（http(s) URL またはサイトルートからの絶対パス） */
 export function isImageUrl(value?: string): boolean {
-  return Boolean(value && (value.startsWith('http://') || value.startsWith('https://')));
+  if (!value) return false;
+  return value.startsWith('http://') || value.startsWith('https://') || value.startsWith('/');
 }

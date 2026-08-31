@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 
 import { Event } from '@/lib/types/event';
+import { isImageUrl } from '@/lib/utils';
 
 const genreLabels: Record<string, string> = {
   'class-exhibit': 'クラス・学科展',
@@ -18,7 +19,7 @@ interface ExhibitionCardProps {
 }
 
 export function ExhibitionCard({ event }: ExhibitionCardProps) {
-  const isIconUrl = event.icon && (event.icon.startsWith('http://') || event.icon.startsWith('https://'));
+  const isIconUrl = isImageUrl(event.icon);
 
   const rawLine = event.catchphrase?.split('\n')[0] ?? '';
   const displayCatchphrase = rawLine.length > 40 ? rawLine.substring(0, 40) + '...' : rawLine;

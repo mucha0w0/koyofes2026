@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 
 import type { SponsorItem } from '@/lib/types/sponsor';
+import { isImageUrl } from '@/lib/utils';
 
 interface SponsorCardProps {
   item: SponsorItem;
 }
 
 export function SponsorCard({ item }: SponsorCardProps) {
-  const isIconUrl = item.icon.startsWith('http://') || item.icon.startsWith('https://') || item.icon.startsWith('/');
+  const isIconUrl = isImageUrl(item.icon);
 
   return (
     <Card className="py-0">
