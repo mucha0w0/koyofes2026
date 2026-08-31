@@ -4,8 +4,7 @@ import Link from 'next/link';
 
 import { SponsorsClient } from './sponsors-client';
 
-import { fetchSponsorsFromMicroCMS } from '@/lib/microcms';
-import { transformMicroCMSSponsor } from '@/lib/sponsors';
+import { fetchSponsorsFromMicroCMS, transformMicroCMSSponsor } from '@/lib/sponsors';
 
 // 1. 親：サーバーコンポーネント（ここでデータを取得する）
 export async function Sponsors() {

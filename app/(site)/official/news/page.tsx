@@ -4,7 +4,7 @@ import { PageLayout } from '@/components/page-layout';
 import { Pagination } from '@/components/pagination';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
 
-import { getNews, MicroCMSNews } from '@/lib/microcms';
+import { getNews, type MicroCMSNews } from '@/lib/news';
 
 export const revalidate = 60; // 1分ごとにISR
 

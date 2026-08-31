@@ -1,6 +1,6 @@
 import { CategoryEventsContent } from './category-events-client';
 
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
 type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';

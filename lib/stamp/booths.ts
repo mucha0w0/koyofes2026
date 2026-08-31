@@ -3,7 +3,7 @@ import {
   STAMP_CONFIG,
   type StampSourceCategory,
 } from '@/lib/config/stampConfig';
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import type { Event } from '@/lib/types/event';
 import type { StampBooth, StampBoothGroup } from '@/lib/types/stamp';
 

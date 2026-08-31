@@ -1,5 +1,17 @@
-import { fetchSponsorsFromMicroCMS, type MicroCMSSponsor } from '@/lib/microcms';
+import { fetchMicroCMSList } from '@/lib/microcms/client';
+import type { MicroCMSSponsor } from '@/lib/microcms/types';
 import { getSponsorCategoryConfig, type SponsorItem, type SponsorSection } from '@/lib/types/sponsor';
+
+export type { MicroCMSSponsor } from '@/lib/microcms/types';
+
+export async function fetchSponsorsFromMicroCMS(): Promise<MicroCMSSponsor[]> {
+  try {
+    return await fetchMicroCMSList<MicroCMSSponsor>('sponsors');
+  } catch (error) {
+    console.error('microCMS 協賛データ取得エラー:', error);
+    throw error;
+  }
+}
 
 function getSponsorCategory(sponsor: MicroCMSSponsor): string {
   if (Array.isArray(sponsor.category)) {

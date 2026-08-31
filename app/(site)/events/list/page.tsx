@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { EventListClient } from './client';
 
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
 export const dynamic = 'force-dynamic';

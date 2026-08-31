@@ -1,6 +1,7 @@
 import type { Event } from '@/lib/types/event';
 
-import { fetchPartsFromMicroCMS, getEvents, type MicroCMSPart } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
+import { fetchPartsFromMicroCMS, type MicroCMSPart } from '@/lib/parts';
 
 export interface RecommendedEvent {
   partId: string;

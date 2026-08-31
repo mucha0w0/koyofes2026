@@ -1,4 +1,5 @@
-import { fetchPartsFromMicroCMS, type MicroCMSPart } from '@/lib/microcms';
+import { fetchMicroCMSList } from '@/lib/microcms/client';
+import type { MicroCMSPart } from '@/lib/microcms/types';
 import {
   PART_CATEGORY_CONFIG,
   type PartCategory,
@@ -6,6 +7,17 @@ import {
   type PartSection,
   type PartSocialLink,
 } from '@/lib/types/part';
+
+export type { MicroCMSPart } from '@/lib/microcms/types';
+
+export async function fetchPartsFromMicroCMS(): Promise<MicroCMSPart[]> {
+  try {
+    return await fetchMicroCMSList<MicroCMSPart>('parts');
+  } catch (error) {
+    console.error('microCMS パートデータ取得エラー:', error);
+    throw error;
+  }
+}
 
 function getPartCategory(part: MicroCMSPart): PartCategory {
   const category = Array.isArray(part.category) ? part.category[0] : part.category;

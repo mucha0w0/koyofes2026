@@ -6,7 +6,7 @@ import { SimpleSerch } from '@/components/Simple-serch';
 import { EventCarousel } from '@/components/event-carousel';
 import { EventMarkdown } from '@/components/event-markdown';
 
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
 

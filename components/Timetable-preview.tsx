@@ -2,7 +2,7 @@ import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
 const PREVIEW_COUNT = 3;

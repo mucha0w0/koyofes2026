@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { SimpleSerch } from '@/components/Simple-serch';
 import { PageLayout } from '@/components/page-layout';
 
-import { getEvents } from '@/lib/microcms';
+import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
 export const dynamic = 'force-dynamic';

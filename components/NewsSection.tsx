@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-import { getNews, MicroCMSNews } from '@/lib/microcms';
+import { getNews, type MicroCMSNews } from '@/lib/news';
 
 export async function NewsSection() {
   let news: MicroCMSNews[] = [];

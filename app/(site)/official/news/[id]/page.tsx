@@ -8,7 +8,7 @@ import { PageLayout } from '@/components/page-layout';
 // 👇 ここで UI コンポーネントをインポートします
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-import { MicroCMSNews } from '@/lib/microcms';
+import { type MicroCMSNews } from '@/lib/news';
 
 export default function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
