@@ -1,4 +1,5 @@
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
+import { isStampStorageData } from '@/lib/stamp/validation';
 import type { StampEntry, StampStorageData } from '@/lib/types/stamp';
 
 export function createEmptyStampStorage(): StampStorageData {
@@ -7,31 +8,6 @@ export function createEmptyStampStorage(): StampStorageData {
     isRedeemed: false,
     redeemedAt: null,
   };
-}
-
-function isStampEntry(value: unknown): value is StampEntry {
-  if (value === null || typeof value !== 'object') {
-    return false;
-  }
-  const entry = value as Record<string, unknown>;
-  return (
-    typeof entry.slug === 'string' &&
-    typeof entry.signature === 'string' &&
-    typeof entry.obtainedAt === 'string'
-  );
-}
-
-function isStampStorageData(value: unknown): value is StampStorageData {
-  if (value === null || typeof value !== 'object') {
-    return false;
-  }
-  const data = value as Record<string, unknown>;
-  return (
-    Array.isArray(data.stamps) &&
-    data.stamps.every(isStampEntry) &&
-    typeof data.isRedeemed === 'boolean' &&
-    (data.redeemedAt === null || typeof data.redeemedAt === 'string')
-  );
 }
 
 /** LocalStorage から読み取り。不正・未設定なら空データ */

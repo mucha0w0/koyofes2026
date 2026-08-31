@@ -5,6 +5,11 @@ const REVALIDATE_SECONDS = 60;
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
 
+export interface MicroCMSListQuery {
+  limit?: number;
+  filters?: string;
+}
+
 function getMicroCMSConfig() {
   const apiKey = process.env.MICROCMS_API_KEY;
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
@@ -33,9 +38,15 @@ function resolveFetchCache(cacheMode: MicroCMSFetchCache) {
 export async function fetchMicroCMSList<T>(
   endpoint: string,
   cacheMode: MicroCMSFetchCache = 'default',
+  query: MicroCMSListQuery = {},
 ): Promise<T[]> {
   const { apiKey, serviceDomain } = getMicroCMSConfig();
-  const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}?limit=100`;
+  const params = new URLSearchParams();
+  params.set('limit', String(query.limit ?? 100));
+  if (query.filters) {
+    params.set('filters', query.filters);
+  }
+  const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}?${params.toString()}`;
 
   const response = await fetch(url, {
     headers: { 'X-MICROCMS-API-KEY': apiKey },

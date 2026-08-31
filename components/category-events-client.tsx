@@ -1,22 +1,17 @@
 'use client';
 
-import { ArrowRight, Building2, Users, Mic2, ShoppingBag, Truck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
+import { CategorySection } from '@/components/ui/category-section';
+
+import { getEventCategoryIcon } from '@/lib/config/category-icons';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
 
-type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
-
-const categoryIconConfig: Record<EventCategory, React.ElementType> = {
-  'class-exhibit': Building2,
-  'volunteer-exhibit': Users,
-  booth: ShoppingBag,
-  stage: Mic2,
-  'food-truck': Truck,
-};
+type EventCategory = Event['category'];
 
 interface EventCardProps {
   event: Event;
@@ -180,29 +175,27 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
         </div>
 
         <div className="space-y-8">
-          {categories.map((category) => {
-            const IconComponent = categoryIconConfig[category.id];
-            return (
-              <div key={category.id} className="bg-card">
-                <div className="flex items-center gap-3 p-4 bg-muted">
-                  <div className="p-2 bg-background text-foreground">
-                    <IconComponent className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-lg font-medium">{category.title}</h3>
-                  <Link
-                    className="ml-auto text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
-                    href="/events/list"
-                  >
-                    すべて見る
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-                <div className="px-4 pb-4">
-                  <ScrollingEvents events={category.events} />
-                </div>
+          {categories.map((category) => (
+            <CategorySection
+              key={category.id}
+              action={
+                <Link
+                  className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+                  href="/events/list"
+                >
+                  すべて見る
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              }
+              icon={getEventCategoryIcon(category.id)}
+              title={category.title}
+              titleAs="h3"
+            >
+              <div className="px-4 pb-4">
+                <ScrollingEvents events={category.events} />
               </div>
-            );
-          })}
+            </CategorySection>
+          ))}
         </div>
       </div>
     </section>

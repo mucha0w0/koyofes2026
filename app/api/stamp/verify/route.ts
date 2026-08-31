@@ -1,21 +1,10 @@
 import { NextResponse } from 'next/server';
 
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
-import { getStampBooths } from '@/lib/stamp/booths';
+import { getStampBoothSlugSet } from '@/lib/stamp/booths';
 import { verifyStampSignature } from '@/lib/stamp/signature';
-import type { StampEntry, StampVerifySuccess } from '@/lib/types/stamp';
-
-function isStampEntry(value: unknown): value is StampEntry {
-  if (value === null || typeof value !== 'object') {
-    return false;
-  }
-  const entry = value as Record<string, unknown>;
-  return (
-    typeof entry.slug === 'string' &&
-    typeof entry.signature === 'string' &&
-    typeof entry.obtainedAt === 'string'
-  );
-}
+import { isStampEntry } from '@/lib/stamp/validation';
+import type { StampVerifySuccess } from '@/lib/types/stamp';
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -38,8 +27,7 @@ export async function POST(request: Request) {
 
   let knownSlugs: Set<string>;
   try {
-    const booths = await getStampBooths();
-    knownSlugs = new Set(booths.map((booth) => booth.slug));
+    knownSlugs = await getStampBoothSlugSet();
   } catch (error) {
     console.error('スタンプブース取得エラー:', error);
     return NextResponse.json({ error: 'ブース情報の取得に失敗しました' }, { status: 500 });

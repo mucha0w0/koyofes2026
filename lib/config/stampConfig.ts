@@ -1,10 +1,10 @@
+import { STAMP_SOURCE_CATEGORIES, type StampSourceCategory } from '@/lib/types/stamp';
+
+export { STAMP_SOURCE_CATEGORIES, type StampSourceCategory };
+
 /**
  * スタンプラリー設定（ブース本体は microCMS から取得）
  */
-export const STAMP_SOURCE_CATEGORIES = ['class-exhibit', 'volunteer-exhibit'] as const;
-
-export type StampSourceCategory = (typeof STAMP_SOURCE_CATEGORIES)[number];
-
 export const STAMP_CATEGORY_ORDER = [
   { id: 'class-exhibit', label: 'クラス・学科' },
   { id: 'volunteer-exhibit', label: '有志' },

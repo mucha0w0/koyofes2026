@@ -1,4 +1,7 @@
-import type { StampSourceCategory } from '@/lib/config/stampConfig';
+/** スタンプラリー対象のイベントカテゴリ */
+export const STAMP_SOURCE_CATEGORIES = ['class-exhibit', 'volunteer-exhibit'] as const;
+
+export type StampSourceCategory = (typeof STAMP_SOURCE_CATEGORIES)[number];
 
 /** スタンプ対象ブース（microCMS events 由来） */
 export interface StampBooth {

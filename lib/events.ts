@@ -52,3 +52,21 @@ export async function getEvents(cacheMode: MicroCMSFetchCache = 'default'): Prom
     throw error;
   }
 }
+
+/** slug でイベントを1件取得（一覧 API より軽量） */
+export async function getEventBySlug(
+  slug: string,
+  cacheMode: MicroCMSFetchCache = 'default',
+): Promise<Event | null> {
+  try {
+    const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode, {
+      filters: `slug[equals]${slug}`,
+      limit: 1,
+    });
+    const raw = microCMSEvents[0];
+    return raw ? transformMicroCMSEvent(raw) : null;
+  } catch (error) {
+    console.error(`イベント取得に失敗しました (slug=${slug}):`, error);
+    throw error;
+  }
+}

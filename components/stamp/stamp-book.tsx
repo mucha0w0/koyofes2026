@@ -1,6 +1,5 @@
 'use client';
 
-import { Building2, Users } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -8,10 +7,11 @@ import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
 import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
+import { CategorySection } from '@/components/ui/category-section';
 
-import type { StampSourceCategory } from '@/lib/config/stampConfig';
 import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
 
+import { getStampCategoryIcon } from '@/lib/config/category-icons';
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
@@ -19,11 +19,6 @@ import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/st
 interface StampBookProps {
   groups: StampBoothGroup[];
 }
-
-const categoryIconConfig: Record<StampSourceCategory, React.ElementType> = {
-  'class-exhibit': Building2,
-  'volunteer-exhibit': Users,
-};
 
 function formatRedeemedAt(iso: string | null): string {
   if (!iso) {
@@ -159,24 +154,19 @@ export function StampBook({ groups }: StampBookProps) {
         </div>
       ) : (
         <div className="space-y-8">
-          {groups.map((group) => {
-            const IconComponent = categoryIconConfig[group.category];
-            return (
-              <div key={group.category} className="bg-card">
-                <div className="flex items-center gap-3 p-4 bg-muted">
-                  <div className="p-2 bg-background text-foreground">
-                    <IconComponent className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-lg font-medium">{group.label}</h2>
-                </div>
-                <div className="flex flex-wrap gap-4 p-4">
-                  {group.booths.map((booth) => (
-                    <StampBoothCard key={booth.slug} booth={booth} collected={validSet.has(booth.slug)} />
-                  ))}
-                </div>
+          {groups.map((group) => (
+            <CategorySection
+              key={group.category}
+              icon={getStampCategoryIcon(group.category)}
+              title={group.label}
+            >
+              <div className="flex flex-wrap gap-4 p-4">
+                {group.booths.map((booth) => (
+                  <StampBoothCard key={booth.slug} booth={booth} collected={validSet.has(booth.slug)} />
+                ))}
               </div>
-            );
-          })}
+            </CategorySection>
+          ))}
         </div>
       )}
 
