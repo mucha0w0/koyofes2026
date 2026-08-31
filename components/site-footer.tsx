@@ -1,10 +1,15 @@
+import Link from 'next/link';
 import { SiX, SiInstagram, SiYoutube } from 'react-icons/si';
+
+import { getNavSections } from '@/lib/config/nav';
 
 const socialLinks = [
   { label: 'X (旧Twitter)', href: 'https://twitter.com/kouyousai2026', icon: SiX },
   { label: 'Instagram', href: 'https://instagram.com/kouyousai2026', icon: SiInstagram },
   { label: 'YouTube', href: 'https://youtube.com/@kouyousai2026', icon: SiYoutube },
 ] as const;
+
+const footerNavSections = getNavSections('footer');
 
 export function SiteFooter() {
   return (
@@ -38,6 +43,26 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
+
+        <nav
+          aria-label="フッターナビゲーション"
+          className="mt-10 grid gap-8 border-t border-primary-foreground/20 pt-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {footerNavSections.map((section) => (
+            <div key={section.id}>
+              <p className="mb-3 text-sm font-medium">{section.label}</p>
+              <ul className="space-y-2 text-sm text-primary-foreground/70">
+                {section.items.map((item) => (
+                  <li key={item.href}>
+                    <Link className="transition-colors hover:text-primary-foreground" href={item.href}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-primary-foreground/20 pt-6 text-xs text-primary-foreground/60 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
           <p>こうよう祭 2026 システムパート</p>

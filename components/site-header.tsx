@@ -6,55 +6,11 @@ import { useState } from 'react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
-interface DropdownItem {
-  label: string;
-  href: string;
-}
+import { getNavSections, type ResolvedNavSection } from '@/lib/config/nav';
 
-interface NavItem {
-  label: string;
-  items: DropdownItem[];
-}
+const navItems = getNavSections('header');
 
-const navItems: NavItem[] = [
-  {
-    label: '企画情報',
-    items: [
-      { label: '企画一覧・検索', href: '/events/list' },
-      { label: 'おすすめ企画', href: '/events/recommended' },
-      { label: 'タイムテーブル', href: '/events/timetable' },
-    ],
-  },
-  {
-    label: '公式コンテンツ',
-    items: [
-      { label: 'お知らせ', href: '/official/news' },
-      { label: 'スタンプラリー', href: '/stamp' },
-      { label: '公式SNS', href: '/official/social' },
-      { label: 'パンフレット', href: '/official/pamphlet' },
-    ],
-  },
-  {
-    label: 'ご案内',
-    items: [
-      { label: 'アクセス', href: '/guide/access' },
-      { label: '会場マップ', href: '/guide/map' },
-      { label: 'よくある質問', href: '/guide/faq' },
-    ],
-  },
-  {
-    label: 'こうよう祭について',
-    items: [
-      { label: 'こうよう祭とは', href: '/about/overview' },
-      { label: 'テーマ', href: '/about/theme' },
-      { label: 'パート', href: '/about/part' },
-      { label: 'ご協賛', href: '/about/sponsor' },
-      { label: 'お問い合わせ', href: '/about/contact' },
-    ],
-  },
-];
-
-function DropdownMenu({ item }: { item: NavItem }) {
+function DropdownMenu({ item }: { item: ResolvedNavSection }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -104,7 +60,7 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
         <Accordion collapsible className="w-full" type="single">
           {navItems.map((item) => (
-            <AccordionItem key={item.label} className="last:border-b-0" value={item.label}>
+            <AccordionItem key={item.id} className="last:border-b-0" value={item.id}>
               <AccordionTrigger className="text-base font-medium py-4">{item.label}</AccordionTrigger>
               <AccordionContent className="pb-4">
                 {item.items.map((subItem) => (
@@ -141,7 +97,7 @@ export function SiteHeader() {
         {/* Desktop Navigation */}
         <nav aria-label="メインナビゲーション" className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
-            <DropdownMenu key={item.label} item={item} />
+            <DropdownMenu key={item.id} item={item} />
           ))}
         </nav>
 
