@@ -9,37 +9,37 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-14">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-8">
-          <div>
-            <p className="text-xl font-medium tracking-[0.08em] mb-4">こうよう祭 2026</p>
-            <p className="text-sm text-primary-foreground/70 leading-relaxed">
+      <div className="container mx-auto px-4 py-10 md:py-12">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
+          <div className="space-y-2.5">
+            <p className="text-xl font-medium tracking-[0.08em]">こうよう祭 2026</p>
+            <p className="text-sm leading-relaxed text-primary-foreground/70">
               豊田高専の文化祭
               <br />
               10/31(土)・11/1(日)
             </p>
           </div>
 
-          <div>
-            <h4 className="font-medium mb-4 text-sm">公式SNS</h4>
-            <div className="flex gap-3">
+          <div className="sm:shrink-0">
+            <p className="mb-3 text-sm font-medium">公式SNS</p>
+            <div className="flex gap-2">
               {socialLinks.map(({ label, href, icon: Icon }) => (
                 <a
                   key={label}
                   aria-label={label}
-                  className="p-2 bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 transition-colors"
+                  className="flex size-10 items-center justify-center bg-primary-foreground/20 text-primary-foreground transition-colors hover:bg-primary-foreground/30"
                   href={href}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="size-5" />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-primary-foreground/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-foreground/70">
+        <div className="mt-10 flex flex-col gap-2 border-t border-primary-foreground/20 pt-6 text-xs text-primary-foreground/60 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
           <p>こうよう祭 2026 システムパート</p>
           <p>&copy; 2026 KoyoFes System Part</p>
         </div>
