@@ -6,19 +6,10 @@ import { EventSearchSection } from '@/components/event-search';
 import { EventCarousel } from '@/components/event-carousel';
 import { EventMarkdown } from '@/components/event-markdown';
 
+import { formatEventTimeRange } from '@/lib/event-time';
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
-
-// Convert time format from HHMMMM to HH:MM~HH:MM
-function formatTimeDisplay(timeStr: string): string {
-  if (!timeStr || timeStr.length !== 8) return timeStr;
-  const startHour = timeStr.substring(0, 2);
-  const startMin = timeStr.substring(2, 4);
-  const endHour = timeStr.substring(4, 6);
-  const endMin = timeStr.substring(6, 8);
-  return `${startHour}:${startMin}~${endHour}:${endMin}`;
-}
 
 // Format location display with floor and classroom
 function formatLocation(event: Event): {
@@ -125,8 +116,8 @@ export default async function EventPage({ params }: PageProps) {
     notFound();
   }
 
-  const timeDay1 = formatTimeDisplay(event['time-day1']);
-  const timeDay2 = formatTimeDisplay(event['time-day2']);
+  const timeDay1 = formatEventTimeRange(event['time-day1']);
+  const timeDay2 = formatEventTimeRange(event['time-day2']);
   const locationDisplay = formatLocation(event);
   const participantsDisplay = formatParticipants(event);
   const durationDisplay = formatDuration(event.duration);

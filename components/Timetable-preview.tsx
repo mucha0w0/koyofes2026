@@ -2,26 +2,11 @@ import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/event-time';
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
 const PREVIEW_COUNT = 3;
-
-function parseTime(timeStr: string): { startMin: number; endMin: number } | null {
-  if (!timeStr || timeStr.length !== 8) return null;
-  const sh = parseInt(timeStr.substring(0, 2), 10);
-  const sm = parseInt(timeStr.substring(2, 4), 10);
-  const eh = parseInt(timeStr.substring(4, 6), 10);
-  const em = parseInt(timeStr.substring(6, 8), 10);
-  if (isNaN(sh) || isNaN(sm) || isNaN(eh) || isNaN(em)) return null;
-  return { startMin: sh * 60 + sm, endMin: eh * 60 + em };
-}
-
-function minToTimeStr(min: number): string {
-  return `${Math.floor(min / 60)
-    .toString()
-    .padStart(2, '0')}:${(min % 60).toString().padStart(2, '0')}`;
-}
 
 // ─── サブコンポーネント ──────────────────────────────
 
@@ -107,15 +92,15 @@ export async function TimetablePreview() {
   function toRowsSorted(timeKey: 'time-day1' | 'time-day2'): EventRowProps[] {
     return stageEvents
       .map((event): (EventRowProps & { startMin: number }) | null => {
-        const parsed = parseTime(event[timeKey]);
+        const parsed = parseEventTime(event[timeKey]);
         if (!parsed) return null;
         return {
           slug: event.slug,
           icon: event.icon ?? undefined,
           title: event.title,
           organization: event.organization,
-          timeRange: `${minToTimeStr(parsed.startMin)}〜${minToTimeStr(parsed.endMin)}`,
-          duration: parsed.endMin - parsed.startMin,
+          timeRange: formatEventTimeRange(parsed, '〜'),
+          duration: eventTimeDuration(parsed),
           startMin: parsed.startMin,
         };
       })

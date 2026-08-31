@@ -1,14 +1,11 @@
-import { fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
 import type { MicroCMSEvent } from '@/lib/microcms/types';
 import type { Event } from '@/lib/types/event';
 
+import { formatTimeFromNumber } from '@/lib/event-time';
+import { fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+
 export type { MicroCMSEvent } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';
-
-function formatTimeFromNumber(timeNum: number): string {
-  if (!timeNum) return '';
-  return String(timeNum).padStart(8, '0');
-}
 
 export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   return {

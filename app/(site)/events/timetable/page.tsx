@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { EventSearchSection } from '@/components/event-search';
 import { PageLayout } from '@/components/page-layout';
 
+import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/event-time';
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
@@ -17,32 +18,6 @@ const DAY2_END_HOUR = 18;
 const PX_PER_HOUR = 80;
 const PX_PER_MIN = PX_PER_HOUR / 60;
 const CARD_HEIGHT = 88;
-
-function parseTime(timeStr: string): { startMin: number; endMin: number } | null {
-  if (!timeStr || timeStr.length !== 8) return null;
-  const sh = parseInt(timeStr.substring(0, 2), 10);
-  const sm = parseInt(timeStr.substring(2, 4), 10);
-  const eh = parseInt(timeStr.substring(4, 6), 10);
-  const em = parseInt(timeStr.substring(6, 8), 10);
-  if (isNaN(sh) || isNaN(sm) || isNaN(eh) || isNaN(em)) return null;
-  return {
-    startMin: sh * 60 + sm,
-    endMin: eh * 60 + em,
-  };
-}
-
-// 分 → "HH:MM" 変換
-function minToTimeStr(min: number): string {
-  const h = Math.floor(min / 60)
-    .toString()
-    .padStart(2, '0');
-  const m = (min % 60).toString().padStart(2, '0');
-  return `${h}:${m}`;
-}
-
-function calcDuration(startMin: number, endMin: number): number {
-  return endMin - startMin;
-}
 
 interface ScheduleEvent {
   title: string;
@@ -155,7 +130,7 @@ export default async function StageEventsPage() {
   const toScheduleEvents = (timeKey: 'time-day1' | 'time-day2', startHour: number) =>
     stageEvents
       .map((event): ScheduleEvent | null => {
-        const parsed = parseTime(event[timeKey]);
+        const parsed = parseEventTime(event[timeKey]);
         if (!parsed) return null;
         return {
           title: event.title,
@@ -164,9 +139,9 @@ export default async function StageEventsPage() {
           slug: event.slug,
           startMin: parsed.startMin,
           endMin: parsed.endMin,
-          duration: calcDuration(parsed.startMin, parsed.endMin),
+          duration: eventTimeDuration(parsed),
           topPx: (parsed.startMin - startHour * 60) * PX_PER_MIN,
-          timeRange: `${minToTimeStr(parsed.startMin)}~${minToTimeStr(parsed.endMin)}`,
+          timeRange: formatEventTimeRange(parsed),
         };
       })
       .filter((e): e is ScheduleEvent => e !== null)
