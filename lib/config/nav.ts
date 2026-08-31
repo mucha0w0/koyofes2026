@@ -1,5 +1,6 @@
+import { Heart, HelpCircle, Info, Mail, MapPin, Users } from 'lucide-react';
+
 import type { LucideIcon } from 'lucide-react';
-import { Heart, HelpCircle, Info, Mail, MapPin, Stamp, Users } from 'lucide-react';
 
 /** UI 上の表示先 */
 export type NavSurface = 'header' | 'footer' | 'links';
@@ -47,15 +48,7 @@ export const NAV_SECTIONS = [
     surfaces: { links: false },
     links: [
       { label: 'お知らせ', href: '/official/news' },
-      {
-        label: 'スタンプラリー',
-        href: '/stamp',
-        card: {
-          icon: Stamp,
-          description: 'スタンプ帳・ふくびき参加券',
-        },
-        surfaces: { links: true },
-      },
+      { label: 'スタンプラリー', href: '/stamp' },
       { label: '公式SNS', href: '/official/social' },
       { label: 'パンフレット', href: '/official/pamphlet' },
     ],
@@ -164,11 +157,11 @@ export interface ResolvedNavLinkCardSection {
 
 function isVisible(link: NavLink, section: NavSection, surface: NavSurface): boolean {
   if (link.surfaces?.[surface] !== undefined) {
-    return link.surfaces[surface]!;
+    return link.surfaces[surface];
   }
 
   if (section.surfaces?.[surface] !== undefined) {
-    return section.surfaces[surface]!;
+    return section.surfaces[surface];
   }
 
   return true;
