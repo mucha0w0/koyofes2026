@@ -2,7 +2,7 @@ import { Clock, MapPin, Users, Building2 } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import { SimpleSerch } from '@/components/Simple-serch';
+import { EventSearchSection } from '@/components/event-search';
 import { EventCarousel } from '@/components/event-carousel';
 import { EventMarkdown } from '@/components/event-markdown';
 
@@ -250,7 +250,7 @@ export default async function EventPage({ params }: PageProps) {
           </div>
         </div>
 
-        <SimpleSerch />
+        <EventSearchSection variant="compact" />
       </main>
     );
 }

@@ -1,4 +1,4 @@
-import { SimpleSerch } from '@/components/Simple-serch';
+import { EventSearchSection } from '@/components/event-search';
 import { PageLayout } from '@/components/page-layout';
 import { RecommendedEventCard } from '@/components/recommended-event-card';
 
@@ -22,7 +22,7 @@ export default async function RecommendedEventsPage() {
           ))}
         </div>
       </PageLayout>
-      <SimpleSerch />
+      <EventSearchSection variant="compact" />
     </>
   );
 }

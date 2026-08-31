@@ -2,7 +2,7 @@ import { Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { SimpleSerch } from '@/components/Simple-serch';
+import { EventSearchSection } from '@/components/event-search';
 import { PageLayout } from '@/components/page-layout';
 
 import { getEvents } from '@/lib/events';
@@ -193,7 +193,7 @@ export default async function StageEventsPage() {
           </div>
         </div>
       </PageLayout>
-      <SimpleSerch />
+      <EventSearchSection variant="compact" />
     </>
   );
 }
