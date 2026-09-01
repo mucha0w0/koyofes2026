@@ -1,0 +1,5 @@
+## Git Commit Messages
+When generating git commit messages, always follow these rules:
+- LANGUAGE: Always generate the commit message in Japanese (日本語).
+- FORMAT: Use Conventional Commits format (e.g., "feat: 新機能の追加", "fix: バグの修正").
+- STYLE: Be concise and clear. Do not use English unless it is a specific technical term.
