@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 
 import type { StampBoothGroup, StampStorageData } from '@/lib/types/stamp';
 
-import { getStampCategoryIcon } from '@/lib/config/category-icons';
+import { getStampCategoryIcon } from '@/lib/config/stampConfig';
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
