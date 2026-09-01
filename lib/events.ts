@@ -1,8 +1,8 @@
 import type { MicroCMSEvent } from '@/lib/microcms/types';
-import type { Event } from '@/lib/types/event';
 
 import { formatTimeFromNumber } from '@/lib/event-time';
 import { fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+import { parseEventCategory, type Event } from '@/lib/types/event';
 
 export type { MicroCMSEvent } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';
@@ -26,9 +26,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     description: event.description,
     'organ-description': event['organ-description'],
     author: event.author,
-    category: Array.isArray(event.category)
-      ? (event.category[0] as Event['category']) || 'booth'
-      : event.category,
+    category: parseEventCategory(event.category, { slug: event.slug }),
   };
 }
 
