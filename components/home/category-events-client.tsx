@@ -50,7 +50,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
   const touchStartXRef = useRef(0);
   const touchOffsetRef = useRef(0);
   const lastTimeRef = useRef<number | null>(null);
-  const SPEED = 20; // px/ç§
+  const SPEED = 20; // px/秒
 
   useEffect(() => {
     const track = trackRef.current;
@@ -59,7 +59,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
     const getSingleSetWidth = (): number => {
       const firstSet = track.querySelector<HTMLElement>('[data-event-set="1"]');
       if (!firstSet) return 0;
-      // getBoundingClientRect ă§gapčžźăżăŽĺŽĺšăĺĺž
+      // getBoundingClientRect でgap込みの実幅を取得
       const allSets = track.querySelectorAll<HTMLElement>('[data-event-set]');
       const set0 = allSets[0];
       const set1 = allSets[1];
@@ -69,7 +69,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
 
     const animate = (time: number) => {
       if (lastTimeRef.current === null) lastTimeRef.current = time;
-      const delta = (time - lastTimeRef.current) / 1000; // ç§
+      const delta = (time - lastTimeRef.current) / 1000; // 秒
       lastTimeRef.current = time;
 
       if (!isHoveredRef.current && !isTouchingRef.current) {
@@ -82,7 +82,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
         }
       }
 
-      // scrollLeft ă§ăŻăŞă transform ă§ç§ťĺďźăăźă¸ăšăŻă­ăźăŤă¨çŤśĺăăŞăďź
+      // scrollLeft ではなく transform で移動（ページスクロールと競合しない）
       track.style.transform = `translateX(-${offsetRef.current}px)`;
       animationIdRef.current = requestAnimationFrame(animate);
     };
@@ -135,13 +135,13 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
   }, [events.length]);
 
   if (events.length === 0) {
-    return <div className="flex items-center justify-center py-8 text-muted-foreground">äźçťăŻćşĺä¸­ă§ă</div>;
+    return <div className="flex items-center justify-center py-8 text-muted-foreground">企画は準備中です</div>;
   }
 
   return (
-    // overflow-hidden ă§ăăŠăăŻăŽăŻăżĺşăăé ă
+    // overflow-hidden でトラックのはみ出しを隠す
     <div className="overflow-hidden py-2">
-      {/* ăăŠăăŻďźtransform ă§ĺăăăĺšăŻăłăłăăłăĺĺżčŚăŞăŽă§ width-max */}
+      {/* トラック：transform で動かす。幅はコンテンツ分必要なので width-max */}
       <div ref={trackRef} className="flex gap-4 w-max will-change-transform">
         {[1, 2, 3].map((setNum) => (
           <div key={`set-${setNum}`} className="flex gap-4 shrink-0" data-event-set={setNum}>
@@ -170,8 +170,8 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
     <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-medium mb-2">ăŤăă´ăŞĺĽäźçťä¸čŚ§</h2>
-          <p className="text-muted-foreground">ć§ăăŞäźçťăăé¸ăă§ăă§ăăŻ</p>
+          <h2 className="text-2xl md:text-3xl font-medium mb-2">カテゴリ別企画一覧</h2>
+          <p className="text-muted-foreground">様々な企画から選んでチェック</p>
         </div>
 
         <div className="space-y-8">
@@ -183,7 +183,7 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
                   className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
                   href="/events/list"
                 >
-                  ăăšăŚčŚă
+                  すべて見る
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               }
