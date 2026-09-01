@@ -1,4 +1,4 @@
-import { FAQItem } from '@/components/ui/faq-item';
+import { FAQItem } from '@/components/faq-item';
 
 import { FaqGroup } from '@/lib/types/faq';
 

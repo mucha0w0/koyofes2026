@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 
+import { Spinner } from '@/components/spinner';
 import { PageLayout } from '@/components/page-layout';
 import { StampResetClient } from '@/components/stamp/stamp-reset-client';
-import { Spinner } from '@/components/ui/spinner';
 
 export const metadata = {
   title: 'スタンプ記録リセット（デバッグ用） | こうよう祭 2026',

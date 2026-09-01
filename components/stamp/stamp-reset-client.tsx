@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { Spinner } from '@/components/spinner';
 import { Button } from '@/components/ui/button';
-import { Spinner } from '@/components/ui/spinner';
 
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 

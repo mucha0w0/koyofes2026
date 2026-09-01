@@ -3,11 +3,11 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
+import { CategorySection } from '@/components/category-section';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
 import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
-import { CategorySection } from '@/components/ui/category-section';
 
 import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
 

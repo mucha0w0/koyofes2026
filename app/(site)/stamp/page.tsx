@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 
+import { Spinner } from '@/components/spinner';
 import { PageLayout } from '@/components/page-layout';
 import { StampBook } from '@/components/stamp/stamp-book';
-import { Spinner } from '@/components/ui/spinner';
 
 import { getStampBoothGroups } from '@/lib/stamp/booths';
 

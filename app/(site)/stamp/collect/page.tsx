@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 
+import { Spinner } from '@/components/spinner';
 import { PageLayout } from '@/components/page-layout';
 import { StampCollectClient } from '@/components/stamp/stamp-collect-client';
-import { Spinner } from '@/components/ui/spinner';
 
 export const metadata = {
   title: 'スタンプ獲得 | こうよう祭 2026',
