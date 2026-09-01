@@ -1,10 +1,11 @@
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
-import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
-
-/** CMS ページ共通: ISR（間隔は lib/cache.ts） */
-export const revalidate = CMS_REVALIDATE_SECONDS;
+/**
+ * CMS ページ共通 ISR（秒）。fetch 側は lib/cache.ts の CMS_REVALIDATE_SECONDS と同値にすること。
+ * Next.js の segment config はリテラル必須のため、ここでは直書きしている。
+ */
+export const revalidate = 60;
 
 export default function SiteLayout({
   children,

@@ -6,6 +6,7 @@
  *   （`lib/microcms/client` の `cacheMode: 'no-store'`）
  *
  * ページの revalidate は `app/(site)/layout.tsx` で一括設定。
+ * （Next.js の制約上、layout 側はリテラル `60` の直書き。変更時は両方を揃えること）
  */
 
 /** microCMS データの ISR 間隔（秒） */

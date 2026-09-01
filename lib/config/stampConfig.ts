@@ -9,7 +9,7 @@ export { STAMP_SOURCE_CATEGORIES, type StampSourceCategory };
 export const STAMP_CATEGORY_ORDER = STAMP_SOURCE_CATEGORIES.map((id) => ({
   id,
   label: getEventCategoryLabel(id),
-})) as const satisfies ReadonlyArray<{ id: StampSourceCategory; label: string }>;
+})) satisfies ReadonlyArray<{ id: StampSourceCategory; label: string }>;
 
 export const STAMP_CONFIG = {
   sourceCategories: STAMP_SOURCE_CATEGORIES,
