@@ -6,64 +6,10 @@ import { EventSearchSection } from '@/components/event-search';
 import { EventCarousel } from '@/components/event-carousel';
 import { EventMarkdown } from '@/components/event-markdown';
 
+import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { formatEventTimeRange } from '@/lib/event-time';
 import { getEventBySlug, getEvents } from '@/lib/events';
-import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
-
-// Format location display with floor and classroom
-function formatLocation(event: Event): {
-  firstLine: string;
-  secondLine?: string;
-} {
-  const firstLine = [event.location];
-  if (event.floor) firstLine.push(event.floor);
-
-  return {
-    firstLine: firstLine.join(' '),
-    secondLine: event.classroom,
-  };
-}
-
-// Format participants display
-function formatParticipants(event: Event): string {
-  // Both empty/undefined = unlimited
-  if (!event.participantsUL && !event.participantsLL) {
-    return '制限なし';
-  }
-
-  // Only lower limit exists
-  if (!event.participantsUL && event.participantsLL) {
-    return `${event.participantsLL}人`;
-  }
-
-  // Only upper limit exists
-  if (event.participantsUL && !event.participantsLL) {
-    if (event.participantsUL >= 9999) {
-      return '一般（制限なし）';
-    }
-    return `${event.participantsUL}人`;
-  }
-
-  // Both exist
-  if (event.participantsUL >= 9999) {
-    return '一般（制限なし）';
-  }
-  if (event.participantsUL === event.participantsLL) {
-    return `${event.participantsLL}人`;
-  }
-  return `${event.participantsLL}-${event.participantsUL}人`;
-}
-
-// Format duration display
-function formatDuration(minutes: number): string {
-  if (minutes === 0) return '時間未定';
-  if (minutes < 60) return `${minutes}分`;
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  if (mins === 0) return `${hours}時間`;
-  return `${hours}時間${mins}分`;
-}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
