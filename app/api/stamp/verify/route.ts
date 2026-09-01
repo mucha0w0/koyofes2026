@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 
+import type { StampVerifySuccess } from '@/lib/types/stamp';
+
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { getStampBoothSlugSet } from '@/lib/stamp/booths';
 import { verifyStampSignature } from '@/lib/stamp/signature';
 import { isStampEntry } from '@/lib/stamp/validation';
-import type { StampVerifySuccess } from '@/lib/types/stamp';
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -14,10 +15,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'リクエストボディが不正です' }, { status: 400 });
   }
 
-  const stampsRaw =
-    body !== null && typeof body === 'object' && 'stamps' in body
-      ? (body as { stamps: unknown }).stamps
-      : undefined;
+  const stampsRaw = body !== null && typeof body === 'object' && 'stamps' in body ? body.stamps : undefined;
 
   if (!Array.isArray(stampsRaw)) {
     return NextResponse.json({ error: 'stamps 配列が必要です' }, { status: 400 });

@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
+import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
+
 import { getStampBoothBySlug } from '@/lib/stamp/booths';
 import { createStampSignature } from '@/lib/stamp/signature';
 import { resolveSlugFromToken } from '@/lib/stamp/token-map';
-import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
 function errorResponse(status: number, error: string, code: StampCollectError['code']) {
   const body: StampCollectError = { error, code };
@@ -18,8 +19,7 @@ export async function POST(request: Request) {
     return errorResponse(400, 'リクエストボディが不正です', 'BAD_REQUEST');
   }
 
-  const token =
-    body !== null && typeof body === 'object' && 'token' in body ? (body as { token: unknown }).token : undefined;
+  const token = body !== null && typeof body === 'object' && 'token' in body ? body.token : undefined;
 
   if (typeof token !== 'string' || token.trim().length === 0) {
     return errorResponse(400, 'token が必要です', 'BAD_REQUEST');
