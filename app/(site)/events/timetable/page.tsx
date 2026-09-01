@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { EventSearchSection } from '@/components/events/event-search';
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 
 import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
 
@@ -124,7 +124,7 @@ export default async function StageEventsPage() {
 
   return (
     <>
-      <PageLayout subtitle="2日間のタイムテーブルです" title="タイムテーブル">
+      <CmsPageLayout meta="eventTimetable">
         <div className="space-y-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -139,7 +139,7 @@ export default async function StageEventsPage() {
             <TimelineView endHour={DAY2_END_HOUR} events={day2Events} startHour={DAY2_START_HOUR} />
           </div>
         </div>
-      </PageLayout>
+      </CmsPageLayout>
       <EventSearchSection variant="compact" />
     </>
   );

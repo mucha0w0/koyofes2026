@@ -1,5 +1,5 @@
 import { EventSearchSection } from '@/components/events/event-search';
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { RecommendedEventCard } from '@/components/events/recommended-event-card';
 
 import { getRecommendedEvents } from '@/lib/recommended-events';
@@ -9,7 +9,7 @@ export default async function RecommendedEventsPage() {
 
   return (
     <>
-      <PageLayout subtitle="各パートリーダーがピックアップした、おすすめの企画です" title="おすすめ企画">
+      <CmsPageLayout meta="eventRecommended">
         <div className="flex flex-col gap-4">
           {recommendedEvents.map(({ partId, recommender, recommenderIcon, whyRecom, event }) => (
             <RecommendedEventCard
@@ -21,7 +21,7 @@ export default async function RecommendedEventsPage() {
             />
           ))}
         </div>
-      </PageLayout>
+      </CmsPageLayout>
       <EventSearchSection variant="compact" />
     </>
   );

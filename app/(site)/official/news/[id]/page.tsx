@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 import type { Metadata } from 'next';
@@ -69,7 +69,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     .replace(/\//g, '.');
 
   return (
-    <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
+    <CmsPageLayout meta="newsList">
       <div className="max-w-3xl">
         <Link
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
@@ -92,6 +92,6 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
           </CardContent>
         </Card>
       </div>
-    </PageLayout>
+    </CmsPageLayout>
   );
 }

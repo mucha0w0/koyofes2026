@@ -37,3 +37,6 @@ export const cmsPageMeta = {
 } as const;
 
 export type CmsPageMetaKey = keyof typeof cmsPageMeta;
+
+/** PageLayout を使う CMS ページのキー（eventDetail は独自レイアウトのため除外） */
+export type CmsPageLayoutKey = Exclude<CmsPageMetaKey, 'eventDetail'>;

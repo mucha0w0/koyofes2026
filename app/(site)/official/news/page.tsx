@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { Pagination } from '@/components/news/pagination';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
 
@@ -24,7 +24,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const paginatedItems = newsItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
-    <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
+    <CmsPageLayout meta="newsList">
       {newsItems.length === 0 ? (
         <div className="max-w-3xl text-center py-12">
           <p className="text-muted-foreground">ニュースはまだ投稿されていません。</p>
@@ -72,6 +72,6 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           <Pagination basePath="/official/news" currentPage={safePage} totalPages={totalPages} />
         </>
       )}
-    </PageLayout>
+    </CmsPageLayout>
   );
 }

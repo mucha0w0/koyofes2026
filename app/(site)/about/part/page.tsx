@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { PartCard } from '@/components/about/part-card';
 
 import { getPartSections } from '@/lib/parts';
@@ -7,7 +7,7 @@ export default async function PartPage() {
   const sections = await getPartSections();
 
   return (
-    <PageLayout subtitle="こうよう祭を運営するパートのご紹介" title="パート">
+    <CmsPageLayout meta="part">
       {sections.length === 0 ? (
         <div className="mx-auto max-w-4xl py-12 text-center">
           <p className="text-muted-foreground">パート情報はまだ登録されていません。</p>
@@ -32,6 +32,6 @@ export default async function PartPage() {
           ))}
         </div>
       )}
-    </PageLayout>
+    </CmsPageLayout>
   );
 }

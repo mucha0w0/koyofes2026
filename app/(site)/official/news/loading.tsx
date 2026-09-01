@@ -1,12 +1,9 @@
-import { cmsPageMeta } from '@/components/cms/cms-page-meta';
 import { CmsPageLoading } from '@/components/cms/cms-page-loading';
 import { NewsListSkeleton } from '@/components/cms/skeletons/news-list-skeleton';
 
-const { title, subtitle } = cmsPageMeta.newsList;
-
-export default function NewsListLoading() {
+export default function NewsLoading() {
   return (
-    <CmsPageLoading subtitle={subtitle} title={title}>
+    <CmsPageLoading meta="newsList">
       <NewsListSkeleton />
     </CmsPageLoading>
   );

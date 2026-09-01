@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { PageLayout } from '@/components/layout/page-layout';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { SponsorCard } from '@/components/about/sponsor-card';
 
 import { getSponsorSections } from '@/lib/sponsors';
@@ -9,7 +9,7 @@ export default async function SponsorPage() {
   const sections = await getSponsorSections();
 
   return (
-    <PageLayout subtitle="こうよう祭をご支援いただいている企業・団体様" title="ご協賛">
+    <CmsPageLayout meta="sponsor">
       <div className="mx-auto max-w-4xl space-y-12">
         <p className="text-muted-foreground leading-relaxed">
           こうよう祭の開催にあたり、多くの企業・団体様にご協賛いただいております。 心より感謝申し上げます。
@@ -52,6 +52,6 @@ export default async function SponsorPage() {
           </Link>
         </div>
       </div>
-    </PageLayout>
+    </CmsPageLayout>
   );
 }
