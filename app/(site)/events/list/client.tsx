@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useMemo, useEffect } from 'react';
 
 import { ExhibitionCard } from '@/components/exhibition-card';
-import { PageLayout } from '@/components/page-layout';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 import { Event } from '@/lib/types/event';
@@ -29,10 +28,9 @@ function getUniqueLocations(events: Event[]): string[] {
 
 interface EventListClientProps {
   events: Event[];
-  error: string | null;
 }
 
-export function EventListClient({ events, error }: EventListClientProps) {
+export function EventListClient({ events }: EventListClientProps) {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -108,19 +106,8 @@ export function EventListClient({ events, error }: EventListClientProps) {
     setSelectedLocation('');
   };
 
-  if (error) {
-    return (
-      <PageLayout subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます" title="企画一覧・検索">
-          <div className="text-center py-12">
-            <p className="text-red-500">{error}</p>
-          </div>
-        </PageLayout>
-    );
-  }
-
   return (
-      <PageLayout subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます" title="企画一覧・検索">
-        <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-8">
           {/* 検索バー */}
           <div>
             <div className="relative">
@@ -275,7 +262,6 @@ export function EventListClient({ events, error }: EventListClientProps) {
               </div>
             )}
           </div>
-        </div>
-      </PageLayout>
-    );
+    </div>
+  );
 }
