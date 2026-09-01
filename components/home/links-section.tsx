@@ -19,20 +19,20 @@ export function LinksSection() {
                 {section.items.map((item) => {
                   const Icon = item.icon;
                   return (
-                  <Link
-                    key={item.href}
-                    className="group flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
-                    href={item.href}
-                  >
-                    <div className="bg-muted p-2 text-foreground">
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-sm font-medium">{item.label}</span>
-                      <p className="truncate text-xs text-muted-foreground">{item.description}</p>
-                    </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  </Link>
+                    <Link
+                      key={item.href}
+                      className="group flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
+                      href={item.href}
+                    >
+                      <div className="bg-muted p-2 text-foreground">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="text-sm font-medium">{item.label}</span>
+                        <p className="truncate text-xs text-muted-foreground">{item.description}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    </Link>
                   );
                 })}
               </div>

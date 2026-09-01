@@ -50,7 +50,7 @@ function TimelineView({
 
       {/* 軸エリア（縦線 + 正方形ドット） */}
       <div className="relative w-6 shrink-0" style={{ height: `${totalHeight}px` }}>
-        <div className="absolute left-[11px] top-0 bottom-0 w-px bg-border" />
+        <div className="absolute left-2.75 top-0 bottom-0 w-px bg-border" />
         {events.map((event, idx) => (
           <div
             key={idx}

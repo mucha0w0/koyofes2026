@@ -104,13 +104,16 @@ function loadExistingTokenMap(env) {
   }
 
   const candidates = [
-    { raw: (() => {
-      try {
-        return readFileSync(TOKEN_MAP_ENV_PATH, 'utf8');
-      } catch {
-        return null;
-      }
-    })(), source: 'stamp-tokens/stamp-token-map.env.txt' },
+    {
+      raw: (() => {
+        try {
+          return readFileSync(TOKEN_MAP_ENV_PATH, 'utf8');
+        } catch {
+          return null;
+        }
+      })(),
+      source: 'stamp-tokens/stamp-token-map.env.txt',
+    },
     { raw: env.STAMP_TOKEN_MAP ? `STAMP_TOKEN_MAP=${env.STAMP_TOKEN_MAP}` : null, source: '.env.local' },
   ];
 
@@ -253,9 +256,7 @@ async function main() {
 
   const csvHeader = 'category,slug,title,token,nfc_url';
   const csvBody = rows
-    .map((row) =>
-      [row.categoryLabel, row.slug, row.title, row.token, row.url].map(csvEscape).join(','),
-    )
+    .map((row) => [row.categoryLabel, row.slug, row.title, row.token, row.url].map(csvEscape).join(','))
     .join('\n');
   writeFileSync(join(OUT_DIR, 'stamp-nfc-urls.csv'), `${csvHeader}\n${csvBody}\n`, 'utf8');
 
@@ -293,9 +294,7 @@ async function main() {
     console.log(`  新規 slug: ${created.join(', ')}`);
   }
   if (retainedOrphans.length > 0) {
-    console.log(
-      `⚠  CMS に無いがマップに残したトークン: ${retainedOrphans.length} 件（NFC 無効化防止）`,
-    );
+    console.log(`⚠  CMS に無いがマップに残したトークン: ${retainedOrphans.length} 件（NFC 無効化防止）`);
     for (const orphan of retainedOrphans) {
       console.log(`    ${orphan.slug} ← ${orphan.token.slice(0, 8)}…`);
     }

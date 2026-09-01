@@ -124,18 +124,10 @@ export function StampBook({ groups }: StampBookProps) {
       ) : (
         <div className="space-y-8">
           {groups.map((group) => (
-            <CategorySection
-              key={group.category}
-              icon={getStampCategoryIcon(group.category)}
-              title={group.label}
-            >
+            <CategorySection key={group.category} icon={getStampCategoryIcon(group.category)} title={group.label}>
               <div className="flex flex-wrap gap-4 p-4">
                 {group.booths.map((booth) => (
-                  <StampBoothCard
-                    key={booth.slug}
-                    booth={booth}
-                    collected={display.collectedSlugs.has(booth.slug)}
-                  />
+                  <StampBoothCard key={booth.slug} booth={booth} collected={display.collectedSlugs.has(booth.slug)} />
                 ))}
               </div>
             </CategorySection>

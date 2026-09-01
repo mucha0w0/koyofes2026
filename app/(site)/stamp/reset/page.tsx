@@ -14,21 +14,21 @@ export const metadata = {
 
 export default function StampResetPage() {
   return (
-      <PageLayout
-        backHref="/stamp"
-        backLabel="スタンプ帳に戻る"
-        subtitle="デバッグ用：この端末のスタンプ記録を消去します"
-        title="スタンプリセット"
+    <PageLayout
+      backHref="/stamp"
+      backLabel="スタンプ帳に戻る"
+      subtitle="デバッグ用：この端末のスタンプ記録を消去します"
+      title="スタンプリセット"
+    >
+      <Suspense
+        fallback={
+          <div className="flex justify-center py-16">
+            <Spinner className="size-6" />
+          </div>
+        }
       >
-        <Suspense
-          fallback={
-            <div className="flex justify-center py-16">
-              <Spinner className="size-6" />
-            </div>
-          }
-        >
-          <StampResetClient />
-        </Suspense>
-      </PageLayout>
-    );
+        <StampResetClient />
+      </Suspense>
+    </PageLayout>
+  );
 }

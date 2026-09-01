@@ -32,9 +32,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   };
 }
 
-export async function fetchEventsFromMicroCMS(
-  cacheMode: MicroCMSFetchCache = 'default',
-): Promise<MicroCMSEvent[]> {
+export async function fetchEventsFromMicroCMS(cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSEvent[]> {
   try {
     return await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode);
   } catch (error) {
@@ -55,19 +53,18 @@ export const getEvents = cache(async (cacheMode: MicroCMSFetchCache = 'default')
 });
 
 /** slug でイベントを1件取得（一覧 API より軽量・リクエスト内 dedupe） */
-export const getEventBySlug = cache(async (
-  slug: string,
-  cacheMode: MicroCMSFetchCache = 'default',
-): Promise<Event | null> => {
-  try {
-    const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode, {
-      filters: `slug[equals]${slug}`,
-      limit: 1,
-    });
-    const raw = microCMSEvents[0];
-    return raw ? transformMicroCMSEvent(raw) : null;
-  } catch (error) {
-    console.error(`イベント取得に失敗しました (slug=${slug}):`, error);
-    throw error;
-  }
-});
+export const getEventBySlug = cache(
+  async (slug: string, cacheMode: MicroCMSFetchCache = 'default'): Promise<Event | null> => {
+    try {
+      const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode, {
+        filters: `slug[equals]${slug}`,
+        limit: 1,
+      });
+      const raw = microCMSEvents[0];
+      return raw ? transformMicroCMSEvent(raw) : null;
+    } catch (error) {
+      console.error(`イベント取得に失敗しました (slug=${slug}):`, error);
+      throw error;
+    }
+  },
+);

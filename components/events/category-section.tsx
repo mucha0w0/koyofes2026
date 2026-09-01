@@ -9,7 +9,13 @@ interface CategorySectionProps {
   children: ReactNode;
 }
 
-export function CategorySection({ icon: Icon, title, titleAs: TitleTag = 'h2', action, children }: CategorySectionProps) {
+export function CategorySection({
+  icon: Icon,
+  title,
+  titleAs: TitleTag = 'h2',
+  action,
+  children,
+}: CategorySectionProps) {
   return (
     <div className="bg-card">
       <div className="flex items-center gap-3 p-4 bg-muted">

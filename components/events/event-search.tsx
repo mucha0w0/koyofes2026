@@ -43,9 +43,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
       <input
         className={cn(
           'w-full bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors',
-          isProminent
-            ? 'pl-12 pr-4 py-4'
-            : 'h-12 pl-10 sm:pl-12 pr-10 text-sm sm:text-base',
+          isProminent ? 'pl-12 pr-4 py-4' : 'h-12 pl-10 sm:pl-12 pr-10 text-sm sm:text-base',
         )}
         placeholder="企画名、キーワードで検索..."
         type="text"
@@ -72,9 +70,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
     <button
       className={cn(
         'bg-foreground text-background font-medium hover:opacity-80 cursor-pointer transition-opacity whitespace-nowrap',
-        isProminent
-          ? 'px-8 py-3'
-          : 'h-12 px-4 sm:px-8 text-sm sm:text-base',
+        isProminent ? 'px-8 py-3' : 'h-12 px-4 sm:px-8 text-sm sm:text-base',
       )}
       onClick={handleSearch}
     >
@@ -105,22 +101,14 @@ type EventSearchSectionProps = {
   showViewAllLink?: boolean;
 };
 
-export function EventSearchSection({
-  variant = 'prominent',
-  showViewAllLink,
-}: EventSearchSectionProps) {
+export function EventSearchSection({ variant = 'prominent', showViewAllLink }: EventSearchSectionProps) {
   const isProminent = variant === 'prominent';
   const viewAllLink = showViewAllLink ?? !isProminent;
 
   return (
     <section className={cn('bg-muted', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')}>
       <div className="container mx-auto px-4">
-        <div
-          className={cn(
-            'text-center mb-8',
-            !isProminent && 'flex flex-col gap-2',
-          )}
-        >
+        <div className={cn('text-center mb-8', !isProminent && 'flex flex-col gap-2')}>
           <h2
             className={cn(
               'font-medium',
@@ -129,9 +117,7 @@ export function EventSearchSection({
           >
             企画を探す
           </h2>
-          {isProminent && (
-            <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>
-          )}
+          {isProminent && <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>}
         </div>
 
         <EventSearchBar variant={variant} />

@@ -24,10 +24,7 @@ export async function getNews(): Promise<MicroCMSNews[]> {
 }
 
 /** ID でニュースを1件取得（コンテンツ API による直接取得） */
-export async function getNewsByID(
-  id: string,
-  cacheMode: MicroCMSFetchCache = 'default',
-): Promise<MicroCMSNews | null> {
+export async function getNewsByID(id: string, cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSNews | null> {
   try {
     return await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode);
   } catch (error) {

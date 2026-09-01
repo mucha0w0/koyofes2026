@@ -28,9 +28,7 @@ export function NotFoundContent() {
         </div>
 
         <div className="mt-16 border-t border-border pt-12 md:mt-24">
-          <p className="text-sm text-muted-foreground">
-            何か問題がある場合は、お問い合わせページよりご連絡ください。
-          </p>
+          <p className="text-sm text-muted-foreground">何か問題がある場合は、お問い合わせページよりご連絡ください。</p>
         </div>
       </div>
     </main>

@@ -36,9 +36,7 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
             <p className="text-sm text-muted-foreground">{event.organization}</p>
             {displayCatchphrase && <p className="text-xs text-muted-foreground mt-1 truncate">{displayCatchphrase}</p>}
             <div className="flex gap-3 mt-3 flex-wrap text-xs">
-              <span className="px-2 py-1 bg-muted text-foreground">
-                {getEventCategoryLabel(event.category)}
-              </span>
+              <span className="px-2 py-1 bg-muted text-foreground">{getEventCategoryLabel(event.category)}</span>
               <span className="px-2 py-1 bg-muted text-foreground">{event.location}</span>
             </div>
           </div>

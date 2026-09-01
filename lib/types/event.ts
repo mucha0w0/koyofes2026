@@ -1,11 +1,5 @@
 /** microCMS events.category の許容値（単一の正とする） */
-export const EVENT_CATEGORIES = [
-  'class-exhibit',
-  'volunteer-exhibit',
-  'booth',
-  'stage',
-  'food-truck',
-] as const;
+export const EVENT_CATEGORIES = ['class-exhibit', 'volunteer-exhibit', 'booth', 'stage', 'food-truck'] as const;
 
 export type EventCategory = (typeof EVENT_CATEGORIES)[number];
 
@@ -18,10 +12,7 @@ export function isEventCategory(value: string): value is EventCategory {
 }
 
 /** microCMS の category（string[]）を EventCategory に正規化する */
-export function parseEventCategory(
-  raw: string | string[] | undefined,
-  context?: { slug?: string },
-): EventCategory {
+export function parseEventCategory(raw: string | string[] | undefined, context?: { slug?: string }): EventCategory {
   const value = Array.isArray(raw) ? raw[0] : raw;
   if (value && isEventCategory(value)) {
     return value;

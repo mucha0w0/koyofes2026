@@ -5,11 +5,7 @@ export function isStampEntry(value: unknown): value is StampEntry {
     return false;
   }
   const entry = value as Record<string, unknown>;
-  return (
-    typeof entry.slug === 'string' &&
-    typeof entry.signature === 'string' &&
-    typeof entry.obtainedAt === 'string'
-  );
+  return typeof entry.slug === 'string' && typeof entry.signature === 'string' && typeof entry.obtainedAt === 'string';
 }
 
 export function isStampStorageData(value: unknown): value is StampStorageData {

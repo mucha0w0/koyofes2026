@@ -14,21 +14,21 @@ export const metadata = {
 
 export default function StampCollectPage() {
   return (
-      <PageLayout
-        backHref="/stamp"
-        backLabel="スタンプ帳に戻る"
-        subtitle="NFC / QR からのスタンプ獲得処理を行います"
-        title="スタンプ獲得"
+    <PageLayout
+      backHref="/stamp"
+      backLabel="スタンプ帳に戻る"
+      subtitle="NFC / QR からのスタンプ獲得処理を行います"
+      title="スタンプ獲得"
+    >
+      <Suspense
+        fallback={
+          <div className="flex justify-center py-16">
+            <Spinner className="size-6" />
+          </div>
+        }
       >
-        <Suspense
-          fallback={
-            <div className="flex justify-center py-16">
-              <Spinner className="size-6" />
-            </div>
-          }
-        >
-          <StampCollectClient />
-        </Suspense>
-      </PageLayout>
-    );
+        <StampCollectClient />
+      </Suspense>
+    </PageLayout>
+  );
 }

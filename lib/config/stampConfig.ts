@@ -1,9 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 
-import {
-  getEventCategoryIcon,
-  getEventCategoryLabel,
-} from '@/lib/config/event-categories';
+import { getEventCategoryIcon, getEventCategoryLabel } from '@/lib/config/event-categories';
 import { STAMP_SOURCE_CATEGORIES, type StampSourceCategory } from '@/lib/types/stamp';
 export { STAMP_SOURCE_CATEGORIES, type StampSourceCategory };
 

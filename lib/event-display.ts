@@ -9,9 +9,7 @@ export interface EventLocationDisplay {
 }
 
 /** 場所・階・教室を表示用にフォーマット */
-export function formatLocation(
-  event: Pick<Event, 'location' | 'floor' | 'classroom'>,
-): EventLocationDisplay {
+export function formatLocation(event: Pick<Event, 'location' | 'floor' | 'classroom'>): EventLocationDisplay {
   const firstLine = [event.location];
   if (event.floor) firstLine.push(event.floor);
 
@@ -22,9 +20,7 @@ export function formatLocation(
 }
 
 /** 参加人数の上下限を表示用にフォーマット */
-export function formatParticipants(
-  event: Pick<Event, 'participantsUL' | 'participantsLL'>,
-): string {
+export function formatParticipants(event: Pick<Event, 'participantsUL' | 'participantsLL'>): string {
   const { participantsUL, participantsLL } = event;
 
   // Both empty/undefined = unlimited

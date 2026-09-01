@@ -25,21 +25,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // CJSの二重底（.default）を安全にすり抜けるための設定抽出
-const tailwindConfig = (tailwindcss as any).configs?.['flat/recommended']
-  || (tailwindcss as any).default?.configs?.['flat/recommended']
-  || [];
+const tailwindConfig =
+  (tailwindcss as any).configs?.['flat/recommended'] ||
+  (tailwindcss as any).default?.configs?.['flat/recommended'] ||
+  [];
 
 export default tseslint.config(
   // 1. 【最重要】ビルド成果物や設定ファイルを不要な警告から除外する（完全無視設定）
   {
-    ignores: [
-      '.next/**',
-      'node_modules/**',
-      'dist/**',
-      'out/**',
-      'next.config.mjs',
-      'postcss.config.mjs',
-    ],
+    ignores: ['.next/**', 'node_modules/**', 'dist/**', 'out/**', 'next.config.mjs', 'postcss.config.mjs'],
   },
 
   // 2. 基本的な推奨ルールセット
@@ -174,5 +168,5 @@ export default tseslint.config(
   },
 
   // 12. Prettierと競合するルールをすべてOFFにする
-  eslintConfigPrettier as any
+  eslintConfigPrettier as any,
 );
