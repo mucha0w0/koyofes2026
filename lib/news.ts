@@ -1,7 +1,8 @@
-import { fetchMicroCMSList } from '@/lib/microcms/client';
+import { fetchMicroCMSContent, fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
 import type { MicroCMSNews } from '@/lib/microcms/types';
 
 export type { MicroCMSNews } from '@/lib/microcms/types';
+export type { MicroCMSFetchCache } from '@/lib/microcms/client';
 
 async function fetchNewsFromMicroCMS(): Promise<MicroCMSNews[]> {
   try {
@@ -22,12 +23,15 @@ export async function getNews(): Promise<MicroCMSNews[]> {
   }
 }
 
-export async function getNewsByID(id: string): Promise<MicroCMSNews | undefined> {
+/** ID でニュースを1件取得（コンテンツ API による直接取得） */
+export async function getNewsByID(
+  id: string,
+  cacheMode: MicroCMSFetchCache = 'default',
+): Promise<MicroCMSNews | null> {
   try {
-    const news = await fetchNewsFromMicroCMS();
-    return news.find((item) => item.id === id);
+    return await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode);
   } catch (error) {
-    console.error('ニュース取得に失敗しました:', error);
+    console.error(`ニュース取得に失敗しました (id=${id}):`, error);
     throw error;
   }
 }

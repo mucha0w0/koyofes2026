@@ -60,3 +60,32 @@ export async function fetchMicroCMSList<T>(
   const data: MicroCMSListResponse<T> = await response.json();
   return data.contents;
 }
+
+/**
+ * microCMS コンテンツ API で1件取得
+ * @param endpoint `news` などエンドポイント名（`/api/v1/` 以降）
+ * @param contentId コンテンツ ID
+ */
+export async function fetchMicroCMSContent<T>(
+  endpoint: string,
+  contentId: string,
+  cacheMode: MicroCMSFetchCache = 'default',
+): Promise<T | null> {
+  const { apiKey, serviceDomain } = getMicroCMSConfig();
+  const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}/${contentId}`;
+
+  const response = await fetch(url, {
+    headers: { 'X-MICROCMS-API-KEY': apiKey },
+    ...resolveFetchCache(cacheMode),
+  });
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json() as Promise<T>;
+}
