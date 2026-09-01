@@ -6,8 +6,6 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction }
 
 import { getNews, type MicroCMSNews } from '@/lib/news';
 
-export const revalidate = 60; // 1分ごとにISR
-
 const ITEMS_PER_PAGE = 10;
 
 interface NewsPageProps {

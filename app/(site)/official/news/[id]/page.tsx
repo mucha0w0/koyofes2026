@@ -9,9 +9,6 @@ import type { Metadata } from 'next';
 
 import { getNews, getNewsByID } from '@/lib/news';
 
-
-export const revalidate = 60;
-
 interface NewsDetailPageProps {
   params: Promise<{ id: string }>;
 }

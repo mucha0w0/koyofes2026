@@ -2,6 +2,7 @@ import { cache } from 'react';
 
 import { STAMP_CATEGORY_ORDER } from '@/lib/config/stampConfig';
 import { getEventBySlug, getEvents } from '@/lib/events';
+import type { MicroCMSFetchCache } from '@/lib/microcms/client';
 import type { Event } from '@/lib/types/event';
 import {
   STAMP_SOURCE_CATEGORIES,
@@ -54,11 +55,11 @@ function groupBooths(booths: StampBooth[]): StampBoothGroup[] {
 }
 
 /**
- * スタンプ対象ブース一覧（ISR キャッシュ + リクエスト内 dedupe）。
- * スタンプ帳ページ・verify API など複数箇所から参照しても CMS は1回。
+ * スタンプ対象ブース一覧（リクエスト内 dedupe）。
+ * 表示ページは ISR、照合 API は `no-store`（lib/cache.ts 参照）。
  */
-const loadStampBooths = cache(async (): Promise<StampBooth[]> => {
-  const events = await getEvents();
+const loadStampBooths = cache(async (cacheMode: MicroCMSFetchCache = 'default'): Promise<StampBooth[]> => {
+  const events = await getEvents(cacheMode);
   return events.map(toStampBooth).filter((booth): booth is StampBooth => booth !== null);
 });
 
@@ -75,15 +76,15 @@ export async function getStampBoothGroups(): Promise<StampBoothGroup[]> {
   return groupBooths(booths);
 }
 
-/** verify 用：有効 slug の集合（全件 fetch + グルーピング不要） */
+/** verify 用：有効 slug の集合（照合 API 向け・常に最新） */
 export async function getStampBoothSlugSet(): Promise<Set<string>> {
-  const booths = await loadStampBooths();
+  const booths = await loadStampBooths('no-store');
   return new Set(booths.map((booth) => booth.slug));
 }
 
-/** slug からブースを1件取得（collect API 向け・フィルタ付き単体取得） */
+/** slug からブースを1件取得（collect API 向け・常に最新） */
 export async function getStampBoothBySlug(slug: string): Promise<StampBooth | null> {
-  const event = await getEventBySlug(slug);
+  const event = await getEventBySlug(slug, 'no-store');
   if (!event) {
     return null;
   }

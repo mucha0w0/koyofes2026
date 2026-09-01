@@ -1,6 +1,11 @@
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 
+import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
+
+/** CMS ページ共通: ISR（間隔は lib/cache.ts） */
+export const revalidate = CMS_REVALIDATE_SECONDS;
+
 export default function SiteLayout({
   children,
 }: Readonly<{

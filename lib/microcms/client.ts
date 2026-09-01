@@ -1,7 +1,5 @@
+import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
 import type { MicroCMSListResponse } from '@/lib/microcms/types';
-
-/** production ISR 間隔（秒）。この間隔で CMS 更新が反映される */
-const REVALIDATE_SECONDS = 60;
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
 
@@ -27,7 +25,7 @@ function resolveFetchCache(cacheMode: MicroCMSFetchCache) {
   if (cacheMode === 'no-store' || process.env.NODE_ENV === 'development') {
     return { cache: 'no-store' as const };
   }
-  return { next: { revalidate: REVALIDATE_SECONDS } };
+  return { next: { revalidate: CMS_REVALIDATE_SECONDS } };
 }
 
 /**

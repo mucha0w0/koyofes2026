@@ -5,8 +5,6 @@ import type { PartSection } from '@/lib/types/part';
 
 import { getPartSections } from '@/lib/parts';
 
-export const revalidate = 60;
-
 export default async function PartPage() {
   let sections: PartSection[] = [];
   let error: string | null = null;

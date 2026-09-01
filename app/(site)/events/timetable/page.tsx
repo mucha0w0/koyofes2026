@@ -9,8 +9,6 @@ import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/e
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
-export const dynamic = 'force-dynamic';
-
 const DAY1_START_HOUR = 9;
 const DAY1_END_HOUR = 18;
 const DAY2_START_HOUR = 9;

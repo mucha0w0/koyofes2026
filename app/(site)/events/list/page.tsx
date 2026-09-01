@@ -6,8 +6,6 @@ import { PageLayout } from '@/components/page-layout';
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 
-export const dynamic = 'force-dynamic';
-
 export default async function EventListPage() {
   let events: Event[] = [];
   let error: string | null = null;
