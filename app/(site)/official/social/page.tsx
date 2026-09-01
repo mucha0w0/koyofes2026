@@ -1,7 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 const socialPlatforms = [
   {

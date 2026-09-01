@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { PageLayout } from '@/components/page-layout';
-import { SponsorCard } from '@/components/sponsor-card';
+import { PageLayout } from '@/components/layout/page-layout';
+import { SponsorCard } from '@/components/about/sponsor-card';
 
 import type { SponsorSection } from '@/lib/types/sponsor';
 

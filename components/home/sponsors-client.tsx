@@ -1,4 +1,4 @@
-// @/components/sponsors-client.tsx
+﻿// @/components/home/sponsors-client.tsx
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,6 +1,6 @@
-import { FAQCategoryNav } from '@/components/faq-category-nav';
-import { FAQCategorySection } from '@/components/faq-category-section';
-import { PageLayout } from '@/components/page-layout';
+import { FAQCategoryNav } from '@/components/guide/faq-category-nav';
+import { FAQCategorySection } from '@/components/guide/faq-category-section';
+import { PageLayout } from '@/components/layout/page-layout';
 
 import faqData from '@/lib/faqs.json';
 import { groupFaqsByCategory } from '@/lib/utils/groupFaqsByCategory';

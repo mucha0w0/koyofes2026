@@ -1,6 +1,6 @@
 import { Train, Bus, Car, MapPin } from 'lucide-react';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 export default function AccessPage() {
   return (

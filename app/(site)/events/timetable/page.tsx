@@ -2,8 +2,8 @@ import { Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { EventSearchSection } from '@/components/event-search';
-import { PageLayout } from '@/components/page-layout';
+import { EventSearchSection } from '@/components/events/event-search';
+import { PageLayout } from '@/components/layout/page-layout';
 
 import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
 

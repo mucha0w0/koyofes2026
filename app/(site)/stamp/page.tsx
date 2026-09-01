@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
-import { Spinner } from '@/components/spinner';
-import { PageLayout } from '@/components/page-layout';
+import { Spinner } from '@/components/common/spinner';
+import { PageLayout } from '@/components/layout/page-layout';
 import { StampBook } from '@/components/stamp/stamp-book';
 
 import { getStampBoothGroups } from '@/lib/stamp/booths';

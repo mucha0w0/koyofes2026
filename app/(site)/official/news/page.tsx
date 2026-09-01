@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { PageLayout } from '@/components/page-layout';
-import { Pagination } from '@/components/pagination';
+import { PageLayout } from '@/components/layout/page-layout';
+import { Pagination } from '@/components/news/pagination';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
 
 import { getNews, type MicroCMSNews } from '@/lib/news';

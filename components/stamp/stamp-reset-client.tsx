@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { Spinner } from '@/components/spinner';
+import { Spinner } from '@/components/common/spinner';
 import { Button } from '@/components/ui/button';
 
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';

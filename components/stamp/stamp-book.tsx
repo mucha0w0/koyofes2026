@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
-import { CategorySection } from '@/components/category-section';
+import { CategorySection } from '@/components/events/category-section';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';

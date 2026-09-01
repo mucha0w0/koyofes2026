@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 import kounaizu from './kounaizu.jpg'; // ← インポート追加
 

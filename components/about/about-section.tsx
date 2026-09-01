@@ -28,7 +28,7 @@ const items: AboutItem[] = [
   },
 ];
 
-export default function AboutSection() {
+export function AboutSection() {
   return (
     <div className="pb-6">
       {items.map((item, index) => (

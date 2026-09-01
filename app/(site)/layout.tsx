@@ -1,5 +1,5 @@
-import { SiteFooter } from '@/components/site-footer';
-import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
+import { SiteHeader } from '@/components/layout/site-header';
 
 /**
  * CMS ページ共通 ISR（秒）。fetch 側は lib/cache.ts の CMS_REVALIDATE_SECONDS と同値にすること。

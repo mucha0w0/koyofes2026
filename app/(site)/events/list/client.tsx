@@ -4,7 +4,7 @@ import { Search, RotateCcw } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useState, useMemo, useEffect } from 'react';
 
-import { ExhibitionCard } from '@/components/exhibition-card';
+import { ExhibitionCard } from '@/components/events/exhibition-card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';

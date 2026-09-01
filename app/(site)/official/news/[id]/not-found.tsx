@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 
 export default function NewsNotFound() {
   return (

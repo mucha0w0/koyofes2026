@@ -2,9 +2,9 @@ import { Clock, MapPin, Users, Building2 } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import { EventSearchSection } from '@/components/event-search';
-import { EventCarousel } from '@/components/event-carousel';
-import { EventMarkdown } from '@/components/event-markdown';
+import { EventCarousel } from '@/components/events/event-carousel';
+import { EventMarkdown } from '@/components/events/event-markdown';
+import { EventSearchSection } from '@/components/events/event-search';
 
 import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { formatEventTimeRange } from '@/lib/event-time';

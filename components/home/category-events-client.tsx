@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
-import { CategorySection } from '@/components/category-section';
+import { CategorySection } from '@/components/events/category-section';
 
 import { getEventCategoryIcon } from '@/lib/config/category-icons';
 import { Event } from '@/lib/types/event';

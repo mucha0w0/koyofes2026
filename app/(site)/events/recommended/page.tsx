@@ -1,6 +1,6 @@
-import { EventSearchSection } from '@/components/event-search';
-import { PageLayout } from '@/components/page-layout';
-import { RecommendedEventCard } from '@/components/recommended-event-card';
+import { EventSearchSection } from '@/components/events/event-search';
+import { PageLayout } from '@/components/layout/page-layout';
+import { RecommendedEventCard } from '@/components/events/recommended-event-card';
 
 import { getRecommendedEvents } from '@/lib/recommended-events';
 

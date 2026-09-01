@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 import type { Metadata } from 'next';

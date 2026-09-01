@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { EventListClient } from './client';
 
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/layout/page-layout';
 import { getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 

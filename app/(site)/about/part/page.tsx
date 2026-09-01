@@ -1,5 +1,5 @@
-import { PageLayout } from '@/components/page-layout';
-import { PartCard } from '@/components/part-card';
+import { PageLayout } from '@/components/layout/page-layout';
+import { PartCard } from '@/components/about/part-card';
 
 import type { PartSection } from '@/lib/types/part';
 

@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-import { Spinner } from '@/components/spinner';
+import { Spinner } from '@/components/common/spinner';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';

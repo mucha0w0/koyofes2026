@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
-import { Spinner } from '@/components/spinner';
-import { PageLayout } from '@/components/page-layout';
+import { Spinner } from '@/components/common/spinner';
+import { PageLayout } from '@/components/layout/page-layout';
 import { StampCollectClient } from '@/components/stamp/stamp-collect-client';
 
 export const metadata = {
