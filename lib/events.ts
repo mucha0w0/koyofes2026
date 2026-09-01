@@ -43,7 +43,8 @@ export async function fetchEventsFromMicroCMS(
   }
 }
 
-export async function getEvents(cacheMode: MicroCMSFetchCache = 'default'): Promise<Event[]> {
+/** 全イベント一覧（リクエスト内 dedupe） */
+export const getEvents = cache(async (cacheMode: MicroCMSFetchCache = 'default'): Promise<Event[]> => {
   try {
     const microCMSEvents = await fetchEventsFromMicroCMS(cacheMode);
     return microCMSEvents.map(transformMicroCMSEvent);
@@ -51,7 +52,7 @@ export async function getEvents(cacheMode: MicroCMSFetchCache = 'default'): Prom
     console.error('イベント取得に失敗しました:', error);
     throw error;
   }
-}
+});
 
 /** slug でイベントを1件取得（一覧 API より軽量・リクエスト内 dedupe） */
 export const getEventBySlug = cache(async (
