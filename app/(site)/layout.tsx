@@ -1,5 +1,4 @@
-import { SiteFooter } from '@/components/layout/site-footer';
-import { SiteHeader } from '@/components/layout/site-header';
+import { SiteShell } from '@/components/layout/site-shell';
 
 /**
  * CMS ページ共通 ISR（秒）。fetch 側は lib/cache.ts の CMS_REVALIDATE_SECONDS と同値にすること。
@@ -12,11 +11,5 @@ export default function SiteLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-      <div className="flex-1">{children}</div>
-      <SiteFooter />
-    </div>
-  );
+  return <SiteShell>{children}</SiteShell>;
 }
