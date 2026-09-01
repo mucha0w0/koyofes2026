@@ -1,52 +1,440 @@
 # KoYoFes Website
 
-## プロジェクト概要
+2026年度 **こうよう祭（KoYoFes）** の公式ウェブサイトです。企画情報の検索・閲覧、タイムテーブル、スタンプラリー、お知らせなど、来場者向けの情報を提供します。
 
-このリポジトリは、2026年度こうよう祭（KoYoFes）の公式ホームページです。
+## 目次
 
-## ページ
+- [技術スタック](#技術スタック)
+- [主な機能](#主な機能)
+- [サイト構成](#サイト構成)
+- [ディレクトリ構成](#ディレクトリ構成)
+- [開発環境のセットアップ](#開発環境のセットアップ)
+- [環境変数](#環境変数)
+- [npm スクリプト](#npm-スクリプト)
+- [コンテンツの更新方法](#コンテンツの更新方法)
+- [スタンプラリー運用](#スタンプラリー運用)
+- [キャッシュ方針](#キャッシュ方針)
+- [デプロイ](#デプロイ)
+- [リント・品質チェック](#リント品質チェック)
+- [年度更新チェックリスト](#年度更新チェックリスト)
 
-- `/about`：こうよう祭について
-  - `/overview`：こうよう祭とは
-  - `/theme`：今年度テーマ
-  - `/part`：運営パート紹介
-  - `/sponsor`：協賛
-  - `/contact`：お問い合わせ
-
-- `/events`：企画情報
-  - `/list`：企画一覧
-  - `/recommended`：おすすめ企画
-  - `/timetable`：タイムテーブル
-  - `/[id]`：企画詳細
-
-- `/guide`：ご案内
-  - `/access`：アクセス
-  - `/admission`：入場について
-  - `/faq`：よくある質問
-  - `/map`：会場マップ
-  - `/notice`：注意事項
-
-- `/official`：公式コンテンツ
-  - `/news`：お知らせ一覧
-    - `/[id]`：お知らせ詳細
-  - `/goods`：公式グッズ
-  - `/pamphlet`：パンフレット
-
-- トップページ
-- 404ページ
-
-## 主な機能
-
-- 企画検索
-- カテゴリ・ジャンルによる絞り込み
-- 企画詳細ページ
-- ステージ企画詳細ページ
-- タイムテーブル表示
-- レスポンシブデザイン
+---
 
 ## 技術スタック
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
+| 分類 | 技術 |
+|------|------|
+| フレームワーク | [Next.js](https://nextjs.org/) 16（App Router） |
+| UI | [React](https://react.dev/) 19 |
+| 言語 | [TypeScript](https://www.typescriptlang.org/) |
+| スタイル | [Tailwind CSS](https://tailwindcss.com/) 4 |
+| UI コンポーネント | [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/) |
+| アイコン | [Lucide React](https://lucide.dev/) / [React Icons](https://react-icons.github.io/react-icons/) |
+| CMS | [microCMS](https://microcms.io/) |
+| ホスティング | [Vercel](https://vercel.com/) |
+| アナリティクス | [@vercel/analytics](https://vercel.com/docs/analytics) |
+
+---
+
+## 主な機能
+
+### 企画情報
+
+- **企画一覧・検索**（`/events/list`）: キーワード検索、カテゴリ・ジャンルによる絞り込み
+- **企画詳細**（`/events/[slug]`）: 企画の詳細情報、画像、開催時間・場所の表示
+- **おすすめ企画**（`/events/recommended`）: 運営パートメンバーによるおすすめ企画の紹介
+- **タイムテーブル**（`/events/timetable`）: ステージ企画の2日間スケジュール表示
+
+### スタンプラリー
+
+- **スタンプ帳**（`/stamp`）: 対象ブース一覧と獲得状況の表示
+- **スタンプ獲得**（`/stamp/collect`）: NFC / QR コードからのスタンプ取得（検索エンジン非対象）
+- **サーバー署名検証**: 改ざん防止のため HMAC 署名でスタンプの正当性を検証
+- **ふくびき券条件**: 対象ブースのうち 3 個以上のスタンプ獲得でクリア（`lib/config/stampConfig.ts` で設定）
+
+### 公式コンテンツ
+
+- **お知らせ**（`/official/news`）: microCMS から取得したニュース一覧・詳細
+- **公式 SNS**（`/official/social`）: Instagram / X / YouTube へのリンク
+- **パンフレット**（`/official/pamphlet`）: PDF ビューアとダウンロード
+
+### ご案内
+
+- **アクセス**（`/guide/access`）: 電車・バス・車でのアクセス方法
+- **会場マップ**（`/guide/map`）: 構内図と各エリアの説明
+- **よくある質問**（`/guide/faq`）: カテゴリ別 FAQ（`lib/faqs.json` から読み込み）
+
+### こうよう祭について
+
+- **こうよう祭とは**（`/about/overview`）: 祭の概要・開催情報
+- **テーマ**（`/about/theme`）: 今年度のテーマ紹介
+- **パート**（`/about/part`）: 運営パートメンバー紹介（microCMS）
+- **ご協賛**（`/about/sponsor`）: 協賛企業・団体一覧（microCMS）
+- **お問い合わせ**（`/about/contact`）: 連絡先情報
+
+### トップページ
+
+ヒーロー、カウントダウン、企画検索、カテゴリ別企画、PR 動画、SNS CTA、タイムテーブルプレビュー、リンク集、お知らせ、協賛企業を表示します。
+
+### その他
+
+- レスポンシブデザイン（モバイル・タブレット・デスクトップ対応）
+- CMS 取得失敗時のエラーページ・スケルトン UI
+- 404 ページ
+
+---
+
+## サイト構成
+
+ナビゲーション・リンクの定義は **`lib/config/nav.ts`** が単一ソースです。ヘッダー、フッター、トップページのリンク集はすべてこのファイルから生成されます。URL やラベルの変更はここだけ行ってください。
+
+### ルーティング一覧
+
+| パス | 説明 |
+|------|------|
+| `/` | トップページ |
+| `/events/list` | 企画一覧・検索 |
+| `/events/recommended` | おすすめ企画 |
+| `/events/timetable` | タイムテーブル |
+| `/events/[slug]` | 企画詳細 |
+| `/official/news` | お知らせ一覧 |
+| `/official/news/[id]` | お知らせ詳細 |
+| `/official/social` | 公式 SNS |
+| `/official/pamphlet` | パンフレット |
+| `/stamp` | スタンプラリー |
+| `/stamp/collect` | スタンプ獲得（NFC/QR 用・非公開） |
+| `/stamp/reset` | スタンプリセット（デバッグ用・非公開） |
+| `/guide/access` | アクセス |
+| `/guide/map` | 会場マップ |
+| `/guide/faq` | よくある質問 |
+| `/about/overview` | こうよう祭とは |
+| `/about/theme` | テーマ |
+| `/about/part` | パート紹介 |
+| `/about/sponsor` | ご協賛 |
+| `/about/contact` | お問い合わせ |
+
+### API ルート
+
+| パス | メソッド | 説明 |
+|------|----------|------|
+| `/api/stamp` | POST | トークンからスタンプを発行（署名付き） |
+| `/api/stamp/verify` | POST | 保存済みスタンプの署名検証・クリア判定 |
+
+---
+
+## ディレクトリ構成
+
+```
+.
+├── app/                        # Next.js App Router
+│   ├── (site)/                 # サイト本体（共通レイアウト付き）
+│   │   ├── page.tsx            # トップページ
+│   │   ├── about/              # こうよう祭について
+│   │   ├── events/             # 企画情報
+│   │   ├── guide/              # ご案内
+│   │   ├── official/           # 公式コンテンツ
+│   │   ├── stamp/              # スタンプラリー
+│   │   └── layout.tsx          # サイト共通レイアウト（ISR 設定）
+│   ├── api/stamp/              # スタンプラリー API
+│   ├── globals.css             # グローバルスタイル
+│   └── layout.tsx              # ルートレイアウト（フォント・メタデータ）
+├── components/
+│   ├── about/                  # 概要・パート・協賛関連
+│   ├── cms/                    # CMS ページ共通（エラー・スケルトン）
+│   ├── common/                 # 共通 UI（スピナーなど）
+│   ├── events/                 # 企画検索・カード・タイムテーブル
+│   ├── guide/                  # FAQ 関連
+│   ├── home/                   # トップページ各セクション
+│   ├── layout/                 # ヘッダー・フッター・ページレイアウト
+│   ├── news/                   # お知らせ
+│   ├── stamp/                  # スタンプラリー UI
+│   └── ui/                     # shadcn/ui プリミティブ
+├── lib/
+│   ├── config/                 # 設定の単一ソース
+│   │   ├── nav.ts              # ナビゲーション定義
+│   │   ├── event-categories.ts # 企画カテゴリ定義
+│   │   └── stampConfig.ts      # スタンプラリー設定
+│   ├── microcms/               # microCMS クライアント・型定義
+│   ├── stamp/                  # スタンプラリー（署名・トークン・ブース取得）
+│   ├── types/                  # ドメイン型定義
+│   ├── events.ts               # 企画データ取得・変換
+│   ├── news.ts                 # お知らせデータ取得
+│   ├── parts.ts                # パートデータ取得
+│   ├── sponsors.ts             # 協賛データ取得
+│   ├── recommended-events.ts   # おすすめ企画の組み立て
+│   ├── timetable.ts            # タイムテーブル用データ変換
+│   ├── faqs.json               # FAQ データ
+│   └── cache.ts                # キャッシュ方針の定数
+├── public/                     # 静的ファイル（アイコン、画像、PDF など）
+├── scripts/
+│   └── generate-stamp-tokens.mjs # スタンプトークン生成スクリプト
+└── stamp-tokens/               # トークン生成出力（git 管理外）
+```
+
+---
+
+## 開発環境のセットアップ
+
+### 必要条件
+
+- **Node.js** 22 以上（`@types/node` のバージョンに準拠）
+- **npm**
+
+### 手順
+
+```bash
+# 1. リポジトリをクローン
+git clone <repository-url>
+cd test2_2026-05-19
+
+# 2. 依存パッケージをインストール
+npm install
+
+# 3. 環境変数を設定（下記「環境変数」参照）
+#    プロジェクト直下に .env.local を作成
+
+# 4. 開発サーバーを起動
+npm run dev
+```
+
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認します。
+
+> **注意**: microCMS の環境変数が未設定の場合、企画・お知らせ・協賛など CMS 連携ページはエラーになります。スタンプラリー機能を使う場合は、スタンプ関連の環境変数も必要です。
+
+---
+
+## 環境変数
+
+プロジェクト直下に `.env.local` を作成し、以下を設定します。`.env.local` は git 管理外です（`.gitignore` 参照）。
+
+### microCMS（必須: CMS ページを動かす場合）
+
+| 変数名 | 説明 | 例 |
+|--------|------|-----|
+| `MICROCMS_API_KEY` | microCMS の API キー | `xxxxxxxx` |
+| `MICROCMS_SERVICE_DOMAIN` | サービスドメイン（`.microcms.io` より前の部分） | `koyofes` |
+
+### スタンプラリー（必須: スタンプ機能を動かす場合）
+
+| 変数名 | 説明 | 例 |
+|--------|------|-----|
+| `STAMP_SIGNING_SECRET` | スタンプ署名用の秘密鍵（十分な長さのランダム文字列） | `your-random-secret-here` |
+| `STAMP_TOKEN_MAP` | トークンとブース slug の対応表（JSON オブジェクト） | `{"abc123...":"booth-slug",...}` |
+
+`STAMP_TOKEN_MAP` の形式:
+
+```json
+{"ランダムトークン1": "企画のslug1", "ランダムトークン2": "企画のslug2"}
+```
+
+トークンは `npm run stamp:generate-tokens` で自動生成できます（[スタンプラリー運用](#スタンプラリー運用) 参照）。
+
+### 設定例（`.env.local`）
+
+```env
+MICROCMS_API_KEY=your-api-key
+MICROCMS_SERVICE_DOMAIN=your-service-domain
+
+STAMP_SIGNING_SECRET=your-signing-secret
+STAMP_TOKEN_MAP={"exampletoken1234567890abcdef":"example-booth-slug"}
+```
+
+本番環境（Vercel）でも同じ変数を **Environment Variables** に設定してください。
+
+---
+
+## npm スクリプト
+
+| コマンド | 説明 |
+|----------|------|
+| `npm run dev` | 開発サーバーを起動（ホットリロード有効） |
+| `npm run build` | 本番ビルド |
+| `npm run start` | 本番ビルド後のサーバー起動 |
+| `npm run lint` | ESLint によるコードチェック |
+| `npm run lint:fix` | ESLint の自動修正 |
+| `npm run markuplint` | Markuplint による HTML/JSX 構造チェック |
+| `npm run lint:html` | Markuplint（`app/`・`components/` のみ） |
+| `npm run lint:html:fix` | Markuplint の自動修正 |
+| `npm run secretlint` | シークレット漏洩チェック |
+| `npm run prettier` | Prettier によるコード整形 |
+| `npm run stamp:generate-tokens` | スタンプラリートークンの生成 |
+
+---
+
+## コンテンツの更新方法
+
+コンテンツの更新場所を整理します。**コードを触らずに更新できるもの**と**開発が必要なもの**を区別してください。
+
+### microCMS 管理画面で更新（コード変更不要）
+
+| コンテンツ | microCMS エンドポイント | 取得関数 | 表示ページ |
+|------------|-------------------------|----------|------------|
+| 企画情報 | `events` | `lib/events.ts` | 企画一覧・詳細・タイムテーブル・スタンプラリー |
+| お知らせ | `news` | `lib/news.ts` | `/official/news` |
+| 運営パート | `parts` | `lib/parts.ts` | `/about/part`、おすすめ企画 |
+| 協賛企業 | `sponsors` | `lib/sponsors.ts` | `/about/sponsor`、トップページ |
+
+microCMS での更新は、本番では最大 **60 秒** の遅延で反映されます（[キャッシュ方針](#キャッシュ方針) 参照）。
+
+### コード内のファイルを編集
+
+| コンテンツ | ファイル | 表示ページ |
+|------------|----------|------------|
+| FAQ | `lib/faqs.json` | `/guide/faq` |
+| ナビゲーション・リンク | `lib/config/nav.ts` | ヘッダー・フッター・トップページ |
+| 企画カテゴリ定義 | `lib/config/event-categories.ts` | 企画一覧・カテゴリ表示全般 |
+| スタンプラリー設定 | `lib/config/stampConfig.ts` | `/stamp` |
+| テーマページ本文 | `app/(site)/about/theme/page.tsx` | `/about/theme` |
+| 概要ページ本文 | `components/about/about-section.tsx` など | `/about/overview` |
+| アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
+| 会場マップ画像 | `app/(site)/guide/map/kounaizu.jpg` | `/guide/map` |
+| お問い合わせ | `app/(site)/about/contact/page.tsx` | `/about/contact` |
+| 公式 SNS リンク | `app/(site)/official/social/page.tsx` | `/official/social` |
+| パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
+
+### 企画カテゴリ
+
+`lib/config/event-categories.ts` で定義されています。
+
+| ID | 表示名 | 用途 |
+|----|--------|------|
+| `class-exhibit` | クラス・学科展 | スタンプラリー対象 |
+| `volunteer-exhibit` | 有志展示 | スタンプラリー対象 |
+| `booth` | 模擬店 | |
+| `stage` | ステージ | タイムテーブル表示対象 |
+| `food-truck` | キッチンカー | |
+
+---
+
+## スタンプラリー運用
+
+### 仕組み
+
+1. microCMS の `events` から、カテゴリが `class-exhibit` または `volunteer-exhibit` の企画をスタンプ対象ブースとして取得
+2. 各ブースにランダムトークンを割り当て（`STAMP_TOKEN_MAP`）
+3. NFC / QR コードの URL は `https://koyosai.com/stamp/collect?token=<トークン>` 形式
+4. 来場者が URL にアクセスすると `/api/stamp` が署名付きスタンプを発行
+5. スタンプはブラウザの LocalStorage に保存（キー: `koyosai_stamp_data_2026`）
+6. `/api/stamp/verify` で署名を検証し、3 個以上でクリア判定
+
+### トークン生成
+
+```bash
+# 初回または新規ブース追加時
+npm run stamp:generate-tokens
+
+# 全トークンを再発行（既存 NFC が無効になるため注意）
+node scripts/generate-stamp-tokens.mjs --force-rotate
+```
+
+**前提条件**: `.env.local` に `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が設定されていること。
+
+**出力先**（いずれも `stamp-tokens/` 配下、git 管理外）:
+
+| ファイル | 用途 |
+|----------|------|
+| `stamp-token-map.env.txt` | Vercel / `.env.local` に貼り付ける `STAMP_TOKEN_MAP=` 1 行 |
+| `stamp-nfc-urls.csv` | NFC 書き込み用 URL 一覧 |
+| `stamp-tokens.json` | slug / title / token / url の詳細 |
+
+**運用フロー**:
+
+1. microCMS にスタンプ対象の企画を登録・公開
+2. `npm run stamp:generate-tokens` を実行
+3. 出力された `stamp-token-map.env.txt` の内容を Vercel の環境変数 `STAMP_TOKEN_MAP` に設定
+4. `stamp-nfc-urls.csv` をもとに NFC タグへ URL を書き込み
+5. 本番デプロイ後、実機でスタンプ獲得をテスト
+
+### デバッグ
+
+- `/stamp/reset`: 端末の LocalStorage に保存されたスタンプ記録を消去（検索エンジン非対象）
+- 開発環境では microCMS データは常に最新を取得（キャッシュなし）
+
+---
+
+## キャッシュ方針
+
+キャッシュ設定は `lib/cache.ts` で一元管理しています。
+
+| 対象 | 方針 | 設定箇所 |
+|------|------|----------|
+| CMS ページ全体 | ISR 60 秒 | `app/(site)/layout.tsx` の `revalidate = 60` |
+| microCMS fetch（通常） | `revalidate: 60` | `lib/microcms/client.ts` |
+| スタンプ照合 API | `no-store`（常に最新） | `lib/stamp/booths.ts` の `getStampBoothSlugSet` など |
+
+ISR 間隔を変更する場合は、`lib/cache.ts` の `CMS_REVALIDATE_SECONDS` と `app/(site)/layout.tsx` の `revalidate` を**両方**同じ値に揃えてください（Next.js の制約により layout 側はリテラル直書きが必要です）。
+
+---
+
+## デプロイ
+
+本番環境は **Vercel** でホスティングしています。
+
+### ビルド設定
+
+`vercel.json` より:
+
+- インストール: `npm install`
+- ビルド: `npm run build`
+
+### デプロイ手順（概要）
+
+1. GitHub リポジトリと Vercel プロジェクトを連携
+2. [環境変数](#環境変数) を Vercel の Environment Variables に設定
+3. `main` ブランチへの push で自動デプロイ
+
+### 本番のみ有効な機能
+
+- `@vercel/analytics` によるアクセス解析（`app/layout.tsx` で `NODE_ENV === 'production'` のときのみ読み込み）
+
+---
+
+## リント・品質チェック
+
+コミット前に以下の実行を推奨します。
+
+```bash
+npm run lint          # ESLint
+npm run lint:html     # Markuplint（HTML 構造）
+npm run secretlint    # シークレット漏洩チェック
+```
+
+### Git コミットメッセージ
+
+[Conventional Commits](https://www.conventionalcommits.org/) 形式で、**日本語**で記述します。
+
+```
+feat: スタンプラリー獲得ダイアログを追加
+fix: タイムテーブルの時刻表示を修正
+docs: README の環境変数セクションを更新
+```
+
+---
+
+## 年度更新チェックリスト
+
+毎年の祭準備時に確認・更新が必要な項目です。
+
+### コンテンツ
+
+- [ ] microCMS の企画・お知らせ・パート・協賛データを新年度用に更新
+- [ ] テーマページ（`/about/theme`）の文案・テーマ名
+- [ ] 概要ページ（`/about/overview`）の開催日・概要
+- [ ] FAQ（`lib/faqs.json`）の内容
+- [ ] パンフレット PDF（`public/koyofes2026_pamphlet.pdf`）の差し替え
+- [ ] 会場マップ画像（`app/(site)/guide/map/kounaizu.jpg`）
+- [ ] 公式 SNS のアカウント・URL（`/official/social`）
+- [ ] お問い合わせ先（`/about/contact`）
+
+### 設定・コード
+
+- [ ] `lib/config/stampConfig.ts` の `storageKey`（LocalStorage キー）を年度に合わせて変更
+- [ ] メタデータ（`app/layout.tsx` の `title` / `description`）
+- [ ] スタンプラリートークンの再生成と Vercel 環境変数の更新
+- [ ] NFC タグへの URL 書き込み
+
+### インフラ
+
+- [ ] Vercel 環境変数の確認（特に `STAMP_TOKEN_MAP` / `STAMP_SIGNING_SECRET`）
+- [ ] microCMS API キーの有効期限・権限確認
+- [ ] 本番 URL・ドメイン設定の確認
