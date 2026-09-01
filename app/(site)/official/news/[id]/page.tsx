@@ -1,68 +1,68 @@
-'use client';
-
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { use, useState, useEffect } from 'react';
+import { notFound } from 'next/navigation';
 
 import { PageLayout } from '@/components/page-layout';
-// 👇 ここで UI コンポーネントをインポートします
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-import { type MicroCMSNews } from '@/lib/news';
+import type { Metadata } from 'next';
 
-export default function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const [news, setNews] = useState<MicroCMSNews | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+import { getNews, getNewsByID } from '@/lib/news';
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(`/api/news/${id}`);
-        if (!response.ok) {
-          throw new Error('ニュースが見つかりません');
-        }
-        const data = await response.json();
-        setNews(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'ニュースの取得に失敗しました');
-      } finally {
-        setLoading(false);
-      }
+
+export const revalidate = 60;
+
+interface NewsDetailPageProps {
+  params: Promise<{ id: string }>;
+}
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').trim();
+}
+
+export async function generateStaticParams() {
+  try {
+    const newsItems = await getNews();
+    return newsItems.map((item) => ({ id: item.id }));
+  } catch (error) {
+    console.error('静的パラメータ生成エラー:', error);
+    return [];
+  }
+}
+
+export async function generateMetadata({ params }: NewsDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const news = await getNewsByID(id);
+
+  if (!news) {
+    return {
+      title: 'お知らせが見つかりません | こうよう祭',
     };
-
-    void fetchNews(); // ← void を付けて浮きPromiseを明示的に無視
-  }, [id]);
-
-  if (loading) {
-    return (
-      <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
-          <div className="max-w-3xl text-center py-12">
-            <p className="text-muted-foreground">読み込み中...</p>
-          </div>
-        </PageLayout>
-    );
   }
 
-  if (error || !news) {
-    return (
-      <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
-          <div className="max-w-3xl text-center">
-            <p className="text-muted-foreground mb-6">申し訳ございません。お探しのお知らせは見つかりませんでした。</p>
-            <Link
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              href="/official/news"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              お知らせ一覧に戻る
-            </Link>
-          </div>
-        </PageLayout>
-    );
+  const description = stripHtml(news.content).slice(0, 160);
+
+  return {
+    title: `${news.title} | お知らせ | こうよう祭`,
+    description,
+    openGraph: {
+      title: news.title,
+      description,
+      type: 'article',
+      publishedTime: news.publishedAt,
+      modifiedTime: news.updatedAt,
+    },
+  };
+}
+
+export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
+  const { id } = await params;
+  const news = await getNewsByID(id);
+
+  if (!news) {
+    notFound();
   }
 
-  // dateを表示用にフォーマット
   const formattedDate = new Date(news.date)
     .toLocaleDateString('ja-JP', {
       year: 'numeric',
@@ -72,35 +72,29 @@ export default function NewsDetailPage({ params }: { params: Promise<{ id: strin
     .replace(/\//g, '.');
 
   return (
-      <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
-        <div className="max-w-3xl">
-          <Link
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-            href="/official/news"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            お知らせ一覧に戻る
-          </Link>
+    <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
+      <div className="max-w-3xl">
+        <Link
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+          href="/official/news"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          お知らせ一覧に戻る
+        </Link>
 
-          {/* 👇 <article className="bg-card p-8"> を <Card> に変更 */}
-          {/* 元々の p-8（上下左右 2rem の余白）に合わせるため、少し微調整しています */}
-          <Card className="border border-[#e6e9ed] pt-2">
-            <CardHeader className="px-8 pt-6 pb-2">
-              {/* 日付 */}
-              <div className="flex items-center gap-3">
-                <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
-              </div>
+        <Card className="border border-[#e6e9ed] pt-2">
+          <CardHeader className="px-8 pt-6 pb-2">
+            <div className="flex items-center gap-3">
+              <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+            </div>
+            <CardTitle className="font-medium text-xl mt-1">{news.title}</CardTitle>
+          </CardHeader>
 
-              {/* 記事タイトル (詳細画面なので文字サイズを大きめの text-2xl に変更しても格好いいです) */}
-              <CardTitle className="font-medium text-xl mt-1">{news.title}</CardTitle>
-            </CardHeader>
-
-            {/* 👇 本文全体を CardContent に配置 */}
-            <CardContent className="px-8 pb-8">
-              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: news.content }} />
-            </CardContent>
-          </Card>
-        </div>
-      </PageLayout>
-    );
+          <CardContent className="px-8 pb-8">
+            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: news.content }} />
+          </CardContent>
+        </Card>
+      </div>
+    </PageLayout>
+  );
 }
