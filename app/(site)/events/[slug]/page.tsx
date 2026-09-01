@@ -7,7 +7,7 @@ import { EventCarousel } from '@/components/event-carousel';
 import { EventMarkdown } from '@/components/event-markdown';
 
 import { formatEventTimeRange } from '@/lib/event-time';
-import { getEvents } from '@/lib/events';
+import { getEventBySlug, getEvents } from '@/lib/events';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
 
@@ -69,17 +69,6 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getEvent(slug: string): Promise<Event | null> {
-  try {
-    const events = await getEvents();
-    const event = events.find((e) => e.slug === slug);
-    return event || null;
-  } catch (error) {
-    console.error('イベント取得エラー:', error);
-    return null;
-  }
-}
-
 export async function generateStaticParams() {
   try {
     const events = await getEvents();
@@ -94,7 +83,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const event = await getEvent(slug);
+  const event = await getEventBySlug(slug);
 
   if (!event) {
     return {
@@ -110,7 +99,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function EventPage({ params }: PageProps) {
   const { slug } = await params;
-  const event = await getEvent(slug);
+  const event = await getEventBySlug(slug);
 
   if (!event) {
     notFound();

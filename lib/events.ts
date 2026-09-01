@@ -1,3 +1,5 @@
+import { cache } from 'react';
+
 import type { MicroCMSEvent } from '@/lib/microcms/types';
 
 import { formatTimeFromNumber } from '@/lib/event-time';
@@ -51,11 +53,11 @@ export async function getEvents(cacheMode: MicroCMSFetchCache = 'default'): Prom
   }
 }
 
-/** slug でイベントを1件取得（一覧 API より軽量） */
-export async function getEventBySlug(
+/** slug でイベントを1件取得（一覧 API より軽量・リクエスト内 dedupe） */
+export const getEventBySlug = cache(async (
   slug: string,
   cacheMode: MicroCMSFetchCache = 'default',
-): Promise<Event | null> {
+): Promise<Event | null> => {
   try {
     const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode, {
       filters: `slug[equals]${slug}`,
@@ -67,4 +69,4 @@ export async function getEventBySlug(
     console.error(`イベント取得に失敗しました (slug=${slug}):`, error);
     throw error;
   }
-}
+});
