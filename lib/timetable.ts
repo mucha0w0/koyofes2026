@@ -1,6 +1,7 @@
+import type { Event } from '@/lib/types/event';
+
 import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/event-time';
 import { getEvents } from '@/lib/events';
-import type { Event } from '@/lib/types/event';
 
 export type TimetableDayKey = 'time-day1' | 'time-day2';
 
