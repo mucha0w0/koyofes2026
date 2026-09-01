@@ -2,8 +2,8 @@ import { Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { EventSearchSection } from '@/components/events/event-search';
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
+import { EventSearchSection } from '@/components/events/event-search';
 
 import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
 
