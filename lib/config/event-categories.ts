@@ -1,8 +1,8 @@
 import { Building2, Mic2, ShoppingBag, Truck, Users } from 'lucide-react';
 
-import { EVENT_CATEGORIES, type EventCategory } from '@/lib/types/event';
-
 import type { LucideIcon } from 'lucide-react';
+
+import { EVENT_CATEGORIES, type EventCategory } from '@/lib/types/event';
 
 export interface EventCategoryConfig {
   label: string;
