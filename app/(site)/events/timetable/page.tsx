@@ -5,31 +5,24 @@ import Link from 'next/link';
 import { EventSearchSection } from '@/components/event-search';
 import { PageLayout } from '@/components/page-layout';
 
-import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/event-time';
-import { getEvents } from '@/lib/events';
-import { Event } from '@/lib/types/event';
+import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
 
 const DAY1_START_HOUR = 9;
 const DAY1_END_HOUR = 18;
 const DAY2_START_HOUR = 9;
 const DAY2_END_HOUR = 18;
 const PX_PER_HOUR = 80;
-const PX_PER_MIN = PX_PER_HOUR / 60;
 const CARD_HEIGHT = 88;
 
-interface ScheduleEvent {
-  title: string;
-  organization: string;
-  icon?: string;
-  slug: string; // 追加
-  startMin: number;
-  endMin: number;
-  duration: number;
-  topPx: number;
-  timeRange: string;
-}
-
-function TimelineView({ events, startHour, endHour }: { events: ScheduleEvent[]; startHour: number; endHour: number }) {
+function TimelineView({
+  events,
+  startHour,
+  endHour,
+}: {
+  events: ScheduleLayoutEvent[];
+  startHour: number;
+  endHour: number;
+}) {
   const totalHeight = (endHour - startHour) * PX_PER_HOUR;
   const timeLabels: string[] = [];
   for (let h = startHour; h <= endHour; h++) {
@@ -117,36 +110,17 @@ function TimelineView({ events, startHour, endHour }: { events: ScheduleEvent[];
 }
 
 export default async function StageEventsPage() {
-  let stageEvents: Event[] = [];
-  try {
-    const events = await getEvents();
-    stageEvents = events.filter((e) => e.category === 'stage');
-  } catch (error) {
-    console.error('イベント取得エラー:', error);
-  }
+  const stageEvents = await getStageEvents();
 
-  const toScheduleEvents = (timeKey: 'time-day1' | 'time-day2', startHour: number) =>
-    stageEvents
-      .map((event): ScheduleEvent | null => {
-        const parsed = parseEventTime(event[timeKey]);
-        if (!parsed) return null;
-        return {
-          title: event.title,
-          organization: event.organization,
-          icon: event.icon ?? undefined,
-          slug: event.slug,
-          startMin: parsed.startMin,
-          endMin: parsed.endMin,
-          duration: eventTimeDuration(parsed),
-          topPx: (parsed.startMin - startHour * 60) * PX_PER_MIN,
-          timeRange: formatEventTimeRange(parsed),
-        };
-      })
-      .filter((e): e is ScheduleEvent => e !== null)
-      .sort((a, b) => a.startMin - b.startMin);
-
-  const day1Events = toScheduleEvents('time-day1', DAY1_START_HOUR);
-  const day2Events = toScheduleEvents('time-day2', DAY2_START_HOUR);
+  const layout = { pxPerHour: PX_PER_HOUR };
+  const day1Events = toScheduleLayoutEvents(stageEvents, 'time-day1', {
+    ...layout,
+    startHour: DAY1_START_HOUR,
+  });
+  const day2Events = toScheduleLayoutEvents(stageEvents, 'time-day2', {
+    ...layout,
+    startHour: DAY2_START_HOUR,
+  });
 
   return (
     <>

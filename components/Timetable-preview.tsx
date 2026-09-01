@@ -2,9 +2,7 @@ import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { eventTimeDuration, formatEventTimeRange, parseEventTime } from '@/lib/event-time';
-import { getEvents } from '@/lib/events';
-import { Event } from '@/lib/types/event';
+import { getStageEvents, toTimedEvents } from '@/lib/timetable';
 
 const PREVIEW_COUNT = 3;
 
@@ -81,37 +79,23 @@ function DaySection({ label, events }: DaySectionProps) {
 // ─── メインコンポーネント ────────────────────────────
 
 export async function TimetablePreview() {
-  let stageEvents: Event[] = [];
-  try {
-    const events = await getEvents();
-    stageEvents = events.filter((e) => e.category === 'stage');
-  } catch (error) {
-    console.error('イベント取得エラー:', error);
-  }
+  const stageEvents = await getStageEvents();
 
-  function toRowsSorted(timeKey: 'time-day1' | 'time-day2'): EventRowProps[] {
-    return stageEvents
-      .map((event): (EventRowProps & { startMin: number }) | null => {
-        const parsed = parseEventTime(event[timeKey]);
-        if (!parsed) return null;
-        return {
-          slug: event.slug,
-          icon: event.icon ?? undefined,
-          title: event.title,
-          organization: event.organization,
-          timeRange: formatEventTimeRange(parsed, '〜'),
-          duration: eventTimeDuration(parsed),
-          startMin: parsed.startMin,
-        };
-      })
-      .filter((e): e is EventRowProps & { startMin: number } => e !== null)
-      .sort((a, b) => a.startMin - b.startMin)
+  function toPreviewRows(dayKey: 'time-day1' | 'time-day2'): EventRowProps[] {
+    return toTimedEvents(stageEvents, dayKey, { timeRangeSeparator: '〜' })
       .slice(0, PREVIEW_COUNT)
-      .map(({ startMin: _s, ...rest }) => rest);
+      .map(({ slug, icon, title, organization, timeRange, duration }) => ({
+        slug,
+        icon,
+        title,
+        organization,
+        timeRange,
+        duration,
+      }));
   }
 
-  const day1Rows = toRowsSorted('time-day1');
-  const day2Rows = toRowsSorted('time-day2');
+  const day1Rows = toPreviewRows('time-day1');
+  const day2Rows = toPreviewRows('time-day2');
 
   return (
     <section className="bg-muted py-10 md:py-14">
