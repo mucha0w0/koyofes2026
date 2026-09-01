@@ -6,7 +6,7 @@ import { Event } from '@/lib/types/event';
 type EventCategory = 'class-exhibit' | 'volunteer-exhibit' | 'booth' | 'stage' | 'food-truck';
 
 const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
-  'class-exhibit': { title: 'クラス・学科展示', Icon: () => null },
+  'class-exhibit': { title: 'クラス・学科展', Icon: () => null },
   'volunteer-exhibit': { title: '有志展示', Icon: () => null },
   booth: { title: '模擬店', Icon: () => null },
   'food-truck': { title: 'キッチンカー', Icon: () => null },
