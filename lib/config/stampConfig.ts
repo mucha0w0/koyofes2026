@@ -1,3 +1,4 @@
+import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { STAMP_SOURCE_CATEGORIES, type StampSourceCategory } from '@/lib/types/stamp';
 
 export { STAMP_SOURCE_CATEGORIES, type StampSourceCategory };
@@ -5,10 +6,10 @@ export { STAMP_SOURCE_CATEGORIES, type StampSourceCategory };
 /**
  * スタンプラリー設定（ブース本体は microCMS から取得）
  */
-export const STAMP_CATEGORY_ORDER = [
-  { id: 'class-exhibit', label: 'クラス・学科' },
-  { id: 'volunteer-exhibit', label: '有志' },
-] as const satisfies ReadonlyArray<{ id: StampSourceCategory; label: string }>;
+export const STAMP_CATEGORY_ORDER = STAMP_SOURCE_CATEGORIES.map((id) => ({
+  id,
+  label: getEventCategoryLabel(id),
+})) as const satisfies ReadonlyArray<{ id: StampSourceCategory; label: string }>;
 
 export const STAMP_CONFIG = {
   sourceCategories: STAMP_SOURCE_CATEGORIES,

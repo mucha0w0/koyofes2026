@@ -1,15 +1,8 @@
 import { CategoryEventsContent } from './category-events-client';
 
+import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { getEvents } from '@/lib/events';
-import { EVENT_CATEGORIES, type Event, type EventCategory } from '@/lib/types/event';
-
-const categoryConfig: Record<EventCategory, { title: string; Icon: React.ElementType }> = {
-  'class-exhibit': { title: 'クラス・学科展', Icon: () => null },
-  'volunteer-exhibit': { title: '有志展示', Icon: () => null },
-  booth: { title: '模擬店', Icon: () => null },
-  'food-truck': { title: 'キッチンカー', Icon: () => null },
-  stage: { title: 'ステージ', Icon: () => null },
-};
+import { EVENT_CATEGORIES, type Event } from '@/lib/types/event';
 
 export async function CategoryEvents() {
   let events: Event[] = [];
@@ -24,7 +17,7 @@ export async function CategoryEvents() {
   const categories = [...EVENT_CATEGORIES]
     .map((cat) => ({
       id: cat,
-      title: categoryConfig[cat].title,
+      title: getEventCategoryLabel(cat),
       events: events.filter((e) => e.category === cat),
     }))
     .filter((cat) => cat.events.length > 0);

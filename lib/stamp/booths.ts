@@ -69,7 +69,7 @@ export async function getStampBooths(): Promise<StampBooth[]> {
   return groups.flatMap((group) => group.booths);
 }
 
-/** カテゴリ見出し付きで取得（クラス・学科 → 有志、各々50音順） */
+/** カテゴリ見出し付きで取得（クラス・学科展 → 有志展示、各々50音順） */
 export async function getStampBoothGroups(): Promise<StampBoothGroup[]> {
   const booths = await loadStampBooths();
   return groupBooths(booths);

@@ -30,9 +30,10 @@ const TOKEN_MAP_ENV_PATH = join(OUT_DIR, 'stamp-token-map.env.txt');
 
 const SOURCE_CATEGORIES = ['class-exhibit', 'volunteer-exhibit'];
 const CATEGORY_ORDER = ['class-exhibit', 'volunteer-exhibit'];
+/** lib/config/event-categories.ts の EVENT_CATEGORY_CONFIG.label と揃える */
 const CATEGORY_LABEL = {
-  'class-exhibit': 'クラス・学科',
-  'volunteer-exhibit': '有志',
+  'class-exhibit': 'クラス・学科展',
+  'volunteer-exhibit': '有志展示',
 };
 const COLLECT_BASE_URL = 'https://koyosai.com/stamp/collect';
 

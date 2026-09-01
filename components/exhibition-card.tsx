@@ -3,16 +3,9 @@ import Link from 'next/link';
 
 import { Card, CardContent } from '@/components/ui/card';
 
+import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
 import { isImageUrl } from '@/lib/utils';
-
-const genreLabels: Record<string, string> = {
-  'class-exhibit': 'クラス・学科展',
-  'volunteer-exhibit': '有志展示',
-  booth: '模擬店',
-  stage: 'ステージ',
-  'food-truck': 'キッチンカー',
-};
 
 interface ExhibitionCardProps {
   event: Event;
@@ -44,7 +37,7 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
             {displayCatchphrase && <p className="text-xs text-muted-foreground mt-1 truncate">{displayCatchphrase}</p>}
             <div className="flex gap-3 mt-3 flex-wrap text-xs">
               <span className="px-2 py-1 bg-muted text-foreground">
-                {genreLabels[event.category] || event.category}
+                {getEventCategoryLabel(event.category)}
               </span>
               <span className="px-2 py-1 bg-muted text-foreground">{event.location}</span>
             </div>

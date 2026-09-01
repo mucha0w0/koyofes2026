@@ -7,16 +7,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { ExhibitionCard } from '@/components/exhibition-card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
+import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
-
-// ジャンルマッピング
-const genreLabels: Record<string, string> = {
-  'class-exhibit': 'クラス・学科展',
-  'volunteer-exhibit': '有志展示',
-  booth: '模擬店',
-  stage: 'ステージ',
-  'food-truck': 'キッチンカー',
-};
 
 // ロケーションラベル（データベースから一意に抽出）
 function getUniqueLocations(events: Event[]): string[] {
@@ -126,17 +118,17 @@ export function EventListClient({ events }: EventListClientProps) {
           <div className="space-y-3">
             <p className="text-sm font-medium text-foreground">ジャンル</p>
             <div className="flex flex-wrap gap-2">
-              {Object.keys(genreLabels).map((genre) => (
+              {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
                 <button
-                  key={genre}
+                  key={id}
                   className={`px-4 py-2 text-sm transition-colors ${
-                    selectedGenres.includes(genre)
+                    selectedGenres.includes(id)
                       ? 'bg-foreground text-background'
                       : 'bg-muted text-foreground hover:bg-muted/80'
                   }`}
-                  onClick={() => handleGenreToggle(genre)}
+                  onClick={() => handleGenreToggle(id)}
                 >
-                  {genreLabels[genre]}
+                  {label}
                 </button>
               ))}
             </div>
