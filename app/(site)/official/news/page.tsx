@@ -4,7 +4,7 @@ import { PageLayout } from '@/components/layout/page-layout';
 import { Pagination } from '@/components/news/pagination';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
 
-import { getNews, type MicroCMSNews } from '@/lib/news';
+import { getNews } from '@/lib/news';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -16,14 +16,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const { page } = await searchParams;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  let newsItems: MicroCMSNews[] = [];
-  let error: string | null = null;
-  try {
-    newsItems = await getNews();
-  } catch (err) {
-    error = err instanceof Error ? err.message : 'ニュースの取得に失敗しました';
-    console.error('ニュース取得エラー:', err);
-  }
+  const newsItems = await getNews();
 
   const totalPages = Math.max(1, Math.ceil(newsItems.length / ITEMS_PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
@@ -32,11 +25,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
   return (
       <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
-        {error ? (
-          <div className="max-w-3xl text-center py-12">
-            <p className="text-red-500">{error}</p>
-          </div>
-        ) : newsItems.length === 0 ? (
+        {newsItems.length === 0 ? (
           <div className="max-w-3xl text-center py-12">
             <p className="text-muted-foreground">ニュースはまだ投稿されていません。</p>
           </div>
