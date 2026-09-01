@@ -8,13 +8,17 @@ import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
 import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 
-import type { StampBoothGroup, StampStorageData, StampVerifySuccess } from '@/lib/types/stamp';
+import type { StampBoothGroup, StampStorageData } from '@/lib/types/stamp';
 
 import { getStampCategoryIcon } from '@/lib/config/category-icons';
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
+import { useStampVerify } from '@/lib/stamp/use-stamp-verify';
+import { getStampVerifyDisplay } from '@/lib/stamp/verify-display';
 
 interface StampBookProps {
   groups: StampBoothGroup[];
@@ -38,13 +42,12 @@ export function StampBook({ groups }: StampBookProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [storage, setStorage] = useState<StampStorageData | null>(null);
-  const [validSlugs, setValidSlugs] = useState<string[]>([]);
-  const [isCleared, setIsCleared] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
   const [showInAppNotice, setShowInAppNotice] = useState(false);
   const [earnedOpen, setEarnedOpen] = useState(false);
   const [earnedTitle, setEarnedTitle] = useState<string | null>(null);
   const [alreadyOwned, setAlreadyOwned] = useState(false);
+
+  const { verifyState, retry } = useStampVerify(storage?.stamps);
 
   const allBooths = useMemo(() => groups.flatMap((group) => group.booths), [groups]);
   const totalCount = allBooths.length;
@@ -56,58 +59,14 @@ export function StampBook({ groups }: StampBookProps) {
     return map;
   }, [allBooths]);
 
-  const collectedCount = validSlugs.length;
+  const localSlugs = useMemo(() => storage?.stamps.map((stamp) => stamp.slug) ?? [], [storage]);
+  const display = getStampVerifyDisplay(verifyState, localSlugs);
   const requiredCount = STAMP_CONFIG.clearConditions.requiredStampCount;
 
   useEffect(() => {
     setShowInAppNotice(isInAppBrowser());
     setStorage(readStampStorage());
   }, []);
-
-  useEffect(() => {
-    if (!storage) {
-      return;
-    }
-
-    let cancelled = false;
-
-    async function verify() {
-      setIsVerifying(true);
-      try {
-        const response = await fetch('/api/stamp/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ stamps: storage!.stamps }),
-        });
-        if (!response.ok) {
-          if (!cancelled) {
-            setValidSlugs([]);
-            setIsCleared(false);
-          }
-          return;
-        }
-        const data = (await response.json()) as StampVerifySuccess;
-        if (!cancelled) {
-          setValidSlugs(data.validSlugs);
-          setIsCleared(data.isCleared);
-        }
-      } catch {
-        if (!cancelled) {
-          setValidSlugs([]);
-          setIsCleared(false);
-        }
-      } finally {
-        if (!cancelled) {
-          setIsVerifying(false);
-        }
-      }
-    }
-
-    void verify();
-    return () => {
-      cancelled = true;
-    };
-  }, [storage]);
 
   useEffect(() => {
     const earned = searchParams.get('earned');
@@ -130,16 +89,26 @@ export function StampBook({ groups }: StampBookProps) {
     setStorage(next);
   };
 
-  const validSet = new Set(validSlugs);
-
   return (
     <div className="space-y-8 max-w-3xl">
       {showInAppNotice && <InAppBrowserNotice />}
+      {display.verifyFailed ? (
+        <Alert variant="destructive">
+          <AlertTitle className="font-medium tracking-wide">スタンプの確認に失敗しました</AlertTitle>
+          <AlertDescription className="leading-loose tracking-wider space-y-3">
+            <p>通信エラーのため正確な獲得数を表示できません。表示は端末内の記録に基づいています。</p>
+            <Button disabled={display.isVerifying} size="sm" type="button" variant="outline" onClick={retry}>
+              {display.isVerifying ? '確認中…' : '再試行'}
+            </Button>
+          </AlertDescription>
+        </Alert>
+      ) : null}
       <StampStatusPanel
-        collectedCount={collectedCount}
-        isCleared={isCleared}
+        collectedCount={display.collectedCount}
+        isCleared={display.isCleared}
         isRedeemed={storage?.isRedeemed ?? false}
-        isVerifying={isVerifying}
+        isVerifying={display.isVerifying}
+        progressCount={display.progressCount}
         redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
         requiredCount={requiredCount}
         totalCount={totalCount}
@@ -162,7 +131,11 @@ export function StampBook({ groups }: StampBookProps) {
             >
               <div className="flex flex-wrap gap-4 p-4">
                 {group.booths.map((booth) => (
-                  <StampBoothCard key={booth.slug} booth={booth} collected={validSet.has(booth.slug)} />
+                  <StampBoothCard
+                    key={booth.slug}
+                    booth={booth}
+                    collected={display.collectedSlugs.has(booth.slug)}
+                  />
                 ))}
               </div>
             </CategorySection>

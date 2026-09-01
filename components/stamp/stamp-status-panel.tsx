@@ -17,7 +17,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 
 interface StampStatusPanelProps {
-  collectedCount: number;
+  collectedCount: number | null;
+  progressCount: number;
   totalCount: number;
   requiredCount: number;
   isCleared: boolean;
@@ -29,6 +30,7 @@ interface StampStatusPanelProps {
 
 export function StampStatusPanel({
   collectedCount,
+  progressCount,
   totalCount,
   requiredCount,
   isCleared,
@@ -39,8 +41,8 @@ export function StampStatusPanel({
 }: StampStatusPanelProps) {
   const [open, setOpen] = useState(false);
   const safeTotal = Math.max(totalCount, 1);
-  const progressValue = Math.min(100, Math.round((collectedCount / safeTotal) * 100));
-  const remaining = Math.max(requiredCount - collectedCount, 0);
+  const progressValue = Math.min(100, Math.round((progressCount / safeTotal) * 100));
+  const remaining = Math.max(requiredCount - (collectedCount ?? progressCount), 0);
   const lotteryMark = Math.min(100, Math.round((requiredCount / safeTotal) * 100));
   const emphasized = isCleared || isRedeemed;
 
@@ -66,8 +68,15 @@ export function StampStatusPanel({
           </p>
         </div>
         <p className="text-sm tracking-wider shrink-0">
-          <span className="text-3xl font-medium tracking-normal tabular-nums">{collectedCount}</span>
+          {collectedCount === null ? (
+            <span className="text-3xl font-medium tracking-normal tabular-nums text-muted-foreground">—</span>
+          ) : (
+            <span className="text-3xl font-medium tracking-normal tabular-nums">{collectedCount}</span>
+          )}
           <span className={emphasized ? 'text-white/70' : 'text-muted-foreground'}> / {totalCount}</span>
+          {isVerifying ? (
+            <span className={`ml-2 text-xs ${emphasized ? 'text-white/65' : 'text-muted-foreground'}`}>確認中</span>
+          ) : null}
         </p>
       </div>
 

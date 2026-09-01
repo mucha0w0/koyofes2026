@@ -55,3 +55,22 @@ export interface StampVerifySuccess {
   requiredCount: number;
   isCleared: boolean;
 }
+
+/** クライアント側スタンプ照合の状態（判別可能 union） */
+export type StampVerifyState =
+  | { status: 'idle' }
+  | { status: 'verifying' }
+  | { status: 'ok'; validSlugs: string[]; isCleared: boolean }
+  | { status: 'error' };
+
+/** 照合状態 + ローカル記録から導出する UI 表示用データ */
+export interface StampVerifyDisplay {
+  collectedSlugs: Set<string>;
+  /** サーバー照合済みの獲得数。初回照合中は null */
+  collectedCount: number | null;
+  /** プログレスバー用（照合中はローカル記録を使用） */
+  progressCount: number;
+  isCleared: boolean;
+  isVerifying: boolean;
+  verifyFailed: boolean;
+}
