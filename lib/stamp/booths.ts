@@ -1,9 +1,10 @@
 import { cache } from 'react';
 
-import { STAMP_CATEGORY_ORDER } from '@/lib/config/stampConfig';
-import { getEventBySlug, getEvents } from '@/lib/events';
 import type { MicroCMSFetchCache } from '@/lib/microcms/client';
 import type { Event } from '@/lib/types/event';
+
+import { STAMP_CATEGORY_ORDER } from '@/lib/config/stampConfig';
+import { getEventBySlug, getEvents } from '@/lib/events';
 import {
   STAMP_SOURCE_CATEGORIES,
   type StampBooth,

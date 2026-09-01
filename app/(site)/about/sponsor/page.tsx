@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { SponsorCard } from '@/components/about/sponsor-card';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 
 import { getSponsorSections } from '@/lib/sponsors';
 

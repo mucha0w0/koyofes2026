@@ -1,5 +1,5 @@
-import { EventSearchSection } from '@/components/events/event-search';
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
+import { EventSearchSection } from '@/components/events/event-search';
 import { RecommendedEventCard } from '@/components/events/recommended-event-card';
 
 import { getRecommendedEvents } from '@/lib/recommended-events';

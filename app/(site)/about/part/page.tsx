@@ -1,5 +1,5 @@
-import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { PartCard } from '@/components/about/part-card';
+import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 
 import { getPartSections } from '@/lib/parts';
 

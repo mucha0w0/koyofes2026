@@ -1,5 +1,6 @@
-import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
 import type { MicroCMSListResponse } from '@/lib/microcms/types';
+
+import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
 

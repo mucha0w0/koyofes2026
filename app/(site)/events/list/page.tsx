@@ -1,9 +1,11 @@
 import { Suspense } from 'react';
 
-import { EventListClient } from './client';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventListSkeleton } from '@/components/cms/skeletons/event-list-skeleton';
+
+import { EventListClient } from './client';
+
 import { getEvents } from '@/lib/events';
 
 export default async function EventListPage() {

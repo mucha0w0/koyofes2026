@@ -1,5 +1,6 @@
-import { fetchMicroCMSList } from '@/lib/microcms/client';
 import type { MicroCMSSponsor } from '@/lib/microcms/types';
+
+import { fetchMicroCMSList } from '@/lib/microcms/client';
 import { getSponsorCategoryConfig, type SponsorItem, type SponsorSection } from '@/lib/types/sponsor';
 
 export type { MicroCMSSponsor } from '@/lib/microcms/types';

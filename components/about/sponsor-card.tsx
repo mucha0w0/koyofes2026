@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 
 import type { SponsorItem } from '@/lib/types/sponsor';
+
 import { isImageUrl } from '@/lib/utils';
 
 interface SponsorCardProps {

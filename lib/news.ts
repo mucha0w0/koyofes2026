@@ -1,7 +1,8 @@
 import { cache } from 'react';
 
-import { fetchMicroCMSContent, fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
 import type { MicroCMSNews } from '@/lib/microcms/types';
+
+import { fetchMicroCMSContent, fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
 
 export type { MicroCMSNews } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';

@@ -1,6 +1,7 @@
+import type { StampEntry, StampStorageData } from '@/lib/types/stamp';
+
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isStampStorageData } from '@/lib/stamp/validation';
-import type { StampEntry, StampStorageData } from '@/lib/types/stamp';
 
 export function createEmptyStampStorage(): StampStorageData {
   return {
