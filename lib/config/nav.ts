@@ -184,7 +184,7 @@ export function getNavLinkCardSections(): ResolvedNavLinkCardSection[] {
     id: section.id,
     label: section.label,
     items: section.links.flatMap((link) => {
-      if (!link.card || !isVisible(link, section, 'links')) {
+      if (!('card' in link) || !link.card || !isVisible(link, section, 'links')) {
         return [];
       }
 

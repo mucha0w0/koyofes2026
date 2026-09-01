@@ -16,22 +16,25 @@ export function LinksSection() {
                 <h2 className="text-xl font-medium md:text-2xl">{section.label}</h2>
               </div>
               <div className="grid gap-2">
-                {section.items.map((link) => (
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
                   <Link
-                    key={link.href}
+                    key={item.href}
                     className="group flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
-                    href={link.href}
+                    href={item.href}
                   >
                     <div className="bg-muted p-2 text-foreground">
-                      <link.icon className="h-4 w-4" />
+                      <Icon className="h-4 w-4" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <span className="text-sm font-medium">{link.label}</span>
-                      <p className="truncate text-xs text-muted-foreground">{link.description}</p>
+                      <span className="text-sm font-medium">{item.label}</span>
+                      <p className="truncate text-xs text-muted-foreground">{item.description}</p>
                     </div>
                     <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
