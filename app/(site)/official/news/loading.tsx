@@ -1,10 +1,13 @@
+import { cmsPageMeta } from '@/components/cms/cms-page-meta';
+import { CmsPageLoading } from '@/components/cms/cms-page-loading';
 import { NewsListSkeleton } from '@/components/cms/skeletons/news-list-skeleton';
-import { PageLayout } from '@/components/layout/page-layout';
+
+const { title, subtitle } = cmsPageMeta.newsList;
 
 export default function NewsListLoading() {
   return (
-    <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
+    <CmsPageLoading subtitle={subtitle} title={title}>
       <NewsListSkeleton />
-    </PageLayout>
+    </CmsPageLoading>
   );
 }

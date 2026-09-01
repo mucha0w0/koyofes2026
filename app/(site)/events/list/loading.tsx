@@ -1,10 +1,13 @@
+import { cmsPageMeta } from '@/components/cms/cms-page-meta';
+import { CmsPageLoading } from '@/components/cms/cms-page-loading';
 import { EventListSkeleton } from '@/components/cms/skeletons/event-list-skeleton';
-import { PageLayout } from '@/components/layout/page-layout';
+
+const { title, subtitle } = cmsPageMeta.eventList;
 
 export default function EventListLoading() {
   return (
-    <PageLayout subtitle="開催されるすべての企画をカテゴリやキーワードで検索できます" title="企画一覧・検索">
+    <CmsPageLoading subtitle={subtitle} title={title}>
       <EventListSkeleton />
-    </PageLayout>
+    </CmsPageLoading>
   );
 }
