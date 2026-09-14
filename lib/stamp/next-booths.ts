@@ -1,6 +1,6 @@
 import type { StampBooth, StampEntry } from '@/lib/types/stamp';
 
-/** トップページの「次に目指すブース」件数 */
+/** トップページの「近くのスタンプ未獲得ブース」件数 */
 export const STAMP_PREVIEW_NEXT_COUNT = 3;
 
 /**
