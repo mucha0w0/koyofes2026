@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Spinner } from '@/components/common/spinner';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
-import { StampVotePanel } from '@/components/stamp/stamp-vote-panel';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 
@@ -15,13 +14,9 @@ import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { addStampEntry, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
 
-type CollectStatus = 'idle' | 'loading' | 'vote' | 'error';
+type CollectStatus = 'idle' | 'loading' | 'error';
 
-interface StampCollectClientProps {
-  rankingEnabled: boolean;
-}
-
-export function StampCollectClient({ rankingEnabled }: StampCollectClientProps) {
+export function StampCollectClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get('token');
@@ -30,8 +25,6 @@ export function StampCollectClient({ rankingEnabled }: StampCollectClientProps) 
   const [status, setStatus] = useState<CollectStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showInAppNotice, setShowInAppNotice] = useState(false);
-  const [collect, setCollect] = useState<StampCollectSuccess | null>(null);
-  const [alreadyOwned, setAlreadyOwned] = useState(false);
 
   useEffect(() => {
     setShowInAppNotice(isInAppBrowser());
@@ -82,14 +75,11 @@ export function StampCollectClient({ rankingEnabled }: StampCollectClientProps) 
         });
         writeStampStorage(next);
 
-        if (rankingEnabled) {
-          setCollect(data);
-          setAlreadyOwned(already);
-          setStatus('vote');
-          return;
+        const params = new URLSearchParams({ earned: data.slug });
+        if (already) {
+          params.set('already', '1');
         }
-
-        goToStampBook(data.slug, already);
+        router.replace(`/stamp?${params.toString()}`);
       } catch {
         setStatus('error');
         setErrorMessage('通信に失敗しました。ネットワークを確認して、もう一度読み取り直してください。');
@@ -97,15 +87,7 @@ export function StampCollectClient({ rankingEnabled }: StampCollectClientProps) 
     }
 
     void collectStamp();
-  }, [token, router, rankingEnabled]);
-
-  function goToStampBook(slug: string, already: boolean) {
-    const params = new URLSearchParams({ earned: slug });
-    if (already) {
-      params.set('already', '1');
-    }
-    router.replace(`/stamp?${params.toString()}`);
-  }
+  }, [token, router]);
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
@@ -116,19 +98,6 @@ export function StampCollectClient({ rankingEnabled }: StampCollectClientProps) 
           <Spinner className="size-6" />
           <p className="text-sm text-muted-foreground leading-loose tracking-wider">スタンプを確認しています…</p>
         </div>
-      ) : null}
-
-      {status === 'vote' && collect ? (
-        <StampVotePanel
-          alreadyOwned={alreadyOwned}
-          icon={collect.icon}
-          obtainedAt={collect.obtainedAt}
-          signature={collect.signature}
-          slug={collect.slug}
-          title={collect.title}
-          onSkip={() => goToStampBook(collect.slug, alreadyOwned)}
-          onVoted={() => goToStampBook(collect.slug, alreadyOwned)}
-        />
       ) : null}
 
       {status === 'error' && (

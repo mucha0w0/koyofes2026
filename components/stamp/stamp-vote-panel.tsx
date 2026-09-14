@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import type { RankingVoteError } from '@/lib/types/ranking';
 
@@ -64,23 +65,23 @@ export function StampVotePanel({
   }
 
   return (
-    <div className="bg-card p-6 md:p-8 space-y-6">
-      <div className="space-y-1">
+    <div className="space-y-6">
+      <DialogHeader className="space-y-1 text-left">
         <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Vote</p>
-        <h2 className="text-lg font-medium tracking-wide">
+        <DialogTitle className="text-lg font-medium tracking-wide">
           {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました'}
-        </h2>
-        <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+        </DialogTitle>
+        <DialogDescription className="text-sm leading-loose tracking-wider">
           {alreadyOwned
             ? `「${title}」の感想を、もう一度投票できます。`
             : `「${title}」の感想を星で教えてください。スキップもできます。`}
-        </p>
-      </div>
+        </DialogDescription>
+      </DialogHeader>
 
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 bg-muted flex items-center justify-center overflow-hidden shrink-0">
+        <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden bg-muted">
           {hasIcon ? (
-            <Image alt={title} className="w-full h-full object-cover" height={64} src={icon} width={64} />
+            <Image alt={title} className="size-full object-cover" height={64} src={icon} width={64} />
           ) : (
             <span className="text-xs text-muted-foreground">No image</span>
           )}
@@ -136,7 +137,7 @@ export function StampVotePanel({
           variant="outline"
           onClick={onSkip}
         >
-          スキップしてスタンプ帳へ
+          スキップ
         </Button>
       </div>
     </div>

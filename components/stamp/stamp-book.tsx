@@ -22,6 +22,7 @@ import { getStampVerifyDisplay } from '@/lib/stamp/verify-display';
 
 interface StampBookProps {
   groups: StampBoothGroup[];
+  rankingEnabled: boolean;
 }
 
 function formatRedeemedAt(iso: string | null): string {
@@ -38,13 +39,17 @@ function formatRedeemedAt(iso: string | null): string {
   }
 }
 
-export function StampBook({ groups }: StampBookProps) {
+export function StampBook({ groups, rankingEnabled }: StampBookProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [storage, setStorage] = useState<StampStorageData | null>(null);
   const [showInAppNotice, setShowInAppNotice] = useState(false);
   const [earnedOpen, setEarnedOpen] = useState(false);
   const [earnedTitle, setEarnedTitle] = useState<string | null>(null);
+  const [earnedSlug, setEarnedSlug] = useState<string | null>(null);
+  const [earnedIcon, setEarnedIcon] = useState('');
+  const [earnedSignature, setEarnedSignature] = useState<string | null>(null);
+  const [earnedObtainedAt, setEarnedObtainedAt] = useState<string | null>(null);
   const [alreadyOwned, setAlreadyOwned] = useState(false);
 
   const { verifyState, retry } = useStampVerify(storage?.stamps);
@@ -74,11 +79,17 @@ export function StampBook({ groups }: StampBookProps) {
       return;
     }
     const already = searchParams.get('already') === '1';
-    setEarnedTitle(titleBySlug.get(earned) ?? earned);
+    const booth = allBooths.find((item) => item.slug === earned);
+    const entry = storage.stamps.find((stamp) => stamp.slug === earned);
+    setEarnedSlug(earned);
+    setEarnedTitle(booth?.title ?? titleBySlug.get(earned) ?? earned);
+    setEarnedIcon(booth?.icon ?? '');
+    setEarnedSignature(entry?.signature ?? null);
+    setEarnedObtainedAt(entry?.obtainedAt ?? null);
     setAlreadyOwned(already);
     setEarnedOpen(true);
     router.replace('/stamp', { scroll: false });
-  }, [searchParams, storage, titleBySlug, router]);
+  }, [searchParams, storage, titleBySlug, allBooths, router]);
 
   const handleRedeem = () => {
     if (!storage) {
@@ -137,7 +148,12 @@ export function StampBook({ groups }: StampBookProps) {
 
       <StampEarnedDialog
         alreadyOwned={alreadyOwned}
+        icon={earnedIcon}
+        obtainedAt={earnedObtainedAt}
         open={earnedOpen}
+        rankingEnabled={rankingEnabled}
+        signature={earnedSignature}
+        slug={earnedSlug}
         title={earnedTitle}
         onOpenChange={setEarnedOpen}
       />

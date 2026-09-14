@@ -4,6 +4,7 @@ import { Spinner } from '@/components/common/spinner';
 import { PageLayout } from '@/components/layout/page-layout';
 import { StampBook } from '@/components/stamp/stamp-book';
 
+import { isRankingEnabled } from '@/lib/config/rankingConfig';
 import { getStampBoothGroups } from '@/lib/stamp/booths';
 
 export const metadata = {
@@ -14,6 +15,7 @@ export const metadata = {
 
 export default async function StampPage() {
   const groups = await getStampBoothGroups();
+  const rankingEnabled = isRankingEnabled();
 
   return (
     <PageLayout subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー">
@@ -24,7 +26,7 @@ export default async function StampPage() {
           </div>
         }
       >
-        <StampBook groups={groups} />
+        <StampBook groups={groups} rankingEnabled={rankingEnabled} />
       </Suspense>
     </PageLayout>
   );

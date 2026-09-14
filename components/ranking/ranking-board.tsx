@@ -182,7 +182,7 @@ export function RankingBoard() {
       {!awaitingTab && !errorMessage && tab === 'overall' && overallItems.length === 0 ? (
         <div className="bg-card p-6">
           <p className="text-sm text-muted-foreground leading-loose tracking-wider">
-            まだ投票がありません。スタンプ獲得画面から星を付けてください。
+            まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
           </p>
         </div>
       ) : null}
