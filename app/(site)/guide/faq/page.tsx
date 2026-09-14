@@ -11,7 +11,7 @@ export default function FAQPage() {
 
   return (
     <PageLayout subtitle="お問い合わせの多いご質問にお答えします" title="よくある質問">
-      <div className="max-w-3xl">
+      <div className="mx-auto max-w-3xl">
         <FAQCategoryNav categories={categories} />
         <div className="space-y-12">
           {faqGroups.map((group) => (

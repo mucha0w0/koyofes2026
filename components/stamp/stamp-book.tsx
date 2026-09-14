@@ -101,7 +101,7 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
   };
 
   return (
-    <div className="space-y-8 max-w-3xl">
+    <div className="mx-auto max-w-3xl space-y-8">
       {showInAppNotice && <InAppBrowserNotice />}
       {display.verifyFailed ? (
         <Alert variant="destructive">

@@ -195,7 +195,7 @@ export function FestivalCountdown() {
 
   return (
     <div className="w-full bg-[#1f2529] text-white">
-      <div className="mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-4 py-5 pl-[max(1.5rem,env(safe-area-inset-left))] pr-[max(1.5rem,env(safe-area-inset-right))]">
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-4 px-4 py-5 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]">
         {renderContent()}
       </div>
     </div>

@@ -9,7 +9,7 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-10 md:py-12">
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
           <div className="space-y-2.5">
             <p className="text-xl font-medium tracking-[0.08em]">こうよう祭 2026</p>

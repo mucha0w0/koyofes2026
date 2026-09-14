@@ -2,7 +2,7 @@ export function EventDetailSkeleton() {
   return (
     <main className="flex-1 animate-pulse">
       <div className="aspect-video w-full bg-muted" />
-      <div className="container mx-auto px-4 py-8 md:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
         <div className="mb-12 md:mb-16 space-y-6">
           <div className="flex items-start gap-4 md:gap-8">
             <div className="h-16 w-16 shrink-0 bg-muted md:h-24 md:w-24" />

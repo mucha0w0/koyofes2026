@@ -14,7 +14,7 @@ export function HeroSection() {
         src="/20251106soumukikaku2-1024x768.jpg"
         style={{ zIndex: 0 }}
       />
-      <div className="container mx-auto px-4 w-full" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="mx-auto w-full max-w-7xl px-4" style={{ position: 'relative', zIndex: 1 }}>
         <div className="text-center space-y-12">
           {/* Main Title */}
           <div className="space-y-6">

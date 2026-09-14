@@ -44,7 +44,7 @@ function SocialLink({ Icon, label, handle, url }: (typeof SOCIAL_LINKS)[number])
 export function SocialCtaSection() {
   return (
     <section className="bg-primary py-8">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="text-sm text-muted tracking-wide text-center sm:text-left shrink-0">
             最新情報は公式SNSをチェック！

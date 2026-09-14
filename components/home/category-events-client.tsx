@@ -168,7 +168,7 @@ interface CategoryEventsContentProps {
 export function CategoryEventsContent({ categories }: CategoryEventsContentProps) {
   return (
     <section className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-medium mb-2">カテゴリ別企画一覧</h2>
           <p className="text-muted-foreground">様々な企画から選んでチェック</p>

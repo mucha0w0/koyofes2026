@@ -107,7 +107,7 @@ export function EventSearchSection({ variant = 'prominent', showViewAllLink }: E
 
   return (
     <section className={cn('bg-muted', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')}>
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className={cn('text-center mb-8', !isProminent && 'flex flex-col gap-2')}>
           <h2
             className={cn(

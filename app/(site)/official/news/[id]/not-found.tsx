@@ -6,7 +6,7 @@ import { PageLayout } from '@/components/layout/page-layout';
 export default function NewsNotFound() {
   return (
     <PageLayout subtitle="こうよう祭に関するお知らせ一覧" title="お知らせ">
-      <div className="max-w-3xl text-center">
+      <div className="mx-auto max-w-3xl text-center">
         <p className="text-muted-foreground mb-6">申し訳ございません。お探しのお知らせは見つかりませんでした。</p>
         <Link
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"

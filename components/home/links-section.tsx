@@ -8,7 +8,7 @@ const linkSections = getNavLinkCardSections();
 export function LinksSection() {
   return (
     <section className="pt-16 md:pt-24">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {linkSections.map((section) => (
             <div key={section.id} className="space-y-4">

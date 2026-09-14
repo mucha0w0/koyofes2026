@@ -83,6 +83,17 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/*
+  Tailwind's default .container steps max-width at each breakpoint,
+  which snaps side margins on resize. Layouts use max-w-7xl instead;
+  keep this cap if .container is added again.
+*/
+.container {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -131,7 +131,7 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
 
   return (
     <section className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl space-y-6">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-medium md:text-2xl">スタンプラリー</h2>

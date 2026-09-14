@@ -26,12 +26,12 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   return (
     <CmsPageLayout meta="newsList">
       {newsItems.length === 0 ? (
-        <div className="max-w-3xl text-center py-12">
+        <div className="mx-auto max-w-3xl py-12 text-center">
           <p className="text-muted-foreground">ニュースはまだ投稿されていません。</p>
         </div>
       ) : (
         <>
-          <div className="space-y-4 max-w-3xl">
+          <div className="mx-auto max-w-3xl space-y-4">
             {paginatedItems.map((item, i) => {
               const globalIndex = startIndex + i;
               const formattedDate = new Date(item.date)

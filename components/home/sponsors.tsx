@@ -22,7 +22,7 @@ export async function Sponsors() {
 
   return (
     <section className="py-12 md:py-16 bg-muted overflow-hidden">
-      <div className="container mx-auto px-4 mb-8">
+      <div className="mx-auto mb-8 w-full max-w-7xl px-4">
         <div className="text-center">
           <h2 className="text-xl md:text-2xl font-medium mb-2">ご協賛</h2>
         </div>

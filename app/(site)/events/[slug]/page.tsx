@@ -64,7 +64,7 @@ export default async function EventPage({ params }: PageProps) {
       {/* Banner Carousel */}
       <EventCarousel images={event.images} title={event.title} />
 
-      <div className="container mx-auto px-4 py-8 md:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
         {/* Hero Title Section with Catchphrase - Full Width */}
         <div className="mb-12 md:mb-16">
           <div className="flex items-start gap-4 md:gap-8 mb-6">

@@ -99,7 +99,7 @@ export async function TimetablePreview() {
 
   return (
     <section className="bg-muted py-10 md:py-14">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h2 className="text-xl md:text-2xl font-medium text-foreground">タイムテーブル</h2>
         </div>

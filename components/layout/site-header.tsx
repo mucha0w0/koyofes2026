@@ -94,7 +94,7 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
         <Link className="flex items-center gap-2" href="/">
           <div className="flex items-center gap-1">
             <span className="text-2xl font-medium tracking-[0.08em] text-foreground">こうよう祭</span>
