@@ -80,7 +80,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
 
   if (isProminent) {
     return (
-      <div className={cn('max-w-2xl mx-auto', className)}>
+      <div className={cn('max-w-3xl mx-auto', className)}>
         <div className="mb-6">{input}</div>
         <div className="flex justify-center">{button}</div>
       </div>
@@ -88,7 +88,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
   }
 
   return (
-    <div className={cn('max-w-2xl mx-auto flex flex-row items-stretch gap-2 sm:gap-3', className)}>
+    <div className={cn('max-w-3xl mx-auto flex flex-row items-stretch gap-2 sm:gap-3', className)}>
       {input}
       {button}
     </div>
@@ -108,31 +108,33 @@ export function EventSearchSection({ variant = 'prominent', showViewAllLink }: E
   return (
     <section className={cn('bg-muted', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')}>
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className={cn('text-center mb-8', !isProminent && 'flex flex-col gap-2')}>
-          <h2
-            className={cn(
-              'font-medium',
-              isProminent ? 'text-2xl md:text-3xl mb-2' : 'text-xl md:text-2xl tracking-tight',
-            )}
-          >
-            企画を探す
-          </h2>
-          {isProminent && <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>}
-        </div>
-
-        <EventSearchBar variant={variant} />
-
-        {viewAllLink && (
-          <div className="mt-6 text-center">
-            <Link
-              className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              href={SEARCH_LIST_PATH}
+        <div className="mx-auto max-w-3xl">
+          <div className={cn('mb-8 text-center', !isProminent && 'flex flex-col gap-2')}>
+            <h2
+              className={cn(
+                'font-medium',
+                isProminent ? 'text-2xl md:text-3xl mb-2' : 'text-xl md:text-2xl tracking-tight',
+              )}
             >
-              すべての企画を見る
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+              企画を探す
+            </h2>
+            {isProminent && <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>}
           </div>
-        )}
+
+          <EventSearchBar variant={variant} />
+
+          {viewAllLink && (
+            <div className="mt-6 text-center">
+              <Link
+                className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                href={SEARCH_LIST_PATH}
+              >
+                すべての企画を見る
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

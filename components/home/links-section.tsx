@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { getNavLinkCardSections } from '@/lib/config/nav';
+import { cn } from '@/lib/utils';
 
 const linkSections = getNavLinkCardSections();
 
@@ -9,7 +10,12 @@ export function LinksSection() {
   return (
     <section className="pt-16 md:pt-24">
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="mb-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div
+          className={cn(
+            'mb-16 grid w-full gap-8 md:grid-cols-2',
+            linkSections.length >= 3 && 'xl:grid-cols-3',
+          )}
+        >
           {linkSections.map((section) => (
             <div key={section.id} className="space-y-4">
               <div className="flex items-center justify-between">
