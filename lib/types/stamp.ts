@@ -10,6 +10,9 @@ export interface StampBooth {
   organization: string;
   icon: string;
   category: StampSourceCategory;
+  location: string;
+  floor: string;
+  classroom: string;
 }
 
 /** カテゴリ見出し付きブースグループ */

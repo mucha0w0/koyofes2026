@@ -6,6 +6,7 @@ import { LinksSection } from '@/components/home/links-section';
 import { PrVideoSection } from '@/components/home/pr-video-section';
 import { SocialCtaSection } from '@/components/home/social-cta-section';
 import { Sponsors } from '@/components/home/sponsors';
+import { StampRallyPreview } from '@/components/home/stamp-rally-preview';
 import { TimetablePreview } from '@/components/home/timetable-preview';
 import { NewsSection } from '@/components/news/news-section';
 
@@ -15,6 +16,7 @@ export default function HomePage() {
       <HeroSection />
       <FestivalCountdown />
       <EventSearchSection variant="prominent" />
+      <StampRallyPreview />
       <CategoryEvents />
       <PrVideoSection />
       <SocialCtaSection />

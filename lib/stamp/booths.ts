@@ -30,6 +30,9 @@ function toStampBooth(event: Event): StampBooth | null {
     organization: event.organization,
     icon: event.icon,
     category: event.category,
+    location: event.location ?? '',
+    floor: event.floor ?? '',
+    classroom: event.classroom ?? '',
   };
 }
 
