@@ -16,9 +16,9 @@ export default function HomePage() {
       <HeroSection />
       <FestivalCountdown />
       <EventSearchSection variant="prominent" />
-      <StampRallyPreview />
       <CategoryEvents />
       <PrVideoSection />
+      <StampRallyPreview />
       <SocialCtaSection />
       <TimetablePreview />
       <LinksSection />
