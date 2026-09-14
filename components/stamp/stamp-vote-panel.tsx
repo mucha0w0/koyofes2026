@@ -74,7 +74,7 @@ export function StampVotePanel({
         <DialogDescription className="text-sm leading-loose tracking-wider">
           {alreadyOwned
             ? `「${title}」の感想を、もう一度投票できます。`
-            : `「${title}」の感想を星で教えてください。スキップもできます。`}
+            : '投票で企画を応援しよう。'}
         </DialogDescription>
       </DialogHeader>
 
