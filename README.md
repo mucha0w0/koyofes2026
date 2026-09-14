@@ -1,6 +1,6 @@
 # KoYoFes Website
 
-2026年度 **こうよう祭（KoYoFes）** の公式ウェブサイトです。企画情報の検索・閲覧、タイムテーブル、スタンプラリー、お知らせなど、来場者向けの情報を提供します。
+2026年度 **こうよう祭（KoYoFes）** の公式ウェブサイトです。企画情報の検索・閲覧、タイムテーブル、スタンプラリー、企画展ランキング、お知らせなど、来場者向けの情報を提供します。
 
 ## 目次
 
@@ -13,6 +13,7 @@
 - [npm スクリプト](#npm-スクリプト)
 - [コンテンツの更新方法](#コンテンツの更新方法)
 - [スタンプラリー運用](#スタンプラリー運用)
+- [企画展ランキング運用](#企画展ランキング運用)
 - [キャッシュ方針](#キャッシュ方針)
 - [デプロイ](#デプロイ)
 - [リント・品質チェック](#リント品質チェック)
@@ -31,6 +32,7 @@
 | UI コンポーネント | [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/) |
 | アイコン | [Lucide React](https://lucide.dev/) / [React Icons](https://react-icons.github.io/react-icons/) |
 | CMS | [microCMS](https://microcms.io/) |
+| DB（ランキング） | [Neon](https://neon.tech/) Postgres + [Drizzle](https://orm.drizzle.team/) |
 | ホスティング | [Vercel](https://vercel.com/) |
 | アナリティクス | [@vercel/analytics](https://vercel.com/docs/analytics) |
 
@@ -51,6 +53,12 @@
 - **スタンプ獲得**（`/stamp/collect`）: NFC / QR コードからのスタンプ取得（検索エンジン非対象）
 - **サーバー署名検証**: 改ざん防止のため HMAC 署名でスタンプの正当性を検証
 - **ふくびき券条件**: 対象ブースのうち 3 個以上のスタンプ獲得でクリア（`lib/config/stampConfig.ts` で設定）
+
+### 企画展ランキング
+
+- **リアルタイムランキング**（`/ranking`）: 星評価の総合順位と、直近20分の来訪によるトレンド順位（15秒更新）
+- **投票**: スタンプ獲得画面で 1〜5 星を任意投票（スキップ可）。毎回新しい票として加算
+- **開催時のみ**: `RANKING_ENABLED=true` のときナビと投票を出す
 
 ### 公式コンテンツ
 
@@ -104,6 +112,7 @@
 | `/stamp` | スタンプラリー |
 | `/stamp/collect` | スタンプ獲得（NFC/QR 用・非公開） |
 | `/stamp/reset` | スタンプリセット（デバッグ用・非公開） |
+| `/ranking` | 企画展リアルタイムランキング（`RANKING_ENABLED` 時のみナビ表示） |
 | `/guide/access` | アクセス |
 | `/guide/map` | 会場マップ |
 | `/guide/faq` | よくある質問 |
@@ -117,8 +126,10 @@
 
 | パス | メソッド | 説明 |
 |------|----------|------|
-| `/api/stamp` | POST | トークンからスタンプを発行（署名付き） |
+| `/api/stamp` | POST | トークンからスタンプを発行（署名付き）。ランキング有効時は来訪ログも記録 |
 | `/api/stamp/verify` | POST | 保存済みスタンプの署名検証・クリア判定 |
+| `/api/ranking` | GET | 総合 / トレンド集計（`?tab=overall` または `trend`） |
+| `/api/ranking/vote` | POST | 星 1〜5 の投票（毎回新規票。スタンプ HMAC 必須） |
 
 ---
 
@@ -133,8 +144,10 @@
 │   │   ├── events/             # 企画情報
 │   │   ├── guide/              # ご案内
 │   │   ├── official/           # 公式コンテンツ
+│   │   ├── ranking/            # リアルタイムランキング
 │   │   ├── stamp/              # スタンプラリー
 │   │   └── layout.tsx          # サイト共通レイアウト（ISR 設定）
+│   ├── api/ranking/            # ランキング API
 │   ├── api/stamp/              # スタンプラリー API
 │   ├── globals.css             # グローバルスタイル
 │   └── layout.tsx              # ルートレイアウト（フォント・メタデータ）
@@ -147,14 +160,17 @@
 │   ├── home/                   # トップページ各セクション
 │   ├── layout/                 # ヘッダー・フッター・ページレイアウト
 │   ├── news/                   # お知らせ
+│   ├── ranking/                # ランキング UI
 │   ├── stamp/                  # スタンプラリー UI
 │   └── ui/                     # shadcn/ui プリミティブ
 ├── lib/
 │   ├── config/                 # 設定の単一ソース
 │   │   ├── nav.ts              # ナビゲーション定義
 │   │   ├── event-categories.ts # 企画カテゴリ定義
+│   │   ├── rankingConfig.ts    # ランキング設定
 │   │   └── stampConfig.ts      # スタンプラリー設定
 │   ├── microcms/               # microCMS クライアント・型定義
+│   ├── ranking/                # ランキング（DB・集計・来場者 Cookie）
 │   ├── stamp/                  # スタンプラリー（署名・トークン・ブース取得）
 │   ├── types/                  # ドメイン型定義
 │   ├── events.ts               # 企画データ取得・変換
@@ -166,6 +182,7 @@
 │   ├── faqs.json               # FAQ データ
 │   └── cache.ts                # キャッシュ方針の定数
 ├── public/                     # 静的ファイル（アイコン、画像、PDF など）
+├── drizzle/                    # ランキング用 Postgres スキーマ
 ├── scripts/
 │   └── generate-stamp-tokens.mjs # スタンプトークン生成スクリプト
 └── stamp-tokens/               # トークン生成出力（git 管理外）
@@ -229,6 +246,25 @@ npm run dev
 
 トークンは `npm run stamp:generate-tokens` で自動生成できます（[スタンプラリー運用](#スタンプラリー運用) 参照）。
 
+### 企画展ランキング（開催時のみ）
+
+| 変数名 | 説明 | 例 |
+|--------|------|-----|
+| `RANKING_ENABLED` | `true` のときナビ・投票・集計 API を有効化。準備期間は未設定か `false` | `true` |
+| `DATABASE_URL` | Neon（または互換 Postgres）の接続文字列。**pooled** 接続を使う | `postgresql://...` |
+
+Neon の手順:
+
+1. [Neon](https://neon.tech/) で無料プロジェクトを作成する
+2. コンピュートは最小 **0.25 CU** にする（開催月に 24 時間起こし続けない）
+3. pooled の接続文字列を `DATABASE_URL` に入れる
+4. `npm run db:push` でテーブルを作成する（または `drizzle/0000_ranking.sql` を実行）
+5. 開催前後だけ `RANKING_ENABLED=true` にする
+
+ローカルで Neon を使わずに動かす場合は `DATABASE_URL=pglite` でも可（プロセス内メモリ。再起動で消える。本番では使わない）。
+
+`DATABASE_URL` が無いときはスタンプは従来どおり動き、ランキング API は 503 を返します。接続文字列は Git に置かないでください。
+
 ### 設定例（`.env.local`）
 
 ```env
@@ -237,6 +273,9 @@ MICROCMS_SERVICE_DOMAIN=your-service-domain
 
 STAMP_SIGNING_SECRET=your-signing-secret
 STAMP_TOKEN_MAP={"exampletoken1234567890abcdef":"example-booth-slug"}
+
+RANKING_ENABLED=false
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 ```
 
 本番環境（Vercel）でも同じ変数を **Environment Variables** に設定してください。
@@ -258,6 +297,8 @@ STAMP_TOKEN_MAP={"exampletoken1234567890abcdef":"example-booth-slug"}
 | `npm run secretlint` | シークレット漏洩チェック |
 | `npm run prettier` | Prettier によるコード整形 |
 | `npm run stamp:generate-tokens` | スタンプラリートークンの生成 |
+| `npm run db:push` | ランキング用テーブルを Postgres に反映 |
+| `npm run db:generate` | Drizzle のマイグレーション生成 |
 
 ---
 
@@ -284,6 +325,7 @@ microCMS での更新は、本番では最大 **60 秒** の遅延で反映さ�
 | ナビゲーション・リンク | `lib/config/nav.ts` | ヘッダー・フッター・トップページ |
 | 企画カテゴリ定義 | `lib/config/event-categories.ts` | 企画一覧・カテゴリ表示全般 |
 | スタンプラリー設定 | `lib/config/stampConfig.ts` | `/stamp` |
+| ランキング設定 | `lib/config/rankingConfig.ts` | `/ranking` |
 | テーマページ本文 | `app/(site)/about/theme/page.tsx` | `/about/theme` |
 | 概要ページ本文 | `components/about/about-section.tsx` など | `/about/overview` |
 | アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
@@ -352,6 +394,20 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 
 ---
 
+## 企画展ランキング運用
+
+対象はスタンプラリーと同じクラス・学科展 / 有志展示です。公式表彰には使いません。
+
+1. Neon にテーブルを作成（`npm run db:push`）
+2. Vercel に `DATABASE_URL` と、開催時のみ `RANKING_ENABLED=true` を設定
+3. 来場者は NFC/QR でスタンプ獲得後、同じ画面で星を付けられる（スキップ可）
+4. 投票は毎回新しい票。連打防止のため同一企画は約 30 秒空ける
+5. `/ranking` で総合（ベイズ平均）とトレンド（直近 20 分のユニーク来訪）を見る
+
+開催が終わったら `RANKING_ENABLED` を外すか `false` にして、Neon を起こし続けないようにしてください。
+
+---
+
 ## キャッシュ方針
 
 キャッシュ設定は `lib/cache.ts` で一元管理しています。
@@ -361,6 +417,8 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 | CMS ページ全体 | ISR 60 秒 | `app/(site)/layout.tsx` の `revalidate = 60` |
 | microCMS fetch（通常） | `revalidate: 60` | `lib/microcms/client.ts` |
 | スタンプ照合 API | `no-store`（常に最新） | `lib/stamp/booths.ts` の `getStampBoothSlugSet` など |
+| ランキング API | `no-store` | `app/api/ranking/route.ts` |
+| ランキングページ | `force-dynamic` | `app/(site)/ranking/page.tsx` |
 
 ISR 間隔を変更する場合は、`lib/cache.ts` の `CMS_REVALIDATE_SECONDS` と `app/(site)/layout.tsx` の `revalidate` を**両方**同じ値に揃えてください（Next.js の制約により layout 側はリテラル直書きが必要です）。
 
@@ -429,12 +487,14 @@ docs: README の環境変数セクションを更新
 ### 設定・コード
 
 - [ ] `lib/config/stampConfig.ts` の `storageKey`（LocalStorage キー）を年度に合わせて変更
+- [ ] `lib/config/rankingConfig.ts` の Cookie 名・トレンド窓など
 - [ ] メタデータ（`app/layout.tsx` の `title` / `description`）
 - [ ] スタンプラリートークンの再生成と Vercel 環境変数の更新
 - [ ] NFC タグへの URL 書き込み
 
 ### インフラ
 
-- [ ] Vercel 環境変数の確認（特に `STAMP_TOKEN_MAP` / `STAMP_SIGNING_SECRET`）
+- [ ] Vercel 環境変数の確認（特に `STAMP_TOKEN_MAP` / `STAMP_SIGNING_SECRET` / `DATABASE_URL` / `RANKING_ENABLED`）
+- [ ] Neon のコンピュートが 0.25 CU であること。開催月に常時起動しない
 - [ ] microCMS API キーの有効期限・権限確認
 - [ ] 本番 URL・ドメイン設定の確認

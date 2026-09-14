@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 
 import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
+import { isRankingEnabled } from '@/lib/config/rankingConfig';
+import { recordVisit } from '@/lib/ranking/queries';
+import { getOrCreateVisitorId } from '@/lib/ranking/visitor';
 import { getStampBoothBySlug } from '@/lib/stamp/booths';
 import { createStampSignature } from '@/lib/stamp/signature';
 import { resolveSlugFromToken } from '@/lib/stamp/token-map';
@@ -61,6 +64,15 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('スタンプ署名エラー:', error);
     return errorResponse(503, 'スタンプラリーの設定が完了していません', 'MISCONFIGURED');
+  }
+
+  if (isRankingEnabled()) {
+    try {
+      const visitorId = await getOrCreateVisitorId();
+      await recordVisit(visitorId, booth.slug);
+    } catch (error) {
+      console.error('来訪ログの記録に失敗しました:', error);
+    }
   }
 
   const success: StampCollectSuccess = {

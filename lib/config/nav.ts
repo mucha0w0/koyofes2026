@@ -17,6 +17,8 @@ export interface NavLink {
   card?: NavLinkCard;
   /** リンク単位の表示先上書き（未指定時はセクション設定 → 全 surface） */
   surfaces?: Partial<Record<NavSurface, boolean>>;
+  /** true のとき RANKING_ENABLED がオンの場合のみ表示 */
+  requiresRanking?: boolean;
 }
 
 export interface NavSection {
@@ -49,6 +51,7 @@ export const NAV_SECTIONS = [
     links: [
       { label: 'お知らせ', href: '/official/news' },
       { label: 'スタンプラリー', href: '/stamp' },
+      { label: 'リアルタイムランキング', href: '/ranking', requiresRanking: true },
       { label: '公式SNS', href: '/official/social' },
       { label: 'パンフレット', href: '/official/pamphlet' },
     ],
@@ -155,7 +158,16 @@ export interface ResolvedNavLinkCardSection {
   items: ResolvedNavLinkCard[];
 }
 
-function isVisible(link: NavLink, section: NavSection, surface: NavSurface): boolean {
+function isVisible(
+  link: NavLink,
+  section: NavSection,
+  surface: NavSurface,
+  rankingEnabled: boolean,
+): boolean {
+  if (link.requiresRanking && !rankingEnabled) {
+    return false;
+  }
+
   if (link.surfaces?.[surface] !== undefined) {
     return link.surfaces[surface];
   }
@@ -168,23 +180,23 @@ function isVisible(link: NavLink, section: NavSection, surface: NavSurface): boo
 }
 
 /** Header / Footer 向け: セクションとリンク一覧 */
-export function getNavSections(surface: NavSurface): ResolvedNavSection[] {
+export function getNavSections(surface: NavSurface, rankingEnabled = false): ResolvedNavSection[] {
   return NAV_SECTIONS.map((section) => ({
     id: section.id,
     label: section.label,
     items: section.links
-      .filter((link) => isVisible(link, section, surface))
+      .filter((link) => isVisible(link, section, surface, rankingEnabled))
       .map(({ label, href }) => ({ label, href })),
   })).filter((section) => section.items.length > 0);
 }
 
 /** トップページ LinksSection 向け: card 付きリンクのみ */
-export function getNavLinkCardSections(): ResolvedNavLinkCardSection[] {
+export function getNavLinkCardSections(rankingEnabled = false): ResolvedNavLinkCardSection[] {
   const sections = NAV_SECTIONS.map((section) => ({
     id: section.id,
     label: section.label,
     items: section.links.flatMap((link) => {
-      if (!('card' in link) || !link.card || !isVisible(link, section, 'links')) {
+      if (!('card' in link) || !link.card || !isVisible(link, section, 'links', rankingEnabled)) {
         return [];
       }
 

@@ -8,8 +8,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 
 import { getNavSections, type ResolvedNavSection } from '@/lib/config/nav';
 
-const navItems = getNavSections('header');
-
 function DropdownMenu({ item }: { item: ResolvedNavSection }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +42,15 @@ function DropdownMenu({ item }: { item: ResolvedNavSection }) {
   );
 }
 
-function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function MobileMenu({
+  isOpen,
+  navItems,
+  onClose,
+}: {
+  isOpen: boolean;
+  navItems: ResolvedNavSection[];
+  onClose: () => void;
+}) {
   return (
     <div
       className={`fixed inset-0 z-50 bg-background transition-transform duration-300 ${
@@ -82,8 +88,9 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navItems = getNavSections('header', rankingEnabled);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
@@ -112,7 +119,7 @@ export function SiteHeader() {
       </div>
 
       {/* Mobile Menu */}
-      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <MobileMenu isOpen={mobileMenuOpen} navItems={navItems} onClose={() => setMobileMenuOpen(false)} />
     </header>
   );
 }

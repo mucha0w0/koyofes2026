@@ -4,6 +4,8 @@ import { Spinner } from '@/components/common/spinner';
 import { PageLayout } from '@/components/layout/page-layout';
 import { StampCollectClient } from '@/components/stamp/stamp-collect-client';
 
+import { isRankingEnabled } from '@/lib/config/rankingConfig';
+
 export const metadata = {
   title: 'スタンプ獲得 | こうよう祭 2026',
   robots: {
@@ -13,11 +15,17 @@ export const metadata = {
 };
 
 export default function StampCollectPage() {
+  const rankingEnabled = isRankingEnabled();
+
   return (
     <PageLayout
       backHref="/stamp"
       backLabel="スタンプ帳に戻る"
-      subtitle="NFC / QR からのスタンプ獲得処理を行います"
+      subtitle={
+        rankingEnabled
+          ? 'NFC / QR からのスタンプ獲得と、任意の星評価を行います'
+          : 'NFC / QR からのスタンプ獲得処理を行います'
+      }
       title="スタンプ獲得"
     >
       <Suspense
@@ -27,7 +35,7 @@ export default function StampCollectPage() {
           </div>
         }
       >
-        <StampCollectClient />
+        <StampCollectClient rankingEnabled={rankingEnabled} />
       </Suspense>
     </PageLayout>
   );

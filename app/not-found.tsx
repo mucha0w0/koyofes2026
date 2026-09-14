@@ -1,6 +1,8 @@
 import { NotFoundContent } from '@/components/layout/not-found-content';
 import { SiteShell } from '@/components/layout/site-shell';
 
+import { isRankingEnabled } from '@/lib/config/rankingConfig';
+
 /**
  * ルート直下の 404（存在しない URL など）。
  * (site) セグメント外のため layout を継承できず、SiteShell で同等の枠を適用する。
@@ -8,7 +10,7 @@ import { SiteShell } from '@/components/layout/site-shell';
  */
 export default function NotFound() {
   return (
-    <SiteShell>
+    <SiteShell rankingEnabled={isRankingEnabled()}>
       <NotFoundContent />
     </SiteShell>
   );

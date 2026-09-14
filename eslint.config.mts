@@ -33,7 +33,7 @@ const tailwindConfig =
 export default tseslint.config(
   // 1. 【最重要】ビルド成果物や設定ファイルを不要な警告から除外する（完全無視設定）
   {
-    ignores: ['.next/**', 'node_modules/**', 'dist/**', 'out/**', 'next.config.mjs', 'postcss.config.mjs'],
+    ignores: ['.next/**', 'node_modules/**', 'dist/**', 'out/**', 'next.config.mjs', 'postcss.config.mjs', 'drizzle.config.ts', 'drizzle/**'],
   },
 
   // 2. 基本的な推奨ルールセット
