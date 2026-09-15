@@ -115,7 +115,7 @@
 /* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
 .theme-1dearland {
   --paper: #ffffff;
-  --paper-2: #f4f1ea;
+  --paper-2: #fdf8ea;
   --ink: #161412;
   --ink-soft: #5a534c;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);

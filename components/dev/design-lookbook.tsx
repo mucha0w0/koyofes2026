@@ -10,7 +10,7 @@ import { getEnabledOfficialSocials } from '@/lib/config/social';
 
 const PALETTE = [
   { token: '--paper', hex: '#FFFFFF', note: 'ページ地', fill: 'var(--paper)' },
-  { token: '--paper-2', hex: '#F4F1EA', note: '背景色2・帯', fill: 'var(--paper-2)' },
+  { token: '--paper-2', hex: '#FDF8EA', note: '背景色2・帯', fill: 'var(--paper-2)' },
   { token: '--ink', hex: '#161412', note: '本文・強い線', fill: 'var(--ink)' },
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
   { token: '--ink-faint', hex: 'ink 16%', note: 'ヘアライン', fill: 'color-mix(in srgb, var(--ink) 16%, var(--paper))' },
@@ -198,7 +198,7 @@ export function DesignLookbook() {
           <h1 className="mt-2 text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mt-4 max-w-3xl">
             絵は多色のままヒーローに置く。このページのヘッダー・ボタン・カードは白・紙色2・インク・黄。見本のため黄の面積は本番の上限（CTA
-            1 つ）を超えている。セクション帯は `--paper-2`。選択は `--accent-soft`。この二つは同じ色にしない。
+            1 つ）を超えている。セクション帯は `--paper-2`。選択は `--accent-soft`。色相は同じ黄、明度だけ変える。
           </p>
           <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">
             書体は第一候補の Zen Maru Gothic。未確定。テーマ名 1dearland
@@ -244,7 +244,7 @@ export function DesignLookbook() {
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
               <span className="block font-medium">--paper-2</span>
-              セクション帯。黄ではない
+              セクション帯。黄を白で薄く割る
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
               <span className="block font-medium">--accent-soft</span>
