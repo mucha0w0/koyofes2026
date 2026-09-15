@@ -50,7 +50,7 @@ export function StampVotePanel({
   onSkip,
   onVoted,
 }: StampVotePanelProps) {
-  const [stars, setStars] = useState<number | null>(null);
+  const [stars, setStars] = useState(3);
   const [waitLevel, setWaitLevel] = useState<WaitLevel | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -65,12 +65,10 @@ export function StampVotePanel({
     setErrorMessage(null);
 
     const proof = { slug, signature, obtainedAt };
-    const tasks: Promise<{ ok: boolean; error: string | null }>[] = [
+    const tasks = [
       postJson('/api/ranking/wait', { ...proof, level: nextWaitLevel }),
+      postJson('/api/ranking/vote', { ...proof, stars }),
     ];
-    if (stars !== null) {
-      tasks.push(postJson('/api/ranking/vote', { ...proof, stars }));
-    }
 
     const results = await Promise.all(tasks);
     const failed = results.find((result) => !result.ok);
@@ -93,7 +91,7 @@ export function StampVotePanel({
         <DialogDescription className="text-sm leading-loose tracking-wider">
           {alreadyOwned
             ? `「${title}」の感想を、もう一度送れます。`
-            : 'よければ星を付けて、いまの並びを押してください。'}
+            : '星を確認して、いまの並びを押してください。'}
         </DialogDescription>
       </DialogHeader>
 
@@ -109,10 +107,10 @@ export function StampVotePanel({
       </div>
 
       <div>
-        <p className="mb-3 text-sm tracking-wider">評価（任意）</p>
+        <p className="mb-3 text-sm tracking-wider">評価</p>
         <div aria-label="星評価" className="flex gap-1 sm:gap-2" role="radiogroup">
           {[1, 2, 3, 4, 5].map((value) => {
-            const filled = stars !== null && value <= stars;
+            const filled = value <= stars;
             return (
               <button
                 key={value}
