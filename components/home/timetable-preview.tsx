@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getStageEvents, toTimedEvents } from '@/lib/timetable';
+import { type Event } from '@/lib/types/event';
 
 const PREVIEW_COUNT = 3;
 
@@ -79,7 +80,12 @@ function DaySection({ label, events }: DaySectionProps) {
 // ─── メインコンポーネント ────────────────────────────
 
 export async function TimetablePreview() {
-  const stageEvents = await getStageEvents();
+  let stageEvents: Event[] = [];
+  try {
+    stageEvents = await getStageEvents();
+  } catch (error) {
+    console.error('イベント取得エラー:', error);
+  }
 
   function toPreviewRows(dayKey: 'time-day1' | 'time-day2'): EventRowProps[] {
     return toTimedEvents(stageEvents, dayKey, { timeRangeSeparator: '〜' })

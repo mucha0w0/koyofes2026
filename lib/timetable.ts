@@ -27,15 +27,10 @@ interface ToTimedEventsOptions {
   timeRangeSeparator?: string;
 }
 
-/** ステージイベントを取得（取得失敗時は空配列） */
+/** ステージイベントを取得（失敗時は呼び出し元へ伝播） */
 export async function getStageEvents(): Promise<Event[]> {
-  try {
-    const events = await getEvents();
-    return events.filter((event) => event.category === 'stage');
-  } catch (error) {
-    console.error('イベント取得エラー:', error);
-    return [];
-  }
+  const events = await getEvents();
+  return events.filter((event) => event.category === 'stage');
 }
 
 /** Event を指定日の TimedEvent に変換し、開始時刻順にソート */
