@@ -55,22 +55,21 @@ export function StampVotePanel({
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const hasIcon = isImageUrl(icon);
-  const canSubmit = stars !== null || waitLevel !== null;
 
-  async function handleVote() {
-    if (!canSubmit || submitting) {
+  async function handleWaitSelect(nextWaitLevel: WaitLevel) {
+    if (submitting) {
       return;
     }
+    setWaitLevel(nextWaitLevel);
     setSubmitting(true);
     setErrorMessage(null);
 
     const proof = { slug, signature, obtainedAt };
-    const tasks: Promise<{ ok: boolean; error: string | null }>[] = [];
+    const tasks: Promise<{ ok: boolean; error: string | null }>[] = [
+      postJson('/api/ranking/wait', { ...proof, level: nextWaitLevel }),
+    ];
     if (stars !== null) {
       tasks.push(postJson('/api/ranking/vote', { ...proof, stars }));
-    }
-    if (waitLevel !== null) {
-      tasks.push(postJson('/api/ranking/wait', { ...proof, level: waitLevel }));
     }
 
     const results = await Promise.all(tasks);
@@ -85,14 +84,16 @@ export function StampVotePanel({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <DialogHeader className="space-y-1 text-left">
         <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Vote</p>
         <DialogTitle className="text-lg font-medium tracking-wide">
           {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました'}
         </DialogTitle>
         <DialogDescription className="text-sm leading-loose tracking-wider">
-          {alreadyOwned ? `「${title}」の感想を、もう一度投票できます。` : '投票で企画を応援しよう。'}
+          {alreadyOwned
+            ? `「${title}」の感想を、もう一度送れます。`
+            : 'よければ星を付けて、いまの並びを押してください。'}
         </DialogDescription>
       </DialogHeader>
 
@@ -108,7 +109,7 @@ export function StampVotePanel({
       </div>
 
       <div>
-        <p className="mb-3 text-sm tracking-wider">評価</p>
+        <p className="mb-3 text-sm tracking-wider">評価（任意）</p>
         <div aria-label="星評価" className="flex gap-1 sm:gap-2" role="radiogroup">
           {[1, 2, 3, 4, 5].map((value) => {
             const filled = stars !== null && value <= stars;
@@ -136,23 +137,21 @@ export function StampVotePanel({
       <div>
         <p className="mb-1 text-sm tracking-wider">いまの並び</p>
         <p className="mb-3 text-sm text-muted-foreground leading-loose tracking-wider">
-          いま見えている並びを、見た感じで教えてください。
+          いま見えている並びを押してください。押すと送信されます。
         </p>
-        <div aria-label="待ちの雰囲気" className="grid grid-cols-2 gap-2" role="radiogroup">
+        <div aria-busy={submitting} aria-label="いまの並び" className="grid grid-cols-2 gap-2" role="group">
           {RANKING_CONFIG.waitLevels.map((option) => {
             const selected = waitLevel === option.value;
             return (
               <button
                 key={option.value}
-                aria-checked={selected}
-                aria-label={option.label}
-                className={`flex flex-col items-center gap-2 border px-2 py-3 transition-opacity hover:opacity-80 ${
-                  selected ? 'border-foreground bg-muted' : 'border-border'
+                aria-label={`${option.label}を送信`}
+                className={`flex flex-col items-center justify-center gap-2 border px-2 py-3 transition-opacity hover:opacity-80 ${
+                  selected ? 'border-foreground bg-foreground text-background' : 'border-foreground'
                 }`}
                 disabled={submitting}
-                role="radio"
                 type="button"
-                onClick={() => setWaitLevel(option.value)}
+                onClick={() => void handleWaitSelect(option.value)}
               >
                 <span className="flex gap-0.5">
                   {RANKING_CONFIG.waitLevels.map((iconLevel) => {
@@ -160,13 +159,23 @@ export function StampVotePanel({
                     return (
                       <User
                         key={iconLevel.value}
-                        className={`size-4 ${filled ? 'fill-foreground text-foreground' : 'fill-none text-[#bcbfc3]'}`}
+                        className={`size-4 ${
+                          filled
+                            ? selected
+                              ? 'fill-background text-background'
+                              : 'fill-foreground text-foreground'
+                            : selected
+                              ? 'fill-none text-background/40'
+                              : 'fill-none text-[#bcbfc3]'
+                        }`}
                         strokeWidth={1.5}
                       />
                     );
                   })}
                 </span>
-                <span className="text-xs tracking-wider">{option.label}</span>
+                <span className="text-xs tracking-wider">
+                  {submitting && selected ? '送信中…' : option.label}
+                </span>
               </button>
             );
           })}
@@ -177,22 +186,13 @@ export function StampVotePanel({
         <p className="text-sm text-destructive leading-loose tracking-wider">{errorMessage}</p>
       ) : null}
 
-      <div className="space-y-3">
+      <div className="text-center">
         <Button
-          className="w-full rounded-none"
-          disabled={!canSubmit || submitting}
-          size="lg"
-          type="button"
-          onClick={() => void handleVote()}
-        >
-          {submitting ? '送信中…' : '投票する'}
-        </Button>
-        <Button
-          className="w-full rounded-none"
+          className="text-muted-foreground"
           disabled={submitting}
-          size="lg"
+          size="sm"
           type="button"
-          variant="outline"
+          variant="ghost"
           onClick={onSkip}
         >
           スキップ
