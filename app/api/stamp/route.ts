@@ -50,11 +50,7 @@ export async function POST(request: Request) {
 
   if (!booth) {
     console.error(`トークンに対応する slug がスタンプ対象にありません: ${slug}`);
-    return errorResponse(
-      503,
-      `スタンプラリーの設定が不正です（ブース「${slug}」が見つかりません。STAMP_TOKEN_MAP の slug と microCMS を確認してください）`,
-      'MISCONFIGURED',
-    );
+    return errorResponse(503, 'スタンプラリーの設定が完了していません', 'MISCONFIGURED');
   }
 
   let signature: string;
