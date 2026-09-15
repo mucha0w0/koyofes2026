@@ -1,7 +1,10 @@
 export function EventListSkeleton() {
   return (
     <div className="mx-auto max-w-5xl animate-pulse space-y-8">
-      <div className="h-12 w-full rounded bg-muted" />
+      <div className="flex items-stretch gap-2">
+        <div className="h-12 min-w-0 flex-1 rounded bg-muted" />
+        <div className="h-12 w-12 shrink-0 rounded bg-muted" />
+      </div>
       <div className="space-y-3">
         <div className="h-4 w-16 rounded bg-muted" />
         <div className="flex flex-wrap gap-2">

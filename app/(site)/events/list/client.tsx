@@ -4,10 +4,19 @@ import { Search, RotateCcw } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useState, useMemo, useEffect } from 'react';
 
+import { EventSortMenu } from '@/components/events/event-sort-menu';
 import { ExhibitionCard } from '@/components/events/exhibition-card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
+import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
+import {
+  fetchRankingScoreMap,
+  getEventSortResultHint,
+  isRankingSortKey,
+  sortEvents,
+  type EventSortKey,
+} from '@/lib/event-sort';
 import { Event } from '@/lib/types/event';
 
 // ロケーションラベル（データベースから一意に抽出）
@@ -33,6 +42,12 @@ export function EventListClient({ events }: EventListClientProps) {
   const [durationValue, setDurationValue] = useState(15);
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const [sortKey, setSortKey] = useState<EventSortKey>('none');
+  const [scoreMaps, setScoreMaps] = useState<Record<RankingTab, Map<string, number> | null>>({
+    overall: null,
+    trend: null,
+    wait: null,
+  });
 
   // URLクエリパラメータから検索文字を取得（useSearchParams は既にデコード済み）
   useEffect(() => {
@@ -41,6 +56,37 @@ export function EventListClient({ events }: EventListClientProps) {
       setSearchQuery(q);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!isRankingSortKey(sortKey)) {
+      return;
+    }
+
+    const tab = sortKey;
+    const controller = new AbortController();
+
+    const load = async () => {
+      try {
+        const map = await fetchRankingScoreMap(tab, controller.signal);
+        setScoreMaps((prev) => ({ ...prev, [tab]: map }));
+      } catch (error) {
+        if (controller.signal.aborted || (error instanceof DOMException && error.name === 'AbortError')) {
+          return;
+        }
+        setScoreMaps((prev) => ({ ...prev, [tab]: prev[tab] ?? new Map() }));
+      }
+    };
+
+    void load();
+    const timer = window.setInterval(() => {
+      void load();
+    }, RANKING_CONFIG.pollIntervalMs);
+
+    return () => {
+      controller.abort();
+      window.clearInterval(timer);
+    };
+  }, [sortKey]);
 
   const uniqueLocations = useMemo(() => getUniqueLocations(events), [events]);
 
@@ -89,6 +135,13 @@ export function EventListClient({ events }: EventListClientProps) {
     selectedLocation,
   ]);
 
+  const displayedEvents = useMemo(() => {
+    const scores = isRankingSortKey(sortKey) ? scoreMaps[sortKey] : null;
+    return sortEvents(filteredEvents, sortKey, scores);
+  }, [filteredEvents, sortKey, scoreMaps]);
+
+  const sortHint = getEventSortResultHint(sortKey);
+
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres((prev) => (prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]));
   };
@@ -101,13 +154,14 @@ export function EventListClient({ events }: EventListClientProps) {
     setDurationValue(15);
     setEnableDurationFilter(false);
     setSelectedLocation('');
+    setSortKey('none');
   };
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       {/* 検索バー */}
-      <div>
-        <div className="relative">
+      <div className="flex items-stretch gap-2">
+        <div className="relative min-w-0 flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <input
             className="w-full pl-10 pr-4 py-3 bg-input border border-border focus:outline-none focus:border-ring"
@@ -117,6 +171,7 @@ export function EventListClient({ events }: EventListClientProps) {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
+        <EventSortMenu value={sortKey} onChange={setSortKey} />
       </div>
 
       {/* ジャンルフィルター */}
@@ -230,12 +285,15 @@ export function EventListClient({ events }: EventListClientProps) {
 
       {/* ヒット件数とリセットボタン */}
       <div className="flex items-center justify-between">
-        <p className="text-xs text-muted-foreground">{filteredEvents.length}件が見つかりました。</p>
+        <p className="text-xs text-muted-foreground">
+          {displayedEvents.length}件が見つかりました{sortHint ? `（${sortHint}）` : ''}。
+        </p>
         {(searchQuery ||
           selectedGenres.length > 0 ||
           enableParticipantFilter ||
           enableDurationFilter ||
-          selectedLocation) && (
+          selectedLocation ||
+          sortKey !== 'none') && (
           <button
             className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
             onClick={handleResetFilters}
@@ -248,8 +306,8 @@ export function EventListClient({ events }: EventListClientProps) {
 
       {/* 企画カード */}
       <div className="space-y-4">
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((event) => <ExhibitionCard key={event.slug} event={event} />)
+        {displayedEvents.length > 0 ? (
+          displayedEvents.map((event) => <ExhibitionCard key={event.slug} event={event} />)
         ) : (
           <div className="text-center py-12">
             <p className="text-muted-foreground">検索条件に該当する企画が見つかりません。</p>
