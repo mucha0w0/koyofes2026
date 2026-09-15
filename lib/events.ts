@@ -15,7 +15,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     title: event.title,
     catchphrase: event.catchphrase ?? '',
     icon: event.icon?.url ?? '',
-    images: event.images.map((img) => img.url).filter((url) => url && url.length > 0),
+    images: (event.images ?? []).map((img) => img.url).filter((url) => url && url.length > 0),
     organization: event.organization,
     location: Array.isArray(event.location) ? event.location[0] || '' : event.location,
     floor: Array.isArray(event.floor) ? event.floor[0] || '' : event.floor,

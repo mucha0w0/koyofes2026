@@ -29,7 +29,7 @@ export interface MicroCMSEvent {
   title: string;
   catchphrase?: string;
   icon: MicroCMSIconField;
-  images: MicroCMSImageField[];
+  images?: MicroCMSImageField[] | null;
   organization: string;
   location: string[];
   floor: string[];
