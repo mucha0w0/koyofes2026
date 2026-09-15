@@ -10,7 +10,7 @@ import { getEnabledOfficialSocials } from '@/lib/config/social';
 
 const PALETTE = [
   { token: '--paper', hex: '#FFFFFF', note: 'ページ地', fill: 'var(--paper)' },
-  { token: '--paper-2', hex: '#FDF8EA', note: '背景色2・帯', fill: 'var(--paper-2)' },
+  { token: '--paper-2', hex: '#FFFBF0', note: '背景色2・帯', fill: 'var(--paper-2)' },
   { token: '--ink', hex: '#161412', note: '本文・強い線', fill: 'var(--ink)' },
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
   { token: '--ink-faint', hex: 'ink 16%', note: 'ヘアライン', fill: 'color-mix(in srgb, var(--ink) 16%, var(--paper))' },
@@ -75,7 +75,7 @@ function LookbookHeader() {
   return (
     <header data-lookbook-chrome className="overflow-x-hidden border-b border-[var(--ink-faint)] bg-[var(--paper)]">
       <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-        <Link className="text-xl font-medium text-[var(--ink)]" href="/">
+        <Link className="lookbook-heading text-xl text-[var(--ink)]" href="/">
           こうよう祭
         </Link>
         <nav aria-label="見本用メインナビゲーション" className="flex flex-wrap items-center justify-end gap-1">
@@ -125,7 +125,7 @@ function LookbookFooter() {
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
-            <p className="text-xl font-medium">こうよう祭 2026</p>
+            <p className="lookbook-heading text-xl">こうよう祭 2026</p>
             <p className="text-sm text-[var(--paper)]/80">
               豊田高専の文化祭
               <br />
@@ -201,8 +201,8 @@ export function DesignLookbook() {
             1 つ）を超えている。セクション帯は `--paper-2`。選択は `--accent-soft`。色相は同じ黄、明度だけ変える。
           </p>
           <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">
-            書体は第一候補の Zen Maru Gothic。未確定。テーマ名 1dearland
-            は絵がワードマークなので、見出しでは活字で組まない。
+            見出しは POP体（Mochiy Pop One）。本文は Zen Maru Gothic。見出しを丸ゴの太字で代用しない。テーマ名 1dearland
+            は絵がワードマークなので、ヒーローでは活字で組まない。
           </p>
           <nav aria-label="見本内の目次" className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm">
             {TOC.map((item) => (
@@ -244,7 +244,7 @@ export function DesignLookbook() {
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
               <span className="block font-medium">--paper-2</span>
-              セクション帯。黄を白で薄く割る
+              セクション帯。白にかなり近い黄
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
               <span className="block font-medium">--accent-soft</span>
@@ -256,18 +256,18 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 字間 0 ・ 本文行間 1.8" title="活字">
+        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 見出し POP / 本文 丸ゴ" title="活字">
           <div data-lookbook-chrome className="max-w-3xl space-y-6">
             <div>
-              <p className="text-sm text-[var(--ink-soft)]">ページ H1</p>
-              <p className="text-3xl md:text-4xl font-bold">こうよう祭とは</p>
+              <p className="text-sm text-[var(--ink-soft)]">ページ H1 ・ POP体</p>
+              <p className="lookbook-heading text-3xl md:text-4xl">こうよう祭とは</p>
             </div>
             <div>
-              <p className="text-sm text-[var(--ink-soft)]">H2</p>
-              <p className="text-2xl font-bold">開催概要</p>
+              <p className="text-sm text-[var(--ink-soft)]">H2 ・ POP体</p>
+              <p className="lookbook-heading text-2xl">開催概要</p>
             </div>
             <p>
-              こうよう祭は、豊田高専で毎年秋に開催される文化祭です。本文はインク。キャプションだけ
+              こうよう祭は、豊田高専で毎年秋に開催される文化祭です。本文はインクの丸ゴ。キャプションだけ
               ink-soft。広い字間と Josefin の英字ラベルは使わない。
             </p>
             <p className="text-sm text-[var(--ink-soft)]">キャプション・メタ情報。長文の代用にしない。</p>
@@ -420,7 +420,7 @@ export function DesignLookbook() {
             <Link className="lookbook-link text-sm" href="/">
               トップページに戻る
             </Link>
-            <p className="mt-6 text-3xl font-bold md:text-4xl">こうよう祭とは</p>
+            <p className="lookbook-heading mt-6 text-3xl md:text-4xl">こうよう祭とは</p>
             <p className="mt-3 text-[var(--ink-soft)]">歴史と概要</p>
           </div>
           <p data-lookbook-chrome className="mt-8 max-w-3xl">

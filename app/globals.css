@@ -115,7 +115,7 @@
 /* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
 .theme-1dearland {
   --paper: #ffffff;
-  --paper-2: #fdf8ea;
+  --paper-2: #fffbf0;
   --ink: #161412;
   --ink-soft: #5a534c;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
@@ -152,10 +152,12 @@
 
 .theme-1dearland h1,
 .theme-1dearland h2,
-.theme-1dearland h3 {
+.theme-1dearland h3,
+.theme-1dearland .lookbook-heading {
+  font-family: var(--font-mochiy-pop), var(--font-zen-maru), sans-serif;
+  font-weight: 400;
   letter-spacing: 0;
   line-height: 1.35;
-  font-weight: 700;
 }
 
 .theme-1dearland.is-grayscale [data-lookbook-chrome] {
