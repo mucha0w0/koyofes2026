@@ -18,6 +18,8 @@ function getUniqueLocations(events: Event[]): string[] {
     .sort();
 }
 
+const PARTICIPANT_FILTER_OPEN_MAX = 5;
+
 interface EventListClientProps {
   events: Event[];
 }
@@ -57,7 +59,10 @@ export function EventListClient({ events }: EventListClientProps) {
       if (enableParticipantFilter) {
         const participantsLL = event.participantsLL || 1;
         const participantsUL = event.participantsUL || 1;
-        if (participantMax < participantsLL || participantMax > participantsUL) {
+        // スライダー最大値「5〜」は 5 人以上として扱う
+        if (participantMax >= PARTICIPANT_FILTER_OPEN_MAX) {
+          if (participantsUL < PARTICIPANT_FILTER_OPEN_MAX) return false;
+        } else if (participantMax < participantsLL || participantMax > participantsUL) {
           return false;
         }
       }
@@ -158,8 +163,8 @@ export function EventListClient({ events }: EventListClientProps) {
                 </div>
                 <input
                   className="w-full"
-                  max="5"
-                  min="1"
+                  max={PARTICIPANT_FILTER_OPEN_MAX}
+                  min={1}
                   type="range"
                   value={participantMax}
                   onChange={(e) => setParticipantMax(Number(e.target.value))}
