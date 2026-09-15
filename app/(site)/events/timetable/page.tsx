@@ -66,10 +66,11 @@ function TimelineView({
         {timeLabels.map((label, i) => (
           <div
             key={label}
-            className="absolute left-0 right-0"
+            className={`absolute left-0 right-0 ${
+              i % 2 === 0 ? 'border-t border-border' : 'border-t border-dashed border-border/50'
+            }`}
             style={{
               top: `${i * (PX_PER_HOUR / 2)}px`,
-              borderTop: i % 2 === 0 ? '1px solid hsl(var(--border))' : '1px dashed hsl(var(--border) / 0.5)',
             }}
           />
         ))}
