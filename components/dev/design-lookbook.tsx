@@ -9,13 +9,14 @@ import { getNavSections } from '@/lib/config/nav';
 import { getEnabledOfficialSocials } from '@/lib/config/social';
 
 const PALETTE = [
-  { token: '--paper', hex: '#FFFFFF', note: '地' },
-  { token: '--ink', hex: '#161412', note: '本文・強い線' },
-  { token: '--ink-soft', hex: '#5A534C', note: 'キャプション' },
-  { token: '--ink-faint', hex: 'ink 16%', note: 'ヘアライン' },
-  { token: '--accent', hex: '#E8B42A', note: 'CTA・選択' },
-  { token: '--accent-soft', hex: '#FBF3D2', note: '帯・選択地' },
-  { token: '--danger', hex: '#B42318', note: 'エラーのみ' },
+  { token: '--paper', hex: '#FFFFFF', note: 'ページ地', fill: 'var(--paper)' },
+  { token: '--paper-2', hex: '#F4F1EA', note: '背景色2・帯', fill: 'var(--paper-2)' },
+  { token: '--ink', hex: '#161412', note: '本文・強い線', fill: 'var(--ink)' },
+  { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
+  { token: '--ink-faint', hex: 'ink 16%', note: 'ヘアライン', fill: 'color-mix(in srgb, var(--ink) 16%, var(--paper))' },
+  { token: '--accent', hex: '#E8B42A', note: '主 CTA', fill: 'var(--festival-accent)' },
+  { token: '--accent-soft', hex: '#FBF3D2', note: '選択・ホバー', fill: 'var(--festival-accent-soft)' },
+  { token: '--danger', hex: '#B42318', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
 
 const SECTION_ID = {
@@ -58,7 +59,7 @@ function Section({
   band?: boolean;
 }) {
   return (
-    <section className={band ? 'bg-[var(--festival-accent-soft)]' : 'bg-[var(--paper)]'} id={id}>
+    <section className={band ? 'bg-[var(--paper-2)]' : 'bg-[var(--paper)]'} id={id}>
       <div className="mx-auto w-full max-w-7xl px-4 py-14 md:py-16">
         <p className="mb-2 text-sm text-[var(--ink-soft)]">{spec}</p>
         <h2 className="mb-8 text-2xl md:text-3xl">{title}</h2>
@@ -196,8 +197,8 @@ export function DesignLookbook() {
           <p className="text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット</p>
           <h1 className="mt-2 text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mt-4 max-w-3xl">
-            絵は多色のままヒーローに置く。このページのヘッダー・ボタン・カードは白・インク・黄だけ。見本のため黄の面積は本番の上限（CTA
-            1 つ）を超えている。
+            絵は多色のままヒーローに置く。このページのヘッダー・ボタン・カードは白・紙色2・インク・黄。見本のため黄の面積は本番の上限（CTA
+            1 つ）を超えている。セクション帯は `--paper-2`。選択は `--accent-soft`。この二つは同じ色にしない。
           </p>
           <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">
             書体は第一候補の Zen Maru Gothic。未確定。テーマ名 1dearland
@@ -213,26 +214,13 @@ export function DesignLookbook() {
         </div>
 
         <Section id={SECTION_ID.palette} spec="DESIGN2 5.1 ・ hex は仮" title="色">
-          <div data-lookbook-chrome className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
+          <div data-lookbook-chrome className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {PALETTE.map((item) => (
               <figure key={item.token} className="min-w-0">
                 <div
                   className="aspect-square border border-[var(--ink-faint)]"
                   style={{
-                    background:
-                      item.token === '--ink-faint'
-                        ? 'color-mix(in srgb, var(--ink) 16%, var(--paper))'
-                        : item.token === '--accent'
-                          ? 'var(--festival-accent)'
-                          : item.token === '--accent-soft'
-                            ? 'var(--festival-accent-soft)'
-                            : item.token === '--danger'
-                              ? 'var(--festival-danger)'
-                              : item.token === '--paper'
-                                ? 'var(--paper)'
-                                : item.token === '--ink'
-                                  ? 'var(--ink)'
-                                  : 'var(--ink-soft)',
+                    background: item.fill,
                     borderRadius: 12,
                   }}
                 />
@@ -245,8 +233,26 @@ export function DesignLookbook() {
               </figure>
             ))}
           </div>
+          <div
+            data-lookbook-chrome
+            className="mt-8 grid grid-cols-1 overflow-hidden border border-[var(--ink-faint)] sm:grid-cols-3"
+            style={{ borderRadius: 12 }}
+          >
+            <p className="bg-[var(--paper)] px-4 py-6 text-sm">
+              <span className="block font-medium">--paper</span>
+              ページ地
+            </p>
+            <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
+              <span className="block font-medium">--paper-2</span>
+              セクション帯。黄ではない
+            </p>
+            <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
+              <span className="block font-medium">--accent-soft</span>
+              選択・ホバー。帯にしない
+            </p>
+          </div>
           <p className="mt-6 max-w-3xl text-sm text-[var(--ink-soft)]">
-            かきつばた・空・緑・桃はトークンにしない。赤は危険以外に使わない。
+            かきつばた・空・緑・桃はトークンにしない。赤は危険の印以外に使わない。帯と選択を同じクリームにしない。
           </p>
         </Section>
 
@@ -333,7 +339,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ 黄を背負わせない" title="入力">
+        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ エラーは箱にしない" title="入力">
           <div data-lookbook-chrome className="max-w-md space-y-6">
             <div>
               <label className="mb-2 block text-sm font-medium" htmlFor={searchId}>
@@ -341,17 +347,18 @@ export function DesignLookbook() {
               </label>
               <input className="lookbook-input" id={searchId} placeholder="キーワード" type="search" />
             </div>
-            <div
-              className="border-l-[3px] border-[var(--festival-danger)] bg-[var(--paper)] px-4 py-3"
-              role="alert"
-            >
-              <p className="font-medium">送信できませんでした</p>
-              <p className="text-sm">エラー文はインク。赤は左の線だけ。</p>
+            <div className="lookbook-error" role="alert">
+              <span aria-hidden className="lookbook-error-mark" />
+              <div>
+                <p className="text-sm text-[var(--ink-soft)]">エラー</p>
+                <p className="font-medium">送信できませんでした</p>
+                <p className="mt-1 text-sm">印だけ色を持つ。枠で囲まない。</p>
+              </div>
             </div>
           </div>
         </Section>
 
-        <Section id={SECTION_ID.card} spec="DESIGN2 11.4 ・ リストは hairline" title="カード">
+        <Section id={SECTION_ID.card} spec="DESIGN2 11.4 ・ 選択は accent-soft。帯は paper-2" title="カード">
           <div data-lookbook-chrome className="grid gap-4 md:grid-cols-2">
             <article className="border border-[var(--ink-faint)] p-5" style={{ borderRadius: 12 }}>
               <p className="text-lg font-bold">アクセス</p>
@@ -359,7 +366,14 @@ export function DesignLookbook() {
             </article>
             <article className="border border-[var(--ink-faint)] bg-[var(--festival-accent-soft)] p-5" style={{ borderRadius: 12 }}>
               <p className="text-lg font-bold">ホバー／選択の地</p>
-              <p className="mt-2 text-sm text-[var(--ink-soft)]">不透明度を下げない。accent-soft へ。</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">白の上では cream。帯色ではない。</p>
+            </article>
+          </div>
+          <div data-lookbook-chrome className="mt-4 bg-[var(--paper-2)] p-5" style={{ borderRadius: 12 }}>
+            <p className="mb-4 text-sm text-[var(--ink-soft)]">同じカードを paper-2 の帯の上へ</p>
+            <article className="border border-[var(--ink-faint)] bg-[var(--festival-accent-soft)] p-5" style={{ borderRadius: 12 }}>
+              <p className="text-lg font-bold">選択中</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">帯と選択が同じ色だと溶ける。だから分ける。</p>
             </article>
           </div>
           <div data-lookbook-chrome className="mt-8 overflow-x-auto">

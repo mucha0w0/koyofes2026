@@ -115,6 +115,7 @@
 /* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
 .theme-1dearland {
   --paper: #ffffff;
+  --paper-2: #f4f1ea;
   --ink: #161412;
   --ink-soft: #5a534c;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
@@ -132,7 +133,7 @@
   --primary-foreground: var(--paper);
   --secondary: var(--paper);
   --secondary-foreground: var(--ink);
-  --muted: var(--festival-accent-soft);
+  --muted: var(--paper-2);
   --muted-foreground: var(--ink-soft);
   --accent: var(--ink);
   --accent-foreground: var(--paper);
@@ -271,6 +272,20 @@
 
 .theme-1dearland .lookbook-chip-muted {
   color: var(--ink-soft);
+}
+
+.theme-1dearland .lookbook-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.theme-1dearland .lookbook-error-mark {
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  flex-shrink: 0;
+  background: var(--festival-danger);
 }
 
 .theme-1dearland .lookbook-link {
