@@ -1,0 +1,452 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useId, useState } from 'react';
+
+import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
+import { getNavSections } from '@/lib/config/nav';
+import { getEnabledOfficialSocials } from '@/lib/config/social';
+
+const PALETTE = [
+  { token: '--paper', hex: '#FFFFFF', note: '地' },
+  { token: '--ink', hex: '#161412', note: '本文・強い線' },
+  { token: '--ink-soft', hex: '#5A534C', note: 'キャプション' },
+  { token: '--ink-faint', hex: 'ink 16%', note: 'ヘアライン' },
+  { token: '--accent', hex: '#E8B42A', note: 'CTA・選択' },
+  { token: '--accent-soft', hex: '#FBF3D2', note: '帯・選択地' },
+  { token: '--danger', hex: '#B42318', note: 'エラーのみ' },
+] as const;
+
+const SECTION_ID = {
+  palette: 'palette',
+  type: 'type',
+  line: 'line',
+  button: 'button',
+  chip: 'chip',
+  form: 'form',
+  card: 'card',
+  chrome: 'chrome',
+  page: 'page',
+  stage: 'stage',
+} as const;
+
+const TOC = [
+  { href: `#${SECTION_ID.palette}`, label: '色' },
+  { href: `#${SECTION_ID.type}`, label: '活字' },
+  { href: `#${SECTION_ID.line}`, label: '線' },
+  { href: `#${SECTION_ID.button}`, label: 'ボタン' },
+  { href: `#${SECTION_ID.chip}`, label: 'チップ' },
+  { href: `#${SECTION_ID.form}`, label: '入力' },
+  { href: `#${SECTION_ID.card}`, label: 'カード' },
+  { href: `#${SECTION_ID.chrome}`, label: 'ヘッダー／フッター' },
+  { href: `#${SECTION_ID.page}`, label: 'ページ見出し' },
+  { href: `#${SECTION_ID.stage}`, label: 'ヒーロー' },
+] as const;
+
+function Section({
+  id,
+  title,
+  spec,
+  children,
+  band = false,
+}: {
+  id: string;
+  title: string;
+  spec: string;
+  children: React.ReactNode;
+  band?: boolean;
+}) {
+  return (
+    <section className={band ? 'bg-[var(--festival-accent-soft)]' : 'bg-[var(--paper)]'} id={id}>
+      <div className="mx-auto w-full max-w-7xl px-4 py-14 md:py-16">
+        <p className="mb-2 text-sm text-[var(--ink-soft)]">{spec}</p>
+        <h2 className="mb-8 text-2xl md:text-3xl">{title}</h2>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function LookbookHeader() {
+  const navItems = getNavSections('header');
+
+  return (
+    <header data-lookbook-chrome className="overflow-x-hidden border-b border-[var(--ink-faint)] bg-[var(--paper)]">
+      <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <Link className="text-xl font-medium text-[var(--ink)]" href="/">
+          こうよう祭
+        </Link>
+        <nav aria-label="見本用メインナビゲーション" className="flex flex-wrap items-center justify-end gap-1">
+          {navItems.map((item) => (
+            <details key={item.id} className="relative">
+              <summary className="cursor-pointer list-none px-3 py-2 text-sm text-[var(--ink)] underline-offset-4 hover:underline [&::-webkit-details-marker]:hidden">
+                {item.label}
+              </summary>
+              <div className="absolute top-full right-0 z-10 min-w-44 border border-[var(--ink-faint)] bg-[var(--paper)] py-2">
+                {item.items.map((subItem) => (
+                  <Link
+                    key={subItem.href}
+                    className="block px-4 py-2 text-sm text-[var(--ink)] hover:bg-[var(--festival-accent-soft)]"
+                    href={subItem.href}
+                  >
+                    {subItem.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+function CountdownSpecimen() {
+  const days = Math.max(0, Math.ceil((new Date(2026, 9, 31, 9, 0, 0).getTime() - Date.now()) / 86_400_000));
+
+  return (
+    <div data-lookbook-chrome className="mt-8 bg-[var(--ink)] px-4 py-5 text-[var(--paper)]">
+      <p className="text-center text-sm sm:text-base">
+        開催まで
+        <span className="mx-3 text-2xl font-bold tabular-nums tracking-wide">{String(days).padStart(2, '0')}</span>
+        日
+      </p>
+    </div>
+  );
+}
+
+function LookbookFooter() {
+  const socialLinks = getEnabledOfficialSocials();
+
+  return (
+    <footer data-lookbook-chrome className="bg-[var(--ink)] text-[var(--paper)]">
+      <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-2">
+            <p className="text-xl font-medium">こうよう祭 2026</p>
+            <p className="text-sm text-[var(--paper)]/80">
+              豊田高専の文化祭
+              <br />
+              10/31(土)・11/1(日)
+            </p>
+          </div>
+          {socialLinks.length > 0 && (
+            <div>
+              <p className="mb-3 text-sm font-medium">公式SNS</p>
+              <div className="flex flex-wrap gap-2">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.id}
+                    className="inline-flex min-h-11 items-center border border-[color-mix(in_srgb,var(--paper)_35%,transparent)] px-4 text-sm text-[var(--paper)] hover:bg-[color-mix(in_srgb,var(--paper)_12%,transparent)]"
+                    href={link.url}
+                    rel="noopener noreferrer"
+                    style={{ borderRadius: 12 }}
+                    target="_blank"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="mt-10 flex flex-col gap-2 border-t border-[color-mix(in_srgb,var(--paper)_20%,transparent)] pt-6 text-xs text-[var(--paper)]/70 sm:flex-row sm:justify-between sm:text-sm">
+          <p>こうよう祭 2026 システムパート</p>
+          <p>&copy; 2026 KoyoFes System Part</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export function DesignLookbook() {
+  const [grayscale, setGrayscale] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(EVENT_CATEGORY_OPTIONS[0]?.id ?? '');
+  const searchId = useId();
+
+  return (
+    <div className={`theme-1dearland min-h-screen overflow-x-hidden ${grayscale ? 'is-grayscale' : ''}`}>
+      <div className="border-b border-[var(--ink)] bg-[var(--ink)] text-[var(--paper)]">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm">
+            開発用見本 <span className="text-[var(--paper)]/70">/dev/design ・ インデックスしない ・ 本番トークン未変更</span>
+          </p>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <button
+              aria-pressed={grayscale}
+              className="min-h-11 border border-[color-mix(in_srgb,var(--paper)_40%,transparent)] px-3"
+              style={{ borderRadius: 12 }}
+              type="button"
+              onClick={() => setGrayscale((value) => !value)}
+            >
+              {grayscale ? 'グレーを解除' : 'クロムをグレーで見る'}
+            </button>
+            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/">
+              現行トップへ
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <LookbookHeader />
+
+      <main>
+        <div data-lookbook-chrome className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
+          <p className="text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット</p>
+          <h1 className="mt-2 text-3xl md:text-4xl">1dearland のクロム見本</h1>
+          <p className="mt-4 max-w-3xl">
+            絵は多色のままヒーローに置く。このページのヘッダー・ボタン・カードは白・インク・黄だけ。見本のため黄の面積は本番の上限（CTA
+            1 つ）を超えている。
+          </p>
+          <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">
+            書体は第一候補の Zen Maru Gothic。未確定。テーマ名 1dearland
+            は絵がワードマークなので、見出しでは活字で組まない。
+          </p>
+          <nav aria-label="見本内の目次" className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            {TOC.map((item) => (
+              <a key={item.href} className="lookbook-link" href={item.href}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        <Section id={SECTION_ID.palette} spec="DESIGN2 5.1 ・ hex は仮" title="色">
+          <div data-lookbook-chrome className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
+            {PALETTE.map((item) => (
+              <figure key={item.token} className="min-w-0">
+                <div
+                  className="aspect-square border border-[var(--ink-faint)]"
+                  style={{
+                    background:
+                      item.token === '--ink-faint'
+                        ? 'color-mix(in srgb, var(--ink) 16%, var(--paper))'
+                        : item.token === '--accent'
+                          ? 'var(--festival-accent)'
+                          : item.token === '--accent-soft'
+                            ? 'var(--festival-accent-soft)'
+                            : item.token === '--danger'
+                              ? 'var(--festival-danger)'
+                              : item.token === '--paper'
+                                ? 'var(--paper)'
+                                : item.token === '--ink'
+                                  ? 'var(--ink)'
+                                  : 'var(--ink-soft)',
+                    borderRadius: 12,
+                  }}
+                />
+                <figcaption className="mt-2 text-sm">
+                  <span className="block font-medium">{item.token}</span>
+                  <span className="block text-[var(--ink-soft)]">
+                    {item.hex} ・ {item.note}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-6 max-w-3xl text-sm text-[var(--ink-soft)]">
+            かきつばた・空・緑・桃はトークンにしない。赤は危険以外に使わない。
+          </p>
+        </Section>
+
+        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 字間 0 ・ 本文行間 1.8" title="活字">
+          <div data-lookbook-chrome className="max-w-3xl space-y-6">
+            <div>
+              <p className="text-sm text-[var(--ink-soft)]">ページ H1</p>
+              <p className="text-3xl md:text-4xl font-bold">こうよう祭とは</p>
+            </div>
+            <div>
+              <p className="text-sm text-[var(--ink-soft)]">H2</p>
+              <p className="text-2xl font-bold">開催概要</p>
+            </div>
+            <p>
+              こうよう祭は、豊田高専で毎年秋に開催される文化祭です。本文はインク。キャプションだけ
+              ink-soft。広い字間と Josefin の英字ラベルは使わない。
+            </p>
+            <p className="text-sm text-[var(--ink-soft)]">キャプション・メタ情報。長文の代用にしない。</p>
+            <p>
+              リンクは
+              <a className="lookbook-link" href="/about/overview">
+                こうよう祭とは
+              </a>
+              のようにインクの下線。黄にしない。
+            </p>
+          </div>
+        </Section>
+
+        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ 絵の 2cm を全要素にしない" title="線">
+          <div data-lookbook-chrome className="grid gap-8 md:grid-cols-3">
+            <div>
+              <p className="mb-3 text-sm text-[var(--ink-soft)]">hairline ・ 既定</p>
+              <div className="h-24 border border-[var(--ink-faint)]" style={{ borderRadius: 12 }} />
+            </div>
+            <div>
+              <p className="mb-3 text-sm text-[var(--ink-soft)]">rule ・ 主ボタンと強調だけ</p>
+              <div className="h-24 border-2 border-[var(--ink)]" style={{ borderRadius: 12 }} />
+            </div>
+            <div>
+              <p className="mb-3 text-sm text-[var(--ink-soft)]">offset ・ 主ボタンホバー</p>
+              <div
+                className="h-24 border-2 border-[var(--ink)] bg-[var(--festival-accent)]"
+                style={{ borderRadius: 12, boxShadow: '0 3px 0 var(--ink)' }}
+              />
+            </div>
+          </div>
+        </Section>
+
+        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 黄の上は黒文字" title="ボタン">
+          <div data-lookbook-chrome className="flex flex-wrap items-center gap-4">
+            <button className="btn-ticket" type="button">
+              企画を探す
+            </button>
+            <button className="btn-outline" type="button">
+              パンフレット
+            </button>
+            <button className="btn-quiet" type="button">
+              トップページに戻る
+            </button>
+            <button disabled className="btn-ticket" type="button">
+              無効
+            </button>
+          </div>
+        </Section>
+
+        <Section id={SECTION_ID.chip} spec="DESIGN2 5.4 ・ 色でカテゴリを分けない" title="チップ">
+          <div data-lookbook-chrome className="flex flex-wrap gap-2">
+            {EVENT_CATEGORY_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                aria-pressed={selectedCategory === option.id}
+                className="lookbook-chip"
+                type="button"
+                onClick={() => setSelectedCategory(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <div data-lookbook-chrome className="mt-6 flex flex-wrap gap-2">
+            <span className="lookbook-chip lookbook-chip-on">開催中</span>
+            <span className="lookbook-chip lookbook-chip-muted">終了</span>
+            <span className="lookbook-chip">獲得済み</span>
+          </div>
+        </Section>
+
+        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ 黄を背負わせない" title="入力">
+          <div data-lookbook-chrome className="max-w-md space-y-6">
+            <div>
+              <label className="mb-2 block text-sm font-medium" htmlFor={searchId}>
+                企画を検索
+              </label>
+              <input className="lookbook-input" id={searchId} placeholder="キーワード" type="search" />
+            </div>
+            <div
+              className="border-l-[3px] border-[var(--festival-danger)] bg-[var(--paper)] px-4 py-3"
+              role="alert"
+            >
+              <p className="font-medium">送信できませんでした</p>
+              <p className="text-sm">エラー文はインク。赤は左の線だけ。</p>
+            </div>
+          </div>
+        </Section>
+
+        <Section id={SECTION_ID.card} spec="DESIGN2 11.4 ・ リストは hairline" title="カード">
+          <div data-lookbook-chrome className="grid gap-4 md:grid-cols-2">
+            <article className="border border-[var(--ink-faint)] p-5" style={{ borderRadius: 12 }}>
+              <p className="text-lg font-bold">アクセス</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">電車・バス・車でのアクセス方法</p>
+            </article>
+            <article className="border border-[var(--ink-faint)] bg-[var(--festival-accent-soft)] p-5" style={{ borderRadius: 12 }}>
+              <p className="text-lg font-bold">ホバー／選択の地</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">不透明度を下げない。accent-soft へ。</p>
+            </article>
+          </div>
+          <div data-lookbook-chrome className="mt-8 overflow-x-auto">
+            <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+              <caption className="mb-3 text-left text-sm text-[var(--ink-soft)]">
+                ランキング表 ・ 1 位だけ帯
+              </caption>
+              <thead>
+                <tr className="border-b border-[var(--ink-faint)]">
+                  <th className="py-2 font-medium">順位</th>
+                  <th className="py-2 font-medium">企画</th>
+                  <th className="py-2 font-medium">票</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-[var(--ink-faint)] bg-[var(--festival-accent-soft)]">
+                  <td className="py-2">1</td>
+                  <td className="py-2">サンプル企画 A</td>
+                  <td className="py-2">128</td>
+                </tr>
+                <tr className="border-b border-[var(--ink-faint)]">
+                  <td className="py-2">2</td>
+                  <td className="py-2">サンプル企画 B</td>
+                  <td className="py-2">96</td>
+                </tr>
+                <tr>
+                  <td className="py-2">3</td>
+                  <td className="py-2">サンプル企画 C</td>
+                  <td className="py-2">71</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Section>
+
+        <Section band id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
+          <p data-lookbook-chrome className="max-w-3xl">
+            上端のバーの下が提案ヘッダー。ページ最下部が提案フッター（インク地）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
+          </p>
+        </Section>
+
+        <Section id={SECTION_ID.page} spec="DESIGN2 9 ・ 見出し下は hairline" title="ページ見出し">
+          <div data-lookbook-chrome className="border-b border-[var(--ink-faint)] pb-8">
+            <Link className="lookbook-link text-sm" href="/">
+              トップページに戻る
+            </Link>
+            <p className="mt-6 text-3xl font-bold md:text-4xl">こうよう祭とは</p>
+            <p className="mt-3 text-[var(--ink-soft)]">歴史と概要</p>
+          </div>
+          <p data-lookbook-chrome className="mt-8 max-w-3xl">
+            こうよう祭は、豊田高専で毎年秋に開催される文化祭です。下層の本文はこの密度を基準にする。
+          </p>
+        </Section>
+
+        <Section id={SECTION_ID.stage} spec="DESIGN2 4.1 / 11.8 ・ 絵の上にテーマ名を重ねない" title="ヒーロー">
+          <div className="overflow-hidden border border-[var(--ink-faint)]" style={{ borderRadius: 12 }}>
+            <div className="relative w-full" style={{ aspectRatio: '1178 / 295' }}>
+              <Image
+                fill
+                priority
+                alt="こうよう祭 2026 テーマ 1dearland のコンセプトアート"
+                className="object-contain"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                src="/conceptart.jpg"
+              />
+            </div>
+            <div
+              data-lookbook-chrome
+              className="flex flex-col gap-4 border-t-2 border-[var(--ink)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <p className="text-sm">
+                2026年10月31日(土)・11月1日(日)
+                <span className="mx-2 text-[var(--ink-soft)]">/</span>
+                9:00 〜 16:00
+                <span className="mx-2 text-[var(--ink-soft)]">/</span>
+                豊田高専
+              </p>
+              <button className="btn-ticket self-start" type="button">
+                企画を探す
+              </button>
+            </div>
+          </div>
+          <CountdownSpecimen />
+        </Section>
+      </main>
+
+      <LookbookFooter />
+    </div>
+  );
+}

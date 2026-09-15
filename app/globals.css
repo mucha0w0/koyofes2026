@@ -112,6 +112,173 @@
   }
 }
 
+/* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
+.theme-1dearland {
+  --paper: #ffffff;
+  --ink: #161412;
+  --ink-soft: #5a534c;
+  --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
+  --festival-accent: #e8b42a;
+  --festival-accent-soft: #fbf3d2;
+  --festival-danger: #b42318;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper);
+  --secondary-foreground: var(--ink);
+  --muted: var(--festival-accent-soft);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--ink);
+  --accent-foreground: var(--paper);
+  --destructive: var(--festival-danger);
+  --destructive-foreground: var(--paper);
+  --border: var(--ink-faint);
+  --input: var(--paper);
+  --ring: var(--ink);
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-zen-maru), var(--font-jp), sans-serif;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+.theme-1dearland h1,
+.theme-1dearland h2,
+.theme-1dearland h3 {
+  letter-spacing: 0;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.theme-1dearland.is-grayscale [data-lookbook-chrome] {
+  filter: grayscale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-1dearland .btn-ticket {
+    transition: none;
+  }
+
+  .theme-1dearland .btn-ticket:hover {
+    transform: none;
+    box-shadow: 0 3px 0 var(--ink);
+  }
+}
+
+.theme-1dearland .btn-ticket,
+.theme-1dearland .btn-outline,
+.theme-1dearland .btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.theme-1dearland .btn-ticket {
+  position: relative;
+  border: 2px solid var(--ink);
+  background: var(--festival-accent);
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-1dearland .btn-ticket:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.theme-1dearland .btn-ticket:focus-visible,
+.theme-1dearland .btn-outline:focus-visible,
+.theme-1dearland .btn-quiet:focus-visible,
+.theme-1dearland .lookbook-input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.theme-1dearland .btn-ticket:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  transform: none;
+  box-shadow: none;
+}
+
+.theme-1dearland .btn-outline {
+  border: 1px solid var(--ink-faint);
+  background: transparent;
+  color: var(--ink);
+}
+
+.theme-1dearland .btn-outline:hover {
+  background: var(--festival-accent-soft);
+}
+
+.theme-1dearland .btn-quiet {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.theme-1dearland .btn-quiet:hover {
+  opacity: 0.7;
+}
+
+.theme-1dearland .lookbook-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--ink-faint);
+  border-radius: 12px;
+  background: var(--paper);
+  padding: 0.5rem 0.875rem;
+  color: var(--ink);
+}
+
+.theme-1dearland .lookbook-input::placeholder {
+  color: var(--ink-soft);
+}
+
+.theme-1dearland .lookbook-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  border: 1px solid var(--ink-faint);
+  border-radius: 999px;
+  background: var(--paper);
+  padding: 0.25rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.theme-1dearland .lookbook-chip[aria-pressed='true'],
+.theme-1dearland .lookbook-chip-on {
+  background: var(--festival-accent-soft);
+}
+
+.theme-1dearland .lookbook-chip-muted {
+  color: var(--ink-soft);
+}
+
+.theme-1dearland .lookbook-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
