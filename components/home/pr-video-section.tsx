@@ -2,10 +2,10 @@ import { ArrowRight, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import Script from 'next/script';
 
-// ── config ──────────────────────────────────────────────
+import { getOfficialSocial } from '@/lib/config/social';
+
 const INSTAGRAM_POST_URL = 'https://www.instagram.com/p/DZZpnTuAJZp/';
-const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/YOUR_ACCOUNT/';
-// ────────────────────────────────────────────────────────
+const INSTAGRAM_PROFILE_URL = getOfficialSocial('instagram').url;
 
 function SectionHeading() {
   return (

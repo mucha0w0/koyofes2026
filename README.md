@@ -63,7 +63,7 @@
 ### 公式コンテンツ
 
 - **お知らせ**（`/official/news`）: microCMS から取得したニュース一覧・詳細
-- **公式 SNS**（`/official/social`）: Instagram / X / YouTube へのリンク
+- **公式 SNS**（`/official/social`）: 公式アカウントへのリンク（表示する媒体は `lib/config/social.ts` の `enabled`）
 - **パンフレット**（`/official/pamphlet`）: PDF ビューアとダウンロード
 
 ### ご案内
@@ -331,7 +331,7 @@ microCMS での更新は、本番では最大 **60 秒** の遅延で反映さ�
 | アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
 | 会場マップ画像 | `app/(site)/guide/map/kounaizu.jpg` | `/guide/map` |
 | お問い合わせ | `app/(site)/about/contact/page.tsx` | `/about/contact` |
-| 公式 SNS リンク | `app/(site)/official/social/page.tsx` | `/official/social` |
+| 公式 SNS リンク | `lib/config/social.ts` | フッター・ホーム CTA・`/official/social` |
 | パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
 
 ### 企画カテゴリ
@@ -485,7 +485,7 @@ docs: README の環境変数セクションを更新
 - [ ] FAQ（`lib/faqs.json`）の内容
 - [ ] パンフレット PDF（`public/koyofes2026_pamphlet.pdf`）の差し替え
 - [ ] 会場マップ画像（`app/(site)/guide/map/kounaizu.jpg`）
-- [ ] 公式 SNS のアカウント・URL（`/official/social`）
+- [ ] 公式 SNS のアカウント・URL（`lib/config/social.ts` の `enabled` と URL）
 - [ ] お問い合わせ先（`/about/contact`）
 
 ### 設定・コード

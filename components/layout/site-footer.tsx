@@ -1,12 +1,8 @@
-import { SiX, SiInstagram, SiYoutube } from 'react-icons/si';
-
-const socialLinks = [
-  { label: 'X (旧Twitter)', href: 'https://twitter.com/kouyousai2026', icon: SiX },
-  { label: 'Instagram', href: 'https://instagram.com/kouyousai2026', icon: SiInstagram },
-  { label: 'YouTube', href: 'https://youtube.com/@kouyousai2026', icon: SiYoutube },
-] as const;
+import { getEnabledOfficialSocials, getOfficialSocialIcon } from '@/lib/config/social';
 
 export function SiteFooter() {
+  const socialLinks = getEnabledOfficialSocials();
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
@@ -20,23 +16,28 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="sm:shrink-0">
-            <p className="mb-3 text-sm font-medium">公式SNS</p>
-            <div className="flex gap-2">
-              {socialLinks.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  aria-label={label}
-                  className="flex size-10 items-center justify-center bg-primary-foreground/20 text-primary-foreground transition-colors hover:bg-primary-foreground/30"
-                  href={href}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Icon className="size-5" />
-                </a>
-              ))}
+          {socialLinks.length > 0 && (
+            <div className="sm:shrink-0">
+              <p className="mb-3 text-sm font-medium">公式SNS</p>
+              <div className="flex gap-2">
+                {socialLinks.map(({ id, label, url }) => {
+                  const Icon = getOfficialSocialIcon(id);
+                  return (
+                    <a
+                      key={id}
+                      aria-label={label}
+                      className="flex size-10 items-center justify-center bg-primary-foreground/20 text-primary-foreground transition-colors hover:bg-primary-foreground/30"
+                      href={url}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <Icon className="size-5" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-primary-foreground/20 pt-6 text-xs text-primary-foreground/60 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
