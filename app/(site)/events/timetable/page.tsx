@@ -62,20 +62,6 @@ function TimelineView({
 
       {/* タイムライン本体 */}
       <div className="relative flex-1" style={{ height: `${totalHeight}px` }}>
-        {/* グリッド線 */}
-        {timeLabels.map((label, i) => (
-          <div
-            key={label}
-            className={`absolute left-0 right-0 ${
-              i % 2 === 0 ? 'border-t border-border' : 'border-t border-dashed border-border/50'
-            }`}
-            style={{
-              top: `${i * (PX_PER_HOUR / 2)}px`,
-            }}
-          />
-        ))}
-
-        {/* カード */}
         {events.map((event, idx) => (
           <Link
             key={idx}
