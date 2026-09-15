@@ -18,7 +18,6 @@ const josefinSans = Josefin_Sans({
 export const metadata: Metadata = {
   title: 'こうよう祭 2026 | 公式ウェブサイト',
   description: '令和8年度 こうよう祭の公式ウェブサイトです。企画情報、来場案内など。',
-  generator: 'v0.app',
   icons: {
     icon: [
       {

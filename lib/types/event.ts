@@ -30,7 +30,7 @@ export interface Event {
   slug: string;
   title: string;
   catchphrase: string;
-  icon: string; // lucide icon name (e.g., "Music", "Utensils")
+  icon: string; // image URL or empty
   images: string[]; // URLs only
   organization: string;
   location: string;
@@ -45,8 +45,4 @@ export interface Event {
   'organ-description': string; // markdown
   author: string;
   category: EventCategory;
-}
-
-export interface EventsData {
-  events: Event[];
 }

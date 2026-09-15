@@ -1,5 +1,3 @@
-'use client';
-
 import { Calendar, MapPin, Clock } from 'lucide-react';
 import Image from 'next/image';
 

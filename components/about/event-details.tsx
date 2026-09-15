@@ -1,5 +1,3 @@
-'use client';
-
 export function EventDetails() {
   return (
     <div className="bg-muted p-6">

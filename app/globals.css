@@ -130,21 +130,6 @@
     line-height: 1.35;
   }
 
-  .section-display-en {
-    font-family: var(--font-display);
-    letter-spacing: 0.03em;
-    line-height: 1.1;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-  }
-
   /* Slider Styles */
   input[type='range'] {
     width: 100%;

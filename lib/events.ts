@@ -9,7 +9,7 @@ import { parseEventCategory, type Event } from '@/lib/types/event';
 export type { MicroCMSEvent } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';
 
-export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
+function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   return {
     slug: event.slug,
     title: event.title,
@@ -32,7 +32,7 @@ export function transformMicroCMSEvent(event: MicroCMSEvent): Event {
   };
 }
 
-export async function fetchEventsFromMicroCMS(cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSEvent[]> {
+async function fetchEventsFromMicroCMS(cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSEvent[]> {
   try {
     return await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode);
   } catch (error) {

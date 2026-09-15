@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 
 import type { PartItem, SocialPlatform } from '@/lib/types/part';
 
-import { getLucideIcon } from '@/lib/lucide-icons';
 import { isImageUrl } from '@/lib/utils';
 
 const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
@@ -20,7 +19,6 @@ interface PartCardProps {
 }
 
 export function PartCard({ item }: PartCardProps) {
-  const IconComponent = getLucideIcon(item.icon);
   const isIconUrl = isImageUrl(item.icon);
 
   return (
@@ -29,8 +27,6 @@ export function PartCard({ item }: PartCardProps) {
         <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-muted flex items-center justify-center overflow-hidden mt-0.5">
           {isIconUrl ? (
             <Image alt={item.name} className="w-full h-full object-cover" height={56} src={item.icon} width={56} />
-          ) : IconComponent ? (
-            <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-foreground" />
           ) : (
             <span className="text-xs text-muted-foreground">No icon</span>
           )}
