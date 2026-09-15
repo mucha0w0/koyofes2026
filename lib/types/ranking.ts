@@ -1,4 +1,4 @@
-import type { RankingTab } from '@/lib/config/rankingConfig';
+import type { RankingTab, WaitLevel } from '@/lib/config/rankingConfig';
 
 export type RankingVoteErrorCode =
   | 'RANKING_DISABLED'
@@ -50,7 +50,25 @@ export interface RankingTrendResponse {
   items: RankingTrendItem[];
 }
 
-export type RankingResponse = RankingOverallResponse | RankingTrendResponse;
+export interface RankingWaitItem {
+  rank: number;
+  slug: string;
+  title: string;
+  organization: string;
+  icon: string;
+  level: WaitLevel;
+  score: number;
+  voteCount: number;
+  lastVotedAt: string;
+}
+
+export interface RankingWaitResponse {
+  tab: 'wait';
+  generatedAt: string;
+  items: RankingWaitItem[];
+}
+
+export type RankingResponse = RankingOverallResponse | RankingTrendResponse | RankingWaitResponse;
 
 export interface RankingApiError {
   error: string;

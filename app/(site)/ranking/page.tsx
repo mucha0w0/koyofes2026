@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'リアルタイムランキング | こうよう祭 2026',
-  description: 'クラス・学科展・有志展示の総合順位と、いま人が多い企画のトレンド順位。',
+  description: 'クラス・学科展・有志展示の総合順位、トレンド、いまの並びの目安。',
 };
 
 export default function RankingPage() {
@@ -24,7 +24,7 @@ export default function RankingPage() {
   }
 
   return (
-    <PageLayout subtitle="星の総合評価と、いま人が多い企画" title="リアルタイムランキング">
+    <PageLayout subtitle="星の総合評価、いま人が多い企画、並びの目安" title="リアルタイムランキング">
       <RankingBoard />
     </PageLayout>
   );

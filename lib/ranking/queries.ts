@@ -2,9 +2,10 @@ import 'server-only';
 
 import { and, count, countDistinct, eq, gte, sum } from 'drizzle-orm';
 
-import { RANKING_CONFIG } from '@/lib/config/rankingConfig';
+import { RANKING_CONFIG, isWaitLevel, type WaitLevel } from '@/lib/config/rankingConfig';
 import { getDb } from '@/lib/ranking/db';
-import { rankingVisits, rankingVotes } from '@/lib/ranking/schema';
+import { rankingVisits, rankingVotes, rankingWaits } from '@/lib/ranking/schema';
+import { roundWaitLevel, weightedWaitScore } from '@/lib/ranking/score';
 
 export class RankingDatabaseUnavailableError extends Error {
   constructor() {
@@ -78,6 +79,22 @@ export async function insertVote(visitorId: string, slug: string, stars: number)
   await db.insert(rankingVotes).values({ visitorId, slug, stars });
 }
 
+export async function insertWait(visitorId: string, slug: string, level: WaitLevel): Promise<void> {
+  const db = await requireDb();
+  const since = new Date(Date.now() - RANKING_CONFIG.voteDebounceMs);
+  const recent = await db
+    .select({ id: rankingWaits.id })
+    .from(rankingWaits)
+    .where(and(eq(rankingWaits.visitorId, visitorId), eq(rankingWaits.slug, slug), gte(rankingWaits.createdAt, since)))
+    .limit(1);
+
+  if (recent.length > 0) {
+    throw new VoteRateLimitedError();
+  }
+
+  await db.insert(rankingWaits).values({ visitorId, slug, level });
+}
+
 export interface VoteAggregate {
   slug: string;
   voteCount: number;
@@ -122,4 +139,70 @@ export async function getTrendAggregates(since: Date): Promise<TrendAggregate[]>
     slug: row.slug,
     uniqueVisitors: toNumber(row.uniqueVisitors),
   }));
+}
+
+export interface WaitAggregate {
+  slug: string;
+  score: number;
+  level: WaitLevel;
+  voteCount: number;
+  lastVotedAt: Date;
+}
+
+export async function getWaitAggregates(since: Date, now = new Date()): Promise<WaitAggregate[]> {
+  const db = await requireDb();
+  const rows = await db
+    .select({
+      slug: rankingWaits.slug,
+      level: rankingWaits.level,
+      createdAt: rankingWaits.createdAt,
+    })
+    .from(rankingWaits)
+    .where(gte(rankingWaits.createdAt, since));
+
+  const grouped = new Map<string, { level: number; createdAt: Date }[]>();
+  for (const row of rows) {
+    if (!isWaitLevel(row.level)) {
+      continue;
+    }
+    const list = grouped.get(row.slug) ?? [];
+    list.push({ level: row.level, createdAt: row.createdAt });
+    grouped.set(row.slug, list);
+  }
+
+  const windowMs = RANKING_CONFIG.waitWindowMs;
+  const aggregates: WaitAggregate[] = [];
+
+  for (const [slug, reports] of grouped) {
+    const score = weightedWaitScore(
+      reports.map((report) => ({
+        level: report.level,
+        ageMs: now.getTime() - report.createdAt.getTime(),
+      })),
+      windowMs,
+    );
+    if (score === null) {
+      continue;
+    }
+
+    const first = reports[0];
+    if (!first) {
+      continue;
+    }
+
+    const lastVotedAt = reports.reduce(
+      (latest, report) => (report.createdAt > latest ? report.createdAt : latest),
+      first.createdAt,
+    );
+
+    aggregates.push({
+      slug,
+      score,
+      level: roundWaitLevel(score),
+      voteCount: reports.length,
+      lastVotedAt,
+    });
+  }
+
+  return aggregates;
 }

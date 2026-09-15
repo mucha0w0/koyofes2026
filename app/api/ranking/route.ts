@@ -5,12 +5,14 @@ import type {
   RankingOverallItem,
   RankingResponse,
   RankingTrendItem,
+  RankingWaitItem,
 } from '@/lib/types/ranking';
 
 import { RANKING_CONFIG, isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
 import {
   getTrendAggregates,
   getVoteAggregates,
+  getWaitAggregates,
   RankingDatabaseUnavailableError,
 } from '@/lib/ranking/queries';
 import { averageStars, bayesianScore } from '@/lib/ranking/score';
@@ -35,7 +37,8 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url);
-  const tab = searchParams.get('tab') === 'trend' ? 'trend' : 'overall';
+  const tabParam = searchParams.get('tab');
+  const tab = tabParam === 'trend' ? 'trend' : tabParam === 'wait' ? 'wait' : 'overall';
 
   let booths;
   try {
@@ -77,6 +80,46 @@ export async function GET(request: Request) {
         .map((item, index) => ({ ...item, rank: index + 1 }));
 
       return noStore({ tab: 'trend', generatedAt, items });
+    }
+
+    if (tab === 'wait') {
+      const since = new Date(Date.now() - RANKING_CONFIG.waitWindowMs);
+      const aggregates = await getWaitAggregates(since);
+      const items: RankingWaitItem[] = aggregates
+        .map((row) => {
+          const booth = boothBySlug.get(row.slug);
+          if (!booth || row.voteCount <= 0) {
+            return null;
+          }
+          return {
+            rank: 0,
+            slug: booth.slug,
+            title: booth.title,
+            organization: booth.organization,
+            icon: booth.icon,
+            level: row.level,
+            score: row.score,
+            voteCount: row.voteCount,
+            lastVotedAt: row.lastVotedAt.toISOString(),
+          };
+        })
+        .filter((item): item is RankingWaitItem => item !== null)
+        .sort((a, b) => {
+          if (b.score !== a.score) {
+            return b.score - a.score;
+          }
+          const timeDiff = new Date(b.lastVotedAt).getTime() - new Date(a.lastVotedAt).getTime();
+          if (timeDiff !== 0) {
+            return timeDiff;
+          }
+          if (b.voteCount !== a.voteCount) {
+            return b.voteCount - a.voteCount;
+          }
+          return a.title.localeCompare(b.title, 'ja');
+        })
+        .map((item, index) => ({ ...item, rank: index + 1 }));
+
+      return noStore({ tab: 'wait', generatedAt, items });
     }
 
     const aggregates = await getVoteAggregates();

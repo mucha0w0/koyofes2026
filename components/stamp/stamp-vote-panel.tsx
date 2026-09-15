@@ -1,6 +1,6 @@
 'use client';
 
-import { Star } from 'lucide-react';
+import { Star, User } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -9,6 +9,7 @@ import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/di
 
 import type { RankingVoteError } from '@/lib/types/ranking';
 
+import { RANKING_CONFIG, type WaitLevel } from '@/lib/config/rankingConfig';
 import { isImageUrl } from '@/lib/utils';
 
 export interface StampVotePanelProps {
@@ -22,6 +23,23 @@ export interface StampVotePanelProps {
   onVoted: () => void;
 }
 
+async function postJson(url: string, body: unknown): Promise<{ ok: boolean; error: string | null }> {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (response.ok) {
+      return { ok: true, error: null };
+    }
+    const data = (await response.json().catch(() => null)) as RankingVoteError | null;
+    return { ok: false, error: data?.error ?? '投票に失敗しました。スタンプは獲得済みです。' };
+  } catch {
+    return { ok: false, error: '通信に失敗しました。スタンプは獲得済みです。' };
+  }
+}
+
 export function StampVotePanel({
   slug,
   title,
@@ -33,35 +51,37 @@ export function StampVotePanel({
   onVoted,
 }: StampVotePanelProps) {
   const [stars, setStars] = useState<number | null>(null);
+  const [waitLevel, setWaitLevel] = useState<WaitLevel | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const hasIcon = isImageUrl(icon);
+  const canSubmit = stars !== null || waitLevel !== null;
 
   async function handleVote() {
-    if (stars === null || submitting) {
+    if (!canSubmit || submitting) {
       return;
     }
     setSubmitting(true);
     setErrorMessage(null);
-    try {
-      const response = await fetch('/api/ranking/vote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, stars, signature, obtainedAt }),
-      });
 
-      if (!response.ok) {
-        const data = (await response.json().catch(() => null)) as RankingVoteError | null;
-        setErrorMessage(data?.error ?? '投票に失敗しました。スタンプは獲得済みです。');
-        setSubmitting(false);
-        return;
-      }
-
-      onVoted();
-    } catch {
-      setErrorMessage('通信に失敗しました。スタンプは獲得済みです。');
-      setSubmitting(false);
+    const proof = { slug, signature, obtainedAt };
+    const tasks: Promise<{ ok: boolean; error: string | null }>[] = [];
+    if (stars !== null) {
+      tasks.push(postJson('/api/ranking/vote', { ...proof, stars }));
     }
+    if (waitLevel !== null) {
+      tasks.push(postJson('/api/ranking/wait', { ...proof, level: waitLevel }));
+    }
+
+    const results = await Promise.all(tasks);
+    const failed = results.find((result) => !result.ok);
+    if (failed) {
+      setErrorMessage(failed.error);
+      setSubmitting(false);
+      return;
+    }
+
+    onVoted();
   }
 
   return (
@@ -72,9 +92,7 @@ export function StampVotePanel({
           {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました'}
         </DialogTitle>
         <DialogDescription className="text-sm leading-loose tracking-wider">
-          {alreadyOwned
-            ? `「${title}」の感想を、もう一度投票できます。`
-            : '投票で企画を応援しよう。'}
+          {alreadyOwned ? `「${title}」の感想を、もう一度投票できます。` : '投票で企画を応援しよう。'}
         </DialogDescription>
       </DialogHeader>
 
@@ -115,6 +133,46 @@ export function StampVotePanel({
         </div>
       </div>
 
+      <div>
+        <p className="mb-1 text-sm tracking-wider">いまの並び</p>
+        <p className="mb-3 text-sm text-muted-foreground leading-loose tracking-wider">
+          いま見えている並びを、見た感じで教えてください。
+        </p>
+        <div aria-label="待ちの雰囲気" className="grid grid-cols-2 gap-2" role="radiogroup">
+          {RANKING_CONFIG.waitLevels.map((option) => {
+            const selected = waitLevel === option.value;
+            return (
+              <button
+                key={option.value}
+                aria-checked={selected}
+                aria-label={option.label}
+                className={`flex flex-col items-center gap-2 border px-2 py-3 transition-opacity hover:opacity-80 ${
+                  selected ? 'border-foreground bg-muted' : 'border-border'
+                }`}
+                disabled={submitting}
+                role="radio"
+                type="button"
+                onClick={() => setWaitLevel(option.value)}
+              >
+                <span className="flex gap-0.5">
+                  {RANKING_CONFIG.waitLevels.map((iconLevel) => {
+                    const filled = iconLevel.value <= option.value;
+                    return (
+                      <User
+                        key={iconLevel.value}
+                        className={`size-4 ${filled ? 'fill-foreground text-foreground' : 'fill-none text-[#bcbfc3]'}`}
+                        strokeWidth={1.5}
+                      />
+                    );
+                  })}
+                </span>
+                <span className="text-xs tracking-wider">{option.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {errorMessage ? (
         <p className="text-sm text-destructive leading-loose tracking-wider">{errorMessage}</p>
       ) : null}
@@ -122,7 +180,7 @@ export function StampVotePanel({
       <div className="space-y-3">
         <Button
           className="w-full rounded-none"
-          disabled={stars === null || submitting}
+          disabled={!canSubmit || submitting}
           size="lg"
           type="button"
           onClick={() => void handleVote()}

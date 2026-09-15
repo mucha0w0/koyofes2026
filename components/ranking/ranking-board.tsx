@@ -7,9 +7,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Spinner } from '@/components/common/spinner';
 import { Button } from '@/components/ui/button';
 
-import type { RankingApiError, RankingOverallItem, RankingResponse, RankingTrendItem } from '@/lib/types/ranking';
+import type { RankingApiError, RankingOverallItem, RankingResponse, RankingTrendItem, RankingWaitItem } from '@/lib/types/ranking';
 
-import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
+import { RANKING_CONFIG, getWaitLevelLabel, type RankingTab } from '@/lib/config/rankingConfig';
+import { formatWaitAgo } from '@/lib/ranking/score';
 import { isImageUrl } from '@/lib/utils';
 
 function formatAverage(value: number): string {
@@ -74,6 +75,28 @@ function TrendRow({ item }: { item: RankingTrendItem }) {
   );
 }
 
+function WaitRow({ item, generatedAt }: { item: RankingWaitItem; generatedAt: string }) {
+  return (
+    <li>
+      <Link className="flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80" href={`/events/${item.slug}`}>
+        <span className="w-10 shrink-0 font-display text-xl tabular-nums tracking-wide text-foreground">
+          {String(item.rank).padStart(2, '0')}
+        </span>
+        <BoothIcon icon={item.icon} title={item.title} />
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-medium tracking-wide">{item.title}</p>
+          <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="text-sm tracking-wider">{getWaitLevelLabel(item.level)}</p>
+          <p className="text-xs text-muted-foreground tracking-wider">{formatWaitAgo(item.lastVotedAt, generatedAt)}</p>
+          <p className="text-xs text-muted-foreground tracking-wider">{item.voteCount} 件</p>
+        </div>
+      </Link>
+    </li>
+  );
+}
+
 export function RankingBoard() {
   const [tab, setTab] = useState<RankingTab>('overall');
   const tabRef = useRef(tab);
@@ -131,22 +154,27 @@ export function RankingBoard() {
 
   const overallItems = tab === 'overall' && data?.tab === 'overall' ? data.items : [];
   const trendItems = tab === 'trend' && data?.tab === 'trend' ? data.items : [];
+  const waitItems = tab === 'wait' && data?.tab === 'wait' ? data.items : [];
   const awaitingTab = data?.tab !== tab;
+  const generatedAt = data?.generatedAt ?? new Date().toISOString();
+
+  const heading =
+    tab === 'overall' ? 'Ranking' : tab === 'trend' ? 'Now' : 'Wait';
+  const description =
+    tab === 'overall'
+      ? '体験した人の星評価による総合順位です。約15秒ごとに更新します。'
+      : tab === 'trend'
+        ? '直近20分にスタンプを獲得した人数の順位です。約15秒ごとに更新します。'
+        : '来場者が見た、いまの並びの目安です。約15秒ごとに更新します。';
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <div className="space-y-1">
-        <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">
-          {tab === 'overall' ? 'Ranking' : 'Now'}
-        </p>
-        <p className="text-sm text-muted-foreground leading-loose tracking-wider">
-          {tab === 'overall'
-            ? '体験した人の星評価による総合順位です。約15秒ごとに更新します。'
-            : '直近20分にスタンプを獲得した人数の順位です。約15秒ごとに更新します。'}
-        </p>
+        <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">{heading}</p>
+        <p className="text-sm text-muted-foreground leading-loose tracking-wider">{description}</p>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Button
           className="rounded-none"
           size="lg"
@@ -164,6 +192,15 @@ export function RankingBoard() {
           onClick={() => setTab('trend')}
         >
           トレンド
+        </Button>
+        <Button
+          className="rounded-none"
+          size="lg"
+          type="button"
+          variant={tab === 'wait' ? 'default' : 'outline'}
+          onClick={() => setTab('wait')}
+        >
+          待ち
         </Button>
       </div>
 
@@ -195,6 +232,14 @@ export function RankingBoard() {
         </div>
       ) : null}
 
+      {!awaitingTab && !errorMessage && tab === 'wait' && waitItems.length === 0 ? (
+        <div className="bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+            直近15分の待ち情報はまだありません。スタンプ帳の獲得画面から、いまの並びを教えてください。
+          </p>
+        </div>
+      ) : null}
+
       {!awaitingTab && overallItems.length > 0 ? (
         <ol className="space-y-2">
           {overallItems.map((item) => (
@@ -207,6 +252,14 @@ export function RankingBoard() {
         <ol className="space-y-2">
           {trendItems.map((item) => (
             <TrendRow key={item.slug} item={item} />
+          ))}
+        </ol>
+      ) : null}
+
+      {!awaitingTab && waitItems.length > 0 && data?.tab === 'wait' ? (
+        <ol className="space-y-2">
+          {waitItems.map((item) => (
+            <WaitRow key={item.slug} generatedAt={generatedAt} item={item} />
           ))}
         </ol>
       ) : null}

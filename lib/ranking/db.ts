@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { drizzle as drizzlePg, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
@@ -30,8 +30,13 @@ async function createPgliteDb(): Promise<RankingDatabase> {
   if (!globalForRanking.koyofesPglite) {
     const client = new PGlite();
     await client.waitReady;
-    const sql = readFileSync(join(process.cwd(), 'drizzle/0000_ranking.sql'), 'utf8');
-    await client.exec(sql);
+    const drizzleDir = join(process.cwd(), 'drizzle');
+    const files = readdirSync(drizzleDir)
+      .filter((name) => name.endsWith('.sql'))
+      .sort();
+    for (const file of files) {
+      await client.exec(readFileSync(join(drizzleDir, file), 'utf8'));
+    }
     globalForRanking.koyofesPglite = client;
   }
   return drizzle(globalForRanking.koyofesPglite, { schema }) as unknown as RankingDatabase;

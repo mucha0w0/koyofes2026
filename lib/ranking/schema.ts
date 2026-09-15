@@ -14,6 +14,21 @@ export const rankingVisits = pgTable(
   ],
 );
 
+export const rankingWaits = pgTable(
+  'ranking_waits',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    visitorId: uuid('visitor_id').notNull(),
+    slug: text('slug').notNull(),
+    level: smallint('level').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index('ranking_waits_visitor_slug_created_idx').on(table.visitorId, table.slug, table.createdAt),
+    index('ranking_waits_slug_created_idx').on(table.slug, table.createdAt),
+  ],
+);
+
 export const rankingVotes = pgTable(
   'ranking_votes',
   {
