@@ -32,11 +32,11 @@ export function EventListClient({ events }: EventListClientProps) {
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('');
 
-  // URLクエリパラメータから検索文字を取得
+  // URLクエリパラメータから検索文字を取得（useSearchParams は既にデコード済み）
   useEffect(() => {
     const q = searchParams.get('q');
     if (q) {
-      setSearchQuery(decodeURIComponent(q));
+      setSearchQuery(q);
     }
   }, [searchParams]);
 
