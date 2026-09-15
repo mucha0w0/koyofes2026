@@ -1,5 +1,6 @@
-import type { IconType } from 'react-icons';
 import { SiInstagram, SiLine, SiX, SiYoutube } from 'react-icons/si';
+
+import type { IconType } from 'react-icons';
 
 /**
  * 公式 SNS の単一ソース。
