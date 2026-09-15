@@ -4,8 +4,12 @@ import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
 
+/** microCMS リスト API の1リクエスト上限 */
+const MICROCMS_MAX_LIMIT = 100;
+
 export interface MicroCMSListQuery {
   limit?: number;
+  offset?: number;
   filters?: string;
 }
 
@@ -29,19 +33,17 @@ function resolveFetchCache(cacheMode: MicroCMSFetchCache) {
   return { next: { revalidate: CMS_REVALIDATE_SECONDS } };
 }
 
-/**
- * microCMS リスト API を取得
- * @param endpoint `events` などエンドポイント名（`/api/v1/` 以降）
- * @param cacheMode `no-store` はスタンプ照合など最新データが必要な用途向け
- */
-export async function fetchMicroCMSList<T>(
+async function fetchMicroCMSListPage<T>(
   endpoint: string,
-  cacheMode: MicroCMSFetchCache = 'default',
-  query: MicroCMSListQuery = {},
-): Promise<T[]> {
+  cacheMode: MicroCMSFetchCache,
+  query: MicroCMSListQuery,
+): Promise<MicroCMSListResponse<T>> {
   const { apiKey, serviceDomain } = getMicroCMSConfig();
   const params = new URLSearchParams();
-  params.set('limit', String(query.limit ?? 100));
+  params.set('limit', String(query.limit ?? MICROCMS_MAX_LIMIT));
+  if (query.offset !== undefined) {
+    params.set('offset', String(query.offset));
+  }
   if (query.filters) {
     params.set('filters', query.filters);
   }
@@ -56,8 +58,48 @@ export async function fetchMicroCMSList<T>(
     throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
   }
 
-  const data: MicroCMSListResponse<T> = await response.json();
-  return data.contents;
+  return response.json() as Promise<MicroCMSListResponse<T>>;
+}
+
+/**
+ * microCMS リスト API を取得
+ * @param endpoint `events` などエンドポイント名（`/api/v1/` 以降）
+ * @param cacheMode `no-store` はスタンプ照合など最新データが必要な用途向け
+ * @param query `limit` 未指定時は offset を進めて全件取得する。指定時はその件数だけ（slug 検索など）
+ */
+export async function fetchMicroCMSList<T>(
+  endpoint: string,
+  cacheMode: MicroCMSFetchCache = 'default',
+  query: MicroCMSListQuery = {},
+): Promise<T[]> {
+  if (query.limit !== undefined) {
+    const data = await fetchMicroCMSListPage<T>(endpoint, cacheMode, query);
+    return data.contents;
+  }
+
+  const all: T[] = [];
+  let offset = query.offset ?? 0;
+
+  while (true) {
+    const data = await fetchMicroCMSListPage<T>(endpoint, cacheMode, {
+      filters: query.filters,
+      limit: MICROCMS_MAX_LIMIT,
+      offset,
+    });
+    all.push(...data.contents);
+
+    if (data.contents.length === 0 || all.length >= data.totalCount) {
+      break;
+    }
+
+    const nextOffset = offset + data.contents.length;
+    if (nextOffset <= offset) {
+      break;
+    }
+    offset = nextOffset;
+  }
+
+  return all;
 }
 
 /**
