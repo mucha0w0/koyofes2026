@@ -153,7 +153,7 @@ export function EventListFace() {
   }, [category, query]);
 
   return (
-    <FaceFrame id="face-list" spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。カードは画像が上。" ground="paper">
+    <FaceFrame id="face-list" spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。カードは画像が上。" ground="alt">
       <PageLead subtitle={meta.subtitle} title={meta.title} />
       <label className="mb-6 block">
         <span className="mb-2 block text-sm font-medium">企画を検索</span>
@@ -198,7 +198,7 @@ export function EventListFace() {
                 href="#face-detail"
                 className="lookbook-card lookbook-card-media block text-[var(--ink)] no-underline"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[var(--paper-2)]">
+                <div className="relative aspect-[16/10] overflow-hidden bg-[var(--paper)]">
                   <Image
                     src={CAMPUS_PHOTO}
                     alt=""
@@ -299,7 +299,7 @@ export function StampBookFace() {
   }
 
   return (
-    <FaceFrame id="face-stamp" spec="DESIGN2 Gate C ・ 面4 スタンプ帳。丸とラベルだけ。達成は緑にしない。" ground="paper">
+    <FaceFrame id="face-stamp" spec="DESIGN2 Gate C ・ 面4 スタンプ帳。丸とラベルだけ。達成は緑にしない。" ground="alt">
       <PageLead subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー" />
       <div className="lookbook-card mb-10 p-6">
         <p className="font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">

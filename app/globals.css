@@ -114,38 +114,39 @@
 
 /* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
 .theme-1dearland {
-  --paper: #ffffff;
-  --paper-2: #f4fbfd;
+  --paper: #f4fbfd;
+  --paper-2: #d9eef5;
   --ink: #161412;
   --ink-soft: #5a534c;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
   --festival-accent: #0f90b3;
   --festival-accent-hover: #0c7a98;
-  --festival-accent-soft: #d9eef5;
+  --festival-accent-soft: #ffffff;
   --festival-danger: #8a403a;
 
   --background: var(--paper);
   --foreground: var(--ink);
-  --card: var(--paper);
+  --card: var(--festival-accent-soft);
   --card-foreground: var(--ink);
-  --popover: var(--paper);
+  --popover: var(--festival-accent-soft);
   --popover-foreground: var(--ink);
   --primary: var(--ink);
-  --primary-foreground: var(--paper);
-  --secondary: var(--paper);
+  --primary-foreground: var(--festival-accent-soft);
+  --secondary: var(--festival-accent-soft);
   --secondary-foreground: var(--ink);
   --muted: var(--paper-2);
   --muted-foreground: var(--ink-soft);
   --accent: var(--festival-accent);
-  --accent-foreground: #ffffff;
+  --accent-foreground: var(--festival-accent-soft);
   --destructive: var(--festival-danger);
-  --destructive-foreground: var(--paper);
+  --destructive-foreground: var(--festival-accent-soft);
   --border: transparent;
 
   --fill-quiet: var(--paper-2);
-  --fill-well: var(--paper-2);
-  --fill-card: var(--paper-2);
-  --input: var(--paper);
+  --fill-well: var(--festival-accent-soft);
+  --fill-card: var(--festival-accent-soft);
+  --fill-selected: var(--paper-2);
+  --input: var(--festival-accent-soft);
   --ring: var(--ink);
   --radius: 16px;
   --radius-sm: 16px;
@@ -201,14 +202,16 @@
 
 .theme-1dearland [data-ground='paper'] {
   --fill-quiet: var(--paper-2);
-  --fill-well: var(--paper-2);
-  --fill-card: var(--paper-2);
+  --fill-well: var(--festival-accent-soft);
+  --fill-card: var(--festival-accent-soft);
+  --fill-selected: var(--paper-2);
 }
 
 .theme-1dearland [data-ground='alt'] {
   --fill-quiet: var(--paper);
-  --fill-well: var(--paper);
-  --fill-card: var(--paper);
+  --fill-well: var(--festival-accent-soft);
+  --fill-card: var(--festival-accent-soft);
+  --fill-selected: var(--paper);
 }
 
 .theme-1dearland .lookbook-ticket,
@@ -305,7 +308,7 @@
 }
 
 .theme-1dearland .lookbook-card-on {
-  background: var(--festival-accent-soft);
+  background: var(--fill-selected);
 }
 
 .theme-1dearland .lookbook-card-media {
@@ -323,11 +326,11 @@
   min-height: 5.5rem;
   padding: 1.25rem 1.5rem;
   border-radius: var(--radius);
-  background: var(--fill-card);
+  background: var(--fill-quiet);
 }
 
 .theme-1dearland .lookbook-rank-on {
-  background: var(--festival-accent-soft);
+  background: var(--fill-card);
 }
 
 .theme-1dearland .lookbook-rank-num {
@@ -346,6 +349,10 @@
 
 .theme-1dearland .lookbook-menu a {
   border-radius: var(--radius);
+}
+
+.theme-1dearland .lookbook-menu a:hover {
+  background: var(--fill-selected);
 }
 
 .theme-1dearland .lookbook-soft {
@@ -374,6 +381,10 @@
   text-underline-offset: 0.2em;
 }
 
+.theme-1dearland .lookbook-card .lookbook-chip {
+  background: var(--paper-2);
+}
+
 .theme-1dearland .lookbook-stamp {
   display: flex;
   height: 4.5rem;
@@ -390,7 +401,7 @@
 }
 
 .theme-1dearland .lookbook-stamp-on {
-  background: var(--festival-accent-soft);
+  background: var(--paper-2);
   color: var(--ink);
   opacity: 1;
 }

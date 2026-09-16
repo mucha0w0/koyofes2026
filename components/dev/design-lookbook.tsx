@@ -11,12 +11,12 @@ import { getNavSections } from '@/lib/config/nav';
 import { getEnabledOfficialSocials } from '@/lib/config/social';
 
 const PALETTE = [
-  { token: '--paper', hex: '#FFFFFF', note: 'ページ地', fill: 'var(--paper)' },
-  { token: '--paper-2', hex: '#F4FBFD', note: '背景色2・帯', fill: 'var(--paper-2)' },
+  { token: '--paper', hex: '#F4FBFD', note: 'ページ地', fill: 'var(--paper)' },
+  { token: '--paper-2', hex: '#D9EEF5', note: '背景色2・帯', fill: 'var(--paper-2)' },
   { token: '--ink', hex: '#161412', note: '本文。面に塗らない', fill: 'var(--ink)' },
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
   { token: '--accent', hex: '#0F90B3', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
-  { token: '--accent-soft', hex: '#D9EEF5', note: '選択・ホバー', fill: 'var(--festival-accent-soft)' },
+  { token: '--accent-soft', hex: '#FFFFFF', note: 'カード・入力・選択チップ', fill: 'var(--festival-accent-soft)' },
   { token: '--danger', hex: '#8A403A', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
 
@@ -114,7 +114,7 @@ function LookbookHeader() {
   const navItems = getNavSections('header');
 
   return (
-    <header data-lookbook-chrome className="sticky top-0 z-20 bg-[var(--paper)]" data-ground="paper">
+    <header data-lookbook-chrome className="sticky top-0 z-20 bg-[var(--festival-accent-soft)]" data-ground="paper">
       <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <Link className="lookbook-heading text-xl text-[var(--ink)]" href="/">
           こうよう祭
@@ -122,14 +122,14 @@ function LookbookHeader() {
         <nav aria-label="見本用メインナビゲーション" className="flex flex-wrap items-center justify-end gap-1">
           {navItems.map((item) => (
             <details key={item.id} className="relative">
-              <summary className="cursor-pointer list-none rounded-2xl px-3 py-2 text-sm text-[var(--ink)] hover:bg-[var(--festival-accent-soft)] [&::-webkit-details-marker]:hidden">
+              <summary className="cursor-pointer list-none rounded-2xl px-3 py-2 text-sm text-[var(--ink)] hover:bg-[var(--paper-2)] [&::-webkit-details-marker]:hidden">
                 {item.label}
               </summary>
               <div className="lookbook-menu absolute top-full right-0 z-10 min-w-44 py-2">
                 {item.items.map((subItem) => (
                   <Link
                     key={subItem.href}
-                    className="block rounded-xl px-4 py-2 text-sm text-[var(--ink)] hover:bg-[var(--festival-accent-soft)]"
+                    className="block rounded-xl px-4 py-2 text-sm text-[var(--ink)]"
                     href={subItem.href}
                   >
                     {subItem.label}
@@ -236,7 +236,7 @@ function LookbookFooter() {
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="space-y-2 lg:max-w-xs">
             <p className="lookbook-heading text-xl">こうよう祭 2026</p>
-            <p className="text-sm text-[var(--paper)]/80">
+            <p className="text-sm text-white/80">
               豊田高専の文化祭
               <br />
               10/31(土)・11/1(日)
@@ -249,7 +249,7 @@ function LookbookFooter() {
                 <ul className="space-y-2 text-sm">
                   {section.items.map((item) => (
                     <li key={item.href}>
-                      <Link className="text-[var(--paper)] underline underline-offset-4" href={item.href}>
+                      <Link className="text-white underline underline-offset-4" href={item.href}>
                         {item.label}
                       </Link>
                     </li>
@@ -266,7 +266,7 @@ function LookbookFooter() {
               {socialLinks.map((link) => (
                 <a
                   key={link.id}
-                  className="lookbook-subhead inline-flex min-h-11 items-center rounded-2xl bg-[color-mix(in_srgb,var(--paper)_16%,transparent)] px-4 text-sm text-[var(--paper)] hover:bg-[color-mix(in_srgb,var(--paper)_28%,transparent)]"
+                  className="lookbook-subhead inline-flex min-h-11 items-center rounded-2xl bg-[color-mix(in_srgb,var(--festival-accent-soft)_16%,transparent)] px-4 text-sm text-white hover:bg-[color-mix(in_srgb,var(--festival-accent-soft)_28%,transparent)]"
                   href={link.url}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -277,7 +277,7 @@ function LookbookFooter() {
             </div>
           </div>
         )}
-        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-[var(--paper)]/70 sm:flex-row sm:justify-between sm:text-sm">
+        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-white/70 sm:flex-row sm:justify-between sm:text-sm">
           <p>こうよう祭 2026 システムパート</p>
           <p>&copy; 2026 KoyoFes System Part</p>
         </div>
@@ -331,7 +331,7 @@ export function DesignLookbook() {
           <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            面1は本番トップと同じ現場写真。コンセプトアートはテーマページ用で、ヒーローには使わない。クロムは枠線を使わず、ベタ塗りで段をつける。白・紙色2・インク・水。主 CTA
+            地は薄い水。カードと入力は白で浮かせる。クロムは枠線を使わず、ベタ塗りで段をつける。主 CTA
             は濃い水に白抜き。黄は絵に残す。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
@@ -369,22 +369,22 @@ export function DesignLookbook() {
               ))}
             </div>
           </div>
-          <div data-lookbook-chrome className="lookbook-soft mt-8 grid grid-cols-1 sm:grid-cols-3">
+          <div data-lookbook-chrome className="lookbook-soft mt-8 grid grid-cols-1 overflow-hidden bg-[var(--paper-2)] sm:grid-cols-3">
             <p className="bg-[var(--paper)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper</span>
-              ページ地
+              ページ地。薄い水
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper-2</span>
-              セクション帯。白にかなり近い水
+              セクション帯。一段沈めた水
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--accent-soft</span>
-              選択・ホバー。帯にしない
+              カード・入力・選択チップ。帯にしない
             </p>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-[var(--ink-soft)]">
-            黄・かきつばた・緑・桃はトークンにしない。赤は危険の印以外に使わない。帯と選択を同じ面にしない。
+            黄・かきつばた・緑・桃はトークンにしない。赤は危険の印以外に使わない。白い面は帯にしない。
           </p>
         </Section>
 
@@ -418,20 +418,20 @@ export function DesignLookbook() {
         </Section>
 
         <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ 枠は使わない。面で段をつける" title="塗り">
-          <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 sm:grid-cols-4">
+          <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 overflow-hidden sm:grid-cols-4">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper</span>
               ページ地
             </p>
             <p className="bg-[var(--paper-2)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper-2</span>
-              静かな面
+              セクション帯
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">accent-soft</span>
-              選択
+              浮く面
             </p>
-            <p className="bg-[var(--festival-accent)] px-3 py-8 text-sm text-[var(--paper)]">
+            <p className="bg-[var(--festival-accent)] px-3 py-8 text-sm text-white">
               <span className="lookbook-subhead block font-medium">accent</span>
               主ボタン・横断帯
             </p>
@@ -455,7 +455,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ塗り。枠なし" title="チップ">
+        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ塗り。枠なし" title="チップ">
           <div data-lookbook-chrome className="flex flex-wrap justify-center gap-2">
             {EVENT_CATEGORY_OPTIONS.map((option) => (
               <button
@@ -495,34 +495,34 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.card} spec="DESIGN2 11.4 ・ 枠なし。隣の面と違う塗り" title="カード">
+        <Section band id={SECTION_ID.card} spec="DESIGN2 11.4 ・ 枠なし。白いカードを青い地に浮かせる" title="カード">
           <div data-lookbook-chrome className="grid gap-4 md:grid-cols-2">
             <article className="lookbook-card">
               <p className="lookbook-subhead text-lg font-bold">アクセス</p>
               <p className="mt-2 text-sm text-[var(--ink-soft)]">電車・バス・車でのアクセス方法</p>
             </article>
             <article className="lookbook-card lookbook-card-on">
-              <p className="lookbook-subhead text-lg font-bold">ホバー／選択の地</p>
-              <p className="mt-2 text-sm text-[var(--ink-soft)]">白の上では薄水。帯色ではない。</p>
+              <p className="lookbook-subhead text-lg font-bold">ホバー</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">白いカードを、置かれた地のほうへ一段沈める。</p>
             </article>
           </div>
-          <div data-lookbook-chrome className="lookbook-soft mt-4 bg-[var(--paper-2)] p-5" data-ground="alt">
-            <p className="mb-4 text-sm text-[var(--ink-soft)]">同じカードを paper-2 の帯の上へ</p>
+          <div data-lookbook-chrome className="lookbook-soft mt-4 bg-[var(--paper)] p-5" data-ground="paper">
+            <p className="mb-4 text-sm text-[var(--ink-soft)]">同じ白いカードを paper の地の上へ</p>
             <div className="grid gap-4 md:grid-cols-2">
               <article className="lookbook-card">
-                <p className="lookbook-subhead text-lg font-bold">帯の上のカード</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">白い塗り。帯と同じ色にはしない。</p>
+                <p className="lookbook-subhead text-lg font-bold">薄い地の上のカード</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">白。地が薄いので浮きは弱い。</p>
               </article>
               <article className="lookbook-card lookbook-card-on">
-                <p className="lookbook-subhead text-lg font-bold">選択中</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯と選択が同じ色だと溶ける。だから分ける。</p>
+                <p className="lookbook-subhead text-lg font-bold">ホバー</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯色にはしない。一段だけ沈める。</p>
               </article>
             </div>
           </div>
-          <div data-lookbook-chrome className="lookbook-soft mt-8 overflow-x-auto">
+          <div data-lookbook-chrome className="lookbook-card mt-8 overflow-x-auto">
             <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
               <caption className="mb-3 text-left text-sm text-[var(--ink-soft)]">
-                表の見本 ・ 顔のランキングはリスト。1 位だけ選択色。罫線なし
+                表の見本 ・ 顔のランキングはリスト。1 位だけ白い行。罫線なし
               </caption>
               <thead>
                 <tr className="bg-[var(--paper-2)]">
@@ -557,7 +557,7 @@ export function DesignLookbook() {
             {NEWS.map((item) => (
               <article key={item.title} className={item.image ? 'lookbook-card lookbook-card-media' : 'lookbook-card'}>
                 {item.image ? (
-                  <div className="relative aspect-[16/10] bg-[var(--paper)]">
+                  <div className="relative aspect-[16/10] bg-[var(--paper-2)]">
                     <Image fill alt={item.imageAlt ?? ''} className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" src={item.image} />
                   </div>
                 ) : null}
