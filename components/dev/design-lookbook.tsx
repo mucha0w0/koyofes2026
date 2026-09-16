@@ -316,7 +316,7 @@ export function DesignLookbook() {
             は濃い水に白抜き。黄は絵に残す。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
-            活字は三段階。いちばん強い見出しは POP体。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと絵の直下のランキングだけ借りる。虹・雲・水色見出し・pill は写さない。
+            活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと絵の直下のランキングだけ借りる。虹・雲・水色見出し・pill は写さない。
           </p>
           <nav aria-label="見本内の目次" className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
             {TOC.map((item) => (
@@ -362,10 +362,10 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 強調 POP / 見出し・ボタン 丸ゴ / 本文 角ゴ" title="活字">
+        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 強調 丸ゴ太字 / 見出し・ボタン 丸ゴ / 本文 角ゴ" title="活字">
           <div data-lookbook-chrome className="mx-auto max-w-3xl space-y-6">
             <div>
-              <p className="text-sm text-[var(--ink-soft)]">1 強調 ・ ページ H1 ・ POP体</p>
+              <p className="text-sm text-[var(--ink-soft)]">1 強調 ・ ページ H1 ・ 丸ゴ太字</p>
               <p className="lookbook-heading text-3xl md:text-4xl">こうよう祭とは</p>
             </div>
             <div>

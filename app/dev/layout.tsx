@@ -2,8 +2,6 @@ import { Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
-import './kuramubon.css';
-
 const zenKakuGothic = Zen_Kaku_Gothic_New({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
