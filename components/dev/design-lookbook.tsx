@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
+
+import { EventDetailFace, EventListFace, StampBookFace } from '@/components/dev/lookbook-faces';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { getNavSections } from '@/lib/config/nav';
@@ -15,7 +17,7 @@ const PALETTE = [
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
   { token: '--accent', hex: '#0F90B3', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
   { token: '--accent-soft', hex: '#D9EEF5', note: '選択・ホバー', fill: 'var(--festival-accent-soft)' },
-  { token: '--danger', hex: '#B42318', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
+  { token: '--danger', hex: '#8A403A', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
 
 const RANKING = [
@@ -36,7 +38,7 @@ const NEWS: {
     date: '2026.09.16',
     href: '/official/news',
     image: '/20251106soumukikaku2-1024x768.jpg',
-    imageAlt: '会場の写真。ヒーローには使わない',
+    imageAlt: '会場の写真',
   },
   { title: 'パンフレットの案内を掲載しました。', date: '2026.09.14', href: '/official/pamphlet' },
   { title: 'アクセス情報を更新しました。', date: '2026.08.31', href: '/guide/access' },
@@ -54,6 +56,13 @@ const SECTION_ID = {
   chrome: 'chrome',
   page: 'page',
 } as const;
+
+const FACE_TOC = [
+  { href: '#face-top', label: '面1 トップ' },
+  { href: '#face-list', label: '面2 企画一覧' },
+  { href: '#face-detail', label: '面3 企画詳細' },
+  { href: '#face-stamp', label: '面4 スタンプ帳' },
+] as const;
 
 const TOC = [
   { href: `#${SECTION_ID.palette}`, label: '色' },
@@ -138,14 +147,14 @@ function LookbookHeader() {
 function StageSpecimen() {
   return (
     <div>
-      <div className="relative w-full bg-[var(--paper-2)]" style={{ aspectRatio: '1178 / 295' }}>
+      <div className="relative h-[220px] w-full bg-[var(--paper-2)] md:h-[360px]">
         <Image
           fill
           priority
-          alt="こうよう祭 2026 テーマ 1dearland のコンセプトアート"
-          className="object-contain"
+          alt="会場の写真（仮。本番ヒーロー用）"
+          className="object-cover object-center"
           sizes="100vw"
-          src="/conceptart.jpg"
+          src="/20251106soumukikaku2-1024x768.jpg"
         />
       </div>
       <div data-lookbook-chrome className="bg-[var(--paper)]">
@@ -157,9 +166,9 @@ function StageSpecimen() {
             <span className="mx-2 text-[var(--ink-soft)]">/</span>
             豊田高専
           </p>
-          <button className={`${TICKET_BTN} self-start`} type="button">
+          <a className={`${TICKET_BTN} self-start`} href="#face-list">
             企画を探す
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -198,14 +207,18 @@ function RankingSpecimen() {
 }
 
 function CountdownSpecimen() {
-  const days = Math.max(0, Math.ceil((new Date(2026, 9, 31, 9, 0, 0).getTime() - Date.now()) / 86_400_000));
+  const [days, setDays] = useState<number | null>(null);
+
+  useEffect(() => {
+    setDays(Math.max(0, Math.ceil((new Date(2026, 9, 31, 9, 0, 0).getTime() - Date.now()) / 86_400_000)));
+  }, []);
 
   return (
     <div data-lookbook-chrome className={`${ACCENT_BAND} px-4 py-5`}>
       <p className="mx-auto w-full max-w-7xl text-center text-sm sm:text-base">
         開催まで
         <span className="lookbook-subhead mx-3 text-2xl font-bold tabular-nums tracking-wide">
-          {String(days).padStart(2, '0')}
+          {days === null ? '—' : String(days).padStart(2, '0')}
         </span>
         日
       </p>
@@ -304,21 +317,34 @@ export function DesignLookbook() {
       <LookbookHeader />
 
       <main>
-        <StageSpecimen />
-        <RankingSpecimen />
-        <CountdownSpecimen />
+        <div id="face-top">
+          <StageSpecimen />
+          <RankingSpecimen />
+          <CountdownSpecimen />
+        </div>
+
+        <EventListFace />
+        <EventDetailFace />
+        <StampBookFace />
 
         <div data-lookbook-chrome className="mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
-          <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 顔の下は部品カタログ</p>
+          <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            絵はルックブックでは仮のヒーロー。本番トップは現場写真。クロムは枠線を使わず、ベタ塗りで段をつける。白・紙色2・インク・水。主 CTA
+            面1は本番トップと同じ現場写真。コンセプトアートはテーマページ用で、ヒーローには使わない。クロムは枠線を使わず、ベタ塗りで段をつける。白・紙色2・インク・水。主 CTA
             は濃い水に白抜き。黄は絵に残す。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
-            活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと絵の直下のランキングだけ借りる。虹・雲・水色見出し・pill は写さない。
+            活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと舞台の直下のランキングだけ借りる。虹・雲・水色見出し・pill は写さない。
           </p>
-          <nav aria-label="見本内の目次" className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
+          <nav aria-label="4面の目次" className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
+            {FACE_TOC.map((item) => (
+              <a key={item.href} className="lookbook-link" href={item.href}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <nav aria-label="部品カタログの目次" className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
             {TOC.map((item) => (
               <a key={item.href} className="lookbook-link" href={item.href}>
                 {item.label}
@@ -327,7 +353,7 @@ export function DesignLookbook() {
           </nav>
         </div>
 
-        <Section id={SECTION_ID.palette} spec="DESIGN2 5.1 ・ hex は仮" title="色">
+        <Section id={SECTION_ID.palette} spec="DESIGN2 5.1 ・ hex は閉じた" title="色">
           <div data-lookbook-chrome className="lookbook-soft bg-[var(--paper-2)] p-4">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {PALETTE.map((item) => (
@@ -556,6 +582,18 @@ export function DesignLookbook() {
         <Section id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
             開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
+          </p>
+          <figure data-lookbook-chrome className="lookbook-soft relative mx-auto mt-10 aspect-[1178/295] max-w-3xl overflow-hidden bg-[var(--paper-2)]">
+            <Image
+              fill
+              alt="こうよう祭 2026 テーマ 1dearland のコンセプトアート"
+              className="object-contain"
+              sizes="(min-width: 768px) 48rem, 100vw"
+              src="/conceptart.jpg"
+            />
+          </figure>
+          <p data-lookbook-chrome className="mx-auto mt-3 max-w-3xl text-center text-sm text-[var(--ink-soft)]">
+            テーマページ用の舞台。本番トップのヒーローには使わない。
           </p>
         </Section>
 

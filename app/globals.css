@@ -122,7 +122,7 @@
   --festival-accent: #0f90b3;
   --festival-accent-hover: #0c7a98;
   --festival-accent-soft: #d9eef5;
-  --festival-danger: #b42318;
+  --festival-danger: #8a403a;
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -372,6 +372,31 @@
   color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.theme-1dearland .lookbook-stamp {
+  display: flex;
+  height: 4.5rem;
+  width: 4.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--paper-2);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.theme-1dearland .lookbook-stamp-on {
+  background: var(--festival-accent-soft);
+  color: var(--ink);
+  opacity: 1;
+}
+
+.theme-1dearland .lookbook-stamp-off {
+  opacity: 0.4;
 }
 
 @layer utilities {
