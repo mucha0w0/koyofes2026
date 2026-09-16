@@ -154,21 +154,39 @@
   --radius-xl: 16px;
   --radius-2xl: 16px;
 
+  --font-lookbook-display: var(--font-mochiy-pop), var(--font-zen-maru), sans-serif;
+  --font-lookbook-ui: var(--font-zen-maru), var(--font-zen-kaku), sans-serif;
+  --font-lookbook-body: var(--font-zen-kaku), var(--font-jp), sans-serif;
+
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-zen-maru), var(--font-jp), sans-serif;
+  font-family: var(--font-lookbook-body);
   line-height: 1.8;
   letter-spacing: 0;
 }
 
 .theme-1dearland h1,
-.theme-1dearland h2,
-.theme-1dearland h3,
 .theme-1dearland .lookbook-heading {
-  font-family: var(--font-mochiy-pop), var(--font-zen-maru), sans-serif;
+  font-family: var(--font-lookbook-display);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.35;
+}
+
+.theme-1dearland h2,
+.theme-1dearland h3,
+.theme-1dearland h4,
+.theme-1dearland .lookbook-subhead,
+.theme-1dearland button,
+.theme-1dearland .lookbook-ticket,
+.theme-1dearland .btn-outline,
+.theme-1dearland .btn-quiet,
+.theme-1dearland .lookbook-chip,
+.theme-1dearland label,
+.theme-1dearland th,
+.theme-1dearland summary,
+.theme-1dearland nav {
+  font-family: var(--font-lookbook-ui);
 }
 
 .theme-1dearland.is-grayscale [data-lookbook-chrome] {
@@ -206,6 +224,7 @@
   border-radius: var(--radius);
   font-size: 0.875rem;
   font-weight: 500;
+  font-family: var(--font-lookbook-ui);
   line-height: 1.3;
   cursor: pointer;
 }
@@ -267,6 +286,7 @@
   background: var(--fill-well);
   padding: 0.5rem 0.875rem;
   color: var(--ink);
+  font-family: var(--font-lookbook-body);
 }
 
 .theme-1dearland .lookbook-input::placeholder {

@@ -45,7 +45,7 @@ const TOC = [
 ] as const;
 
 const TICKET_BTN =
-  'inline-flex min-h-11 items-center justify-center rounded-2xl bg-[#0F90B3] px-5 text-sm font-medium text-white hover:bg-[#0C7A98] disabled:cursor-not-allowed disabled:opacity-40';
+  'lookbook-ticket lookbook-subhead inline-flex min-h-11 items-center justify-center rounded-2xl bg-[#0F90B3] px-5 text-sm font-medium text-white hover:bg-[#0C7A98] disabled:cursor-not-allowed disabled:opacity-40';
 
 function Section({
   id,
@@ -116,7 +116,9 @@ function CountdownSpecimen() {
     <div data-lookbook-chrome className="bg-[var(--ink)] px-4 py-5 text-[var(--paper)]">
       <p className="mx-auto w-full max-w-7xl text-center text-sm sm:text-base">
         開催まで
-        <span className="mx-3 text-2xl font-bold tabular-nums tracking-wide">{String(days).padStart(2, '0')}</span>
+        <span className="lookbook-subhead mx-3 text-2xl font-bold tabular-nums tracking-wide">
+          {String(days).padStart(2, '0')}
+        </span>
         日
       </p>
     </div>
@@ -140,12 +142,12 @@ function LookbookFooter() {
           </div>
           {socialLinks.length > 0 && (
             <div>
-              <p className="mb-3 text-sm font-medium">公式SNS</p>
+              <p className="lookbook-subhead mb-3 text-sm font-medium">公式SNS</p>
               <div className="flex flex-wrap gap-2">
                 {socialLinks.map((link) => (
                   <a
                     key={link.id}
-                    className="inline-flex min-h-11 items-center rounded-2xl bg-[color-mix(in_srgb,var(--paper)_16%,transparent)] px-4 text-sm text-[var(--paper)] hover:bg-[color-mix(in_srgb,var(--paper)_28%,transparent)]"
+                    className="lookbook-subhead inline-flex min-h-11 items-center rounded-2xl bg-[color-mix(in_srgb,var(--paper)_16%,transparent)] px-4 text-sm text-[var(--paper)] hover:bg-[color-mix(in_srgb,var(--paper)_28%,transparent)]"
                     href={link.url}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -187,7 +189,7 @@ export function DesignLookbook() {
             >
               {grayscale ? 'グレーを解除' : 'クロムをグレーで見る'}
             </button>
-            <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href="/">
+            <Link className="lookbook-subhead inline-flex min-h-11 items-center underline underline-offset-4" href="/">
               現行トップへ
             </Link>
           </div>
@@ -205,8 +207,8 @@ export function DesignLookbook() {
             は濃い水に白抜き。黄は絵に残す。
           </p>
           <p className="mt-3 max-w-3xl text-[var(--ink-soft)]">
-            見出しは POP体（Mochiy Pop One）。本文は Zen Maru Gothic。見出しを丸ゴの太字で代用しない。テーマ名 1dearland
-            は絵がワードマークなので、ヒーローでは活字で組まない。
+            活字は三段階。いちばん強い見出しは POP体（Mochiy Pop One）。H2 とボタンは丸ゴ（Zen Maru Gothic）。本文は角ゴ（Zen
+            Kaku Gothic New）。テーマ名 1dearland は絵がワードマークなので、ヒーローでは活字で組まない。
           </p>
           <nav aria-label="見本内の目次" className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm">
             {TOC.map((item) => (
@@ -224,7 +226,7 @@ export function DesignLookbook() {
               <figure key={item.token} className="min-w-0">
                 <div className="aspect-square rounded-2xl" style={{ background: item.fill }} />
                 <figcaption className="mt-2 text-sm">
-                  <span className="block font-medium">{item.token}</span>
+                  <span className="lookbook-subhead block font-medium">{item.token}</span>
                   <span className="block text-[var(--ink-soft)]">
                     {item.hex} ・ {item.note}
                   </span>
@@ -235,15 +237,15 @@ export function DesignLookbook() {
           </div>
           <div data-lookbook-chrome className="lookbook-soft mt-8 grid grid-cols-1 sm:grid-cols-3">
             <p className="bg-[var(--paper)] px-4 py-6 text-sm">
-              <span className="block font-medium">--paper</span>
+              <span className="lookbook-subhead block font-medium">--paper</span>
               ページ地
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
-              <span className="block font-medium">--paper-2</span>
+              <span className="lookbook-subhead block font-medium">--paper-2</span>
               セクション帯。白にかなり近い水
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
-              <span className="block font-medium">--accent-soft</span>
+              <span className="lookbook-subhead block font-medium">--accent-soft</span>
               選択・ホバー。帯にしない
             </p>
           </div>
@@ -252,21 +254,25 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 見出し POP / 本文 丸ゴ" title="活字">
+        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 強調 POP / 見出し・ボタン 丸ゴ / 本文 角ゴ" title="活字">
           <div data-lookbook-chrome className="max-w-3xl space-y-6">
             <div>
-              <p className="text-sm text-[var(--ink-soft)]">ページ H1 ・ POP体</p>
+              <p className="text-sm text-[var(--ink-soft)]">1 強調 ・ ページ H1 ・ POP体</p>
               <p className="lookbook-heading text-3xl md:text-4xl">こうよう祭とは</p>
             </div>
             <div>
-              <p className="text-sm text-[var(--ink-soft)]">H2 ・ POP体</p>
-              <p className="lookbook-heading text-2xl">開催概要</p>
+              <p className="text-sm text-[var(--ink-soft)]">2 見出し ・ H2 ・ 丸ゴ</p>
+              <p className="lookbook-subhead text-2xl font-medium">開催概要</p>
+            </div>
+            <div>
+              <p className="text-sm text-[var(--ink-soft)]">2 ラベル ・ ボタン ・ 丸ゴ</p>
+              <p className="lookbook-subhead text-sm font-medium">企画を探す</p>
             </div>
             <p>
-              こうよう祭は、豊田高専で毎年秋に開催される文化祭です。本文はインクの丸ゴ。キャプションだけ
+              こうよう祭は、豊田高専で毎年秋に開催される文化祭です。本文はインクの角ゴ。キャプションだけ
               ink-soft。広い字間と Josefin の英字ラベルは使わない。
             </p>
-            <p className="text-sm text-[var(--ink-soft)]">キャプション・メタ情報。長文の代用にしない。</p>
+            <p className="text-sm text-[var(--ink-soft)]">キャプション・メタ情報。長文の代用にしない。本文と同じ角ゴ。</p>
             <p>
               リンクは
               <a className="lookbook-link" href="/about/overview">
@@ -280,19 +286,19 @@ export function DesignLookbook() {
         <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ 枠は使わない。面で段をつける" title="塗り">
           <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 sm:grid-cols-4">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
-              <span className="block font-medium">paper</span>
+              <span className="lookbook-subhead block font-medium">paper</span>
               ページ地
             </p>
             <p className="bg-[var(--paper-2)] px-3 py-8 text-sm">
-              <span className="block font-medium">paper-2</span>
+              <span className="lookbook-subhead block font-medium">paper-2</span>
               静かな面
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-3 py-8 text-sm">
-              <span className="block font-medium">accent-soft</span>
+              <span className="lookbook-subhead block font-medium">accent-soft</span>
               選択
             </p>
             <p className="bg-[var(--festival-accent)] px-3 py-8 text-sm text-[var(--paper)]">
-              <span className="block font-medium">accent</span>
+              <span className="lookbook-subhead block font-medium">accent</span>
               主ボタン
             </p>
           </div>
@@ -348,7 +354,7 @@ export function DesignLookbook() {
               <span aria-hidden className="lookbook-error-mark" />
               <div>
                 <p className="text-sm text-[var(--ink-soft)]">エラー</p>
-                <p className="font-medium">送信できませんでした</p>
+                <p className="lookbook-subhead font-medium">送信できませんでした</p>
                 <p className="mt-1 text-sm">印だけ色を持つ。枠で囲まない。</p>
               </div>
             </div>
@@ -358,11 +364,11 @@ export function DesignLookbook() {
         <Section id={SECTION_ID.card} spec="DESIGN2 11.4 ・ 枠なし。隣の面と違う塗り" title="カード">
           <div data-lookbook-chrome className="grid gap-4 md:grid-cols-2">
             <article className="lookbook-card">
-              <p className="text-lg font-bold">アクセス</p>
+              <p className="lookbook-subhead text-lg font-bold">アクセス</p>
               <p className="mt-2 text-sm text-[var(--ink-soft)]">電車・バス・車でのアクセス方法</p>
             </article>
             <article className="lookbook-card lookbook-card-on">
-              <p className="text-lg font-bold">ホバー／選択の地</p>
+              <p className="lookbook-subhead text-lg font-bold">ホバー／選択の地</p>
               <p className="mt-2 text-sm text-[var(--ink-soft)]">白の上では薄水。帯色ではない。</p>
             </article>
           </div>
@@ -370,11 +376,11 @@ export function DesignLookbook() {
             <p className="mb-4 text-sm text-[var(--ink-soft)]">同じカードを paper-2 の帯の上へ</p>
             <div className="grid gap-4 md:grid-cols-2">
               <article className="lookbook-card">
-                <p className="text-lg font-bold">帯の上のカード</p>
+                <p className="lookbook-subhead text-lg font-bold">帯の上のカード</p>
                 <p className="mt-2 text-sm text-[var(--ink-soft)]">白い塗り。帯と同じ色にはしない。</p>
               </article>
               <article className="lookbook-card lookbook-card-on">
-                <p className="text-lg font-bold">選択中</p>
+                <p className="lookbook-subhead text-lg font-bold">選択中</p>
                 <p className="mt-2 text-sm text-[var(--ink-soft)]">帯と選択が同じ色だと溶ける。だから分ける。</p>
               </article>
             </div>
@@ -420,7 +426,7 @@ export function DesignLookbook() {
 
         <Section id={SECTION_ID.page} spec="DESIGN2 9 ・ 見出し下は余白。枠なし" title="ページ見出し">
           <div data-lookbook-chrome className="pb-8">
-            <Link className="lookbook-link text-sm" href="/">
+            <Link className="lookbook-link lookbook-subhead text-sm" href="/">
               トップページに戻る
             </Link>
             <p className="lookbook-heading mt-6 text-3xl md:text-4xl">こうよう祭とは</p>

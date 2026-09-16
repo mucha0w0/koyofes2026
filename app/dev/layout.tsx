@@ -1,6 +1,12 @@
-import { Mochiy_Pop_One, Zen_Maru_Gothic } from 'next/font/google';
+import { Mochiy_Pop_One, Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
 
 import type { Metadata } from 'next';
+
+const zenKakuGothic = Zen_Kaku_Gothic_New({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-zen-kaku',
+});
 
 const zenMaruGothic = Zen_Maru_Gothic({
   subsets: ['latin'],
@@ -22,6 +28,8 @@ export const metadata: Metadata = {
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${zenMaruGothic.variable} ${mochiyPop.variable} min-h-screen bg-white`}>{children}</div>
+    <div className={`${zenKakuGothic.variable} ${zenMaruGothic.variable} ${mochiyPop.variable} min-h-screen bg-white`}>
+      {children}
+    </div>
   );
 }
