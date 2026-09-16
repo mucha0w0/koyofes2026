@@ -13,7 +13,7 @@ import type { EventCategory } from '@/lib/types/event';
 
 const CAMPUS_PHOTO = '/20251106soumukikaku2-1024x768.jpg';
 const TICKET_BTN =
-  'lookbook-ticket lookbook-subhead inline-flex min-h-11 items-center justify-center rounded-2xl bg-[#0F90B3] px-5 text-sm font-medium text-white hover:bg-[#0C7A98]';
+  'lookbook-ticket lookbook-subhead inline-flex min-h-11 items-center justify-center rounded-2xl bg-[var(--festival-accent)] px-5 text-sm font-medium text-white hover:bg-[var(--festival-accent-hover)]';
 
 type SampleEvent = {
   slug: string;
@@ -153,7 +153,7 @@ export function EventListFace() {
   }, [category, query]);
 
   return (
-    <FaceFrame id="face-list" spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。カードは画像が上。" ground="alt">
+    <FaceFrame id="face-list" spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。アイコンは角丸の正方形。" ground="alt">
       <PageLead subtitle={meta.subtitle} title={meta.title} />
       <label className="mb-6 block">
         <span className="mb-2 block text-sm font-medium">企画を検索</span>
@@ -196,9 +196,9 @@ export function EventListFace() {
             <li key={event.slug}>
               <a
                 href="#face-detail"
-                className="lookbook-card lookbook-card-media block text-[var(--ink)] no-underline"
+                className="lookbook-card block text-[var(--ink)] no-underline"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[var(--paper)]">
+                <div className="lookbook-thumb mb-4">
                   <Image
                     src={CAMPUS_PHOTO}
                     alt=""
@@ -207,16 +207,14 @@ export function EventListFace() {
                     sizes="(min-width: 1024px) 33vw, 100vw"
                   />
                 </div>
-                <div className="lookbook-card-body">
-                  <p className="lookbook-chip mb-3 inline-flex">{getEventCategoryLabel(event.category)}</p>
-                  <h2 className="lookbook-subhead text-xl">{event.title}</h2>
-                  <p className="mt-2 font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
-                    {event.organization}
-                  </p>
-                  <p className="mt-1 font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
-                    {formatLocation(event).firstLine}
-                  </p>
-                </div>
+                <p className="lookbook-chip mb-3 inline-flex">{getEventCategoryLabel(event.category)}</p>
+                <h2 className="lookbook-subhead text-xl">{event.title}</h2>
+                <p className="mt-2 font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
+                  {event.organization}
+                </p>
+                <p className="mt-1 font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
+                  {formatLocation(event).firstLine}
+                </p>
               </a>
             </li>
           ))}
