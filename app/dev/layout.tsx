@@ -1,6 +1,8 @@
-import { Mochiy_Pop_One, Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
+import { Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
 
 import type { Metadata } from 'next';
+
+import './kuramubon.css';
 
 const zenKakuGothic = Zen_Kaku_Gothic_New({
   subsets: ['latin'],
@@ -14,12 +16,6 @@ const zenMaruGothic = Zen_Maru_Gothic({
   variable: '--font-zen-maru',
 });
 
-const mochiyPop = Mochiy_Pop_One({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-mochiy-pop',
-});
-
 export const metadata: Metadata = {
   title: 'DESIGN2 見本 | こうよう祭 2026',
   description: '1dearland リデザインの開発用見本。検索エンジンの対象外です。',
@@ -28,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function DevLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${zenKakuGothic.variable} ${zenMaruGothic.variable} ${mochiyPop.variable} min-h-screen bg-white`}>
+    <div className={`${zenKakuGothic.variable} ${zenMaruGothic.variable} min-h-screen bg-white`}>
       {children}
     </div>
   );

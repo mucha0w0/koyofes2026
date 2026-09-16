@@ -154,7 +154,7 @@
   --radius-xl: 16px;
   --radius-2xl: 16px;
 
-  --font-lookbook-display: var(--font-mochiy-pop), var(--font-zen-maru), sans-serif;
+  --font-lookbook-display: 'Kuramubon', var(--font-zen-maru), sans-serif;
   --font-lookbook-ui: var(--font-zen-maru), var(--font-zen-kaku), sans-serif;
   --font-lookbook-body: var(--font-zen-kaku), var(--font-jp), sans-serif;
 
@@ -167,7 +167,7 @@
 
 .theme-1dearland h1,
 .theme-1dearland .lookbook-heading {
-  font-family: var(--font-lookbook-display);
+  font-family: 'Kuramubon', var(--font-zen-maru), sans-serif;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.35;
