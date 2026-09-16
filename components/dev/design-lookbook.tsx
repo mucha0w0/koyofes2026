@@ -11,9 +11,9 @@ import { getEnabledOfficialSocials } from '@/lib/config/social';
 const PALETTE = [
   { token: '--paper', hex: '#FFFFFF', note: 'ページ地', fill: 'var(--paper)' },
   { token: '--paper-2', hex: '#F4FBFD', note: '背景色2・帯', fill: 'var(--paper-2)' },
-  { token: '--ink', hex: '#161412', note: '本文', fill: 'var(--ink)' },
+  { token: '--ink', hex: '#161412', note: '本文。面に塗らない', fill: 'var(--ink)' },
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
-  { token: '--accent', hex: '#0F90B3', note: '主 CTA・白抜き', fill: 'var(--festival-accent)' },
+  { token: '--accent', hex: '#0F90B3', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
   { token: '--accent-soft', hex: '#D9EEF5', note: '選択・ホバー', fill: 'var(--festival-accent-soft)' },
   { token: '--danger', hex: '#B42318', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
@@ -67,6 +67,8 @@ const TOC = [
   { href: `#${SECTION_ID.chrome}`, label: 'ヘッダー／フッター' },
   { href: `#${SECTION_ID.page}`, label: 'ページ見出し' },
 ] as const;
+
+const ACCENT_BAND = 'bg-[#0F90B3] text-white';
 
 const TICKET_BTN =
   'lookbook-ticket lookbook-subhead inline-flex min-h-11 items-center justify-center rounded-2xl bg-[#0F90B3] px-5 text-sm font-medium text-white hover:bg-[#0C7A98] disabled:cursor-not-allowed disabled:opacity-40';
@@ -199,7 +201,7 @@ function CountdownSpecimen() {
   const days = Math.max(0, Math.ceil((new Date(2026, 9, 31, 9, 0, 0).getTime() - Date.now()) / 86_400_000));
 
   return (
-    <div data-lookbook-chrome className="bg-[var(--ink)] px-4 py-5 text-[var(--paper)]">
+    <div data-lookbook-chrome className={`${ACCENT_BAND} px-4 py-5`}>
       <p className="mx-auto w-full max-w-7xl text-center text-sm sm:text-base">
         開催まで
         <span className="lookbook-subhead mx-3 text-2xl font-bold tabular-nums tracking-wide">
@@ -216,7 +218,7 @@ function LookbookFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer data-lookbook-chrome className="bg-[var(--ink)] text-[var(--paper)]">
+    <footer data-lookbook-chrome className={ACCENT_BAND}>
       <div className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="space-y-2 lg:max-w-xs">
@@ -278,7 +280,7 @@ export function DesignLookbook() {
 
   return (
     <div className={`theme-1dearland min-h-screen overflow-x-hidden ${grayscale ? 'is-grayscale' : ''}`}>
-      <div className="bg-[var(--ink)] text-[var(--paper)]">
+      <div className={`${ACCENT_BAND}`}>
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm">
             開発用見本 <span className="text-[var(--paper)]/70">/dev/design ・ インデックスしない ・ 本番トークン未変更</span>
@@ -405,7 +407,7 @@ export function DesignLookbook() {
             </p>
             <p className="bg-[var(--festival-accent)] px-3 py-8 text-sm text-[var(--paper)]">
               <span className="lookbook-subhead block font-medium">accent</span>
-              主ボタン
+              主ボタン・横断帯
             </p>
           </div>
         </Section>
@@ -553,7 +555,7 @@ export function DesignLookbook() {
 
         <Section id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
-            開発バーの下が提案ヘッダー（白・sticky）。ページ最下部が提案フッター（インク地＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
+            開発バーの下が提案ヘッダー（白・sticky）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
           </p>
         </Section>
 
