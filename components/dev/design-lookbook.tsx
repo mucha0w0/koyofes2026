@@ -171,7 +171,7 @@ function RankingSpecimen() {
     <div className="bg-[var(--paper-2)]" data-ground="alt">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 md:py-20">
         <p data-lookbook-chrome className="mb-2 text-center text-sm text-[var(--ink-soft)]">
-          DESIGN2 11.11 ・ 舞台の直下。金の王冠は置かない
+          DESIGN2 11.11 ・ ヒーローの直下。金の王冠は置かない
         </p>
         <h2 data-lookbook-chrome className="mb-10 text-center text-2xl md:text-3xl">
           ランキング
@@ -312,7 +312,7 @@ export function DesignLookbook() {
           <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 顔の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            絵は多色のままヒーローに置く。クロムは枠線を使わず、ベタ塗りで段をつける。白・紙色2・インク・水。主 CTA
+            絵はルックブックでは仮のヒーロー。本番トップは現場写真。クロムは枠線を使わず、ベタ塗りで段をつける。白・紙色2・インク・水。主 CTA
             は濃い水に白抜き。黄は絵に残す。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
@@ -555,7 +555,7 @@ export function DesignLookbook() {
 
         <Section id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
-            開発バーの下が提案ヘッダー（白・sticky）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
+            開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
           </p>
         </Section>
 
