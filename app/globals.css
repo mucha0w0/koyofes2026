@@ -300,16 +300,47 @@
 .theme-1dearland .lookbook-card {
   border-radius: var(--radius);
   background: var(--fill-card);
-  padding: 1.25rem;
+  padding: 1.5rem;
+  overflow: hidden;
 }
 
 .theme-1dearland .lookbook-card-on {
   background: var(--festival-accent-soft);
 }
 
+.theme-1dearland .lookbook-card-media {
+  padding: 0;
+}
+
+.theme-1dearland .lookbook-card-media .lookbook-card-body {
+  padding: 1.5rem;
+}
+
+.theme-1dearland .lookbook-rank {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--fill-card);
+}
+
+.theme-1dearland .lookbook-rank-on {
+  background: var(--festival-accent-soft);
+}
+
+.theme-1dearland .lookbook-rank-num {
+  font-family: var(--font-lookbook-ui);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 1.5ch;
+}
+
 .theme-1dearland .lookbook-menu {
   border-radius: var(--radius);
-  background: var(--paper);
+  background: var(--fill-card);
   padding: 0.35rem;
 }
 
