@@ -5,11 +5,12 @@ import { useMemo, useState, type ReactNode } from 'react';
 
 import { cmsPageMeta } from '@/components/cms/cms-page-meta';
 
+import type { EventCategory } from '@/lib/types/event';
+
 import { EVENT_CATEGORY_OPTIONS, getEventCategoryLabel } from '@/lib/config/event-categories';
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { formatEventTimeRange } from '@/lib/event-time';
-import type { EventCategory } from '@/lib/types/event';
 
 const CAMPUS_PHOTO = '/20251106soumukikaku2-1024x768.jpg';
 const TICKET_BTN =
@@ -114,9 +115,9 @@ function FaceFrame({
 }) {
   return (
     <section
-      id={id}
-      data-ground={ground}
       className={ground === 'alt' ? 'bg-[var(--paper-2)] py-16 md:py-24' : 'bg-[var(--paper)] py-16 md:py-24'}
+      data-ground={ground}
+      id={id}
     >
       <p className="mb-10 px-4 text-center font-[family-name:var(--font-ui)] text-xs tracking-wide text-[var(--ink-soft)]">
         {spec}
@@ -126,10 +127,18 @@ function FaceFrame({
   );
 }
 
-function PageLead({ title, subtitle, backHref = '#face-top' }: { title: string; subtitle?: string; backHref?: string }) {
+function PageLead({
+  title,
+  subtitle,
+  backHref = '#face-top',
+}: {
+  title: string;
+  subtitle?: string;
+  backHref?: string;
+}) {
   return (
     <div className="mb-10">
-      <a href={backHref} className="lookbook-link lookbook-subhead text-sm">
+      <a className="lookbook-link lookbook-subhead text-sm" href={backHref}>
         戻る
       </a>
       <h1 className="lookbook-heading mt-3">{title}</h1>
@@ -153,34 +162,38 @@ export function EventListFace() {
   }, [category, query]);
 
   return (
-    <FaceFrame id="face-list" spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。アイコンは角丸の正方形。" ground="alt">
+    <FaceFrame
+      ground="alt"
+      id="face-list"
+      spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。アイコンは角丸の正方形。"
+    >
       <PageLead subtitle={meta.subtitle} title={meta.title} />
       <label className="mb-6 block">
         <span className="mb-2 block text-sm font-medium">企画を検索</span>
         <input
+          className="lookbook-input"
+          placeholder="キーワード"
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="キーワード"
-          className="lookbook-input"
         />
       </label>
       <div className="mb-10 flex flex-wrap gap-2">
         <button
-          type="button"
           aria-pressed={category === 'all'}
-          onClick={() => setCategory('all')}
           className="lookbook-chip"
+          type="button"
+          onClick={() => setCategory('all')}
         >
           すべて
         </button>
         {EVENT_CATEGORY_OPTIONS.map((option) => (
           <button
             key={option.id}
-            type="button"
             aria-pressed={category === option.id}
-            onClick={() => setCategory(option.id)}
             className="lookbook-chip"
+            type="button"
+            onClick={() => setCategory(option.id)}
           >
             {option.label}
           </button>
@@ -194,17 +207,14 @@ export function EventListFace() {
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((event) => (
             <li key={event.slug}>
-              <a
-                href="#face-detail"
-                className="lookbook-card block text-[var(--ink)] no-underline"
-              >
+              <a className="lookbook-card block text-[var(--ink)] no-underline" href="#face-detail">
                 <div className="lookbook-thumb mb-4">
                   <Image
-                    src={CAMPUS_PHOTO}
-                    alt=""
                     fill
+                    alt=""
                     className="object-cover object-center"
                     sizes="(min-width: 1024px) 33vw, 100vw"
+                    src={CAMPUS_PHOTO}
                   />
                 </div>
                 <p className="lookbook-chip mb-3 inline-flex">{getEventCategoryLabel(event.category)}</p>
@@ -231,18 +241,22 @@ export function EventDetailFace() {
   const timeDay2 = formatEventTimeRange(event['time-day2']);
 
   return (
-    <FaceFrame id="face-detail" spec="DESIGN2 Gate C ・ 面3 企画詳細。写真、見出し、本文。アイコンは置かない。" ground="alt">
+    <FaceFrame
+      ground="alt"
+      id="face-detail"
+      spec="DESIGN2 Gate C ・ 面3 企画詳細。写真、見出し、本文。アイコンは置かない。"
+    >
       <PageLead backHref="#face-list" title={event.title} />
       <p className="mb-8 font-[family-name:var(--font-body)] text-lg text-[var(--ink-soft)]">{event.organization}</p>
       <div className="grid gap-10 lg:grid-cols-3 lg:items-start">
         <div className="lg:col-span-2">
           <div className="lookbook-soft relative mb-8 aspect-[16/9] overflow-hidden">
             <Image
-              src={CAMPUS_PHOTO}
-              alt="企画の写真（見本）"
               fill
+              alt="企画の写真（見本）"
               className="object-cover object-center"
               sizes="(min-width: 1024px) 60vw, 100vw"
+              src={CAMPUS_PHOTO}
             />
           </div>
           <p className="lookbook-subhead mb-10 text-lg font-medium">{event.catchphrase}</p>
@@ -297,13 +311,15 @@ export function StampBookFace() {
   }
 
   return (
-    <FaceFrame id="face-stamp" spec="DESIGN2 Gate C ・ 面4 スタンプ帳。アイコンは角丸正方形。達成は緑にしない。" ground="alt">
+    <FaceFrame
+      ground="alt"
+      id="face-stamp"
+      spec="DESIGN2 Gate C ・ 面4 スタンプ帳。アイコンは角丸正方形。達成は緑にしない。"
+    >
       <PageLead subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー" />
       <div className="lookbook-card mb-10 p-6">
         <p className="font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
-          {cleared
-            ? '条件達成です。ふくびき参加券を表示できます'
-            : `あと ${remaining} 個でふくびき券 GET！`}
+          {cleared ? '条件達成です。ふくびき参加券を表示できます' : `あと ${remaining} 個でふくびき券 GET！`}
         </p>
         <p className="lookbook-heading mt-3">
           {count}
@@ -311,7 +327,7 @@ export function StampBookFace() {
         </p>
         <p className="mt-3 text-xs text-[var(--ink-soft)]">ふくびき条件 {required} 個</p>
         {cleared ? (
-          <button type="button" className={`${TICKET_BTN} mt-6 w-full sm:w-auto`}>
+          <button className={`${TICKET_BTN} mt-6 w-full sm:w-auto`} type="button">
             ふくびき参加券を表示する
           </button>
         ) : null}
@@ -326,19 +342,13 @@ export function StampBookFace() {
                 return (
                   <li key={booth.slug}>
                     <button
-                      type="button"
                       aria-pressed={on}
-                      onClick={() => toggle(booth.slug)}
                       className="lookbook-card flex w-full items-center gap-4 p-4 text-left"
+                      type="button"
+                      onClick={() => toggle(booth.slug)}
                     >
                       <span className={`lookbook-thumb lookbook-thumb-sm${on ? '' : ' lookbook-stamp-off'}`}>
-                        <Image
-                          src={CAMPUS_PHOTO}
-                          alt=""
-                          fill
-                          className="object-cover object-center"
-                          sizes="72px"
-                        />
+                        <Image fill alt="" className="object-cover object-center" sizes="72px" src={CAMPUS_PHOTO} />
                       </span>
                       <span>
                         <span className="block font-[family-name:var(--font-ui)] font-medium">{booth.title}</span>
