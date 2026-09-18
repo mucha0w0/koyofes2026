@@ -10,13 +10,55 @@ import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { getNavSections } from '@/lib/config/nav';
 import { getEnabledOfficialSocials } from '@/lib/config/social';
 
-const PALETTE = [
-  { token: '--paper', hex: '#F5EBC8', note: 'ページ地', fill: 'var(--paper)' },
-  { token: '--paper-2', hex: '#F0D9B0', note: '背景色2・帯', fill: 'var(--paper-2)' },
-  { token: '--mist', hex: '#C9B8A4', note: '非選択・表見出し。ホバーは白で割る', fill: 'var(--mist)' },
-  { token: '--ink', hex: '#161412', note: '本文。面に塗らない', fill: 'var(--ink)' },
-  { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
-  { token: '--accent', hex: '#CF783A', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
+const LOOKBOOK_PALETTES = [
+  {
+    id: 'orange',
+    label: 'オレンジ',
+    paper: '#F5EBC8',
+    paper2: '#F0D9B0',
+    accent: '#CF783A',
+    paperFill: 'var(--paper-orange)',
+    paper2Fill: 'var(--paper-2-orange)',
+    accentFill: 'var(--accent-orange)',
+  },
+  {
+    id: 'pink',
+    label: 'ピンク',
+    paper: '#F5E7EA',
+    paper2: '#EFD5DB',
+    accent: '#D2708D',
+    paperFill: 'var(--paper-pink)',
+    paper2Fill: 'var(--paper-2-pink)',
+    accentFill: 'var(--accent-pink)',
+  },
+  {
+    id: 'sky',
+    label: '水色',
+    paper: '#E1EDF2',
+    paper2: '#C7E1E8',
+    accent: '#3E99B0',
+    paperFill: 'var(--paper-sky)',
+    paper2Fill: 'var(--paper-2-sky)',
+    accentFill: 'var(--accent-sky)',
+  },
+  {
+    id: 'green',
+    label: '緑',
+    paper: '#E0EFE7',
+    paper2: '#C5E2D2',
+    accent: '#3BA060',
+    paperFill: 'var(--paper-green)',
+    paper2Fill: 'var(--paper-2-green)',
+    accentFill: 'var(--accent-green)',
+  },
+] as const;
+
+type LookbookPaletteId = (typeof LOOKBOOK_PALETTES)[number]['id'];
+
+const SHARED_PALETTE = [
+  { token: '--ink', hex: '#161616', note: '本文。面に塗らない。無彩色', fill: 'var(--ink)' },
+  { token: '--ink-soft', hex: '#555555', note: 'キャプション。無彩色', fill: 'var(--ink-soft)' },
+  { token: '--mist', hex: '#BABABA', note: '非選択・表見出し。無彩色。ホバーは白で割る', fill: 'var(--mist)' },
   { token: '--accent-soft', hex: '#FFFFFF', note: 'カード・入力・選択チップ', fill: 'var(--festival-accent-soft)' },
   { token: '--danger', hex: '#9C6A66', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
@@ -298,17 +340,40 @@ function LookbookFooter() {
 
 export function DesignLookbook() {
   const [grayscale, setGrayscale] = useState(false);
+  const [palette, setPalette] = useState<LookbookPaletteId>('orange');
   const [selectedCategory, setSelectedCategory] = useState(EVENT_CATEGORY_OPTIONS[0]?.id ?? '');
   const searchId = useId();
+  const activePalette = LOOKBOOK_PALETTES.find((item) => item.id === palette) ?? LOOKBOOK_PALETTES[0];
 
   return (
-    <div className={`theme-1dearland min-h-screen overflow-x-hidden ${grayscale ? 'is-grayscale' : ''}`}>
+    <div
+      className={`theme-1dearland min-h-screen overflow-x-hidden ${grayscale ? 'is-grayscale' : ''}`}
+      data-palette={palette}
+    >
       <div className={`${ACCENT_BAND}`}>
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
           <p className="text-sm">
             開発用見本 <span className="text-white/70">/dev/design ・ インデックスしない ・ 本番トークン未変更</span>
           </p>
-          <div className="flex flex-wrap gap-3 text-sm">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <div aria-label="基調色" className="flex flex-wrap gap-2" role="group">
+              {LOOKBOOK_PALETTES.map((item) => (
+                <button
+                  key={item.id}
+                  aria-pressed={palette === item.id}
+                  className="lookbook-subhead min-h-11 rounded-2xl px-3 text-[var(--ink)]"
+                  style={{
+                    background: item.paperFill,
+                    outline: palette === item.id ? '2px solid #ffffff' : undefined,
+                    outlineOffset: palette === item.id ? '2px' : undefined,
+                  }}
+                  type="button"
+                  onClick={() => setPalette(item.id)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
             <button
               aria-pressed={grayscale}
               className="min-h-11 rounded-2xl bg-[color-mix(in_srgb,var(--paper)_16%,transparent)] px-3"
@@ -341,7 +406,7 @@ export function DesignLookbook() {
           <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            地は薄い黄。カードと入力は白で浮かせる。ホバーと非選択は霧（灰色）。クロムは枠線を使わず、ベタ塗りで段をつける。主CTAは沈めたオレンジに白抜き。空と水は絵に残す。
+            地は基調色の薄い紙。カードと入力は白で浮かせる。ホバーと非選択は無彩色の霧。クロムは枠線を使わず、ベタ塗りで段をつける。主CTAは沈めた基調色に白抜き。ページ上部でオレンジ／ピンク／水色／緑を切り替えて、カテゴリ色の案を見る。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
             活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと舞台の直下のランキングだけ借りる。虹・雲・色つき見出し・pill は写さない。
@@ -362,10 +427,14 @@ export function DesignLookbook() {
           </nav>
         </div>
 
-        <Section id={SECTION_ID.palette} spec="DESIGN2 5.1 ・ hex は閉じた" title="色">
+        <Section id={SECTION_ID.palette} spec="カテゴリ色の試験 ・ インクと霧は無彩色で共用" title="色">
+          <p data-lookbook-chrome className="mb-6 text-center text-sm text-[var(--ink-soft)]">
+            いまの基調は{activePalette.label}。paper / paper-2 / accent だけが色相を持つ。
+          </p>
           <div data-lookbook-chrome className="lookbook-soft bg-[var(--paper-2)] p-4">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {PALETTE.map((item) => (
+            <p className="lookbook-subhead mb-4 text-sm font-medium">共用（無彩色）</p>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-5">
+              {SHARED_PALETTE.map((item) => (
                 <figure key={item.token} className="min-w-0">
                   <div className="aspect-square rounded-2xl" style={{ background: item.fill }} />
                   <figcaption className="mt-2 text-sm">
@@ -378,14 +447,42 @@ export function DesignLookbook() {
               ))}
             </div>
           </div>
+          <div data-lookbook-chrome className="mt-8 space-y-4">
+            {LOOKBOOK_PALETTES.map((item) => (
+              <div
+                key={item.id}
+                className="lookbook-soft overflow-hidden bg-[var(--festival-accent-soft)]"
+                style={palette === item.id ? { outline: '2px solid var(--ink)', outlineOffset: '2px' } : undefined}
+              >
+                <p className="lookbook-subhead px-4 pt-4 text-sm font-medium">
+                  {item.label}
+                  {palette === item.id ? ' ・ 表示中' : ''}
+                </p>
+                <div className="mt-3 grid grid-cols-3">
+                  <p className="px-4 py-6 text-sm" style={{ background: item.paperFill }}>
+                    <span className="lookbook-subhead block font-medium">--paper</span>
+                    {item.paper} ・ ページ地
+                  </p>
+                  <p className="px-4 py-6 text-sm" style={{ background: item.paper2Fill }}>
+                    <span className="lookbook-subhead block font-medium">--paper-2</span>
+                    {item.paper2} ・ セクション帯
+                  </p>
+                  <p className="px-4 py-6 text-sm text-white" style={{ background: item.accentFill }}>
+                    <span className="lookbook-subhead block font-medium">--accent</span>
+                    {item.accent} ・ 主 CTA・横断帯
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
           <div data-lookbook-chrome className="lookbook-soft mt-8 grid grid-cols-1 overflow-hidden bg-[var(--paper-2)] sm:grid-cols-2 lg:grid-cols-4">
             <p className="bg-[var(--paper)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper</span>
-              ページ地。薄い黄
+              ページ地。基調色を薄くした紙
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper-2</span>
-              セクション帯。一段沈めた黄
+              セクション帯。一段沈めた同じ色相
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--accent-soft</span>
@@ -397,7 +494,7 @@ export function DesignLookbook() {
             </p>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-[var(--ink-soft)]">
-            空・水・かきつばた・緑・桃はトークンにしない。赤は危険の印以外に使わない。白い面と霧は帯にしない。
+            この4色はカテゴリ基調の試験。本番トークンはまだオレンジのまま。赤い面は危険の印以外に使わない。白い面と霧は帯にしない。
           </p>
         </Section>
 
@@ -455,7 +552,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 枠なし。沈めたオレンジに白抜き" title="ボタン">
+        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 枠なし。沈めた基調色に白抜き" title="ボタン">
           <div data-lookbook-chrome className="flex flex-wrap items-center justify-center gap-4">
             <button className={TICKET_BTN} type="button">
               企画を探す
@@ -520,7 +617,7 @@ export function DesignLookbook() {
             </article>
             <article className="lookbook-card lookbook-card-on">
               <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-              <p className="mt-2 text-sm text-[var(--ink-soft)]">霧を白で割る。地の黄にはしない。</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">霧を白で割る。地の紙色にはしない。</p>
             </article>
           </div>
           <div data-lookbook-chrome className="lookbook-soft mt-4 bg-[var(--paper)] p-5" data-ground="paper">
@@ -532,7 +629,7 @@ export function DesignLookbook() {
               </article>
               <article className="lookbook-card lookbook-card-on">
                 <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の黄にはしない。薄い霧だけ。</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の紙色にはしない。薄い霧だけ。</p>
               </article>
             </div>
           </div>

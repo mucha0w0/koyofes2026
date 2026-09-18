@@ -170,16 +170,38 @@
   }
 }
 
-/* DESIGN2 パイロット。本番 :root と同じパレット。/dev/design 見本用クラス。 */
+/* DESIGN2 パイロット。/dev/design 見本用。本番 :root は未変更。
+   基調色は paper / paper-2 / accent。インクと霧は無彩色で全パレット共用。 */
 .theme-1dearland {
-  --paper: #f5ebc8;
-  --paper-2: #f0d9b0;
-  --mist: #c9b8a4;
-  --ink: #161412;
-  --ink-soft: #5a534c;
+  --mist: #bababa;
+  --ink: #161616;
+  --ink-soft: #555555;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
-  --festival-accent: #cf783a;
-  --festival-accent-hover: #b56630;
+
+  --paper-orange: #f5ebc8;
+  --paper-2-orange: #f0d9b0;
+  --accent-orange: #cf783a;
+  --accent-orange-hover: #b56630;
+
+  --paper-pink: #f5e7ea;
+  --paper-2-pink: #efd5db;
+  --accent-pink: #d2708d;
+  --accent-pink-hover: #cb4f74;
+
+  --paper-sky: #e1edf2;
+  --paper-2-sky: #c7e1e8;
+  --accent-sky: #3e99b0;
+  --accent-sky-hover: #338498;
+
+  --paper-green: #e0efe7;
+  --paper-2-green: #c5e2d2;
+  --accent-green: #3ba060;
+  --accent-green-hover: #318a52;
+
+  --paper: var(--paper-orange);
+  --paper-2: var(--paper-2-orange);
+  --festival-accent: var(--accent-orange);
+  --festival-accent-hover: var(--accent-orange-hover);
   --festival-accent-soft: #ffffff;
   --festival-danger: #9c6a66;
 
@@ -225,6 +247,33 @@
   font-family: var(--font-lookbook-body);
   line-height: 1.8;
   letter-spacing: 0;
+}
+
+.theme-1dearland[data-palette='pink'] {
+  --paper: var(--paper-pink);
+  --paper-2: var(--paper-2-pink);
+  --festival-accent: var(--accent-pink);
+  --festival-accent-hover: var(--accent-pink-hover);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.theme-1dearland[data-palette='sky'] {
+  --paper: var(--paper-sky);
+  --paper-2: var(--paper-2-sky);
+  --festival-accent: var(--accent-sky);
+  --festival-accent-hover: var(--accent-sky-hover);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.theme-1dearland[data-palette='green'] {
+  --paper: var(--paper-green);
+  --paper-2: var(--paper-2-green);
+  --festival-accent: var(--accent-green);
+  --festival-accent-hover: var(--accent-green-hover);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .theme-1dearland h1,
