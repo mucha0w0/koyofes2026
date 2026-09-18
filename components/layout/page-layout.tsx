@@ -21,7 +21,7 @@ export function PageLayout({
 }: PageLayoutProps) {
   return (
     <main className="min-h-screen">
-      <div className="relative">
+      <div className="relative pb-16">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 top-0 -bottom-7 z-0 overflow-hidden"
@@ -35,7 +35,7 @@ export function PageLayout({
                   width: HEADING_STRIPE_WIDTH_PX,
                   background:
                     index % 2 === 0
-                      ? 'color-mix(in srgb, #74c2d9 40%, var(--festival-accent-soft))'
+                      ? 'color-mix(in srgb, #74c2d9 20%, var(--festival-accent-soft))'
                       : 'var(--festival-accent-soft)',
                 }}
               >
@@ -58,7 +58,7 @@ export function PageLayout({
           </div>
         </div>
       </div>
-      <div className="mx-auto w-full max-w-7xl px-4 py-12">{children}</div>
+      <div className="mx-auto w-full max-w-7xl px-4 pt-24 pb-12">{children}</div>
     </main>
   );
 }
