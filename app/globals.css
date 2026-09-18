@@ -204,6 +204,11 @@
   --festival-accent-hover: var(--accent-orange-hover);
   --festival-accent-soft: #ffffff;
   --festival-danger: #9c6a66;
+  --lookbook-stroke: 2.5px;
+  --lookbook-offset-x: 4px;
+  --lookbook-offset-y: 5px;
+  --lookbook-offset-x-hover: 6px;
+  --lookbook-offset-y-hover: 8px;
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -305,8 +310,29 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-1dearland .lookbook-ticket {
+  .theme-1dearland .lookbook-ticket,
+  .theme-1dearland .btn-outline,
+  .theme-1dearland .lookbook-chip,
+  .theme-1dearland a.lookbook-card,
+  .theme-1dearland button.lookbook-card {
     transition: none;
+    transform: none;
+  }
+
+  .theme-1dearland a.lookbook-ticket:hover,
+  .theme-1dearland button.lookbook-ticket:hover:not(:disabled),
+  .theme-1dearland button.btn-outline:hover,
+  .theme-1dearland button.lookbook-chip:hover,
+  .theme-1dearland a.lookbook-card:hover,
+  .theme-1dearland button.lookbook-card:hover,
+  .theme-1dearland a.lookbook-ticket:active,
+  .theme-1dearland button.lookbook-ticket:active:not(:disabled),
+  .theme-1dearland button.btn-outline:active,
+  .theme-1dearland button.lookbook-chip:active,
+  .theme-1dearland a.lookbook-card:active,
+  .theme-1dearland button.lookbook-card:active {
+    transform: none;
+    box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
   }
 }
 
@@ -322,6 +348,18 @@
 
 .theme-1dearland .lookbook-ticket,
 .theme-1dearland .btn-outline,
+.theme-1dearland .lookbook-chip,
+.theme-1dearland .lookbook-card,
+.theme-1dearland .lookbook-rank {
+  position: relative;
+  z-index: 0;
+  border: var(--lookbook-stroke) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
+}
+
+.theme-1dearland .lookbook-ticket,
+.theme-1dearland .btn-outline,
 .theme-1dearland .btn-quiet,
 .theme-1dearland .lookbook-chip {
   display: inline-flex;
@@ -329,8 +367,6 @@
   justify-content: center;
   min-height: 44px;
   padding: 0.5rem 1.25rem;
-  border: 0;
-  border-radius: var(--radius);
   font-size: 0.875rem;
   font-weight: 500;
   font-family: var(--font-lookbook-ui);
@@ -338,14 +374,47 @@
   cursor: pointer;
 }
 
-.theme-1dearland button.lookbook-ticket {
+.theme-1dearland .lookbook-ticket {
   background-color: var(--festival-accent);
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
-  transition: background-color 0.15s ease;
 }
 
-.theme-1dearland button.lookbook-ticket:hover {
+.theme-1dearland a.lookbook-ticket,
+.theme-1dearland button.lookbook-ticket:not(:disabled),
+.theme-1dearland button.btn-outline,
+.theme-1dearland button.lookbook-chip,
+.theme-1dearland a.lookbook-card,
+.theme-1dearland button.lookbook-card {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.theme-1dearland a.lookbook-ticket:hover,
+.theme-1dearland button.lookbook-ticket:hover:not(:disabled),
+.theme-1dearland button.btn-outline:hover,
+.theme-1dearland button.lookbook-chip:hover,
+.theme-1dearland a.lookbook-card:hover:not(.lookbook-card-static),
+.theme-1dearland button.lookbook-card:hover:not(.lookbook-card-static) {
+  z-index: 1;
+  transform: translate(-2px, -3px);
+  box-shadow: var(--lookbook-offset-x-hover) var(--lookbook-offset-y-hover) 0 0 var(--ink);
+}
+
+.theme-1dearland a.lookbook-ticket:active,
+.theme-1dearland button.lookbook-ticket:active:not(:disabled),
+.theme-1dearland button.btn-outline:active,
+.theme-1dearland button.lookbook-chip:active,
+.theme-1dearland a.lookbook-card:active:not(.lookbook-card-static),
+.theme-1dearland button.lookbook-card:active:not(.lookbook-card-static) {
+  transform: translate(var(--lookbook-offset-x), var(--lookbook-offset-y));
+  box-shadow: 0 0 0 0 var(--ink);
+}
+
+.theme-1dearland a.lookbook-ticket:hover,
+.theme-1dearland button.lookbook-ticket:hover:not(:disabled) {
   background-color: var(--festival-accent-hover);
 }
 
@@ -353,14 +422,18 @@
 .theme-1dearland .btn-outline:focus-visible,
 .theme-1dearland .btn-quiet:focus-visible,
 .theme-1dearland .lookbook-chip:focus-visible,
-.theme-1dearland .lookbook-input:focus-visible {
+.theme-1dearland .lookbook-input:focus-visible,
+.theme-1dearland a.lookbook-card:focus-visible,
+.theme-1dearland button.lookbook-card:focus-visible {
   outline: 2px solid var(--ink);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .theme-1dearland button.lookbook-ticket:disabled {
   cursor: not-allowed;
   opacity: 0.4;
+  transform: none;
+  box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
 }
 
 .theme-1dearland .btn-outline,
@@ -370,7 +443,7 @@
 }
 
 .theme-1dearland .btn-outline:hover,
-.theme-1dearland .lookbook-chip:hover {
+.theme-1dearland button.lookbook-chip:hover {
   background: var(--mist-hover);
 }
 
@@ -382,6 +455,9 @@
 }
 
 .theme-1dearland .btn-quiet {
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: none;
   background: transparent;
   color: var(--ink);
   text-decoration: underline;
@@ -412,19 +488,24 @@
 }
 
 .theme-1dearland .lookbook-card {
-  border-radius: var(--radius);
   background: var(--fill-card);
   padding: 1.5rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.theme-1dearland .lookbook-card:hover:not(.lookbook-card-static),
 .theme-1dearland .lookbook-card-on {
-  background: var(--fill-hover);
+  z-index: 1;
+  transform: translate(-2px, -3px);
+  box-shadow: var(--lookbook-offset-x-hover) var(--lookbook-offset-y-hover) 0 0 var(--ink);
 }
 
 .theme-1dearland .lookbook-card-media {
   padding: 0;
+}
+
+.theme-1dearland .lookbook-card-media > :first-child {
+  overflow: hidden;
+  border-radius: calc(var(--radius) - var(--lookbook-stroke)) calc(var(--radius) - var(--lookbook-stroke)) 0 0;
 }
 
 .theme-1dearland .lookbook-card-media .lookbook-card-body {
@@ -437,7 +518,6 @@
   gap: 1rem;
   min-height: 5.5rem;
   padding: 1.25rem 1.5rem;
-  border-radius: var(--radius);
   background: var(--fill-quiet);
 }
 
@@ -470,6 +550,10 @@
 .theme-1dearland .lookbook-soft {
   overflow: hidden;
   border-radius: var(--radius);
+}
+
+.theme-1dearland .lookbook-soft:has(.lookbook-card) {
+  overflow: visible;
 }
 
 .theme-1dearland .lookbook-error {
@@ -505,6 +589,8 @@
 .theme-1dearland .lookbook-card .lookbook-chip:hover,
 .theme-1dearland .lookbook-card-on .lookbook-chip {
   background: var(--mist);
+  transform: none;
+  box-shadow: 2px 3px 0 0 var(--ink);
 }
 
 .theme-1dearland .lookbook-thumb {

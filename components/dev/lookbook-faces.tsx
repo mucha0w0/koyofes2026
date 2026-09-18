@@ -178,7 +178,7 @@ export function EventListFace() {
           onChange={(event) => setQuery(event.target.value)}
         />
       </label>
-      <div className="mb-10 flex flex-wrap gap-2">
+      <div className="mb-10 flex flex-wrap gap-3">
         <button
           aria-pressed={category === 'all'}
           className="lookbook-chip"
@@ -260,7 +260,7 @@ export function EventDetailFace() {
             />
           </div>
           <p className="lookbook-subhead mb-10 text-lg font-medium">{event.catchphrase}</p>
-          <div className="mb-10 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="lookbook-card p-4">
               <p className="text-xs text-[var(--ink-soft)]">場所</p>
               <p className="mt-2 text-sm font-medium">{locationDisplay.firstLine}</p>
@@ -336,7 +336,7 @@ export function StampBookFace() {
         {STAMP_CONFIG.categoryOrder.map((group) => (
           <div key={group.id}>
             <h2 className="lookbook-subhead mb-4 text-xl">{group.label}</h2>
-            <ul className="grid gap-4 sm:grid-cols-2">
+            <ul className="grid gap-5 sm:grid-cols-2">
               {SAMPLE_BOOTHS.filter((booth) => booth.category === group.id).map((booth) => {
                 const on = collected.includes(booth.slug);
                 return (

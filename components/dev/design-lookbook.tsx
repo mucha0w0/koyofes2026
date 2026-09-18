@@ -228,7 +228,7 @@ function RankingSpecimen() {
         <h2 data-lookbook-chrome className="mb-10 text-center text-2xl md:text-3xl">
           ランキング
         </h2>
-        <ol data-lookbook-chrome className="grid gap-3 md:grid-cols-3">
+        <ol data-lookbook-chrome className="grid gap-4 md:grid-cols-3">
           {RANKING.map((item) => (
             <li key={item.rank} className={item.on ? 'lookbook-rank lookbook-rank-on' : 'lookbook-rank'}>
               <span className="lookbook-rank-num">{item.rank}</span>
@@ -406,7 +406,7 @@ export function DesignLookbook() {
           <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            地は基調色の薄い紙。カードと入力は白で浮かせる。ホバーと非選択は無彩色の霧。クロムは枠線を使わず、ベタ塗りで段をつける。主CTAは沈めた基調色に白抜き。ページ上部でオレンジ／ピンク／水色／緑を切り替えて、カテゴリ色の案を見る。
+            地は基調色の薄い紙。カードとボタンは白い面にインクの枠をつけ、右下へ少し膨らませる。ホバーで持ち上がり、クリックで沈む。ホバーと非選択の塗りは無彩色の霧。主CTAは沈めた基調色に白抜き。ページ上部でオレンジ／ピンク／水色／緑を切り替えて、カテゴリ色の案を見る。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
             活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと舞台の直下のランキングだけ借りる。虹・雲・色つき見出し・pill は写さない。
@@ -527,7 +527,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ 枠は使わない。面で段をつける" title="塗り">
+        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カードはインク枠。帯は枠なし" title="塗り">
           <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 overflow-hidden sm:grid-cols-5">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper</span>
@@ -552,7 +552,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 枠なし。沈めた基調色に白抜き" title="ボタン">
+        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ インク枠。ホバーで持ち上がり、クリックで沈む" title="ボタン">
           <div data-lookbook-chrome className="flex flex-wrap items-center justify-center gap-4">
             <button className={TICKET_BTN} type="button">
               企画を探す
@@ -569,8 +569,8 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ 未選択は霧。選択だけ白" title="チップ">
-          <div data-lookbook-chrome className="flex flex-wrap justify-center gap-2">
+        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ殻。未選択は霧。選択だけ白" title="チップ">
+          <div data-lookbook-chrome className="flex flex-wrap justify-center gap-3">
             {EVENT_CATEGORY_OPTIONS.map((option) => (
               <button
                 key={option.id}
@@ -583,7 +583,7 @@ export function DesignLookbook() {
               </button>
             ))}
           </div>
-          <div data-lookbook-chrome className="mt-6 flex flex-wrap justify-center gap-2">
+          <div data-lookbook-chrome className="mt-6 flex flex-wrap justify-center gap-3">
             <span className="lookbook-chip lookbook-chip-on">開催中</span>
             <span className="lookbook-chip lookbook-chip-muted">終了</span>
             <span className="lookbook-chip">獲得済み</span>
@@ -609,31 +609,32 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.card} spec="DESIGN2 11.4 ・ 枠なし。白いカード。ホバーは薄い霧" title="カード">
-          <div data-lookbook-chrome className="grid gap-4 md:grid-cols-2">
+        <Section band id={SECTION_ID.card} spec="DESIGN2 11.4 ・ インク枠。右下へ膨らむ。白いカード" title="カード">
+          <div data-lookbook-chrome className="grid gap-5 md:grid-cols-2">
             <article className="lookbook-card">
               <p className="lookbook-subhead text-lg font-bold">アクセス</p>
               <p className="mt-2 text-sm text-[var(--ink-soft)]">電車・バス・車でのアクセス方法</p>
             </article>
             <article className="lookbook-card lookbook-card-on">
               <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">霧を白で割る。地の紙色にはしない。</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">右下の膨らみが伸びて、面が少し持ち上がる。</p>
             </article>
           </div>
           <div data-lookbook-chrome className="lookbook-soft mt-4 bg-[var(--paper)] p-5" data-ground="paper">
             <p className="mb-4 text-sm text-[var(--ink-soft)]">同じ白いカードを paper の地の上へ</p>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               <article className="lookbook-card">
                 <p className="lookbook-subhead text-lg font-bold">薄い地の上のカード</p>
                 <p className="mt-2 text-sm text-[var(--ink-soft)]">白。地との差は霧より弱い。</p>
               </article>
               <article className="lookbook-card lookbook-card-on">
                 <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の紙色にはしない。薄い霧だけ。</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の紙色にはしない。枠と右下の膨らみで浮かせる。</p>
               </article>
             </div>
           </div>
-          <div data-lookbook-chrome className="lookbook-card lookbook-card-static mt-8 overflow-x-auto">
+          <div data-lookbook-chrome className="lookbook-card lookbook-card-static mt-8">
+            <div className="overflow-x-auto">
             <table className="lookbook-table w-full min-w-[36rem] border-collapse text-left text-sm">
               <caption className="mb-3 text-left text-sm text-[var(--ink-soft)]">
                 表の見本 ・ 見出し行だけ霧。本文行は白。罫線なし
@@ -663,11 +664,12 @@ export function DesignLookbook() {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </Section>
 
         <Section band id={SECTION_ID.news} spec="DESIGN2 11.12 ・ 日付＋見出し。ライムの NEW は足さない" title="お知らせ">
-          <div data-lookbook-chrome className="grid gap-4 md:grid-cols-3">
+          <div data-lookbook-chrome className="grid gap-5 md:grid-cols-3">
             {NEWS.map((item) => (
               <article key={item.title} className={item.image ? 'lookbook-card lookbook-card-media' : 'lookbook-card'}>
                 {item.image ? (
