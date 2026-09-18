@@ -37,7 +37,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         aria-disabled={currentPage === 1}
         aria-label="前のページへ"
         className={`px-3 py-2 text-sm font-medium transition-colors ${
-          currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'text-foreground hover:opacity-70'
+          currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'text-foreground hover:bg-mist-hover rounded-md'
         }`}
         href={`${basePath}?page=${Math.max(1, currentPage - 1)}`}
       >
@@ -55,8 +55,8 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         ) : (
           <Link
             key={page}
-            className={`w-9 h-9 flex items-center justify-center text-sm font-medium transition-colors ${
-              page === currentPage ? 'bg-primary text-primary-foreground' : 'text-foreground hover:opacity-70'
+            className={`min-h-11 w-11 flex items-center justify-center rounded-md text-sm font-medium transition-colors ${
+              page === currentPage ? 'bg-card text-ink' : 'text-ink hover:bg-mist-hover'
             }`}
             href={`${basePath}?page=${page}`}
           >
@@ -71,7 +71,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         className={`px-3 py-2 text-sm font-medium transition-colors ${
           currentPage === totalPages
             ? 'pointer-events-none text-muted-foreground/40'
-            : 'text-foreground hover:opacity-70'
+            : 'text-foreground hover:bg-mist-hover rounded-md'
         }`}
         href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}
       >

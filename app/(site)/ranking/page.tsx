@@ -14,8 +14,8 @@ export default function RankingPage() {
   if (!isRankingEnabled()) {
     return (
       <PageLayout subtitle="開催期間外です" title="リアルタイムランキング">
-        <div className="mx-auto max-w-3xl bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+        <div className="mx-auto max-w-3xl rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             ランキングは文化祭開催期間のみ公開します。
           </p>
         </div>

@@ -6,9 +6,9 @@ export default function AccessPage() {
   return (
     <PageLayout subtitle="会場までのアクセス方法をご案内します" title="アクセス">
       <div className="space-y-8">
-        <div className="bg-card p-6">
+        <div className="rounded-md bg-card p-6">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-muted">
+            <div className="p-2 bg-paper-2">
               <MapPin className="h-5 w-5 text-foreground" />
             </div>
             <h2 className="font-medium text-lg">会場</h2>
@@ -18,9 +18,9 @@ export default function AccessPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="bg-card p-6">
+          <div className="rounded-md bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-muted">
+              <div className="rounded-md p-2 bg-paper-2">
                 <Train className="h-5 w-5 text-foreground" />
               </div>
               <h3 className="font-medium">電車でお越しの方</h3>
@@ -31,9 +31,9 @@ export default function AccessPage() {
             </ul>
           </div>
 
-          <div className="bg-card p-6">
+          <div className="rounded-md bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-muted">
+              <div className="rounded-md p-2 bg-paper-2">
                 <Bus className="h-5 w-5 text-foreground" />
               </div>
               <h3 className="font-medium">バスでお越しの方</h3>
@@ -44,9 +44,9 @@ export default function AccessPage() {
             </ul>
           </div>
 
-          <div className="bg-card p-6">
+          <div className="rounded-md bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-muted">
+              <div className="rounded-md p-2 bg-paper-2">
                 <Car className="h-5 w-5 text-foreground" />
               </div>
               <h3 className="font-medium">お車でお越しの方</h3>
@@ -58,7 +58,7 @@ export default function AccessPage() {
           </div>
         </div>
 
-        <div className="bg-muted p-6">
+        <div className="rounded-md bg-paper-2 p-6">
           <h3 className="font-medium mb-4">地図（Google Maps）</h3>
           <div className="aspect-video">
             <iframe

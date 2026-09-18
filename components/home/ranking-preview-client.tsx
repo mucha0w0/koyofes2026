@@ -20,14 +20,14 @@ function BoothIcon({ icon, large, title }: { icon: string; large?: boolean; titl
 
   if (!isImageUrl(icon)) {
     return (
-      <div className={`flex shrink-0 items-center justify-center bg-muted ${large ? 'size-24' : 'size-14'}`}>
+      <div className={`flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2 ${large ? 'size-24' : 'size-14'}`}>
         <span className="text-[10px] text-muted-foreground">No image</span>
       </div>
     );
   }
 
   return (
-    <div className={`shrink-0 overflow-hidden bg-muted ${large ? 'size-24' : 'size-14'}`}>
+    <div className={`shrink-0 overflow-hidden rounded-md bg-paper-2 ${large ? 'size-24' : 'size-14'}`}>
       <Image alt={title} className="size-full object-cover" height={size} src={icon} width={size} />
     </div>
   );
@@ -36,20 +36,20 @@ function BoothIcon({ icon, large, title }: { icon: string; large?: boolean; titl
 function FeaturedRow({ item }: { item: RankingOverallItem }) {
   return (
     <Link
-      className="flex items-center gap-4 bg-primary p-5 text-primary-foreground transition-opacity hover:opacity-80 md:gap-6 md:p-6"
+      className="flex items-center gap-4 rounded-md bg-card p-5 text-ink transition-colors hover:bg-mist-hover md:gap-6 md:p-6"
       href={`/events/${item.slug}`}
     >
-      <span className="w-12 shrink-0 font-display text-3xl tabular-nums tracking-wide md:text-4xl">
+      <span className="w-12 shrink-0 font-display text-3xl tabular-nums md:text-4xl">
         {String(item.rank).padStart(2, '0')}
       </span>
       <BoothIcon large icon={item.icon} title={item.title} />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-lg font-medium tracking-wide">{item.title}</p>
-        <p className="truncate text-sm text-primary-foreground/70">{item.organization}</p>
+        <p className="truncate text-lg font-medium">{item.title}</p>
+        <p className="truncate text-sm text-ink-soft">{item.organization}</p>
       </div>
       <div className="shrink-0 text-right">
-        <p className="tabular-nums text-lg tracking-wider md:text-xl">{formatAverage(item.average)}</p>
-        <p className="text-xs tracking-wider text-primary-foreground/70">{item.voteCount} 票</p>
+        <p className="tabular-nums text-lg md:text-xl">{formatAverage(item.average)}</p>
+        <p className="text-xs text-ink-soft">{item.voteCount} 票</p>
       </div>
     </Link>
   );
@@ -58,20 +58,20 @@ function FeaturedRow({ item }: { item: RankingOverallItem }) {
 function CompactRow({ item }: { item: RankingOverallItem }) {
   return (
     <Link
-      className="flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
+      className="flex items-center gap-4 rounded-md bg-mist p-4 text-ink transition-colors hover:bg-mist-hover"
       href={`/events/${item.slug}`}
     >
-      <span className="w-10 shrink-0 font-display text-xl tabular-nums tracking-wide text-foreground">
+      <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
         {String(item.rank).padStart(2, '0')}
       </span>
       <BoothIcon icon={item.icon} title={item.title} />
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium tracking-wide">{item.title}</p>
-        <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
+        <p className="truncate font-medium">{item.title}</p>
+        <p className="truncate text-sm text-ink-soft">{item.organization}</p>
       </div>
       <div className="shrink-0 text-right">
-        <p className="tabular-nums text-sm tracking-wider">{formatAverage(item.average)}</p>
-        <p className="text-xs text-muted-foreground tracking-wider">{item.voteCount} 票</p>
+        <p className="tabular-nums text-sm">{formatAverage(item.average)}</p>
+        <p className="text-xs text-ink-soft">{item.voteCount} 票</p>
       </div>
     </Link>
   );
@@ -81,27 +81,27 @@ function PreviewSkeleton() {
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-4 bg-card p-5 md:p-6">
-        <div className="h-9 w-12 shrink-0 bg-muted" />
-        <div className="size-24 shrink-0 bg-muted" />
+        <div className="h-9 w-12 shrink-0 rounded-md bg-paper-2" />
+        <div className="size-24 shrink-0 rounded-md bg-paper-2" />
         <div className="min-w-0 flex-1 space-y-2">
-          <div className="h-5 w-1/2 bg-muted" />
-          <div className="h-4 w-1/3 bg-muted" />
+          <div className="h-5 w-1/2 rounded-md bg-paper-2" />
+          <div className="h-4 w-1/3 rounded-md bg-paper-2" />
         </div>
       </div>
       <div className="flex items-center gap-4 bg-card p-4">
-        <div className="h-7 w-10 shrink-0 bg-muted" />
-        <div className="size-14 shrink-0 bg-muted" />
+        <div className="h-7 w-10 shrink-0 rounded-md bg-paper-2" />
+        <div className="size-14 shrink-0 rounded-md bg-paper-2" />
         <div className="min-w-0 flex-1 space-y-2">
-          <div className="h-4 w-1/2 bg-muted" />
-          <div className="h-3 w-1/3 bg-muted" />
+          <div className="h-4 w-1/2 rounded-md bg-paper-2" />
+          <div className="h-3 w-1/3 rounded-md bg-paper-2" />
         </div>
       </div>
       <div className="flex items-center gap-4 bg-card p-4">
-        <div className="h-7 w-10 shrink-0 bg-muted" />
-        <div className="size-14 shrink-0 bg-muted" />
+        <div className="h-7 w-10 shrink-0 rounded-md bg-paper-2" />
+        <div className="size-14 shrink-0 rounded-md bg-paper-2" />
         <div className="min-w-0 flex-1 space-y-2">
-          <div className="h-4 w-2/5 bg-muted" />
-          <div className="h-3 w-1/4 bg-muted" />
+          <div className="h-4 w-2/5 rounded-md bg-paper-2" />
+          <div className="h-3 w-1/4 rounded-md bg-paper-2" />
         </div>
       </div>
     </div>
@@ -151,13 +151,13 @@ export function RankingPreviewClient() {
   const loading = items === null && !errorMessage;
 
   return (
-    <section aria-busy={loading} className="bg-muted py-16 md:py-24">
+    <section aria-busy={loading} className="bg-paper-2 py-16 md:py-24">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl space-y-6">
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0 space-y-1">
               <h2 className="text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
-              <p className="text-sm text-muted-foreground tracking-wider">星の総合評価 上位{PREVIEW_COUNT}企画</p>
+              <p className="text-sm text-muted-foreground">星の総合評価 上位{PREVIEW_COUNT}企画</p>
             </div>
             <Link
               className="flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -172,13 +172,13 @@ export function RankingPreviewClient() {
 
           {errorMessage ? (
             <div className="bg-card p-6">
-              <p className="text-sm leading-loose tracking-wider text-muted-foreground">{errorMessage}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">{errorMessage}</p>
             </div>
           ) : null}
 
           {items && items.length === 0 && !errorMessage ? (
             <div className="bg-card p-6">
-              <p className="text-sm leading-loose tracking-wider text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
               </p>
             </div>

@@ -9,7 +9,7 @@ interface FAQCategorySectionProps {
 export const FAQCategorySection: React.FC<FAQCategorySectionProps> = ({ group }) => {
   return (
     <section className="scroll-mt-40 pt-16 mb-16 last:mb-0" id={group.category}>
-      <h2 className="text-2xl font-medium text-foreground tracking-tight mb-8 pb-4 border-b border-border/60">
+      <h2 className="text-2xl font-medium text-foreground mb-8 pb-4">
         {group.category}
       </h2>
 

@@ -17,10 +17,10 @@ export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, e
   const isEventIconUrl = isImageUrl(event.icon);
 
   return (
-    <div className="bg-card p-5 space-y-4">
+    <div className="rounded-md bg-card p-5 space-y-4">
       {/* パート情報（外枠） */}
       <div className="flex items-center gap-3">
-        <div className="shrink-0 w-10 h-10 bg-muted flex items-center justify-center overflow-hidden">
+        <div className="shrink-0 w-10 h-10 rounded-md bg-paper-2 flex items-center justify-center overflow-hidden">
           {recommenderIcon ? (
             <Image
               alt={recommender}
@@ -42,10 +42,10 @@ export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, e
       {/* 企画紹介カード（内側） */}
       {/* 企画紹介カード（内側） */}
       <Link
-        className="flex items-center gap-4 bg-muted p-4 hover:opacity-80 transition-opacity"
+        className="flex items-center gap-4 rounded-md bg-paper-2 p-4 transition-colors hover:bg-mist-hover"
         href={`/events/${event.slug}`}
       >
-        <div className="shrink-0 w-16 h-16 bg-background flex items-center justify-center overflow-hidden">
+        <div className="shrink-0 w-16 h-16 rounded-md bg-card flex items-center justify-center overflow-hidden">
           {isEventIconUrl ? (
             <Image alt={event.title} className="w-full h-full object-cover" height={64} src={event.icon} width={64} />
           ) : (

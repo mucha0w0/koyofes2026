@@ -79,10 +79,10 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
           お知らせ一覧に戻る
         </Link>
 
-        <Card className="border border-[#e6e9ed] pt-2">
+        <Card className="pt-2">
           <CardHeader className="px-8 pt-6 pb-2">
             <div className="flex items-center gap-3">
-              <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+              <time className="text-sm text-muted-foreground">{formattedDate}</time>
             </div>
             <CardTitle className="font-medium text-xl mt-1">{news.title}</CardTitle>
           </CardHeader>

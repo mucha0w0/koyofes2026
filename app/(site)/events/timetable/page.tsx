@@ -50,11 +50,11 @@ function TimelineView({
 
       {/* 軸エリア（縦線 + 正方形ドット） */}
       <div className="relative w-6 shrink-0" style={{ height: `${totalHeight}px` }}>
-        <div className="absolute left-2.75 top-0 bottom-0 w-px bg-border" />
+        <div className="absolute left-2.75 top-0 bottom-0 w-px bg-mist" />
         {events.map((event, idx) => (
           <div
             key={idx}
-            className="absolute w-2 h-2 bg-foreground"
+            className="absolute w-2 h-2 rounded-[4px] bg-ink"
             style={{ left: '7px', top: `${event.topPx - 4}px` }}
           />
         ))}
@@ -65,14 +65,14 @@ function TimelineView({
         {events.map((event, idx) => (
           <Link
             key={idx}
-            className="absolute left-0 right-0 bg-card px-4 flex items-center gap-3 transition-opacity hover:opacity-80"
+            className="absolute left-0 right-0 rounded-md bg-card px-4 flex items-center gap-3 transition-colors hover:bg-mist-hover"
             href={`/events/${event.slug}`}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
             {event.icon && (
               <Image
                 alt={event.title}
-                className="w-10 h-10 object-contain shrink-0"
+                className="w-10 h-10 rounded-md object-contain shrink-0"
                 height={40}
                 src={event.icon}
                 width={40}

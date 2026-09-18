@@ -32,20 +32,20 @@ export function StampResetClient() {
         {!done ? (
           <>
             <Spinner className="size-6" />
-            <p className="text-sm text-muted-foreground leading-loose tracking-wider">記録をリセットしています…</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">記録をリセットしています…</p>
           </>
         ) : (
           <>
-            <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Reset</p>
-            <p className="text-foreground leading-loose tracking-wider">スタンプ記録をリセットしました。</p>
-            <p className="text-sm text-muted-foreground leading-loose tracking-wider">スタンプ帳へ移動します…</p>
-            <Button asChild className="rounded-none" size="lg">
+            <p className="font-display text-[15px] text-muted-foreground">Reset</p>
+            <p className="text-foreground leading-relaxed">スタンプ記録をリセットしました。</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">スタンプ帳へ移動します…</p>
+            <Button asChild size="lg">
               <Link href="/stamp">今すぐスタンプ帳を開く</Link>
             </Button>
           </>
         )}
       </div>
-      <p className="text-xs text-muted-foreground leading-loose tracking-wider text-center">
+      <p className="text-xs text-muted-foreground leading-relaxed text-center">
         ※このページはこの端末・このブラウザの記録だけを消します（デバッグ用）。
       </p>
     </div>

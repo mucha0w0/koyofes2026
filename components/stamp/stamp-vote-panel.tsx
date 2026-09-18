@@ -84,11 +84,11 @@ export function StampVotePanel({
   return (
     <div className="space-y-5">
       <DialogHeader className="space-y-1 text-left">
-        <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">Vote</p>
-        <DialogTitle className="text-lg font-medium tracking-wide">
+        <p className="font-display text-[15px] text-muted-foreground">Vote</p>
+        <DialogTitle className="text-lg font-medium">
           {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました'}
         </DialogTitle>
-        <DialogDescription className="text-sm leading-loose tracking-wider">
+        <DialogDescription className="text-sm leading-relaxed">
           {alreadyOwned
             ? `「${title}」の感想を、もう一度送れます。`
             : '星を確認して、いまの並びを押してください。'}
@@ -96,18 +96,18 @@ export function StampVotePanel({
       </DialogHeader>
 
       <div className="flex items-center gap-4">
-        <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden bg-muted">
+        <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
           {hasIcon ? (
             <Image alt={title} className="size-full object-cover" height={64} src={icon} width={64} />
           ) : (
             <span className="text-xs text-muted-foreground">No image</span>
           )}
         </div>
-        <p className="font-medium tracking-wide">{title}</p>
+        <p className="font-medium">{title}</p>
       </div>
 
       <div>
-        <p className="mb-3 text-sm tracking-wider">評価</p>
+        <p className="mb-3 text-sm">評価</p>
         <div aria-label="星評価" className="flex gap-1 sm:gap-2" role="radiogroup">
           {[1, 2, 3, 4, 5].map((value) => {
             const filled = value <= stars;
@@ -123,7 +123,7 @@ export function StampVotePanel({
                 onClick={() => setStars(value)}
               >
                 <Star
-                  className={`size-8 ${filled ? 'fill-foreground text-foreground' : 'fill-none text-[#bcbfc3]'}`}
+                  className={`size-8 ${filled ? 'fill-ink text-ink' : 'fill-none text-mist'}`}
                   strokeWidth={1.5}
                 />
               </button>
@@ -133,8 +133,8 @@ export function StampVotePanel({
       </div>
 
       <div>
-        <p className="mb-1 text-sm tracking-wider">いまの並び</p>
-        <p className="mb-3 text-sm text-muted-foreground leading-loose tracking-wider">
+        <p className="mb-1 text-sm">いまの並び</p>
+        <p className="mb-3 text-sm text-muted-foreground leading-relaxed">
           いま見えている並びを押してください。押すと送信されます。
         </p>
         <div aria-busy={submitting} aria-label="いまの並び" className="grid grid-cols-2 gap-2" role="group">
@@ -144,8 +144,8 @@ export function StampVotePanel({
               <button
                 key={option.value}
                 aria-label={`${option.label}を送信`}
-                className={`flex flex-col items-center justify-center gap-2 border px-2 py-3 transition-opacity hover:opacity-80 ${
-                  selected ? 'border-foreground bg-foreground text-background' : 'border-foreground'
+                className={`flex min-h-11 flex-col items-center justify-center gap-2 rounded-md px-2 py-3 transition-colors ${
+                  selected ? 'bg-card text-ink' : 'bg-mist text-ink hover:bg-mist-hover'
                 }`}
                 disabled={submitting}
                 type="button"
@@ -160,18 +160,18 @@ export function StampVotePanel({
                         className={`size-4 ${
                           filled
                             ? selected
-                              ? 'fill-background text-background'
-                              : 'fill-foreground text-foreground'
+                              ? 'fill-ink text-ink'
+                              : 'fill-ink text-ink'
                             : selected
-                              ? 'fill-none text-background/40'
-                              : 'fill-none text-[#bcbfc3]'
+                              ? 'fill-none text-mist'
+                              : 'fill-none text-mist'
                         }`}
                         strokeWidth={1.5}
                       />
                     );
                   })}
                 </span>
-                <span className="text-xs tracking-wider">
+                <span className="text-xs">
                   {submitting && selected ? '送信中…' : option.label}
                 </span>
               </button>
@@ -181,7 +181,7 @@ export function StampVotePanel({
       </div>
 
       {errorMessage ? (
-        <p className="text-sm text-destructive leading-loose tracking-wider">{errorMessage}</p>
+        <p className="text-sm text-ink leading-relaxed">{errorMessage}</p>
       ) : null}
 
       <div className="text-center">

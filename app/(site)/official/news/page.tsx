@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { Pagination } from '@/components/news/pagination';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 import { getNews } from '@/lib/news';
 
@@ -32,8 +32,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
       ) : (
         <>
           <div className="mx-auto max-w-3xl space-y-4">
-            {paginatedItems.map((item, i) => {
-              const globalIndex = startIndex + i;
+            {paginatedItems.map((item) => {
               const formattedDate = new Date(item.date)
                 .toLocaleDateString('ja-JP', {
                   year: 'numeric',
@@ -44,19 +43,12 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
               const plainContent = item.content.replace(/<[^>]*>/g, '').trim();
               return (
                 <Link key={item.id} className="block group" href={`/official/news/${item.id}`}>
-                  <Card className="border border-[#e6e9ed] transition-colors group-hover:bg-muted cursor-pointer">
+                  <Card className="transition-colors group-hover:bg-mist-hover cursor-pointer">
                     <CardHeader>
                       <div className="flex items-center gap-3">
-                        <time className="text-sm text-muted-foreground font-mono">{formattedDate}</time>
+                        <time className="text-sm text-muted-foreground">{formattedDate}</time>
                       </div>
                       <CardTitle className="font-medium text-lg mt-1">{item.title}</CardTitle>
-                      {globalIndex === 0 && (
-                        <CardAction>
-                          <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary rounded-sm">
-                            NEW
-                          </span>
-                        </CardAction>
-                      )}
                     </CardHeader>
                     <CardContent className="pb-6">
                       <CardDescription className="text-muted-foreground text-sm line-clamp-1">

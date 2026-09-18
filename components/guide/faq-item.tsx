@@ -12,7 +12,7 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b py-5 first:pt-2">
+    <div className="py-5 first:pt-2">
       {/* 質問ボタン */}
       <button
         aria-expanded={isOpen}
@@ -22,10 +22,10 @@ export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       >
         {/* Qマークとテキストのコンテナ */}
         <span className="flex items-start gap-3 flex-1 min-w-0">
-          <span className="text-xl  text-primary w-6 h-7 flex items-center justify-center shrink-0 select-none">
+          <span className="text-xl text-ink w-6 h-7 flex items-center justify-center shrink-0 select-none">
             Q.
           </span>
-          <span className="text-lg  text-primary leading-relaxed flex-1 pt-px">{question}</span>
+          <span className="text-lg text-ink leading-relaxed flex-1 pt-px">{question}</span>
         </span>
 
         {/* 矢印アイコン（items-start に合わせた位置調整） */}

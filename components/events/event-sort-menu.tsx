@@ -49,10 +49,8 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
         aria-haspopup="menu"
         aria-label="並び替え"
         className={cn(
-          'flex h-full min-h-12 items-center justify-center border px-3 transition-colors',
-          isActive
-            ? 'border-foreground bg-foreground text-background'
-            : 'border-border bg-input text-muted-foreground hover:border-ring hover:text-foreground',
+          'flex h-full min-h-12 items-center justify-center rounded-md px-3 transition-colors',
+          isActive ? 'bg-card text-ink' : 'bg-mist text-ink hover:bg-mist-hover',
         )}
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -62,7 +60,7 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
       <div
         aria-hidden={!open}
         className={cn(
-          'absolute top-full right-0 z-30 mt-1 min-w-52 border border-border bg-popover py-1 transition-all duration-200',
+          'absolute top-full right-0 z-30 mt-1 min-w-52 rounded-md bg-card py-1 transition-all duration-200',
           open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0',
         )}
         id={menuId}
@@ -75,10 +73,8 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
             <button
               key={option.key}
               className={cn(
-                'flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left text-sm transition-colors',
-                selected
-                  ? 'bg-muted text-foreground'
-                  : 'text-foreground hover:bg-primary hover:text-primary-foreground',
+                'flex w-full items-center justify-between gap-3 rounded-md px-4 py-2.5 text-left text-sm transition-colors',
+                selected ? 'bg-card text-ink' : 'text-ink hover:bg-mist-hover',
               )}
               role="menuitem"
               type="button"

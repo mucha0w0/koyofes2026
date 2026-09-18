@@ -7,7 +7,7 @@ function SocialLink({ id, label, handle, url }: OfficialSocial) {
 
   return (
     <a
-      className="flex-1 relative flex items-center gap-3 px-5 py-3.5 bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30 transition-colors rounded-md max-w-[320px]"
+      className="flex-1 relative flex items-center gap-3 px-5 py-3.5 rounded-md bg-card text-ink hover:bg-mist-hover transition-colors max-w-[320px]"
       href={url}
       rel="noopener noreferrer"
       target="_blank"
@@ -16,10 +16,10 @@ function SocialLink({ id, label, handle, url }: OfficialSocial) {
 
       <div className="flex flex-col min-w-0">
         <span className="text-sm font-medium leading-tight">{label}</span>
-        <span className="text-xs text-primary-foreground/60 leading-tight">{handle}</span>
+        <span className="text-xs text-ink-soft leading-tight">{handle}</span>
       </div>
 
-      <ExternalLink className="absolute bottom-2 right-2 h-3.5 w-3.5 text-primary-foreground/40" />
+      <ExternalLink className="absolute bottom-2 right-2 h-3.5 w-3.5 text-ink-soft" />
     </a>
   );
 }
@@ -31,10 +31,10 @@ export function SocialCtaSection() {
   }
 
   return (
-    <section className="bg-primary py-8">
+    <section className="bg-paper-2 py-8">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-muted tracking-wide text-center sm:text-left shrink-0">
+          <p className="text-sm text-ink tracking-normal text-center sm:text-left shrink-0">
             最新情報は公式SNSをチェック！
           </p>
           <div className="flex w-full sm:w-auto sm:flex-1 justify-end gap-3">

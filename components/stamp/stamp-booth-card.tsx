@@ -17,11 +17,11 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
 
   return (
     <Link
-      className={`flex flex-col items-center gap-2 shrink-0 group ${collected ? '' : 'opacity-70'}`}
+      className={`flex flex-col items-center gap-2 shrink-0 group ${collected ? '' : 'opacity-40'}`}
       href={`/events/${booth.slug}`}
     >
       <div
-        className={`relative w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center ${
+        className={`relative w-20 h-20 md:w-32 md:h-32 rounded-md bg-paper-2 overflow-hidden flex items-center justify-center ${
           collected ? '' : 'grayscale'
         }`}
       >
@@ -30,11 +30,7 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
         ) : (
           <span className="text-xs text-muted-foreground">No image</span>
         )}
-        <span
-          className={`absolute bottom-0 inset-x-0 py-0.5 text-center text-[10px] md:text-xs font-medium tracking-wider ${
-            collected ? 'bg-primary text-primary-foreground' : 'bg-background/85 text-muted-foreground'
-          }`}
-        >
+        <span className="absolute bottom-0 inset-x-0 py-0.5 text-center text-[10px] md:text-xs font-medium bg-card/90 text-ink">
           {collected ? '獲得済み' : '未獲得'}
         </span>
       </div>

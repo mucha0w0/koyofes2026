@@ -42,7 +42,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
       />
       <input
         className={cn(
-          'w-full bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-ring transition-colors',
+          'w-full rounded-md bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink',
           isProminent ? 'pl-12 pr-4 py-4' : 'h-12 pl-10 sm:pl-12 pr-10 text-sm sm:text-base',
         )}
         placeholder="企画名、キーワードで検索..."
@@ -69,7 +69,7 @@ export function EventSearchBar({ variant = 'compact', className }: EventSearchBa
   const button = (
     <button
       className={cn(
-        'bg-foreground text-background font-medium hover:opacity-80 cursor-pointer transition-opacity whitespace-nowrap',
+        'bg-festival-accent text-festival-accent-soft font-medium hover:bg-festival-accent-hover cursor-pointer transition-colors whitespace-nowrap rounded-md min-h-11',
         isProminent ? 'px-8 py-3' : 'h-12 px-4 sm:px-8 text-sm sm:text-base',
       )}
       onClick={handleSearch}
@@ -106,7 +106,7 @@ export function EventSearchSection({ variant = 'prominent', showViewAllLink }: E
   const viewAllLink = showViewAllLink ?? !isProminent;
 
   return (
-    <section className={cn('bg-muted', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')}>
+    <section className={cn('bg-paper-2', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')}>
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl">
           <div className={cn('mb-8 text-center', !isProminent && 'flex flex-col gap-2')}>

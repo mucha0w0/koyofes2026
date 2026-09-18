@@ -11,7 +11,7 @@ import type { RankingApiError, RankingOverallItem, RankingResponse, RankingTrend
 
 import { RANKING_CONFIG, getWaitLevelLabel, type RankingTab } from '@/lib/config/rankingConfig';
 import { formatWaitAgo } from '@/lib/ranking/score';
-import { isImageUrl } from '@/lib/utils';
+import { cn, isImageUrl } from '@/lib/utils';
 
 function formatAverage(value: number): string {
   return value.toFixed(1);
@@ -20,34 +20,41 @@ function formatAverage(value: number): string {
 function BoothIcon({ icon, title }: { icon: string; title: string }) {
   if (!isImageUrl(icon)) {
     return (
-      <div className="flex size-14 shrink-0 items-center justify-center bg-muted">
+      <div className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
         <span className="text-[10px] text-muted-foreground">No image</span>
       </div>
     );
   }
 
   return (
-    <div className="size-14 shrink-0 overflow-hidden bg-muted">
+    <div className="size-14 shrink-0 overflow-hidden rounded-md bg-paper-2">
       <Image alt={title} className="size-full object-cover" height={56} src={icon} width={56} />
     </div>
+  );
+}
+
+function rowClass(rank: number) {
+  return cn(
+    'flex items-center gap-4 rounded-md p-4 transition-colors hover:bg-mist-hover',
+    rank === 1 ? 'bg-card' : 'bg-mist',
   );
 }
 
 function OverallRow({ item }: { item: RankingOverallItem }) {
   return (
     <li>
-      <Link className="flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80" href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums tracking-wide text-foreground">
+      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <BoothIcon icon={item.icon} title={item.title} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium tracking-wide">{item.title}</p>
+          <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="tabular-nums text-sm tracking-wider">{formatAverage(item.average)}</p>
-          <p className="text-xs text-muted-foreground tracking-wider">{item.voteCount} 票</p>
+          <p className="tabular-nums text-sm">{formatAverage(item.average)}</p>
+          <p className="text-xs text-muted-foreground">{item.voteCount} 票</p>
         </div>
       </Link>
     </li>
@@ -57,18 +64,18 @@ function OverallRow({ item }: { item: RankingOverallItem }) {
 function TrendRow({ item }: { item: RankingTrendItem }) {
   return (
     <li>
-      <Link className="flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80" href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums tracking-wide text-foreground">
+      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <BoothIcon icon={item.icon} title={item.title} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium tracking-wide">{item.title}</p>
+          <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="tabular-nums text-sm tracking-wider">{item.uniqueVisitors}</p>
-          <p className="text-xs text-muted-foreground tracking-wider">人</p>
+          <p className="tabular-nums text-sm">{item.uniqueVisitors}</p>
+          <p className="text-xs text-muted-foreground">人</p>
         </div>
       </Link>
     </li>
@@ -78,19 +85,19 @@ function TrendRow({ item }: { item: RankingTrendItem }) {
 function WaitRow({ item, generatedAt }: { item: RankingWaitItem; generatedAt: string }) {
   return (
     <li>
-      <Link className="flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80" href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums tracking-wide text-foreground">
+      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <BoothIcon icon={item.icon} title={item.title} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium tracking-wide">{item.title}</p>
+          <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="text-sm tracking-wider">{getWaitLevelLabel(item.level)}</p>
-          <p className="text-xs text-muted-foreground tracking-wider">{formatWaitAgo(item.lastVotedAt, generatedAt)}</p>
-          <p className="text-xs text-muted-foreground tracking-wider">{item.voteCount} 件</p>
+          <p className="text-sm">{getWaitLevelLabel(item.level)}</p>
+          <p className="text-xs text-muted-foreground">{formatWaitAgo(item.lastVotedAt, generatedAt)}</p>
+          <p className="text-xs text-muted-foreground">{item.voteCount} 件</p>
         </div>
       </Link>
     </li>
@@ -158,8 +165,7 @@ export function RankingBoard() {
   const awaitingTab = data?.tab !== tab;
   const generatedAt = data?.generatedAt ?? new Date().toISOString();
 
-  const heading =
-    tab === 'overall' ? 'Ranking' : tab === 'trend' ? 'Now' : 'Wait';
+  const heading = tab === 'overall' ? 'Ranking' : tab === 'trend' ? 'Now' : 'Wait';
   const description =
     tab === 'overall'
       ? '体験した人の星評価による総合順位です。約15秒ごとに更新します。'
@@ -170,34 +176,34 @@ export function RankingBoard() {
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <div className="space-y-1">
-        <p className="font-display text-[15px] tracking-[0.03em] text-muted-foreground uppercase">{heading}</p>
-        <p className="text-sm text-muted-foreground leading-loose tracking-wider">{description}</p>
+        <p className="font-display text-[15px] text-muted-foreground">{heading}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
       </div>
 
       <div className="flex flex-wrap gap-2">
         <Button
-          className="rounded-none"
+          className={tab === 'overall' ? 'bg-card hover:bg-card' : ''}
           size="lg"
           type="button"
-          variant={tab === 'overall' ? 'default' : 'outline'}
+          variant="outline"
           onClick={() => setTab('overall')}
         >
           総合
         </Button>
         <Button
-          className="rounded-none"
+          className={tab === 'trend' ? 'bg-card hover:bg-card' : ''}
           size="lg"
           type="button"
-          variant={tab === 'trend' ? 'default' : 'outline'}
+          variant="outline"
           onClick={() => setTab('trend')}
         >
           トレンド
         </Button>
         <Button
-          className="rounded-none"
+          className={tab === 'wait' ? 'bg-card hover:bg-card' : ''}
           size="lg"
           type="button"
-          variant={tab === 'wait' ? 'default' : 'outline'}
+          variant="outline"
           onClick={() => setTab('wait')}
         >
           待ち
@@ -211,30 +217,28 @@ export function RankingBoard() {
       ) : null}
 
       {errorMessage && !awaitingTab ? (
-        <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">{errorMessage}</p>
+        <div className="rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">{errorMessage}</p>
         </div>
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'overall' && overallItems.length === 0 ? (
-        <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+        <div className="rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
           </p>
         </div>
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'trend' && trendItems.length === 0 ? (
-        <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
-            直近20分の来訪はまだありません。
-          </p>
+        <div className="rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">直近20分の来訪はまだありません。</p>
         </div>
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'wait' && waitItems.length === 0 ? (
-        <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+        <div className="rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             直近15分の待ち情報はまだありません。スタンプ帳の獲得画面から、いまの並びを教えてください。
           </p>
         </div>

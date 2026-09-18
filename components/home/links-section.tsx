@@ -27,10 +27,10 @@ export function LinksSection() {
                   return (
                     <Link
                       key={item.href}
-                      className="group flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
+                      className="group flex items-center gap-4 rounded-md bg-card p-4 transition-colors hover:bg-mist-hover"
                       href={item.href}
                     >
-                      <div className="bg-muted p-2 text-foreground">
+                      <div className="rounded-md bg-mist p-2 text-ink">
                         <Icon className="h-4 w-4" />
                       </div>
                       <div className="min-w-0 flex-1">

@@ -4,12 +4,12 @@ export function SiteFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-festival-accent text-festival-accent-soft">
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
           <div className="space-y-2.5">
-            <p className="text-xl font-medium tracking-[0.08em]">こうよう祭 2026</p>
-            <p className="text-sm leading-relaxed text-primary-foreground/70">
+            <p className="font-display text-xl font-bold">こうよう祭 2026</p>
+            <p className="text-sm leading-relaxed text-festival-accent-soft/80">
               豊田高専の文化祭
               <br />
               10/31(土)・11/1(日)
@@ -26,7 +26,7 @@ export function SiteFooter() {
                     <a
                       key={id}
                       aria-label={label}
-                      className="flex size-10 items-center justify-center bg-primary-foreground/20 text-primary-foreground transition-colors hover:bg-primary-foreground/30"
+                      className="flex size-10 items-center justify-center rounded-md bg-festival-accent-soft/20 text-festival-accent-soft transition-colors hover:bg-festival-accent-soft/30"
                       href={url}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -40,7 +40,7 @@ export function SiteFooter() {
           )}
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-primary-foreground/20 pt-6 text-xs text-primary-foreground/60 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
+        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-festival-accent-soft/70 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
           <p>こうよう祭 2026 システムパート</p>
           <p>&copy; 2026 KoyoFes System Part</p>
         </div>

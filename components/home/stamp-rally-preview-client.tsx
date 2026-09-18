@@ -31,10 +31,10 @@ function BoothRow({ booth }: { booth: StampBooth }) {
 
   return (
     <Link
-      className="group flex items-center gap-4 bg-card p-4 transition-opacity hover:opacity-80"
+      className="group flex items-center gap-4 rounded-md bg-card p-4 transition-colors hover:bg-mist-hover"
       href={`/events/${booth.slug}`}
     >
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden bg-muted">
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
         {hasIcon ? (
           <Image alt={booth.title} className="h-full w-full object-cover" height={56} src={booth.icon} width={56} />
         ) : (
@@ -62,10 +62,10 @@ function BoothRow({ booth }: { booth: StampBooth }) {
 function BoothRowSkeleton() {
   return (
     <div className="flex items-center gap-4 bg-card p-4">
-      <div className="h-14 w-14 shrink-0 bg-muted" />
+      <div className="h-14 w-14 shrink-0 rounded-md bg-paper-2" />
       <div className="min-w-0 flex-1 space-y-2">
-        <div className="h-4 w-1/2 bg-muted" />
-        <div className="h-3 w-1/3 bg-muted" />
+        <div className="h-4 w-1/2 rounded-md bg-paper-2" />
+        <div className="h-3 w-1/3 rounded-md bg-paper-2" />
       </div>
     </div>
   );
@@ -145,8 +145,8 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
           </div>
 
           {totalCount > 0 ? (
-            <div className="flex items-center gap-4 bg-card px-4 py-3">
-              <p className="shrink-0 text-sm tracking-wider">
+            <div className="flex items-center gap-4 rounded-md bg-card px-4 py-3">
+              <p className="shrink-0 text-sm">
                 {ready ? (
                   <span className="text-lg font-medium tracking-normal tabular-nums">{collectedCount}</span>
                 ) : (
@@ -154,7 +154,7 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
                 )}
                 <span className="text-muted-foreground"> / {totalCount}</span>
               </p>
-              <Progress className="h-1.5 rounded-none bg-muted" value={progressValue} />
+              <Progress className="h-1.5 bg-mist" value={progressValue} />
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">現在表示できるスタンプ対象ブースがありません</p>

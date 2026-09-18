@@ -14,7 +14,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
 
   if (images.length === 0) {
     return (
-      <div className="relative aspect-video w-full bg-muted flex items-center justify-center">
+      <div className="relative aspect-video w-full bg-paper-2 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl text-muted-foreground/30 mb-4">📷</div>
           <p className="text-muted-foreground">No image</p>
@@ -34,7 +34,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
   const currentImage = images[currentIndex];
 
   return (
-    <div className="relative aspect-video w-full bg-muted overflow-hidden group">
+    <div className="relative aspect-video w-full bg-paper-2 overflow-hidden group">
       {/* Main Image */}
       {currentImage && (
         <Image fill priority alt={`${title} image ${currentIndex + 1}`} className="object-cover" src={currentImage} />
@@ -45,7 +45,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
         <>
           <button
             aria-label="Previous image"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-ink/50 hover:bg-ink/70 text-festival-accent-soft p-2 rounded-md transition-all opacity-0 group-hover:opacity-100 z-20"
             onClick={goToPrevious}
           >
             <ChevronLeft className="h-6 w-6" />
@@ -53,7 +53,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
 
           <button
             aria-label="Next image"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 z-20"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-ink/50 hover:bg-ink/70 text-festival-accent-soft p-2 rounded-md transition-all opacity-0 group-hover:opacity-100 z-20"
             onClick={goToNext}
           >
             <ChevronRight className="h-6 w-6" />
@@ -65,8 +65,8 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
               <button
                 key={idx}
                 aria-label={`Go to image ${idx + 1}`}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/70'
+                className={`w-2 h-2 rounded-[4px] transition-all ${
+                  idx === currentIndex ? 'bg-festival-accent-soft w-6' : 'bg-festival-accent-soft/50 hover:bg-festival-accent-soft/70'
                 }`}
                 onClick={() => setCurrentIndex(idx)}
               />

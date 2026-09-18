@@ -22,7 +22,7 @@ function EventCard({ event }: EventCardProps) {
 
   return (
     <Link className="flex flex-col items-center gap-2 shrink-0 group" href={`/events/${event.slug}`}>
-      <div className="w-20 h-20 md:w-32 md:h-32 bg-muted overflow-hidden hover:opacity-80 transition-opacity flex items-center justify-center">
+      <div className="w-20 h-20 md:w-32 md:h-32 rounded-md bg-paper-2 overflow-hidden transition-colors flex items-center justify-center">
         {isIconUrl ? (
           <Image alt={event.title} className="w-full h-full object-cover" height={128} src={event.icon} width={128} />
         ) : (

@@ -17,9 +17,9 @@ export function CategorySection({
   children,
 }: CategorySectionProps) {
   return (
-    <div className="bg-card">
-      <div className="flex items-center gap-3 p-4 bg-muted">
-        <div className="p-2 bg-background text-foreground">
+    <div className="rounded-md bg-card overflow-hidden">
+      <div className="flex items-center gap-3 p-4 bg-paper-2">
+        <div className="rounded-md p-2 bg-card text-ink">
           <Icon className="h-5 w-5" />
         </div>
         <TitleTag className="text-lg font-medium">{title}</TitleTag>

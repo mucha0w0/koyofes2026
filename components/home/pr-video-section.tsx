@@ -65,7 +65,7 @@ function InstagramLink() {
 
 export function PrVideoSection() {
   return (
-    <section className="py-16 md:py-24 bg-muted">
+    <section className="py-16 md:py-24 bg-paper-2">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-2 text-center">

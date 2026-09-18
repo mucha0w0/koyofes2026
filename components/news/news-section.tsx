@@ -8,7 +8,6 @@ export async function NewsSection() {
 
   try {
     const allNews = await getNews();
-    // トップページ用の最新3件のみにスライス
     news = allNews.slice(0, 3);
   } catch (error) {
     console.error('ニュース取得エラー(NewsSection):', error);
@@ -31,8 +30,7 @@ export async function NewsSection() {
 
           <div className="space-y-3">
             {news.length > 0 ? (
-              news.map((item, index) => {
-                // dateを表示用にフォーマット
+              news.map((item) => {
                 const formattedDate = new Date(item.date)
                   .toLocaleDateString('ja-JP', {
                     year: 'numeric',
@@ -44,15 +42,10 @@ export async function NewsSection() {
                 return (
                   <Link
                     key={item.id}
-                    className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+                    className="flex items-center gap-4 rounded-md p-4 bg-card transition-colors hover:bg-mist-hover group"
                     href={`/official/news/${item.id}`}
                   >
-                    <span className="text-sm text-muted-foreground font-mono shrink-0">{formattedDate}</span>
-                    {index === 0 && (
-                      <span className="text-xs font-medium text-primary-foreground px-2 py-0.5 bg-primary shrink-0">
-                        NEW
-                      </span>
-                    )}
+                    <span className="text-sm text-muted-foreground shrink-0">{formattedDate}</span>
                     <span className="text-sm font-medium truncate">{item.title}</span>
                     <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
                   </Link>

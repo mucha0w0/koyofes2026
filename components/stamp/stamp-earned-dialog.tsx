@@ -46,7 +46,7 @@ export function StampEarnedDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton
-        className="max-h-[min(90vh,40rem)] overflow-y-auto rounded-none border-border bg-card shadow-none sm:max-w-md"
+        className="max-h-[min(90vh,40rem)] overflow-y-auto sm:max-w-md"
       >
         {canVote && slug && signature && obtainedAt ? (
           <StampVotePanel
@@ -63,10 +63,10 @@ export function StampEarnedDialog({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="font-medium tracking-wide">
+              <DialogTitle className="font-medium">
                 {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました！'}
               </DialogTitle>
-              <DialogDescription className="leading-loose tracking-wider">
+              <DialogDescription className="leading-relaxed">
                 {title
                   ? alreadyOwned
                     ? `「${title}」のスタンプはすでに持っています。`
@@ -77,7 +77,7 @@ export function StampEarnedDialog({
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button className="w-full rounded-none sm:w-auto" type="button" onClick={close}>
+              <Button className="w-full sm:w-auto" type="button" onClick={close}>
                 スタンプ帳を見る
               </Button>
             </DialogFooter>

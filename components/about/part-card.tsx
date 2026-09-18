@@ -24,7 +24,7 @@ export function PartCard({ item }: PartCardProps) {
   return (
     <Card className="py-0">
       <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
-        <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 bg-muted flex items-center justify-center overflow-hidden mt-0.5">
+        <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-md bg-paper-2 flex items-center justify-center overflow-hidden mt-0.5">
           {isIconUrl ? (
             <Image alt={item.name} className="w-full h-full object-cover" height={56} src={item.icon} width={56} />
           ) : (

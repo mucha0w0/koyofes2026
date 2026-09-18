@@ -23,10 +23,10 @@ export function CmsPageError({
       <div className="mx-auto max-w-2xl py-12 text-center">
         <p className="text-base text-muted-foreground">{message}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button className="px-8 font-normal tracking-wider" size="lg" onClick={reset}>
+          <Button className="px-8" size="lg" onClick={reset}>
             再読み込み
           </Button>
-          <Button asChild className="px-8 font-normal tracking-wider" size="lg" variant="outline">
+          <Button asChild className="px-8" size="lg" variant="outline">
             <Link href="/">トップページに戻る</Link>
           </Button>
         </div>

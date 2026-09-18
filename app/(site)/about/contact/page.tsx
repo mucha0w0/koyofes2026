@@ -7,11 +7,11 @@ export default function ContactPage() {
     <PageLayout subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <div className="bg-card p-6">
+          <div className="bg-card rounded-md p-6">
             <h2 className="font-medium text-lg mb-4">連絡先（学生課学生支援係）</h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-muted">
+                <div className="rounded-md p-2 bg-paper-2">
                   <Mail className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
@@ -20,7 +20,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-muted">
+                <div className="rounded-md p-2 bg-paper-2">
                   <Phone className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
@@ -29,7 +29,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-muted">
+                <div className="rounded-md p-2 bg-paper-2">
                   <MapPin className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
@@ -40,7 +40,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-muted p-6">
+          <div className="rounded-md bg-paper-2 p-6">
             <p className="text-sm text-muted-foreground">
               お問い合わせへの回答には数日いただく場合がございます。 よくある質問もご確認ください。
             </p>

@@ -21,7 +21,7 @@ export async function Sponsors() {
   if (sponsorItems.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-16 bg-muted overflow-hidden">
+    <section className="py-12 md:py-16 bg-paper-2 overflow-hidden">
       <div className="mx-auto mb-8 w-full max-w-7xl px-4">
         <div className="text-center">
           <h2 className="text-xl md:text-2xl font-medium mb-2">ご協賛</h2>

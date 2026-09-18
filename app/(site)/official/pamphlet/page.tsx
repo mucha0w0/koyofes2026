@@ -1,12 +1,13 @@
 import { Download } from 'lucide-react';
 
 import { PageLayout } from '@/components/layout/page-layout';
+import { Button } from '@/components/ui/button';
 
 export default function PamphletPage() {
   return (
     <PageLayout subtitle="こうよう祭2026公式パンフレット" title="パンフレット">
       <div className="max-w-2xl mx-auto space-y-8">
-        <div className="bg-card p-8 text-center">
+        <div className="rounded-md bg-card p-8 text-center">
           {/* PDFビューア */}
           <div className="w-full mb-6 aspect-[1/1.414]">
             <iframe
@@ -17,17 +18,15 @@ export default function PamphletPage() {
               title="公式パンフレット PDF"
             />
           </div>
-          <a
-            download
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity"
-            href="/koyofes2026_pamphlet.pdf"
-          >
-            <Download className="h-5 w-5" />
-            PDFをダウンロード
-          </a>
+          <Button asChild className="px-6" size="lg">
+            <a download href="/koyofes2026_pamphlet.pdf">
+              <Download className="h-5 w-5" />
+              PDFをダウンロード
+            </a>
+          </Button>
         </div>
 
-        <div className="bg-muted p-6">
+        <div className="rounded-md bg-paper-2 p-6">
           <h3 className="font-medium mb-4">当日配布について</h3>
           <p className="text-sm text-muted-foreground">
             当日は正門付近の本部にて、紙のパンフレットを無料配布いたします。

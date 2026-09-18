@@ -21,12 +21,12 @@ interface EventRowProps {
 function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
     <Link
-      className="flex items-center gap-4 p-4 bg-card transition-opacity hover:opacity-80 group"
+      className="flex items-center gap-4 rounded-md p-4 bg-card transition-colors hover:bg-mist-hover group"
       href={`/events/${slug}`}
     >
       {/* アイコン画像：背景なし、最大サイズで表示 */}
       {icon ? (
-        <Image alt={title} className="w-10 h-10 object-contain shrink-0" height={40} src={icon} width={40} />
+        <Image alt={title} className="w-10 h-10 rounded-md object-contain shrink-0" height={40} src={icon} width={40} />
       ) : (
         <div className="w-10 h-10 shrink-0" />
       )}
@@ -104,7 +104,7 @@ export async function TimetablePreview() {
   const day2Rows = toPreviewRows('time-day2');
 
   return (
-    <section className="bg-muted py-10 md:py-14">
+    <section className="bg-paper-2 py-10 md:py-14">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h2 className="text-xl md:text-2xl font-medium text-foreground">タイムテーブル</h2>

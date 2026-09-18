@@ -96,19 +96,19 @@ export function StampCollectClient() {
       {status === 'loading' || status === 'idle' ? (
         <div className="bg-card p-8 flex flex-col items-center gap-4 text-center">
           <Spinner className="size-6" />
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">スタンプを確認しています…</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">スタンプを確認しています…</p>
         </div>
       ) : null}
 
       {status === 'error' && (
-        <Alert className="rounded-none shadow-none" variant="destructive">
-          <AlertTitle className="font-medium tracking-wide">獲得できませんでした</AlertTitle>
-          <AlertDescription className="leading-loose tracking-wider">{errorMessage}</AlertDescription>
+        <Alert variant="destructive">
+          <AlertTitle className="font-medium">獲得できませんでした</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
       )}
 
       {status === 'error' && (
-        <Button asChild className="w-full rounded-none" size="lg">
+        <Button asChild className="w-full" size="lg">
           <Link href="/stamp">スタンプ帳を開く</Link>
         </Button>
       )}

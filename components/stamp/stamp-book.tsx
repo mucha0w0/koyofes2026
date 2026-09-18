@@ -105,8 +105,8 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
       {showInAppNotice && <InAppBrowserNotice />}
       {display.verifyFailed ? (
         <Alert variant="destructive">
-          <AlertTitle className="font-medium tracking-wide">スタンプの確認に失敗しました</AlertTitle>
-          <AlertDescription className="leading-loose tracking-wider space-y-3">
+          <AlertTitle className="font-medium">スタンプの確認に失敗しました</AlertTitle>
+          <AlertDescription className="space-y-3">
             <p>通信エラーのため正確な獲得数を表示できません。表示は端末内の記録に基づいています。</p>
             <Button disabled={display.isVerifying} size="sm" type="button" variant="outline" onClick={retry}>
               {display.isVerifying ? '確認中…' : '再試行'}
@@ -127,8 +127,8 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
       />
 
       {groups.length === 0 ? (
-        <div className="bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-loose tracking-wider">
+        <div className="rounded-md bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             現在表示できるスタンプ対象ブースがありません。
           </p>
         </div>

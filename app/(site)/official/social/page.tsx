@@ -27,19 +27,19 @@ export default function SocialPage() {
             {platforms.map((platform) => {
               const IconComponent = getOfficialSocialIcon(platform.id);
               return (
-                <div key={platform.id} className="bg-card p-8 space-y-6 text-center hover:bg-muted transition-colors">
+                <div key={platform.id} className="rounded-md bg-card p-8 space-y-6 text-center hover:bg-mist-hover transition-colors">
                   <div className="flex justify-center">
-                    <div className="bg-primary w-24 h-24 flex items-center justify-center">
-                      <IconComponent className="h-12 w-12 text-primary-foreground" />
+                    <div className="rounded-md bg-mist w-24 h-24 flex items-center justify-center">
+                      <IconComponent className="h-12 w-12 text-ink" />
                     </div>
                   </div>
                   <div className="space-y-3">
                     <h3 className="text-xl font-medium text-foreground">{platform.label}</h3>
-                    <p className="text-lg font-medium text-primary">{platform.handle}</p>
+                    <p className="text-lg font-medium text-ink">{platform.handle}</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">{platform.description}</p>
                   </div>
                   <a
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium hover:opacity-80 transition-opacity text-sm"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-md px-6 py-3 bg-festival-accent text-festival-accent-soft font-medium hover:bg-festival-accent-hover transition-colors text-sm"
                     href={platform.url}
                     rel="noopener noreferrer"
                     target="_blank"

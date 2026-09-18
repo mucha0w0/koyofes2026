@@ -16,21 +16,21 @@ function DropdownMenu({ item }: { item: ResolvedNavSection }) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+        className="flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium text-ink hover:bg-mist-hover transition-colors"
       >
         {item.label}
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <div
-        className={`absolute top-full left-0 min-w-50 bg-popover border border-border rounded-none overflow-hidden transition-all duration-200 ${
+        className={`absolute top-full left-0 min-w-50 rounded-md bg-card overflow-hidden transition-all duration-200 ${
           isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
         }`}
       >
-        <div className="py-2">
+        <div className="p-1">
           {item.items.map((subItem) => (
             <Link
               key={subItem.href}
-              className="block px-4 py-2.5 text-sm text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="block rounded-md px-4 py-2.5 text-sm text-ink hover:bg-mist-hover transition-colors"
               href={subItem.href}
             >
               {subItem.label}
@@ -53,26 +53,30 @@ function MobileMenu({
 }) {
   return (
     <div
-      className={`fixed inset-0 z-50 bg-background transition-transform duration-300 ${
+      className={`fixed inset-0 z-50 bg-card transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      <div className="flex items-center justify-between px-4 h-16 border-b border-border">
-        <span className="text-lg font-medium text-foreground">こうよう祭 2026</span>
-        <button aria-label="メニューを閉じる" className="p-2 hover:bg-muted transition-colors" onClick={onClose}>
+      <div className="flex items-center justify-between px-4 h-16">
+        <span className="font-display text-lg font-bold text-ink">こうよう祭</span>
+        <button
+          aria-label="メニューを閉じる"
+          className="flex size-11 items-center justify-center rounded-md hover:bg-mist-hover transition-colors"
+          onClick={onClose}
+        >
           <X className="h-6 w-6" />
         </button>
       </div>
       <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
         <Accordion collapsible className="w-full" type="single">
           {navItems.map((item) => (
-            <AccordionItem key={item.id} className="last:border-b-0" value={item.id}>
+            <AccordionItem key={item.id} value={item.id}>
               <AccordionTrigger className="text-base font-medium py-4">{item.label}</AccordionTrigger>
               <AccordionContent className="pb-4">
                 {item.items.map((subItem) => (
                   <Link
                     key={subItem.href}
-                    className="block py-2.5 pl-4 text-muted-foreground hover:text-foreground transition-colors"
+                    className="block rounded-md py-2.5 pl-4 text-ink-soft hover:bg-mist-hover hover:text-ink transition-colors"
                     href={subItem.href}
                     onClick={onClose}
                   >
@@ -93,32 +97,27 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
   const navItems = getNavSections('header', rankingEnabled);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background">
+    <header className="sticky top-0 z-40 w-full bg-card">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
         <Link className="flex items-center gap-2" href="/">
-          <div className="flex items-center gap-1">
-            <span className="text-2xl font-medium tracking-[0.08em] text-foreground">こうよう祭</span>
-          </div>
+          <span className="font-display text-2xl font-bold text-ink">こうよう祭</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <nav aria-label="メインナビゲーション" className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
             <DropdownMenu key={item.id} item={item} />
           ))}
         </nav>
 
-        {/* Mobile Menu Button */}
         <button
           aria-label="メニューを開く"
-          className="lg:hidden p-2 hover:bg-muted transition-colors"
+          className="lg:hidden flex size-11 items-center justify-center rounded-md hover:bg-mist-hover transition-colors"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu className="h-6 w-6" />
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <MobileMenu isOpen={mobileMenuOpen} navItems={navItems} onClose={() => setMobileMenuOpen(false)} />
     </header>
   );

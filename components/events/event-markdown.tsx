@@ -33,7 +33,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
           'a',
           {
             ...domNode.attribs,
-            className: 'text-blue-600 hover:underline',
+            className: 'text-ink underline underline-offset-[0.2em]',
           },
           domToReact(domNode.children as any),
         );
@@ -44,7 +44,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
         return React.createElement(
           'table',
           {
-            className: 'w-full border-collapse border border-border',
+            className: 'w-full border-collapse',
           },
           domToReact(domNode.children as any),
         );
@@ -54,7 +54,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
         return React.createElement(
           domNode.name,
           {
-            className: 'border border-border px-3 py-2',
+            className: `${domNode.name === 'th' ? 'bg-mist' : 'bg-card'} px-3 py-2`,
           },
           domToReact(domNode.children as any),
         );
@@ -67,7 +67,7 @@ export function EventMarkdown({ content, className = '' }: MarkdownProps) {
 
   return (
     <div
-      className={`prose max-w-none text-muted-foreground leading-relaxed space-y-3 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-6 [&_h1]:mb-3 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-2 [&_p]:mb-3 [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside [&_li]:mb-1 [&_strong]:font-bold [&_em]:italic [&_u]:underline ${className}`}
+      className={`prose max-w-none text-ink leading-relaxed space-y-3 [&_h1]:font-display [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-6 [&_h1]:mb-3 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-medium [&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-4 [&_h3]:mb-2 [&_p]:mb-3 [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside [&_li]:mb-1 [&_strong]:font-bold [&_em]:italic [&_u]:underline ${className}`}
     >
       {htmlContent}
     </div>

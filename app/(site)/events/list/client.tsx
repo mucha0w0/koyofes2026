@@ -164,7 +164,7 @@ export function EventListClient({ events }: EventListClientProps) {
         <div className="relative min-w-0 flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <input
-            className="w-full pl-10 pr-4 py-3 bg-input border border-border focus:outline-none focus:border-ring"
+            className="w-full min-h-11 rounded-md pl-10 pr-4 py-3 bg-card focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
             placeholder="企画名・団体名で検索..."
             type="text"
             value={searchQuery}
@@ -181,10 +181,10 @@ export function EventListClient({ events }: EventListClientProps) {
           {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
             <button
               key={id}
-              className={`px-4 py-2 text-sm transition-colors ${
+              className={`min-h-11 rounded-md px-4 py-2 text-sm transition-colors ${
                 selectedGenres.includes(id)
-                  ? 'bg-foreground text-background'
-                  : 'bg-muted text-foreground hover:bg-muted/80'
+                  ? 'bg-card text-ink'
+                  : 'bg-mist text-ink hover:bg-mist-hover'
               }`}
               onClick={() => handleGenreToggle(id)}
             >
@@ -196,7 +196,7 @@ export function EventListClient({ events }: EventListClientProps) {
 
       {/* 詳細検索（アコーディオン） */}
       <Accordion collapsible type="single">
-        <AccordionItem className="border-t border-b border-border last:border-b" value="advanced">
+        <AccordionItem value="advanced">
           <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline hover:text-muted-foreground py-4">
             詳細検索
           </AccordionTrigger>
@@ -266,7 +266,7 @@ export function EventListClient({ events }: EventListClientProps) {
               <div>
                 <label className="text-sm font-medium text-foreground block mb-3">設営場所</label>
                 <select
-                  className="w-full px-4 py-2 bg-input border border-border focus:outline-none focus:border-ring text-foreground"
+                  className="w-full min-h-11 rounded-md px-4 py-2 bg-card text-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
                 >
