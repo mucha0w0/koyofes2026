@@ -3,6 +3,7 @@ import 'server-only';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import type { PGlite } from '@electric-sql/pglite';
 import { drizzle as drizzlePg, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
@@ -10,14 +11,9 @@ import * as schema from '@/lib/ranking/schema';
 
 export type RankingDatabase = PostgresJsDatabase<typeof schema>;
 
-type PgliteLike = {
-  waitReady: Promise<void>;
-  exec: (sql: string) => Promise<unknown>;
-};
-
 const globalForRanking = globalThis as typeof globalThis & {
   koyofesRankingDb?: Promise<RankingDatabase | null>;
-  koyofesPglite?: PgliteLike;
+  koyofesPglite?: PGlite;
 };
 
 function isPgliteUrl(url: string): boolean {
@@ -27,8 +23,8 @@ function isPgliteUrl(url: string): boolean {
 async function createPgliteDb(): Promise<RankingDatabase> {
   const { PGlite } = await import('@electric-sql/pglite');
   const { drizzle } = await import('drizzle-orm/pglite');
+  const client = globalForRanking.koyofesPglite ?? new PGlite();
   if (!globalForRanking.koyofesPglite) {
-    const client = new PGlite();
     await client.waitReady;
     const drizzleDir = join(process.cwd(), 'drizzle');
     const files = readdirSync(drizzleDir)
@@ -39,7 +35,7 @@ async function createPgliteDb(): Promise<RankingDatabase> {
     }
     globalForRanking.koyofesPglite = client;
   }
-  return drizzle(globalForRanking.koyofesPglite, { schema }) as unknown as RankingDatabase;
+  return drizzle(client, { schema }) as unknown as RankingDatabase;
 }
 
 async function createPostgresDb(url: string): Promise<RankingDatabase> {
