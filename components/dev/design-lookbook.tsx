@@ -64,9 +64,9 @@ const SHARED_PALETTE = [
 ] as const;
 
 const RANKING = [
-  { rank: 1, title: 'サンプル企画 A', votes: 128, on: true },
-  { rank: 2, title: 'サンプル企画 B', votes: 96, on: false },
-  { rank: 3, title: 'サンプル企画 C', votes: 71, on: false },
+  { rank: 1, title: 'サンプル企画 A', votes: 128 },
+  { rank: 2, title: 'サンプル企画 B', votes: 96 },
+  { rank: 3, title: 'サンプル企画 C', votes: 71 },
 ] as const;
 
 const NEWS: {
@@ -230,7 +230,7 @@ function RankingSpecimen() {
         </h2>
         <ol data-lookbook-chrome className="grid gap-4 md:grid-cols-3">
           {RANKING.map((item) => (
-            <li key={item.rank} className={item.on ? 'lookbook-rank lookbook-rank-on' : 'lookbook-rank'}>
+            <li key={item.rank} className="lookbook-rank">
               <span className="lookbook-rank-num">{item.rank}</span>
               <div className="lookbook-thumb lookbook-thumb-sm">
                 <Image

@@ -518,11 +518,7 @@
   gap: 1rem;
   min-height: 5.5rem;
   padding: 1.25rem 1.5rem;
-  background: var(--fill-quiet);
-}
-
-.theme-1dearland .lookbook-rank-on {
-  background: var(--fill-card);
+  background: var(--festival-accent-soft);
 }
 
 .theme-1dearland .lookbook-rank-num {
