@@ -35,7 +35,7 @@ type SampleEvent = {
   participantsLL: number;
 };
 
-const SAMPLE_EVENTS: SampleEvent[] = [
+const SAMPLE_EVENTS: [SampleEvent, ...SampleEvent[]] = [
   {
     slug: 'sample-class-a',
     title: 'サンプル企画 A',
