@@ -1,6 +1,7 @@
 import { ArrowRight, Instagram } from 'lucide-react';
 import Link from 'next/link';
-import Script from 'next/script';
+
+import { InstagramEmbed } from '@/components/home/instagram-embed';
 
 import { getOfficialSocial } from '@/lib/config/social';
 
@@ -12,39 +13,6 @@ function SectionHeading() {
     <h2 className="text-2xl font-medium text-foreground" style={{ letterSpacing: 0 }}>
       PR動画第１弾！
     </h2>
-  );
-}
-
-function InstagramEmbed() {
-  return (
-    <>
-      <div
-        className="
-          w-full max-w-135 mx-auto 
-          overflow-hidden 
-          [&_.instagram-media]:min-w-0!
-          [&_.instagram-media]:w-full!
-          [&_.instagram-media]:max-w-full!
-          [&_.instagram-media]:border-0!
-          [&_.instagram-media]:bg-transparent!
-          [&_.instagram-media]:m-0!
-        "
-      >
-        <blockquote
-          className="instagram-media"
-          data-instgrm-permalink={INSTAGRAM_POST_URL}
-          data-instgrm-version="14"
-          style={{
-            margin: 0,
-            padding: 0,
-            border: 0,
-            background: 'transparent',
-          }}
-        />
-      </div>
-
-      <Script src="//www.instagram.com/embed.js" strategy="lazyOnload" />
-    </>
   );
 }
 
@@ -71,7 +39,7 @@ export function PrVideoSection() {
           <div className="flex flex-col items-center gap-2 text-center">
             <SectionHeading />
           </div>
-          <InstagramEmbed />
+          <InstagramEmbed permalink={INSTAGRAM_POST_URL} />
           <InstagramLink />
         </div>
       </div>
