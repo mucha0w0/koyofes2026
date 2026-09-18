@@ -476,6 +476,7 @@
   opacity: 0.4;
 }
 
+
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
