@@ -31,10 +31,10 @@ export function SocialCtaSection() {
   }
 
   return (
-    <section className="bg-paper-2 py-8">
+    <section className="bg-festival-accent py-8 text-festival-accent-soft">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-ink tracking-normal text-center sm:text-left shrink-0">
+          <p className="text-sm tracking-normal text-center sm:text-left shrink-0">
             最新情報は公式SNSをチェック！
           </p>
           <div className="flex w-full sm:w-auto sm:flex-1 justify-end gap-3">
