@@ -114,14 +114,14 @@
 
 /* DESIGN2 パイロット。:root は変えない。/dev/design の .theme-1dearland だけ。 */
 .theme-1dearland {
-  --paper: #e7f3f8;
-  --paper-2: #d9eef5;
-  --mist: #c9c7c3;
+  --paper: #f5ebc8;
+  --paper-2: #f0d9b0;
+  --mist: #c9b8a4;
   --ink: #161412;
   --ink-soft: #5a534c;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
-  --festival-accent: #478a9e;
-  --festival-accent-hover: #3e7a8c;
+  --festival-accent: #cf783a;
+  --festival-accent-hover: #b56630;
   --festival-accent-soft: #ffffff;
   --festival-danger: #9c6a66;
 
@@ -408,25 +408,10 @@
   background: var(--paper);
 }
 
-.theme-1dearland .lookbook-stamp {
-  display: flex;
-  height: 4.5rem;
+.theme-1dearland .lookbook-thumb-sm {
   width: 4.5rem;
+  height: 4.5rem;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  background: var(--paper-2);
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-}
-
-.theme-1dearland .lookbook-stamp-on {
-  background: var(--paper-2);
-  color: var(--ink);
-  opacity: 1;
 }
 
 .theme-1dearland .lookbook-stamp-off {

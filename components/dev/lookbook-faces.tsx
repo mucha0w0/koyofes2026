@@ -297,7 +297,7 @@ export function StampBookFace() {
   }
 
   return (
-    <FaceFrame id="face-stamp" spec="DESIGN2 Gate C ・ 面4 スタンプ帳。丸とラベルだけ。達成は緑にしない。" ground="alt">
+    <FaceFrame id="face-stamp" spec="DESIGN2 Gate C ・ 面4 スタンプ帳。アイコンは角丸正方形。達成は緑にしない。" ground="alt">
       <PageLead subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー" />
       <div className="lookbook-card mb-10 p-6">
         <p className="font-[family-name:var(--font-body)] text-sm text-[var(--ink-soft)]">
@@ -331,8 +331,14 @@ export function StampBookFace() {
                       onClick={() => toggle(booth.slug)}
                       className="lookbook-card flex w-full items-center gap-4 p-4 text-left"
                     >
-                      <span className={`lookbook-stamp${on ? ' lookbook-stamp-on' : ' lookbook-stamp-off'}`}>
-                        {on ? '済' : '未'}
+                      <span className={`lookbook-thumb lookbook-thumb-sm${on ? '' : ' lookbook-stamp-off'}`}>
+                        <Image
+                          src={CAMPUS_PHOTO}
+                          alt=""
+                          fill
+                          className="object-cover object-center"
+                          sizes="72px"
+                        />
                       </span>
                       <span>
                         <span className="block font-[family-name:var(--font-ui)] font-medium">{booth.title}</span>

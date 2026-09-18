@@ -11,12 +11,12 @@ import { getNavSections } from '@/lib/config/nav';
 import { getEnabledOfficialSocials } from '@/lib/config/social';
 
 const PALETTE = [
-  { token: '--paper', hex: '#E7F3F8', note: 'ページ地', fill: 'var(--paper)' },
-  { token: '--paper-2', hex: '#D9EEF5', note: '背景色2・帯', fill: 'var(--paper-2)' },
-  { token: '--mist', hex: '#C9C7C3', note: '非選択・表見出し。ホバーは白で割る', fill: 'var(--mist)' },
+  { token: '--paper', hex: '#F5EBC8', note: 'ページ地', fill: 'var(--paper)' },
+  { token: '--paper-2', hex: '#F0D9B0', note: '背景色2・帯', fill: 'var(--paper-2)' },
+  { token: '--mist', hex: '#C9B8A4', note: '非選択・表見出し。ホバーは白で割る', fill: 'var(--mist)' },
   { token: '--ink', hex: '#161412', note: '本文。面に塗らない', fill: 'var(--ink)' },
   { token: '--ink-soft', hex: '#5A534C', note: 'キャプション', fill: 'var(--ink-soft)' },
-  { token: '--accent', hex: '#478A9E', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
+  { token: '--accent', hex: '#CF783A', note: '主 CTA・横断帯・白抜き', fill: 'var(--festival-accent)' },
   { token: '--accent-soft', hex: '#FFFFFF', note: 'カード・入力・選択チップ', fill: 'var(--festival-accent-soft)' },
   { token: '--danger', hex: '#9C6A66', note: 'エラーの印のみ', fill: 'var(--festival-danger)' },
 ] as const;
@@ -190,6 +190,15 @@ function RankingSpecimen() {
           {RANKING.map((item) => (
             <li key={item.rank} className={item.on ? 'lookbook-rank lookbook-rank-on' : 'lookbook-rank'}>
               <span className="lookbook-rank-num">{item.rank}</span>
+              <div className="lookbook-thumb lookbook-thumb-sm">
+                <Image
+                  fill
+                  alt=""
+                  className="object-cover object-center"
+                  sizes="72px"
+                  src="/20251106soumukikaku2-1024x768.jpg"
+                />
+              </div>
               <div className="min-w-0">
                 <p className="lookbook-subhead truncate font-medium">{item.title}</p>
                 <p className="text-sm text-[var(--ink-soft)]">{item.votes} 票</p>
@@ -332,10 +341,10 @@ export function DesignLookbook() {
           <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
-            地は薄い水。カードと入力は白で浮かせる。ホバーと非選択は霧（灰色）。クロムは枠線を使わず、ベタ塗りで段をつける。主CTAは沈めた水に白抜き。黄は絵に残す。
+            地は薄い黄。カードと入力は白で浮かせる。ホバーと非選択は霧（灰色）。クロムは枠線を使わず、ベタ塗りで段をつける。主CTAは沈めたオレンジに白抜き。空と水は絵に残す。
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--ink-soft)]">
-            活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと舞台の直下のランキングだけ借りる。虹・雲・水色見出し・pill は写さない。
+            活字は三段階。いちばん強い見出しは丸ゴ太字。H2 とボタンは丸ゴ。本文は角ゴ。サンエックス公式からは白いヘッダーと舞台の直下のランキングだけ借りる。虹・雲・色つき見出し・pill は写さない。
           </p>
           <nav aria-label="4面の目次" className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
             {FACE_TOC.map((item) => (
@@ -372,11 +381,11 @@ export function DesignLookbook() {
           <div data-lookbook-chrome className="lookbook-soft mt-8 grid grid-cols-1 overflow-hidden bg-[var(--paper-2)] sm:grid-cols-2 lg:grid-cols-4">
             <p className="bg-[var(--paper)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper</span>
-              ページ地。薄い水
+              ページ地。薄い黄
             </p>
             <p className="bg-[var(--paper-2)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--paper-2</span>
-              セクション帯。一段沈めた水
+              セクション帯。一段沈めた黄
             </p>
             <p className="bg-[var(--festival-accent-soft)] px-4 py-6 text-sm">
               <span className="lookbook-subhead block font-medium">--accent-soft</span>
@@ -388,7 +397,7 @@ export function DesignLookbook() {
             </p>
           </div>
           <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-[var(--ink-soft)]">
-            黄・かきつばた・緑・桃はトークンにしない。赤は危険の印以外に使わない。白い面と霧は帯にしない。
+            空・水・かきつばた・緑・桃はトークンにしない。赤は危険の印以外に使わない。白い面と霧は帯にしない。
           </p>
         </Section>
 
@@ -416,7 +425,7 @@ export function DesignLookbook() {
               <a className="lookbook-link" href="/about/overview">
                 こうよう祭とは
               </a>
-              のようにインクの下線。水色にしない。
+              のようにインクの下線。オレンジにしない。
             </p>
           </div>
         </Section>
@@ -446,7 +455,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 枠なし。濃い水に白抜き" title="ボタン">
+        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ 枠なし。沈めたオレンジに白抜き" title="ボタン">
           <div data-lookbook-chrome className="flex flex-wrap items-center justify-center gap-4">
             <button className={TICKET_BTN} type="button">
               企画を探す
@@ -511,7 +520,7 @@ export function DesignLookbook() {
             </article>
             <article className="lookbook-card lookbook-card-on">
               <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-              <p className="mt-2 text-sm text-[var(--ink-soft)]">霧を白で割る。地の水色にはしない。</p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">霧を白で割る。地の黄にはしない。</p>
             </article>
           </div>
           <div data-lookbook-chrome className="lookbook-soft mt-4 bg-[var(--paper)] p-5" data-ground="paper">
@@ -523,7 +532,7 @@ export function DesignLookbook() {
               </article>
               <article className="lookbook-card lookbook-card-on">
                 <p className="lookbook-subhead text-lg font-bold">ホバー</p>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の水色にはしない。薄い霧だけ。</p>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">帯の黄にはしない。薄い霧だけ。</p>
               </article>
             </div>
           </div>
