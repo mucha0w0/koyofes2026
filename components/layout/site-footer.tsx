@@ -4,12 +4,12 @@ export function SiteFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer className="bg-festival-accent text-festival-accent-soft">
+    <footer className="bg-ink text-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
           <div className="space-y-2.5">
             <p className="font-display text-xl font-bold">こうよう祭 2026</p>
-            <p className="text-sm leading-relaxed text-festival-accent-soft/80">
+            <p className="text-sm leading-relaxed text-white/80">
               豊田高専の文化祭
               <br />
               10/31(土)・11/1(日)
@@ -26,7 +26,7 @@ export function SiteFooter() {
                     <a
                       key={id}
                       aria-label={label}
-                      className="flex size-10 items-center justify-center rounded-md bg-festival-accent-soft/20 text-festival-accent-soft transition-colors hover:bg-festival-accent-soft/30"
+                      className="flex size-10 items-center justify-center rounded-md bg-white/20 text-white transition-colors hover:bg-white/30"
                       href={url}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -40,7 +40,7 @@ export function SiteFooter() {
           )}
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-festival-accent-soft/70 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
+        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-white/70 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-sm">
           <p>こうよう祭 2026 システムパート</p>
           <p>&copy; 2026 KoyoFes System Part</p>
         </div>

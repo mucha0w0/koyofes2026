@@ -283,7 +283,7 @@ function LookbookFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer data-lookbook-chrome className={ACCENT_BAND}>
+    <footer data-lookbook-chrome className="bg-ink text-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="space-y-2 lg:max-w-xs">
@@ -695,7 +695,7 @@ export function DesignLookbook() {
 
         <Section id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
-            開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
+            開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（インク地＋白抜き＋既存ナビの列。基調色には追従しない）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
           </p>
           <figure data-lookbook-chrome className="lookbook-photo relative mx-auto mt-10 aspect-[1178/295] max-w-3xl">
             <Image
