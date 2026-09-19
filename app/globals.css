@@ -209,6 +209,8 @@
   --lookbook-offset-y: 5px;
   --lookbook-offset-x-hover: 6px;
   --lookbook-offset-y-hover: 8px;
+  --lookbook-offset-x-press: 2px;
+  --lookbook-offset-y-press: 3px;
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -316,19 +318,18 @@
   .theme-1dearland a.lookbook-card,
   .theme-1dearland button.lookbook-card {
     transition: none;
-    transform: none;
   }
 
   .theme-1dearland a.lookbook-ticket:hover,
   .theme-1dearland button.lookbook-ticket:hover:not(:disabled),
-  .theme-1dearland button.btn-outline:hover,
-  .theme-1dearland button.lookbook-chip:hover,
+  .theme-1dearland button.btn-outline:hover:not(:disabled),
+  .theme-1dearland button.lookbook-chip:hover:not([aria-pressed='true']):not(.lookbook-chip-on),
   .theme-1dearland a.lookbook-card:hover,
   .theme-1dearland button.lookbook-card:hover,
   .theme-1dearland a.lookbook-ticket:active,
   .theme-1dearland button.lookbook-ticket:active:not(:disabled),
-  .theme-1dearland button.btn-outline:active,
-  .theme-1dearland button.lookbook-chip:active,
+  .theme-1dearland button.btn-outline:active:not(:disabled),
+  .theme-1dearland button.lookbook-chip:active:not([aria-pressed='true']):not(.lookbook-chip-on),
   .theme-1dearland a.lookbook-card:active,
   .theme-1dearland button.lookbook-card:active {
     transform: none;
@@ -350,12 +351,17 @@
 .theme-1dearland .btn-outline,
 .theme-1dearland .lookbook-chip,
 .theme-1dearland .lookbook-card,
-.theme-1dearland .lookbook-rank {
+.theme-1dearland .lookbook-rank,
+.theme-1dearland .lookbook-error {
   position: relative;
   z-index: 0;
   border: var(--lookbook-stroke) solid var(--ink);
   border-radius: var(--radius);
   box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
+}
+
+.theme-1dearland .lookbook-header {
+  border-bottom: var(--lookbook-stroke) solid var(--ink);
 }
 
 .theme-1dearland .lookbook-ticket,
@@ -394,8 +400,8 @@
 
 .theme-1dearland a.lookbook-ticket:hover,
 .theme-1dearland button.lookbook-ticket:hover:not(:disabled),
-.theme-1dearland button.btn-outline:hover,
-.theme-1dearland button.lookbook-chip:hover,
+.theme-1dearland button.btn-outline:hover:not(:disabled),
+.theme-1dearland button.lookbook-chip:hover:not([aria-pressed='true']):not(.lookbook-chip-on),
 .theme-1dearland a.lookbook-card:hover:not(.lookbook-card-static),
 .theme-1dearland button.lookbook-card:hover:not(.lookbook-card-static) {
   z-index: 1;
@@ -405,12 +411,15 @@
 
 .theme-1dearland a.lookbook-ticket:active,
 .theme-1dearland button.lookbook-ticket:active:not(:disabled),
-.theme-1dearland button.btn-outline:active,
-.theme-1dearland button.lookbook-chip:active,
+.theme-1dearland button.btn-outline:active:not(:disabled),
+.theme-1dearland button.lookbook-chip:active:not([aria-pressed='true']):not(.lookbook-chip-on),
 .theme-1dearland a.lookbook-card:active:not(.lookbook-card-static),
 .theme-1dearland button.lookbook-card:active:not(.lookbook-card-static) {
-  transform: translate(var(--lookbook-offset-x), var(--lookbook-offset-y));
-  box-shadow: 0 0 0 0 var(--ink);
+  transform: translate(
+    calc(var(--lookbook-offset-x) - var(--lookbook-offset-x-press)),
+    calc(var(--lookbook-offset-y) - var(--lookbook-offset-y-press))
+  );
+  box-shadow: var(--lookbook-offset-x-press) var(--lookbook-offset-y-press) 0 0 var(--ink);
 }
 
 .theme-1dearland a.lookbook-ticket:hover,
@@ -429,11 +438,15 @@
   outline-offset: 3px;
 }
 
-.theme-1dearland button.lookbook-ticket:disabled {
+.theme-1dearland button.lookbook-ticket:disabled,
+.theme-1dearland button.btn-outline:disabled {
   cursor: not-allowed;
   opacity: 0.4;
-  transform: none;
-  box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
+  transform: translate(
+    calc(var(--lookbook-offset-x) - var(--lookbook-offset-x-press)),
+    calc(var(--lookbook-offset-y) - var(--lookbook-offset-y-press))
+  );
+  box-shadow: var(--lookbook-offset-x-press) var(--lookbook-offset-y-press) 0 0 var(--ink);
 }
 
 .theme-1dearland .btn-outline,
@@ -442,8 +455,8 @@
   color: var(--ink);
 }
 
-.theme-1dearland .btn-outline:hover,
-.theme-1dearland button.lookbook-chip:hover {
+.theme-1dearland .btn-outline:hover:not(:disabled),
+.theme-1dearland button.lookbook-chip:hover:not([aria-pressed='true']):not(.lookbook-chip-on) {
   background: var(--mist-hover);
 }
 
@@ -452,6 +465,11 @@
 .theme-1dearland .lookbook-chip[aria-pressed='true']:hover,
 .theme-1dearland .lookbook-chip-on:hover {
   background: var(--fill-selected);
+  transform: translate(
+    calc(var(--lookbook-offset-x) - var(--lookbook-offset-x-press)),
+    calc(var(--lookbook-offset-y) - var(--lookbook-offset-y-press))
+  );
+  box-shadow: var(--lookbook-offset-x-press) var(--lookbook-offset-y-press) 0 0 var(--ink);
 }
 
 .theme-1dearland .btn-quiet {
@@ -556,6 +574,9 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+  background: var(--fill-card);
+  padding: 1.5rem;
+  overflow: visible;
 }
 
 .theme-1dearland .lookbook-error-mark {

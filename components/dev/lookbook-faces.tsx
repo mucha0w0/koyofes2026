@@ -372,7 +372,7 @@ export function StampBookFace() {
         <div>
           <p className="text-sm text-[var(--ink-soft)]">エラー</p>
           <p className="lookbook-subhead font-medium">読み込みに失敗したときの見本です</p>
-          <p className="mt-1 text-sm">印だけ色を持つ。枠で囲まない。</p>
+          <p className="mt-1 text-sm">印だけ色を持つ。殻はカードと同じ。</p>
         </div>
       </div>
     </FaceFrame>

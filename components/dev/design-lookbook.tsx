@@ -157,7 +157,7 @@ function LookbookHeader() {
   const navItems = getNavSections('header');
 
   return (
-    <header data-lookbook-chrome className="sticky top-0 z-20 bg-[var(--festival-accent-soft)]" data-ground="paper">
+    <header data-lookbook-chrome className="lookbook-header sticky top-0 z-20 bg-[var(--festival-accent-soft)]" data-ground="paper">
       <div className="mx-auto flex min-h-16 w-full max-w-7xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <Link className="lookbook-heading text-xl text-[var(--ink)]" href="/">
           こうよう祭
@@ -527,7 +527,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カードはインク枠。帯は枠なし" title="塗り">
+        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カード・エラーはインク枠。帯は枠なし" title="塗り">
           <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 overflow-hidden sm:grid-cols-5">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper</span>
@@ -569,7 +569,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ殻。未選択は霧。選択だけ白" title="チップ">
+        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ殻。未選択は霧。選択は白で沈む" title="チップ">
           <div data-lookbook-chrome className="flex flex-wrap justify-center gap-3">
             {EVENT_CATEGORY_OPTIONS.map((option) => (
               <button
@@ -590,7 +590,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ エラーは箱にしない。絵の上に載せない" title="入力">
+        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ エラーはカードと同じ殻。絵の上に載せない" title="入力">
           <div data-lookbook-chrome className="mx-auto max-w-md space-y-6">
             <div>
               <label className="mb-2 block text-sm font-medium" htmlFor={searchId}>
@@ -603,7 +603,7 @@ export function DesignLookbook() {
               <div>
                 <p className="text-sm text-[var(--ink-soft)]">エラー</p>
                 <p className="lookbook-subhead font-medium">送信できませんでした</p>
-                <p className="mt-1 text-sm">印だけ色を持つ。枠で囲まない。</p>
+                <p className="mt-1 text-sm">印だけ色を持つ。殻はカードと同じ。</p>
               </div>
             </div>
           </div>
