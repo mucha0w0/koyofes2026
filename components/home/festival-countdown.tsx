@@ -107,7 +107,7 @@ function useCountdown(): CountdownStatus {
 
 // ── サブコンポーネント ───────────────────────────────────
 function Divider() {
-  return <div aria-hidden className="hidden md:block h-8 w-px bg-festival-accent-soft/30" />;
+  return <div aria-hidden className="hidden md:block h-8 w-px bg-white/30" />;
 }
 
 function ErrorMessage() {
@@ -138,11 +138,11 @@ function TimeCounter({ timeLeft }: { timeLeft: TimeLeft }) {
           <span className="font-display w-11 md:w-14 text-center text-[28px] md:text-[40px] font-medium leading-none lining-nums tabular-nums">
             {String(unit.value).padStart(2, '0')}
           </span>
-          <span className="text-[10px] md:text-[11px] text-festival-accent-soft/80">{unit.label}</span>
+          <span className="text-[10px] md:text-[11px] text-white/80">{unit.label}</span>
           {index < units.length - 1 && (
             <span
               aria-hidden="true"
-              className="text-[16px] md:text-[20px] font-light text-festival-accent-soft/40 ml-1 md:ml-2 select-none"
+              className="text-[16px] md:text-[20px] font-light text-white/40 ml-1 md:ml-2 select-none"
             >
               :
             </span>
@@ -179,7 +179,7 @@ export function FestivalCountdown() {
   };
 
   return (
-    <div className="w-full bg-festival-accent text-festival-accent-soft">
+    <div className="w-full bg-[#1f2529] text-white">
       <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-6 gap-y-4 px-4 py-5 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))]">
         {renderContent()}
       </div>
