@@ -18,7 +18,7 @@ export function PageLayout({
 }: PageLayoutProps) {
   return (
     <main className="min-h-screen">
-      <div className="bg-card">
+      <div className="border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-card">
         <div className="mx-auto w-full max-w-7xl px-4 pt-12 pb-10 md:pt-16 md:pb-12">
           <Link className="ink-link mb-6 inline-flex items-center gap-2 text-sm" href={backHref}>
             <ArrowLeft className="h-4 w-4" />
