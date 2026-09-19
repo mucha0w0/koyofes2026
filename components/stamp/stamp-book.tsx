@@ -13,7 +13,6 @@ import { Button } from '@/components/ui/button';
 
 import type { StampBoothGroup, StampStorageData } from '@/lib/types/stamp';
 
-import { getStampCategoryIcon } from '@/lib/config/stampConfig';
 import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
@@ -127,7 +126,7 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
       />
 
       {groups.length === 0 ? (
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <p className="text-sm text-muted-foreground leading-relaxed">
             現在表示できるスタンプ対象ブースがありません。
           </p>
@@ -135,7 +134,7 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
       ) : (
         <div className="space-y-8">
           {groups.map((group) => (
-            <CategorySection key={group.category} icon={getStampCategoryIcon(group.category)} title={group.label}>
+            <CategorySection key={group.category} title={group.label}>
               <div className="flex flex-wrap gap-4 p-4">
                 {group.booths.map((booth) => (
                   <StampBoothCard key={booth.slug} booth={booth} collected={display.collectedSlugs.has(booth.slug)} />

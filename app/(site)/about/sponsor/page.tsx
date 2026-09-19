@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { SponsorCard } from '@/components/about/sponsor-card';
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
+import { Button } from '@/components/ui/button';
 
 import { getSponsorSections } from '@/lib/sponsors';
 
@@ -38,18 +39,15 @@ export default async function SponsorPage() {
           ))
         )}
 
-        <div className="rounded-md bg-paper-2 p-6">
+        <div className="bg-paper-2 p-6">
           <h2 className="mb-4 text-lg font-medium">協賛のお願い</h2>
           <p className="mb-4 text-muted-foreground">
             こうよう祭では、協賛いただける企業・団体様を募集しております。
             ご興味のある方は、お問い合わせフォームよりご連絡ください。
           </p>
-          <Link
-            className="inline-flex min-h-11 items-center gap-2 rounded-md bg-festival-accent px-4 py-2 text-sm font-medium text-festival-accent-soft transition-colors hover:bg-festival-accent-hover"
-            href="/about/contact"
-          >
-            お問い合わせ
-          </Link>
+          <Button asChild>
+            <Link href="/about/contact">お問い合わせ</Link>
+          </Button>
         </div>
       </div>
     </CmsPageLayout>

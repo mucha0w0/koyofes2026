@@ -14,11 +14,8 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
 
   if (images.length === 0) {
     return (
-      <div className="relative aspect-video w-full bg-paper-2 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl text-muted-foreground/30 mb-4">📷</div>
-          <p className="text-muted-foreground">No image</p>
-        </div>
+      <div className="relative aspect-video w-full bg-paper-2">
+        <p className="flex size-full items-center justify-center text-muted-foreground">画像はありません</p>
       </div>
     );
   }

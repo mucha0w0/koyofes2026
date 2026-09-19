@@ -1,15 +1,13 @@
-import { Clock, MapPin, Users, Building2 } from 'lucide-react';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { EventCarousel } from '@/components/events/event-carousel';
 import { EventMarkdown } from '@/components/events/event-markdown';
 import { EventSearchSection } from '@/components/events/event-search';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { formatEventTimeRange } from '@/lib/event-time';
 import { getEventBySlug, getEvents } from '@/lib/events';
-import { isImageUrl } from '@/lib/utils';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -57,118 +55,77 @@ export default async function EventPage({ params }: PageProps) {
   const participantsDisplay = formatParticipants(event);
   const durationDisplay = formatDuration(event.duration);
 
-  const isIconUrl = isImageUrl(event.icon);
-
   return (
     <main className="flex-1">
-      {/* Banner Carousel */}
       <EventCarousel images={event.images} title={event.title} />
 
       <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
-        {/* Hero Title Section with Catchphrase - Full Width */}
         <div className="mb-12 md:mb-16">
-          <div className="flex items-start gap-4 md:gap-8 mb-6">
-            {/* Icon */}
-            <div className="shrink-0 w-16 h-16 md:w-24 md:h-24 rounded-md bg-paper-2 flex items-center justify-center overflow-hidden">
-              {isIconUrl ? (
-                <Image
-                  alt={event.title}
-                  className="w-full h-full object-cover"
-                  height={96}
-                  src={event.icon}
-                  width={96}
-                />
-              ) : (
-                <span className="text-sm text-muted-foreground">No icon</span>
-              )}
-            </div>
+          <div className="mb-6 flex items-start gap-4 md:gap-8">
+            <InkPhoto alt={event.title} className="size-16 md:size-24" size={96} src={event.icon} />
 
-            {/* Title and Organization */}
             <div className="flex-1">
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">{event.title}</h1>
-              <p className="text-base md:text-lg text-muted-foreground">{event.organization}</p>
+              <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
+              <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
             </div>
           </div>
 
-          {/* Catchphrase */}
-          <p className="text-lg md:text-xl font-medium text-foreground">{event.catchphrase}</p>
+          <p className="text-lg font-medium text-foreground md:text-xl">{event.catchphrase}</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
-            {/* Quick Info Cards - 4等分 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="rounded-md bg-card p-4">
-                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                  <MapPin className="h-4 w-4" />
-                  <span className="text-xs font-medium">場所</span>
-                </div>
-                <div className="space-y-1">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+          <div className="space-y-12 lg:col-span-2">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              <div className="ink-shell bg-card p-4">
+                <p className="text-xs text-muted-foreground">場所</p>
+                <div className="mt-2 space-y-1">
                   <p className="text-sm font-medium text-foreground">{locationDisplay.firstLine}</p>
-                  {locationDisplay.secondLine && (
+                  {locationDisplay.secondLine ? (
                     <p className="text-sm font-medium text-foreground">{locationDisplay.secondLine}</p>
-                  )}
+                  ) : null}
                 </div>
               </div>
 
-              <div className="rounded-md bg-card p-4">
-                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span className="text-xs font-medium">時間</span>
-                </div>
-                <div className="space-y-1">
+              <div className="ink-shell bg-card p-4">
+                <p className="text-xs text-muted-foreground">時間</p>
+                <div className="mt-2 space-y-1">
                   <p className="text-xs font-medium text-foreground">{timeDay1}</p>
                   <p className="text-xs font-medium text-foreground">{timeDay2}</p>
                 </div>
               </div>
 
-              <div className="rounded-md bg-card p-4">
-                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                  <Users className="h-4 w-4" />
-                  <span className="text-xs font-medium">人数</span>
-                </div>
-                <p className="text-sm font-medium text-foreground">{participantsDisplay}</p>
+              <div className="ink-shell bg-card p-4">
+                <p className="text-xs text-muted-foreground">人数</p>
+                <p className="mt-2 text-sm font-medium text-foreground">{participantsDisplay}</p>
               </div>
 
-              <div className="rounded-md bg-card p-4">
-                <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span className="text-xs font-medium">所要時間</span>
-                </div>
-                <p className="text-sm font-medium text-foreground">{durationDisplay}</p>
+              <div className="ink-shell bg-card p-4">
+                <p className="text-xs text-muted-foreground">所要時間</p>
+                <p className="mt-2 text-sm font-medium text-foreground">{durationDisplay}</p>
               </div>
             </div>
 
-            {/* Event Description */}
             <section>
-              <h2 className="text-2xl font-medium mb-6 text-foreground">企画について</h2>
+              <h2 className="mb-6 text-2xl font-medium text-foreground">企画について</h2>
               <div className="prose max-w-none">
                 <EventMarkdown content={event.description} />
               </div>
-              {/* Author Info - Desktop */}
-              <div className="hidden lg:block mt-6 pt-6">
+              <div className="mt-6 hidden pt-6 lg:block">
                 <p className="text-xs text-muted-foreground">執筆者: {event.author}</p>
               </div>
             </section>
           </div>
 
-          {/* Sidebar */}
           <aside className="space-y-8">
-            {/* Organization Card */}
-            <div className="rounded-md bg-card p-8">
-              <div className="flex items-center gap-2 mb-4">
-                <Building2 className="h-5 w-5 text-foreground" />
-                <h3 className="text-lg font-medium text-foreground">企画団体</h3>
-              </div>
-              <p className="text-2xl font-medium text-foreground mb-6">{event.organization}</p>
+            <div className="ink-shell bg-card p-8">
+              <h3 className="mb-4 text-lg font-medium text-foreground">企画団体</h3>
+              <p className="mb-6 text-2xl font-medium text-foreground">{event.organization}</p>
 
               <div className="prose max-w-none">
                 <EventMarkdown className="text-sm" content={event['organ-description']} />
               </div>
 
-              {/* Author Info - Mobile/Tablet */}
-              <div className="lg:hidden mt-6 pt-6">
+              <div className="mt-6 pt-6 lg:hidden">
                 <p className="text-xs text-muted-foreground">執筆者: {event.author}</p>
               </div>
             </div>

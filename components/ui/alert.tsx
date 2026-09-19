@@ -3,17 +3,20 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-const alertVariants = cva('relative flex w-full items-start gap-3 bg-transparent p-0 text-sm text-foreground', {
-  variants: {
-    variant: {
-      default: '',
-      destructive: '',
+const alertVariants = cva(
+  'ink-shell relative flex w-full items-start gap-3 bg-card p-6 text-sm text-foreground',
+  {
+    variants: {
+      variant: {
+        default: '',
+        destructive: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
     },
   },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+);
 
 function Alert({
   className,

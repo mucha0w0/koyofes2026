@@ -6,7 +6,7 @@ export default function AccessPage() {
   return (
     <PageLayout subtitle="会場までのアクセス方法をご案内します" title="アクセス">
       <div className="space-y-8">
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-paper-2">
               <MapPin className="h-5 w-5 text-foreground" />
@@ -18,7 +18,7 @@ export default function AccessPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="rounded-md bg-card p-6">
+          <div className="ink-shell bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="rounded-md p-2 bg-paper-2">
                 <Train className="h-5 w-5 text-foreground" />
@@ -31,7 +31,7 @@ export default function AccessPage() {
             </ul>
           </div>
 
-          <div className="rounded-md bg-card p-6">
+          <div className="ink-shell bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="rounded-md p-2 bg-paper-2">
                 <Bus className="h-5 w-5 text-foreground" />
@@ -44,7 +44,7 @@ export default function AccessPage() {
             </ul>
           </div>
 
-          <div className="rounded-md bg-card p-6">
+          <div className="ink-shell bg-card p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="rounded-md p-2 bg-paper-2">
                 <Car className="h-5 w-5 text-foreground" />

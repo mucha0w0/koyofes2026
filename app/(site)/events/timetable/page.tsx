@@ -1,9 +1,9 @@
 import { Clock } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventSearchSection } from '@/components/events/event-search';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
 
@@ -65,18 +65,12 @@ function TimelineView({
         {events.map((event, idx) => (
           <Link
             key={idx}
-            className="absolute left-0 right-0 rounded-md bg-card px-4 flex items-center gap-3 transition-colors hover:bg-mist-hover"
+            className="absolute left-0 right-0 ink-shell ink-lift flex items-center gap-3 bg-card px-4"
             href={`/events/${event.slug}`}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
             {event.icon && (
-              <Image
-                alt={event.title}
-                className="w-10 h-10 rounded-md object-contain shrink-0"
-                height={40}
-                src={event.icon}
-                width={40}
-              />
+              <InkPhoto alt={event.title} className="ink-shell-sm size-10" size={40} src={event.icon} />
             )}
             <div className="min-w-0">
               <h3 className="font-medium text-foreground leading-snug truncate">{event.title}</h3>

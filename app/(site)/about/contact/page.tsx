@@ -7,7 +7,7 @@ export default function ContactPage() {
     <PageLayout subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <div className="bg-card rounded-md p-6">
+          <div className="ink-shell bg-card p-6">
             <h2 className="font-medium text-lg mb-4">連絡先（学生課学生支援係）</h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3">

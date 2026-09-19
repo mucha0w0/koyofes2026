@@ -7,6 +7,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { EventSortMenu } from '@/components/events/event-sort-menu';
 import { ExhibitionCard } from '@/components/events/exhibition-card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
@@ -164,7 +165,7 @@ export function EventListClient({ events }: EventListClientProps) {
         <div className="relative min-w-0 flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <input
-            className="w-full min-h-11 rounded-md pl-10 pr-4 py-3 bg-card focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            className="ink-shell min-h-11 w-full bg-card py-3 pr-4 pl-10 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
             placeholder="企画名・団体名で検索..."
             type="text"
             value={searchQuery}
@@ -179,17 +180,15 @@ export function EventListClient({ events }: EventListClientProps) {
         <p className="text-sm font-medium text-foreground">ジャンル</p>
         <div className="flex flex-wrap gap-2">
           {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
-            <button
+            <Button
               key={id}
-              className={`min-h-11 rounded-md px-4 py-2 text-sm transition-colors ${
-                selectedGenres.includes(id)
-                  ? 'bg-card text-ink'
-                  : 'bg-mist text-ink hover:bg-mist-hover'
-              }`}
+              aria-pressed={selectedGenres.includes(id)}
+              type="button"
+              variant="outline"
               onClick={() => handleGenreToggle(id)}
             >
               {label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -266,7 +265,7 @@ export function EventListClient({ events }: EventListClientProps) {
               <div>
                 <label className="text-sm font-medium text-foreground block mb-3">設営場所</label>
                 <select
-                  className="w-full min-h-11 rounded-md px-4 py-2 bg-card text-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  className="ink-shell min-h-11 w-full bg-card px-4 py-2 text-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
                   value={selectedLocation}
                   onChange={(e) => setSelectedLocation(e.target.value)}
                 >
@@ -295,7 +294,7 @@ export function EventListClient({ events }: EventListClientProps) {
           selectedLocation ||
           sortKey !== 'none') && (
           <button
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="ink-link flex items-center gap-1 text-xs"
             onClick={handleResetFilters}
           >
             <RotateCcw className="h-3 w-3" />

@@ -1,13 +1,11 @@
-import { Clock, ArrowRight, EllipsisVertical } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { getStageEvents, toTimedEvents } from '@/lib/timetable';
 import { type Event } from '@/lib/types/event';
 
 const PREVIEW_COUNT = 3;
-
-// ─── サブコンポーネント ──────────────────────────────
 
 interface EventRowProps {
   slug: string;
@@ -20,33 +18,21 @@ interface EventRowProps {
 
 function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
-    <Link
-      className="flex items-center gap-4 rounded-md p-4 bg-card transition-colors hover:bg-mist-hover group"
-      href={`/events/${slug}`}
-    >
-      {/* アイコン画像：背景なし、最大サイズで表示 */}
+    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={`/events/${slug}`}>
       {icon ? (
-        <Image alt={title} className="w-10 h-10 rounded-md object-contain shrink-0" height={40} src={icon} width={40} />
+        <InkPhoto alt={title} className="ink-shell-sm size-10" size={40} src={icon} />
       ) : (
-        <div className="w-10 h-10 shrink-0" />
+        <div className="size-10 shrink-0" />
       )}
 
-      {/* テキスト情報 */}
-      <div className="flex-1 min-w-0">
-        <span className="font-medium text-sm">{title}</span>
-        <p className="text-xs text-muted-foreground truncate mt-0.5">{organization}</p>
+      <div className="min-w-0 flex-1">
+        <span className="text-sm font-medium">{title}</span>
+        <p className="mt-0.5 truncate text-xs text-muted-foreground">{organization}</p>
       </div>
 
-      {/* 時間情報 + 矢印 */}
-      <div className="shrink-0 flex items-center gap-2">
-        <div className="text-right">
-          <p className="text-xs text-muted-foreground">{timeRange}</p>
-          <p className="text-xs text-muted-foreground flex items-center justify-end gap-1 mt-0.5">
-            <Clock className="h-3 w-3" />
-            {duration}分
-          </p>
-        </div>
-        <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
+      <div className="shrink-0 text-right">
+        <p className="text-xs text-muted-foreground">{timeRange}</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">{duration}分</p>
       </div>
     </Link>
   );
@@ -61,23 +47,15 @@ function DaySection({ label, events }: DaySectionProps) {
   if (events.length === 0) return null;
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium text-foreground">{label}</h2>
-      </div>
-      <div className="grid gap-2">
+      <h2 className="text-center text-sm font-medium text-foreground">{label}</h2>
+      <div className="grid gap-3">
         {events.map((event) => (
           <EventRow key={event.slug} {...event} />
         ))}
       </div>
-      {/* 縦向き三点リーダー（図形） */}
-      <div className="flex justify-center py-2">
-        <EllipsisVertical className="h-5 w-5 text-muted-foreground" />
-      </div>
     </div>
   );
 }
-
-// ─── メインコンポーネント ────────────────────────────
 
 export async function TimetablePreview() {
   let stageEvents: Event[] = [];
@@ -104,26 +82,20 @@ export async function TimetablePreview() {
   const day2Rows = toPreviewRows('time-day2');
 
   return (
-    <section className="bg-paper-2 py-10 md:py-14">
+    <section className="bg-paper-2 py-10 md:py-14" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 text-center">
-          <h2 className="text-xl md:text-2xl font-medium text-foreground">タイムテーブル</h2>
+          <h2 className="text-xl font-medium text-foreground md:text-2xl">タイムテーブル</h2>
         </div>
 
-        {/* 2日分のグリッド */}
-        <div className="grid md:grid-cols-2 gap-8 mb-10">
+        <div className="mb-10 grid gap-8 md:grid-cols-2">
           <DaySection events={day1Rows} label="DAY 1" />
           <DaySection events={day2Rows} label="DAY 2" />
         </div>
 
-        {/* 「すべて見る」リンク（中央揃え） */}
         <div className="flex justify-center">
-          <Link
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            href="/events/timetable"
-          >
+          <Link className="ink-link text-sm" href="/events/timetable">
             タイムテーブルを見る
-            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>

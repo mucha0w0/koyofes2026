@@ -1,53 +1,33 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Spinner } from '@/components/common/spinner';
 import { Button } from '@/components/ui/button';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { RankingApiError, RankingOverallItem, RankingResponse, RankingTrendItem, RankingWaitItem } from '@/lib/types/ranking';
 
 import { RANKING_CONFIG, getWaitLevelLabel, type RankingTab } from '@/lib/config/rankingConfig';
 import { formatWaitAgo } from '@/lib/ranking/score';
-import { cn, isImageUrl } from '@/lib/utils';
 
 function formatAverage(value: number): string {
   return value.toFixed(1);
 }
 
-function BoothIcon({ icon, title }: { icon: string; title: string }) {
-  if (!isImageUrl(icon)) {
-    return (
-      <div className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
-        <span className="text-[10px] text-muted-foreground">No image</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="size-14 shrink-0 overflow-hidden rounded-md bg-paper-2">
-      <Image alt={title} className="size-full object-cover" height={56} src={icon} width={56} />
-    </div>
-  );
-}
-
-function rowClass(rank: number) {
-  return cn(
-    'flex items-center gap-4 rounded-md p-4 transition-colors hover:bg-mist-hover',
-    rank === 1 ? 'bg-card' : 'bg-mist',
-  );
+function rowClass() {
+  return 'ink-shell ink-lift flex items-center gap-4 bg-card p-4';
 }
 
 function OverallRow({ item }: { item: RankingOverallItem }) {
   return (
     <li>
-      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`}>
         <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
-        <BoothIcon icon={item.icon} title={item.title} />
+        <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
@@ -64,11 +44,11 @@ function OverallRow({ item }: { item: RankingOverallItem }) {
 function TrendRow({ item }: { item: RankingTrendItem }) {
   return (
     <li>
-      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`}>
         <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
-        <BoothIcon icon={item.icon} title={item.title} />
+        <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
@@ -85,11 +65,11 @@ function TrendRow({ item }: { item: RankingTrendItem }) {
 function WaitRow({ item, generatedAt }: { item: RankingWaitItem; generatedAt: string }) {
   return (
     <li>
-      <Link className={rowClass(item.rank)} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`}>
         <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
-        <BoothIcon icon={item.icon} title={item.title} />
+        <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{item.title}</p>
           <p className="truncate text-sm text-muted-foreground">{item.organization}</p>
@@ -182,7 +162,7 @@ export function RankingBoard() {
 
       <div className="flex flex-wrap gap-2">
         <Button
-          className={tab === 'overall' ? 'bg-card hover:bg-card' : ''}
+          aria-pressed={tab === 'overall'}
           size="lg"
           type="button"
           variant="outline"
@@ -191,7 +171,7 @@ export function RankingBoard() {
           総合
         </Button>
         <Button
-          className={tab === 'trend' ? 'bg-card hover:bg-card' : ''}
+          aria-pressed={tab === 'trend'}
           size="lg"
           type="button"
           variant="outline"
@@ -200,7 +180,7 @@ export function RankingBoard() {
           トレンド
         </Button>
         <Button
-          className={tab === 'wait' ? 'bg-card hover:bg-card' : ''}
+          aria-pressed={tab === 'wait'}
           size="lg"
           type="button"
           variant="outline"
@@ -217,13 +197,13 @@ export function RankingBoard() {
       ) : null}
 
       {errorMessage && !awaitingTab ? (
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <p className="text-sm text-muted-foreground leading-relaxed">{errorMessage}</p>
         </div>
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'overall' && overallItems.length === 0 ? (
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <p className="text-sm text-muted-foreground leading-relaxed">
             まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
           </p>
@@ -231,13 +211,13 @@ export function RankingBoard() {
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'trend' && trendItems.length === 0 ? (
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <p className="text-sm text-muted-foreground leading-relaxed">直近20分の来訪はまだありません。</p>
         </div>
       ) : null}
 
       {!awaitingTab && !errorMessage && tab === 'wait' && waitItems.length === 0 ? (
-        <div className="rounded-md bg-card p-6">
+        <div className="ink-shell bg-card p-6">
           <p className="text-sm text-muted-foreground leading-relaxed">
             直近15分の待ち情報はまだありません。スタンプ帳の獲得画面から、いまの並びを教えてください。
           </p>
@@ -245,7 +225,7 @@ export function RankingBoard() {
       ) : null}
 
       {!awaitingTab && overallItems.length > 0 ? (
-        <ol className="space-y-2">
+        <ol className="space-y-3">
           {overallItems.map((item) => (
             <OverallRow key={item.slug} item={item} />
           ))}
@@ -253,7 +233,7 @@ export function RankingBoard() {
       ) : null}
 
       {!awaitingTab && trendItems.length > 0 ? (
-        <ol className="space-y-2">
+        <ol className="space-y-3">
           {trendItems.map((item) => (
             <TrendRow key={item.slug} item={item} />
           ))}
@@ -261,7 +241,7 @@ export function RankingBoard() {
       ) : null}
 
       {!awaitingTab && waitItems.length > 0 && data?.tab === 'wait' ? (
-        <ol className="space-y-2">
+        <ol className="space-y-3">
           {waitItems.map((item) => (
             <WaitRow key={item.slug} generatedAt={generatedAt} item={item} />
           ))}

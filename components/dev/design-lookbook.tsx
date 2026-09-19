@@ -353,7 +353,7 @@ export function DesignLookbook() {
       <div className={`${ACCENT_BAND}`}>
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
           <p className="text-sm">
-            開発用見本 <span className="text-white/70">/dev/design ・ インデックスしない ・ 本番トークン未変更</span>
+            開発用見本 <span className="text-white/70">/dev/design ・ インデックスしない</span>
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <div aria-label="基調色" className="flex flex-wrap gap-2" role="group">

@@ -22,7 +22,7 @@ export default function ThemePage() {
           <p className="text-xl text-muted-foreground"></p>
         </div>
 
-        <div className="rounded-md bg-card p-8 text-left">
+        <div className="ink-shell bg-card p-8 text-left">
           <h3 className="font-medium text-lg mb-4">テーマに込めた想い</h3>
           <p className="text-muted-foreground leading-relaxed">ああああああああああああああああ</p>
           <p className="text-muted-foreground leading-relaxed mt-4">あああああああああ。</p>

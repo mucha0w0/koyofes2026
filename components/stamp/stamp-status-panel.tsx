@@ -46,7 +46,7 @@ export function StampStatusPanel({
   const lotteryMark = Math.min(100, Math.round((requiredCount / safeTotal) * 100));
 
   return (
-    <div className="rounded-md bg-card p-6 space-y-5 text-ink">
+    <div className="ink-shell space-y-5 bg-card p-6 text-ink">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-1">
           <p className="font-display text-[15px] text-ink-soft">Rally</p>

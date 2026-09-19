@@ -48,10 +48,8 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label="並び替え"
-        className={cn(
-          'flex h-full min-h-12 items-center justify-center rounded-md px-3 transition-colors',
-          isActive ? 'bg-card text-ink' : 'bg-mist text-ink hover:bg-mist-hover',
-        )}
+        aria-pressed={isActive}
+        className={cn('ink-shell ink-lift flex h-full min-h-12 items-center justify-center px-3', isActive ? 'bg-card' : 'bg-mist')}
         type="button"
         onClick={() => setOpen((prev) => !prev)}
       >

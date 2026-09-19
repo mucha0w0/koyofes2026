@@ -4,13 +4,12 @@ import Link from 'next/link';
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  basePath: string; // 例: "/official/news"
+  basePath: string;
 }
 
-// 表示するページ番号と省略記号の配列を生成
 function getPageNumbers(currentPage: number, totalPages: number): (number | 'ellipsis')[] {
   const pages: (number | 'ellipsis')[] = [];
-  const showRange = 1; // 現在ページの前後に表示する件数
+  const showRange = 1;
 
   for (let i = 1; i <= totalPages; i++) {
     const isFirstOrLast = i === 1 || i === totalPages;
@@ -32,12 +31,12 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
-    <nav aria-label="ページネーション" className="flex items-center justify-center gap-2 mt-8">
+    <nav aria-label="ページネーション" className="mt-8 flex items-center justify-center gap-2">
       <Link
         aria-disabled={currentPage === 1}
         aria-label="前のページへ"
-        className={`px-3 py-2 text-sm font-medium transition-colors ${
-          currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'text-foreground hover:bg-mist-hover rounded-md'
+        className={`flex size-11 items-center justify-center ${
+          currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'ink-link'
         }`}
         href={`${basePath}?page=${Math.max(1, currentPage - 1)}`}
       >
@@ -48,15 +47,17 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
         page === 'ellipsis' ? (
           <span
             key={`ellipsis-${idx}`}
-            className="w-9 h-9 flex items-center justify-center text-sm text-muted-foreground/60"
+            className="flex size-11 items-center justify-center text-sm text-muted-foreground/60"
           >
             ...
           </span>
         ) : (
           <Link
             key={page}
-            className={`min-h-11 w-11 flex items-center justify-center rounded-md text-sm font-medium transition-colors ${
-              page === currentPage ? 'bg-card text-ink' : 'text-ink hover:bg-mist-hover'
+            aria-current={page === currentPage ? 'page' : undefined}
+            aria-pressed={page === currentPage}
+            className={`ink-shell ink-lift flex size-11 items-center justify-center text-sm font-medium ${
+              page === currentPage ? 'bg-card' : 'bg-mist'
             }`}
             href={`${basePath}?page=${page}`}
           >
@@ -68,10 +69,8 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
       <Link
         aria-disabled={currentPage === totalPages}
         aria-label="次のページへ"
-        className={`px-3 py-2 text-sm font-medium transition-colors ${
-          currentPage === totalPages
-            ? 'pointer-events-none text-muted-foreground/40'
-            : 'text-foreground hover:bg-mist-hover rounded-md'
+        className={`flex size-11 items-center justify-center ${
+          currentPage === totalPages ? 'pointer-events-none text-muted-foreground/40' : 'ink-link'
         }`}
         href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}
       >

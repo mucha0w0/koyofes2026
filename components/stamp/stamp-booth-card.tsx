@@ -1,7 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { StampBooth } from '@/lib/types/stamp';
 
@@ -16,28 +17,23 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
   const hasIcon = isImageUrl(booth.icon);
 
   return (
-    <Link
-      className={`flex flex-col items-center gap-2 shrink-0 group ${collected ? '' : 'opacity-40'}`}
-      href={`/events/${booth.slug}`}
-    >
-      <div
-        className={`relative w-20 h-20 md:w-32 md:h-32 rounded-md bg-paper-2 overflow-hidden flex items-center justify-center ${
-          collected ? '' : 'grayscale'
-        }`}
-      >
-        {hasIcon ? (
-          <Image alt={booth.title} className="w-full h-full object-cover" height={128} src={booth.icon} width={128} />
-        ) : (
-          <span className="text-xs text-muted-foreground">No image</span>
-        )}
-        <span className="absolute bottom-0 inset-x-0 py-0.5 text-center text-[10px] md:text-xs font-medium bg-card/90 text-ink">
+    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${booth.slug}`}>
+      <div className="relative">
+        <InkPhoto
+          alt={booth.title}
+          className="size-20 md:size-32"
+          dimmed={!collected}
+          size={128}
+          src={hasIcon ? booth.icon : undefined}
+        />
+        <span className="absolute inset-x-1 bottom-1 rounded-[4px] bg-card/90 py-0.5 text-center text-[10px] font-medium text-ink md:text-xs">
           {collected ? '獲得済み' : '未獲得'}
         </span>
       </div>
-      <div className="text-center max-w-20 md:max-w-32">
-        <p className="text-xs md:text-sm font-medium truncate">{booth.title}</p>
+      <div className="max-w-20 text-center md:max-w-32">
+        <p className="truncate text-xs font-medium md:text-sm">{booth.title}</p>
         {booth.organization ? (
-          <p className="text-xs md:text-sm text-muted-foreground truncate">{booth.organization}</p>
+          <p className="truncate text-xs text-muted-foreground md:text-sm">{booth.organization}</p>
         ) : null}
       </div>
     </Link>

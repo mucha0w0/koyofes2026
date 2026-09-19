@@ -17,7 +17,7 @@ export function EventListSkeleton() {
       <div className="h-4 w-32 rounded bg-paper-2" />
       <div className="space-y-4">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="rounded-md bg-card p-6 space-y-3">
+          <div key={index} className="ink-shell bg-card p-6 space-y-3">
             <div className="flex gap-4">
               <div className="h-16 w-16 shrink-0 rounded bg-paper-2" />
               <div className="flex-1 space-y-2">

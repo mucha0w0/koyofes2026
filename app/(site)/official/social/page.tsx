@@ -1,12 +1,11 @@
-import { ExternalLink } from 'lucide-react';
-
+import { Button } from '@/components/ui/button';
 import { PageLayout } from '@/components/layout/page-layout';
 
 import { getEnabledOfficialSocials, getOfficialSocialIcon } from '@/lib/config/social';
 
 function socialGridClass(count: number): string {
   if (count <= 1) {
-    return 'grid grid-cols-1 max-w-md mx-auto';
+    return 'mx-auto grid max-w-md grid-cols-1';
   }
   if (count === 2) {
     return 'grid grid-cols-1 md:grid-cols-2';
@@ -19,7 +18,7 @@ export default function SocialPage() {
 
   return (
     <PageLayout subtitle="最新情報をSNSでチェック" title="公式SNS">
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         {platforms.length === 0 ? (
           <p className="text-center text-muted-foreground">公開中の公式SNSはありません。</p>
         ) : (
@@ -27,26 +26,22 @@ export default function SocialPage() {
             {platforms.map((platform) => {
               const IconComponent = getOfficialSocialIcon(platform.id);
               return (
-                <div key={platform.id} className="rounded-md bg-card p-8 space-y-6 text-center hover:bg-mist-hover transition-colors">
+                <div key={platform.id} className="ink-shell space-y-6 bg-card p-8 text-center">
                   <div className="flex justify-center">
-                    <div className="rounded-md bg-mist w-24 h-24 flex items-center justify-center">
+                    <div className="flex size-24 items-center justify-center rounded-[var(--radius)] bg-mist">
                       <IconComponent className="h-12 w-12 text-ink" />
                     </div>
                   </div>
                   <div className="space-y-3">
                     <h3 className="text-xl font-medium text-foreground">{platform.label}</h3>
                     <p className="text-lg font-medium text-ink">{platform.handle}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{platform.description}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{platform.description}</p>
                   </div>
-                  <a
-                    className="inline-flex min-h-11 items-center gap-2 rounded-md px-6 py-3 bg-festival-accent text-festival-accent-soft font-medium hover:bg-festival-accent-hover transition-colors text-sm"
-                    href={platform.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {platform.buttonText}
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
+                  <Button asChild>
+                    <a href={platform.url} rel="noopener noreferrer" target="_blank">
+                      {platform.buttonText}
+                    </a>
+                  </Button>
                 </div>
               );
             })}

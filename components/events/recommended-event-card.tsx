@@ -1,10 +1,8 @@
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
-import type { Event } from '@/lib/types/event';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
-import { isImageUrl } from '@/lib/utils';
+import type { Event } from '@/lib/types/event';
 
 interface RecommendedEventCardProps {
   recommender: string;
@@ -14,54 +12,22 @@ interface RecommendedEventCardProps {
 }
 
 export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, event }: RecommendedEventCardProps) {
-  const isEventIconUrl = isImageUrl(event.icon);
-
   return (
-    <div className="rounded-md bg-card p-5 space-y-4">
-      {/* パート情報（外枠） */}
+    <div className="ink-shell space-y-4 bg-card p-5">
       <div className="flex items-center gap-3">
-        <div className="shrink-0 w-10 h-10 rounded-md bg-paper-2 flex items-center justify-center overflow-hidden">
-          {recommenderIcon ? (
-            <Image
-              alt={recommender}
-              className="w-full h-full object-cover"
-              height={40}
-              src={recommenderIcon}
-              width={40}
-            />
-          ) : (
-            <span className="text-[10px] text-muted-foreground">No icon</span>
-          )}
-        </div>
+        <InkPhoto alt={recommender} className="ink-shell-sm size-10" size={40} src={recommenderIcon} />
         <p className="text-sm font-medium text-muted-foreground">{recommender}</p>
       </div>
 
-      {/* おすすめ理由 */}
-      {whyRecom && <p className="text-sm text-foreground leading-relaxed">{whyRecom}</p>}
+      {whyRecom ? <p className="text-sm leading-relaxed text-foreground">{whyRecom}</p> : null}
 
-      {/* 企画紹介カード（内側） */}
-      {/* 企画紹介カード（内側） */}
-      <Link
-        className="flex items-center gap-4 rounded-md bg-paper-2 p-4 transition-colors hover:bg-mist-hover"
-        href={`/events/${event.slug}`}
-      >
-        <div className="shrink-0 w-16 h-16 rounded-md bg-card flex items-center justify-center overflow-hidden">
-          {isEventIconUrl ? (
-            <Image alt={event.title} className="w-full h-full object-cover" height={64} src={event.icon} width={64} />
-          ) : (
-            <span className="text-xs text-muted-foreground">No icon</span>
-          )}
+      <Link className="ink-shell ink-lift flex items-center gap-4 bg-paper-2 p-4" href={`/events/${event.slug}`}>
+        <InkPhoto alt={event.title} className="ink-shell-sm size-16" size={64} src={event.icon} />
+
+        <div className="min-w-0 flex-1 space-y-1">
+          <p className="truncate font-medium">{event.title}</p>
+          {event.catchphrase ? <p className="line-clamp-2 text-sm text-muted-foreground">{event.catchphrase}</p> : null}
         </div>
-
-        <div className="flex-1 min-w-0 space-y-1">
-          <p className="font-medium truncate">{event.title}</p>
-          {event.catchphrase && <p className="text-sm text-muted-foreground line-clamp-2">{event.catchphrase}</p>}
-        </div>
-
-        <span className="ml-auto shrink-0 text-sm text-muted-foreground flex items-center gap-1">
-          詳細を見る
-          <ArrowRight className="h-4 w-4" />
-        </span>
       </Link>
     </div>
   );

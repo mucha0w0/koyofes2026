@@ -1,45 +1,33 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
-import { isImageUrl } from '@/lib/utils';
 
 interface ExhibitionCardProps {
   event: Event;
 }
 
 export function ExhibitionCard({ event }: ExhibitionCardProps) {
-  const isIconUrl = isImageUrl(event.icon);
-
   const rawLine = event.catchphrase?.split('\n')[0] ?? '';
   const displayCatchphrase = rawLine.length > 40 ? rawLine.substring(0, 40) + '...' : rawLine;
 
   return (
-    <Link className="block" href={`/events/${event.slug}`}>
-      <Card className="transition-colors cursor-pointer py-0 hover:bg-mist-hover">
-        <CardContent className="flex gap-4 p-6">
-          <div className="w-16 h-16 rounded-md bg-paper-2 flex items-center justify-center shrink-0 overflow-hidden">
-            {isIconUrl ? (
-              <Image alt={event.title} className="w-full h-full object-cover" height={64} src={event.icon} width={64} />
-            ) : (
-              <span className="text-xs text-muted-foreground">No image</span>
-            )}
-          </div>
+    <Link className="ink-shell ink-lift block bg-card" href={`/events/${event.slug}`}>
+      <div className="flex gap-4 p-6">
+        <InkPhoto alt={event.title} className="ink-shell-sm size-16" size={64} src={event.icon} />
 
-          <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-foreground text-lg">{event.title}</h3>
-            <p className="text-sm text-muted-foreground">{event.organization}</p>
-            {displayCatchphrase && <p className="text-xs text-muted-foreground mt-1 truncate">{displayCatchphrase}</p>}
-            <div className="flex gap-3 mt-3 flex-wrap text-xs">
-              <span className="rounded-md px-2 py-1 bg-mist text-ink">{getEventCategoryLabel(event.category)}</span>
-              <span className="rounded-md px-2 py-1 bg-mist text-ink">{event.location}</span>
-            </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-lg font-medium text-foreground">{event.title}</h3>
+          <p className="text-sm text-muted-foreground">{event.organization}</p>
+          {displayCatchphrase ? <p className="mt-1 truncate text-xs text-muted-foreground">{displayCatchphrase}</p> : null}
+          <div className="mt-3 flex flex-wrap gap-3 text-xs">
+            <span className="ink-tag">{getEventCategoryLabel(event.category)}</span>
+            <span className="ink-tag">{event.location}</span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </Link>
   );
 }

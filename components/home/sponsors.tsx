@@ -1,5 +1,4 @@
 // @/components/home/sponsors.tsx
-import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { SponsorsClient } from './sponsors-client';
@@ -21,7 +20,7 @@ export async function Sponsors() {
   if (sponsorItems.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-16 bg-paper-2 overflow-hidden">
+    <section className="overflow-hidden bg-paper-2 py-12 md:py-16" data-palette="pink">
       <div className="mx-auto mb-8 w-full max-w-7xl px-4">
         <div className="text-center">
           <h2 className="text-xl md:text-2xl font-medium mb-2">ご協賛</h2>
@@ -32,13 +31,9 @@ export async function Sponsors() {
       <SponsorsClient sponsors={sponsorItems} />
 
       <div className="text-center mt-6">
-        <Link
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          href="/about/sponsor"
-        >
-          すべて見る
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+          <Link className="ink-link inline-flex items-center text-sm" href="/about/sponsor">
+            すべて見る
+          </Link>
       </div>
     </section>
   );

@@ -1,12 +1,10 @@
 import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
 import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { PartItem, SocialPlatform } from '@/lib/types/part';
-
-import { isImageUrl } from '@/lib/utils';
 
 const socialIcons: Record<SocialPlatform, React.ComponentType<{ className?: string }>> = {
   instagram: SiInstagram,
@@ -19,17 +17,11 @@ interface PartCardProps {
 }
 
 export function PartCard({ item }: PartCardProps) {
-  const isIconUrl = isImageUrl(item.icon);
-
   return (
     <Card className="py-0">
       <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
-        <div className="row-start-1 col-start-1 sm:row-span-2 w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-md bg-paper-2 flex items-center justify-center overflow-hidden mt-0.5">
-          {isIconUrl ? (
-            <Image alt={item.name} className="w-full h-full object-cover" height={56} src={item.icon} width={56} />
-          ) : (
-            <span className="text-xs text-muted-foreground">No icon</span>
-          )}
+        <div className="row-start-1 col-start-1 mt-0.5 size-12 shrink-0 sm:row-span-2 sm:size-14">
+          <InkPhoto alt={item.name} className="ink-shell-sm size-full" size={56} src={item.icon} />
         </div>
 
         <div className="row-start-1 col-start-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">

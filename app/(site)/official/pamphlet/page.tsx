@@ -7,7 +7,7 @@ export default function PamphletPage() {
   return (
     <PageLayout subtitle="こうよう祭2026公式パンフレット" title="パンフレット">
       <div className="max-w-2xl mx-auto space-y-8">
-        <div className="rounded-md bg-card p-8 text-center">
+        <div className="ink-shell bg-card p-8 text-center">
           {/* PDFビューア */}
           <div className="w-full mb-6 aspect-[1/1.414]">
             <iframe

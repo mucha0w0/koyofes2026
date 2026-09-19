@@ -1,4 +1,3 @@
-import { ArrowRight, Instagram } from 'lucide-react';
 import Link from 'next/link';
 
 import { InstagramEmbed } from '@/components/home/instagram-embed';
@@ -19,21 +18,19 @@ function SectionHeading() {
 function InstagramLink() {
   return (
     <Link
-      className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+      className="ink-link inline-flex items-center gap-1 text-sm"
       href={INSTAGRAM_PROFILE_URL}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <Instagram className="h-4 w-4" />
       全てのPR動画をInstagramで見る
-      <ArrowRight className="h-4 w-4" />
     </Link>
   );
 }
 
 export function PrVideoSection() {
   return (
-    <section className="py-16 md:py-24 bg-paper-2">
+    <section className="bg-paper-2 py-16 md:py-24" data-palette="green">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col items-center gap-8">
           <div className="flex flex-col items-center gap-2 text-center">

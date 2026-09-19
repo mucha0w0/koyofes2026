@@ -42,8 +42,8 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 .replace(/\//g, '.');
               const plainContent = item.content.replace(/<[^>]*>/g, '').trim();
               return (
-                <Link key={item.id} className="block group" href={`/official/news/${item.id}`}>
-                  <Card className="transition-colors group-hover:bg-mist-hover cursor-pointer">
+                <Link key={item.id} className="block" href={`/official/news/${item.id}`}>
+                  <Card className="ink-lift cursor-pointer">
                     <CardHeader>
                       <div className="flex items-center gap-3">
                         <time className="text-sm text-muted-foreground">{formattedDate}</time>

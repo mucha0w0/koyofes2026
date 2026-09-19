@@ -2,7 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 interface CategorySectionProps {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   title: string;
   titleAs?: 'h2' | 'h3';
   action?: ReactNode;
@@ -10,18 +10,14 @@ interface CategorySectionProps {
 }
 
 export function CategorySection({
-  icon: Icon,
   title,
   titleAs: TitleTag = 'h2',
   action,
   children,
 }: CategorySectionProps) {
   return (
-    <div className="rounded-md bg-card overflow-hidden">
-      <div className="flex items-center gap-3 p-4 bg-paper-2">
-        <div className="rounded-md p-2 bg-card text-ink">
-          <Icon className="h-5 w-5" />
-        </div>
+    <div className="ink-shell overflow-visible bg-card">
+      <div className="flex items-center gap-3 p-4">
         <TitleTag className="text-lg font-medium">{title}</TitleTag>
         {action ? <div className="ml-auto">{action}</div> : null}
       </div>

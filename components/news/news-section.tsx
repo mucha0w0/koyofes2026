@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { getNews, type MicroCMSNews } from '@/lib/news';
@@ -14,17 +13,13 @@ export async function NewsSection() {
   }
 
   return (
-    <section className="pb-16 md:pb-24">
+    <section className="bg-background py-16 md:pb-24" data-palette="green">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl md:text-2xl font-medium">お知らせ</h2>
-            <Link
-              className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              href="/official/news"
-            >
+            <h2 className="text-xl font-medium md:text-2xl">お知らせ</h2>
+            <Link className="ink-link text-sm" href="/official/news">
               すべて見る
-              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -42,17 +37,16 @@ export async function NewsSection() {
                 return (
                   <Link
                     key={item.id}
-                    className="flex items-center gap-4 rounded-md p-4 bg-card transition-colors hover:bg-mist-hover group"
+                    className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4"
                     href={`/official/news/${item.id}`}
                   >
-                    <span className="text-sm text-muted-foreground shrink-0">{formattedDate}</span>
-                    <span className="text-sm font-medium truncate">{item.title}</span>
-                    <ArrowRight className="h-4 w-4 ml-auto text-muted-foreground shrink-0" />
+                    <span className="shrink-0 text-sm text-muted-foreground">{formattedDate}</span>
+                    <span className="truncate text-sm font-medium">{item.title}</span>
                   </Link>
                 );
               })
             ) : (
-              <div className="text-center p-4 text-muted-foreground">ニュースはまだ投稿されていません。</div>
+              <div className="p-4 text-center text-muted-foreground">ニュースはまだ投稿されていません。</div>
             )}
           </div>
         </div>

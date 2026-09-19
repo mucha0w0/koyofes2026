@@ -1,5 +1,3 @@
-import { ExternalLink } from 'lucide-react';
-
 import { getEnabledOfficialSocials, getOfficialSocialIcon, type OfficialSocial } from '@/lib/config/social';
 
 function SocialLink({ id, label, handle, url }: OfficialSocial) {
@@ -7,19 +5,16 @@ function SocialLink({ id, label, handle, url }: OfficialSocial) {
 
   return (
     <a
-      className="flex-1 relative flex items-center gap-3 px-5 py-3.5 rounded-md bg-card text-ink hover:bg-mist-hover transition-colors max-w-[320px]"
+      className="ink-shell ink-lift relative flex max-w-[320px] flex-1 items-center gap-3 bg-card px-5 py-3.5 text-ink"
       href={url}
       rel="noopener noreferrer"
       target="_blank"
     >
       <Icon className="h-6 w-6 shrink-0" />
-
-      <div className="flex flex-col min-w-0">
-        <span className="text-sm font-medium leading-tight">{label}</span>
-        <span className="text-xs text-ink-soft leading-tight">{handle}</span>
+      <div className="flex min-w-0 flex-col">
+        <span className="text-sm leading-tight font-medium">{label}</span>
+        <span className="text-xs leading-tight text-ink-soft">{handle}</span>
       </div>
-
-      <ExternalLink className="absolute bottom-2 right-2 h-3.5 w-3.5 text-ink-soft" />
     </a>
   );
 }
@@ -31,13 +26,11 @@ export function SocialCtaSection() {
   }
 
   return (
-    <section className="bg-festival-accent py-8 text-festival-accent-soft">
+    <section className="bg-festival-accent py-8 text-festival-accent-soft" data-palette="green">
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm tracking-normal text-center sm:text-left shrink-0">
-            最新情報は公式SNSをチェック！
-          </p>
-          <div className="flex w-full sm:w-auto sm:flex-1 justify-end gap-3">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <p className="shrink-0 text-center text-sm tracking-normal sm:text-left">最新情報は公式SNSをチェック！</p>
+          <div className="flex w-full justify-end gap-3 sm:w-auto sm:flex-1">
             {links.map((link) => (
               <SocialLink key={link.id} {...link} />
             ))}

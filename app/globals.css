@@ -7,17 +7,46 @@
 :root {
   color-scheme: light only;
 
-  --paper: #f5ebc8;
-  --paper-2: #f0d9b0;
-  --mist: #c9b8a4;
-  --ink: #161412;
-  --ink-soft: #5a534c;
+  --ink: #161616;
+  --ink-soft: #555555;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
-  --festival-accent: #cf783a;
-  --festival-accent-hover: #b56630;
+  --mist: #bababa;
   --festival-accent-soft: #ffffff;
   --festival-danger: #9c6a66;
+
+  --paper-orange: #f5ebc8;
+  --paper-2-orange: #f0d9b0;
+  --accent-orange: #cf783a;
+  --accent-orange-hover: #b56630;
+
+  --paper-green: #e0efe7;
+  --paper-2-green: #c5e2d2;
+  --accent-green: #3ba060;
+  --accent-green-hover: #318a52;
+
+  --paper-sky: #e1edf2;
+  --paper-2-sky: #c7e1e8;
+  --accent-sky: #3e99b0;
+  --accent-sky-hover: #338498;
+
+  --paper-pink: #f5e7ea;
+  --paper-2-pink: #efd5db;
+  --accent-pink: #d2708d;
+  --accent-pink-hover: #cb4f74;
+
+  --paper: var(--paper-orange);
+  --paper-2: var(--paper-2-orange);
+  --festival-accent: var(--accent-orange);
+  --festival-accent-hover: var(--accent-orange-hover);
   --mist-hover: color-mix(in srgb, var(--mist) 38%, var(--festival-accent-soft));
+
+  --shell-stroke: 2.5px;
+  --shell-ox: 4px;
+  --shell-oy: 5px;
+  --shell-ox-hover: 6px;
+  --shell-oy-hover: 8px;
+  --shell-ox-press: 2px;
+  --shell-oy-press: 3px;
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -54,6 +83,50 @@
   --sidebar-ring: var(--ink);
   --font-jp: var(--font-zen-kaku), 'Yu Gothic Pr6N M', 'Yu Gothic', 'YuGothic', sans-serif;
   --font-display: var(--font-zen-maru), var(--font-zen-kaku), sans-serif;
+}
+
+html[data-palette='green'],
+[data-palette='green'] {
+  --paper: var(--paper-green);
+  --paper-2: var(--paper-2-green);
+  --festival-accent: var(--accent-green);
+  --festival-accent-hover: var(--accent-green-hover);
+  --background: var(--paper);
+  --chart-1: var(--festival-accent);
+  --sidebar: var(--paper);
+}
+
+html[data-palette='sky'],
+[data-palette='sky'] {
+  --paper: var(--paper-sky);
+  --paper-2: var(--paper-2-sky);
+  --festival-accent: var(--accent-sky);
+  --festival-accent-hover: var(--accent-sky-hover);
+  --background: var(--paper);
+  --chart-1: var(--festival-accent);
+  --sidebar: var(--paper);
+}
+
+html[data-palette='pink'],
+[data-palette='pink'] {
+  --paper: var(--paper-pink);
+  --paper-2: var(--paper-2-pink);
+  --festival-accent: var(--accent-pink);
+  --festival-accent-hover: var(--accent-pink-hover);
+  --background: var(--paper);
+  --chart-1: var(--festival-accent);
+  --sidebar: var(--paper);
+}
+
+html[data-palette='orange'],
+[data-palette='orange'] {
+  --paper: var(--paper-orange);
+  --paper-2: var(--paper-2-orange);
+  --festival-accent: var(--accent-orange);
+  --festival-accent-hover: var(--accent-orange-hover);
+  --background: var(--paper);
+  --chart-1: var(--festival-accent);
+  --sidebar: var(--paper);
 }
 
 @theme inline {
@@ -170,7 +243,7 @@
   }
 }
 
-/* DESIGN2 パイロット。/dev/design 見本用。本番 :root は未変更。
+/* DESIGN2 パイロット。/dev/design 見本用。
    基調色は paper / paper-2 / accent。インクと霧は無彩色で全パレット共用。 */
 .theme-1dearland {
   --mist: #bababa;
@@ -204,13 +277,13 @@
   --festival-accent-hover: var(--accent-orange-hover);
   --festival-accent-soft: #ffffff;
   --festival-danger: #9c6a66;
-  --lookbook-stroke: 2.5px;
-  --lookbook-offset-x: 4px;
-  --lookbook-offset-y: 5px;
-  --lookbook-offset-x-hover: 6px;
-  --lookbook-offset-y-hover: 8px;
-  --lookbook-offset-x-press: 2px;
-  --lookbook-offset-y-press: 3px;
+  --lookbook-stroke: var(--shell-stroke);
+  --lookbook-offset-x: var(--shell-ox);
+  --lookbook-offset-y: var(--shell-oy);
+  --lookbook-offset-x-hover: var(--shell-ox-hover);
+  --lookbook-offset-y-hover: var(--shell-oy-hover);
+  --lookbook-offset-x-press: var(--shell-ox-press);
+  --lookbook-offset-y-press: var(--shell-oy-press);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -625,8 +698,112 @@
   opacity: 0.4;
 }
 
+@layer components {
+  .ink-shell {
+    position: relative;
+    z-index: 0;
+    border: var(--shell-stroke) solid var(--ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shell-ox) var(--shell-oy) 0 0 var(--ink);
+  }
+
+  .ink-shell-sm {
+    box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
+  }
+
+  .ink-lift {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .ink-pressed,
+  .ink-lift[aria-pressed='true'],
+  .ink-lift[aria-pressed='true']:hover,
+  .ink-lift:disabled,
+  button.ink-lift:disabled {
+    z-index: 0;
+    transform: translate(
+      calc(var(--shell-ox) - var(--shell-ox-press)),
+      calc(var(--shell-oy) - var(--shell-oy-press))
+    );
+    box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
+  }
+
+  .ink-lift[aria-pressed='true'],
+  .ink-lift[aria-pressed='true']:hover {
+    background: var(--festival-accent-soft);
+  }
+
+  .ink-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    border: var(--shell-stroke) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--mist);
+    padding: 0.125rem 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    color: var(--ink);
+    box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
+  }
+
+  .ink-link {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .ink-link:hover {
+    opacity: 0.7;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a.ink-lift:hover,
+    button.ink-lift:hover:not(:disabled):not([aria-pressed='true']),
+    .ink-lift:hover:not(:disabled):not([aria-pressed='true']) {
+      z-index: 1;
+      transform: translate(-2px, -3px);
+      box-shadow: var(--shell-ox-hover) var(--shell-oy-hover) 0 0 var(--ink);
+    }
+
+    a.ink-lift:active,
+    button.ink-lift:active:not(:disabled):not([aria-pressed='true']),
+    .ink-lift:active:not(:disabled):not([aria-pressed='true']) {
+      transform: translate(
+        calc(var(--shell-ox) - var(--shell-ox-press)),
+        calc(var(--shell-oy) - var(--shell-oy-press))
+      );
+      box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-lift {
+      transition: none;
+    }
+
+    a.ink-lift:hover,
+    button.ink-lift:hover:not(:disabled):not([aria-pressed='true']),
+    .ink-lift:hover:not(:disabled):not([aria-pressed='true']),
+    a.ink-lift:active,
+    button.ink-lift:active:not(:disabled):not([aria-pressed='true']),
+    .ink-lift:active:not(:disabled):not([aria-pressed='true']) {
+      transform: none;
+      box-shadow: var(--shell-ox) var(--shell-oy) 0 0 var(--ink);
+    }
+  }
+}
 
 @layer utilities {
+  .ink-lift[aria-pressed='true'],
+  .ink-lift[aria-pressed='true']:hover {
+    background-color: var(--festival-accent-soft);
+  }
+
   .font-display {
     font-family: var(--font-display);
     letter-spacing: 0;

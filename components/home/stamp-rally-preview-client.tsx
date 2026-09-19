@@ -1,10 +1,9 @@
 'use client';
 
-import { ArrowRight, MapPin } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
+import { InkPhoto } from '@/components/ui/ink-photo';
 import { Progress } from '@/components/ui/progress';
 
 import type { StampBooth, StampStorageData } from '@/lib/types/stamp';
@@ -13,7 +12,6 @@ import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { formatLocation } from '@/lib/event-display';
 import { findLastCollectedBooth, pickNextStampBooths } from '@/lib/stamp/next-booths';
 import { readStampStorage } from '@/lib/stamp/storage';
-import { isImageUrl } from '@/lib/utils';
 
 interface StampRallyPreviewClientProps {
   booths: StampBooth[];
@@ -25,47 +23,31 @@ function boothLocationLabel(booth: StampBooth): string {
 }
 
 function BoothRow({ booth }: { booth: StampBooth }) {
-  const hasIcon = isImageUrl(booth.icon);
   const locationLabel = boothLocationLabel(booth);
   const categoryLabel = getEventCategoryLabel(booth.category);
 
   return (
-    <Link
-      className="group flex items-center gap-4 rounded-md bg-card p-4 transition-colors hover:bg-mist-hover"
-      href={`/events/${booth.slug}`}
-    >
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
-        {hasIcon ? (
-          <Image alt={booth.title} className="h-full w-full object-cover" height={56} src={booth.icon} width={56} />
-        ) : (
-          <span className="text-xs text-muted-foreground">No image</span>
-        )}
-      </div>
+    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={`/events/${booth.slug}`}>
+      <InkPhoto alt={booth.title} className="ink-shell-sm size-14" size={56} src={booth.icon} />
       <div className="min-w-0 flex-1 space-y-1">
         <p className="truncate text-sm font-medium">{booth.title}</p>
         {booth.organization ? <p className="truncate text-xs text-muted-foreground">{booth.organization}</p> : null}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
           <span>{categoryLabel}</span>
-          {locationLabel ? (
-            <span className="inline-flex min-w-0 items-center gap-1">
-              <MapPin className="h-3 w-3 shrink-0" />
-              <span className="truncate">{locationLabel}</span>
-            </span>
-          ) : null}
+          {locationLabel ? <span className="truncate">{locationLabel}</span> : null}
         </div>
       </div>
-      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
     </Link>
   );
 }
 
 function BoothRowSkeleton() {
   return (
-    <div className="flex items-center gap-4 bg-card p-4">
-      <div className="h-14 w-14 shrink-0 rounded-md bg-paper-2" />
+    <div className="ink-shell flex items-center gap-4 bg-card p-4">
+      <div className="size-14 shrink-0 rounded-[var(--radius)] bg-paper-2" />
       <div className="min-w-0 flex-1 space-y-2">
-        <div className="h-4 w-1/2 rounded-md bg-paper-2" />
-        <div className="h-3 w-1/3 rounded-md bg-paper-2" />
+        <div className="h-4 w-1/2 rounded-[var(--radius)] bg-paper-2" />
+        <div className="h-3 w-1/3 rounded-[var(--radius)] bg-paper-2" />
       </div>
     </div>
   );
@@ -88,8 +70,8 @@ function BoothGroup({
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-medium">{heading}</h3>
-      <div className="grid gap-2">
+      <h3 className="text-center text-sm font-medium">{heading}</h3>
+      <div className="grid gap-3">
         {ready
           ? booths.map((booth) => <BoothRow key={booth.slug} booth={booth} />)
           : Array.from({ length: skeletonCount }, (_, index) => <BoothRowSkeleton key={index} />)}
@@ -130,22 +112,20 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
     : [];
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="bg-background py-16 md:py-24" data-palette="green">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl space-y-6">
-          <div className="flex items-center justify-between gap-4">
+          <div className="text-center">
             <h2 className="text-xl font-medium md:text-2xl">スタンプラリー</h2>
-            <Link
-              className="flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              href="/stamp"
-            >
-              スタンプ帳を見る
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <p className="mt-3">
+              <Link className="ink-link text-sm" href="/stamp">
+                スタンプ帳を見る
+              </Link>
+            </p>
           </div>
 
           {totalCount > 0 ? (
-            <div className="flex items-center gap-4 rounded-md bg-card px-4 py-3">
+            <div className="ink-shell flex items-center gap-4 bg-card px-4 py-3">
               <p className="shrink-0 text-sm">
                 {ready ? (
                   <span className="text-lg font-medium tracking-normal tabular-nums">{collectedCount}</span>

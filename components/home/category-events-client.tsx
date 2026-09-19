@@ -1,15 +1,12 @@
 ﻿'use client';
 
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 import { CategorySection } from '@/components/events/category-section';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
-import { getEventCategoryIcon } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
-import { isImageUrl } from '@/lib/utils';
 
 type EventCategory = Event['category'];
 
@@ -18,20 +15,12 @@ interface EventCardProps {
 }
 
 function EventCard({ event }: EventCardProps) {
-  const isIconUrl = isImageUrl(event.icon);
-
   return (
-    <Link className="flex flex-col items-center gap-2 shrink-0 group" href={`/events/${event.slug}`}>
-      <div className="w-20 h-20 md:w-32 md:h-32 rounded-md bg-paper-2 overflow-hidden transition-colors flex items-center justify-center">
-        {isIconUrl ? (
-          <Image alt={event.title} className="w-full h-full object-cover" height={128} src={event.icon} width={128} />
-        ) : (
-          <span className="text-xs text-muted-foreground">No image</span>
-        )}
-      </div>
-      <div className="text-center max-w-24 md:max-w-32">
-        <p className="text-xs md:text-sm font-medium truncate">{event.title}</p>
-        <p className="text-xs md:text-sm text-muted-foreground truncate">{event.organization}</p>
+    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${event.slug}`}>
+      <InkPhoto alt={event.title} className="size-20 md:size-32" size={128} src={event.icon} />
+      <div className="max-w-24 text-center md:max-w-32">
+        <p className="truncate text-xs font-medium md:text-sm">{event.title}</p>
+        <p className="truncate text-xs text-muted-foreground md:text-sm">{event.organization}</p>
       </div>
     </Link>
   );
@@ -140,7 +129,7 @@ function ScrollingEvents({ events }: ScrollingEventsProps) {
 
   return (
     // overflow-hidden でトラックのはみ出しを隠す
-    <div className="overflow-hidden py-2">
+    <div className="overflow-hidden px-1 py-3">
       {/* トラック：transform で動かす。幅はコンテンツ分必要なので width-max */}
       <div ref={trackRef} className="flex gap-4 w-max will-change-transform">
         {[1, 2, 3].map((setNum) => (
@@ -167,10 +156,10 @@ interface CategoryEventsContentProps {
 
 export function CategoryEventsContent({ categories }: CategoryEventsContentProps) {
   return (
-    <section className="py-16 md:py-24">
+    <section className="bg-background py-16 md:py-24" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-medium mb-2">カテゴリ別企画一覧</h2>
+        <div className="mb-12 text-center">
+          <h2 className="mb-2 text-2xl font-medium md:text-3xl">カテゴリ別企画一覧</h2>
           <p className="text-muted-foreground">様々な企画から選んでチェック</p>
         </div>
 
@@ -179,15 +168,10 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
             <CategorySection
               key={category.id}
               action={
-                <Link
-                  className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
-                  href="/events/list"
-                >
+                <Link className="ink-link text-sm" href="/events/list">
                   すべて見る
-                  <ArrowRight className="h-4 w-4" />
                 </Link>
               }
-              icon={getEventCategoryIcon(category.id)}
               title={category.title}
               titleAs="h3"
             >

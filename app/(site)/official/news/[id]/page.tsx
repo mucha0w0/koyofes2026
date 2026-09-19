@@ -71,10 +71,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   return (
     <CmsPageLayout meta="newsList">
       <div className="mx-auto max-w-3xl">
-        <Link
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-          href="/official/news"
-        >
+          <Link className="ink-link mb-6 inline-flex items-center gap-2 text-sm" href="/official/news">
           <ArrowLeft className="h-4 w-4" />
           お知らせ一覧に戻る
         </Link>

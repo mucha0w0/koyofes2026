@@ -125,10 +125,10 @@ function EventMeta() {
 
 function TimeCounter({ timeLeft }: { timeLeft: TimeLeft }) {
   const units = [
-    { label: 'days', value: timeLeft.days },
-    { label: 'hours', value: timeLeft.hours },
-    { label: 'mins', value: timeLeft.minutes },
-    { label: 'secs', value: timeLeft.seconds },
+    { label: '日', value: timeLeft.days },
+    { label: '時間', value: timeLeft.hours },
+    { label: '分', value: timeLeft.minutes },
+    { label: '秒', value: timeLeft.seconds },
   ];
 
   return (

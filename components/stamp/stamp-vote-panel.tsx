@@ -1,16 +1,15 @@
 'use client';
 
 import { Star, User } from 'lucide-react';
-import Image from 'next/image';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { RankingVoteError } from '@/lib/types/ranking';
 
 import { RANKING_CONFIG, type WaitLevel } from '@/lib/config/rankingConfig';
-import { isImageUrl } from '@/lib/utils';
 
 export interface StampVotePanelProps {
   slug: string;
@@ -54,7 +53,6 @@ export function StampVotePanel({
   const [waitLevel, setWaitLevel] = useState<WaitLevel | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const hasIcon = isImageUrl(icon);
 
   async function handleWaitSelect(nextWaitLevel: WaitLevel) {
     if (submitting) {
@@ -96,13 +94,7 @@ export function StampVotePanel({
       </DialogHeader>
 
       <div className="flex items-center gap-4">
-        <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-paper-2">
-          {hasIcon ? (
-            <Image alt={title} className="size-full object-cover" height={64} src={icon} width={64} />
-          ) : (
-            <span className="text-xs text-muted-foreground">No image</span>
-          )}
-        </div>
+        <InkPhoto alt={title} className="ink-shell-sm size-16" size={64} src={icon} />
         <p className="font-medium">{title}</p>
       </div>
 
@@ -144,9 +136,8 @@ export function StampVotePanel({
               <button
                 key={option.value}
                 aria-label={`${option.label}を送信`}
-                className={`flex min-h-11 flex-col items-center justify-center gap-2 rounded-md px-2 py-3 transition-colors ${
-                  selected ? 'bg-card text-ink' : 'bg-mist text-ink hover:bg-mist-hover'
-                }`}
+                className="ink-shell ink-lift flex min-h-11 flex-col items-center justify-center gap-2 bg-mist px-2 py-3"
+                aria-pressed={selected}
                 disabled={submitting}
                 type="button"
                 onClick={() => void handleWaitSelect(option.value)}

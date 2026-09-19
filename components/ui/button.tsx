@@ -5,16 +5,17 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-display text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink border-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius)] font-display text-sm font-medium outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: 'bg-festival-accent text-festival-accent-soft hover:bg-festival-accent-hover',
-        destructive: 'bg-mist text-ink hover:bg-mist-hover',
-        outline: 'bg-mist text-ink hover:bg-mist-hover',
-        secondary: 'bg-card text-ink hover:bg-mist-hover',
-        ghost: 'bg-transparent text-ink underline-offset-[0.2em] hover:underline',
-        link: 'bg-transparent text-ink underline underline-offset-[0.2em] hover:opacity-70',
+        default:
+          'ink-shell ink-lift bg-festival-accent text-festival-accent-soft hover:bg-festival-accent-hover disabled:opacity-40',
+        destructive: 'ink-shell ink-lift bg-mist text-ink disabled:opacity-40',
+        outline: 'ink-shell ink-lift bg-mist text-ink disabled:opacity-40',
+        secondary: 'ink-shell ink-lift bg-card text-ink disabled:opacity-40',
+        ghost: 'bg-transparent text-ink underline-offset-[0.2em] hover:underline disabled:opacity-40',
+        link: 'bg-transparent text-ink underline underline-offset-[0.2em] hover:opacity-70 disabled:opacity-40',
       },
       size: {
         default: 'h-11 min-h-11 px-5 py-2 has-[>svg]:px-3',
