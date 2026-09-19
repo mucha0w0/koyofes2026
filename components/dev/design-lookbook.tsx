@@ -527,7 +527,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カード・エラーはインク枠。帯は枠なし" title="塗り">
+        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カード・エラー・写真はインク枠。帯は枠なし" title="塗り">
           <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 overflow-hidden sm:grid-cols-5">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper</span>
@@ -668,23 +668,21 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.news} spec="DESIGN2 11.12 ・ 日付＋見出し。ライムの NEW は足さない" title="お知らせ">
+        <Section band id={SECTION_ID.news} spec="DESIGN2 11.12 ・ 日付＋見出し。サムネは枠付き。ライムの NEW は足さない" title="お知らせ">
           <div data-lookbook-chrome className="grid gap-5 md:grid-cols-3">
             {NEWS.map((item) => (
-              <article key={item.title} className={item.image ? 'lookbook-card lookbook-card-media' : 'lookbook-card'}>
+              <article key={item.title} className="lookbook-card">
                 {item.image ? (
-                  <div className="relative aspect-[16/10] bg-[var(--paper-2)]">
+                  <div className="lookbook-photo relative mb-4 aspect-[16/10]">
                     <Image fill alt={item.imageAlt ?? ''} className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" src={item.image} />
                   </div>
                 ) : null}
-                <div className={item.image ? 'lookbook-card-body' : undefined}>
-                  <p className="text-sm text-[var(--ink-soft)]">{item.date}</p>
-                  <p className="lookbook-subhead mt-2 font-medium">
-                    <Link className="lookbook-link" href={item.href}>
-                      {item.title}
-                    </Link>
-                  </p>
-                </div>
+                <p className="text-sm text-[var(--ink-soft)]">{item.date}</p>
+                <p className="lookbook-subhead mt-2 font-medium">
+                  <Link className="lookbook-link" href={item.href}>
+                    {item.title}
+                  </Link>
+                </p>
               </article>
             ))}
           </div>
@@ -699,7 +697,7 @@ export function DesignLookbook() {
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
             開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（accent 地＋白抜き＋既存ナビの列）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
           </p>
-          <figure data-lookbook-chrome className="lookbook-soft relative mx-auto mt-10 aspect-[1178/295] max-w-3xl overflow-hidden bg-[var(--paper-2)]">
+          <figure data-lookbook-chrome className="lookbook-photo relative mx-auto mt-10 aspect-[1178/295] max-w-3xl">
             <Image
               fill
               alt="こうよう祭 2026 テーマ 1dearland のコンセプトアート"
