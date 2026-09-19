@@ -1,5 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 interface PageLayoutProps {
   title: string;
@@ -20,10 +19,9 @@ export function PageLayout({
     <main className="min-h-screen">
       <div className="border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-card">
         <div className="mx-auto w-full max-w-7xl px-4 pt-12 pb-10 md:pt-16 md:pb-12">
-          <Link className="ink-link mb-6 inline-flex items-center gap-2 text-sm" href={backHref}>
-            <ArrowLeft className="h-4 w-4" />
+          <InkTextLink arrow="left" className="mb-6" href={backHref}>
             {backLabel}
-          </Link>
+          </InkTextLink>
           <h1 className="font-display text-3xl font-bold md:text-4xl">{title}</h1>
           {subtitle ? <p className="mt-3 text-muted-foreground">{subtitle}</p> : null}
         </div>

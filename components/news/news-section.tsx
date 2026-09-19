@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { InkTextLink } from '@/components/ui/ink-text-link';
+
 import { getNews, type MicroCMSNews } from '@/lib/news';
 
 export async function NewsSection() {
@@ -18,9 +20,7 @@ export async function NewsSection() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-medium md:text-2xl">お知らせ</h2>
-            <Link className="ink-link text-sm" href="/official/news">
-              すべて見る
-            </Link>
+            <InkTextLink href="/official/news">すべて見る</InkTextLink>
           </div>
 
           <div className="space-y-3">

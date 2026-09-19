@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,7 +21,8 @@ export function NotFoundContent() {
           </p>
         </div>
 
-        <Link className="ink-shell ink-lift inline-flex min-h-11 items-center bg-festival-accent px-8 text-sm font-medium text-festival-accent-soft hover:bg-festival-accent-hover" href="/">
+        <Link className="ink-shell ink-lift inline-flex min-h-11 items-center gap-2 bg-festival-accent px-8 text-sm font-medium text-festival-accent-soft hover:bg-festival-accent-hover" href="/">
+          <ArrowLeft aria-hidden className="h-4 w-4" />
           トップページに戻る
         </Link>
       </div>

@@ -1,7 +1,7 @@
 // @/components/home/sponsors.tsx
-import Link from 'next/link';
-
 import { SponsorsClient } from './sponsors-client';
+
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { fetchSponsorsFromMicroCMS, transformMicroCMSSponsor } from '@/lib/sponsors';
 
@@ -31,9 +31,7 @@ export async function Sponsors() {
       <SponsorsClient sponsors={sponsorItems} />
 
       <div className="text-center mt-6">
-          <Link className="ink-link inline-flex items-center text-sm" href="/about/sponsor">
-            すべて見る
-          </Link>
+          <InkTextLink href="/about/sponsor">すべて見る</InkTextLink>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { getStageEvents, toTimedEvents } from '@/lib/timetable';
 import { type Event } from '@/lib/types/event';
@@ -94,9 +95,7 @@ export async function TimetablePreview() {
         </div>
 
         <div className="flex justify-center">
-          <Link className="ink-link text-sm" href="/events/timetable">
-            タイムテーブルを見る
-          </Link>
+          <InkTextLink href="/events/timetable">タイムテーブルを見る</InkTextLink>
         </div>
       </div>
     </section>

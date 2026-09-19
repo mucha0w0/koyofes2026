@@ -553,8 +553,7 @@ html[data-palette='orange'],
   box-shadow: none;
   background: transparent;
   color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-decoration: none;
 }
 
 .theme-1dearland .btn-quiet:hover {
@@ -724,10 +723,7 @@ html[data-palette='orange'],
   .ink-lift:disabled,
   button.ink-lift:disabled {
     z-index: 0;
-    transform: translate(
-      calc(var(--shell-ox) - var(--shell-ox-press)),
-      calc(var(--shell-oy) - var(--shell-oy-press))
-    );
+    transform: translate(calc(var(--shell-ox) - var(--shell-ox-press)), calc(var(--shell-oy) - var(--shell-oy-press)));
     box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
   }
 
@@ -753,8 +749,7 @@ html[data-palette='orange'],
 
   .ink-link {
     color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+    text-decoration: none;
   }
 
   .ink-link:hover {

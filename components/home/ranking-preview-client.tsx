@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import type { RankingApiError, RankingOverallItem, RankingResponse } from '@/lib/types/ranking';
 
@@ -97,9 +98,7 @@ export function RankingPreviewClient() {
             <h2 className="text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
             <p className="mt-1 text-sm text-muted-foreground">星の総合評価 上位{PREVIEW_COUNT}企画</p>
             <p className="mt-3">
-              <Link className="ink-link text-sm" href="/ranking">
-                ランキングを見る
-              </Link>
+              <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
             </p>
           </div>
 

@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 
 import { CategorySection } from '@/components/events/category-section';
 import { InkPhoto } from '@/components/ui/ink-photo';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { Event } from '@/lib/types/event';
 
@@ -168,9 +169,7 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
             <CategorySection
               key={category.id}
               action={
-                <Link className="ink-link text-sm" href="/events/list">
-                  すべて見る
-                </Link>
+                <InkTextLink href="/events/list">すべて見る</InkTextLink>
               }
               title={category.title}
               titleAs="h3"

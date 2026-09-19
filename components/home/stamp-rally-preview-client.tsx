@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 import { Progress } from '@/components/ui/progress';
 
 import type { StampBooth, StampStorageData } from '@/lib/types/stamp';
@@ -118,9 +119,7 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
           <div className="text-center">
             <h2 className="text-xl font-medium md:text-2xl">スタンプラリー</h2>
             <p className="mt-3">
-              <Link className="ink-link text-sm" href="/stamp">
-                スタンプ帳を見る
-              </Link>
+              <InkTextLink href="/stamp">スタンプ帳を見る</InkTextLink>
             </p>
           </div>
 

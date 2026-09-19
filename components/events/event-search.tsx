@@ -1,9 +1,10 @@
 'use client';
 
 import { Search, X } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type KeyboardEvent } from 'react';
+
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { cn } from '@/lib/utils';
 
@@ -125,9 +126,7 @@ export function EventSearchSection({ variant = 'prominent', showViewAllLink }: E
 
           {viewAllLink && (
             <div className="mt-6 text-center">
-              <Link className="ink-link inline-flex items-center gap-1 text-sm" href={SEARCH_LIST_PATH}>
-                すべての企画を見る
-              </Link>
+              <InkTextLink href={SEARCH_LIST_PATH}>すべての企画を見る</InkTextLink>
             </div>
           )}
         </div>

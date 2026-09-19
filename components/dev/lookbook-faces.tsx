@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useMemo, useState, type ReactNode } from 'react';
 
 import { cmsPageMeta } from '@/components/cms/cms-page-meta';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import type { EventCategory } from '@/lib/types/event';
 
@@ -138,9 +139,9 @@ function PageLead({
 }) {
   return (
     <div className="mb-10">
-      <a className="lookbook-link lookbook-subhead text-sm" href={backHref}>
+      <InkTextLink arrow="left" className="lookbook-subhead" href={backHref}>
         戻る
-      </a>
+      </InkTextLink>
       <h1 className="lookbook-heading mt-3">{title}</h1>
       {subtitle ? <p className="mt-3 text-[var(--ink-soft)]">{subtitle}</p> : null}
     </div>

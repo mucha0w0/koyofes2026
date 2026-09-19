@@ -1,10 +1,12 @@
 'use client';
 
+import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 
 import { EventDetailFace, EventListFace, StampBookFace } from '@/components/dev/lookbook-faces';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { getNavSections } from '@/lib/config/nav';
@@ -249,9 +251,7 @@ function RankingSpecimen() {
           ))}
         </ol>
         <p data-lookbook-chrome className="mt-8 text-center">
-          <Link className="btn-quiet" href="/ranking">
-            ランキングを見る
-          </Link>
+          <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
         </p>
       </div>
     </div>
@@ -382,9 +382,9 @@ export function DesignLookbook() {
             >
               {grayscale ? 'グレーを解除' : 'クロムをグレーで見る'}
             </button>
-            <Link className="lookbook-subhead inline-flex min-h-11 items-center underline underline-offset-4" href="/">
+            <InkTextLink className="lookbook-subhead min-h-11" href="/">
               現行トップへ
-            </Link>
+            </InkTextLink>
           </div>
         </div>
       </div>
@@ -560,7 +560,8 @@ export function DesignLookbook() {
             <button className="btn-outline" type="button">
               パンフレット
             </button>
-            <button className="btn-quiet" type="button">
+            <button className="btn-quiet inline-flex items-center gap-2" type="button">
+              <ArrowLeft aria-hidden className="h-4 w-4" />
               トップページに戻る
             </button>
             <button disabled className={TICKET_BTN} type="button">
@@ -687,9 +688,7 @@ export function DesignLookbook() {
             ))}
           </div>
           <p data-lookbook-chrome className="mt-8 text-center">
-            <Link className="btn-quiet" href="/official/news">
-              お知らせを見る
-            </Link>
+            <InkTextLink href="/official/news">お知らせを見る</InkTextLink>
           </p>
         </Section>
 
@@ -713,9 +712,9 @@ export function DesignLookbook() {
 
         <Section band id={SECTION_ID.page} spec="DESIGN2 9 ・ 見出し下は余白。枠なし" title="ページ見出し">
           <div data-lookbook-chrome className="mx-auto max-w-3xl pb-8">
-            <Link className="lookbook-link lookbook-subhead text-sm" href="/">
+            <InkTextLink arrow="left" className="lookbook-subhead" href="/">
               トップページに戻る
-            </Link>
+            </InkTextLink>
             <p className="lookbook-heading mt-6 text-3xl md:text-4xl">こうよう祭とは</p>
             <p className="mt-3 text-[var(--ink-soft)]">歴史と概要</p>
           </div>

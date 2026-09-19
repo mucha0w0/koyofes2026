@@ -1,6 +1,5 @@
-import Link from 'next/link';
-
 import { InstagramEmbed } from '@/components/home/instagram-embed';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { getOfficialSocial } from '@/lib/config/social';
 
@@ -17,14 +16,9 @@ function SectionHeading() {
 
 function InstagramLink() {
   return (
-    <Link
-      className="ink-link inline-flex items-center gap-1 text-sm"
-      href={INSTAGRAM_PROFILE_URL}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
+    <InkTextLink href={INSTAGRAM_PROFILE_URL} rel="noopener noreferrer" target="_blank">
       全てのPR動画をInstagramで見る
-    </Link>
+    </InkTextLink>
   );
 }
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 import { PageLayout } from '@/components/layout/page-layout';
@@ -27,7 +28,10 @@ export function CmsPageError({
             再読み込み
           </Button>
           <Button asChild className="px-8" size="lg" variant="outline">
-            <Link href="/">トップページに戻る</Link>
+            <Link href="/">
+              <ArrowLeft aria-hidden className="h-4 w-4" />
+              トップページに戻る
+            </Link>
           </Button>
         </div>
       </div>

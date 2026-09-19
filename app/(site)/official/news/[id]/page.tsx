@@ -1,9 +1,8 @@
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import type { Metadata } from 'next';
 
@@ -71,10 +70,9 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   return (
     <CmsPageLayout meta="newsList">
       <div className="mx-auto max-w-3xl">
-          <Link className="ink-link mb-6 inline-flex items-center gap-2 text-sm" href="/official/news">
-          <ArrowLeft className="h-4 w-4" />
-          お知らせ一覧に戻る
-        </Link>
+          <InkTextLink arrow="left" className="mb-6" href="/official/news">
+            お知らせ一覧に戻る
+          </InkTextLink>
 
         <Card className="pt-2">
           <CardHeader className="px-8 pt-6 pb-2">
