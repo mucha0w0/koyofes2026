@@ -597,10 +597,13 @@ html[data-palette='orange'],
   background: var(--fill-card);
 }
 
-.theme-1dearland .lookbook-card .lookbook-photo,
+.theme-1dearland .lookbook-card .lookbook-photo {
+  box-shadow: 2px 3px 0 0 var(--ink);
+}
+
 .theme-1dearland .lookbook-card .lookbook-thumb,
 .theme-1dearland .lookbook-rank .lookbook-thumb {
-  box-shadow: 2px 3px 0 0 var(--ink);
+  box-shadow: none;
 }
 
 .theme-1dearland .lookbook-rank {
@@ -707,7 +710,25 @@ html[data-palette='orange'],
   }
 
   .ink-shell-sm {
-    box-shadow: var(--shell-ox-press) var(--shell-oy-press) 0 0 var(--ink);
+    box-shadow: none;
+  }
+
+  .ink-card-icon {
+    width: auto;
+    height: auto;
+    min-width: 6.5rem;
+    min-height: 6.5rem;
+    max-width: 8.5rem;
+    align-self: stretch;
+    aspect-ratio: 1 / 1;
+  }
+
+  @media (max-width: 640px) {
+    .ink-card-icon {
+      min-width: 5.75rem;
+      min-height: 5.75rem;
+      max-width: 7rem;
+    }
   }
 
   .ink-lift {
