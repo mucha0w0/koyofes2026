@@ -17,16 +17,20 @@ export default function HomePage() {
     <main>
       <HeroSection />
       <FestivalCountdown />
-      <FestivalTicker />
       <EventSearchSection variant="prominent" />
       <CategoryEvents />
+
+      <FestivalTicker />
+
       <PrVideoSection />
       <StampRallyPreview />
       <RankingPreview />
       <SocialCtaSection />
       <TimetablePreview />
+      <FestivalTicker />
       <LinksSection />
       <NewsSection />
+      <FestivalTicker />
       <Sponsors />
     </main>
   );

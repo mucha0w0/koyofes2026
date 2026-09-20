@@ -15,7 +15,7 @@ export async function NewsSection() {
   }
 
   return (
-    <section className="bg-background py-16 md:pb-24" data-palette="green">
+    <section className="bg-background py-16 md:pb-24" data-palette="sky">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
