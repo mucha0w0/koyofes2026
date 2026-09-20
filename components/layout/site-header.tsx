@@ -12,7 +12,11 @@ function DropdownMenu({ item }: { item: ResolvedNavSection }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
+    <div
+      className="relative flex items-center"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <button
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -22,19 +26,21 @@ function DropdownMenu({ item }: { item: ResolvedNavSection }) {
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <div
-        className={`absolute top-full right-0 min-w-50 rounded-[var(--radius)] bg-card p-1 transition-all duration-200 ${
-          isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'
+        className={`absolute top-full right-0 z-10 border-t-[length:var(--shell-stroke)] border-transparent transition-opacity duration-200 ${
+          isOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
-        {item.items.map((subItem) => (
-          <Link
-            key={subItem.href}
-            className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
-            href={subItem.href}
-          >
-            {subItem.label}
-          </Link>
-        ))}
+        <div className="ink-shell-hang min-w-50 bg-card p-1">
+          {item.items.map((subItem) => (
+            <Link
+              key={subItem.href}
+              className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
+              href={subItem.href}
+            >
+              {subItem.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -103,7 +109,7 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
           <span className="font-display text-2xl font-bold text-ink">こうよう祭</span>
         </Link>
 
-        <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="メインナビゲーション" className="hidden self-stretch gap-1 lg:flex">
           {navItems.map((item) => (
             <DropdownMenu key={item.id} item={item} />
           ))}

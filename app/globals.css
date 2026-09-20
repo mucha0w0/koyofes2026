@@ -652,9 +652,12 @@ html[data-palette='orange'],
 }
 
 .theme-1dearland .lookbook-menu {
-  border-radius: var(--radius);
+  border: var(--lookbook-stroke) solid var(--ink);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
   background: var(--fill-card);
   padding: 0.35rem;
+  box-shadow: var(--lookbook-offset-x) var(--lookbook-offset-y) 0 0 var(--ink);
 }
 
 .theme-1dearland .lookbook-menu a {
@@ -735,6 +738,34 @@ html[data-palette='orange'],
     border: var(--shell-stroke) solid var(--ink);
     border-radius: var(--radius);
     box-shadow: var(--shell-ox) var(--shell-oy) 0 0 var(--ink);
+  }
+
+  .ink-shell-hang {
+    position: relative;
+    z-index: 0;
+    border: var(--shell-stroke) solid var(--ink);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shell-ox) var(--shell-oy) 0 0 var(--ink);
+  }
+
+  .ink-shell-hang::before,
+  .ink-shell-hang::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    width: var(--shell-stroke);
+    height: 0;
+    border-top: var(--shell-stroke) solid var(--ink);
+    pointer-events: none;
+  }
+
+  .ink-shell-hang::before {
+    left: calc(-1 * var(--shell-stroke));
+  }
+
+  .ink-shell-hang::after {
+    right: calc(-1 * var(--shell-stroke));
   }
 
   .ink-shell-sm {
