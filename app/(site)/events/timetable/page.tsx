@@ -65,20 +65,27 @@ function TimelineView({
         {events.map((event, idx) => (
           <Link
             key={idx}
-            className="absolute left-0 right-0 ink-shell ink-lift flex items-center gap-3 bg-card px-4"
+            className="absolute left-0 right-0 ink-shell ink-lift flex items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
             href={`/events/${event.slug}`}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
-            {event.icon && (
-              <InkPhoto alt={event.title} className="ink-shell-sm size-10" size={40} src={event.icon} />
+            {event.icon ? (
+              <InkPhoto
+                alt={event.title}
+                className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+                size={128}
+                src={event.icon}
+              />
+            ) : (
+              <div className="ink-row-icon h-full min-w-0 w-auto shrink" />
             )}
-            <div className="min-w-0">
-              <h3 className="font-medium text-foreground leading-snug truncate">{event.title}</h3>
-              <p className="text-sm text-muted-foreground mt-0.5 truncate">{event.organization}</p>
+            <div className="flex min-w-0 flex-1 flex-col justify-center">
+              <h3 className="truncate font-medium leading-snug text-foreground">{event.title}</h3>
+              <p className="mt-0.5 truncate text-sm text-muted-foreground">{event.organization}</p>
             </div>
-            <div className="ml-auto flex items-center gap-2 shrink-0">
+            <div className="ml-auto flex shrink-0 items-center gap-2">
               <span className="text-xs text-muted-foreground">{event.timeRange}</span>
-              <span className="text-xs text-muted-foreground flex items-center gap-1">
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {event.duration}分
               </span>

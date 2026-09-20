@@ -1,50 +1,47 @@
 import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { SponsorItem } from '@/lib/types/sponsor';
-
-import { isImageUrl } from '@/lib/utils';
 
 interface SponsorCardProps {
   item: SponsorItem;
 }
 
 export function SponsorCard({ item }: SponsorCardProps) {
-  const isIconUrl = isImageUrl(item.icon);
-
   return (
     <Card className="py-0">
-      <CardContent className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 p-4 sm:p-5 sm:gap-y-2">
-        <div className="row-start-1 col-start-1 mt-0.5 flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius)] bg-card sm:row-span-2 sm:size-14">
-          {isIconUrl ? (
-            <Image alt={item.name} className="size-full object-contain" height={56} src={item.icon} width={56} />
-          ) : (
-            <span className="text-[10px] text-muted-foreground">No logo</span>
-          )}
+      <CardContent className="flex h-[98px] items-stretch gap-4 py-1.5 pr-4 pl-1.5 sm:pr-5">
+        <InkPhoto
+          alt={item.name}
+          className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+          size={128}
+          src={item.icon}
+        />
+
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-1">
+          <div className="flex min-w-0 items-center justify-between gap-4">
+            <h3 className="truncate font-medium text-base leading-snug text-foreground sm:text-lg">{item.name}</h3>
+
+            {item.link ? (
+              <a
+                aria-label={`${item.name}の公式サイト`}
+                className="inline-flex shrink-0 items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground"
+                href={item.link}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                公式サイト
+                <ExternalLink className="h-3 w-3 opacity-60" />
+              </a>
+            ) : null}
+          </div>
+
+          {item.description ? (
+            <p className="truncate text-sm text-muted-foreground">{item.description}</p>
+          ) : null}
         </div>
-
-        <div className="row-start-1 col-start-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
-          <h3 className="font-medium text-base sm:text-lg text-foreground leading-snug">{item.name}</h3>
-
-          {item.link && (
-            <a
-              aria-label={`${item.name}の公式サイト`}
-              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors shrink-0"
-              href={item.link}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              公式サイト
-              <ExternalLink className="h-3 w-3 opacity-60" />
-            </a>
-          )}
-        </div>
-
-        <p className="row-start-2 col-start-1 col-span-2 sm:col-start-2 sm:col-span-1 text-sm text-muted-foreground leading-relaxed">
-          {item.description}
-        </p>
       </CardContent>
     </Card>
   );
