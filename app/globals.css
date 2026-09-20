@@ -211,12 +211,14 @@ html[data-palette='orange'],
   }
   html {
     color-scheme: light only;
+    overflow-x: clip;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: normal;
     line-height: 1.8;
     letter-spacing: 0;
+    overflow-x: clip;
   }
   h1 {
     font-family: var(--font-display);
