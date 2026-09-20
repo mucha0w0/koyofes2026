@@ -18,7 +18,7 @@ interface EventCardProps {
 function EventCard({ event }: EventCardProps) {
   return (
     <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${event.slug}`}>
-      <InkPhoto alt={event.title} className="size-20 md:size-32" size={128} src={event.icon} />
+      <InkPhoto alt={event.title} className="ink-lift size-20 md:size-32" size={128} src={event.icon} />
       <div className="max-w-24 text-center md:max-w-32">
         <p className="truncate text-xs font-medium md:text-sm">{event.title}</p>
         <p className="truncate text-xs text-muted-foreground md:text-sm">{event.organization}</p>

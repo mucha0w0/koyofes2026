@@ -21,7 +21,7 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
       <div className="relative">
         <InkPhoto
           alt={booth.title}
-          className="size-20 md:size-32"
+          className="ink-lift size-20 md:size-32"
           dimmed={!collected}
           size={128}
           src={hasIcon ? booth.icon : undefined}

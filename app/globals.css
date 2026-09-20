@@ -773,6 +773,7 @@ html[data-palette='orange'],
 
   @media (prefers-reduced-motion: no-preference) {
     a.ink-lift:hover,
+    a:hover .ink-lift:not(:disabled):not([aria-pressed='true']),
     button.ink-lift:hover:not(:disabled):not([aria-pressed='true']),
     .ink-lift:hover:not(:disabled):not([aria-pressed='true']) {
       z-index: 1;
@@ -781,6 +782,7 @@ html[data-palette='orange'],
     }
 
     a.ink-lift:active,
+    a:active .ink-lift:not(:disabled):not([aria-pressed='true']),
     button.ink-lift:active:not(:disabled):not([aria-pressed='true']),
     .ink-lift:active:not(:disabled):not([aria-pressed='true']) {
       transform: translate(
@@ -797,9 +799,11 @@ html[data-palette='orange'],
     }
 
     a.ink-lift:hover,
+    a:hover .ink-lift:not(:disabled):not([aria-pressed='true']),
     button.ink-lift:hover:not(:disabled):not([aria-pressed='true']),
     .ink-lift:hover:not(:disabled):not([aria-pressed='true']),
     a.ink-lift:active,
+    a:active .ink-lift:not(:disabled):not([aria-pressed='true']),
     button.ink-lift:active:not(:disabled):not([aria-pressed='true']),
     .ink-lift:active:not(:disabled):not([aria-pressed='true']) {
       transform: none;
