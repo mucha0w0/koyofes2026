@@ -7,7 +7,7 @@ const linkSections = getNavLinkCardSections();
 
 export function LinksSection() {
   return (
-    <section className="bg-background" data-palette="sky">
+    <section className="bg-paper-2" data-palette="sky">
       <div
         className={cn(
           'mx-auto grid w-full max-w-7xl gap-8 px-4 py-16 md:grid-cols-2 md:py-24',
