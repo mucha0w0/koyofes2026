@@ -26,8 +26,8 @@ function DropdownMenu({ item }: { item: ResolvedNavSection }) {
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <div
-        className={`absolute top-full right-0 z-10 transition-opacity duration-200 ${
-          isOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        className={`absolute top-full right-0 z-10 ${
+          isOpen ? 'visible' : 'invisible'
         }`}
       >
         <div className="ink-shell-hang min-w-50 bg-card p-1">
