@@ -6,7 +6,6 @@ import { HeroSection } from '@/components/home/hero-section';
 import { LinksSection } from '@/components/home/links-section';
 import { PrVideoSection } from '@/components/home/pr-video-section';
 import { RankingPreview } from '@/components/home/ranking-preview';
-import { SocialCtaSection } from '@/components/home/social-cta-section';
 import { Sponsors } from '@/components/home/sponsors';
 import { StampRallyPreview } from '@/components/home/stamp-rally-preview';
 import { TimetablePreview } from '@/components/home/timetable-preview';
@@ -19,14 +18,11 @@ export default function HomePage() {
       <FestivalCountdown />
       <EventSearchSection variant="prominent" />
       <CategoryEvents />
-
-      <FestivalTicker />
-
-      <PrVideoSection />
-      <StampRallyPreview />
-      <RankingPreview />
-      <SocialCtaSection />
       <TimetablePreview />
+      <FestivalTicker />
+      <StampRallyPreview />
+      <PrVideoSection />
+      <RankingPreview />
       <FestivalTicker />
       <LinksSection />
       <NewsSection />
