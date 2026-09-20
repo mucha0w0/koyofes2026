@@ -7,6 +7,7 @@ import { CategorySection } from '@/components/events/category-section';
 import { InkPhoto } from '@/components/ui/ink-photo';
 import { InkTextLink } from '@/components/ui/ink-text-link';
 
+import { getEventCategoryIcon } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
 
 type EventCategory = Event['category'];
@@ -171,6 +172,7 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
               action={
                 <InkTextLink href="/events/list">すべて見る</InkTextLink>
               }
+              icon={getEventCategoryIcon(category.id)}
               title={category.title}
               titleAs="h3"
             >

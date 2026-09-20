@@ -1,4 +1,4 @@
-import { Building2, Mic2, ShoppingBag, Truck, Users } from 'lucide-react';
+import { Mic2, School, Store, Truck, Users } from 'lucide-react';
 
 import type { LucideIcon } from 'lucide-react';
 
@@ -14,9 +14,9 @@ export interface EventCategoryConfig {
  * ラベル・アイコンの変更はここだけ行う。
  */
 export const EVENT_CATEGORY_CONFIG = {
-  'class-exhibit': { label: 'クラス・学科展', icon: Building2 },
+  'class-exhibit': { label: 'クラス・学科展', icon: School },
   'volunteer-exhibit': { label: '有志展示', icon: Users },
-  booth: { label: '模擬店', icon: ShoppingBag },
+  booth: { label: '模擬店', icon: Store },
   stage: { label: 'ステージ', icon: Mic2 },
   'food-truck': { label: 'キッチンカー', icon: Truck },
 } as const satisfies Record<EventCategory, EventCategoryConfig>;
