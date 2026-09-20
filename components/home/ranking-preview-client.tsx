@@ -94,16 +94,10 @@ export function RankingPreviewClient() {
   const loading = items === null && !errorMessage;
 
   return (
-    <section aria-busy={loading} className="bg-paper-2 py-16 md:py-24" data-palette="green">
+    <section aria-busy={loading} className="bg-paper-2 py-12 md:py-16" data-palette="green">
       <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="mx-auto max-w-3xl space-y-6">
-          <div className="text-center">
-            <h2 className="text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
-            <p className="mt-1 text-sm text-muted-foreground">星の総合評価 上位{PREVIEW_COUNT}企画</p>
-            <p className="mt-3">
-              <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
-            </p>
-          </div>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-center text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
 
           {loading ? <PreviewSkeleton /> : null}
 
@@ -130,6 +124,10 @@ export function RankingPreviewClient() {
               ))}
             </ol>
           ) : null}
+
+          <div className="mt-8 text-center">
+            <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
+          </div>
         </div>
       </div>
     </section>
