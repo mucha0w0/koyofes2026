@@ -73,7 +73,7 @@ export const NAV_SECTIONS = [
         href: '/guide/map',
         card: {
           icon: MapPin,
-          description: '構内図',
+          description: '校内の施設とエリア案内',
         },
       },
       {
