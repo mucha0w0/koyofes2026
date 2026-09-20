@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useId, useState } from 'react';
 
 import { EventDetailFace, EventListFace, StampBookFace } from '@/components/dev/lookbook-faces';
+import { FestivalTicker } from '@/components/home/festival-ticker';
 import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
@@ -397,6 +398,9 @@ export function DesignLookbook() {
           <StageSpecimen />
           <RankingSpecimen />
           <CountdownSpecimen />
+          <div data-lookbook-chrome>
+            <FestivalTicker />
+          </div>
         </div>
 
         <EventListFace />
