@@ -1,4 +1,4 @@
-import { Heart, HelpCircle, Info, Mail, MapPin, Users } from 'lucide-react';
+import { BookOpen, Handshake, HelpCircle, Mail, Map, Palette, Train, Users } from 'lucide-react';
 
 import type { LucideIcon } from 'lucide-react';
 
@@ -64,7 +64,7 @@ export const NAV_SECTIONS = [
         label: 'アクセス',
         href: '/guide/access',
         card: {
-          icon: MapPin,
+          icon: Train,
           description: '電車・バス・車でのアクセス方法',
         },
       },
@@ -72,7 +72,7 @@ export const NAV_SECTIONS = [
         label: '会場マップ',
         href: '/guide/map',
         card: {
-          icon: MapPin,
+          icon: Map,
           description: '校内の施設とエリア案内',
         },
       },
@@ -94,7 +94,7 @@ export const NAV_SECTIONS = [
         label: 'こうよう祭とは',
         href: '/about/overview',
         card: {
-          icon: Info,
+          icon: BookOpen,
           description: '歴史と概要',
         },
       },
@@ -102,7 +102,7 @@ export const NAV_SECTIONS = [
         label: 'テーマ',
         href: '/about/theme',
         card: {
-          icon: Heart,
+          icon: Palette,
           description: '今年のテーマについて',
         },
         surfaces: { footer: false },
@@ -120,7 +120,7 @@ export const NAV_SECTIONS = [
         label: 'ご協賛',
         href: '/about/sponsor',
         card: {
-          icon: Users,
+          icon: Handshake,
           description: 'ご協賛いただいている企業・団体様',
         },
       },

@@ -8,7 +8,7 @@ export default function AccessPage() {
       <div className="space-y-8">
         <div className="ink-shell bg-card p-6">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-paper-2">
+            <div className="rounded-md p-2 bg-paper-2">
               <MapPin className="h-5 w-5 text-foreground" />
             </div>
             <h2 className="font-medium text-lg">会場</h2>
