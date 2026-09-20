@@ -243,7 +243,7 @@ html[data-palette='orange'],
   }
 }
 
-/* DESIGN2 パイロット。/dev/design 見本用。
+/* DESIGN パイロット。/dev/design 見本用。
    基調色は paper / paper-2 / accent。インクと霧は無彩色で全パレット共用。 */
 .theme-1dearland {
   --mist: #bababa;

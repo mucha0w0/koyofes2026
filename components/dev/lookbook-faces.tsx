@@ -166,7 +166,7 @@ export function EventListFace() {
     <FaceFrame
       ground="alt"
       id="face-list"
-      spec="DESIGN2 Gate C ・ 面2 企画一覧。検索がある地面。写真は枠付きの角丸正方形。"
+      spec="DESIGN-rationale Gate C ・ 面2 企画一覧。検索がある地面。写真は枠付きの角丸正方形。"
     >
       <PageLead subtitle={meta.subtitle} title={meta.title} />
       <label className="mb-6 block">
@@ -245,7 +245,7 @@ export function EventDetailFace() {
     <FaceFrame
       ground="alt"
       id="face-detail"
-      spec="DESIGN2 Gate C ・ 面3 企画詳細。写真は枠付き。見出し、本文。アイコンは置かない。"
+      spec="DESIGN-rationale Gate C ・ 面3 企画詳細。写真は枠付き。見出し、本文。アイコンは置かない。"
     >
       <PageLead backHref="#face-list" title={event.title} />
       <p className="mb-8 font-[family-name:var(--font-body)] text-lg text-[var(--ink-soft)]">{event.organization}</p>
@@ -315,7 +315,7 @@ export function StampBookFace() {
     <FaceFrame
       ground="alt"
       id="face-stamp"
-      spec="DESIGN2 Gate C ・ 面4 スタンプ帳。写真は枠付きの角丸正方形。達成は緑にしない。"
+      spec="DESIGN-rationale Gate C ・ 面4 スタンプ帳。写真は枠付きの角丸正方形。達成は緑にしない。"
     >
       <PageLead subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー" />
       <div className="lookbook-card mb-10 p-6">

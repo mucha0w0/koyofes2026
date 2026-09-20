@@ -15,7 +15,7 @@ const zenMaruGothic = Zen_Maru_Gothic({
 });
 
 export const metadata: Metadata = {
-  title: 'DESIGN2 見本 | こうよう祭 2026',
+  title: 'DESIGN 見本 | こうよう祭 2026',
   description: '1dearland リデザインの開発用見本。検索エンジンの対象外です。',
   robots: { index: false, follow: false },
 };

@@ -225,7 +225,7 @@ function RankingSpecimen() {
     <div className="bg-[var(--paper-2)]" data-ground="alt">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 md:py-20">
         <p data-lookbook-chrome className="mb-2 text-center text-sm text-[var(--ink-soft)]">
-          DESIGN2 11.11 ・ ヒーローの直下。金の王冠は置かない
+          DESIGN-rationale 11.11 ・ ヒーローの直下。金の王冠は置かない
         </p>
         <h2 data-lookbook-chrome className="mb-10 text-center text-2xl md:text-3xl">
           ランキング
@@ -403,7 +403,7 @@ export function DesignLookbook() {
         <StampBookFace />
 
         <div data-lookbook-chrome className="mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
-          <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN2.md パイロット ・ 4 面の下は部品カタログ</p>
+          <p className="text-center text-sm text-[var(--ink-soft)]">DESIGN-rationale.md パイロット ・ 4 面の下は部品カタログ</p>
           <h1 className="mt-2 text-center text-3xl md:text-4xl">1dearland のクロム見本</h1>
           <p className="mx-auto mt-4 max-w-3xl text-center">
             地は基調色の薄い紙。カードとボタンは白い面にインクの枠をつけ、右下へ少し膨らませる。ホバーで持ち上がり、クリックで沈む。ホバーと非選択の塗りは無彩色の霧。主CTAは沈めた基調色に白抜き。ページ上部でオレンジ／ピンク／水色／緑を切り替えて、カテゴリ色の案を見る。
@@ -498,7 +498,7 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section band id={SECTION_ID.type} spec="DESIGN2 6 ・ 強調 丸ゴ太字 / 見出し・ボタン 丸ゴ / 本文 角ゴ" title="活字">
+        <Section band id={SECTION_ID.type} spec="DESIGN-rationale 6 ・ 強調 丸ゴ太字 / 見出し・ボタン 丸ゴ / 本文 角ゴ" title="活字">
           <div data-lookbook-chrome className="mx-auto max-w-3xl space-y-6">
             <div>
               <p className="text-sm text-[var(--ink-soft)]">1 強調 ・ ページ H1 ・ 丸ゴ太字</p>
@@ -527,7 +527,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section id={SECTION_ID.line} spec="DESIGN2 7.1 ・ ボタン・カード・エラー・写真はインク枠。帯は枠なし" title="塗り">
+        <Section id={SECTION_ID.line} spec="DESIGN-rationale 7.1 ・ ボタン・カード・エラー・写真はインク枠。帯は枠なし" title="塗り">
           <div data-lookbook-chrome className="lookbook-soft grid grid-cols-2 overflow-hidden sm:grid-cols-5">
             <p className="bg-[var(--paper)] px-3 py-8 text-sm">
               <span className="lookbook-subhead block font-medium">paper</span>
@@ -552,7 +552,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.button} spec="DESIGN2 11.3 ・ インク枠。ホバーで持ち上がり、クリックで沈む" title="ボタン">
+        <Section band id={SECTION_ID.button} spec="DESIGN-rationale 11.3 ・ インク枠。ホバーで持ち上がり、クリックで沈む" title="ボタン">
           <div data-lookbook-chrome className="flex flex-wrap items-center justify-center gap-4">
             <button className={TICKET_BTN} type="button">
               企画を探す
@@ -570,7 +570,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.chip} spec="DESIGN2 11.6 ・ Outline と同じ殻。未選択は霧。選択は白で沈む" title="チップ">
+        <Section band id={SECTION_ID.chip} spec="DESIGN-rationale 11.6 ・ Outline と同じ殻。未選択は霧。選択は白で沈む" title="チップ">
           <div data-lookbook-chrome className="flex flex-wrap justify-center gap-3">
             {EVENT_CATEGORY_OPTIONS.map((option) => (
               <button
@@ -591,7 +591,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.form} spec="DESIGN2 11.5 ・ エラーはカードと同じ殻。絵の上に載せない" title="入力">
+        <Section band id={SECTION_ID.form} spec="DESIGN-rationale 11.5 ・ エラーはカードと同じ殻。絵の上に載せない" title="入力">
           <div data-lookbook-chrome className="mx-auto max-w-md space-y-6">
             <div>
               <label className="mb-2 block text-sm font-medium" htmlFor={searchId}>
@@ -610,7 +610,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.card} spec="DESIGN2 11.4 ・ インク枠。右下へ膨らむ。白いカード" title="カード">
+        <Section band id={SECTION_ID.card} spec="DESIGN-rationale 11.4 ・ インク枠。右下へ膨らむ。白いカード" title="カード">
           <div data-lookbook-chrome className="grid gap-5 md:grid-cols-2">
             <article className="lookbook-card">
               <p className="lookbook-subhead text-lg font-bold">アクセス</p>
@@ -669,7 +669,7 @@ export function DesignLookbook() {
           </div>
         </Section>
 
-        <Section band id={SECTION_ID.news} spec="DESIGN2 11.12 ・ 日付＋見出し。サムネは枠付き。ライムの NEW は足さない" title="お知らせ">
+        <Section band id={SECTION_ID.news} spec="DESIGN-rationale 11.12 ・ 日付＋見出し。サムネは枠付き。ライムの NEW は足さない" title="お知らせ">
           <div data-lookbook-chrome className="grid gap-5 md:grid-cols-3">
             {NEWS.map((item) => (
               <article key={item.title} className="lookbook-card">
@@ -692,7 +692,7 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section id={SECTION_ID.chrome} spec="DESIGN2 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
+        <Section id={SECTION_ID.chrome} spec="DESIGN-rationale 11.1 / 11.2 ・ このページの上下が実物" title="ヘッダー／フッター">
           <p data-lookbook-chrome className="mx-auto max-w-3xl text-center">
             開発バーの下が提案ヘッダー（白・sticky・祭名活字のみ。機関車は足さない。後からロゴ画像で挿し替え）。ページ最下部が提案フッター（インク地＋白抜き＋既存ナビの列。基調色には追従しない）。本番コンポーネントはまだ差し替えていない。ナビは開閉できる見本。
           </p>
@@ -710,7 +710,7 @@ export function DesignLookbook() {
           </p>
         </Section>
 
-        <Section band id={SECTION_ID.page} spec="DESIGN2 9 ・ 見出し下は余白。枠なし" title="ページ見出し">
+        <Section band id={SECTION_ID.page} spec="DESIGN-rationale 9 ・ 見出し下は余白。枠なし" title="ページ見出し">
           <div data-lookbook-chrome className="mx-auto max-w-3xl pb-8">
             <InkTextLink arrow="left" className="lookbook-subhead" href="/">
               トップページに戻る
