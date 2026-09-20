@@ -1,7 +1,8 @@
-import { getEnabledOfficialSocials, getOfficialSocialIcon } from '@/lib/config/social';
+import { getOfficialSocial, getOfficialSocialIcon } from '@/lib/config/social';
 
 export function SiteFooter() {
-  const socialLinks = getEnabledOfficialSocials();
+  const instagram = getOfficialSocial('instagram');
+  const InstagramIcon = getOfficialSocialIcon(instagram.id);
 
   return (
     <footer className="bg-charcoal text-white">
@@ -16,27 +17,21 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {socialLinks.length > 0 && (
-            <div className="sm:shrink-0">
-              <p className="mb-3 text-sm font-medium">公式SNS</p>
-              <div className="flex gap-2">
-                {socialLinks.map(({ id, label, url }) => {
-                  const Icon = getOfficialSocialIcon(id);
-                  return (
-                    <a
-                      key={id}
-                      aria-label={label}
-                      className="flex size-10 items-center justify-center rounded-md bg-white/20 text-white transition-colors hover:bg-white/30"
-                      href={url}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <Icon className="size-5" />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
+          {instagram.enabled && (
+            <a
+              className="group inline-flex items-center gap-3 sm:shrink-0"
+              href={instagram.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-white/20 text-white transition-colors group-hover:bg-white/30">
+                <InstagramIcon aria-hidden className="size-5" />
+              </span>
+              <span className="flex min-w-0 flex-col">
+                <span className="text-sm leading-tight font-medium">公式Instagram</span>
+                <span className="text-xs leading-tight text-white/70">{instagram.handle}</span>
+              </span>
+            </a>
           )}
         </div>
 
