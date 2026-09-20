@@ -28,9 +28,12 @@ function BoothRow({ booth }: { booth: StampBooth }) {
   const categoryLabel = getEventCategoryLabel(booth.category);
 
   return (
-    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={`/events/${booth.slug}`}>
-      <InkPhoto alt={booth.title} className="ink-shell-sm size-14" size={56} src={booth.icon} />
-      <div className="min-w-0 flex-1 space-y-1">
+    <Link
+      className="ink-shell ink-lift group flex h-[96px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
+      href={`/events/${booth.slug}`}
+    >
+      <InkPhoto alt={booth.title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={booth.icon} />
+      <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1">
         <p className="truncate text-sm font-medium">{booth.title}</p>
         {booth.organization ? <p className="truncate text-xs text-muted-foreground">{booth.organization}</p> : null}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
@@ -44,9 +47,9 @@ function BoothRow({ booth }: { booth: StampBooth }) {
 
 function BoothRowSkeleton() {
   return (
-    <div className="ink-shell flex items-center gap-4 bg-card p-4">
-      <div className="size-14 shrink-0 rounded-[var(--radius)] bg-paper-2" />
-      <div className="min-w-0 flex-1 space-y-2">
+    <div className="ink-shell flex h-[96px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5">
+      <div className="ink-row-icon rounded-[var(--radius)] bg-paper-2" />
+      <div className="flex min-w-0 flex-1 flex-col justify-center space-y-2">
         <div className="h-4 w-1/2 rounded-[var(--radius)] bg-paper-2" />
         <div className="h-3 w-1/3 rounded-[var(--radius)] bg-paper-2" />
       </div>

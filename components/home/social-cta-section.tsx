@@ -5,7 +5,7 @@ function SocialLink({ id, label, handle, url }: OfficialSocial) {
 
   return (
     <a
-      className="ink-shell ink-lift relative flex max-w-[320px] flex-1 items-center gap-3 bg-card px-5 py-3.5 text-ink"
+      className="ink-shell ink-lift relative flex max-w-[320px] items-center gap-3 bg-card px-5 py-3.5 text-ink sm:flex-1"
       href={url}
       rel="noopener noreferrer"
       target="_blank"
@@ -30,7 +30,7 @@ export function SocialCtaSection() {
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <p className="shrink-0 text-center text-sm tracking-normal sm:text-left">最新情報は公式SNSをチェック！</p>
-          <div className="flex w-full justify-end gap-3 sm:w-auto sm:flex-1">
+          <div className="flex w-full justify-center gap-3 sm:w-auto sm:flex-1 sm:justify-end">
             {links.map((link) => (
               <SocialLink key={link.id} {...link} />
             ))}

@@ -19,19 +19,22 @@ interface EventRowProps {
 
 function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
-    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={`/events/${slug}`}>
+    <Link
+      className="ink-shell ink-lift group flex h-[83px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
+      href={`/events/${slug}`}
+    >
       {icon ? (
-        <InkPhoto alt={title} className="ink-shell-sm size-10" size={40} src={icon} />
+        <InkPhoto alt={title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={icon} />
       ) : (
-        <div className="size-10 shrink-0" />
+        <div className="ink-row-icon h-full min-w-0 w-auto shrink" />
       )}
 
-      <div className="min-w-0 flex-1">
+      <div className="flex min-w-0 flex-1 flex-col justify-center">
         <span className="text-sm font-medium">{title}</span>
         <p className="mt-0.5 truncate text-xs text-muted-foreground">{organization}</p>
       </div>
 
-      <div className="shrink-0 text-right">
+      <div className="flex shrink-0 flex-col justify-center text-right">
         <p className="text-xs text-muted-foreground">{timeRange}</p>
         <p className="mt-0.5 text-xs text-muted-foreground">{duration}分</p>
       </div>

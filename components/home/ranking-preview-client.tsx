@@ -16,16 +16,19 @@ function formatAverage(value: number): string {
 
 function RankingRow({ item }: { item: RankingOverallItem }) {
   return (
-    <Link className="ink-shell ink-lift flex items-center gap-4 bg-card p-4 text-ink md:p-5" href={`/events/${item.slug}`}>
-      <span className="w-10 shrink-0 font-display text-xl tabular-nums md:text-2xl">
+    <Link
+      className="ink-shell ink-lift flex h-[100px] items-stretch gap-4 bg-card px-4 py-1.5 text-ink md:px-5"
+      href={`/events/${item.slug}`}
+    >
+      <span className="flex w-10 shrink-0 items-center font-display text-xl tabular-nums md:text-2xl">
         {String(item.rank).padStart(2, '0')}
       </span>
-      <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
-      <div className="min-w-0 flex-1">
+      <InkPhoto alt={item.title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={item.icon} />
+      <div className="flex min-w-0 flex-1 flex-col justify-center">
         <p className="truncate font-medium">{item.title}</p>
         <p className="truncate text-sm text-ink-soft">{item.organization}</p>
       </div>
-      <div className="shrink-0 text-right">
+      <div className="flex shrink-0 flex-col justify-center text-right">
         <p className="tabular-nums">{formatAverage(item.average)}</p>
         <p className="text-xs text-ink-soft">{item.voteCount} 票</p>
       </div>
@@ -37,10 +40,10 @@ function PreviewSkeleton() {
   return (
     <div className="space-y-3">
       {Array.from({ length: 3 }, (_, index) => (
-        <div key={index} className="ink-shell flex items-center gap-4 bg-card p-4">
-          <div className="h-7 w-10 shrink-0 rounded-[var(--radius)] bg-paper-2" />
-          <div className="size-14 shrink-0 rounded-[var(--radius)] bg-paper-2" />
-          <div className="min-w-0 flex-1 space-y-2">
+        <div key={index} className="ink-shell flex h-[100px] items-stretch gap-4 bg-card px-4 py-1.5">
+          <div className="h-7 w-10 shrink-0 self-center rounded-[var(--radius)] bg-paper-2" />
+          <div className="ink-row-icon rounded-[var(--radius)] bg-paper-2" />
+          <div className="flex min-w-0 flex-1 flex-col justify-center space-y-2">
             <div className="h-4 w-1/2 rounded-[var(--radius)] bg-paper-2" />
             <div className="h-3 w-1/3 rounded-[var(--radius)] bg-paper-2" />
           </div>
