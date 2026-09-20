@@ -9,12 +9,16 @@ interface EventCarouselProps {
   title: string;
 }
 
+/** 16:9 を上限に、広い画面では高さを 50vh で打ち切って縦方向にクロップする */
+const frameClassName =
+  'relative h-[min(50vh,56.25vw)] w-full overflow-hidden border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2';
+
 export function EventCarousel({ images, title }: EventCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (images.length === 0) {
     return (
-      <div className="relative aspect-video w-full border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2">
+      <div className={frameClassName}>
         <p className="flex size-full items-center justify-center text-muted-foreground">画像はありません</p>
       </div>
     );
@@ -31,10 +35,16 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
   const currentImage = images[currentIndex];
 
   return (
-    <div className="relative aspect-video w-full overflow-hidden border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2 group">
+    <div className={`${frameClassName} group`}>
       {/* Main Image */}
       {currentImage && (
-        <Image fill priority alt={`${title} image ${currentIndex + 1}`} className="object-cover" src={currentImage} />
+        <Image
+          fill
+          priority
+          alt={`${title} image ${currentIndex + 1}`}
+          className="object-cover object-center"
+          src={currentImage}
+        />
       )}
 
       {/* Navigation Buttons */}
