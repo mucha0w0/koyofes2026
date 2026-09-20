@@ -4,7 +4,7 @@ export function SiteFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer className="bg-ink text-white">
+    <footer className="bg-charcoal text-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
           <div className="space-y-2.5">

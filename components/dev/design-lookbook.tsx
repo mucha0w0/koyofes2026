@@ -59,6 +59,7 @@ type LookbookPaletteId = (typeof LOOKBOOK_PALETTES)[number]['id'];
 
 const SHARED_PALETTE = [
   { token: '--ink', hex: '#161616', note: '本文。面に塗らない。無彩色', fill: 'var(--ink)' },
+  { token: '--charcoal', hex: '#2A2A2A', note: 'フッター・カウントダウン・SNS帯。無彩色', fill: 'var(--charcoal)' },
   { token: '--ink-soft', hex: '#555555', note: 'キャプション。無彩色', fill: 'var(--ink-soft)' },
   { token: '--mist', hex: '#BABABA', note: '非選択・表見出し。無彩色。ホバーは白で割る', fill: 'var(--mist)' },
   { token: '--accent-soft', hex: '#FFFFFF', note: 'カード・入力・選択チップ', fill: 'var(--festival-accent-soft)' },
@@ -283,7 +284,7 @@ function LookbookFooter() {
   const socialLinks = getEnabledOfficialSocials();
 
   return (
-    <footer data-lookbook-chrome className="bg-ink text-white">
+    <footer data-lookbook-chrome className="bg-charcoal text-white">
       <div className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="space-y-2 lg:max-w-xs">

@@ -26,7 +26,7 @@ export function SocialCtaSection() {
   }
 
   return (
-    <section className="bg-[#1f2529] py-8 text-white">
+    <section className="bg-charcoal py-8 text-white">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <p className="shrink-0 text-center text-sm tracking-normal sm:text-left">最新情報は公式SNSをチェック！</p>

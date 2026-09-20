@@ -8,6 +8,7 @@
   color-scheme: light only;
 
   --ink: #161616;
+  --charcoal: #2a2a2a;
   --ink-soft: #555555;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
   --mist: #bababa;
@@ -162,6 +163,7 @@ html[data-palette='orange'],
   --color-mist: var(--mist);
   --color-mist-hover: var(--mist-hover);
   --color-ink: var(--ink);
+  --color-charcoal: var(--charcoal);
   --color-ink-soft: var(--ink-soft);
   --color-festival-accent: var(--festival-accent);
   --color-festival-accent-hover: var(--festival-accent-hover);
@@ -248,6 +250,7 @@ html[data-palette='orange'],
 .theme-1dearland {
   --mist: #bababa;
   --ink: #161616;
+  --charcoal: #2a2a2a;
   --ink-soft: #555555;
   --ink-faint: color-mix(in srgb, var(--ink) 16%, transparent);
 
