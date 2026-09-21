@@ -72,7 +72,7 @@ export const CAMPUS_MAP_LEGEND = [
  * 来場案内として出す施設。
  * `location` が null のものは「調整中」。構内図から確実に言えることだけ `hint` に書く。
  */
-export const FESTIVAL_FACILITIES = [
+export const FESTIVAL_FACILITIES: readonly FestivalFacility[] = [
   { id: 'reception', label: '受付・案内', location: null },
   { id: 'headquarters', label: '本部', location: null },
   { id: 'first-aid', label: '救護室', location: null },
@@ -96,7 +96,7 @@ export const FESTIVAL_FACILITIES = [
     label: '駐輪場',
     location: '構内図の凡例（灰色の塗り）',
   },
-] as const satisfies FestivalFacility[];
+];
 
 /**
  * 構内図に載っている来場者向けの建物・屋外。
