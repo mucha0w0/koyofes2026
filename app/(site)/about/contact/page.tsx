@@ -4,7 +4,14 @@ import { PageLayout } from '@/components/layout/page-layout';
 
 export default function ContactPage() {
   return (
-    <PageLayout subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
+    <PageLayout
+      related={{
+        pages: ['/about/overview', '/guide/faq', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+      subtitle="ご質問・ご要望はこちらから"
+      title="お問い合わせ"
+    >
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="space-y-6">
           <div className="ink-shell bg-card p-6">

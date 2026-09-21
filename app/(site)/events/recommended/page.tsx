@@ -1,6 +1,7 @@
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventSearchSection } from '@/components/events/event-search';
 import { RecommendedEventCard } from '@/components/events/recommended-event-card';
+import { RelatedLinks } from '@/components/layout/related-links';
 
 import { getRecommendedEvents } from '@/lib/recommended-events';
 
@@ -23,6 +24,7 @@ export default async function RecommendedEventsPage() {
         </div>
       </CmsPageLayout>
       <EventSearchSection variant="compact" />
+      <RelatedLinks background="paper" pages={['/events/list', '/events/timetable', '/stamp']} />
     </>
   );
 }

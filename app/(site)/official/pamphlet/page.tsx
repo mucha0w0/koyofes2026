@@ -5,7 +5,14 @@ import { Button } from '@/components/ui/button';
 
 export default function PamphletPage() {
   return (
-    <PageLayout subtitle="こうよう祭2026公式パンフレット" title="パンフレット">
+    <PageLayout
+      related={{
+        pages: ['/events/list', '/guide/map', '/guide/faq'],
+        background: 'paper-2',
+      }}
+      subtitle="こうよう祭2026公式パンフレット"
+      title="パンフレット"
+    >
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="ink-shell bg-card p-8 text-center">
           {/* PDFビューア */}

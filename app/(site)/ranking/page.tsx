@@ -15,16 +15,21 @@ export default function RankingPage() {
     return (
       <PageLayout subtitle="開催期間外です" title="リアルタイムランキング">
         <div className="ink-shell mx-auto max-w-3xl bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            ランキングは文化祭開催期間のみ公開します。
-          </p>
+          <p className="text-sm text-muted-foreground leading-relaxed">ランキングは文化祭開催期間のみ公開します。</p>
         </div>
       </PageLayout>
     );
   }
 
   return (
-    <PageLayout subtitle="星の総合評価、いま人が多い企画、並びの目安" title="リアルタイムランキング">
+    <PageLayout
+      related={{
+        pages: ['/events/list', '/events/recommended', '/events/timetable'],
+        background: 'paper-2',
+      }}
+      subtitle="星の総合評価、いま人が多い企画、並びの目安"
+      title="リアルタイムランキング"
+    >
       <RankingBoard />
     </PageLayout>
   );

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { EventCarousel } from '@/components/events/event-carousel';
 import { EventMarkdown } from '@/components/events/event-markdown';
 import { EventSearchSection } from '@/components/events/event-search';
+import { RelatedLinks } from '@/components/layout/related-links';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
@@ -134,6 +135,7 @@ export default async function EventPage({ params }: PageProps) {
       </div>
 
       <EventSearchSection variant="compact" />
+      <RelatedLinks background="paper" pages={['/events/list', '/ranking', '/stamp']} />
     </main>
   );
 }

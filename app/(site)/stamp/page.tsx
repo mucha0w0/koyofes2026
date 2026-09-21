@@ -18,7 +18,14 @@ export default async function StampPage() {
   const rankingEnabled = isRankingEnabled();
 
   return (
-    <PageLayout subtitle="スタンプを集めてふくびきに参加" title="スタンプラリー">
+    <PageLayout
+      related={{
+        pages: ['/events/list', '/ranking', '/events/recommended'],
+        background: 'paper-2',
+      }}
+      subtitle="スタンプを集めてふくびきに参加"
+      title="スタンプラリー"
+    >
       <Suspense
         fallback={
           <div className="flex justify-center py-16">

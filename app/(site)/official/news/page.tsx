@@ -24,7 +24,13 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const paginatedItems = newsItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
-    <CmsPageLayout meta="newsList">
+    <CmsPageLayout
+      meta="newsList"
+      related={{
+        pages: ['/about/overview', '/guide/faq', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+    >
       {newsItems.length === 0 ? (
         <div className="mx-auto max-w-3xl py-12 text-center">
           <p className="text-muted-foreground">ニュースはまだ投稿されていません。</p>

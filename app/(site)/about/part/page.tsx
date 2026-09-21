@@ -7,7 +7,13 @@ export default async function PartPage() {
   const sections = await getPartSections();
 
   return (
-    <CmsPageLayout meta="part">
+    <CmsPageLayout
+      meta="part"
+      related={{
+        pages: ['/events/recommended', '/about/overview', '/about/theme'],
+        background: 'paper-2',
+      }}
+    >
       {sections.length === 0 ? (
         <div className="mx-auto max-w-4xl py-12 text-center">
           <p className="text-muted-foreground">パート情報はまだ登録されていません。</p>

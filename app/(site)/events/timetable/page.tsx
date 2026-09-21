@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventSearchSection } from '@/components/events/event-search';
+import { RelatedLinks } from '@/components/layout/related-links';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { getStageEvents, toScheduleLayoutEvents, type ScheduleLayoutEvent } from '@/lib/timetable';
@@ -129,6 +130,7 @@ export default async function StageEventsPage() {
         </div>
       </CmsPageLayout>
       <EventSearchSection variant="compact" />
+      <RelatedLinks background="paper" pages={['/events/list', '/events/recommended', '/guide/map']} />
     </>
   );
 }

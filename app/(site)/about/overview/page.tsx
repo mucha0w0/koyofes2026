@@ -4,7 +4,14 @@ import { PageLayout } from '@/components/layout/page-layout';
 
 export default function AboutPage() {
   return (
-    <PageLayout subtitle="歴史と概要" title="こうよう祭とは">
+    <PageLayout
+      related={{
+        pages: ['/about/theme', '/about/part', '/guide/faq'],
+        background: 'paper-2',
+      }}
+      subtitle="歴史と概要"
+      title="こうよう祭とは"
+    >
       <div className="flex flex-col md:flex-row md:gap-12 md:items-start">
         <div className="flex-1 min-w-0">
           <AboutSection />

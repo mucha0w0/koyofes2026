@@ -10,7 +10,14 @@ export default function FAQPage() {
   const categories = faqGroups.map((group) => group.category);
 
   return (
-    <PageLayout subtitle="お問い合わせの多いご質問にお答えします" title="よくある質問">
+    <PageLayout
+      related={{
+        pages: ['/about/overview', '/official/news', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+      subtitle="お問い合わせの多いご質問にお答えします"
+      title="よくある質問"
+    >
       <div className="mx-auto max-w-3xl">
         <FAQCategoryNav categories={categories} />
         <div className="space-y-12">

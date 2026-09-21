@@ -68,11 +68,17 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     .replace(/\//g, '.');
 
   return (
-    <CmsPageLayout meta="newsList">
+    <CmsPageLayout
+      meta="newsList"
+      related={{
+        pages: ['/about/overview', '/guide/faq', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+    >
       <div className="mx-auto max-w-3xl">
-          <InkTextLink arrow="left" className="mb-6" href="/official/news">
-            お知らせ一覧に戻る
-          </InkTextLink>
+        <InkTextLink arrow="left" className="mb-6" href="/official/news">
+          お知らせ一覧に戻る
+        </InkTextLink>
 
         <Card className="pt-2">
           <CardHeader className="px-8 pt-6 pb-2">

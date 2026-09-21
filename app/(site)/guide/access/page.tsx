@@ -4,7 +4,14 @@ import { PageLayout } from '@/components/layout/page-layout';
 
 export default function AccessPage() {
   return (
-    <PageLayout subtitle="会場までのアクセス方法をご案内します" title="アクセス">
+    <PageLayout
+      related={{
+        pages: ['/guide/map', '/guide/faq', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+      subtitle="会場までのアクセス方法をご案内します"
+      title="アクセス"
+    >
       <div className="space-y-8">
         <div className="ink-shell bg-card p-6">
           <div className="flex items-center gap-3 mb-4">

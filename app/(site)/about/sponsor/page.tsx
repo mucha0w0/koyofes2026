@@ -10,7 +10,13 @@ export default async function SponsorPage() {
   const sections = await getSponsorSections();
 
   return (
-    <CmsPageLayout meta="sponsor">
+    <CmsPageLayout
+      meta="sponsor"
+      related={{
+        pages: ['/events/list', '/about/overview', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+    >
       <div className="mx-auto max-w-4xl space-y-12">
         <p className="text-muted-foreground leading-relaxed">
           こうよう祭の開催にあたり、多くの企業・団体様にご協賛いただいております。 心より感謝申し上げます。
