@@ -1,4 +1,9 @@
+import { RelatedLinks } from '@/components/layout/related-links';
 import { InkTextLink } from '@/components/ui/ink-text-link';
+
+import type { RelatedLinksConfig } from '@/lib/config/related-links';
+
+import { cn } from '@/lib/utils';
 
 interface PageLayoutProps {
   title: string;
@@ -6,6 +11,7 @@ interface PageLayoutProps {
   children: React.ReactNode;
   backHref?: string;
   backLabel?: string;
+  related?: RelatedLinksConfig;
 }
 
 export function PageLayout({
@@ -14,6 +20,7 @@ export function PageLayout({
   children,
   backHref = '/',
   backLabel = 'トップページに戻る',
+  related,
 }: PageLayoutProps) {
   return (
     <main className="min-h-screen">
@@ -26,7 +33,12 @@ export function PageLayout({
           {subtitle ? <p className="mt-3 text-muted-foreground">{subtitle}</p> : null}
         </div>
       </div>
-      <div className="mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12">{children}</div>
+      <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10', related ? 'pb-0 md:pt-12' : 'pb-12 md:pt-12')}>
+        {children}
+      </div>
+      {related ? (
+        <RelatedLinks background={related.background} pages={related.pages} title={related.title} />
+      ) : null}
     </main>
   );
 }

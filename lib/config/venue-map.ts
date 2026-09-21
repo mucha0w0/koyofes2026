@@ -35,12 +35,6 @@ export interface MapLegendItem {
   mark: string;
 }
 
-export interface MapRelatedLink {
-  href: string;
-  label: string;
-  description: string;
-}
-
 export interface MapPageSection {
   id: string;
   label: string;
@@ -146,12 +140,6 @@ export const CAMPUS_AREA_GROUPS = [
     ],
   },
 ] as const satisfies CampusAreaGroup[];
-
-export const MAP_RELATED_LINKS = [
-  { href: '/guide/access', label: 'アクセス', description: '電車・バス・車での行き方' },
-  { href: '/guide/faq', label: 'よくある質問', description: '入場や注意事項' },
-  { href: '/official/pamphlet', label: 'パンフレット', description: '紙面の案内' },
-] as const satisfies MapRelatedLink[];
 
 export function mapLocationLabel(location: MapLocation): string {
   const value = location?.trim();

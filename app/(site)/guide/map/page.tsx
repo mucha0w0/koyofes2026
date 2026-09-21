@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { CampusMapFigure } from '@/components/guide/campus-map-figure';
 import { MapAreaList } from '@/components/guide/map-area-list';
 import { MapFacilityList } from '@/components/guide/map-facility-list';
@@ -8,16 +6,18 @@ import { PageLayout } from '@/components/layout/page-layout';
 
 import kounaizu from './kounaizu.jpg';
 
-import {
-  CAMPUS_MAP_ALT,
-  CAMPUS_MAP_LEGEND,
-  MAP_RELATED_LINKS,
-  MAP_STATUS_NOTE,
-} from '@/lib/config/venue-map';
+import { CAMPUS_MAP_ALT, CAMPUS_MAP_LEGEND, MAP_STATUS_NOTE } from '@/lib/config/venue-map';
 
 export default function MapPage() {
   return (
-    <PageLayout subtitle="校内の施設とエリアの案内です" title="会場マップ">
+    <PageLayout
+      related={{
+        pages: ['/guide/access', '/guide/faq', '/official/pamphlet'],
+        background: 'paper-2',
+      }}
+      subtitle="校内の施設とエリアの案内です"
+      title="会場マップ"
+    >
       <div className="space-y-12 md:space-y-16">
         <div className="space-y-6">
           <div className="rounded-md bg-paper-2 p-6">
@@ -56,23 +56,6 @@ export default function MapPage() {
             </p>
           </div>
           <MapAreaList />
-        </section>
-
-        <section className="scroll-mt-24 space-y-6" id="related">
-          <h2 className="text-2xl font-medium text-foreground">関連案内</h2>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {MAP_RELATED_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={link.href}>
-                  <span aria-hidden className="size-2 shrink-0 rounded-[4px] bg-ink" />
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-sm font-medium">{link.label}</span>
-                    <span className="mt-1 block text-xs text-muted-foreground">{link.description}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </section>
       </div>
     </PageLayout>
