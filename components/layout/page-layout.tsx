@@ -33,7 +33,7 @@ export function PageLayout({
           {subtitle ? <p className="mt-3 text-muted-foreground">{subtitle}</p> : null}
         </div>
       </div>
-      <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10', related ? 'pb-0 md:pt-12' : 'pb-12 md:pt-12')}>
+      <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12', related && 'md:pb-16')}>
         {children}
       </div>
       {related ? (
