@@ -12,6 +12,8 @@ interface PageLayoutProps {
   backHref?: string;
   backLabel?: string;
   related?: RelatedLinksConfig;
+  /** 本文をシェル幅の外に出し、全幅の交互地セクションを置ける */
+  fullWidth?: boolean;
 }
 
 export function PageLayout({
@@ -21,6 +23,7 @@ export function PageLayout({
   backHref = '/',
   backLabel = 'トップページに戻る',
   related,
+  fullWidth = false,
 }: PageLayoutProps) {
   return (
     <main className="min-h-screen">
@@ -33,9 +36,13 @@ export function PageLayout({
           {subtitle ? <p className="mt-3 text-muted-foreground">{subtitle}</p> : null}
         </div>
       </div>
-      <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12', related && 'md:pb-16')}>
-        {children}
-      </div>
+      {fullWidth ? (
+        children
+      ) : (
+        <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12', related && 'md:pb-16')}>
+          {children}
+        </div>
+      )}
       {related ? (
         <RelatedLinks background={related.background} pages={related.pages} title={related.title} />
       ) : null}
