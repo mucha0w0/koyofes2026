@@ -18,13 +18,11 @@ export default function FAQPage() {
       subtitle="お問い合わせの多いご質問にお答えします"
       title="よくある質問"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-3xl space-y-12 md:space-y-16">
         <FAQCategoryNav categories={categories} />
-        <div className="space-y-12">
-          {faqGroups.map((group) => (
-            <FAQCategorySection key={group.category} group={group} />
-          ))}
-        </div>
+        {faqGroups.map((group) => (
+          <FAQCategorySection key={group.category} group={group} />
+        ))}
       </div>
     </PageLayout>
   );

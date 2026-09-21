@@ -1,59 +1,40 @@
 'use client';
 
 import { ChevronDown } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface FAQItemProps {
   question: string;
   answer: string;
 }
 
-export const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
+export function FAQItem({ question, answer }: FAQItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="py-5 first:pt-2">
-      {/* 質問ボタン */}
+    <div className="ink-shell bg-card px-6">
       <button
         aria-expanded={isOpen}
-        className="group w-full flex items-start justify-between gap-4 text-left py-1"
+        className="flex min-h-11 w-full items-center justify-between gap-4 py-5 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {/* Qマークとテキストのコンテナ */}
-        <span className="flex items-start gap-3 flex-1 min-w-0">
-          <span className="text-xl text-ink w-6 h-7 flex items-center justify-center shrink-0 select-none">
-            Q.
-          </span>
-          <span className="text-lg text-ink leading-relaxed flex-1 pt-px">{question}</span>
-        </span>
-
-        {/* 矢印アイコン（items-start に合わせた位置調整） */}
-        <span className="h-7 flex items-center shrink-0">
-          <ChevronDown
-            className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ease-in-out ${
-              isOpen ? 'rotate-180' : ''
-            }`}
-          />
-        </span>
+        <span className="min-w-0 flex-1 text-lg font-medium leading-snug text-foreground">{question}</span>
+        <ChevronDown
+          aria-hidden
+          className={`size-5 shrink-0 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+        />
       </button>
 
-      {/* 回答エリア */}
       <div
-        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+        className={`grid transition-[grid-template-rows] duration-200 ease-out ${
           isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
         <div className="overflow-hidden">
-          {/* Aマークとテキストのコンテナ */}
-          <div className="flex items-start gap-3 pb-2 pt-3">
-            <span className="text-xl text-muted-foreground w-6 h-7 flex items-center justify-center shrink-0 select-none">
-              A.
-            </span>
-            <p className="text-muted-foreground leading-relaxed flex-1 pt-0.5">{answer}</p>
-          </div>
+          <p className="pb-5 text-base leading-relaxed whitespace-pre-line text-muted-foreground">{answer}</p>
         </div>
       </div>
     </div>
   );
-};
+}
