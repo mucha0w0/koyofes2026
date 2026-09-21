@@ -39,7 +39,7 @@ export default async function SponsorPage() {
           ))
         )}
 
-        <div className="bg-paper-2 p-6">
+        <div className="rounded-md bg-paper-2 p-6">
           <h2 className="mb-4 text-lg font-medium">協賛のお願い</h2>
           <p className="mb-4 text-muted-foreground">
             こうよう祭では、協賛いただける企業・団体様を募集しております。
