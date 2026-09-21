@@ -52,7 +52,7 @@ export interface NavSection {
  * サイトナビの単一ソース。
  * ラベル・URL・分類の変更はここだけ行う。
  */
-export const NAV_SECTIONS = [
+export const NAV_SECTIONS: NavSection[] = [
   {
     id: 'events',
     label: '企画情報',
@@ -153,7 +153,7 @@ export const NAV_SECTIONS = [
       },
     ],
   },
-] satisfies NavSection[];
+];
 
 /** LinksSection の列順（ヘッダー順とは独立） */
 const LINKS_SECTION_DISPLAY_ORDER = ['about', 'guide', 'official'] as const;
