@@ -24,7 +24,7 @@ function OverallRow({ item }: { item: RankingOverallItem }) {
   return (
     <li>
       <Link className={rowClass()} href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
+        <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
@@ -45,7 +45,7 @@ function TrendRow({ item }: { item: RankingTrendItem }) {
   return (
     <li>
       <Link className={rowClass()} href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
+        <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
@@ -66,7 +66,7 @@ function WaitRow({ item, generatedAt }: { item: RankingWaitItem; generatedAt: st
   return (
     <li>
       <Link className={rowClass()} href={`/events/${item.slug}`}>
-        <span className="w-10 shrink-0 font-display text-xl tabular-nums text-ink">
+        <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
         <InkPhoto alt={item.title} className="ink-shell-sm size-14" size={56} src={item.icon} />
