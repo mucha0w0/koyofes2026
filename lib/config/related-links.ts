@@ -1,3 +1,5 @@
+import type { LucideIcon } from 'lucide-react';
+
 import type { SitePaletteId } from '@/lib/config/palette';
 
 import { NAV_SECTIONS } from '@/lib/config/nav';
@@ -63,6 +65,7 @@ export interface ResolvedRelatedPage {
   href: RelatedPageHref;
   label: string;
   description: string;
+  icon: LucideIcon;
 }
 
 function isRelatedPageHref(href: string): href is RelatedPageHref {
@@ -85,10 +88,17 @@ export function resolveRelatedPages(
         continue;
       }
 
+      const icon = link.card?.icon ?? link.icon;
+
+      if (!icon) {
+        continue;
+      }
+
       catalog.set(link.href, {
         href: link.href,
         label: link.label,
         description: RELATED_DESCRIPTIONS[link.href],
+        icon,
       });
     }
   }

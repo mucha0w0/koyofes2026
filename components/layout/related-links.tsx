@@ -39,17 +39,23 @@ export function RelatedLinks({ pages, background = 'paper', title = '関連案�
       >
         <h2 className="text-2xl font-medium text-foreground">{title}</h2>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((link) => (
-            <li key={link.href}>
-              <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={link.href}>
-                <span aria-hidden className="size-2 shrink-0 rounded-[4px] bg-ink" />
-                <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-medium">{link.label}</span>
-                  <span className="mt-1 block text-xs text-muted-foreground">{link.description}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
+          {items.map((link) => {
+            const Icon = link.icon;
+
+            return (
+              <li key={link.href}>
+                <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={link.href}>
+                  <div className="shrink-0 rounded-md p-2 bg-paper-2">
+                    <Icon aria-hidden className="h-5 w-5 text-foreground" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-sm font-medium">{link.label}</span>
+                    <p className="truncate text-xs text-muted-foreground">{link.description}</p>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

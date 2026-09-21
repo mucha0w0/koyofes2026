@@ -1,4 +1,21 @@
-import { BookOpen, Handshake, HelpCircle, Mail, Map, Palette, Train, Users } from 'lucide-react';
+import {
+  BookOpen,
+  Clock,
+  FileText,
+  Handshake,
+  HelpCircle,
+  Mail,
+  Map,
+  Newspaper,
+  Palette,
+  Search,
+  Share2,
+  Stamp,
+  Star,
+  Train,
+  Trophy,
+  Users,
+} from 'lucide-react';
 
 import type { LucideIcon } from 'lucide-react';
 
@@ -13,6 +30,8 @@ export interface NavLinkCard {
 export interface NavLink {
   label: string;
   href: string;
+  /** 関連案内カード用。card.icon がある場合はそちらを使う */
+  icon?: LucideIcon;
   /** トップページ LinksSection 用（未指定ならカード非表示） */
   card?: NavLinkCard;
   /** リンク単位の表示先上書き（未指定時はセクション設定 → 全 surface） */
@@ -39,9 +58,9 @@ export const NAV_SECTIONS = [
     label: '企画情報',
     surfaces: { links: false },
     links: [
-      { label: '企画一覧・検索', href: '/events/list' },
-      { label: 'おすすめ企画', href: '/events/recommended' },
-      { label: 'タイムテーブル', href: '/events/timetable' },
+      { label: '企画一覧・検索', href: '/events/list', icon: Search },
+      { label: 'おすすめ企画', href: '/events/recommended', icon: Star },
+      { label: 'タイムテーブル', href: '/events/timetable', icon: Clock },
     ],
   },
   {
@@ -49,11 +68,11 @@ export const NAV_SECTIONS = [
     label: '公式コンテンツ',
     surfaces: { links: false },
     links: [
-      { label: 'お知らせ', href: '/official/news' },
-      { label: 'スタンプラリー', href: '/stamp' },
-      { label: 'リアルタイムランキング', href: '/ranking', requiresRanking: true },
-      { label: '公式SNS', href: '/official/social' },
-      { label: 'パンフレット', href: '/official/pamphlet' },
+      { label: 'お知らせ', href: '/official/news', icon: Newspaper },
+      { label: 'スタンプラリー', href: '/stamp', icon: Stamp },
+      { label: 'リアルタイムランキング', href: '/ranking', icon: Trophy, requiresRanking: true },
+      { label: '公式SNS', href: '/official/social', icon: Share2 },
+      { label: 'パンフレット', href: '/official/pamphlet', icon: FileText },
     ],
   },
   {
