@@ -3,7 +3,7 @@
 import { ArrowUpDown, Check } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 
-import { EVENT_SORT_OPTIONS, type EventSortKey } from '@/lib/event-sort';
+import { DEFAULT_EVENT_SORT_KEY, EVENT_SORT_OPTIONS, type EventSortKey } from '@/lib/event-sort';
 import { cn } from '@/lib/utils';
 
 type EventSortMenuProps = {
@@ -15,7 +15,7 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
-  const isActive = value !== 'none';
+  const isActive = value !== DEFAULT_EVENT_SORT_KEY;
 
   useEffect(() => {
     if (!open) {

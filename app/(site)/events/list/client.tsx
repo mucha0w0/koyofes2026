@@ -13,6 +13,7 @@ import { HelpButton } from '@/components/ui/help-button';
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
 import {
+  DEFAULT_EVENT_SORT_KEY,
   fetchRankingScoreMap,
   getEventSortResultHint,
   isRankingSortKey,
@@ -44,7 +45,7 @@ export function EventListClient({ events }: EventListClientProps) {
   const [durationValue, setDurationValue] = useState(15);
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const [sortKey, setSortKey] = useState<EventSortKey>('none');
+  const [sortKey, setSortKey] = useState<EventSortKey>(DEFAULT_EVENT_SORT_KEY);
   const [scoreMaps, setScoreMaps] = useState<Record<RankingTab, Map<string, number> | null>>({
     overall: null,
     trend: null,
@@ -139,8 +140,8 @@ export function EventListClient({ events }: EventListClientProps) {
 
   const displayedEvents = useMemo(() => {
     const scores = isRankingSortKey(sortKey) ? scoreMaps[sortKey] : null;
-    return sortEvents(filteredEvents, sortKey, scores);
-  }, [filteredEvents, sortKey, scoreMaps]);
+    return sortEvents(filteredEvents, sortKey, scores, searchQuery);
+  }, [filteredEvents, sortKey, scoreMaps, searchQuery]);
 
   const sortHint = getEventSortResultHint(sortKey);
 
@@ -156,7 +157,7 @@ export function EventListClient({ events }: EventListClientProps) {
     setDurationValue(15);
     setEnableDurationFilter(false);
     setSelectedLocation('');
-    setSortKey('none');
+    setSortKey(DEFAULT_EVENT_SORT_KEY);
   };
 
   return (
@@ -297,7 +298,7 @@ export function EventListClient({ events }: EventListClientProps) {
           enableParticipantFilter ||
           enableDurationFilter ||
           selectedLocation ||
-          sortKey !== 'none') && (
+          sortKey !== DEFAULT_EVENT_SORT_KEY) && (
           <button className="ink-link flex items-center gap-1 text-xs" onClick={handleResetFilters}>
             <RotateCcw className="h-3 w-3" />
             リセット
