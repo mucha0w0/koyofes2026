@@ -18,11 +18,11 @@ export default function HomePage() {
       <FestivalCountdown />
       <EventSearchSection variant="prominent" />
       <CategoryEvents />
+      <RankingPreview />
       <TimetablePreview />
       <FestivalTicker />
-      <StampRallyPreview />
       <PrVideoSection />
-      <RankingPreview />
+      <StampRallyPreview />
       <FestivalTicker />
       <LinksSection />
       <NewsSection />

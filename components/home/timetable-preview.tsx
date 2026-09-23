@@ -24,7 +24,12 @@ function EventRow({ slug, icon, title, organization, timeRange, duration }: Even
       href={`/events/${slug}`}
     >
       {icon ? (
-        <InkPhoto alt={title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={icon} />
+        <InkPhoto
+          alt={title}
+          className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+          size={128}
+          src={icon}
+        />
       ) : (
         <div className="ink-row-icon h-full min-w-0 w-auto shrink" />
       )}
@@ -86,7 +91,7 @@ export async function TimetablePreview() {
   const day2Rows = toPreviewRows('time-day2');
 
   return (
-    <section className="bg-paper-2 py-10 md:py-14" data-palette="orange">
+    <section className="bg-paper py-10 md:py-14" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-medium text-foreground md:text-2xl">タイムテーブル</h2>
