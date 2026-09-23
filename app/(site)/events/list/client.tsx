@@ -176,21 +176,18 @@ export function EventListClient({ events }: EventListClientProps) {
       </div>
 
       {/* ジャンルフィルター */}
-      <div className="space-y-3">
-        <p className="text-sm font-medium text-foreground">ジャンル</p>
-        <div className="flex flex-wrap gap-2">
-          {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
-            <Button
-              key={id}
-              aria-pressed={selectedGenres.includes(id)}
-              type="button"
-              variant="outline"
-              onClick={() => handleGenreToggle(id)}
-            >
-              {label}
-            </Button>
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-2">
+        {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
+          <Button
+            key={id}
+            aria-pressed={selectedGenres.includes(id)}
+            type="button"
+            variant="outline"
+            onClick={() => handleGenreToggle(id)}
+          >
+            {label}
+          </Button>
+        ))}
       </div>
 
       {/* 詳細検索（アコーディオン） */}

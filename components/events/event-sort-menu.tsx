@@ -58,7 +58,7 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
       <div
         aria-hidden={!open}
         className={cn(
-          'absolute top-full right-0 z-30 mt-1 min-w-52 rounded-md bg-card py-1 transition-all duration-200',
+          'absolute top-full right-0 z-30 mt-1 min-w-52 rounded-md border-[length:var(--shell-stroke)] border-ink bg-card py-1 shadow-[var(--shell-ox)_var(--shell-oy)_0_0_var(--ink)] transition-all duration-200',
           open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0',
         )}
         id={menuId}
