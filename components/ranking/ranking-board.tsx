@@ -145,21 +145,8 @@ export function RankingBoard() {
   const awaitingTab = data?.tab !== tab;
   const generatedAt = data?.generatedAt ?? new Date().toISOString();
 
-  const heading = tab === 'overall' ? 'Ranking' : tab === 'trend' ? 'Now' : 'Wait';
-  const description =
-    tab === 'overall'
-      ? '体験した人の星評価による総合順位です。約15秒ごとに更新します。'
-      : tab === 'trend'
-        ? '直近20分にスタンプを獲得した人数の順位です。約15秒ごとに更新します。'
-        : '来場者が見た、いまの並びの目安です。約15秒ごとに更新します。';
-
   return (
     <div className="mx-auto max-w-3xl space-y-8">
-      <div className="space-y-1">
-        <p className="font-display text-[15px] text-muted-foreground">{heading}</p>
-        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-      </div>
-
       <div className="flex flex-wrap gap-2">
         <Button
           aria-pressed={tab === 'overall'}

@@ -1,6 +1,5 @@
 import { PageLayout } from '@/components/layout/page-layout';
 import { RankingBoard } from '@/components/ranking/ranking-board';
-import { HelpButton } from '@/components/ui/help-button';
 
 import { isRankingEnabled } from '@/lib/config/rankingConfig';
 
@@ -31,13 +30,6 @@ export default function RankingPage() {
       subtitle="星の総合評価、いま人が多い企画、並びの目安"
       title="リアルタイムランキング"
     >
-      <HelpButton description="3つの順位の見方です。" title="リアルタイムランキングの見方">
-        <h2>総合</h2>
-        <p>体験した人の星評価による順位です。</p>
-        <ul>
-          <li>約15秒ごとに更新されます。</li>
-        </ul>
-      </HelpButton>
       <RankingBoard />
     </PageLayout>
   );
