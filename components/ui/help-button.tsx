@@ -75,7 +75,7 @@ export function HelpButton({ title, children, description, className }: HelpButt
         <div className={helpBodyClassName}>{children}</div>
         <DialogFooter className="shrink-0">
           <DialogClose asChild>
-            <Button className="w-full sm:w-auto" type="button" variant="outline">
+            <Button className="w-full sm:w-auto" type="button" variant="secondary">
               閉じる
             </Button>
           </DialogClose>
