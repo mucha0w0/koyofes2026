@@ -220,6 +220,13 @@ html[data-palette='orange'],
     letter-spacing: 0;
     overflow-x: clip;
   }
+  /*
+    ダイアログはスクロールバー幅を body の右余白にする。
+    html の overflow-x: clip ではスクロールバーが残るため、余白だけページが左へずれる。
+  */
+  html body[data-scroll-locked] {
+    margin-right: 0 !important;
+  }
   h1 {
     font-family: var(--font-display);
     font-weight: 700;
