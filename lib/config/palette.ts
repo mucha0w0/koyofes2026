@@ -20,13 +20,7 @@ export function getPaletteForNavSection(sectionId: string): SitePaletteId {
  * トップとそれ以外は企画のオレンジ（サイトの既定）。
  */
 export function getPaletteForPath(pathname: string): SitePaletteId {
-  if (
-    pathname === '/stamp' ||
-    pathname.startsWith('/stamp/') ||
-    pathname === '/ranking' ||
-    pathname.startsWith('/ranking/') ||
-    pathname.startsWith('/official')
-  ) {
+  if (pathname === '/stamp' || pathname.startsWith('/stamp/') || pathname.startsWith('/official')) {
     return 'green';
   }
 

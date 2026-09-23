@@ -61,6 +61,7 @@ export const NAV_SECTIONS: NavSection[] = [
       { label: '企画一覧・検索', href: '/events/list', icon: Search },
       { label: 'おすすめ企画', href: '/events/recommended', icon: Star },
       { label: 'タイムテーブル', href: '/events/timetable', icon: Clock },
+      { label: 'リアルタイムランキング', href: '/ranking', icon: Trophy, requiresRanking: true },
     ],
   },
   {
@@ -70,7 +71,6 @@ export const NAV_SECTIONS: NavSection[] = [
     links: [
       { label: 'お知らせ', href: '/official/news', icon: Newspaper },
       { label: 'スタンプラリー', href: '/stamp', icon: Stamp },
-      { label: 'リアルタイムランキング', href: '/ranking', icon: Trophy, requiresRanking: true },
       { label: '公式SNS', href: '/official/social', icon: Share2 },
       { label: 'パンフレット', href: '/official/pamphlet', icon: FileText },
     ],
