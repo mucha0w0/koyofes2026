@@ -174,15 +174,27 @@ export function RankingBoard() {
           >
             トレンド
           </Button>
-          <Button aria-pressed={tab === 'wait'} size="lg" type="button" variant="outline" onClick={() => setTab('wait')}>
+          <Button
+            aria-pressed={tab === 'wait'}
+            size="lg"
+            type="button"
+            variant="outline"
+            onClick={() => setTab('wait')}
+          >
             待ち
           </Button>
         </div>
-        <HelpButton description="3つの順位の見方です。" title="リアルタイムランキングの見方">
+        <HelpButton description="" title="リアルタイムランキングとは">
+          <p>
+            リアルタイムランキングとは、ユーザーの投票をもとに、現在の待ち時間やトレンドをランキング表示する機能です。
+            <br />
+            60秒ごとに更新されます。
+            <br />
+          </p>
           <h2>総合</h2>
           <p>体験した人の星評価による順位です。</p>
           <ul>
-            <li>約15秒ごとに更新されます。</li>
+            <li>60秒ごとに更新されます。</li>
           </ul>
         </HelpButton>
       </div>

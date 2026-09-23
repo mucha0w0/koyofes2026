@@ -9,7 +9,7 @@ export const RANKING_CONFIG = {
   visitDebounceMs: 10 * 60 * 1000,
   voteDebounceMs: 30 * 1000,
   waitWindowMs: 15 * 60 * 1000,
-  pollIntervalMs: 15 * 1000,
+  pollIntervalMs: 60 * 1000,
   bayes: {
     priorMean: 3.5,
     priorCount: 8,
