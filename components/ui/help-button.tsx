@@ -16,6 +16,8 @@ import {
 
 import type { ReactNode } from 'react';
 
+import { cn } from '@/lib/utils';
+
 const helpBodyClassName = [
   'min-h-0 overflow-y-auto overscroll-contain',
   'space-y-3 text-base leading-relaxed text-ink-soft',
@@ -34,44 +36,33 @@ interface HelpButtonProps {
   children: ReactNode;
   /** 見出しの下に出す短いリード */
   description?: string;
-  /** ボタンに表示する文言 */
-  label?: string;
-  /** 文言を出さず、アイコンだけにする */
-  iconOnly?: boolean;
   className?: string;
 }
 
 /**
- * ページ本文を増やさずに説明を出すボタン。
+ * ページ本文を増やさずに説明を出すアイコン。
  * 押すとモーダルが開き、children を説明として表示する。
  */
-export function HelpButton({
-  title,
-  children,
-  description,
-  label = 'ヘルプ',
-  iconOnly = false,
-  className,
-}: HelpButtonProps) {
+export function HelpButton({ title, children, description, className }: HelpButtonProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          aria-label={`${label}：${title}`}
-          className={className}
-          size={iconOnly ? 'icon' : 'default'}
+        <button
+          aria-label={`${title}の説明`}
+          className={cn(
+            'inline-flex size-11 items-center justify-center rounded-[var(--radius)] text-ink-soft outline-none transition-colors hover:bg-mist-hover focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink',
+            className,
+          )}
           type="button"
-          variant="outline"
         >
-          <HelpCircle aria-hidden />
-          {iconOnly ? null : label}
-        </Button>
+          <HelpCircle aria-hidden className="size-5" />
+        </button>
       </DialogTrigger>
       <DialogContent
-        showCloseButton
         className="flex max-h-[min(90dvh,40rem)] flex-col gap-5 overflow-hidden"
+        showCloseButton={false}
       >
-        <DialogHeader className="shrink-0 pr-10 text-left">
+        <DialogHeader className="shrink-0 text-left">
           <DialogTitle className="font-display text-xl leading-snug font-medium">{title}</DialogTitle>
           {description ? (
             <DialogDescription className="text-left text-sm leading-relaxed text-ink-soft">
