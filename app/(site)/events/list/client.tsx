@@ -8,6 +8,7 @@ import { EventSortMenu } from '@/components/events/event-sort-menu';
 import { ExhibitionCard } from '@/components/events/exhibition-card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { HelpButton } from '@/components/ui/help-button';
 
 import { EVENT_CATEGORY_OPTIONS } from '@/lib/config/event-categories';
 import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
@@ -176,18 +177,34 @@ export function EventListClient({ events }: EventListClientProps) {
       </div>
 
       {/* ジャンルフィルター */}
-      <div className="flex flex-wrap gap-2">
-        {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
-          <Button
-            key={id}
-            aria-pressed={selectedGenres.includes(id)}
-            type="button"
-            variant="outline"
-            onClick={() => handleGenreToggle(id)}
-          >
-            {label}
-          </Button>
-        ))}
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap gap-2">
+          {EVENT_CATEGORY_OPTIONS.map(({ id, label }) => (
+            <Button
+              key={id}
+              aria-pressed={selectedGenres.includes(id)}
+              type="button"
+              variant="outline"
+              onClick={() => handleGenreToggle(id)}
+            >
+              {label}
+            </Button>
+          ))}
+        </div>
+        <HelpButton className="shrink-0" description="" title="リアルタイムランキングとは">
+          <p>
+            リアルタイムランキングとは、ユーザーの投票をもとに、現在の待ち時間やトレンドをランキング表示する機能です。
+            <br />
+            60秒ごとに更新されます。
+            <br />
+          </p>
+          <h2>総合</h2>
+          <p>体験した人の評価の平均をもとにした順位です。</p>
+          <h2>トレンド</h2>
+          <p>直近20分にスタンプを獲得した人数をもとにした順位です。</p>
+          <h2>待ち</h2>
+          <p>来場者が見た、いまの並びの目安です。</p>
+        </HelpButton>
       </div>
 
       {/* 詳細検索（アコーディオン） */}
