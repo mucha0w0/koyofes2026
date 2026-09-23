@@ -5,9 +5,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Spinner } from '@/components/common/spinner';
 import { Button } from '@/components/ui/button';
+import { HelpButton } from '@/components/ui/help-button';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
-import type { RankingApiError, RankingOverallItem, RankingResponse, RankingTrendItem, RankingWaitItem } from '@/lib/types/ranking';
+import type {
+  RankingApiError,
+  RankingOverallItem,
+  RankingResponse,
+  RankingTrendItem,
+  RankingWaitItem,
+} from '@/lib/types/ranking';
 
 import { RANKING_CONFIG, getWaitLevelLabel, type RankingTab } from '@/lib/config/rankingConfig';
 import { formatWaitAgo } from '@/lib/ranking/score';
@@ -147,34 +154,37 @@ export function RankingBoard() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
-      <div className="flex flex-wrap gap-2">
-        <Button
-          aria-pressed={tab === 'overall'}
-          size="lg"
-          type="button"
-          variant="outline"
-          onClick={() => setTab('overall')}
-        >
-          総合
-        </Button>
-        <Button
-          aria-pressed={tab === 'trend'}
-          size="lg"
-          type="button"
-          variant="outline"
-          onClick={() => setTab('trend')}
-        >
-          トレンド
-        </Button>
-        <Button
-          aria-pressed={tab === 'wait'}
-          size="lg"
-          type="button"
-          variant="outline"
-          onClick={() => setTab('wait')}
-        >
-          待ち
-        </Button>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap gap-2">
+          <Button
+            aria-pressed={tab === 'overall'}
+            size="lg"
+            type="button"
+            variant="outline"
+            onClick={() => setTab('overall')}
+          >
+            総合
+          </Button>
+          <Button
+            aria-pressed={tab === 'trend'}
+            size="lg"
+            type="button"
+            variant="outline"
+            onClick={() => setTab('trend')}
+          >
+            トレンド
+          </Button>
+          <Button aria-pressed={tab === 'wait'} size="lg" type="button" variant="outline" onClick={() => setTab('wait')}>
+            待ち
+          </Button>
+        </div>
+        <HelpButton description="3つの順位の見方です。" title="リアルタイムランキングの見方">
+          <h2>総合</h2>
+          <p>体験した人の星評価による順位です。</p>
+          <ul>
+            <li>約15秒ごとに更新されます。</li>
+          </ul>
+        </HelpButton>
       </div>
 
       {awaitingTab || (loading && !data) ? (
