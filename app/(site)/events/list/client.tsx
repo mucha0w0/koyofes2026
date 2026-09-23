@@ -191,19 +191,10 @@ export function EventListClient({ events }: EventListClientProps) {
             </Button>
           ))}
         </div>
-        <HelpButton className="shrink-0" description="" title="リアルタイムランキングとは">
-          <p>
-            リアルタイムランキングとは、ユーザーの投票をもとに、現在の待ち時間やトレンドをランキング表示する機能です。
-            <br />
-            60秒ごとに更新されます。
-            <br />
-          </p>
-          <h2>総合</h2>
-          <p>体験した人の評価の平均をもとにした順位です。</p>
-          <h2>トレンド</h2>
-          <p>直近20分にスタンプを獲得した人数をもとにした順位です。</p>
-          <h2>待ち</h2>
-          <p>来場者が見た、いまの並びの目安です。</p>
+        <HelpButton className="shrink-0" description="" title="企画一覧・検索機能について">
+          <p>学科展、クラス展、有志展示、模擬店、ステージ、キッチンカーの全企画を一括検索できます。</p>
+          <h2>詳細検索</h2>
+          <p>参加可能な人数、所要時間、設営場所から企画を絞り込むことができます。</p>
         </HelpButton>
       </div>
 
@@ -307,10 +298,7 @@ export function EventListClient({ events }: EventListClientProps) {
           enableDurationFilter ||
           selectedLocation ||
           sortKey !== 'none') && (
-          <button
-            className="ink-link flex items-center gap-1 text-xs"
-            onClick={handleResetFilters}
-          >
+          <button className="ink-link flex items-center gap-1 text-xs" onClick={handleResetFilters}>
             <RotateCcw className="h-3 w-3" />
             リセット
           </button>
