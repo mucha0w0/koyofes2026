@@ -36,14 +36,14 @@ function PickSkeleton() {
   return (
     <div className="ink-shell space-y-3 bg-card p-3">
       <div className="flex items-start gap-3">
-        <div className="ink-shell-sm size-8 bg-paper-2" />
+        <div className="size-8 shrink-0 rounded-[var(--radius)] bg-paper-2" />
         <div className="min-w-0 flex-1 space-y-2 pt-1">
           <div className="h-3.5 w-24 rounded-(--radius) bg-paper-2" />
           <div className="h-3.5 w-full rounded-(--radius) bg-paper-2" />
         </div>
       </div>
       <div className="ink-shell flex items-center gap-3 bg-card p-2">
-        <div className="ink-shell-sm size-12 bg-paper-2" />
+        <div className="size-12 shrink-0 rounded-[var(--radius)] bg-paper-2" />
         <div className="min-w-0 flex-1 space-y-2">
           <div className="h-3.5 w-1/2 rounded-(--radius) bg-paper-2" />
           <div className="h-3 w-2/3 rounded-(--radius) bg-paper-2" />

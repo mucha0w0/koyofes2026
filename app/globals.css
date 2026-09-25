@@ -773,6 +773,7 @@ html[data-palette='orange'],
   }
 
   .ink-shell-sm {
+    border: none;
     box-shadow: none;
   }
 
