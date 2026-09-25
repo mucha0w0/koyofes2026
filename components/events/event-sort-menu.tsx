@@ -3,7 +3,7 @@
 import { ArrowUpDown, Check } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 
-import { DEFAULT_EVENT_SORT_KEY, EVENT_SORT_OPTIONS, type EventSortKey } from '@/lib/event-sort';
+import { EVENT_SORT_OPTIONS, type EventSortKey } from '@/lib/event-sort';
 import { cn } from '@/lib/utils';
 
 type EventSortMenuProps = {
@@ -15,7 +15,6 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
-  const isActive = value !== DEFAULT_EVENT_SORT_KEY;
 
   useEffect(() => {
     if (!open) {
@@ -48,12 +47,11 @@ export function EventSortMenu({ value, onChange }: EventSortMenuProps) {
         aria-expanded={open}
         aria-haspopup="menu"
         aria-label="並び替え"
-        aria-pressed={isActive}
-        className={cn('ink-shell ink-lift flex h-full min-h-12 items-center justify-center px-3', isActive ? 'bg-card' : 'bg-mist')}
+        className="ink-shell ink-lift flex h-full min-h-12 items-center justify-center bg-festival-accent px-3 text-white hover:bg-festival-accent-hover"
         type="button"
         onClick={() => setOpen((prev) => !prev)}
       >
-        <ArrowUpDown className="h-5 w-5" />
+        <ArrowUpDown className="h-5 w-5 text-white" />
       </button>
       <div
         aria-hidden={!open}
