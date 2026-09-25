@@ -29,7 +29,7 @@ function BoothRow({ booth }: { booth: StampBooth }) {
 
   return (
     <Link
-      className="ink-shell ink-lift group flex h-[96px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
+      className="ink-shell ink-lift group flex h-24 items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
       href={`/events/${booth.slug}`}
     >
       <InkPhoto
@@ -52,11 +52,11 @@ function BoothRow({ booth }: { booth: StampBooth }) {
 
 function BoothRowSkeleton() {
   return (
-    <div className="ink-shell flex h-[96px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5">
-      <div className="ink-row-icon rounded-[var(--radius)] bg-paper-2" />
+    <div className="ink-shell flex h-24 items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5">
+      <div className="ink-row-icon rounded-(--radius) bg-paper-2" />
       <div className="flex min-w-0 flex-1 flex-col justify-center space-y-2">
-        <div className="h-4 w-1/2 rounded-[var(--radius)] bg-paper-2" />
-        <div className="h-3 w-1/3 rounded-[var(--radius)] bg-paper-2" />
+        <div className="h-4 w-1/2 rounded-(--radius) bg-paper-2" />
+        <div className="h-3 w-1/3 rounded-(--radius) bg-paper-2" />
       </div>
     </div>
   );
