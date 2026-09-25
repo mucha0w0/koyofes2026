@@ -48,16 +48,15 @@ export function StampStatusPanel({
   return (
     <div className="ink-shell space-y-5 bg-card p-6 text-ink">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <div className="space-y-1">
-          <p className="font-display text-[15px] text-ink-soft">Rally</p>
-          <p className="text-sm leading-relaxed text-ink-soft">
-            {isRedeemed
-              ? 'ふくびき参加券は引き換え済みです'
-              : isCleared
-                ? '条件達成です。ふくびき参加券を表示できます'
-                : `あと ${remaining} 個でふくびき券 GET！`}
-          </p>
-        </div>
+        <p className="text-sm leading-relaxed text-ink-soft">
+          {isRedeemed
+            ? redeemedAtLabel
+              ? `ふくびき参加券は引き換え済みです（${redeemedAtLabel}）`
+              : 'ふくびき参加券は引き換え済みです'
+            : isCleared
+              ? '条件達成です。ふくびき参加券を表示できます'
+              : `ふくびき券まであと ${remaining} 個`}
+        </p>
         <p className="text-sm shrink-0">
           {collectedCount === null ? (
             <span className="text-3xl font-medium tabular-nums text-ink-soft">—</span>
@@ -80,10 +79,6 @@ export function StampStatusPanel({
           />
         ) : null}
       </div>
-
-      <p className="text-xs text-ink-soft">
-        ふくびき条件 {requiredCount} 個{isRedeemed && redeemedAtLabel ? ` · 引き換え ${redeemedAtLabel}` : null}
-      </p>
 
       {isRedeemed ? (
         <p className="text-sm leading-relaxed text-ink-soft">スタンプ集めは引き続き楽しめます。</p>
