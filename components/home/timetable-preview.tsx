@@ -91,7 +91,7 @@ export async function TimetablePreview() {
   const day2Rows = toPreviewRows('time-day2');
 
   return (
-    <section className="bg-paper py-10 md:py-14" data-palette="orange">
+    <section className="bg-paper-2 py-10 md:py-14" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-medium text-foreground md:text-2xl">タイムテーブル</h2>

@@ -94,7 +94,7 @@ export function RankingPreviewClient() {
   const loading = items === null && !errorMessage;
 
   return (
-    <section aria-busy={loading} className="bg-paper-2 py-12 md:py-16" data-palette="orange">
+    <section aria-busy={loading} className="bg-paper py-12 md:py-16" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-6 text-center text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
