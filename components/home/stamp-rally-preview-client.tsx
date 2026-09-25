@@ -32,7 +32,12 @@ function BoothRow({ booth }: { booth: StampBooth }) {
       className="ink-shell ink-lift group flex h-[96px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
       href={`/events/${booth.slug}`}
     >
-      <InkPhoto alt={booth.title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={booth.icon} />
+      <InkPhoto
+        alt={booth.title}
+        className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+        size={128}
+        src={booth.icon}
+      />
       <div className="flex min-w-0 flex-1 flex-col justify-center space-y-1">
         <p className="truncate text-sm font-medium">{booth.title}</p>
         {booth.organization ? <p className="truncate text-xs text-muted-foreground">{booth.organization}</p> : null}
@@ -147,7 +152,7 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
               {ready && lastCollected ? (
                 <BoothGroup ready booths={[lastCollected]} heading="直前に獲得したスタンプ" skeletonCount={1} />
               ) : null}
-              <BoothGroup booths={nearbyBooths} heading="近くのスタンプ未獲得ブース" ready={ready} skeletonCount={3} />
+              <BoothGroup booths={nearbyBooths} heading="近くの未獲得スタンプ" ready={ready} skeletonCount={3} />
             </>
           ) : null}
         </div>
