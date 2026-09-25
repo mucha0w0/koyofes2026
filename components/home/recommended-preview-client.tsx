@@ -65,12 +65,18 @@ export function RecommendedPreviewClient({ items }: { items: RecommendedEvent[] 
     <section aria-busy={pick === null} className="bg-paper-2 py-10 md:py-12" data-palette="orange">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-4 text-center text-xl font-medium md:text-2xl">おすすめ企画</h2>
+          <h2 className="mb-4 text-center text-xl font-medium md:text-2xl">
+            {pick ? (
+              `${pick.recommender}のおすすめ企画`
+            ) : (
+              <span className="mx-auto block h-7 w-56 rounded-(--radius) bg-paper" />
+            )}
+          </h2>
 
           {pick ? <CompactPick pick={pick} /> : <PickSkeleton />}
 
           <div className="mt-5 text-center">
-            <InkTextLink href="/events/recommended">おすすめ企画を見る</InkTextLink>
+            <InkTextLink href="/events/recommended">全てのおすすめ企画を見る</InkTextLink>
           </div>
         </div>
       </div>
