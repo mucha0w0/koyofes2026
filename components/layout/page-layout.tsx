@@ -44,7 +44,7 @@ export function PageLayout({
         </div>
       )}
       {related ? (
-        <RelatedLinks background={related.background} pages={related.pages} title={related.title} />
+        <RelatedLinks {...related} />
       ) : null}
     </main>
   );

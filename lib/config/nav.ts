@@ -24,14 +24,15 @@ export type NavSurface = 'header' | 'footer' | 'links';
 
 export interface NavLinkCard {
   icon: LucideIcon;
-  description: string;
 }
 
 export interface NavLink {
   label: string;
   href: string;
-  /** 関連案内カード用。card.icon がある場合はそちらを使う */
+  /** 関連案内カードのアイコン。card.icon がある場合はそちらを使う */
   icon?: LucideIcon;
+  /** 関連案内とトップの案内カードで共通の一文 */
+  description: string;
   /** トップページ LinksSection 用（未指定ならカード非表示） */
   card?: NavLinkCard;
   /** リンク単位の表示先上書き（未指定時はセクション設定 → 全 surface） */
@@ -50,18 +51,24 @@ export interface NavSection {
 
 /**
  * サイトナビの単一ソース。
- * ラベル・URL・分類の変更はここだけ行う。
+ * ラベル・URL・説明文・分類の変更はここだけ行う。
  */
-export const NAV_SECTIONS: NavSection[] = [
+export const NAV_SECTIONS = [
   {
     id: 'events',
     label: '企画情報',
     surfaces: { links: false },
     links: [
-      { label: '企画一覧・検索', href: '/events/list', icon: Search },
-      { label: 'おすすめ企画', href: '/events/recommended', icon: Star },
-      { label: 'タイムテーブル', href: '/events/timetable', icon: Clock },
-      { label: 'リアルタイムランキング', href: '/ranking', icon: Trophy, requiresRanking: true },
+      { label: '企画一覧・検索', href: '/events/list', description: '企画を探す', icon: Search },
+      { label: 'おすすめ企画', href: '/events/recommended', description: '運営のおすすめ', icon: Star },
+      { label: 'タイムテーブル', href: '/events/timetable', description: '公演の時間', icon: Clock },
+      {
+        label: 'リアルタイムランキング',
+        href: '/ranking',
+        description: 'いまの人気',
+        icon: Trophy,
+        requiresRanking: true,
+      },
     ],
   },
   {
@@ -69,10 +76,10 @@ export const NAV_SECTIONS: NavSection[] = [
     label: '公式コンテンツ',
     surfaces: { links: false },
     links: [
-      { label: 'お知らせ', href: '/official/news', icon: Newspaper },
-      { label: 'スタンプラリー', href: '/stamp', icon: Stamp },
-      { label: '公式SNS', href: '/official/social', icon: Share2 },
-      { label: 'パンフレット', href: '/official/pamphlet', icon: FileText },
+      { label: 'お知らせ', href: '/official/news', description: '最新のお知らせ', icon: Newspaper },
+      { label: 'スタンプラリー', href: '/stamp', description: 'スタンプを集める', icon: Stamp },
+      { label: '公式SNS', href: '/official/social', description: '公式アカウント', icon: Share2 },
+      { label: 'パンフレット', href: '/official/pamphlet', description: '紙面の案内', icon: FileText },
     ],
   },
   {
@@ -82,26 +89,20 @@ export const NAV_SECTIONS: NavSection[] = [
       {
         label: 'アクセス',
         href: '/guide/access',
-        card: {
-          icon: Train,
-          description: '電車・バス・車でのアクセス方法',
-        },
+        description: '電車・バス・車でのアクセス方法',
+        card: { icon: Train },
       },
       {
         label: '会場マップ',
         href: '/guide/map',
-        card: {
-          icon: Map,
-          description: '校内の施設とエリア案内',
-        },
+        description: '校内の施設とエリア案内',
+        card: { icon: Map },
       },
       {
         label: 'よくある質問',
         href: '/guide/faq',
-        card: {
-          icon: HelpCircle,
-          description: 'FAQ・お問い合わせ前に',
-        },
+        description: 'FAQ・お問い合わせ前に',
+        card: { icon: HelpCircle },
       },
     ],
   },
@@ -112,48 +113,41 @@ export const NAV_SECTIONS: NavSection[] = [
       {
         label: 'こうよう祭とは',
         href: '/about/overview',
-        card: {
-          icon: BookOpen,
-          description: '歴史と概要',
-        },
+        description: '歴史と概要',
+        card: { icon: BookOpen },
       },
       {
         label: 'テーマ',
         href: '/about/theme',
-        card: {
-          icon: Palette,
-          description: '今年のテーマについて',
-        },
+        description: '今年のテーマについて',
+        card: { icon: Palette },
         surfaces: { footer: false },
       },
       {
         label: 'パート',
         href: '/about/part',
-        card: {
-          icon: Users,
-          description: 'こうよう祭を運営するパートのご紹介',
-        },
+        description: 'こうよう祭を運営するパートのご紹介',
+        card: { icon: Users },
         surfaces: { footer: false },
       },
       {
         label: 'ご協賛',
         href: '/about/sponsor',
-        card: {
-          icon: Handshake,
-          description: 'ご協賛いただいている企業・団体様',
-        },
+        description: 'ご協賛いただいている企業・団体様',
+        card: { icon: Handshake },
       },
       {
         label: 'お問い合わせ',
         href: '/about/contact',
-        card: {
-          icon: Mail,
-          description: '連絡先',
-        },
+        description: '連絡先',
+        card: { icon: Mail },
       },
     ],
   },
-];
+] satisfies NavSection[];
+
+/** 実行時の走査用。href のリテラル型は NAV_SECTIONS に残す。 */
+const NAV_SECTION_LIST: readonly NavSection[] = NAV_SECTIONS;
 
 /** LinksSection の列順（ヘッダー順とは独立） */
 const LINKS_SECTION_DISPLAY_ORDER = ['about', 'guide', 'official'] as const;
@@ -200,7 +194,7 @@ function isVisible(
 
 /** Header / Footer 向け: セクションとリンク一覧 */
 export function getNavSections(surface: NavSurface, rankingEnabled = false): ResolvedNavSection[] {
-  return NAV_SECTIONS.map((section) => ({
+  return NAV_SECTION_LIST.map((section) => ({
     id: section.id,
     label: section.label,
     items: section.links
@@ -211,11 +205,11 @@ export function getNavSections(surface: NavSurface, rankingEnabled = false): Res
 
 /** トップページ LinksSection 向け: card 付きリンクのみ */
 export function getNavLinkCardSections(rankingEnabled = false): ResolvedNavLinkCardSection[] {
-  const sections = NAV_SECTIONS.map((section) => ({
+  const sections = NAV_SECTION_LIST.map((section) => ({
     id: section.id,
     label: section.label,
     items: section.links.flatMap((link) => {
-      if (!('card' in link) || !link.card || !isVisible(link, section, 'links', rankingEnabled)) {
+      if (!link.card || !isVisible(link, section, 'links', rankingEnabled)) {
         return [];
       }
 
@@ -224,7 +218,7 @@ export function getNavLinkCardSections(rankingEnabled = false): ResolvedNavLinkC
           label: link.label,
           href: link.href,
           icon: link.card.icon,
-          description: link.card.description,
+          description: link.description,
         },
       ];
     }),

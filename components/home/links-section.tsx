@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { NavCardLink } from '@/components/layout/nav-card-link';
 
 import { getNavLinkCardSections } from '@/lib/config/nav';
 import { cn } from '@/lib/utils';
@@ -18,25 +18,16 @@ export function LinksSection() {
           <div key={section.id} className="space-y-4">
             <h2 className="text-center text-xl font-medium md:text-2xl">{section.label}</h2>
             <div className="grid gap-3">
-              {section.items.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <Link
-                    key={item.href}
-                    className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4"
-                    href={item.href}
-                  >
-                    <div className="shrink-0 rounded-md p-2 bg-paper-2">
-                      <Icon aria-hidden className="h-5 w-5 text-foreground" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-sm font-medium">{item.label}</span>
-                      <p className="truncate text-xs text-muted-foreground">{item.description}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+              {section.items.map((item) => (
+                <NavCardLink
+                  key={item.href}
+                  description={item.description}
+                  descriptionClassName="truncate"
+                  href={item.href}
+                  icon={item.icon}
+                  label={item.label}
+                />
+              ))}
             </div>
           </div>
         ))}
