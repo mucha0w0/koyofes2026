@@ -4,6 +4,7 @@ import { EventCarousel } from '@/components/events/event-carousel';
 import { EventMarkdown } from '@/components/events/event-markdown';
 import { EventSearchSection } from '@/components/events/event-search';
 import { RelatedLinks } from '@/components/layout/related-links';
+import { HelpButton } from '@/components/ui/help-button';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
 import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
@@ -66,7 +67,14 @@ export default async function EventPage({ params }: PageProps) {
             <InkPhoto alt={event.title} className="size-16 md:size-24" size={96} src={event.icon} />
 
             <div className="flex-1">
-              <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
+              <div className="mb-2 flex items-center gap-1">
+                <h1 className="min-w-0 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
+                <HelpButton className="shrink-0" title="掲載内容について">
+                  <p>
+                    掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。
+                  </p>
+                </HelpButton>
+              </div>
               <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
             </div>
           </div>
