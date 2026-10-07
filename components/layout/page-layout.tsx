@@ -26,7 +26,7 @@ export function PageLayout({
   fullWidth = false,
 }: PageLayoutProps) {
   return (
-    <main className="min-h-screen">
+    <main className="flex flex-1 flex-col">
       <div className="border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-card">
         <div className="mx-auto w-full max-w-7xl px-4 pt-12 pb-10 md:pt-16 md:pb-12">
           <InkTextLink arrow="left" className="mb-6" href={backHref}>

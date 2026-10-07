@@ -9,7 +9,7 @@ export function SiteShell({
   return (
     <SitePalette>
       <SiteHeader rankingEnabled={rankingEnabled} />
-      <div className="flex-1">{children}</div>
+      <div className="flex flex-1 flex-col">{children}</div>
       <SiteFooter />
     </SitePalette>
   );

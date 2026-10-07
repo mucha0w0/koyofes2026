@@ -58,7 +58,7 @@ export default async function EventPage({ params }: PageProps) {
   const durationDisplay = formatDuration(event.duration);
 
   return (
-    <main className="flex-1">
+    <main className="flex flex-1 flex-col">
       <EventCarousel images={event.images} title={event.title} />
 
       <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
@@ -142,8 +142,10 @@ export default async function EventPage({ params }: PageProps) {
         </div>
       </div>
 
-      <EventSearchSection variant="compact" />
-      <RelatedLinks background="paper" pages={['/events/list', '/ranking', '/stamp']} />
+      <div className="mt-auto">
+        <EventSearchSection variant="compact" />
+        <RelatedLinks background="paper" pages={['/events/list', '/ranking', '/stamp']} />
+      </div>
     </main>
   );
 }
