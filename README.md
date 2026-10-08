@@ -66,7 +66,6 @@
 ### 公式コンテンツ
 
 - **お知らせ**（`/official/news`）: microCMS から取得したニュース一覧・詳細
-- **公式 SNS**（`/official/social`）: 公式アカウントへのリンク（表示する媒体は `lib/config/social.ts` の `enabled`）
 - **パンフレット**（`/official/pamphlet`）: PDF ビューアとダウンロード
 
 ### ご案内
@@ -110,7 +109,6 @@
 | `/events/[slug]` | 企画詳細 |
 | `/official/news` | お知らせ一覧 |
 | `/official/news/[id]` | お知らせ詳細 |
-| `/official/social` | 公式 SNS |
 | `/official/pamphlet` | パンフレット |
 | `/stamp` | スタンプラリー |
 | `/stamp/collect` | スタンプ獲得（NFC/QR 用・非公開） |
@@ -336,7 +334,7 @@ microCMS での更新は、本番では最大 **60 秒** の遅延で反映さ�
 | アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
 | 会場マップ画像 | `app/(site)/guide/map/kounaizu.jpg` | `/guide/map` |
 | お問い合わせ | `app/(site)/about/contact/page.tsx` | `/about/contact` |
-| 公式 SNS リンク | `lib/config/social.ts` | フッター・ホーム CTA・`/official/social` |
+| 公式 SNS リンク | `lib/config/social.ts` | フッター・ホーム CTA |
 | パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
 
 ### 企画カテゴリ

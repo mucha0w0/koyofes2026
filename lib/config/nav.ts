@@ -9,7 +9,6 @@ import {
   Newspaper,
   Palette,
   Search,
-  Share2,
   Stamp,
   Star,
   Train,
@@ -78,7 +77,6 @@ export const NAV_SECTIONS = [
     links: [
       { label: 'お知らせ', href: '/official/news', description: '最新のお知らせ', icon: Newspaper },
       { label: 'スタンプラリー', href: '/stamp', description: 'スタンプを集める', icon: Stamp },
-      { label: '公式SNS', href: '/official/social', description: '公式アカウント', icon: Share2 },
       { label: 'パンフレット', href: '/official/pamphlet', description: '紙面の案内', icon: FileText },
     ],
   },

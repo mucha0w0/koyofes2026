@@ -905,22 +905,35 @@ html[data-palette='orange'],
     outline-offset: 2px;
   }
 
-  /* Slider Styles */
+  /* 詳細検索のスライダー。主ボタン以外にオレンジを使わない。つまみはカード内の小さなインク殻 */
   input[type='range'] {
+    box-sizing: border-box;
     width: 100%;
-    height: 4px;
-    padding: 0;
+    height: 32px;
+    margin: 0;
+    /* 端のつまみが入力の外にはみ出して切れないようにする */
+    padding: 0 14px;
     background: transparent;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    -moz-appearance: none;
   }
 
-  /* Track (background) */
+  input[type='range']:disabled {
+    cursor: not-allowed;
+  }
+
+  input[type='range']:focus {
+    outline: none;
+  }
+
+  input[type='range']::-moz-focus-outer {
+    border: 0;
+  }
+
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
-    height: 4px;
+    height: 8px;
     background: var(--mist);
     border: none;
     border-radius: 4px;
@@ -928,47 +941,59 @@ html[data-palette='orange'],
 
   input[type='range']::-moz-range-track {
     width: 100%;
-    height: 4px;
+    height: 8px;
     background: var(--mist);
     border: none;
     border-radius: 4px;
   }
 
   input[type='range']::-moz-range-progress {
-    background-color: var(--festival-accent);
-    height: 4px;
-    border-radius: 4px;
-  }
-
-  /* Thumb (handle) */
-  input[type='range']::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    margin-top: -6px;
-    background: var(--festival-accent);
+    height: 8px;
+    background: var(--mist);
     border: none;
     border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
   }
 
-  input[type='range']::-webkit-slider-thumb:hover {
-    background: var(--festival-accent-hover);
+  input[type='range']::-webkit-slider-thumb {
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -7px;
+    background: var(--card);
+    border: var(--shell-stroke) solid var(--ink);
+    border-radius: 4px;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  input[type='range']:disabled::-webkit-slider-thumb {
+    cursor: not-allowed;
+  }
+
+  input[type='range']:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
   }
 
   input[type='range']::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    background: var(--festival-accent);
-    border: none;
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    background: var(--card);
+    border: var(--shell-stroke) solid var(--ink);
     border-radius: 4px;
+    box-shadow: none;
     cursor: pointer;
-    transition: background-color 0.2s ease;
   }
 
-  input[type='range']::-moz-range-thumb:hover {
-    background: var(--festival-accent-hover);
+  input[type='range']:disabled::-moz-range-thumb {
+    cursor: not-allowed;
+  }
+
+  input[type='range']:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
   }
 }

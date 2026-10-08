@@ -1,8 +1,8 @@
 'use client';
 
-import { Search, RotateCcw } from 'lucide-react';
+import { Check, ChevronDown, Search, RotateCcw } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, type ReactNode } from 'react';
 
 import { EventSortMenu } from '@/components/events/event-sort-menu';
 import { ExhibitionCard } from '@/components/events/exhibition-card';
@@ -21,6 +21,7 @@ import {
   type EventSortKey,
 } from '@/lib/event-sort';
 import { Event } from '@/lib/types/event';
+import { cn } from '@/lib/utils';
 
 // ロケーションラベル（データベースから一意に抽出）
 function getUniqueLocations(events: Event[]): string[] {
@@ -31,6 +32,14 @@ function getUniqueLocations(events: Event[]): string[] {
 }
 
 const PARTICIPANT_FILTER_OPEN_MAX = 5;
+
+const PARTICIPANT_MARKS = [
+  { value: 1, label: '1' },
+  { value: 2, label: '2' },
+  { value: 3, label: '3' },
+  { value: 4, label: '4' },
+  { value: PARTICIPANT_FILTER_OPEN_MAX, label: '5〜' },
+] as const;
 
 interface EventListClientProps {
   events: Event[];
@@ -199,89 +208,107 @@ export function EventListClient({ events }: EventListClientProps) {
         </HelpButton>
       </div>
 
-      {/* 詳細検索（アコーディオン） */}
-      <Accordion collapsible type="single">
+      {/* 詳細検索（アコーディオン）。FAQ と同じ白いインク殻 */}
+      <Accordion collapsible className="ink-shell bg-card px-6" type="single">
         <AccordionItem value="advanced">
-          <AccordionTrigger className="text-sm font-medium text-foreground hover:no-underline hover:text-muted-foreground py-4">
-            詳細検索
+          <AccordionTrigger className="py-5 text-lg font-medium text-foreground">
+            <span className="flex min-w-0 items-center gap-3">
+              詳細検索
+              {enableParticipantFilter || enableDurationFilter || selectedLocation ? (
+                <span className="ink-tag">絞り込み中</span>
+              ) : null}
+            </span>
           </AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-8 pt-2">
-              {/* 参加人数フィルター */}
+          <AccordionContent className="pr-4 pb-6">
+            <div className="space-y-6 pt-1">
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <input
-                    checked={enableParticipantFilter}
-                    className="w-4 h-4"
-                    id="enable-participant"
-                    type="checkbox"
-                    onChange={(e) => setEnableParticipantFilter(e.target.checked)}
-                  />
-                  <label className="text-sm font-medium text-foreground cursor-pointer" htmlFor="enable-participant">
-                    参加人数
-                  </label>
-                </div>
-                <input
-                  className="w-full"
-                  max={PARTICIPANT_FILTER_OPEN_MAX}
-                  min={1}
-                  type="range"
-                  value={participantMax}
-                  onChange={(e) => setParticipantMax(Number(e.target.value))}
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5〜</span>
-                </div>
-              </div>
-
-              {/* 所要時間フィルター */}
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <input
-                    checked={enableDurationFilter}
-                    className="w-4 h-4"
-                    id="enable-duration"
-                    type="checkbox"
-                    onChange={(e) => setEnableDurationFilter(e.target.checked)}
-                  />
-                  <label className="text-sm font-medium text-foreground cursor-pointer" htmlFor="enable-duration">
-                    所要時間
-                  </label>
-                </div>
-                <input
-                  className="w-full"
-                  max="30"
-                  min="5"
-                  type="range"
-                  value={durationValue}
-                  onChange={(e) => setDurationValue(Number(e.target.value))}
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                  <span>さくっと</span>
-                  <span className="mx-auto">{durationValue}分程度</span>
-                  <span>じっくり</span>
-                </div>
-              </div>
-
-              {/* 設営場所フィルター */}
-              <div>
-                <label className="text-sm font-medium text-foreground block mb-3">設営場所</label>
-                <select
-                  className="ink-shell min-h-11 w-full bg-card px-4 py-2 text-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
+                <FilterToggle
+                  checked={enableParticipantFilter}
+                  id="enable-participant"
+                  onCheckedChange={setEnableParticipantFilter}
                 >
-                  <option value="">すべて</option>
-                  {uniqueLocations.map((location) => (
-                    <option key={location} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
+                  参加人数
+                </FilterToggle>
+                <div className={cn('px-4', !enableParticipantFilter && 'pointer-events-none opacity-40')}>
+                  <input
+                    aria-label="参加人数"
+                    aria-valuetext={participantMax >= PARTICIPANT_FILTER_OPEN_MAX ? '5人以上' : `${participantMax}人`}
+                    className="w-full"
+                    disabled={!enableParticipantFilter}
+                    max={PARTICIPANT_FILTER_OPEN_MAX}
+                    min={1}
+                    type="range"
+                    value={participantMax}
+                    onChange={(e) => setParticipantMax(Number(e.target.value))}
+                  />
+                  <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+                    {PARTICIPANT_MARKS.map((mark) => (
+                      <span
+                        key={mark.value}
+                        className={cn(
+                          enableParticipantFilter && participantMax === mark.value && 'font-medium text-ink',
+                        )}
+                      >
+                        {mark.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <FilterToggle
+                  checked={enableDurationFilter}
+                  id="enable-duration"
+                  onCheckedChange={setEnableDurationFilter}
+                >
+                  所要時間
+                </FilterToggle>
+                <div className={cn('px-4', !enableDurationFilter && 'pointer-events-none opacity-40')}>
+                  <input
+                    aria-label="所要時間"
+                    aria-valuetext={`${durationValue}分程度`}
+                    className="w-full"
+                    disabled={!enableDurationFilter}
+                    max="30"
+                    min="5"
+                    type="range"
+                    value={durationValue}
+                    onChange={(e) => setDurationValue(Number(e.target.value))}
+                  />
+                  <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+                    <span>さくっと</span>
+                    <span className={cn('mx-auto', enableDurationFilter && 'font-medium text-ink')}>
+                      {durationValue}分程度
+                    </span>
+                    <span>じっくり</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-3 block text-sm font-medium text-foreground" htmlFor="event-location">
+                  設営場所
+                </label>
+                <div className="relative">
+                  <select
+                    className="ink-shell min-h-11 w-full appearance-none bg-card py-2 pr-11 pl-4 text-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
+                    id="event-location"
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                  >
+                    <option value="">すべて</option>
+                    {uniqueLocations.map((location) => (
+                      <option key={location} value={location}>
+                        {location}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown
+                    aria-hidden
+                    className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-ink-soft"
+                  />
+                </div>
               </div>
             </div>
           </AccordionContent>
@@ -317,5 +344,39 @@ export function EventListClient({ events }: EventListClientProps) {
         )}
       </div>
     </div>
+  );
+}
+
+function FilterToggle({
+  id,
+  checked,
+  onCheckedChange,
+  children,
+}: {
+  id: string;
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
+  children: ReactNode;
+}) {
+  return (
+    <label
+      className="mb-2 flex min-h-11 w-fit cursor-pointer items-center gap-3 text-sm font-medium text-foreground"
+      htmlFor={id}
+    >
+      <input
+        checked={checked}
+        className="peer sr-only focus:outline-none"
+        id={id}
+        type="checkbox"
+        onChange={(event) => onCheckedChange(event.target.checked)}
+      />
+      <span
+        aria-hidden
+        className="flex size-6 shrink-0 items-center justify-center rounded-[4px] border-(length:--shell-stroke) border-ink bg-mist text-ink peer-checked:bg-card peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink"
+      >
+        <Check className={cn('size-3.5', checked ? 'opacity-100' : 'opacity-0')} strokeWidth={2.75} />
+      </span>
+      {children}
+    </label>
   );
 }

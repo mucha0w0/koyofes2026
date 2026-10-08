@@ -5,7 +5,7 @@ import type { IconType } from 'react-icons';
 /**
  * 公式 SNS の単一ソース。
  * 見た目に出すかは `enabled`。アカウント開設後は true にするだけで
- * フッター・ホーム CTA・公式 SNS ページに出る。
+ * フッター・ホーム CTA に出る。
  */
 export const OFFICIAL_SOCIALS = [
   {

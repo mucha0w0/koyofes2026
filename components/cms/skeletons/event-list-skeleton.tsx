@@ -13,7 +13,7 @@ export function EventListSkeleton() {
           ))}
         </div>
       </div>
-      <div className="h-12 w-full rounded bg-paper-2" />
+      <div className="ink-shell h-20 bg-card" />
       <div className="h-4 w-32 rounded bg-paper-2" />
       <div className="space-y-4">
         {Array.from({ length: 4 }).map((_, index) => (
