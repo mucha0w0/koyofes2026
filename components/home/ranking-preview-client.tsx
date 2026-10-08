@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
 import { InkTextLink } from '@/components/ui/ink-text-link';
@@ -53,6 +53,22 @@ function PreviewSkeleton() {
   );
 }
 
+export function RankingPreviewSection({ children }: { children: ReactNode }) {
+  return (
+    <section className="bg-paper py-12 md:py-16" data-palette="orange">
+      <div className="mx-auto w-full max-w-7xl px-4">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-center text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
+          {children}
+          <div className="mt-8 text-center">
+            <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function RankingPreviewClient() {
   const [items, setItems] = useState<RankingOverallItem[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -94,42 +110,34 @@ export function RankingPreviewClient() {
   const loading = items === null && !errorMessage;
 
   return (
-    <section aria-busy={loading} className="bg-paper py-12 md:py-16" data-palette="orange">
-      <div className="mx-auto w-full max-w-7xl px-4">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-6 text-center text-xl font-medium md:text-2xl">リアルタイムランキング</h2>
+    <RankingPreviewSection>
+      <div aria-busy={loading}>
+        {loading ? <PreviewSkeleton /> : null}
 
-          {loading ? <PreviewSkeleton /> : null}
-
-          {errorMessage ? (
-            <div className="ink-shell bg-card p-6">
-              <p className="text-sm leading-relaxed text-muted-foreground">{errorMessage}</p>
-            </div>
-          ) : null}
-
-          {items && items.length === 0 && !errorMessage ? (
-            <div className="ink-shell bg-card p-6">
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
-              </p>
-            </div>
-          ) : null}
-
-          {items && items.length > 0 ? (
-            <ol className="space-y-3">
-              {items.map((item) => (
-                <li key={item.slug}>
-                  <RankingRow item={item} />
-                </li>
-              ))}
-            </ol>
-          ) : null}
-
-          <div className="mt-8 text-center">
-            <InkTextLink href="/ranking">ランキングを見る</InkTextLink>
+        {errorMessage ? (
+          <div className="ink-shell bg-card p-6">
+            <p className="text-sm leading-relaxed text-muted-foreground">{errorMessage}</p>
           </div>
-        </div>
+        ) : null}
+
+        {items && items.length === 0 && !errorMessage ? (
+          <div className="ink-shell bg-card p-6">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              まだ投票がありません。スタンプ帳の獲得画面から星を付けてください。
+            </p>
+          </div>
+        ) : null}
+
+        {items && items.length > 0 ? (
+          <ol className="space-y-3">
+            {items.map((item) => (
+              <li key={item.slug}>
+                <RankingRow item={item} />
+              </li>
+            ))}
+          </ol>
+        ) : null}
       </div>
-    </section>
+    </RankingPreviewSection>
   );
 }
