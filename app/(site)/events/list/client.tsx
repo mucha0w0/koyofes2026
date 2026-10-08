@@ -211,7 +211,7 @@ export function EventListClient({ events }: EventListClientProps) {
       {/* 詳細検索（アコーディオン）。FAQ と同じ白いインク殻 */}
       <Accordion collapsible className="ink-shell bg-card px-6" type="single">
         <AccordionItem value="advanced">
-          <AccordionTrigger className="py-5 text-lg font-medium text-foreground">
+          <AccordionTrigger className="py-3 text-base leading-normal font-medium text-foreground">
             <span className="flex min-w-0 items-center gap-3">
               詳細検索
               {enableParticipantFilter || enableDurationFilter || selectedLocation ? (
