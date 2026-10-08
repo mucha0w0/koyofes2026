@@ -102,6 +102,12 @@ export const NAV_SECTIONS = [
         description: 'FAQ・お問い合わせ前に',
         card: { icon: HelpCircle },
       },
+      {
+        label: 'お問い合わせ',
+        href: '/guide/contact',
+        description: '連絡先',
+        card: { icon: Mail },
+      },
     ],
   },
   {
@@ -133,12 +139,6 @@ export const NAV_SECTIONS = [
         href: '/about/sponsor',
         description: 'ご協賛いただいている企業・団体様',
         card: { icon: Handshake },
-      },
-      {
-        label: 'お問い合わせ',
-        href: '/about/contact',
-        description: '連絡先',
-        card: { icon: Mail },
       },
     ],
   },

@@ -73,6 +73,7 @@
 - **アクセス**（`/guide/access`）: 電車・バス・車でのアクセス方法
 - **会場マップ**（`/guide/map`）: 構内図と各エリアの説明
 - **よくある質問**（`/guide/faq`）: カテゴリ別 FAQ（`lib/faqs.json` から読み込み）
+- **お問い合わせ**（`/guide/contact`）: 連絡先情報
 
 ### こうよう祭について
 
@@ -80,7 +81,6 @@
 - **テーマ**（`/about/theme`）: 今年度のテーマ紹介
 - **パート**（`/about/part`）: 運営パートメンバー紹介（microCMS）
 - **ご協賛**（`/about/sponsor`）: 協賛企業・団体一覧（microCMS）
-- **お問い合わせ**（`/about/contact`）: 連絡先情報
 
 ### トップページ
 
@@ -117,11 +117,11 @@
 | `/guide/access` | アクセス |
 | `/guide/map` | 会場マップ |
 | `/guide/faq` | よくある質問 |
+| `/guide/contact` | お問い合わせ |
 | `/about/overview` | こうよう祭とは |
 | `/about/theme` | テーマ |
 | `/about/part` | パート紹介 |
 | `/about/sponsor` | ご協賛 |
-| `/about/contact` | お問い合わせ |
 
 ### API ルート
 
@@ -333,7 +333,7 @@ microCMS での更新は、本番では最大 **60 秒** の遅延で反映さ�
 | 概要ページ本文 | `components/about/about-section.tsx` など | `/about/overview` |
 | アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
 | 会場マップ画像 | `app/(site)/guide/map/kounaizu.jpg` | `/guide/map` |
-| お問い合わせ | `app/(site)/about/contact/page.tsx` | `/about/contact` |
+| お問い合わせ | `app/(site)/guide/contact/page.tsx` | `/guide/contact` |
 | 公式 SNS リンク | `lib/config/social.ts` | フッター・ホーム CTA |
 | パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
 
@@ -515,7 +515,7 @@ docs: README の環境変数セクションを更新
 - [ ] パンフレット PDF（`public/koyofes2026_pamphlet.pdf`）の差し替え
 - [ ] 会場マップ画像（`app/(site)/guide/map/kounaizu.jpg`）
 - [ ] 公式 SNS のアカウント・URL（`lib/config/social.ts` の `enabled` と URL）
-- [ ] お問い合わせ先（`/about/contact`）
+- [ ] お問い合わせ先（`/guide/contact`）
 
 ### 設定・コード
 

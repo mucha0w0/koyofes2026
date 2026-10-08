@@ -52,7 +52,7 @@ export default async function SponsorPage() {
             ご興味のある方は、お問い合わせフォームよりご連絡ください。
           </p>
           <Button asChild>
-            <Link href="/about/contact">お問い合わせ</Link>
+            <Link href="/guide/contact">お問い合わせ</Link>
           </Button>
         </div>
       </div>
