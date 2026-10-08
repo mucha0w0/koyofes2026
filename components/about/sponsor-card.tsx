@@ -1,9 +1,13 @@
-import { ExternalLink } from 'lucide-react';
+import { ChevronRight, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
 import type { SponsorItem } from '@/lib/types/sponsor';
+
+const actionClassName =
+  'inline-flex shrink-0 items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground';
 
 interface SponsorCardProps {
   item: SponsorItem;
@@ -24,10 +28,15 @@ export function SponsorCard({ item }: SponsorCardProps) {
           <div className="flex min-w-0 items-center justify-between gap-4">
             <h3 className="truncate font-medium text-base leading-snug text-foreground sm:text-lg">{item.name}</h3>
 
-            {item.link ? (
+            {item.href ? (
+              <Link aria-label={`${item.name}の詳細`} className={actionClassName} href={item.href}>
+                詳細
+                <ChevronRight className="h-3 w-3 opacity-60" />
+              </Link>
+            ) : item.link ? (
               <a
                 aria-label={`${item.name}の公式サイト`}
-                className="inline-flex shrink-0 items-center gap-1 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground"
+                className={actionClassName}
                 href={item.link}
                 rel="noopener noreferrer"
                 target="_blank"

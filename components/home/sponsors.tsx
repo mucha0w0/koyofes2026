@@ -3,7 +3,11 @@ import { SponsorsClient } from './sponsors-client';
 
 import { InkTextLink } from '@/components/ui/ink-text-link';
 
-import { fetchSponsorsFromMicroCMS, transformMicroCMSSponsor } from '@/lib/sponsors';
+import {
+  fetchSponsorsFromMicroCMS,
+  isLegacyFoodTruckSponsor,
+  transformMicroCMSSponsor,
+} from '@/lib/sponsors';
 
 // 1. 親：サーバーコンポーネント（ここでデータを取得する）
 export async function Sponsors() {
@@ -11,7 +15,7 @@ export async function Sponsors() {
 
   try {
     const sponsors = await fetchSponsorsFromMicroCMS();
-    sponsorItems = sponsors.map(transformMicroCMSSponsor);
+    sponsorItems = sponsors.map(transformMicroCMSSponsor).filter((item) => !isLegacyFoodTruckSponsor(item));
   } catch (error) {
     console.error('協賛取得エラー:', error);
     return null; // エラー時はセクションごと非表示に

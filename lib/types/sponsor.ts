@@ -3,7 +3,10 @@ export interface SponsorItem {
   name: string;
   icon: string;
   description: string;
+  /** 外部サイト */
   link?: string;
+  /** サイト内ページ（企画詳細など） */
+  href?: string;
   category: string;
 }
 
