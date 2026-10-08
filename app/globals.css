@@ -905,8 +905,9 @@ html[data-palette='orange'],
     outline-offset: 2px;
   }
 
-  /* 詳細検索のスライダー。主ボタン以外にオレンジを使わない。つまみはカード内の小さなインク殻 */
+  /* 詳細検索のスライダー。つまみの左だけ accent。位置が色の長さで読める */
   input[type='range'] {
+    --range-fill: 0%;
     box-sizing: border-box;
     width: 100%;
     height: 32px;
@@ -934,7 +935,7 @@ html[data-palette='orange'],
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
     height: 8px;
-    background: var(--mist);
+    background: linear-gradient(to right, var(--festival-accent) var(--range-fill), var(--mist) var(--range-fill));
     border: none;
     border-radius: 4px;
   }
@@ -949,9 +950,9 @@ html[data-palette='orange'],
 
   input[type='range']::-moz-range-progress {
     height: 8px;
-    background: var(--mist);
+    background: var(--festival-accent);
     border: none;
-    border-radius: 4px;
+    border-radius: 4px 0 0 4px;
   }
 
   input[type='range']::-webkit-slider-thumb {

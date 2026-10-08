@@ -2,7 +2,7 @@
 
 import { Check, ChevronDown, Search, RotateCcw } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { useState, useMemo, useEffect, type ReactNode } from 'react';
+import { useState, useMemo, useEffect, type CSSProperties, type ReactNode } from 'react';
 
 import { EventSortMenu } from '@/components/events/event-sort-menu';
 import { ExhibitionCard } from '@/components/events/exhibition-card';
@@ -237,6 +237,7 @@ export function EventListClient({ events }: EventListClientProps) {
                     disabled={!enableParticipantFilter}
                     max={PARTICIPANT_FILTER_OPEN_MAX}
                     min={1}
+                    style={rangeFillStyle(participantMax, 1, PARTICIPANT_FILTER_OPEN_MAX)}
                     type="range"
                     value={participantMax}
                     onChange={(e) => setParticipantMax(Number(e.target.value))}
@@ -272,6 +273,7 @@ export function EventListClient({ events }: EventListClientProps) {
                     disabled={!enableDurationFilter}
                     max="30"
                     min="5"
+                    style={rangeFillStyle(durationValue, 5, 30)}
                     type="range"
                     value={durationValue}
                     onChange={(e) => setDurationValue(Number(e.target.value))}
@@ -345,6 +347,11 @@ export function EventListClient({ events }: EventListClientProps) {
       </div>
     </div>
   );
+}
+
+function rangeFillStyle(value: number, min: number, max: number): CSSProperties {
+  const fill = max === min ? 0 : ((value - min) / (max - min)) * 100;
+  return { '--range-fill': `${fill}%` } as CSSProperties;
 }
 
 function FilterToggle({
