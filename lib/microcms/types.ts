@@ -83,5 +83,4 @@ export interface MicroCMSSponsor {
   icon?: MicroCMSImageField;
   link?: string;
   explanation: string;
-  category: string[];
 }
