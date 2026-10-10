@@ -1,13 +1,13 @@
-import Link from 'next/link';
-
 import { SponsorCard } from '@/components/about/sponsor-card';
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
-import { Button } from '@/components/ui/button';
+import { NavCardLink } from '@/components/layout/nav-card-link';
 
+import { resolveRelatedPages } from '@/lib/config/related-links';
 import { getSponsorSections } from '@/lib/sponsors';
 
 export default async function SponsorPage() {
   const sections = await getSponsorSections();
+  const [contact] = resolveRelatedPages(['/guide/contact']);
 
   return (
     <CmsPageLayout
@@ -51,9 +51,15 @@ export default async function SponsorPage() {
             こうよう祭では、協賛いただける企業・団体様を募集しております。
             ご興味のある方は、お問い合わせフォームよりご連絡ください。
           </p>
-          <Button asChild>
-            <Link href="/guide/contact">お問い合わせ</Link>
-          </Button>
+          {contact ? (
+            <NavCardLink
+              description={contact.description}
+              descriptionClassName="sm:truncate"
+              href={contact.href}
+              icon={contact.icon}
+              label={contact.label}
+            />
+          ) : null}
         </div>
       </div>
     </CmsPageLayout>
