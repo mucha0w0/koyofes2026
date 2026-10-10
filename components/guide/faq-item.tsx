@@ -15,11 +15,11 @@ export function FAQItem({ question, answer }: FAQItemProps) {
     <div className="ink-shell bg-card px-6">
       <button
         aria-expanded={isOpen}
-        className="flex min-h-11 w-full items-center justify-between gap-4 py-5 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
+        className="flex min-h-11 w-full items-center justify-between gap-4 py-3 text-left outline-none focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <span className="min-w-0 flex-1 text-lg font-medium leading-snug text-foreground">{question}</span>
+        <span className="min-w-0 flex-1 text-base font-medium leading-normal text-foreground">{question}</span>
         <ChevronDown
           aria-hidden
           className={`size-5 shrink-0 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
