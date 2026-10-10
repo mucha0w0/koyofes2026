@@ -1,21 +1,21 @@
 'use client';
 
 import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { NavCardLink } from '@/components/layout/nav-card-link';
 
-import type { FaqRelatedPage } from '@/lib/types/faq';
+import { resolveRelatedPages, type RelatedPageHref } from '@/lib/config/related-links';
 
 interface FAQItemProps {
   question: string;
   answer: string;
-  related?: FaqRelatedPage;
+  related?: RelatedPageHref;
 }
 
 export function FAQItem({ question, answer, related }: FAQItemProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const relatedPage = related ? resolveRelatedPages([related], true)[0] : undefined;
 
   return (
     <div className="ink-shell bg-card px-6">
@@ -40,10 +40,16 @@ export function FAQItem({ question, answer, related }: FAQItemProps) {
         <div className="overflow-hidden" inert={!isOpen}>
           <div className="flex flex-col items-start gap-4 pb-5">
             <p className="text-base leading-relaxed whitespace-pre-line text-muted-foreground">{answer}</p>
-            {related ? (
-              <Button asChild variant="outline">
-                <Link href={related.href}>{related.label}</Link>
-              </Button>
+            {relatedPage ? (
+              <div className="w-full pt-1 pr-2 pb-2 pl-1">
+                <NavCardLink
+                  description={relatedPage.description}
+                  descriptionClassName="sm:truncate"
+                  href={relatedPage.href}
+                  icon={relatedPage.icon}
+                  label={relatedPage.label}
+                />
+              </div>
             ) : null}
           </div>
         </div>

@@ -1,14 +1,11 @@
-/** 回答本文のあとに出す、関連ページへのボタン。未指定ならボタンなし */
-export interface FaqRelatedPage {
-  href: string;
-  label: string;
-}
+import type { RelatedPageHref } from '@/lib/config/related-links';
 
 export interface Faq {
   category: string;
   question: string;
   answer: string;
-  related?: FaqRelatedPage;
+  /** 回答本文のあとに出す関連ページ。未指定ならボタンなし */
+  related?: RelatedPageHref;
 }
 
 export interface FaqGroup {
