@@ -7,7 +7,7 @@ export const OFFICIAL_SOCIALS = [
   {
     id: 'instagram',
     label: 'Instagram',
-    url: 'https://instagram.com/kouyousai2026',
+    url: 'https://www.instagram.com/koyofes_mc/',
     enabled: true,
   },
 ] as const;
