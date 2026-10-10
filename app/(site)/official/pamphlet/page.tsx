@@ -36,7 +36,7 @@ export default function PamphletPage() {
         <div className="rounded-md bg-paper-2 p-6">
           <h3 className="font-medium mb-4">当日配布について</h3>
           <p className="text-sm text-muted-foreground">
-            当日は正門付近の本部にて、紙のパンフレットを無料配布いたします。
+            当日は、正門付近であらかじめ印刷したパンフレットを無料配布いたします。
             数に限りがございますので、予めご了承ください。
           </p>
         </div>
