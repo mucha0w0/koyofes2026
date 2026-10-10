@@ -27,7 +27,7 @@ export default function RankingPage() {
         pages: ['/events/list', '/events/recommended', '/events/timetable'],
         background: 'paper-2',
       }}
-      subtitle="星の総合評価、いま人が多い企画、並びの目安"
+      subtitle="いまの人気と混み具合"
       title="リアルタイムランキング"
     >
       <RankingBoard />
