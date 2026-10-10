@@ -334,7 +334,7 @@ microCMS での更新は、本番では最大 **60 秒** の遅延で反映さ�
 | アクセス情報 | `app/(site)/guide/access/page.tsx` | `/guide/access` |
 | 会場マップ画像 | `app/(site)/guide/map/kounaizu.jpg` | `/guide/map` |
 | お問い合わせ | `app/(site)/guide/contact/page.tsx` | `/guide/contact` |
-| 公式 SNS リンク | `lib/config/social.ts` | フッター・ホーム CTA |
+| 公式 Instagram | `lib/config/social.ts` | PR動画、開発用ルックブック |
 | パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
 
 ### 企画カテゴリ

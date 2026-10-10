@@ -82,7 +82,6 @@ mx-auto w-full max-w-7xl px-4
 | PrVideoSection | `components/home/pr-video-section.tsx` | A。埋め込みだけ約 540px | `bg-muted` | `py-16 md:py-24` |
 | StampRallyPreview | `components/home/stamp-rally-preview-client.tsx` | **B** | 通常 | `py-16 md:py-24` |
 | RankingPreview | `components/home/ranking-preview-client.tsx` | **B** | `bg-muted` | `py-16 md:py-24` |
-| SocialCtaSection | `components/home/social-cta-section.tsx` | A | `bg-primary` | `py-8` |
 | TimetablePreview | `components/home/timetable-preview.tsx` | A | `bg-muted` | `py-10 md:py-14` |
 | LinksSection | `components/home/links-section.tsx` | A | 通常 | `pt-16 md:pt-24`（下は News と連続） |
 | NewsSection | `components/news/news-section.tsx` | A | 通常 | `pb-16 md:pb-24`（上は Links と連続） |
@@ -97,7 +96,7 @@ mx-auto w-full max-w-7xl px-4
 - **Links と News**: 見た目はひと続き。Links は上余白だけ、News は下余白だけ。間に別セクションを挟むなら、両方に `py-16 md:py-24` を戻す。
 - **スポンサーロゴ列**: 見出しだけシェル A。ティッカーは画面端まで流すので `overflow-hidden` の外に出す。
 
-縦余白はまだ完全には揃えていない。新しく足す通常セクションは **`py-16 md:py-24`** を既定にする。短い帯（SNS CTA・カウントダウン）だけ薄くする。
+縦余白はまだ完全には揃えていない。新しく足す通常セクションは **`py-16 md:py-24`** を既定にする。短い帯（カウントダウン）だけ薄くする。
 
 ---
 
