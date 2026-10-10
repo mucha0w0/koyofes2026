@@ -3,17 +3,17 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
-import { CategorySection } from '@/components/events/category-section';
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
-import { StampBoothCard } from '@/components/stamp/stamp-booth-card';
+import { StampCatalogSection } from '@/components/stamp/stamp-catalog-section';
 import { StampEarnedDialog } from '@/components/stamp/stamp-earned-dialog';
 import { StampStatusPanel } from '@/components/stamp/stamp-status-panel';
+import { StampStatusSection } from '@/components/stamp/stamp-status-section';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 
 import type { StampBoothGroup, StampStorageData } from '@/lib/types/stamp';
 
-import { STAMP_CONFIG, getStampCategoryIcon } from '@/lib/config/stampConfig';
+import { STAMP_CONFIG } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { markStampRedeemed, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
 import { useStampVerify } from '@/lib/stamp/use-stamp-verify';
@@ -100,50 +100,41 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8">
-      {showInAppNotice && <InAppBrowserNotice />}
-      {display.verifyFailed ? (
-        <Alert variant="destructive">
-          <AlertTitle className="font-medium">スタンプの確認に失敗しました</AlertTitle>
-          <AlertDescription className="space-y-3">
-            <p>通信エラーのため正確な獲得数を表示できません。表示は端末内の記録に基づいています。</p>
-            <Button disabled={display.isVerifying} size="sm" type="button" variant="outline" onClick={retry}>
-              {display.isVerifying ? '確認中…' : '再試行'}
-            </Button>
-          </AlertDescription>
-        </Alert>
-      ) : null}
-      <StampStatusPanel
-        collectedCount={display.collectedCount}
-        isCleared={display.isCleared}
-        isRedeemed={storage?.isRedeemed ?? false}
-        isVerifying={display.isVerifying}
-        progressCount={display.progressCount}
-        redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
-        requiredCount={requiredCount}
-        totalCount={totalCount}
-        onRedeem={handleRedeem}
-      />
+    <>
+      <StampStatusSection>
+        {showInAppNotice && <InAppBrowserNotice />}
+        {display.verifyFailed ? (
+          <Alert variant="destructive">
+            <AlertTitle className="font-medium">スタンプの確認に失敗しました</AlertTitle>
+            <AlertDescription className="space-y-3">
+              <p>通信エラーのため正確な獲得数を表示できません。表示は端末内の記録に基づいています。</p>
+              <Button disabled={display.isVerifying} size="sm" type="button" variant="outline" onClick={retry}>
+                {display.isVerifying ? '確認中…' : '再試行'}
+              </Button>
+            </AlertDescription>
+          </Alert>
+        ) : null}
+        <StampStatusPanel
+          collectedCount={display.collectedCount}
+          isCleared={display.isCleared}
+          isRedeemed={storage?.isRedeemed ?? false}
+          isVerifying={display.isVerifying}
+          progressCount={display.progressCount}
+          redeemedAtLabel={formatRedeemedAt(storage?.redeemedAt ?? null)}
+          requiredCount={requiredCount}
+          totalCount={totalCount}
+          onRedeem={handleRedeem}
+        />
+        {groups.length === 0 ? (
+          <div className="ink-shell bg-card p-6">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              現在表示できるスタンプ対象ブースがありません。
+            </p>
+          </div>
+        ) : null}
+      </StampStatusSection>
 
-      {groups.length === 0 ? (
-        <div className="ink-shell bg-card p-6">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            現在表示できるスタンプ対象ブースがありません。
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-8">
-          {groups.map((group) => (
-            <CategorySection key={group.category} icon={getStampCategoryIcon(group.category)} title={group.label}>
-              <div className="flex flex-wrap gap-4 p-4">
-                {group.booths.map((booth) => (
-                  <StampBoothCard key={booth.slug} booth={booth} collected={display.collectedSlugs.has(booth.slug)} />
-                ))}
-              </div>
-            </CategorySection>
-          ))}
-        </div>
-      )}
+      <StampCatalogSection collectedSlugs={display.collectedSlugs} groups={groups} />
 
       <StampEarnedDialog
         alreadyOwned={alreadyOwned}
@@ -156,6 +147,6 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
         title={earnedTitle}
         onOpenChange={setEarnedOpen}
       />
-    </div>
+    </>
   );
 }
