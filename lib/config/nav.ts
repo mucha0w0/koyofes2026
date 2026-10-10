@@ -93,7 +93,7 @@ export const NAV_SECTIONS = [
       {
         label: '会場マップ',
         href: '/guide/map',
-        description: '校内の施設とエリア案内',
+        description: '豊田高専の構内図',
         card: { icon: Map },
       },
       {
