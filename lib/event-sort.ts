@@ -19,23 +19,6 @@ export function isRankingSortKey(sortKey: EventSortKey): sortKey is RankingTab {
   return sortKey === 'overall' || sortKey === 'trend' || sortKey === 'wait';
 }
 
-export function getEventSortResultHint(sortKey: EventSortKey): string {
-  switch (sortKey) {
-    case 'match':
-      return 'キーワードの一致が強い順';
-    case 'duration':
-      return '所要時間が短い順';
-    case 'overall':
-      return '総合ランキング順';
-    case 'trend':
-      return 'トレンド順';
-    case 'wait':
-      return '空いている順';
-    default:
-      return '';
-  }
-}
-
 export function rankingScoresFromResponse(body: RankingResponse): Map<string, number> {
   const map = new Map<string, number>();
   if (body.tab === 'overall' || body.tab === 'trend') {

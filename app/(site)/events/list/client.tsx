@@ -15,7 +15,6 @@ import { RANKING_CONFIG, type RankingTab } from '@/lib/config/rankingConfig';
 import {
   DEFAULT_EVENT_SORT_KEY,
   fetchRankingScoreMap,
-  getEventSortResultHint,
   isRankingSortKey,
   sortEvents,
   type EventSortKey,
@@ -151,8 +150,6 @@ export function EventListClient({ events }: EventListClientProps) {
     const scores = isRankingSortKey(sortKey) ? scoreMaps[sortKey] : null;
     return sortEvents(filteredEvents, sortKey, scores, searchQuery);
   }, [filteredEvents, sortKey, scoreMaps, searchQuery]);
-
-  const sortHint = getEventSortResultHint(sortKey);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres((prev) => (prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]));
@@ -320,7 +317,7 @@ export function EventListClient({ events }: EventListClientProps) {
       {/* ヒット件数とリセットボタン */}
       <div className="flex items-center justify-between">
         <p className="text-xs text-muted-foreground">
-          {displayedEvents.length}件が見つかりました{sortHint ? `（${sortHint}）` : ''}。
+          {displayedEvents.length}件が見つかりました。
         </p>
         {(searchQuery ||
           selectedGenres.length > 0 ||
