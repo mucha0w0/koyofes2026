@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
 
-import { getEventCategoryLabel } from '@/lib/config/event-categories';
 import { Event } from '@/lib/types/event';
 
 interface ExhibitionCardProps {
@@ -22,10 +21,6 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
           <h3 className="text-lg font-medium text-foreground">{event.title}</h3>
           <p className="text-sm text-muted-foreground">{event.organization}</p>
           {displayCatchphrase ? <p className="mt-1 truncate text-xs text-muted-foreground">{displayCatchphrase}</p> : null}
-          <div className="mt-3 flex flex-wrap gap-3 text-xs">
-            <span className="ink-tag">{getEventCategoryLabel(event.category)}</span>
-            <span className="ink-tag">{event.location}</span>
-          </div>
         </div>
       </div>
     </Link>
