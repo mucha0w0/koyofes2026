@@ -99,7 +99,7 @@ export const NAV_SECTIONS = [
       {
         label: 'よくある質問',
         href: '/guide/faq',
-        description: 'FAQ・お問い合わせ前に',
+        description: '来場前の確認事項',
         card: { icon: HelpCircle },
       },
       {

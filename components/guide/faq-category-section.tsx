@@ -22,8 +22,10 @@ export function FAQCategorySection({ group, background }: FAQCategorySectionProp
               <FAQItem
                 key={`${group.category}-${i}`}
                 answer={faq.answer}
+                points={faq.points}
                 question={faq.question}
                 related={faq.related}
+                steps={faq.steps}
               />
             ))}
           </div>
