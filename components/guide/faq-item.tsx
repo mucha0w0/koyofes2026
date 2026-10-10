@@ -1,14 +1,20 @@
 'use client';
 
 import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+
+import type { FaqRelatedPage } from '@/lib/types/faq';
 
 interface FAQItemProps {
   question: string;
   answer: string;
+  related?: FaqRelatedPage;
 }
 
-export function FAQItem({ question, answer }: FAQItemProps) {
+export function FAQItem({ question, answer, related }: FAQItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -31,8 +37,15 @@ export function FAQItem({ question, answer }: FAQItemProps) {
           isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
-        <div className="overflow-hidden">
-          <p className="pb-5 text-base leading-relaxed whitespace-pre-line text-muted-foreground">{answer}</p>
+        <div className="overflow-hidden" inert={!isOpen}>
+          <div className="flex flex-col items-start gap-4 pb-5">
+            <p className="text-base leading-relaxed whitespace-pre-line text-muted-foreground">{answer}</p>
+            {related ? (
+              <Button asChild variant="outline">
+                <Link href={related.href}>{related.label}</Link>
+              </Button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

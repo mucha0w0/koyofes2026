@@ -19,7 +19,12 @@ export function FAQCategorySection({ group, background }: FAQCategorySectionProp
           <h2 className="text-2xl font-medium text-foreground">{group.category}</h2>
           <div className="flex flex-col gap-4">
             {group.items.map((faq, i) => (
-              <FAQItem key={`${group.category}-${i}`} answer={faq.answer} question={faq.question} />
+              <FAQItem
+                key={`${group.category}-${i}`}
+                answer={faq.answer}
+                question={faq.question}
+                related={faq.related}
+              />
             ))}
           </div>
         </div>
