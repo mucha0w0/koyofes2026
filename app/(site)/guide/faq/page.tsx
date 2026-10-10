@@ -23,9 +23,6 @@ export default function FAQPage() {
       <div className="mx-auto w-full max-w-7xl px-4 pt-10 md:pt-12">
         <div className="mx-auto max-w-3xl space-y-6 pb-2">
           <FAQCategoryNav categories={categories} />
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            場所が調整中の案内は、決まり次第、会場マップなどに掲載します。ここにないご質問は、お問い合わせへご連絡ください。
-          </p>
         </div>
       </div>
       {faqGroups.map((group, index) => (
