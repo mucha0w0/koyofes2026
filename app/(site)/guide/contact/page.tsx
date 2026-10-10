@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
+import Link from 'next/link';
 
 import { PageLayout } from '@/components/layout/page-layout';
 
@@ -48,7 +49,7 @@ export default function ContactPage() {
 
         <div className="rounded-md bg-paper-2 p-6">
           <p className="text-sm text-muted-foreground">
-            お問い合わせへの回答には数日いただく場合がございます。 よくある質問もご確認ください。
+            お問い合わせへの回答には数日いただく場合がございます。 <Link className="text-ink underline underline-offset-[0.2em] outline-none hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink" href="/guide/faq">よくある質問</Link>もご確認ください。
           </p>
         </div>
       </div>
