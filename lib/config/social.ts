@@ -1,14 +1,12 @@
 /**
  * 公式 SNS の単一ソース。
- * 公開の PR 動画リンクと、開発用ルックブックのフッターが参照する。
- * 見た目に出すかは `enabled`。
+ * 公開の PR 動画リンクが参照する。
  */
 export const OFFICIAL_SOCIALS = [
   {
     id: 'instagram',
     label: 'Instagram',
     url: 'https://www.instagram.com/koyofes_mc/',
-    enabled: true,
   },
 ] as const;
 
@@ -21,8 +19,4 @@ export function getOfficialSocial(id: OfficialSocialId): OfficialSocial {
     throw new Error(`未定義の公式 SNS: ${id}`);
   }
   return social;
-}
-
-export function getEnabledOfficialSocials(): OfficialSocial[] {
-  return OFFICIAL_SOCIALS.filter((item) => item.enabled);
 }
