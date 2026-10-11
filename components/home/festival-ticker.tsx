@@ -21,7 +21,7 @@ function TickerCopy() {
 
   return (
     <div className="festival-ticker-copy flex shrink-0 items-center gap-16 pr-16">
-      <TickerItems phrases={phrases} trailingDot />
+      <TickerItems trailingDot phrases={phrases} />
     </div>
   );
 }

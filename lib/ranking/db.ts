@@ -3,9 +3,10 @@ import 'server-only';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import type { PGlite } from '@electric-sql/pglite';
 import { drizzle as drizzlePg, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+
+import type { PGlite } from '@electric-sql/pglite';
 
 import * as schema from '@/lib/ranking/schema';
 
@@ -38,7 +39,7 @@ async function createPgliteDb(): Promise<RankingDatabase> {
   return drizzle(client, { schema }) as unknown as RankingDatabase;
 }
 
-async function createPostgresDb(url: string): Promise<RankingDatabase> {
+function createPostgresDb(url: string): RankingDatabase {
   const client = postgres(url, {
     max: 1,
     idle_timeout: 20,

@@ -87,9 +87,7 @@ export function StampVotePanel({
           {alreadyOwned ? 'すでに獲得済みです' : 'スタンプを獲得しました'}
         </DialogTitle>
         <DialogDescription className="text-sm leading-relaxed">
-          {alreadyOwned
-            ? `「${title}」の感想を、もう一度送れます。`
-            : '星を確認して、いまの並びを押してください。'}
+          {alreadyOwned ? `「${title}」の感想を、もう一度送れます。` : '星を確認して、いまの並びを押してください。'}
         </DialogDescription>
       </DialogHeader>
 
@@ -114,10 +112,7 @@ export function StampVotePanel({
                 type="button"
                 onClick={() => setStars(value)}
               >
-                <Star
-                  className={`size-8 ${filled ? 'fill-ink text-ink' : 'fill-none text-mist'}`}
-                  strokeWidth={1.5}
-                />
+                <Star className={`size-8 ${filled ? 'fill-ink text-ink' : 'fill-none text-mist'}`} strokeWidth={1.5} />
               </button>
             );
           })}
@@ -136,8 +131,8 @@ export function StampVotePanel({
               <button
                 key={option.value}
                 aria-label={`${option.label}を送信`}
-                className="ink-shell ink-lift flex min-h-11 flex-col items-center justify-center gap-2 bg-mist px-2 py-3"
                 aria-pressed={selected}
+                className="ink-shell ink-lift flex min-h-11 flex-col items-center justify-center gap-2 bg-mist px-2 py-3"
                 disabled={submitting}
                 type="button"
                 onClick={() => void handleWaitSelect(option.value)}
@@ -162,18 +157,14 @@ export function StampVotePanel({
                     );
                   })}
                 </span>
-                <span className="text-xs">
-                  {submitting && selected ? '送信中…' : option.label}
-                </span>
+                <span className="text-xs">{submitting && selected ? '送信中…' : option.label}</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {errorMessage ? (
-        <p className="text-sm text-ink leading-relaxed">{errorMessage}</p>
-      ) : null}
+      {errorMessage ? <p className="text-sm text-ink leading-relaxed">{errorMessage}</p> : null}
 
       <div className="text-center">
         <Button

@@ -32,7 +32,7 @@ const items: AboutItem[] = [
 export function AboutSection() {
   return (
     <div className="pb-6">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <div key={item.label} className="py-8">
           <h3 className="text-lg font-medium text-foreground mb-4">{item.label}</h3>
           <div className="space-y-4">

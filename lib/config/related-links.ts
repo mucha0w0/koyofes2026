@@ -31,7 +31,7 @@ export interface ResolvedRelatedPage {
 }
 
 function isRelatedPageHref(href: string): href is RelatedPageHref {
-  return (RELATED_PAGE_HREFS as readonly string[]).includes(href);
+  return RELATED_PAGE_HREFS.includes(href);
 }
 
 export function resolveRelatedPages(
