@@ -11,19 +11,14 @@ const buttonVariants = cva(
       variant: {
         default:
           'ink-shell ink-lift bg-festival-accent text-festival-accent-soft hover:bg-festival-accent-hover disabled:opacity-40',
-        destructive: 'ink-shell ink-lift bg-mist text-ink disabled:opacity-40',
         outline: 'ink-shell ink-lift bg-mist text-ink disabled:opacity-40',
         secondary: 'ink-shell ink-lift bg-card text-ink disabled:opacity-40',
         ghost: 'bg-transparent text-ink underline-offset-[0.2em] hover:underline disabled:opacity-40',
-        link: 'bg-transparent text-ink underline underline-offset-[0.2em] hover:opacity-70 disabled:opacity-40',
       },
       size: {
         default: 'h-11 min-h-11 px-5 py-2 has-[>svg]:px-3',
         sm: 'h-11 min-h-11 gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-11 min-h-11 px-6 has-[>svg]:px-4',
-        icon: 'size-11',
-        'icon-sm': 'size-11',
-        'icon-lg': 'size-11',
       },
     },
     defaultVariants: {
