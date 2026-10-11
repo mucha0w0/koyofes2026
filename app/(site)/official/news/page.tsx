@@ -12,6 +12,13 @@ interface NewsPageProps {
   searchParams: Promise<{ page?: string }>;
 }
 
+/**
+ * `page` クエリで表示件数が変わる。
+ * レイアウトの静的キャッシュに乗ると、`?page=` や `utm_` など URL ごとに ISR エントリができる。
+ * ページ自体は毎回描画し、お知らせデータはタグ付き fetch キャッシュを使う。
+ */
+export const revalidate = 0;
+
 export default async function NewsPage({ searchParams }: NewsPageProps) {
   const { page } = await searchParams;
   const currentPage = Math.max(1, Number(page) || 1);

@@ -1,6 +1,6 @@
 import type { MicroCMSListResponse } from '@/lib/microcms/types';
 
-import { CMS_REVALIDATE_SECONDS } from '@/lib/cache';
+import { cmsEndpointTag } from '@/lib/microcms/tags';
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
 
@@ -24,19 +24,34 @@ function getMicroCMSConfig() {
   return { apiKey, serviceDomain };
 }
 
-function resolveFetchCache(cacheMode: MicroCMSFetchCache) {
-  // production の force-cache は再デプロイまで CMS 更新が反映されない。
-  // 既定は ISR（60秒）。スタンプ照合など即時性が必要な場合は no-store。
+function resolveCacheTags(endpoint: string, tags: readonly string[] | undefined): string[] {
+  if (tags) {
+    return [...tags];
+  }
+  const endpointTag = cmsEndpointTag(endpoint);
+  return endpointTag ? [endpointTag] : [];
+}
+
+function resolveFetchCache(cacheMode: MicroCMSFetchCache, endpoint: string, tags?: readonly string[]) {
+  // 開発中は常に最新を見る。スタンプ照合など即時性が必要な場合は no-store。
+  // 本番の通常取得は期限なしでキャッシュし、Webhook の revalidateTag まで保持する。
   if (cacheMode === 'no-store' || process.env.NODE_ENV === 'development') {
     return { cache: 'no-store' as const };
   }
-  return { next: { revalidate: CMS_REVALIDATE_SECONDS } };
+  return {
+    cache: 'force-cache' as const,
+    next: {
+      revalidate: false as const,
+      tags: resolveCacheTags(endpoint, tags),
+    },
+  };
 }
 
 async function fetchMicroCMSListPage<T>(
   endpoint: string,
   cacheMode: MicroCMSFetchCache,
   query: MicroCMSListQuery,
+  tags?: readonly string[],
 ): Promise<MicroCMSListResponse<T>> {
   const { apiKey, serviceDomain } = getMicroCMSConfig();
   const params = new URLSearchParams();
@@ -51,7 +66,7 @@ async function fetchMicroCMSListPage<T>(
 
   const response = await fetch(url, {
     headers: { 'X-MICROCMS-API-KEY': apiKey },
-    ...resolveFetchCache(cacheMode),
+    ...resolveFetchCache(cacheMode, endpoint, tags),
   });
 
   if (!response.ok) {
@@ -71,9 +86,10 @@ export async function fetchMicroCMSList<T>(
   endpoint: string,
   cacheMode: MicroCMSFetchCache = 'default',
   query: MicroCMSListQuery = {},
+  tags?: readonly string[],
 ): Promise<T[]> {
   if (query.limit !== undefined) {
-    const data = await fetchMicroCMSListPage<T>(endpoint, cacheMode, query);
+    const data = await fetchMicroCMSListPage<T>(endpoint, cacheMode, query, tags);
     return data.contents;
   }
 
@@ -81,11 +97,16 @@ export async function fetchMicroCMSList<T>(
   let offset = query.offset ?? 0;
 
   while (true) {
-    const data = await fetchMicroCMSListPage<T>(endpoint, cacheMode, {
-      filters: query.filters,
-      limit: MICROCMS_MAX_LIMIT,
-      offset,
-    });
+    const data = await fetchMicroCMSListPage<T>(
+      endpoint,
+      cacheMode,
+      {
+        filters: query.filters,
+        limit: MICROCMS_MAX_LIMIT,
+        offset,
+      },
+      tags,
+    );
     all.push(...data.contents);
 
     if (data.contents.length === 0 || all.length >= data.totalCount) {
@@ -111,13 +132,14 @@ export async function fetchMicroCMSContent<T>(
   endpoint: string,
   contentId: string,
   cacheMode: MicroCMSFetchCache = 'default',
+  tags?: readonly string[],
 ): Promise<T | null> {
   const { apiKey, serviceDomain } = getMicroCMSConfig();
   const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}/${contentId}`;
 
   const response = await fetch(url, {
     headers: { 'X-MICROCMS-API-KEY': apiKey },
-    ...resolveFetchCache(cacheMode),
+    ...resolveFetchCache(cacheMode, endpoint, tags),
   });
 
   if (response.status === 404) {

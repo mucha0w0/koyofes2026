@@ -3,10 +3,10 @@ import { SiteShell } from '@/components/layout/site-shell';
 import { isRankingEnabled } from '@/lib/config/rankingConfig';
 
 /**
- * CMS ページ共通 ISR（秒）。fetch 側は lib/cache.ts の CMS_REVALIDATE_SECONDS と同値にすること。
- * Next.js の segment config はリテラル必須のため、ここでは直書きしている。
+ * 時間では再検証しない。正の秒数にすると配下の全ページがその間隔で ISR Write になる。
+ * CMS の更新は `/api/revalidate`（microCMS Webhook）が関係するタグとパスだけを無効化する。
  */
-export const revalidate = 60;
+export const revalidate = false;
 
 export default function SiteLayout({
   children,

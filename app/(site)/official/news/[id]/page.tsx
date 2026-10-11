@@ -12,18 +12,20 @@ interface NewsDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+/**
+ * ビルド時に無い id はページを作らない。
+ * クローラーが適当な id を踏むたびに ISR Write が増えるのを防ぐ。
+ * 公開後に増えたお知らせは、Webhook の Deploy Hook による再ビルドで追加する。
+ */
+export const dynamicParams = false;
+
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim();
 }
 
 export async function generateStaticParams() {
-  try {
-    const newsItems = await getNews();
-    return newsItems.map((item) => ({ id: item.id }));
-  } catch (error) {
-    console.error('静的パラメータ生成エラー:', error);
-    return [];
-  }
+  const newsItems = await getNews();
+  return newsItems.map((item) => ({ id: item.id }));
 }
 
 export async function generateMetadata({ params }: NewsDetailPageProps): Promise<Metadata> {

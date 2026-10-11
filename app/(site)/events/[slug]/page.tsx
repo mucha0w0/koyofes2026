@@ -15,16 +15,20 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * ビルド時に無い slug はページを作らない。
+ * クローラーが適当な slug を踏むたびに ISR Write が増えるのを防ぐ。
+ * 公開後に増えた企画は、Webhook の Deploy Hook による再ビルドで追加する。
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  try {
-    const events = await getEvents();
-    return events.map((event) => ({
+  const events = await getEvents();
+  return events
+    .filter((event) => event.slug)
+    .map((event) => ({
       slug: event.slug,
     }));
-  } catch (error) {
-    console.error('静的パラメータ生成エラー:', error);
-    return [];
-  }
 }
 
 export async function generateMetadata({ params }: PageProps) {
@@ -70,9 +74,7 @@ export default async function EventPage({ params }: PageProps) {
               <div className="mb-2 flex items-center gap-1">
                 <h1 className="min-w-0 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
                 <HelpButton className="shrink-0" title="掲載内容について">
-                  <p>
-                    掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。
-                  </p>
+                  <p>掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。</p>
                 </HelpButton>
               </div>
               <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
