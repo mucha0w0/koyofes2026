@@ -303,7 +303,6 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 | `npm run start` | 本番ビルド後のサーバー起動 |
 | `npm run lint` | ESLint によるコードチェック |
 | `npm run lint:fix` | ESLint の自動修正 |
-| `npm run markuplint` | Markuplint による HTML/JSX 構造チェック |
 | `npm run lint:html` | Markuplint（`app/`・`components/` のみ） |
 | `npm run lint:html:fix` | Markuplint の自動修正 |
 | `npm run secretlint` | シークレット漏洩チェック |
