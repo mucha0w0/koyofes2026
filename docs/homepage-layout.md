@@ -34,7 +34,7 @@ mx-auto w-full max-w-7xl px-4
 1280px 以上の画面での本文幅は **1280 − 32 = 1248px**。  
 1280px 未満では **ビューポート幅 − 32px**（左右 16px 固定）。
 
-ヘッダーも同じシェル。高さは `h-16`（64px）。ヒーローは `h-[calc(100vh-64px)]` でヘッダー分を引く。
+ヘッダーも同じシェル。高さは `h-16`（64px）。ヒーローは完成絵の比率 `aspect-[1178/295]`。高さはビューポートから引かない。
 
 ### Tailwind の `container` は使わない
 
@@ -75,8 +75,8 @@ mx-auto w-full max-w-7xl px-4
 | ブロック | ファイル | 横幅 | 背景 | 縦余白（現状） |
 | --- | --- | --- | --- | --- |
 | Header | `components/layout/site-header.tsx` | A | 通常 | 高さ 64px |
-| Hero | `components/home/hero-section.tsx` | A（文字）。画像はフルブリード | 背景画像 | ヘッダー下の残りビューポート |
-| FestivalCountdown | `components/home/festival-countdown.tsx` | A。バー背景はフルブリード | `#1f2529` | `py-5` |
+| Hero | `components/home/hero-section.tsx` | 画像はフルブリード（シェルの外） | 完成絵。枠なし | 比率 `1178/295` |
+| FestivalCountdown | `components/home/festival-countdown.tsx` | A。バー背景はフルブリード | `bg-charcoal`（`#2a2a2a`） | `py-5` |
 | EventSearchSection | `components/events/event-search.tsx` | **B** | `bg-muted` | `py-12 md:py-16`（prominent） |
 | CategoryEvents | `components/home/category-events-client.tsx` | A | 通常 | `py-16 md:py-24` |
 | PrVideoSection | `components/home/pr-video-section.tsx` | A。埋め込みだけ約 540px | `bg-muted` | `py-16 md:py-24` |
@@ -86,7 +86,7 @@ mx-auto w-full max-w-7xl px-4
 | LinksSection | `components/home/links-section.tsx` | A | 通常 | `pt-16 md:pt-24`（下は News と連続） |
 | NewsSection | `components/news/news-section.tsx` | A | 通常 | `pb-16 md:pb-24`（上は Links と連続） |
 | Sponsors | `components/home/sponsors.tsx` | 見出しは A。ロゴ列はフルブリード | `bg-muted` | `py-12 md:py-16` |
-| Footer | `components/layout/site-footer.tsx` | A | `bg-primary` | `py-10 md:py-12` |
+| Footer | `components/layout/site-footer.tsx` | A | `bg-charcoal` | `py-10 md:py-12` |
 
 ### 例外（意図したもの）
 
