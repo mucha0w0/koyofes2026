@@ -2,8 +2,6 @@
 @import 'tw-animate-css';
 @plugin '@tailwindcss/typography';
 
-@variant dark (&:where(.dark, .dark *));
-
 :root {
   color-scheme: light only;
 
@@ -53,12 +51,8 @@
   --foreground: var(--ink);
   --card: var(--festival-accent-soft);
   --card-foreground: var(--ink);
-  --popover: var(--festival-accent-soft);
-  --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--festival-accent-soft);
-  --secondary: var(--festival-accent-soft);
-  --secondary-foreground: var(--ink);
   --muted: var(--mist);
   --muted-foreground: var(--ink-soft);
   --accent: var(--mist-hover);
@@ -68,20 +62,7 @@
   --border: transparent;
   --input: var(--festival-accent-soft);
   --ring: var(--ink);
-  --chart-1: var(--festival-accent);
-  --chart-2: var(--mist);
-  --chart-3: var(--paper-2);
-  --chart-4: var(--ink);
-  --chart-5: var(--ink-soft);
   --radius: 16px;
-  --sidebar: var(--paper);
-  --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: var(--festival-accent-soft);
-  --sidebar-accent: var(--mist-hover);
-  --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: transparent;
-  --sidebar-ring: var(--ink);
   --font-jp: var(--font-zen-kaku), 'Yu Gothic Pr6N M', 'Yu Gothic', 'YuGothic', sans-serif;
   --font-display: var(--font-zen-maru), var(--font-zen-kaku), sans-serif;
 }
@@ -93,8 +74,6 @@ html[data-palette='green'],
   --festival-accent: var(--accent-green);
   --festival-accent-hover: var(--accent-green-hover);
   --background: var(--paper);
-  --chart-1: var(--festival-accent);
-  --sidebar: var(--paper);
 }
 
 html[data-palette='sky'],
@@ -104,8 +83,6 @@ html[data-palette='sky'],
   --festival-accent: var(--accent-sky);
   --festival-accent-hover: var(--accent-sky-hover);
   --background: var(--paper);
-  --chart-1: var(--festival-accent);
-  --sidebar: var(--paper);
 }
 
 html[data-palette='pink'],
@@ -115,8 +92,6 @@ html[data-palette='pink'],
   --festival-accent: var(--accent-pink);
   --festival-accent-hover: var(--accent-pink-hover);
   --background: var(--paper);
-  --chart-1: var(--festival-accent);
-  --sidebar: var(--paper);
 }
 
 html[data-palette='orange'],
@@ -126,8 +101,6 @@ html[data-palette='orange'],
   --festival-accent: var(--accent-orange);
   --festival-accent-hover: var(--accent-orange-hover);
   --background: var(--paper);
-  --chart-1: var(--festival-accent);
-  --sidebar: var(--paper);
 }
 
 @theme inline {
@@ -138,12 +111,8 @@ html[data-palette='orange'],
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -153,11 +122,6 @@ html[data-palette='orange'],
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
   --color-mist: var(--mist);
@@ -174,14 +138,6 @@ html[data-palette='orange'],
   --radius-xl: 16px;
   --radius-2xl: 16px;
   --radius-3xl: 16px;
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
   --animate-festival-ticker: festival-ticker 120s linear infinite;
 
   @keyframes festival-ticker {
@@ -192,17 +148,6 @@ html[data-palette='orange'],
       transform: translateX(-50%);
     }
   }
-}
-
-/*
-  Tailwind's default .container steps max-width at each breakpoint,
-  which snaps side margins on resize. Layouts use max-w-7xl instead;
-  keep this cap if .container is added again.
-*/
-.container {
-  width: 100%;
-  max-width: 80rem;
-  margin-inline: auto;
 }
 
 @layer base {

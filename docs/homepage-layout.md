@@ -40,7 +40,7 @@ mx-auto w-full max-w-7xl px-4
 
 既定の `.container` は 640 / 768 / 1024 / 1280 / 1536px で `max-width` が段階的に変わる。`mx-auto` と組み合わせると、リサイズのたびに左右余白が伸びて急に戻る。
 
-レイアウトシェルに `container` を付けない。保険として `app/globals.css` で `.container` の上限も 80rem に固定してあるが、新規コードでは `max-w-7xl` を直接書く。
+レイアウトシェルに `container` を付けない。幅は `max-w-7xl` を直接書く。
 
 ---
 
