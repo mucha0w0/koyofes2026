@@ -4,6 +4,7 @@ import type { MicroCMSEvent } from '@/lib/microcms/types';
 
 import { formatTimeFromNumber } from '@/lib/event-time';
 import { fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+import { eventSlugTag } from '@/lib/microcms/tags';
 import { parseEventCategory, type Event } from '@/lib/types/event';
 
 export type { MicroCMSEvent } from '@/lib/microcms/types';
@@ -56,10 +57,16 @@ export const getEvents = cache(async (cacheMode: MicroCMSFetchCache = 'default')
 export const getEventBySlug = cache(
   async (slug: string, cacheMode: MicroCMSFetchCache = 'default'): Promise<Event | null> => {
     try {
-      const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>('events', cacheMode, {
-        filters: `slug[equals]${slug}`,
-        limit: 1,
-      });
+      const slugTag = eventSlugTag(slug);
+      const microCMSEvents = await fetchMicroCMSList<MicroCMSEvent>(
+        'events',
+        cacheMode,
+        {
+          filters: `slug[equals]${slug}`,
+          limit: 1,
+        },
+        slugTag ? [slugTag] : undefined,
+      );
       const raw = microCMSEvents[0];
       return raw ? transformMicroCMSEvent(raw) : null;
     } catch (error) {

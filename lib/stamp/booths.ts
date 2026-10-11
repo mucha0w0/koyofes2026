@@ -60,7 +60,7 @@ function groupBooths(booths: StampBooth[]): StampBoothGroup[] {
 
 /**
  * スタンプ対象ブース一覧（リクエスト内 dedupe）。
- * 表示ページは ISR、照合 API は `no-store`（lib/cache.ts 参照）。
+ * 表示ページは Webhook までキャッシュし、照合 API は `no-store`（lib/cache.ts 参照）。
  */
 const loadStampBooths = cache(async (cacheMode: MicroCMSFetchCache = 'default'): Promise<StampBooth[]> => {
   const events = await getEvents(cacheMode);

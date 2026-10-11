@@ -3,6 +3,7 @@ import { cache } from 'react';
 import type { MicroCMSNews } from '@/lib/microcms/types';
 
 import { fetchMicroCMSContent, fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+import { newsIdTag } from '@/lib/microcms/tags';
 
 export type { MicroCMSNews } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';
@@ -31,7 +32,8 @@ export const getNews = cache(async (cacheMode: MicroCMSFetchCache = 'default'): 
 export const getNewsByID = cache(
   async (id: string, cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSNews | null> => {
     try {
-      return await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode);
+      const idTag = newsIdTag(id);
+      return await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode, idTag ? [idTag] : undefined);
     } catch (error) {
       console.error(`ニュース取得に失敗しました (id=${id}):`, error);
       throw error;

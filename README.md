@@ -148,9 +148,12 @@
 │   │   ├── official/           # 公式コンテンツ
 │   │   ├── ranking/            # リアルタイムランキング
 │   │   ├── stamp/              # スタンプラリー
-│   │   └── layout.tsx          # サイト共通レイアウト（ISR 設定）
+│   │   └── layout.tsx          # サイト共通レイアウト（キャッシュは期限なし）
 │   ├── api/ranking/            # ランキング API
+│   ├── api/revalidate/         # microCMS Webhook（オンデマンド再検証）
 │   ├── api/stamp/              # スタンプラリー API
+│   ├── robots.ts               # クローラー許可（トークン URL と API は対象外）
+│   ├── sitemap.ts              # 公開ページのサイトマップ
 │   ├── globals.css             # グローバルスタイル
 │   └── layout.tsx              # ルートレイアウト（フォント・メタデータ）
 ├── components/
@@ -233,6 +236,10 @@ npm run dev
 |--------|------|-----|
 | `MICROCMS_API_KEY` | microCMS の API キー | `xxxxxxxx` |
 | `MICROCMS_SERVICE_DOMAIN` | サービスドメイン（`.microcms.io` より前の部分） | `koyofes` |
+| `MICROCMS_WEBHOOK_SECRET` | Webhook 署名（HMAC）のシークレット。microCMS のカスタム通知に同じ値を入れる | `（ランダムな文字列）` |
+| `VERCEL_DEPLOY_HOOK_URL` | 企画・お知らせの**新しい URL** を増やすときの Vercel Deploy Hook。編集だけなら未使用 | `https://api.vercel.com/v1/integrations/deploy/...` |
+
+`MICROCMS_WEBHOOK_SECRET` は、microCMS が送る `x-microcms-signature` の検証に使います。ヘッダに平文では乗りません。
 
 ### スタンプラリー（必須: スタンプ機能を動かす場合）
 
@@ -273,6 +280,8 @@ Neon の手順:
 ```env
 MICROCMS_API_KEY=your-api-key
 MICROCMS_SERVICE_DOMAIN=your-service-domain
+MICROCMS_WEBHOOK_SECRET=your-webhook-secret
+VERCEL_DEPLOY_HOOK_URL=https://api.vercel.com/v1/integrations/deploy/your-hook-id/your-token
 
 STAMP_SIGNING_SECRET=your-signing-secret
 STAMP_TOKEN_MAP={"exampletoken1234567890abcdef":"example-booth-slug"}
@@ -318,7 +327,7 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 | 運営パート | `parts` | `lib/parts.ts` | `/about/part`、おすすめ企画 |
 | 協賛企業 | `sponsors` | `lib/sponsors.ts` | `/about/sponsor`、トップページ |
 
-microCMS での更新は、本番では最大 **60 秒** の遅延で反映されます（[キャッシュ方針](#キャッシュ方針) 参照）。
+microCMS での更新は、本番では Webhook で反映されます。既存ページの編集は次のアクセスで切り替わります。企画・お知らせの新しい URL は Deploy Hook による再ビルド後に有効になります（[キャッシュ方針](#キャッシュ方針) 参照）。
 
 ### コード内のファイルを編集
 
@@ -443,17 +452,21 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 
 ## キャッシュ方針
 
-キャッシュ設定は `lib/cache.ts` で一元管理しています。
+キャッシュ設定の説明は `lib/cache.ts` にあります。時間での再検証はしません。正の `revalidate` をレイアウトに戻すと、アクセスのあるページがその秒数ごとに ISR Write になります。
 
 | 対象 | 方針 | 設定箇所 |
 |------|------|----------|
-| CMS ページ全体 | ISR 60 秒 | `app/(site)/layout.tsx` の `revalidate = 60` |
-| microCMS fetch（通常） | `revalidate: 60` | `lib/microcms/client.ts` |
+| CMS ページ全体 | ビルド後は保持。更新は Webhook | `app/(site)/layout.tsx` の `revalidate = false` |
+| microCMS fetch（通常） | `revalidate: false` + タグ | `lib/microcms/client.ts` |
+| お知らせ一覧 | クエリごとにキャッシュしない | `app/(site)/official/news/page.tsx` の `revalidate = 0` |
+| 企画・お知らせの未知の URL | ページを作らない | `dynamicParams = false` |
 | スタンプ照合 API | `no-store`（常に最新） | `lib/stamp/booths.ts` の `getStampBoothSlugSet` など |
 | ランキング API | `no-store` | `app/api/ranking/route.ts` |
 | ランキングページ | `force-dynamic` | `app/(site)/ranking/page.tsx` |
 
-ISR 間隔を変更する場合は、`lib/cache.ts` の `CMS_REVALIDATE_SECONDS` と `app/(site)/layout.tsx` の `revalidate` を**両方**同じ値に揃えてください（Next.js の制約により layout 側はリテラル直書きが必要です）。
+公開中コンテンツの変更は `POST /api/revalidate` が受けます。microCMS の API 設定 → Webhook → カスタム通知で、`events` / `news` / `parts` / `sponsors` の 4 つから同じ URL に送ってください。シークレットは `MICROCMS_WEBHOOK_SECRET` と同じ値です。
+
+既存ページの編集・削除・公開終了は、関係するタグとパスだけを無効化します。企画やお知らせを**新規公開**したとき、または企画の slug・お知らせの ID が変わったときは、`VERCEL_DEPLOY_HOOK_URL` で本番を再ビルドします（`dynamicParams = false` のため、ビルド時に無かった URL はこの再ビルドまで 404 です）。下書きだけの保存では何もしません。
 
 ---
 
