@@ -475,7 +475,7 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 
 ### ビルド設定
 
-`vercel.json` より:
+Vercel の Next.js 既定に従う。`vercel.json` は置かない。
 
 - インストール: `npm install`
 - ビルド: `npm run build`
