@@ -2,7 +2,7 @@
 
 こうよう祭 2026「1dearland」の視覚言語。情報設計（URL、ナビ、機能）は変えない。変えるのは見た目である。ページ幅は `docs/homepage-layout.md` を引き継ぐ。
 
-根拠と禁止の詳細は `DESIGN-rationale.md`。前年度までのボタニカル／公式グレーは `oldDESIGN.md`。
+根拠と禁止の詳細は `DESIGN-rationale.md`。前年度のボタニカル案はリポジトリから外した。
 
 衝突が起きたときの優先順位:
 
