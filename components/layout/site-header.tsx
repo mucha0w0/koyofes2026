@@ -2,40 +2,100 @@
 
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 import { getNavSections, type ResolvedNavSection } from '@/lib/config/nav';
 
-function DropdownMenu({ item }: { item: ResolvedNavSection }) {
-  const [isOpen, setIsOpen] = useState(false);
+/** 実マウスがあるときだけホバーで開く。タッチの疑似マウスイベントでは開かない。 */
+function opensOnHover(pointerType: string) {
+  return pointerType === 'mouse' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+function DropdownMenu({
+  item,
+  open,
+  onOpenChange,
+}: {
+  item: ResolvedNavSection;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const pointerTypeRef = useRef('mouse');
+  const hoverLockedUntilRef = useRef(0);
+  const onOpenChangeRef = useRef(onOpenChange);
+  onOpenChangeRef.current = onOpenChange;
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        onOpenChangeRef.current(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onOpenChangeRef.current(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
 
   return (
     <div
+      ref={rootRef}
       className="relative flex items-center"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onPointerDown={(event) => {
+        pointerTypeRef.current = event.pointerType;
+      }}
+      onPointerEnter={(event) => {
+        if (performance.now() < hoverLockedUntilRef.current) return;
+        if (opensOnHover(event.pointerType)) onOpenChange(true);
+      }}
+      onPointerLeave={(event) => {
+        if (performance.now() < hoverLockedUntilRef.current) return;
+        if (opensOnHover(event.pointerType)) onOpenChange(false);
+      }}
+      onPointerUp={(event) => {
+        if (event.pointerType === 'mouse') return;
+        // タッチの直後に届く疑似マウスの enter / leave で、開いたメニューを閉じない。
+        hoverLockedUntilRef.current = performance.now() + 500;
+        onOpenChange(!open);
+      }}
     >
       <button
-        aria-expanded={isOpen}
+        aria-expanded={open}
         aria-haspopup="true"
         className="flex items-center gap-1 rounded-[var(--radius)] px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-mist-hover"
+        type="button"
+        onClick={(event) => {
+          // タッチは pointerup で開閉済み。ここでの click はキーボードと、ホバーできないマウス用。
+          if (event.detail === 0) {
+            onOpenChange(!open);
+            return;
+          }
+          if (pointerTypeRef.current !== 'mouse' || opensOnHover(pointerTypeRef.current)) return;
+          onOpenChange(!open);
+        }}
       >
         {item.label}
-        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
-      <div
-        className={`absolute top-full left-0 z-10 ${
-          isOpen ? 'visible' : 'invisible'
-        }`}
-      >
+      <div className={`absolute top-full left-0 z-10 ${open ? 'visible' : 'invisible'}`}>
         <div className="ink-shell-hang min-w-50 bg-card p-1">
           {item.items.map((subItem) => (
             <Link
               key={subItem.href}
               className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
               href={subItem.href}
+              onClick={() => onOpenChange(false)}
             >
               {subItem.label}
             </Link>
@@ -100,6 +160,7 @@ function MobileMenu({
 
 export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolean }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const navItems = getNavSections('header', rankingEnabled);
 
   return (
@@ -111,7 +172,12 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
 
         <nav aria-label="メインナビゲーション" className="hidden self-stretch gap-1 lg:flex">
           {navItems.map((item) => (
-            <DropdownMenu key={item.id} item={item} />
+            <DropdownMenu
+              key={item.id}
+              item={item}
+              open={openMenuId === item.id}
+              onOpenChange={(next) => setOpenMenuId(next ? item.id : null)}
+            />
           ))}
         </nav>
 
