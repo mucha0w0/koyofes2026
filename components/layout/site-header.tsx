@@ -24,20 +24,29 @@ function DropdownMenu({
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const pointerTypeRef = useRef('mouse');
-  const hoverLockedUntilRef = useRef(0);
+  const openedByTouchRef = useRef(false);
   const onOpenChangeRef = useRef(onOpenChange);
   onOpenChangeRef.current = onOpenChange;
+
+  useEffect(() => {
+    if (open) return;
+    openedByTouchRef.current = false;
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
 
     const onPointerDown = (event: PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) {
+        openedByTouchRef.current = false;
         onOpenChangeRef.current(false);
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onOpenChangeRef.current(false);
+      if (event.key === 'Escape') {
+        openedByTouchRef.current = false;
+        onOpenChangeRef.current(false);
+      }
     };
 
     document.addEventListener('pointerdown', onPointerDown);
@@ -56,18 +65,12 @@ function DropdownMenu({
         pointerTypeRef.current = event.pointerType;
       }}
       onPointerEnter={(event) => {
-        if (performance.now() < hoverLockedUntilRef.current) return;
+        if (openedByTouchRef.current) return;
         if (opensOnHover(event.pointerType)) onOpenChange(true);
       }}
       onPointerLeave={(event) => {
-        if (performance.now() < hoverLockedUntilRef.current) return;
+        if (openedByTouchRef.current) return;
         if (opensOnHover(event.pointerType)) onOpenChange(false);
-      }}
-      onPointerUp={(event) => {
-        if (event.pointerType === 'mouse') return;
-        // タッチの直後に届く疑似マウスの enter / leave で、開いたメニューを閉じない。
-        hoverLockedUntilRef.current = performance.now() + 500;
-        onOpenChange(!open);
       }}
     >
       <button
@@ -75,13 +78,21 @@ function DropdownMenu({
         aria-haspopup="true"
         className="flex items-center gap-1 rounded-[var(--radius)] px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-mist-hover"
         type="button"
+        onPointerUp={(event) => {
+          if (event.pointerType === 'mouse') return;
+          // リンク上の pointerup では閉じない。タッチで開いたあとの疑似 mouseleave でも閉じない。
+          openedByTouchRef.current = !open;
+          onOpenChange(!open);
+        }}
         onClick={(event) => {
           // タッチは pointerup で開閉済み。ここでの click はキーボードと、ホバーできないマウス用。
           if (event.detail === 0) {
+            openedByTouchRef.current = false;
             onOpenChange(!open);
             return;
           }
           if (pointerTypeRef.current !== 'mouse' || opensOnHover(pointerTypeRef.current)) return;
+          openedByTouchRef.current = false;
           onOpenChange(!open);
         }}
       >
@@ -95,7 +106,10 @@ function DropdownMenu({
               key={subItem.href}
               className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
               href={subItem.href}
-              onClick={() => onOpenChange(false)}
+              onClick={() => {
+                openedByTouchRef.current = false;
+                onOpenChange(false);
+              }}
             >
               {subItem.label}
             </Link>
