@@ -68,6 +68,7 @@ function TimelineView({
             key={idx}
             className="absolute left-0 right-0 ink-shell ink-lift flex items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
             href={`/events/${event.slug}`}
+            prefetch={false}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
           >
             {event.icon ? (

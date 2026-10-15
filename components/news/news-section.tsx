@@ -39,6 +39,7 @@ export async function NewsSection() {
                     key={item.id}
                     className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4"
                     href={`/official/news/${item.id}`}
+                    prefetch={false}
                   >
                     <span className="shrink-0 text-sm text-muted-foreground">{formattedDate}</span>
                     <span className="truncate text-sm font-medium">{item.title}</span>

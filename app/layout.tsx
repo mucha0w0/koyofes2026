@@ -4,15 +4,21 @@ import { Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 
+// 日本語フォントは unicode-range ごとに100個以上のファイルになる。
+// preload を有効にすると、使わない範囲まで全部リクエストされる。
 const zenKakuGothic = Zen_Kaku_Gothic_New({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-zen-kaku',
+  preload: false,
+  display: 'swap',
 });
 const zenMaruGothic = Zen_Maru_Gothic({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-zen-maru',
+  preload: false,
+  display: 'swap',
 });
 
 export const metadata: Metadata = {

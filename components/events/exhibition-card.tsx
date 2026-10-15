@@ -16,7 +16,7 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
   const categoryLabel = getEventCategoryLabel(event.category);
 
   return (
-    <Link className="ink-shell ink-lift block bg-card" href={`/events/${event.slug}`}>
+    <Link className="ink-shell ink-lift block bg-card" href={`/events/${event.slug}`} prefetch={false}>
       <div className="flex gap-4 p-6">
         <InkPhoto alt={event.title} className="ink-shell-sm size-16" size={64} src={event.icon} />
 
@@ -29,7 +29,9 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
             </span>
           </div>
           <p className="text-sm text-muted-foreground">{event.organization}</p>
-          {displayCatchphrase ? <p className="mt-1 truncate text-xs text-muted-foreground">{displayCatchphrase}</p> : null}
+          {displayCatchphrase ? (
+            <p className="mt-1 truncate text-xs text-muted-foreground">{displayCatchphrase}</p>
+          ) : null}
         </div>
       </div>
     </Link>

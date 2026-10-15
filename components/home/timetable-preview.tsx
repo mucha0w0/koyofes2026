@@ -22,6 +22,7 @@ function EventRow({ slug, icon, title, organization, timeRange, duration }: Even
     <Link
       className="ink-shell ink-lift group flex h-[83px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
       href={`/events/${slug}`}
+      prefetch={false}
     >
       {icon ? (
         <InkPhoto

@@ -6,15 +6,20 @@ import { useEffect, useRef } from 'react';
 
 import type { SponsorItem } from '@/lib/types/sponsor';
 
+import { microCmsImageSrc } from '@/lib/utils';
+
 interface SponsorsClientProps {
   sponsors: SponsorItem[];
 }
 
 function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
+  const cmsSrc = sponsor.icon ? microCmsImageSrc(sponsor.icon, 320) : null;
+
   return (
     <Link
       className="flex flex-col items-center justify-center gap-2 h-20 px-8 shrink-0 cursor-pointer"
       href="/about/sponsor"
+      prefetch={false}
     >
       {sponsor.icon ? (
         <>
@@ -22,7 +27,9 @@ function SponsorLogo({ sponsor }: { sponsor: SponsorItem }) {
             alt={sponsor.name}
             className="max-h-14 max-w-40 object-contain"
             height={56}
-            src={sponsor.icon}
+            loading="lazy"
+            src={cmsSrc ?? sponsor.icon}
+            unoptimized={cmsSrc !== null}
             width={160}
           />
           <span className="text-xs text-muted-foreground whitespace-nowrap">{sponsor.name}</span>

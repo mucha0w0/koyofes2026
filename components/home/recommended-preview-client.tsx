@@ -21,7 +21,11 @@ function CompactPick({ pick }: { pick: RecommendedEvent }) {
         </div>
       </div>
 
-      <Link className="ink-shell ink-lift flex items-center gap-3 bg-card p-2" href={`/events/${event.slug}`}>
+      <Link
+        className="ink-shell ink-lift flex items-center gap-3 bg-card p-2"
+        href={`/events/${event.slug}`}
+        prefetch={false}
+      >
         <InkPhoto alt={event.title} className="ink-shell-sm size-12" size={48} src={event.icon} />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{event.title}</p>

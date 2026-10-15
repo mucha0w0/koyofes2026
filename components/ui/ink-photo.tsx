@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { cn, isImageUrl } from '@/lib/utils';
+import { cn, isImageUrl, microCmsImageSrc } from '@/lib/utils';
 
 type InkPhotoProps = {
   src?: string;
@@ -12,6 +12,7 @@ type InkPhotoProps = {
 
 export function InkPhoto({ src, alt, className, size = 64, dimmed = false }: InkPhotoProps) {
   const imageSrc = typeof src === 'string' && isImageUrl(src) ? src : null;
+  const cmsSrc = imageSrc ? microCmsImageSrc(imageSrc, size * 2) : null;
   // カード内アイコンは ink-shell-sm。枠線と影は付けず、単体ボタン用の ink-shell は残す。
   const plain = className?.split(/\s+/).includes('ink-shell-sm') ?? false;
 
@@ -31,7 +32,15 @@ export function InkPhoto({ src, alt, className, size = 64, dimmed = false }: Ink
         )}
       >
         {imageSrc ? (
-          <Image alt={alt} className="size-full object-cover" height={size} src={imageSrc} width={size} />
+          <Image
+            alt={alt}
+            className="size-full object-cover"
+            height={size}
+            loading="lazy"
+            src={cmsSrc ?? imageSrc}
+            unoptimized={cmsSrc !== null}
+            width={size}
+          />
         ) : (
           <span className="flex size-full items-center justify-center text-[10px] text-ink-soft">No image</span>
         )}

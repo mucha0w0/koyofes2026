@@ -14,11 +14,15 @@ type InkTextLinkProps = ComponentProps<typeof Link> & {
   arrow?: keyof typeof ARROW_ICONS;
 };
 
-export function InkTextLink({ arrow = 'right', className, children, ...props }: InkTextLinkProps) {
+export function InkTextLink({ arrow = 'right', className, children, prefetch = false, ...props }: InkTextLinkProps) {
   const Icon = ARROW_ICONS[arrow];
 
   return (
-    <Link className={cn('ink-link inline-flex items-center gap-2 text-sm no-underline', className)} {...props}>
+    <Link
+      className={cn('ink-link inline-flex items-center gap-2 text-sm no-underline', className)}
+      prefetch={prefetch}
+      {...props}
+    >
       {arrow === 'left' ? <Icon aria-hidden className="h-4 w-4" /> : null}
       {children}
       {arrow === 'right' ? <Icon aria-hidden className="h-4 w-4" /> : null}

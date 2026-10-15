@@ -30,7 +30,7 @@ function rowClass() {
 function OverallRow({ item }: { item: RankingOverallItem }) {
   return (
     <li>
-      <Link className={rowClass()} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`} prefetch={false}>
         <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
@@ -51,7 +51,7 @@ function OverallRow({ item }: { item: RankingOverallItem }) {
 function TrendRow({ item }: { item: RankingTrendItem }) {
   return (
     <li>
-      <Link className={rowClass()} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`} prefetch={false}>
         <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>
@@ -72,7 +72,7 @@ function TrendRow({ item }: { item: RankingTrendItem }) {
 function WaitRow({ item, generatedAt }: { item: RankingWaitItem; generatedAt: string }) {
   return (
     <li>
-      <Link className={rowClass()} href={`/events/${item.slug}`}>
+      <Link className={rowClass()} href={`/events/${item.slug}`} prefetch={false}>
         <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums text-ink">
           {String(item.rank).padStart(2, '0')}
         </span>

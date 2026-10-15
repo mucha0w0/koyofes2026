@@ -17,7 +17,7 @@ export function StampBoothCard({ booth, collected }: StampBoothCardProps) {
   const hasIcon = isImageUrl(booth.icon);
 
   return (
-    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${booth.slug}`}>
+    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${booth.slug}`} prefetch={false}>
       <InkPhoto
         alt={booth.title}
         className="ink-lift size-20 md:size-32"

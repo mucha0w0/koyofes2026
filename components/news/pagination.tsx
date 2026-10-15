@@ -39,6 +39,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
           currentPage === 1 ? 'pointer-events-none text-muted-foreground/40' : 'ink-link'
         }`}
         href={`${basePath}?page=${Math.max(1, currentPage - 1)}`}
+        prefetch={false}
       >
         <ArrowLeft className="h-4 w-4" />
       </Link>
@@ -60,6 +61,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
               page === currentPage ? 'bg-card' : 'bg-mist'
             }`}
             href={`${basePath}?page=${page}`}
+            prefetch={false}
           >
             {page}
           </Link>
@@ -73,6 +75,7 @@ export function Pagination({ currentPage, totalPages, basePath }: PaginationProp
           currentPage === totalPages ? 'pointer-events-none text-muted-foreground/40' : 'ink-link'
         }`}
         href={`${basePath}?page=${Math.min(totalPages, currentPage + 1)}`}
+        prefetch={false}
       >
         <ArrowRight className="h-4 w-4" />
       </Link>
