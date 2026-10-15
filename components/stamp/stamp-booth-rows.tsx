@@ -20,6 +20,7 @@ export function StampBoothRow({ booth }: { booth: StampBooth }) {
     <Link
       className="ink-shell ink-lift group flex h-24 items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
       href={`/events/${booth.slug}`}
+      prefetch={false}
     >
       <InkPhoto
         alt={booth.title}

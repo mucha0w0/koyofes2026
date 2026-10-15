@@ -19,11 +19,17 @@ function RankingRow({ item }: { item: RankingOverallItem }) {
     <Link
       className="ink-shell ink-lift flex h-[100px] items-stretch gap-4 bg-card px-4 py-1.5 text-ink md:px-5"
       href={`/events/${item.slug}`}
+      prefetch={false}
     >
       <span className="flex w-10 shrink-0 items-center justify-center text-center font-display text-xl tabular-nums md:text-2xl">
         {String(item.rank).padStart(2, '0')}
       </span>
-      <InkPhoto alt={item.title} className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden" size={128} src={item.icon} />
+      <InkPhoto
+        alt={item.title}
+        className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+        size={128}
+        src={item.icon}
+      />
       <div className="flex min-w-0 flex-1 flex-col justify-center">
         <p className="truncate font-medium">{item.title}</p>
         <p className="truncate text-sm text-ink-soft">{item.organization}</p>

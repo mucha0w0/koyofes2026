@@ -78,12 +78,6 @@ function DropdownMenu({
         aria-haspopup="true"
         className="flex items-center gap-1 rounded-[var(--radius)] px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-mist-hover"
         type="button"
-        onPointerUp={(event) => {
-          if (event.pointerType === 'mouse') return;
-          // リンク上の pointerup では閉じない。タッチで開いたあとの疑似 mouseleave でも閉じない。
-          openedByTouchRef.current = !open;
-          onOpenChange(!open);
-        }}
         onClick={(event) => {
           // タッチは pointerup で開閉済み。ここでの click はキーボードと、ホバーできないマウス用。
           if (event.detail === 0) {
@@ -93,6 +87,12 @@ function DropdownMenu({
           }
           if (pointerTypeRef.current !== 'mouse' || opensOnHover(pointerTypeRef.current)) return;
           openedByTouchRef.current = false;
+          onOpenChange(!open);
+        }}
+        onPointerUp={(event) => {
+          if (event.pointerType === 'mouse') return;
+          // リンク上の pointerup では閉じない。タッチで開いたあとの疑似 mouseleave でも閉じない。
+          openedByTouchRef.current = !open;
           onOpenChange(!open);
         }}
       >
@@ -106,6 +106,7 @@ function DropdownMenu({
               key={subItem.href}
               className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
               href={subItem.href}
+              prefetch={false}
               onClick={() => {
                 openedByTouchRef.current = false;
                 onOpenChange(false);
@@ -158,6 +159,7 @@ function MobileMenu({
                     key={subItem.href}
                     className="block rounded-[var(--radius)] py-2.5 pl-4 text-ink-soft transition-colors hover:bg-mist-hover hover:text-ink"
                     href={subItem.href}
+                    prefetch={false}
                     onClick={onClose}
                   >
                     {subItem.label}
@@ -180,7 +182,7 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
   return (
     <header className="sticky top-0 z-40 w-full border-b-[length:var(--shell-stroke)] border-ink bg-card">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
-        <Link className="flex items-center gap-2" href="/">
+        <Link className="flex items-center gap-2" href="/" prefetch={false}>
           <span className="font-display text-2xl font-bold text-ink">こうよう祭</span>
         </Link>
 

@@ -21,7 +21,11 @@ export function RecommendedEventCard({ recommender, recommenderIcon, whyRecom, e
 
       {whyRecom ? <p className="text-sm leading-relaxed text-foreground">{whyRecom}</p> : null}
 
-      <Link className="ink-shell ink-lift flex items-center gap-4 bg-card p-4" href={`/events/${event.slug}`}>
+      <Link
+        className="ink-shell ink-lift flex items-center gap-4 bg-card p-4"
+        href={`/events/${event.slug}`}
+        prefetch={false}
+      >
         <InkPhoto alt={event.title} className="ink-shell-sm size-16" size={64} src={event.icon} />
 
         <div className="min-w-0 flex-1 space-y-1">

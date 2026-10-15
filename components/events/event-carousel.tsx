@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
+import { microCmsImageSrc } from '@/lib/utils';
+
 interface EventCarouselProps {
   images: string[];
   title: string;
@@ -33,6 +35,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
   };
 
   const currentImage = images[currentIndex];
+  const cmsSrc = currentImage ? microCmsImageSrc(currentImage, 1920) : null;
 
   return (
     <div className={`${frameClassName} group`}>
@@ -43,7 +46,9 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
           priority
           alt={`${title} image ${currentIndex + 1}`}
           className="object-cover object-center"
-          src={currentImage}
+          sizes="100vw"
+          src={cmsSrc ?? currentImage}
+          unoptimized={cmsSrc !== null}
         />
       )}
 
@@ -73,7 +78,9 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
                 key={idx}
                 aria-label={`Go to image ${idx + 1}`}
                 className={`w-2 h-2 rounded-[4px] transition-all ${
-                  idx === currentIndex ? 'bg-festival-accent-soft w-6' : 'bg-festival-accent-soft/50 hover:bg-festival-accent-soft/70'
+                  idx === currentIndex
+                    ? 'bg-festival-accent-soft w-6'
+                    : 'bg-festival-accent-soft/50 hover:bg-festival-accent-soft/70'
                 }`}
                 onClick={() => setCurrentIndex(idx)}
               />

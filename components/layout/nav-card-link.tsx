@@ -15,7 +15,7 @@ interface NavCardLinkProps {
 
 export function NavCardLink({ href, label, description, icon: Icon, descriptionClassName }: NavCardLinkProps) {
   return (
-    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={href}>
+    <Link className="ink-shell ink-lift group flex items-center gap-4 bg-card p-4" href={href} prefetch={false}>
       <div className="shrink-0 rounded-md bg-paper-2 p-2">
         <Icon aria-hidden className="h-5 w-5 text-foreground" />
       </div>

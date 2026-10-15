@@ -55,7 +55,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 .replace(/\//g, '.');
               const plainContent = item.content.replace(/<[^>]*>/g, '').trim();
               return (
-                <Link key={item.id} className="block" href={`/official/news/${item.id}`}>
+                <Link key={item.id} className="block" href={`/official/news/${item.id}`} prefetch={false}>
                   <Card className="ink-lift cursor-pointer">
                     <CardHeader>
                       <div className="flex items-center gap-3">

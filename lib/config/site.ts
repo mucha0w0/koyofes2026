@@ -1,2 +1,2 @@
-/** 本番の公開オリジン。sitemap と robots で使う。 */
-export const SITE_ORIGIN = 'https://koyosai.com';
+/** 本番の公開オリジン。apex は www へ転送されるので、sitemap は転送先を載せる。 */
+export const SITE_ORIGIN = 'https://www.koyosai.com';

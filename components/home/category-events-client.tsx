@@ -18,7 +18,7 @@ interface EventCardProps {
 
 function EventCard({ event }: EventCardProps) {
   return (
-    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${event.slug}`}>
+    <Link className="group flex shrink-0 flex-col items-center gap-2" href={`/events/${event.slug}`} prefetch={false}>
       <InkPhoto alt={event.title} className="ink-lift size-20 md:size-32" size={128} src={event.icon} />
       <div className="max-w-24 text-center md:max-w-32">
         <p className="truncate text-xs font-medium md:text-sm">{event.title}</p>
@@ -169,9 +169,7 @@ export function CategoryEventsContent({ categories }: CategoryEventsContentProps
           {categories.map((category) => (
             <CategorySection
               key={category.id}
-              action={
-                <InkTextLink href="/events/list">すべて見る</InkTextLink>
-              }
+              action={<InkTextLink href="/events/list">すべて見る</InkTextLink>}
               icon={getEventCategoryIcon(category.id)}
               title={category.title}
               titleAs="h3"
