@@ -64,7 +64,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
       {src && (
         <button
           aria-label={`${title}の画像を拡大`}
-          className="absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ink"
+          className="absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ink"
           type="button"
           onClick={() => setViewerOpen(true)}
         >
