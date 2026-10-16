@@ -15,6 +15,10 @@ interface EventCarouselProps {
 const frameClassName =
   'relative h-[min(50vh,56.25vw)] w-full overflow-hidden border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2';
 
+/** 精密ポインタ（マウス）ではホバーまで隠し、タッチ端末では常に表示する */
+const navButtonClassName =
+  'absolute top-1/2 z-20 -translate-y-1/2 rounded-md bg-ink/50 p-2 text-festival-accent-soft transition-all hover:bg-ink/70 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100';
+
 export function EventCarousel({ images, title }: EventCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -60,7 +64,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
         <>
           <button
             aria-label="Previous image"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-ink/50 hover:bg-ink/70 text-festival-accent-soft p-2 rounded-md transition-all opacity-0 group-hover:opacity-100 z-20"
+            className={`${navButtonClassName} left-4`}
             onClick={goToPrevious}
           >
             <ChevronLeft className="h-6 w-6" />
@@ -68,7 +72,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
 
           <button
             aria-label="Next image"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-ink/50 hover:bg-ink/70 text-festival-accent-soft p-2 rounded-md transition-all opacity-0 group-hover:opacity-100 z-20"
+            className={`${navButtonClassName} right-4`}
             onClick={goToNext}
           >
             <ChevronRight className="h-6 w-6" />
