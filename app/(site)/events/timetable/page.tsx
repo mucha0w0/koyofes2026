@@ -12,8 +12,8 @@ const DAY1_START_HOUR = 9;
 const DAY1_END_HOUR = 18;
 const DAY2_START_HOUR = 9;
 const DAY2_END_HOUR = 18;
-const PX_PER_HOUR = 80;
-const CARD_HEIGHT = 88;
+const PX_PER_HOUR = 320;
+const CARD_HEIGHT = 112;
 
 function TimelineView({
   events,
@@ -66,7 +66,7 @@ function TimelineView({
         {events.map((event, idx) => (
           <Link
             key={idx}
-            className="absolute left-0 right-0 ink-shell ink-lift flex items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
+            className="absolute left-0 right-0 ink-shell ink-lift flex items-center gap-3 bg-card py-3 pr-3 pl-2 sm:gap-5 sm:pr-5"
             href={`/events/${event.slug}`}
             prefetch={false}
             style={{ top: `${event.topPx - 16}px`, height: `${CARD_HEIGHT}px` }} //あえて16pxずらす
@@ -74,20 +74,20 @@ function TimelineView({
             {event.icon ? (
               <InkPhoto
                 alt={event.title}
-                className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"
+                className="ink-shell-sm ink-row-icon h-16 w-16 shrink-0 self-center overflow-hidden sm:h-20 sm:w-20"
                 size={128}
                 src={event.icon}
               />
             ) : (
-              <div className="ink-row-icon h-full min-w-0 w-auto shrink" />
+              <div className="ink-row-icon h-16 w-16 shrink-0 self-center sm:h-20 sm:w-20" />
             )}
             <div className="flex min-w-0 flex-1 flex-col justify-center">
               <h3 className="truncate font-medium leading-snug text-foreground">{event.title}</h3>
-              <p className="mt-0.5 truncate text-sm text-muted-foreground">{event.organization}</p>
+              <p className="mt-1.5 truncate text-sm text-muted-foreground">{event.organization}</p>
             </div>
-            <div className="ml-auto flex shrink-0 items-center gap-2">
-              <span className="text-xs text-muted-foreground">{event.timeRange}</span>
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <div className="ml-auto flex shrink-0 flex-col items-end gap-1 sm:flex-row sm:items-center sm:gap-2">
+              <span className="text-xs whitespace-nowrap text-muted-foreground">{event.timeRange}</span>
+              <span className="flex items-center gap-1 text-xs whitespace-nowrap text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {event.duration}分
               </span>
@@ -115,15 +115,15 @@ export default async function StageEventsPage() {
   return (
     <>
       <CmsPageLayout meta="eventTimetable">
-        <div className="space-y-12">
+        <div className="space-y-20">
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <h2 className="text-xl font-medium text-foreground">1日目</h2>
             </div>
             <TimelineView endHour={DAY1_END_HOUR} events={day1Events} startHour={DAY1_START_HOUR} />
           </div>
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-8">
               <h2 className="text-xl font-medium text-foreground">2日目</h2>
             </div>
             <TimelineView endHour={DAY2_END_HOUR} events={day2Events} startHour={DAY2_START_HOUR} />
