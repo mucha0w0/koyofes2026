@@ -1,8 +1,18 @@
 'use client';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { ChevronLeft, ChevronRight, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
+
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 import { microCmsImageSrc } from '@/lib/utils';
 
@@ -19,8 +29,13 @@ const frameClassName =
 const navButtonClassName =
   'absolute top-1/2 z-20 -translate-y-1/2 rounded-md bg-ink/50 p-2 text-festival-accent-soft transition-all hover:bg-ink/70 pointer-fine:opacity-0 pointer-fine:group-hover:opacity-100';
 
+/** 拡大表示では、ホバーできない端末でも切り替えられるよう常に出す */
+const viewerNavButtonClassName =
+  'absolute top-1/2 z-20 -translate-y-1/2 rounded-md bg-ink/50 p-2 text-festival-accent-soft transition-colors hover:bg-ink/70';
+
 export function EventCarousel({ images, title }: EventCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [viewerOpen, setViewerOpen] = useState(false);
 
   if (images.length === 0) {
     return (
@@ -47,34 +62,33 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
       {/* 同じ img の src を差し替えると、次の画像が届くまで前の絵が残る。枚を切り替えるたびに要素を作り直し、未読み込みの間は白地を見せる。 */}
       <div aria-hidden className="absolute inset-0 bg-white" />
       {src && (
-        <Image
-          key={`${currentIndex}:${src}`}
-          fill
-          priority
-          alt={`${title} image ${currentIndex + 1}`}
-          className="object-cover object-center"
-          sizes="100vw"
-          src={src}
-          unoptimized={cmsSrc !== null}
-        />
+        <button
+          aria-label={`${title}の画像を拡大`}
+          className="absolute inset-0 z-10 cursor-zoom-in outline-none focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ink"
+          type="button"
+          onClick={() => setViewerOpen(true)}
+        >
+          <Image
+            key={`${currentIndex}:${src}`}
+            fill
+            priority
+            alt=""
+            className="object-cover object-center"
+            sizes="100vw"
+            src={src}
+            unoptimized={cmsSrc !== null}
+          />
+        </button>
       )}
 
       {/* Navigation Buttons */}
       {images.length > 1 && (
         <>
-          <button
-            aria-label="Previous image"
-            className={`${navButtonClassName} left-4`}
-            onClick={goToPrevious}
-          >
+          <button aria-label="Previous image" className={`${navButtonClassName} left-4`} onClick={goToPrevious}>
             <ChevronLeft className="h-6 w-6" />
           </button>
 
-          <button
-            aria-label="Next image"
-            className={`${navButtonClassName} right-4`}
-            onClick={goToNext}
-          >
+          <button aria-label="Next image" className={`${navButtonClassName} right-4`} onClick={goToNext}>
             <ChevronRight className="h-6 w-6" />
           </button>
 
@@ -95,6 +109,80 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
           </div>
         </>
       )}
+
+      <Dialog open={viewerOpen} onOpenChange={setViewerOpen}>
+        <DialogPortal>
+          <DialogOverlay className="bg-ink/80" />
+          <DialogPrimitive.Content
+            className="fixed top-1/2 left-1/2 z-50 w-max max-w-[96vw] -translate-x-1/2 -translate-y-1/2 outline-none"
+            onKeyDown={(event) => {
+              if (images.length < 2) return;
+              if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                goToPrevious();
+              } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                goToNext();
+              }
+            }}
+          >
+            <DialogTitle className="sr-only">{`${title}の画像`}</DialogTitle>
+            <DialogDescription className="sr-only">切り抜かず、画像の全体を表示しています。</DialogDescription>
+            {src && (
+              <Image
+                key={`${currentIndex}:${src}`}
+                alt={`${title} image ${currentIndex + 1}`}
+                className="h-auto max-h-[92dvh] w-auto max-w-[96vw] bg-white object-contain"
+                height={1080}
+                sizes="96vw"
+                src={src}
+                style={{ width: 'auto', height: 'auto' }}
+                unoptimized={cmsSrc !== null}
+                width={1920}
+              />
+            )}
+            <DialogClose className="absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-md bg-ink/50 text-festival-accent-soft transition-colors hover:bg-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-festival-accent-soft">
+              <XIcon className="size-5" />
+              <span className="sr-only">閉じる</span>
+            </DialogClose>
+            {images.length > 1 && (
+              <>
+                <button
+                  aria-label="Previous image"
+                  className={`${viewerNavButtonClassName} left-3`}
+                  type="button"
+                  onClick={goToPrevious}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  aria-label="Next image"
+                  className={`${viewerNavButtonClassName} right-3`}
+                  type="button"
+                  onClick={goToNext}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+                <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      aria-label={`Go to image ${idx + 1}`}
+                      className={`h-2 rounded-[4px] transition-all ${
+                        idx === currentIndex
+                          ? 'w-6 bg-festival-accent-soft'
+                          : 'w-2 bg-festival-accent-soft/50 hover:bg-festival-accent-soft/70'
+                      }`}
+                      type="button"
+                      onClick={() => setCurrentIndex(idx)}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </DialogPrimitive.Content>
+        </DialogPortal>
+      </Dialog>
     </div>
   );
 }
