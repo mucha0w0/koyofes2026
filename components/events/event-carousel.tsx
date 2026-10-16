@@ -36,18 +36,21 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
 
   const currentImage = images[currentIndex];
   const cmsSrc = currentImage ? microCmsImageSrc(currentImage, 1920) : null;
+  const src = currentImage ? (cmsSrc ?? currentImage) : null;
 
   return (
     <div className={`${frameClassName} group`}>
-      {/* Main Image */}
-      {currentImage && (
+      {/* 同じ img の src を差し替えると、次の画像が届くまで前の絵が残る。枚を切り替えるたびに要素を作り直し、未読み込みの間は白地を見せる。 */}
+      <div aria-hidden className="absolute inset-0 bg-white" />
+      {src && (
         <Image
+          key={`${currentIndex}:${src}`}
           fill
           priority
           alt={`${title} image ${currentIndex + 1}`}
           className="object-cover object-center"
           sizes="100vw"
-          src={cmsSrc ?? currentImage}
+          src={src}
           unoptimized={cmsSrc !== null}
         />
       )}
