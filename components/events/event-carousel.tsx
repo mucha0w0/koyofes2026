@@ -114,7 +114,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
         <DialogPortal>
           <DialogOverlay className="bg-ink/80" />
           <DialogPrimitive.Content
-            className="fixed top-1/2 left-1/2 z-50 w-max max-w-[96vw] -translate-x-1/2 -translate-y-1/2 outline-none"
+            className="fixed inset-0 z-50 outline-none"
             onKeyDown={(event) => {
               if (images.length < 2) return;
               if (event.key === 'ArrowLeft') {
@@ -128,20 +128,23 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
           >
             <DialogTitle className="sr-only">{`${title}の画像`}</DialogTitle>
             <DialogDescription className="sr-only">切り抜かず、画像の全体を表示しています。</DialogDescription>
-            {src && (
-              <Image
-                key={`${currentIndex}:${src}`}
-                alt={`${title} image ${currentIndex + 1}`}
-                className="h-auto max-h-[92dvh] w-auto max-w-[96vw] bg-white object-contain"
-                height={1080}
-                sizes="96vw"
-                src={src}
-                style={{ width: 'auto', height: 'auto' }}
-                unoptimized={cmsSrc !== null}
-                width={1920}
-              />
-            )}
-            <DialogClose className="absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-md bg-ink/50 text-festival-accent-soft transition-colors hover:bg-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-festival-accent-soft">
+            <div className="flex size-full items-center justify-center" onClick={() => setViewerOpen(false)}>
+              {src && (
+                <Image
+                  key={`${currentIndex}:${src}`}
+                  alt={`${title} image ${currentIndex + 1}`}
+                  className="h-auto max-h-[92dvh] w-auto max-w-[96vw] bg-white object-contain"
+                  height={1080}
+                  sizes="96vw"
+                  src={src}
+                  style={{ width: 'auto', height: 'auto' }}
+                  unoptimized={cmsSrc !== null}
+                  width={1920}
+                  onClick={(event) => event.stopPropagation()}
+                />
+              )}
+            </div>
+            <DialogClose className="absolute top-4 right-4 z-20 flex size-11 items-center justify-center rounded-md bg-ink/50 text-festival-accent-soft transition-colors hover:bg-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-festival-accent-soft">
               <XIcon className="size-5" />
               <span className="sr-only">閉じる</span>
             </DialogClose>
@@ -149,7 +152,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
               <>
                 <button
                   aria-label="Previous image"
-                  className={`${viewerNavButtonClassName} left-3`}
+                  className={`${viewerNavButtonClassName} left-4`}
                   type="button"
                   onClick={goToPrevious}
                 >
@@ -157,7 +160,7 @@ export function EventCarousel({ images, title }: EventCarouselProps) {
                 </button>
                 <button
                   aria-label="Next image"
-                  className={`${viewerNavButtonClassName} right-3`}
+                  className={`${viewerNavButtonClassName} right-4`}
                   type="button"
                   onClick={goToNext}
                 >
