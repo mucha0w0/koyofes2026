@@ -35,6 +35,15 @@ export function SpecialGuestSection() {
 
           <p className="text-center text-xl font-medium">サツマカワRPG</p>
 
+          <div className="w-full max-w-135 rounded-md bg-paper-2 p-6">
+            <p className="text-sm text-muted-foreground">
+              マッシュルームヘアの髪型がトレードマーク。主にコントやピンネタを得意とし、ハイテンションかつ狂気や不条理を感じさせる独特な世界観のネタで高い評価を得ています。R-1グランプリでは2022年から3年連続で決勝に進出するなど、実力派ピン芸人として確固たる地位を築きました。
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              ピン芸としての活動に加え、芸人仲間のどんぐりたけし、Yes!アキトとともに「怪奇!YesどんぐりRPG」を結成。息の合ったギャグ連発のスタイルでM-1グランプリでも話題を集めました。
+            </p>
+          </div>
+
           <Button asChild className="px-8" size="lg">
             <Link href="/events/timetable" prefetch={false}>
               タイムテーブルを見る
