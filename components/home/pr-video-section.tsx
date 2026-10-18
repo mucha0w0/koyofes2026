@@ -3,7 +3,7 @@ import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { getOfficialSocial } from '@/lib/config/social';
 
-const INSTAGRAM_POST_URL = 'https://www.instagram.com/p/DZZpnTuAJZp/';
+const INSTAGRAM_POST_URL = 'https://www.instagram.com/p/DeEl8zjDzMV/';
 const INSTAGRAM_PROFILE_URL = getOfficialSocial('instagram').url;
 
 function SectionHeading() {
