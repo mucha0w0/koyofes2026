@@ -28,10 +28,18 @@ export function ExhibitionCard({ event }: ExhibitionCardProps) {
               <span className="sr-only">{categoryLabel}</span>
             </span>
           </div>
-          <p className="text-sm text-muted-foreground">{event.organization}</p>
           {displayCatchphrase ? (
-            <p className="mt-1 truncate text-xs text-muted-foreground">{displayCatchphrase}</p>
+            <p className="text-sm text-muted-foreground">{displayCatchphrase}</p>
           ) : null}
+          <p
+            className={
+              displayCatchphrase
+                ? 'mt-1 truncate text-xs text-muted-foreground'
+                : 'text-sm text-muted-foreground'
+            }
+          >
+            {event.organization}
+          </p>
         </div>
       </div>
     </Link>
