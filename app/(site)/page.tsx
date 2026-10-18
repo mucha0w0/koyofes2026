@@ -18,12 +18,12 @@ export default function HomePage() {
     <main>
       <HeroSection />
       <FestivalCountdown />
-      <SpecialGuestSection />
       <EventSearchSection variant="prominent" />
       <CategoryEvents />
       <RecommendedPreview />
-      <RankingPreview />
+      <SpecialGuestSection />
       <TimetablePreview />
+      <RankingPreview />
       <FestivalTicker />
       <PrVideoSection />
       <StampRallyPreview />

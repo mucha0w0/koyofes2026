@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { InkTextLink } from '@/components/ui/ink-text-link';
 
 /** 宣材を、顔が主役になるようトリミング。元画像: https://natalie.mu/owarai/artist/100932 */
 const GUEST_PORTRAIT = {
@@ -44,11 +43,7 @@ export function SpecialGuestSection() {
             </p>
           </div>
 
-          <Button asChild className="px-8" size="lg">
-            <Link href="/events/timetable" prefetch={false}>
-              タイムテーブルを見る
-            </Link>
-          </Button>
+          <InkTextLink href="/events/special-guest">出演の詳細を見る</InkTextLink>
         </div>
       </div>
     </section>
