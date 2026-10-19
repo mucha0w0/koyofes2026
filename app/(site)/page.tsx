@@ -7,6 +7,7 @@ import { LinksSection } from '@/components/home/links-section';
 import { PrVideoSection } from '@/components/home/pr-video-section';
 import { RankingPreview } from '@/components/home/ranking-preview';
 import { RecommendedPreview } from '@/components/home/recommended-preview';
+import { SpecialGuestSection } from '@/components/home/special-guest-section';
 import { Sponsors } from '@/components/home/sponsors';
 import { StampRallyPreview } from '@/components/home/stamp-rally-preview';
 import { TimetablePreview } from '@/components/home/timetable-preview';
@@ -20,8 +21,9 @@ export default function HomePage() {
       <EventSearchSection variant="prominent" />
       <CategoryEvents />
       <RecommendedPreview />
-      <RankingPreview />
+      <SpecialGuestSection />
       <TimetablePreview />
+      <RankingPreview />
       <FestivalTicker />
       <PrVideoSection />
       <StampRallyPreview />
