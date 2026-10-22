@@ -52,7 +52,7 @@
 - **スタンプ帳**（`/stamp`）: 対象ブース一覧と獲得状況の表示
 - **スタンプ獲得**（`/stamp/collect`）: NFC / QR コードからのスタンプ取得（検索エンジン非対象）
 - **サーバー署名検証**: 改ざん防止のため HMAC 署名でスタンプの正当性を検証
-- **ふくびき券条件**: 対象ブースのうち 3 個以上のスタンプ獲得でクリア（`lib/config/stampConfig.ts` で設定）
+- **ふくびき券条件**: 対象ブースのうち 15 個以上のスタンプ獲得でクリア（`lib/config/stampConfig.ts` で設定）
 
 ### 企画展ランキング
 
@@ -424,7 +424,7 @@ import { Illustration } from '@/components/illustration/illustration';
 3. NFC / QR コードの URL は `https://koyosai.com/stamp/collect?token=<トークン>` 形式
 4. 来場者が URL にアクセスすると `/api/stamp` が署名付きスタンプを発行
 5. スタンプはブラウザの LocalStorage に保存（キー: `koyosai_stamp_data_2026`）
-6. `/api/stamp/verify` で署名を検証し、3 個以上でクリア判定
+6. `/api/stamp/verify` で署名を検証し、15 個以上でクリア判定
 
 ### トークン生成
 

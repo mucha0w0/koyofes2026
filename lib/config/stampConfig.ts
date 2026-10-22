@@ -22,7 +22,7 @@ export const STAMP_CONFIG = {
   categoryOrder: STAMP_CATEGORY_ORDER,
   clearConditions: {
     /** ふくびき券獲得に必要なスタンプ数（全対象ブース中 N 個以上） */
-    requiredStampCount: 3,
+    requiredStampCount: 15,
   },
   storageKey: 'koyosai_stamp_data_2026',
 } as const;
