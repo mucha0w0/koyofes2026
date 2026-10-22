@@ -1,57 +1,79 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
+import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
+import { RelatedLinks } from '@/components/layout/related-links';
+
+/** スマホは 148px のまま。広い画面だけ少し大きくする */
+const CONTACT_ILLUSTRATION_SIZE = 'clamp(148px, 12vw, 210px)';
+/** post.png の描画は、1024px 四方の右 32px・下 136px が透明 */
+const CONTACT_ILLUSTRATION_RIGHT_PAD = 32 / 1024;
+const CONTACT_ILLUSTRATION_BOTTOM_PAD = 136 / 1024;
 
 export default function ContactPage() {
   return (
-    <PageLayout
-      related={{
-        pages: ['/about/overview', '/guide/faq', '/official/pamphlet'],
-        background: 'paper-2',
-      }}
-      subtitle="ご質問・ご要望はこちらから"
-      title="お問い合わせ"
-    >
-      <div className="mx-auto max-w-2xl space-y-6">
-        <div className="ink-shell bg-card p-6">
-          <h2 className="font-medium text-lg mb-4">連絡先（学生課学生支援係）</h2>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="rounded-md p-2 bg-paper-2">
-                <Mail className="h-5 w-5 text-foreground" />
+    <PageLayout fullWidth subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12 md:pb-16">
+        <div className="mx-auto max-w-2xl space-y-6">
+          <div className="ink-shell bg-card p-6">
+            <h2 className="font-medium text-lg mb-4">連絡先（学生課学生支援係）</h2>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="rounded-md p-2 bg-paper-2">
+                  <Mail className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">メール</p>
+                  <p className="font-medium">gakusei☆toyota-ct.ac.jp （☆マークを@に変えて送信）</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">メール</p>
-                <p className="font-medium">gakusei☆toyota-ct.ac.jp （☆マークを@に変えて送信）</p>
+              <div className="flex items-center gap-3">
+                <div className="rounded-md p-2 bg-paper-2">
+                  <Phone className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">電話</p>
+                  <p className="font-medium">0565-36-5913</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="rounded-md p-2 bg-paper-2">
-                <Phone className="h-5 w-5 text-foreground" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">電話</p>
-                <p className="font-medium">0565-36-5913</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="rounded-md p-2 bg-paper-2">
-                <MapPin className="h-5 w-5 text-foreground" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">住所</p>
-                <p className="font-medium">〒471-0067 愛知県豊田市栄生町２丁目１−１</p>
+              <div className="flex items-center gap-3">
+                <div className="rounded-md p-2 bg-paper-2">
+                  <MapPin className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">住所</p>
+                  <p className="font-medium">〒471-0067 愛知県豊田市栄生町２丁目１−１</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="rounded-md bg-paper-2 p-6">
-          <p className="text-sm text-muted-foreground">
-            お問い合わせへの回答には数日いただく場合がございます。 <Link className="text-ink underline underline-offset-[0.2em] outline-none hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink" href="/guide/faq">よくある質問</Link>もご確認ください。
-          </p>
+          <div className="rounded-md bg-paper-2 p-6">
+            <p className="text-sm text-muted-foreground">
+              お問い合わせへの回答には数日いただく場合がございます。{' '}
+              <Link
+                className="text-ink underline underline-offset-[0.2em] outline-none hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink"
+                href="/guide/faq"
+              >
+                よくある質問
+              </Link>
+              もご確認ください。
+            </p>
+          </div>
         </div>
+      </div>
+      <div className="mt-auto">
+        <Illustration
+          alt=""
+          backgroundColor="var(--paper)"
+          bottom={`calc(36px - ${CONTACT_ILLUSTRATION_SIZE} * ${CONTACT_ILLUSTRATION_BOTTOM_PAD})`}
+          height={`calc(${CONTACT_ILLUSTRATION_SIZE} + 28px)`}
+          imageHeight={CONTACT_ILLUSTRATION_SIZE}
+          right={`calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${CONTACT_ILLUSTRATION_SIZE} * ${CONTACT_ILLUSTRATION_RIGHT_PAD})`}
+          src="post.png"
+        />
+        <RelatedLinks background="paper-2" pages={['/about/overview', '/guide/faq', '/official/pamphlet']} />
       </div>
     </PageLayout>
   );
