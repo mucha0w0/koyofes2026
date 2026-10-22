@@ -30,7 +30,7 @@ export default function ThemePage() {
         <div className="mx-auto max-w-3xl space-y-8">
           <div className="text-center">
             <h2 className="text-xl font-medium">1dearland</h2>
-            <p className="mt-3 text-sm text-muted-foreground">読み：ワンダーランド</p>
+            <p className="mt-3 text-sm text-muted-foreground">ワンダーランド</p>
           </div>
 
           <div className="ink-shell bg-card p-8">
@@ -40,17 +40,17 @@ export default function ThemePage() {
               Wonderland（ワンダーランド）と、「みんなで１つに」という言葉遊びです。
             </p>
             <p className="mt-4 leading-relaxed text-foreground">
-              タイトルの文字には、ひとつひとつ目がついています。来場する人も、出す人も、つくる人も、みんなで１つになる。字母を人に見立てたのは、その「みんな」を表すためです。
+              タイトルの文字には、ひとつひとつ目がついています。来場する人も、出す人も、つくる人も、みんなで１つになってほしい。そんな思いを込めて、文字を人に見立てました。
             </p>
           </div>
 
           <div className="ink-shell bg-card p-8">
             <h3 className="mb-4 text-lg font-medium">イラストに込めた思い</h3>
             <p className="leading-relaxed text-foreground">
-              汽車が、雲の上の遊園地へ迎えに来ます。線路は中心へ巻き込まれ、機関車の時計はハートの針で正しい時刻がわかりません。時間を忘れて、この場所を楽しんでほしい——そんな願いが絵になっています。
+              雲の上の遊園地へ向かう汽車は、みんなを乗せて中心へ巻き込まれていきます。「時間を忘れ、みんなで一緒に楽しんでほしい」という思いを絵に込めました。
             </p>
             <p className="mt-4 leading-relaxed text-foreground">
-              絵の中には、こうよう祭と学校の記憶がいくつか仕込まれています。答えは書きません。探しながら見てもらえたら、と思います。
+              絵の中には、過去のこうよう祭や学校にまつわる小ネタがいくつか仕込まれています。探しながら見てもらえたら嬉しいです。
             </p>
           </div>
         </div>
