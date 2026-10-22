@@ -5,12 +5,6 @@ import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
 import { RelatedLinks } from '@/components/layout/related-links';
 
-/** スマホは 148px のまま。広い画面だけ少し大きくする */
-const CONTACT_ILLUSTRATION_SIZE = 'clamp(148px, 12vw, 210px)';
-/** post.png の描画は、1024px 四方の右 32px・下 136px が透明 */
-const CONTACT_ILLUSTRATION_RIGHT_PAD = 32 / 1024;
-const CONTACT_ILLUSTRATION_BOTTOM_PAD = 136 / 1024;
-
 export default function ContactPage() {
   return (
     <PageLayout fullWidth subtitle="ご質問・ご要望はこちらから" title="お問い合わせ">
@@ -64,15 +58,7 @@ export default function ContactPage() {
         </div>
       </div>
       <div className="mt-auto">
-        <Illustration
-          alt=""
-          backgroundColor="var(--paper)"
-          bottom={`calc(36px - ${CONTACT_ILLUSTRATION_SIZE} * ${CONTACT_ILLUSTRATION_BOTTOM_PAD})`}
-          height={`calc(${CONTACT_ILLUSTRATION_SIZE} + 28px)`}
-          imageHeight={CONTACT_ILLUSTRATION_SIZE}
-          right={`calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${CONTACT_ILLUSTRATION_SIZE} * ${CONTACT_ILLUSTRATION_RIGHT_PAD})`}
-          src="post.png"
-        />
+        <Illustration alt="" src="post.png" />
         <RelatedLinks background="paper-2" pages={['/about/overview', '/guide/faq', '/official/pamphlet']} />
       </div>
     </PageLayout>

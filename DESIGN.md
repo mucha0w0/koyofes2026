@@ -340,6 +340,17 @@ mx-auto w-full max-w-7xl px-4
 
 下層の PageLayout 見出し帯は写真ではなく白。戻るリンクは残す。見出しの下は余白。枠線も旗も付けない。
 
+### 挿絵
+
+`public/Illustration` の画像は `Illustration`（`components/illustration/illustration.tsx`）で置く。位置・大きさ・背景を省略したときの初期値が正。ページごとに計算し直さない。
+
+- 帯は画面端まで。角 0。枠も offset も付けない
+- 地は薄い紙 `var(--paper)`。直下の関連ページが `--paper-2` でも、帯は薄い方
+- 絵の右端は本文シェルの内側（`max-w-7xl` の `px-4` の右）に揃える
+- 大きさはスマホ **148px**、広い画面だけ大きくし **210px** で止める（`clamp(148px, 12vw, 210px)`）
+- 描画の下に **36px** の紙色を残す
+- 初期値の透明余白は `post.png`（1024px 四方の右 32px・下 136px）。余白の違う画像は `right` / `bottom` で上書きする
+
 ---
 
 ## 6. Depth & Elevation
@@ -463,6 +474,7 @@ Hero: 1 photo, full-bleed, radius 0, no frame, no type overlay
 Theme spelling: 1dearland
 Festival name: こうよう祭（type, not the art）
 Layout: mx-auto w-full max-w-7xl px-4
+Illustration: paper band, full-bleed, radius 0. Right edge = shell content. Size clamp(148px, 12vw, 210px). 36px under the drawing
 Shadow: blur 禁止。ベタ offset のみ
 ```
 
