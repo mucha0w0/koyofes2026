@@ -107,6 +107,7 @@ mx-auto w-full max-w-7xl px-4
 3. 検索・一覧プレビューのように読み幅を絞るなら、その中に `mx-auto max-w-3xl`。
 4. グリッドは実在する列数に合わせる。空列を作らない。
 5. `container` クラス、`max-w-screen-*`、ブレークポイントごとの `max-w-*` 切り替えは使わない。
+6. 画面端までの色帯に挿絵を置くときは `Illustration`（`components/illustration/illustration.tsx`）を使う。`max-w-7xl` や `max-w-3xl` の中に置いても帯はウィンドウ幅になり、角は 0。高さ・背景色・絵のサイズと位置は [README の挿絵](../README.md#挿絵)。シェルに背景を塗って幅を縮めない。
 
 ---
 

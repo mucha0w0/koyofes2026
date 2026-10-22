@@ -162,6 +162,7 @@
 │   ├── events/                 # 企画検索・カード・タイムテーブル
 │   ├── guide/                  # FAQ 関連
 │   ├── home/                   # トップページ各セクション
+│   ├── illustration/           # 挿絵の帯（Illustration）
 │   ├── layout/                 # ヘッダー・フッター・ページレイアウト
 │   ├── news/                   # お知らせ
 │   ├── ranking/                # ランキング UI
@@ -187,6 +188,7 @@
 │   ├── faqs.json               # FAQ データ
 │   └── cache.ts                # キャッシュ方針の定数
 ├── public/                     # 静的ファイル（アイコン、画像、PDF など）
+│   └── Illustration/           # 挿絵画像（post.png など）
 ├── drizzle/                    # ランキング用 Postgres スキーマ
 ├── scripts/
 │   └── generate-stamp-tokens.mjs # スタンプトークン生成スクリプト
@@ -343,6 +345,38 @@ microCMS での更新は、本番では Webhook で反映されます。既存�
 | お問い合わせ | `app/(site)/guide/contact/page.tsx` | `/guide/contact` |
 | 公式 Instagram | `lib/config/social.ts` | PR動画、開発用ルックブック |
 | パンフレット PDF | `public/koyofes2026_pamphlet.pdf` | `/official/pamphlet` |
+| 挿絵 | `public/Illustration/` と `Illustration` | 配置したページ |
+
+### 挿絵
+
+画像は `public/Illustration/` に置きます。ページへの配置は `components/illustration/illustration.tsx` の `Illustration` です。どのページの本文カラムの中に置いても、帯の幅はウィンドウ幅になります。高さ、背景色、絵の大きさと位置は props で指定します。
+
+```tsx
+import { Illustration } from '@/components/illustration/illustration';
+
+<Illustration
+  src="post.png"
+  alt="赤いポストと紫のキャラクター"
+  backgroundColor="var(--paper-sky)"
+  height={240}
+  imageHeight={220}
+  left={24}
+  bottom={0}
+/>
+```
+
+| prop | 意味 |
+|------|------|
+| `src` | `public/Illustration` のファイル名（例: `post.png`）。`/` または `http` で始まるときは、そのパスを使う |
+| `alt` | 代替テキスト。装飾なら `""` |
+| `backgroundColor` | 帯の背景色。`#c7e1e8` や `var(--paper)`、`var(--paper-2)`、`var(--paper-sky)` などの CSS カラー |
+| `height` | 帯の高さ。数値は px。文字列は `12rem` や `40%`、`clamp(...)` |
+| `imageWidth` / `imageHeight` | 絵の大きさ。片方だけなら画像の比率を保つ。両方ならその枠に収まるよう比率を保つ。両方省略すると帯の高さに合わせる |
+| `top` / `right` / `bottom` / `left` | 帯の中の位置。数値は px。省略した方向は中央に揃う |
+| `className` | 帯への追加クラス。絵を帯の外にはみ出させるときは `overflow-visible` |
+| `priority` | 最初の画面に置くとき `true`。読み込みを優先する |
+
+背景が透明な PNG にすると、指定した帯の色が絵のまわりに出ます。帯からはみ出た部分は切れます。親に `overflow: hidden` がある場合、帯はウィンドウ幅まで広がりません。
 
 ### 企画カテゴリ
 
@@ -524,6 +558,7 @@ docs: README の環境変数セクションを更新
 - [ ] 概要ページ（`/about/overview`）の開催日・概要
 - [ ] FAQ（`lib/faqs.json`）の内容
 - [ ] パンフレット PDF（`public/koyofes2026_pamphlet.pdf`）の差し替え
+- [ ] 挿絵（`public/Illustration/`）と、各ページの `Illustration` の位置・大きさ
 - [ ] 会場マップ画像（`app/(site)/guide/map/kounaizu.jpg`）
 - [ ] 公式 SNS のアカウント・URL（`lib/config/social.ts` の `enabled` と URL）
 - [ ] お問い合わせ先（`/guide/contact`）
