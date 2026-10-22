@@ -352,7 +352,7 @@ microCMS での更新は、本番では Webhook で反映されます。既存�
 画像は `public/Illustration/` に置きます。ページへの配置は `components/illustration/illustration.tsx` の `Illustration` です。どのページの本文カラムの中に置いても、帯の幅はウィンドウ幅になります。位置・大きさ・背景を省略すると、次の初期値になります。見た目のルールは [DESIGN.md の挿絵](DESIGN.md#挿絵) です。
 
 - 背景は薄い紙 `var(--paper)`
-- 大きさはスマホ 148px、広い画面で最大 210px
+- 大きさはスマホ 148px、PC は 240px
 - 絵の右端は本文シェル（`max-w-7xl` の `px-4`）の右
 - 描画の下に 36px
 
@@ -368,7 +368,7 @@ import { Illustration } from '@/components/illustration/illustration';
 | `alt` | 代替テキスト。装飾なら `""` |
 | `backgroundColor` | 帯の背景色。省略時は `var(--paper)`。`#c7e1e8` や `var(--paper-2)` も指定できる |
 | `height` | 帯の高さ。省略時は絵の高さ + 28px。数値は px。文字列は `12rem` や `40%`、`clamp(...)` |
-| `imageWidth` / `imageHeight` | 絵の大きさ。省略時の高さは `clamp(148px, 12vw, 210px)`。片方だけなら画像の比率を保つ。両方ならその枠に収まるよう比率を保つ |
+| `imageWidth` / `imageHeight` | 絵の大きさ。省略時はスマホ 148px、PC は 240px（`clamp(148px, 20vw, 240px)`）。片方だけなら画像の比率を保つ。両方ならその枠に収まるよう比率を保つ |
 | `top` / `right` / `bottom` / `left` | 帯の中の位置。数値は px。`right` を省略すると本文シェルの右端、`bottom` を省略すると描画の下に 36px。`left` を渡すと右端の初期値は使わない。`top` を渡すと下端の初期値は使わない |
 | `className` | 帯への追加クラス。絵を帯の外にはみ出させるときは `overflow-visible` |
 | `priority` | 最初の画面に置くとき `true`。読み込みを優先する |

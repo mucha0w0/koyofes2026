@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils';
 type CssLength = number | string;
 
 /**
- * スマホは 148px。広い画面だけ少し大きくし、210px で止める。
+ * スマホは 148px。PC は 240px。
  * 右端は本文シェル（max-w-7xl の px-4）に揃える。描画の下には 36px 残す。
  * 透明余白は post.png（1024px 四方の右 32px・下 136px）に合わせてある。
  */
-const DEFAULT_ILLUSTRATION_SIZE = 'clamp(148px, 12vw, 210px)';
+const DEFAULT_ILLUSTRATION_SIZE = 'clamp(148px, 20vw, 240px)';
 const DEFAULT_BACKGROUND = 'var(--paper)';
 const DRAWING_RIGHT_INSET = 32 / 1024;
 const DRAWING_BOTTOM_INSET = 136 / 1024;
@@ -39,7 +39,7 @@ export type IllustrationProps = {
   /** 画像の幅。省略時は高さに合わせて画像の比率を保つ */
   imageWidth?: CssLength;
   /**
-   * 画像の高さ。省略時は `clamp(148px, 12vw, 210px)`。
+   * 画像の高さ。省略時はスマホ 148px、PC は 240px。
    * 幅だけ指定したときは、その幅に合わせて比率を保つ。
    * 両方指定したときは、その枠に収まるよう比率を保つ。
    */
