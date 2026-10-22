@@ -5,10 +5,15 @@ export function TimetableSkeleton() {
         <div key={dayIndex} className="space-y-8">
           <div className="h-7 w-16 rounded bg-paper-2" />
           <div className="flex gap-4">
-            <div className="w-12 shrink-0 space-y-14">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="h-3 w-8 rounded bg-paper-2" />
-              ))}
+            <div className="flex shrink-0 gap-2">
+              <div className="w-12 space-y-14">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <div key={index} className="ml-auto h-3 w-8 rounded bg-paper-2" />
+                ))}
+              </div>
+              <div className="relative w-6" style={{ height: '2880px' }}>
+                <div className="absolute top-0 bottom-0 left-1/2 w-2 -translate-x-1/2 rounded-[4px] bg-mist" />
+              </div>
             </div>
             <div className="relative flex-1 space-y-3" style={{ height: '2880px' }}>
               {Array.from({ length: 3 }).map((_, index) => (

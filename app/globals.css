@@ -447,7 +447,7 @@ html[data-palette='orange'],
     margin-top: -7px;
     background: var(--card);
     border: var(--shell-stroke) solid var(--ink);
-    border-radius: 4px;
+    border-radius: 50%;
     box-shadow: none;
     cursor: pointer;
   }
@@ -467,7 +467,7 @@ html[data-palette='orange'],
     height: 22px;
     background: var(--card);
     border: var(--shell-stroke) solid var(--ink);
-    border-radius: 4px;
+    border-radius: 50%;
     box-shadow: none;
     cursor: pointer;
   }

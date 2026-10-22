@@ -33,32 +33,44 @@ function TimelineView({
 
   return (
     <div className="relative flex gap-4">
-      {/* 時間ラベル列 */}
-      <div className="relative shrink-0 w-12" style={{ height: `${totalHeight}px` }}>
-        {timeLabels.map((label, i) => (
-          <div
-            key={label}
-            className="absolute right-0 text-xs text-muted-foreground"
-            style={{
-              top: `${i * (PX_PER_HOUR / 2) - 8}px`,
-              lineHeight: '16px',
-            }}
-          >
-            {label}
-          </div>
-        ))}
-      </div>
+      {/* 時間ラベルと軸。詳細検索のスライダーと同じ、細い文字と 8px の軌跡・インク枠のつまみ */}
+      <div className="flex shrink-0 gap-2">
+        <div className="relative w-12" style={{ height: `${totalHeight}px` }}>
+          {timeLabels.map((label, i) => (
+            <div
+              key={label}
+              className="absolute right-0 text-xs text-muted-foreground"
+              style={{
+                top: `${i * (PX_PER_HOUR / 2) - 8}px`,
+                lineHeight: '16px',
+              }}
+            >
+              {label}
+            </div>
+          ))}
+        </div>
 
-      {/* 軸エリア（縦線 + 正方形ドット） */}
-      <div className="relative w-6 shrink-0" style={{ height: `${totalHeight}px` }}>
-        <div className="absolute left-2.75 top-0 bottom-0 w-px bg-mist" />
-        {events.map((event, idx) => (
-          <div
-            key={idx}
-            className="absolute w-2 h-2 rounded-[4px] bg-ink"
-            style={{ left: '7px', top: `${event.topPx - 4}px` }}
-          />
-        ))}
+        <div aria-hidden className="relative w-6" style={{ height: `${totalHeight}px` }}>
+          <div className="absolute top-0 bottom-0 left-1/2 w-2 -translate-x-1/2 overflow-hidden rounded-[4px] bg-mist">
+            {events.map((event) => (
+              <div
+                key={`${event.slug}-fill`}
+                className="absolute inset-x-0 bg-festival-accent"
+                style={{
+                  top: `${event.topPx}px`,
+                  height: `${(event.duration / 60) * PX_PER_HOUR}px`,
+                }}
+              />
+            ))}
+          </div>
+          {events.map((event) => (
+            <div
+              key={event.slug}
+              className="absolute left-1/2 z-10 size-[22px] -translate-x-1/2 rounded-full border-[length:var(--shell-stroke)] border-ink bg-card"
+              style={{ top: `${event.topPx - 11}px` }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* タイムライン本体 */}
