@@ -73,7 +73,7 @@ export function StampStatusPanel({
         {lotteryMark > 0 && lotteryMark < 100 ? (
           <span
             aria-hidden
-            className="pointer-events-none absolute top-1/2 h-4 w-px -translate-y-1/2 bg-ink/35"
+            className="pointer-events-none absolute top-1/2 h-6 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink"
             style={{ left: `${lotteryMark}%` }}
             title={`ふくびき条件: ${requiredCount} 個`}
           />
