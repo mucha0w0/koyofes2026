@@ -51,7 +51,7 @@ export function StampSuggestions({ booths }: StampSuggestionsProps) {
   }
 
   return (
-    <section className="bg-background py-16 md:py-24" data-palette="green">
+    <section className="bg-paper-2 py-16 md:py-24">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="mx-auto max-w-3xl space-y-6">
           {showLast && lastCollected ? (

@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { Spinner } from '@/components/common/spinner';
+import { ExhibitionMaps } from '@/components/guide/exhibition-maps';
 import { PageLayout } from '@/components/layout/page-layout';
 import { RelatedLinks } from '@/components/layout/related-links';
 import { StampBook } from '@/components/stamp/stamp-book';
@@ -33,6 +34,12 @@ export default async function StampPage() {
       </Suspense>
       <div className="mt-auto">
         <StampSuggestions booths={booths} />
+        <section className="bg-background">
+          <div className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
+            <h2 className="mb-6 text-xl font-medium md:text-2xl">展示マップ</h2>
+            <ExhibitionMaps />
+          </div>
+        </section>
         <RelatedLinks background="paper-2" pages={['/events/list', '/ranking', '/events/recommended']} />
       </div>
     </PageLayout>
