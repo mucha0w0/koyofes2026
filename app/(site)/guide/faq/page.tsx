@@ -1,5 +1,6 @@
 import { FAQCategoryNav } from '@/components/guide/faq-category-nav';
 import { FAQCategorySection } from '@/components/guide/faq-category-section';
+import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
 
 import faqData from '@/lib/faqs.json';
@@ -13,6 +14,7 @@ export default function FAQPage() {
   return (
     <PageLayout
       fullWidth
+      illustration={<Illustration alt="" src="news.png" />}
       related={{
         pages: ['/guide/contact', '/official/news', '/official/pamphlet'],
         background: lastBandIsPaper2 ? 'paper' : 'paper-2',
@@ -26,11 +28,7 @@ export default function FAQPage() {
         </div>
       </div>
       {faqGroups.map((group, index) => (
-        <FAQCategorySection
-          key={group.category}
-          background={index % 2 === 0 ? 'paper' : 'paper-2'}
-          group={group}
-        />
+        <FAQCategorySection key={group.category} background={index % 2 === 0 ? 'paper' : 'paper-2'} group={group} />
       ))}
     </PageLayout>
   );

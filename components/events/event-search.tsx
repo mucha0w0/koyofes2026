@@ -4,7 +4,6 @@ import { Search, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, type KeyboardEvent } from 'react';
 
-import { Illustration } from '@/components/illustration/illustration';
 import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import { cn } from '@/lib/utils';
@@ -108,33 +107,30 @@ export function EventSearchSection({ variant = 'prominent', showViewAllLink }: E
   const viewAllLink = showViewAllLink ?? !isProminent;
 
   return (
-    <>
-      <section className={cn('bg-paper-2', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')} data-palette="orange">
-        <div className="mx-auto w-full max-w-7xl px-4">
-          <div className="mx-auto max-w-3xl">
-            <div className={cn('mb-8 text-center', !isProminent && 'flex flex-col gap-2')}>
-              <h2
-                className={cn(
-                  'font-medium',
-                  isProminent ? 'text-2xl md:text-3xl mb-2' : 'text-xl md:text-2xl tracking-tight',
-                )}
-              >
-                企画を探す
-              </h2>
-              {isProminent && <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>}
-            </div>
-
-            <EventSearchBar variant={variant} />
-
-            {viewAllLink && (
-              <div className="mt-6 text-center">
-                <InkTextLink href={SEARCH_LIST_PATH}>すべての企画を見る</InkTextLink>
-              </div>
-            )}
+    <section className={cn('bg-paper-2', isProminent ? 'py-12 md:py-16' : 'py-10 md:py-16')} data-palette="orange">
+      <div className="mx-auto w-full max-w-7xl px-4">
+        <div className="mx-auto max-w-3xl">
+          <div className={cn('mb-8 text-center', !isProminent && 'flex flex-col gap-2')}>
+            <h2
+              className={cn(
+                'font-medium',
+                isProminent ? 'text-2xl md:text-3xl mb-2' : 'text-xl md:text-2xl tracking-tight',
+              )}
+            >
+              企画を探す
+            </h2>
+            {isProminent && <p className="text-muted-foreground">キーワードやカテゴリから企画を検索</p>}
           </div>
+
+          <EventSearchBar variant={variant} />
+
+          {viewAllLink && (
+            <div className="mt-6 text-center">
+              <InkTextLink href={SEARCH_LIST_PATH}>すべての企画を見る</InkTextLink>
+            </div>
+          )}
         </div>
-      </section>
-      <Illustration alt="" src="pc.png" />
-    </>
+      </div>
+    </section>
   );
 }
