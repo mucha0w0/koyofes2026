@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
+import { Illustration } from '@/components/illustration/illustration';
 import { Pagination } from '@/components/news/pagination';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
@@ -32,6 +33,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
   return (
     <CmsPageLayout
+      illustration={<Illustration alt="" src="news.png" />}
       meta="newsList"
       related={{
         pages: ['/about/overview', '/guide/faq', '/official/pamphlet'],

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventListSkeleton } from '@/components/cms/skeletons/event-list-skeleton';
+import { Illustration } from '@/components/illustration/illustration';
 
 import { EventListClient } from './client';
 
@@ -12,6 +13,7 @@ export default async function EventListPage() {
 
   return (
     <CmsPageLayout
+      illustration={<Illustration alt="" src="pc.png" />}
       meta="eventList"
       related={{
         pages: ['/guide/map', '/events/recommended', '/events/timetable'],

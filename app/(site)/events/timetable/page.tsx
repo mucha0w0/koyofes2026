@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { CmsPageLayout } from '@/components/cms/cms-page-layout';
 import { EventSearchSection } from '@/components/events/event-search';
+import { Illustration } from '@/components/illustration/illustration';
 import { RelatedLinks } from '@/components/layout/related-links';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
@@ -126,7 +127,7 @@ export default async function StageEventsPage() {
 
   return (
     <>
-      <CmsPageLayout meta="eventTimetable">
+      <CmsPageLayout illustration={<Illustration alt="" src="time.png" />} meta="eventTimetable">
         <div className="space-y-20">
           <div>
             <div className="flex items-center gap-3 mb-8">

@@ -1,11 +1,13 @@
 import { Download } from 'lucide-react';
 
+import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
 import { Button } from '@/components/ui/button';
 
 export default function PamphletPage() {
   return (
     <PageLayout
+      illustration={<Illustration alt="" src="news.png" />}
       related={{
         pages: ['/events/list', '/guide/map', '/guide/faq'],
         background: 'paper-2',

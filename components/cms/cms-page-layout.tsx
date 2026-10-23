@@ -7,13 +7,15 @@ interface CmsPageLayoutProps {
   meta: CmsPageLayoutKey;
   children: React.ReactNode;
   related?: RelatedLinksConfig;
+  /** 関連ページの直前。関連ページが無いときは本文の直後 */
+  illustration?: React.ReactNode;
 }
 
-export function CmsPageLayout({ meta, children, related }: CmsPageLayoutProps) {
+export function CmsPageLayout({ meta, children, related, illustration }: CmsPageLayoutProps) {
   const { title, subtitle } = cmsPageMeta[meta];
 
   return (
-    <PageLayout related={related} subtitle={subtitle} title={title}>
+    <PageLayout illustration={illustration} related={related} subtitle={subtitle} title={title}>
       {children}
     </PageLayout>
   );

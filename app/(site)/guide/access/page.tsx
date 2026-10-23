@@ -1,10 +1,12 @@
 import { Train, Bus, Car, MapPin } from 'lucide-react';
 
+import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
 
 export default function AccessPage() {
   return (
     <PageLayout
+      illustration={<Illustration alt="" src="pin.png" />}
       related={{
         pages: ['/guide/map', '/guide/faq', '/official/pamphlet'],
         background: 'paper-2',

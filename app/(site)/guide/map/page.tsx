@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { ExhibitionMaps } from '@/components/guide/exhibition-maps';
+import { Illustration } from '@/components/illustration/illustration';
 import { PageLayout } from '@/components/layout/page-layout';
 
 import kounaizu from './kounaizu.jpg';
@@ -8,6 +9,7 @@ import kounaizu from './kounaizu.jpg';
 export default function MapPage() {
   return (
     <PageLayout
+      illustration={<Illustration alt="" src="pin.png" />}
       related={{
         pages: ['/guide/access', '/guide/faq', '/official/pamphlet'],
         background: 'paper-2',

@@ -6,19 +6,34 @@ type CssLength = number | string;
 /**
  * スマホは 148px。PC は 240px。
  * 右端は本文シェル（max-w-7xl の px-4）に揃える。描画の下には 36px 残す。
- * 透明余白は post.png（1024px 四方の右 32px・下 136px）に合わせてある。
+ * 透明余白は 1024px 四方のキャンバスに対する、描画の右・下の空き。
+ * post.png は見た目に合わせた値。他は不透明画素の外接。
  */
 const DEFAULT_ILLUSTRATION_SIZE = 'clamp(148px, 20vw, 240px)';
 const DEFAULT_BACKGROUND = 'var(--paper)';
-const DRAWING_RIGHT_INSET = 32 / 1024;
-const DRAWING_BOTTOM_INSET = 136 / 1024;
+const CANVAS_PX = 1024;
 
-function contentEdgeRight(size: string): string {
-  return `calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${size} * ${DRAWING_RIGHT_INSET})`;
+const DRAWING_INSET_PX: Record<string, { right: number; bottom: number }> = {
+  'post.png': { right: 32, bottom: 136 },
+  'news.png': { right: 95, bottom: 155 },
+  'pc.png': { right: 24, bottom: 144 },
+  'pin.png': { right: 67, bottom: 111 },
+  'time.png': { right: 124, bottom: 106 },
+};
+
+const DEFAULT_DRAWING_INSET_PX = DRAWING_INSET_PX['post.png'];
+
+function drawingInset(src: string): { right: number; bottom: number } {
+  const file = src.split('/').pop() ?? src;
+  return DRAWING_INSET_PX[file] ?? DEFAULT_DRAWING_INSET_PX;
 }
 
-function footGapBottom(size: string): string {
-  return `calc(36px - ${size} * ${DRAWING_BOTTOM_INSET})`;
+function contentEdgeRight(size: string, rightInset: number): string {
+  return `calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${size} * ${rightInset})`;
+}
+
+function footGapBottom(size: string, bottomInset: number): string {
+  return `calc(36px - ${size} * ${bottomInset})`;
 }
 
 function bandHeight(size: string): string {
@@ -117,6 +132,7 @@ export function Illustration({
   priority = false,
 }: IllustrationProps) {
   const size = toCssLength(imageHeight ?? imageWidth ?? DEFAULT_ILLUSTRATION_SIZE);
+  const inset = drawingInset(src);
   const pinX = left !== undefined || right !== undefined;
   const pinY = top !== undefined || bottom !== undefined;
 
@@ -145,8 +161,8 @@ export function Illustration({
           imageWidth,
           imageHeight: imageHeight ?? (imageWidth === undefined ? DEFAULT_ILLUSTRATION_SIZE : undefined),
           top,
-          right: right ?? (pinX ? undefined : contentEdgeRight(size)),
-          bottom: bottom ?? (pinY ? undefined : footGapBottom(size)),
+          right: right ?? (pinX ? undefined : contentEdgeRight(size, inset.right / CANVAS_PX)),
+          bottom: bottom ?? (pinY ? undefined : footGapBottom(size, inset.bottom / CANVAS_PX)),
           left,
         })}
         width={1}

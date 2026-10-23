@@ -12,6 +12,8 @@ interface PageLayoutProps {
   backHref?: string;
   backLabel?: string;
   related?: RelatedLinksConfig;
+  /** 関連ページの直前。関連ページが無いときは本文の直後 */
+  illustration?: React.ReactNode;
   /** 本文をシェル幅の外に出し、全幅の交互地セクションを置ける */
   fullWidth?: boolean;
 }
@@ -23,6 +25,7 @@ export function PageLayout({
   backHref = '/',
   backLabel = 'トップページに戻る',
   related,
+  illustration,
   fullWidth = false,
 }: PageLayoutProps) {
   return (
@@ -39,11 +42,21 @@ export function PageLayout({
       {fullWidth ? (
         children
       ) : (
-        <div className={cn('mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12', related && 'md:pb-16')}>
+        <div
+          className={cn(
+            'mx-auto w-full max-w-7xl px-4 pt-10 pb-12 md:pt-12',
+            (related || illustration) && 'md:pb-16',
+          )}
+        >
           {children}
         </div>
       )}
-      {related ? (
+      {illustration ? (
+        <div className="mt-auto">
+          {illustration}
+          {related ? <RelatedLinks {...related} /> : null}
+        </div>
+      ) : related ? (
         <RelatedLinks {...related} />
       ) : null}
     </main>
