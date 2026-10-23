@@ -15,9 +15,9 @@ const DAY2_START_HOUR = 9;
 const DAY2_END_HOUR = 18;
 const PX_PER_HOUR = 320;
 const CARD_HEIGHT = 112;
-/** 右端の初期位置から左へずらす。狭い画面では少しだけ。time.png の右の透明幅は残す */
+/** 描画の左端を、関連ページ先頭カードの左端に揃える。time.png の左の透明幅は 100px */
 const TIME_ILLUSTRATION_SIZE = 'clamp(148px, 20vw, 240px)';
-const TIME_ILLUSTRATION_RIGHT = `calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${TIME_ILLUSTRATION_SIZE} * ${124 / 1024} + clamp(1.5rem, 9.5vw, 10rem))`;
+const TIME_ILLUSTRATION_LEFT = `calc(max(1rem, (100vw - 80rem) / 2 + 1rem) - ${TIME_ILLUSTRATION_SIZE} * ${100 / 1024})`;
 
 function TimelineView({
   events,
@@ -131,7 +131,7 @@ export default async function StageEventsPage() {
   return (
     <>
       <CmsPageLayout
-        illustration={<Illustration alt="" right={TIME_ILLUSTRATION_RIGHT} src="time.png" />}
+        illustration={<Illustration alt="" left={TIME_ILLUSTRATION_LEFT} src="time.png" />}
         meta="eventTimetable"
       >
         <div className="space-y-20">
