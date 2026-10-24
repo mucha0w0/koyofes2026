@@ -13,15 +13,15 @@ const DEFAULT_ILLUSTRATION_SIZE = 'clamp(148px, 20vw, 240px)';
 const DEFAULT_BACKGROUND = 'var(--paper)';
 const CANVAS_PX = 1024;
 
+const DEFAULT_DRAWING_INSET_PX = { right: 32, bottom: 136 };
+
 const DRAWING_INSET_PX: Record<string, { right: number; bottom: number }> = {
-  'post.png': { right: 32, bottom: 136 },
+  'post.png': DEFAULT_DRAWING_INSET_PX,
   'news.png': { right: 95, bottom: 155 },
   'pc.png': { right: 24, bottom: 144 },
   'pin.png': { right: 67, bottom: 111 },
   'time.png': { right: 124, bottom: 106 },
 };
-
-const DEFAULT_DRAWING_INSET_PX = DRAWING_INSET_PX['post.png'];
 
 function drawingInset(src: string): { right: number; bottom: number } {
   const file = src.split('/').pop() ?? src;
