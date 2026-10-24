@@ -1,7 +1,7 @@
 import { PageLayout } from '@/components/layout/page-layout';
 import { RankingBoard } from '@/components/ranking/ranking-board';
 
-import { isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isRankingAggregationOpen, isRankingEnabled } from '@/lib/config/rankingConfig';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +10,22 @@ export const metadata = {
   description: 'クラス・学科展・有志展示の総合順位、トレンド、いまの並びの目安。',
 };
 
+const rankingRelated = {
+  pages: ['/events/list', '/events/recommended', '/events/timetable'],
+  background: 'paper-2',
+} as const;
+
 export default function RankingPage() {
+  if (!isRankingAggregationOpen()) {
+    return (
+      <PageLayout related={rankingRelated} subtitle="いまの人気と混み具合" title="リアルタイムランキング">
+        <div className="ink-shell mx-auto max-w-3xl bg-card p-6">
+          <p className="text-sm text-muted-foreground leading-relaxed">集計期間外です</p>
+        </div>
+      </PageLayout>
+    );
+  }
+
   if (!isRankingEnabled()) {
     return (
       <PageLayout subtitle="開催期間外です" title="リアルタイムランキング">
@@ -22,14 +37,7 @@ export default function RankingPage() {
   }
 
   return (
-    <PageLayout
-      related={{
-        pages: ['/events/list', '/events/recommended', '/events/timetable'],
-        background: 'paper-2',
-      }}
-      subtitle="いまの人気と混み具合"
-      title="リアルタイムランキング"
-    >
+    <PageLayout related={rankingRelated} subtitle="いまの人気と混み具合" title="リアルタイムランキング">
       <RankingBoard />
     </PageLayout>
   );

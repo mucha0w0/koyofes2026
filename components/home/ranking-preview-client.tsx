@@ -1,14 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, useSyncExternalStore, type ReactNode } from 'react';
 
 import { InkPhoto } from '@/components/ui/ink-photo';
 import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import type { RankingApiError, RankingOverallItem, RankingResponse } from '@/lib/types/ranking';
 
+import { RANKING_AGGREGATION_START_MS, isRankingAggregationOpen } from '@/lib/config/rankingConfig';
+
 const PREVIEW_COUNT = 3;
+
+function subscribeRankingAggregation(onStoreChange: () => void) {
+  const remaining = RANKING_AGGREGATION_START_MS - Date.now();
+  if (remaining <= 0) {
+    return () => {};
+  }
+  const timer = window.setTimeout(onStoreChange, remaining);
+  return () => window.clearTimeout(timer);
+}
+
+function getRankingAggregationClientSnapshot() {
+  return isRankingAggregationOpen();
+}
 
 function formatAverage(value: number): string {
   return value.toFixed(1);
@@ -73,6 +88,49 @@ export function RankingPreviewSection({ children }: { children: ReactNode }) {
       </div>
     </section>
   );
+}
+
+function OutsidePeriodNotice() {
+  return (
+    <div className="ink-shell bg-card p-6">
+      <p className="text-sm leading-relaxed text-muted-foreground">集計期間外です</p>
+    </div>
+  );
+}
+
+export function RankingPreviewGate({
+  rankingEnabled,
+  serverOpen,
+}: {
+  rankingEnabled: boolean;
+  serverOpen: boolean;
+}) {
+  const getServerSnapshot = useCallback(() => serverOpen, [serverOpen]);
+  const open = useSyncExternalStore(
+    subscribeRankingAggregation,
+    getRankingAggregationClientSnapshot,
+    getServerSnapshot,
+  );
+
+  if (!open) {
+    return (
+      <RankingPreviewSection>
+        <OutsidePeriodNotice />
+      </RankingPreviewSection>
+    );
+  }
+
+  if (!rankingEnabled) {
+    return (
+      <RankingPreviewSection>
+        <div className="ink-shell bg-card p-6">
+          <p className="text-sm leading-relaxed text-muted-foreground">開催期間外です</p>
+        </div>
+      </RankingPreviewSection>
+    );
+  }
+
+  return <RankingPreviewClient />;
 }
 
 export function RankingPreviewClient() {

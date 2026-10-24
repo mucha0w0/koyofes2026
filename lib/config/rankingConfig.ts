@@ -34,6 +34,13 @@ export function getWaitLevelLabel(value: number): string {
   return RANKING_CONFIG.waitLevels.find((level) => level.value === value)?.label ?? '';
 }
 
+/** 文化祭の開始（日本時間 2026-10-31 09:00）。これより前はランキング一覧を出さない。 */
+export const RANKING_AGGREGATION_START_MS = Date.parse('2026-10-31T09:00:00+09:00');
+
+export function isRankingAggregationOpen(now = Date.now()): boolean {
+  return now >= RANKING_AGGREGATION_START_MS;
+}
+
 export function isRankingEnabled(): boolean {
   const value = process.env.RANKING_ENABLED ?? process.env.NEXT_PUBLIC_RANKING_ENABLED ?? '';
   return value.toLowerCase() === 'true' || value === '1';

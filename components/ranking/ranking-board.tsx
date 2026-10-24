@@ -16,7 +16,7 @@ import type {
   RankingWaitItem,
 } from '@/lib/types/ranking';
 
-import { RANKING_CONFIG, getWaitLevelLabel, type RankingTab } from '@/lib/config/rankingConfig';
+import { RANKING_CONFIG, getWaitLevelLabel, isRankingAggregationOpen, type RankingTab } from '@/lib/config/rankingConfig';
 import { formatWaitAgo } from '@/lib/ranking/score';
 
 function formatAverage(value: number): string {
@@ -132,6 +132,10 @@ export function RankingBoard() {
   );
 
   useEffect(() => {
+    if (!isRankingAggregationOpen()) {
+      return;
+    }
+
     const controller = new AbortController();
     setLoading(true);
     void load(controller.signal);
@@ -151,6 +155,14 @@ export function RankingBoard() {
   const waitItems = tab === 'wait' && data?.tab === 'wait' ? data.items : [];
   const awaitingTab = data?.tab !== tab;
   const generatedAt = data?.generatedAt ?? new Date().toISOString();
+
+  if (!isRankingAggregationOpen()) {
+    return (
+      <div className="ink-shell mx-auto max-w-3xl bg-card p-6">
+        <p className="text-sm text-muted-foreground leading-relaxed">集計期間外です</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
