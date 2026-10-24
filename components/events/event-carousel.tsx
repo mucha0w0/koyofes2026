@@ -23,7 +23,7 @@ interface EventCarouselProps {
 
 /** 16:9 を上限に、広い画面では高さを 50vh で打ち切って縦方向にクロップする */
 const frameClassName =
-  'relative h-[min(50vh,56.25vw)] w-full overflow-hidden border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2';
+  'relative h-[min(50vh,56.25vw)] w-full overflow-hidden border-b-[calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2';
 
 /** 精密ポインタ（マウス）ではホバーまで隠し、タッチ端末では常に表示する */
 const navButtonClassName =

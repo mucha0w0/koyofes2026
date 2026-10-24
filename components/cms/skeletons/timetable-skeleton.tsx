@@ -19,7 +19,7 @@ export function TimetableSkeleton() {
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
-                  className="absolute left-0 right-0 h-[112px] rounded bg-paper-2"
+                  className="absolute left-0 right-0 h-28 rounded bg-paper-2"
                   style={{ top: `${index * 280}px` }}
                 />
               ))}

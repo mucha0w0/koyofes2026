@@ -50,7 +50,7 @@ export function HelpButton({ title, children, description, className }: HelpButt
         <button
           aria-label={`${title}の説明`}
           className={cn(
-            'inline-flex size-11 items-center justify-center rounded-[var(--radius)] text-ink-soft outline-none transition-colors hover:bg-mist-hover focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink',
+            'inline-flex size-11 items-center justify-center rounded-(--radius) text-ink-soft outline-none transition-colors hover:bg-mist-hover focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ink',
             className,
           )}
           type="button"

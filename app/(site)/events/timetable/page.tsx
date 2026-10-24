@@ -70,7 +70,7 @@ function TimelineView({
           {events.map((event) => (
             <div
               key={event.slug}
-              className="absolute left-1/2 z-10 size-[22px] -translate-x-1/2 rounded-full border-[length:var(--shell-stroke)] border-ink bg-card"
+              className="absolute left-1/2 z-10 size-5.5 -translate-x-1/2 rounded-full border-(length:--shell-stroke) border-ink bg-card"
               style={{ top: `${event.topPx - 11}px` }}
             />
           ))}

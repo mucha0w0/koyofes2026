@@ -76,7 +76,7 @@ function DropdownMenu({
       <button
         aria-expanded={open}
         aria-haspopup="true"
-        className="flex items-center gap-1 rounded-[var(--radius)] px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-mist-hover"
+        className="flex items-center gap-1 rounded-(--radius) px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-mist-hover"
         type="button"
         onClick={(event) => {
           // タッチは pointerup で開閉済み。ここでの click はキーボードと、ホバーできないマウス用。
@@ -104,7 +104,7 @@ function DropdownMenu({
           {item.items.map((subItem) => (
             <Link
               key={subItem.href}
-              className="block rounded-[var(--radius)] px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
+              className="block rounded-(--radius) px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist-hover"
               href={subItem.href}
               prefetch={false}
               onClick={() => {
@@ -142,7 +142,7 @@ function MobileMenu({
         <span className="font-display text-lg font-bold text-ink">こうよう祭</span>
         <button
           aria-label="メニューを閉じる"
-          className="flex size-11 items-center justify-center rounded-[var(--radius)] transition-colors hover:bg-mist-hover"
+          className="flex size-11 items-center justify-center rounded-(--radius) transition-colors hover:bg-mist-hover"
           onClick={onClose}
         >
           <X className="h-6 w-6" />
@@ -157,7 +157,7 @@ function MobileMenu({
                 {item.items.map((subItem) => (
                   <Link
                     key={subItem.href}
-                    className="block rounded-[var(--radius)] py-2.5 pl-4 text-ink-soft transition-colors hover:bg-mist-hover hover:text-ink"
+                    className="block rounded-(--radius) py-2.5 pl-4 text-ink-soft transition-colors hover:bg-mist-hover hover:text-ink"
                     href={subItem.href}
                     prefetch={false}
                     onClick={onClose}
@@ -180,7 +180,7 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
   const navItems = getNavSections('header', rankingEnabled);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b-[length:var(--shell-stroke)] border-ink bg-card">
+    <header className="sticky top-0 z-40 w-full border-b-(length:--shell-stroke) border-ink bg-card">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
         <Link className="flex items-center gap-2" href="/" prefetch={false}>
           <span className="font-display text-2xl font-bold text-ink">こうよう祭</span>
@@ -199,7 +199,7 @@ export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolea
 
         <button
           aria-label="メニューを開く"
-          className="flex size-11 items-center justify-center rounded-[var(--radius)] transition-colors hover:bg-mist-hover lg:hidden"
+          className="flex size-11 items-center justify-center rounded-(--radius) transition-colors hover:bg-mist-hover lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu className="h-6 w-6" />

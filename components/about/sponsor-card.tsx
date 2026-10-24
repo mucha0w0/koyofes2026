@@ -12,7 +12,7 @@ interface SponsorCardProps {
 
 export function SponsorCard({ item }: SponsorCardProps) {
   const content = (
-    <CardContent className="flex h-[98px] items-stretch gap-4 py-1.5 pr-4 pl-1.5 sm:pr-5">
+    <CardContent className="flex h-24.5 items-stretch gap-4 py-1.5 pr-4 pl-1.5 sm:pr-5">
       <InkPhoto
         alt=""
         className="ink-shell-sm ink-row-icon h-full min-w-0 w-auto shrink overflow-hidden"

@@ -12,7 +12,7 @@ function Card({
 
   return (
     <Comp
-      className={cn('ink-shell bg-card text-card-foreground flex flex-col gap-6 overflow-visible rounded-[var(--radius)] py-6', className)}
+      className={cn('ink-shell bg-card text-card-foreground flex flex-col gap-6 overflow-visible rounded-(--radius) py-6', className)}
       data-slot="card"
       {...props}
     />

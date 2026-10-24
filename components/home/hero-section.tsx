@@ -3,7 +3,7 @@ import Image from 'next/image';
 export function HeroSection() {
   return (
     <section>
-      <div className="relative aspect-[1178/295] w-full overflow-hidden">
+      <div className="relative aspect-1178/295 w-full overflow-hidden">
         <Image
           fill
           priority

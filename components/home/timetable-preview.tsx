@@ -20,7 +20,7 @@ interface EventRowProps {
 function EventRow({ slug, icon, title, organization, timeRange, duration }: EventRowProps) {
   return (
     <Link
-      className="ink-shell ink-lift group flex h-[83px] items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
+      className="ink-shell ink-lift group flex h-20.75 items-stretch gap-4 bg-card py-1.5 pr-4 pl-1.5"
       href={`/events/${slug}`}
       prefetch={false}
     >

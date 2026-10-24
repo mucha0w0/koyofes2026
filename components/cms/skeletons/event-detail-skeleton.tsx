@@ -1,7 +1,7 @@
 export function EventDetailSkeleton() {
   return (
     <main className="flex-1 animate-pulse">
-      <div className="h-[min(50vh,56.25vw)] w-full border-b-[length:calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2" />
+      <div className="h-[min(50vh,56.25vw)] w-full border-b-[calc(var(--shell-stroke)+var(--shell-oy))] border-ink bg-paper-2" />
       <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
         <div className="mb-12 md:mb-16 space-y-6">
           <div className="flex items-start gap-4 md:gap-8">

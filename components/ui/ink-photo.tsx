@@ -20,7 +20,7 @@ export function InkPhoto({ src, alt, className, size = 64, dimmed = false }: Ink
     <div
       className={cn(
         'relative shrink-0 bg-card',
-        plain ? 'overflow-hidden rounded-[var(--radius)]' : 'ink-shell overflow-visible',
+        plain ? 'overflow-hidden rounded-(--radius)' : 'ink-shell overflow-visible',
         dimmed && 'opacity-40 grayscale',
         className,
       )}
@@ -28,7 +28,7 @@ export function InkPhoto({ src, alt, className, size = 64, dimmed = false }: Ink
       <div
         className={cn(
           'size-full overflow-hidden',
-          plain ? 'rounded-[var(--radius)]' : 'rounded-[calc(var(--radius)-var(--shell-stroke))]',
+          plain ? 'rounded-(--radius)' : 'rounded-[calc(var(--radius)-var(--shell-stroke))]',
         )}
       >
         {imageSrc ? (

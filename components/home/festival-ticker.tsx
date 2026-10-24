@@ -4,7 +4,7 @@ const TICKER_PHRASES = ['こうよう祭', 'KoYoFes', '1dearland'] as const;
 const TICKER_REPEAT = 8;
 
 function TickerDot() {
-  return <span aria-hidden className="size-[3px] shrink-0 rounded-full bg-white" />;
+  return <span aria-hidden className="size-0.75 shrink-0 rounded-full bg-white" />;
 }
 
 function TickerItems({ phrases, trailingDot }: { phrases: readonly string[]; trailingDot: boolean }) {
