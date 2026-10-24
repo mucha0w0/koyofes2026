@@ -100,8 +100,8 @@ export default async function EventPage({ params }: PageProps) {
               <div className="ink-shell bg-card p-4">
                 <p className="text-xs text-muted-foreground">時間</p>
                 <div className="mt-2 space-y-1">
-                  <p className="text-xs font-medium text-foreground">{timeDay1}</p>
-                  <p className="text-xs font-medium text-foreground">{timeDay2}</p>
+                  <p className="text-xs font-medium text-foreground">１日目：{timeDay1}</p>
+                  <p className="text-xs font-medium text-foreground">２日目：{timeDay2}</p>
                 </div>
               </div>
 
