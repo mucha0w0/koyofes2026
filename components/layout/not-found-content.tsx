@@ -1,15 +1,10 @@
 import { ArrowLeft } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export function NotFoundContent() {
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-12 md:py-24">
       <div className="w-full max-w-2xl text-center">
-        <div className="relative mx-auto mb-8 h-24 w-full max-w-md overflow-hidden">
-          <Image fill alt="" className="object-cover object-center" src="/conceptart.jpg" />
-        </div>
-
         <p className="hero-display mb-8 text-[80px] font-bold leading-none text-ink md:mb-12 md:text-[120px]">404</p>
 
         <div className="mb-8 md:mb-12">
