@@ -32,7 +32,7 @@ function formatAverage(value: number): string {
 function RankingRow({ item }: { item: RankingOverallItem }) {
   return (
     <Link
-      className="ink-shell ink-lift flex h-[100px] items-stretch gap-4 bg-card px-4 py-1.5 text-ink md:px-5"
+      className="ink-shell ink-lift flex h-25 items-stretch gap-4 bg-card px-4 py-1.5 text-ink md:px-5"
       href={`/events/${item.slug}`}
       prefetch={false}
     >
@@ -61,12 +61,12 @@ function PreviewSkeleton() {
   return (
     <div className="space-y-3">
       {Array.from({ length: 3 }, (_, index) => (
-        <div key={index} className="ink-shell flex h-[100px] items-stretch gap-4 bg-card px-4 py-1.5">
-          <div className="h-7 w-10 shrink-0 self-center rounded-[var(--radius)] bg-paper-2" />
-          <div className="ink-row-icon rounded-[var(--radius)] bg-paper-2" />
+        <div key={index} className="ink-shell flex h-25 items-stretch gap-4 bg-card px-4 py-1.5">
+          <div className="h-7 w-10 shrink-0 self-center rounded-(--radius) bg-paper-2" />
+          <div className="ink-row-icon rounded-(--radius) bg-paper-2" />
           <div className="flex min-w-0 flex-1 flex-col justify-center space-y-2">
-            <div className="h-4 w-1/2 rounded-[var(--radius)] bg-paper-2" />
-            <div className="h-3 w-1/3 rounded-[var(--radius)] bg-paper-2" />
+            <div className="h-4 w-1/2 rounded-(--radius) bg-paper-2" />
+            <div className="h-3 w-1/3 rounded-(--radius) bg-paper-2" />
           </div>
         </div>
       ))}
@@ -98,13 +98,7 @@ function OutsidePeriodNotice() {
   );
 }
 
-export function RankingPreviewGate({
-  rankingEnabled,
-  serverOpen,
-}: {
-  rankingEnabled: boolean;
-  serverOpen: boolean;
-}) {
+export function RankingPreviewGate({ rankingEnabled, serverOpen }: { rankingEnabled: boolean; serverOpen: boolean }) {
   const getServerSnapshot = useCallback(() => serverOpen, [serverOpen]);
   const open = useSyncExternalStore(
     subscribeRankingAggregation,
