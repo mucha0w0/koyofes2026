@@ -52,9 +52,6 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
         <div className="mx-auto max-w-3xl space-y-6">
           <div className="text-center">
             <h2 className="text-xl font-medium md:text-2xl">スタンプラリー</h2>
-            <p className="mt-3">
-              <InkTextLink href="/stamp">スタンプ帳を見る</InkTextLink>
-            </p>
           </div>
 
           {totalCount > 0 ? (
@@ -72,6 +69,10 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
           ) : (
             <p className="text-sm text-muted-foreground">現在表示できるスタンプ対象ブースがありません</p>
           )}
+
+          <p className="text-center">
+            <InkTextLink href="/stamp">スタンプ帳を見る</InkTextLink>
+          </p>
 
           {totalCount > 0 ? (
             <>
