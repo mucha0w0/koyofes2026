@@ -10,7 +10,7 @@ type CssLength = number | string;
  * post.png は見た目に合わせた値。他は不透明画素の外接。
  */
 const DEFAULT_ILLUSTRATION_SIZE = 'clamp(148px, 20vw, 240px)';
-const DEFAULT_BACKGROUND = 'var(--paper-2)';
+const DEFAULT_BACKGROUND = 'var(--paper)';
 const CANVAS_PX = 1024;
 
 const DEFAULT_DRAWING_INSET_PX = { right: 32, bottom: 136 };
@@ -47,7 +47,7 @@ export type IllustrationProps = {
    */
   src: string;
   alt: string;
-  /** 帯の背景色。省略時は紙の濃い方 `var(--paper-2)` */
+  /** 帯の背景色。省略時は薄い紙 `var(--paper)` */
   backgroundColor?: string;
   /** 帯の高さ。省略時は絵の高さ + 28px。幅は常にウィンドウ幅 */
   height?: CssLength;
@@ -115,7 +115,7 @@ function placedImageStyle({
 
 /**
  * ウィンドウ幅の帯の上に挿絵を置く。本文カラムの中に置いても、帯はウィンドウ幅まで広がる。
- * 位置と大きさを省略すると、本文シェルの右端・紙の濃い方・スマホ 148px が初期値になる。
+ * 位置と大きさを省略すると、本文シェルの右端・薄い紙・スマホ 148px が初期値になる。
  */
 export function Illustration({
   src,
