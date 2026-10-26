@@ -1,7 +1,7 @@
 ﻿'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { InAppBrowserNotice } from '@/components/stamp/in-app-browser-notice';
 import { StampCatalogSection } from '@/components/stamp/stamp-catalog-section';
@@ -39,9 +39,9 @@ function formatRedeemedAt(iso: string | null): string {
 }
 
 export function StampBook({ groups, rankingEnabled }: StampBookProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [storage, setStorage] = useState<StampStorageData | null>(null);
+  const consumedEarnedKey = useRef<string | null>(null);
   const [showInAppNotice, setShowInAppNotice] = useState(false);
   const [earnedOpen, setEarnedOpen] = useState(false);
   const [earnedTitle, setEarnedTitle] = useState<string | null>(null);
@@ -77,7 +77,15 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
     if (!earned || !storage) {
       return;
     }
+    // router.replace は遷移完了まで searchParams に earned を残す。
+    // その間に引き換えで storage が更新されると、この effect が再実行されてモーダルが開き直す。
     const already = searchParams.get('already') === '1';
+    const earnedKey = `${earned}:${already ? '1' : '0'}`;
+    if (consumedEarnedKey.current === earnedKey) {
+      return;
+    }
+    consumedEarnedKey.current = earnedKey;
+
     const booth = allBooths.find((item) => item.slug === earned);
     const entry = storage.stamps.find((stamp) => stamp.slug === earned);
     setEarnedSlug(earned);
@@ -87,8 +95,14 @@ export function StampBook({ groups, rankingEnabled }: StampBookProps) {
     setEarnedObtainedAt(entry?.obtainedAt ?? null);
     setAlreadyOwned(already);
     setEarnedOpen(true);
-    router.replace('/stamp', { scroll: false });
-  }, [searchParams, storage, titleBySlug, allBooths, router]);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('earned');
+    params.delete('already');
+    const query = params.toString();
+    // 空オブジェクトだと Next.js が履歴を同期する。history.state を渡すと同期がスキップされる。
+    window.history.replaceState({}, '', query ? `/stamp?${query}` : '/stamp');
+  }, [searchParams, storage, titleBySlug, allBooths]);
 
   const handleRedeem = () => {
     if (!storage) {
