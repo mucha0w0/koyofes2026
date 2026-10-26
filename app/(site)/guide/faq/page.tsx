@@ -14,7 +14,7 @@ export default function FAQPage() {
   return (
     <PageLayout
       fullWidth
-      illustration={<Illustration alt="" src="news.png" />}
+      illustration={<Illustration alt="" backgroundColor="var(--paper-2)" src="news.png" />}
       related={{
         pages: ['/guide/contact', '/official/news', '/official/pamphlet'],
         background: lastBandIsPaper2 ? 'paper' : 'paper-2',
