@@ -7,8 +7,7 @@ import { RelatedLinks } from '@/components/layout/related-links';
 import { HelpButton } from '@/components/ui/help-button';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
-import { formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
-import { formatEventTimeRange } from '@/lib/event-time';
+import { formatDaySchedule, formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { getEventBySlug, getEvents } from '@/lib/events';
 
 interface PageProps {
@@ -55,8 +54,8 @@ export default async function EventPage({ params }: PageProps) {
     notFound();
   }
 
-  const timeDay1 = formatEventTimeRange(event['time-day1']);
-  const timeDay2 = formatEventTimeRange(event['time-day2']);
+  const timeDay1 = formatDaySchedule(event['time-day1']);
+  const timeDay2 = formatDaySchedule(event['time-day2']);
   const locationDisplay = formatLocation(event);
   const participantsDisplay = formatParticipants(event);
   const durationDisplay = formatDuration(event.duration);

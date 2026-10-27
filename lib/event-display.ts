@@ -1,3 +1,4 @@
+import { formatEventTimeRange } from '@/lib/event-time';
 import type { Event } from '@/lib/types/event';
 
 /** participantsUL がこの値以上のとき「一般（制限なし）」と表示 */
@@ -49,6 +50,14 @@ export function formatParticipants(event: Pick<Event, 'participantsUL' | 'partic
     return `${participantsLL}人`;
   }
   return `${participantsLL}-${participantsUL}人`;
+}
+
+/** CMS の開催時間が未入力のときの表示 */
+const NOT_HELD_LABEL = '未開催';
+
+/** １日目・２日目の開催時間。未入力なら「未開催」 */
+export function formatDaySchedule(time: string): string {
+  return formatEventTimeRange(time) || NOT_HELD_LABEL;
 }
 
 /** 所要時間（分）を表示用にフォーマット */
