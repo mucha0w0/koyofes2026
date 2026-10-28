@@ -78,9 +78,11 @@ export function PartCard({ item }: PartCardProps) {
           />
 
           <div className="flex min-w-0 flex-1 flex-col justify-center gap-1">
-            <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <h3 className="truncate font-medium text-base leading-snug text-foreground sm:text-lg">{item.name}</h3>
-              <PartSocialLinks className="pointer-events-auto relative w-fit shrink-0 self-start" item={item} />
+            <div className="flex min-w-0 items-center justify-between gap-2 sm:gap-4">
+              <h3 className="min-w-0 truncate font-medium text-base leading-snug text-foreground sm:text-lg">
+                {item.name}
+              </h3>
+              <PartSocialLinks className="pointer-events-auto relative shrink-0" item={item} />
             </div>
 
             <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
