@@ -46,14 +46,15 @@ interface EventListClientProps {
 
 export function EventListClient({ events }: EventListClientProps) {
   const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') ?? '');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [participantMax, setParticipantMax] = useState(1);
   const [enableParticipantFilter, setEnableParticipantFilter] = useState(false);
   const [durationValue, setDurationValue] = useState(15);
   const [enableDurationFilter, setEnableDurationFilter] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const [sortKey, setSortKey] = useState<EventSortKey>(DEFAULT_EVENT_SORT_KEY);
+  const [manualSortKey, setManualSortKey] = useState<EventSortKey | null>(null);
+  const sortKey: EventSortKey = manualSortKey ?? (searchQuery.trim() ? 'match' : DEFAULT_EVENT_SORT_KEY);
   const [scoreMaps, setScoreMaps] = useState<Record<RankingTab, Map<string, number> | null>>({
     overall: null,
     trend: null,
@@ -163,7 +164,7 @@ export function EventListClient({ events }: EventListClientProps) {
     setDurationValue(15);
     setEnableDurationFilter(false);
     setSelectedLocation('');
-    setSortKey(DEFAULT_EVENT_SORT_KEY);
+    setManualSortKey(null);
   };
 
   return (
@@ -180,7 +181,7 @@ export function EventListClient({ events }: EventListClientProps) {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <EventSortMenu value={sortKey} onChange={setSortKey} />
+        <EventSortMenu value={sortKey} onChange={setManualSortKey} />
       </div>
 
       {/* ジャンルフィルター */}

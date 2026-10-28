@@ -4,8 +4,8 @@ import type { RankingResponse } from '@/lib/types/ranking';
 
 export type EventSortKey = 'match' | 'duration' | RankingTab;
 
-/** 企画一覧の初期並び。キーワードが無いときは取得順のまま。 */
-export const DEFAULT_EVENT_SORT_KEY: EventSortKey = 'match';
+/** 企画一覧の初期並び。検索中で手動変更が無いときは一致順になる。 */
+export const DEFAULT_EVENT_SORT_KEY: EventSortKey = 'trend';
 
 export const EVENT_SORT_OPTIONS: { key: EventSortKey; label: string }[] = [
   { key: 'match', label: '一致順' },
