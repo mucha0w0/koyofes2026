@@ -3,14 +3,11 @@
 import { ExternalLink } from 'lucide-react';
 import { SiInstagram, SiX, SiYoutube } from 'react-icons/si';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -110,14 +107,6 @@ export function PartCard({ item }: PartCardProps) {
         <p className="min-h-0 overflow-y-auto text-base leading-relaxed whitespace-pre-line text-ink-soft">
           {item.description}
         </p>
-
-        <DialogFooter className="shrink-0">
-          <DialogClose asChild>
-            <Button className="w-full sm:w-auto" type="button" variant="secondary">
-              閉じる
-            </Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

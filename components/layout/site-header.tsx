@@ -175,12 +175,37 @@ function MobileMenu({
 }
 
 export function SiteHeader({ rankingEnabled = false }: { rankingEnabled?: boolean }) {
+  const headerRef = useRef<HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [scrollLocked, setScrollLocked] = useState(false);
   const navItems = getNavSections('header', rankingEnabled);
 
+  useEffect(() => {
+    const syncScrollLock = () => {
+      setScrollLocked(document.body.hasAttribute('data-scroll-locked'));
+    };
+    syncScrollLock();
+    const observer = new MutationObserver(syncScrollLock);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-scroll-locked'] });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const shell = headerRef.current?.parentElement;
+    if (!shell) return;
+    // overflow:hidden のロックで sticky が外れるので、fixed にした分の高さを埋める。
+    shell.style.paddingTop = scrollLocked ? 'calc(4rem + var(--shell-stroke))' : '';
+    return () => {
+      shell.style.paddingTop = '';
+    };
+  }, [scrollLocked]);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b-(length:--shell-stroke) border-ink bg-card">
+    <header
+      ref={headerRef}
+      className={`${scrollLocked ? 'fixed inset-x-0' : 'sticky'} top-0 z-40 w-full border-b-(length:--shell-stroke) border-ink bg-card`}
+    >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4">
         <Link className="flex items-center gap-2" href="/" prefetch={false}>
           <span className="font-display text-2xl font-bold text-ink">こうよう祭</span>
