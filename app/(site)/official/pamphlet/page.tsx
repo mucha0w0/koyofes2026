@@ -28,7 +28,7 @@ export default function PamphletPage() {
             />
           </div>
           <Button asChild className="px-6" size="lg">
-            <a download href="/koyofes2026_pamphlet.pdf">
+            <a download href="/pamf.pdf">
               <Download className="h-5 w-5" />
               PDFをダウンロード
             </a>
