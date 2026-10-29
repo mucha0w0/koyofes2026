@@ -75,7 +75,9 @@ export function StampBoothGroup({
     <div className="space-y-3">
       <Heading className="text-center text-sm font-medium">{heading}</Heading>
       {ready && booths.length === 0 ? (
-        <p className="text-center text-sm text-muted-foreground">{emptyMessage}</p>
+        <div className="ink-shell flex h-24 items-center justify-center bg-card px-4">
+          <p className="text-center text-sm text-muted-foreground">{emptyMessage}</p>
+        </div>
       ) : (
         <div className="grid gap-3">
           {ready
