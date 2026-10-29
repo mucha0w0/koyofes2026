@@ -58,25 +58,31 @@ export function StampBoothGroup({
   booths,
   ready,
   skeletonCount,
+  emptyMessage,
 }: {
   heading: string;
   headingLevel?: 'h2' | 'h3';
   booths: StampBooth[];
   ready: boolean;
   skeletonCount: number;
+  emptyMessage?: string;
 }) {
-  if (ready && booths.length === 0) {
+  if (ready && booths.length === 0 && !emptyMessage) {
     return null;
   }
 
   return (
     <div className="space-y-3">
       <Heading className="text-center text-sm font-medium">{heading}</Heading>
-      <div className="grid gap-3">
-        {ready
-          ? booths.map((booth) => <StampBoothRow key={booth.slug} booth={booth} />)
-          : Array.from({ length: skeletonCount }, (_, index) => <StampBoothRowSkeleton key={index} />)}
-      </div>
+      {ready && booths.length === 0 ? (
+        <p className="text-center text-sm text-muted-foreground">{emptyMessage}</p>
+      ) : (
+        <div className="grid gap-3">
+          {ready
+            ? booths.map((booth) => <StampBoothRow key={booth.slug} booth={booth} />)
+            : Array.from({ length: skeletonCount }, (_, index) => <StampBoothRowSkeleton key={index} />)}
+        </div>
+      )}
     </div>
   );
 }

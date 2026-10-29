@@ -30,21 +30,23 @@ export function StampSuggestions({ booths }: StampSuggestionsProps) {
     return new Set(storage.stamps.map((stamp) => stamp.slug).filter((slug) => boothSlugSet.has(slug)));
   }, [storage, boothSlugSet]);
 
-  const lastCollected = storage ? findLastCollectedBooth(booths, storage.stamps) : undefined;
-  const nearbyBooths = ready
-    ? pickNextStampBooths(booths, collectedSlugs, {
-        preferClassroom: lastCollected?.classroom,
-        preferFloor: lastCollected?.floor,
-        preferLocation: lastCollected?.location,
-      })
-    : [];
+  const hasHistory = Boolean(storage && storage.stamps.length > 0);
+  const lastCollected = hasHistory && storage ? findLastCollectedBooth(booths, storage.stamps) : undefined;
+  const nearbyBooths =
+    ready && hasHistory
+      ? pickNextStampBooths(booths, collectedSlugs, {
+          preferClassroom: lastCollected?.classroom,
+          preferFloor: lastCollected?.floor,
+          preferLocation: lastCollected?.location,
+        })
+      : [];
 
   if (booths.length === 0) {
     return null;
   }
 
   const showLast = ready && Boolean(lastCollected);
-  const showNearby = !ready || nearbyBooths.length > 0;
+  const showNearby = !ready || nearbyBooths.length > 0 || (ready && !hasHistory);
 
   if (!showLast && !showNearby) {
     return null;
@@ -66,6 +68,7 @@ export function StampSuggestions({ booths }: StampSuggestionsProps) {
           {showNearby ? (
             <StampBoothGroup
               booths={nearbyBooths}
+              emptyMessage={ready && !hasHistory ? 'スタンプを獲得すると表示されます' : undefined}
               heading="近くの未獲得スタンプ"
               headingLevel="h2"
               ready={ready}

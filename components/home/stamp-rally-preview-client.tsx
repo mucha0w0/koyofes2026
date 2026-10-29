@@ -37,14 +37,16 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
   const safeTotal = Math.max(totalCount, 1);
   const progressValue = ready ? Math.min(100, Math.round((collectedCount / safeTotal) * 100)) : 0;
 
-  const lastCollected = storage ? findLastCollectedBooth(booths, storage.stamps) : undefined;
-  const nearbyBooths = ready
-    ? pickNextStampBooths(booths, collectedSlugs, {
-        preferClassroom: lastCollected?.classroom,
-        preferFloor: lastCollected?.floor,
-        preferLocation: lastCollected?.location,
-      })
-    : [];
+  const hasHistory = Boolean(storage && storage.stamps.length > 0);
+  const lastCollected = hasHistory && storage ? findLastCollectedBooth(booths, storage.stamps) : undefined;
+  const nearbyBooths =
+    ready && hasHistory
+      ? pickNextStampBooths(booths, collectedSlugs, {
+          preferClassroom: lastCollected?.classroom,
+          preferFloor: lastCollected?.floor,
+          preferLocation: lastCollected?.location,
+        })
+      : [];
 
   return (
     <section className="bg-background py-16 md:py-24" data-palette="green">
@@ -79,7 +81,13 @@ export function StampRallyPreviewClient({ booths }: StampRallyPreviewClientProps
               {ready && lastCollected ? (
                 <StampBoothGroup ready booths={[lastCollected]} heading="直前に獲得したスタンプ" skeletonCount={1} />
               ) : null}
-              <StampBoothGroup booths={nearbyBooths} heading="近くの未獲得スタンプ" ready={ready} skeletonCount={3} />
+              <StampBoothGroup
+                booths={nearbyBooths}
+                emptyMessage={ready && !hasHistory ? 'スタンプを獲得すると表示されます' : undefined}
+                heading="近くの未獲得スタンプ"
+                ready={ready}
+                skeletonCount={3}
+              />
             </>
           ) : null}
         </div>
