@@ -22,7 +22,7 @@ export default function PamphletPage() {
             <iframe
               className="w-full h-full"
               loading="lazy"
-              src="/koyofes2026_pamphlet.pdf"
+              src="/pamf.pdf"
               style={{ border: 0 }}
               title="公式パンフレット PDF"
             />
