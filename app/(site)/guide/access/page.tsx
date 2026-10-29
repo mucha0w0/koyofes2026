@@ -63,6 +63,12 @@ export default function AccessPage() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>正門からの出入りはできません</li>
               <li>第１駐車場横の出入り口からお入りください</li>
+              <li>
+                詳しくは豊田高専公式ホームページをご覧ください。
+                <a href="https://www.toyota-ct.ac.jp/life/gakuseikaigyouji/" rel="noopener noreferrer" target="_blank">
+                  https://www.toyota-ct.ac.jp/life/gakuseikaigyouji/
+                </a>
+              </li>
             </ul>
           </div>
         </div>
