@@ -9,7 +9,7 @@ const EXHIBITION_MAPS = [
     alt: '校内の展示地図。講義棟の1階から3階、新講義棟、一般管理棟、学生玄関と、各展示の番号と名前が描かれています。',
   },
   {
-    src: '/kounaizu/tenji-soto.webp',
+    src: '/kounaizu/tenji-soto2.jpg',
     width: 4320,
     height: 2430,
     title: '屋外の展示',
