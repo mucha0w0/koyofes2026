@@ -1,6 +1,7 @@
 import type { MicroCMSEvent, MicroCMSSponsor } from '@/lib/microcms/types';
 
 import { fetchMicroCMSList } from '@/lib/microcms/client';
+import { deliverCmsImage } from '@/lib/microcms/delivered-image';
 import { FOOD_TRUCK_SECTION, SUPPORT_SECTION, type SponsorItem, type SponsorSection } from '@/lib/types/sponsor';
 
 /** events.category のキッチンカー。企画定義の ID */
@@ -21,7 +22,7 @@ export function transformMicroCMSSponsor(sponsor: MicroCMSSponsor): SponsorItem 
   return {
     id: sponsor.id,
     name: sponsor.name,
-    icon: sponsor.icon?.url ?? '',
+    icon: deliverCmsImage(sponsor.icon?.url),
     description: sponsor.explanation,
     link: sponsor.link,
   };
@@ -37,7 +38,7 @@ export function transformFoodTruckEvent(event: MicroCMSEvent): SponsorItem {
   return {
     id: event.id,
     name: event.title,
-    icon: event.icon?.url ?? '',
+    icon: deliverCmsImage(event.icon?.url),
     description: catchphrase || event.organization || '',
     href: event.slug ? `/events/${event.slug}` : undefined,
   };
