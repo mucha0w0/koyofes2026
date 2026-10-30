@@ -60,7 +60,8 @@ function groupBooths(booths: StampBooth[]): StampBoothGroup[] {
 
 /**
  * スタンプ対象ブース一覧（リクエスト内 dedupe）。
- * 表示ページは Webhook までキャッシュし、照合 API は `no-store`（lib/cache.ts 参照）。
+ * 表示も照合も、企画一覧と同じタグ付き fetch キャッシュを使う。
+ * 毎リクエストで events を取り直すと、開催中の照合とランキングポーリングが転送量を食う。
  */
 const loadStampBooths = cache(async (cacheMode: MicroCMSFetchCache = 'default'): Promise<StampBooth[]> => {
   const events = await getEvents(cacheMode);
@@ -80,15 +81,15 @@ export async function getStampBoothGroups(): Promise<StampBoothGroup[]> {
   return groupBooths(booths);
 }
 
-/** verify 用：有効 slug の集合（照合 API 向け・常に最新） */
+/** verify 用：有効 slug の集合（キャッシュ済みの企画一覧） */
 export async function getStampBoothSlugSet(): Promise<Set<string>> {
-  const booths = await loadStampBooths('no-store');
+  const booths = await loadStampBooths();
   return new Set(booths.map((booth) => booth.slug));
 }
 
-/** slug からブースを1件取得（collect API 向け・常に最新） */
+/** slug からブースを1件取得（collect API 向け。キャッシュ済み） */
 export async function getStampBoothBySlug(slug: string): Promise<StampBooth | null> {
-  const event = await getEventBySlug(slug, 'no-store');
+  const event = await getEventBySlug(slug);
   if (!event) {
     return null;
   }

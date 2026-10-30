@@ -13,6 +13,9 @@ stamp-tokens/
 # Common ignores
 node_modules
 .next/
+
+# microCMS 画像のビルド時スナップショット（`npm run build` が再生成する）
+/public/cms-images/
 .DS_Store
 
 # TypeScript

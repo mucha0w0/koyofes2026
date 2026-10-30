@@ -3,10 +3,18 @@ import { cache } from 'react';
 import type { MicroCMSNews } from '@/lib/microcms/types';
 
 import { fetchMicroCMSContent, fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+import { deliverCmsHtml } from '@/lib/microcms/delivered-image';
 import { newsIdTag } from '@/lib/microcms/tags';
 
 export type { MicroCMSNews } from '@/lib/microcms/types';
 export type { MicroCMSFetchCache } from '@/lib/microcms/client';
+
+function deliverNews(news: MicroCMSNews): MicroCMSNews {
+  return {
+    ...news,
+    content: deliverCmsHtml(news.content),
+  };
+}
 
 async function fetchNewsFromMicroCMS(cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSNews[]> {
   try {
@@ -21,7 +29,9 @@ async function fetchNewsFromMicroCMS(cacheMode: MicroCMSFetchCache = 'default'):
 export const getNews = cache(async (cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSNews[]> => {
   try {
     const news = await fetchNewsFromMicroCMS(cacheMode);
-    return news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return news
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .map((item) => deliverNews(item));
   } catch (error) {
     console.error('ニュース取得に失敗しました:', error);
     throw error;
@@ -33,7 +43,8 @@ export const getNewsByID = cache(
   async (id: string, cacheMode: MicroCMSFetchCache = 'default'): Promise<MicroCMSNews | null> => {
     try {
       const idTag = newsIdTag(id);
-      return await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode, idTag ? [idTag] : undefined);
+      const news = await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode, idTag ? [idTag] : undefined);
+      return news ? deliverNews(news) : null;
     } catch (error) {
       console.error(`ニュース取得に失敗しました (id=${id}):`, error);
       throw error;

@@ -12,9 +12,18 @@ export function isImageUrl(value?: string): boolean {
 }
 
 const MICROCMS_IMAGE_HOST = 'images.microcms-assets.io';
+const LOCAL_CMS_IMAGE_PATH = /^\/cms-images\/[a-z0-9]+\.[a-z0-9]+$/;
 
-/** microCMS の画像を、表示幅に合わせて直接配信する URL にする。 */
+/**
+ * microCMS の画像を表示用 URL にする。
+ * ビルド時に保存した `/cms-images/` はそのまま返し、next/image の最適化は通さない。
+ * まだ microCMS の URL のときは、表示幅に合わせたリサイズ URL にする（開発中や、ビルド後に増えた画像）。
+ */
 export function microCmsImageSrc(src: string, width: number): string | null {
+  if (LOCAL_CMS_IMAGE_PATH.test(src)) {
+    return src;
+  }
+
   let url: URL;
   try {
     url = new URL(src);

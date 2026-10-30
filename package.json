@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/mirror-cms-images.mjs && next build",
+    "cms:mirror-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/mirror-cms-images.mjs",
+    "test:cms-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/mirror-cms-images.test.mjs",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
