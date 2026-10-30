@@ -24,6 +24,8 @@
 | ランキングを表彰・ふくびきの判定に使う                      | 仕様外。同じ人が何度も投票できる          |
 | `npm run db:push` の安易な再実行                | スキーマを変えていないなら不要           |
 | `stamp:generate-tokens --force-rotate`   | 全 NFC が無効になる              |
+| `MICROCMS_WEBHOOK_SECRET` の **Rotate Variable** | Vercel だけ変わると署名がずれ、企画・お知らせの更新が届かなくなる。回すなら祭のあと、microCMS のカスタム通知と同時 |
+| 今夜 `RANKING_ENABLED` を `false` に戻す       | 10/30 夜の時点で本番は `true`。戻すと、開場前に再度 `true` と再デプロイが必要になる |
 
 
 
@@ -31,11 +33,11 @@
 ### 設定しておく（準備期間）
 
 - Neon: コンピュート **Min = Max = 0.25 CU**（**いまの Primary** と、default の両方）
-- Neon: **Scale to zero オン**（無料プランはオフにできないことが多い。オンならそのままでよい）
+- Neon: **Scale to zero オン**（無料プランはオフにできない。オンのまま）
 - Neon: Connection pooling **オン** の接続文字列（ホスト名に `-pooler`）
 - ローカル `.env.local` と Vercel に `DATABASE_URL`（pooled）
 - テーブル作成は済んでいること（`npm run db:push` 成功済み）
-- 準備期間の `RANKING_ENABLED` は **未設定または** `false`（ナビと投票を出さない）
+- `RANKING_ENABLED` は開催中 `true`。2026 は **10/30 夜の時点で本番がすでに `true`**。オフに戻さない
 
 Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプは DB なしでも動く。
 
@@ -45,22 +47,37 @@ Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプ
 
 ## 当日まで（準備）
 
-- [ ] Neon の production Primary が 0.25 CU / Scale to zero オン
-- [ ] Vercel Production に `DATABASE_URL` が入っている（接続文字列はチャットに貼らない）
-- [ ] Vercel の `RANKING_ENABLED` はまだ `true` にしない
-- [ ] ローカルで `npm run dev` し直し、次を一度通す
-  - [ ] `/ranking` が開き、503 にならない
-  - [ ] `http://localhost:3000/stamp/collect?token=…` → スタンプ帳のモーダルで星・待ちまたはスキップ
-  - [ ] スキップでもスタンプが残る
-  - [ ] Neon の Tables に `ranking_votes` / `ranking_visits` / `ranking_waits` の行が増える
-- [ ] 本番 URL では、`RANKING_ENABLED=false` のあいだナビにランキングが出ないことを知っておく（正常）
-- [ ] スタンプの NFC/QR は従来どおり。ランキングのためにタグを書き直す必要はない
+2026-10-30 夜にダッシュボードと本番で見た結果。接続文字列の中身は開いていない。
+
+- [x] Neon の production（このプロジェクトの唯一のブランチ。デフォルトも production）のコンピュートは **0.25 CU**
+- [x] Scale to zero は有効。無料プランでは外せない。監視グラフに **ENDPOINT INACTIVE**（斜線）があり、使っていないあいだは寝ている
+- [x] Better Auth は未設定。IP 制限は **None**。どちらもこのまま
+- [x] Vercel Production に `DATABASE_URL` がある（2026-09-14 追加）。値は Secret のため `-pooler` は目視していない。スマホの本番から投票すると行が増える接続ではある
+- [x] `ranking_votes` / `ranking_visits` / `ranking_waits` の 3 テーブルがある。`ranking_waits` は 50 行を超えている
+- [x] 行の書き込みは分単位ではない。並びのボタンの送信が成功した時点で入る。Tables の一覧は自動更新されない。更新ボタンを押し、`created_at` の新しい順で見る。表示時刻が UTC のときは日本時間より 9 時間前
+- [x] 本番の `RANKING_ENABLED` は **すでに `true`**（環境変数の最終更新は 2026-10-07）。ナビ「企画情報」に **リアルタイムランキング** が出ている。今夜 `false` に戻さない。明日の朝に `true` へ切り替える作業は不要
+- [x] 10/31 9:00（日本時間）より前の `/ranking` とトップのランキング欄は **「集計期間外です」**。ナビにリンクがあることとは別に、順位一覧は出さない
+- [x] 投票 API はフラグが `true` なら 9:00 前でも受け付ける。今夜の星は、消さなければ明日の総合に残る
+- [x] スタンプの NFC/QR は従来どおり。ランキングのためにタグを書き直す必要はない
+- [ ] **開場前に、3 テーブルの行を消す**（下の手順）。テーブル定義は残す
 
 確認場所:
 
-- Scale to zero / CU … Neon → **Branches → production → Computes → Edit**
-- 寝ているか … 同じ画面の **Active / Idle**
-- 票が入ったか … Neon → **Tables**（`ranking_votes` / `ranking_visits`）
+- Scale to zero / CU … Neon → **Branches → production** の Branch overview（Default compute **0.25 CU**）。監視グラフの斜線が INACTIVE
+- 票が入ったか … Neon → **Tables**（`ranking_votes` / `ranking_visits` / `ranking_waits`）
+
+### テーブルの行を消す（10/31 9:00 前）
+
+リハーサルと今夜の試験投票が、明日の総合に乗ったままにしない。
+
+総合（`ranking_votes`）は期間で切らない。9 月と 10 月の星も、すべて明日の順位に入る。来訪は直近 20 分、待ちは直近 15 分だけなので、夜の行は 9:00 のトレンドと待ちには出ない。開始を空にするため、**3 つとも行を消す**。
+
+1. Neon → **Tables** → `public`
+2. `ranking_votes`、`ranking_visits`、`ranking_waits` の **行だけ** を消す。テーブル自体、列、インデックスは消さない
+3. `npm run db:push` は実行しない
+4. 消すのは開場前の最後にする。消したあとにスマホで星を送ると、その行は明日の総合に残る
+
+端末のスタンプ帳（LocalStorage）とは別物。行を消しても、獲得済みスタンプは端末に残る。
 
 ---
 
@@ -68,13 +85,14 @@ Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプ
 
 ## 当日になったら（10/31 開場前）
 
-1. Vercel → Environment Variables → Production で `RANKING_ENABLED=true`
-2. 再デプロイして反映を待つ
-3. スマホの本番サイトで次を通す
-  - ナビ「企画情報」に **リアルタイムランキング** がある
+1. 上の手順で、3 テーブルの行が空であることを確認する。まだなら消す
+2. `RANKING_ENABLED` は触らない（本番はすでに `true`）。このための再デプロイはしない
+3. **9:00 以降**に、スマホの本番サイトで次を通す
+   - ナビ「企画情報」に **リアルタイムランキング** がある
+   - `/ranking` が「集計期間外」でも「開催期間外」でもなく、順位の画面になる
    - NFC/QR → スタンプ帳のモーダルで星・待ち（またはスキップ）。`/ranking` へは飛ばない
-  - `/ranking` の総合に票が出る。トレンドは直近 20 分の来訪人数。待ちは直近 15 分の並び目安（情報なしは空いている、ではない）
-4. 会場で見せるなら `https://koyosai.com/ranking` を開く（専用モニターページは無い）
+   - 星を送った企画が `/ranking` の総合に出る。画面の更新は 60 秒ごと。トレンドは直近 20 分の来訪人数。待ちは直近 15 分の並び目安（情報なしは空いている、ではない）
+4. 会場で見せるなら `https://www.koyosai.com/ranking` を開く（専用モニターページは無い）
 
 当日中にやらなくてよいこと:
 
@@ -95,8 +113,9 @@ Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプ
 
 | 症状                 | まず見ること                                       |
 | ------------------ | -------------------------------------------- |
+| 9:00 前に「集計期間外」     | 正常。`RANKING_ENABLED` は触らない                  |
 | ナビにランキングが無い        | Vercel の `RANKING_ENABLED` と再デプロイ            |
-| `/ranking` が 開催期間外 | 同上                                           |
+| 9:00 以降に「開催期間外」    | 同上。フラグが `false`                              |
 | 投票できないがスタンプは残る     | 投票失敗は仕様どおりスタンプ優先。Neon が起きているか、`DATABASE_URL` |
 | スタンプ自体が失敗する        | ランキングではなく `STAMP_TOKEN_MAP` / microCMS       |
 
@@ -111,7 +130,7 @@ Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプ
   → ナビと投票が消える。スタンプ帳は従来どおり使える
 2. Neon は **触らなくてよい**（Scale to zero のまま放置。データは残る）
 3. コンピュートを大きくしたままだったら **0.25 に戻す**
-4. 票の削除は不要。消すなら Neon の Tables から。端末のスタンプ帳（LocalStorage）とは別物
+4. 終了後の票の削除は不要。消すなら Neon の Tables から。開場前にリハーサルを空にする手順は、上の「テーブルの行を消す」。端末のスタンプ帳（LocalStorage）とは別物
 
 開催月に DB を起こし続ける死活監視や、ダッシュボードの頻繁な開きっぱなしはしない。
 
@@ -145,7 +164,7 @@ Vercel の `DATABASE_URL` は開催前に入れておいてよい。スタンプ
 | 変数                   | 準備期間           | 開催中    | 開催後                  |
 | -------------------- | -------------- | ------ | -------------------- |
 | `DATABASE_URL`       | 入れておく          | そのまま   | 入れておいてよい（Git には置かない） |
-| `RANKING_ENABLED`    | `false` または未設定 | `true` | `false` または未設定       |
+| `RANKING_ENABLED`    | 2026 は 10/30 夜にすでに `true`。戻さない | `true` のまま | `false` または未設定       |
 | `STAMP_*` / microCMS | 変更しない          | 変更しない  | 年度更新まで変更しない          |
 
 
