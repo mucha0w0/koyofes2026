@@ -1,6 +1,7 @@
 import type { Event } from '@/lib/types/event';
 
 import { getEvents } from '@/lib/events';
+import { deliverCmsImage } from '@/lib/microcms/delivered-image';
 import { fetchPartsFromMicroCMS, type MicroCMSPart } from '@/lib/parts';
 
 export interface RecommendedEvent {
@@ -27,7 +28,7 @@ export async function getRecommendedEvents(): Promise<RecommendedEvent[]> {
       return {
         partId: part.id,
         recommender: part.name,
-        recommenderIcon: part.icon?.url ?? '',
+        recommenderIcon: deliverCmsImage(part.icon?.url),
         whyRecom: part.whyrecom ?? '',
         event,
       };

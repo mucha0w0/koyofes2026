@@ -300,7 +300,8 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 | コマンド | 説明 |
 |----------|------|
 | `npm run dev` | 開発サーバーを起動（ホットリロード有効） |
-| `npm run build` | 本番ビルド |
+| `npm run build` | 画像を静的ファイルへ写してから本番ビルド |
+| `npm run cms:mirror-images` | microCMS の画像だけを `public/cms-images` に保存 |
 | `npm run start` | 本番ビルド後のサーバー起動 |
 | `npm run lint` | ESLint によるコードチェック |
 | `npm run lint:fix` | ESLint の自動修正 |
@@ -327,7 +328,9 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 | 運営パート | `parts` | `lib/parts.ts` | `/about/part`、おすすめ企画 |
 | 協賛企業 | `sponsors` | `lib/sponsors.ts` | `/about/sponsor`、トップページ |
 
-microCMS での更新は、本番では Webhook で反映されます。既存ページの編集は次のアクセスで切り替わります。企画・お知らせの新しい URL は Deploy Hook による再ビルド後に有効になります（[キャッシュ方針](#キャッシュ方針) 参照）。
+microCMS での更新は、本番では Webhook で反映されます。既存ページの文章の編集は次のアクセスで切り替わります。企画・お知らせの新しい URL は Deploy Hook による再ビルド後に有効になります（[キャッシュ方針](#キャッシュ方針) 参照）。
+
+画像（`images.microcms-assets.io`）はビルドのたびに静的ファイルへコピーします。差し替えや追加を本番に載せるには、Vercel で再デプロイしてください。Webhook だけでは画像ファイルは更新されません。ビルド後に増えた画像 URL だけは、再デプロイまで microCMS から直接配信されます。
 
 ### コード内のファイルを編集
 
@@ -489,13 +492,16 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 | microCMS fetch（通常） | `revalidate: false` + タグ | `lib/microcms/client.ts` |
 | お知らせ一覧 | クエリごとにキャッシュしない | `app/(site)/official/news/page.tsx` の `revalidate = 0` |
 | 企画・お知らせの未知の URL | ページを作らない | `dynamicParams = false` |
-| スタンプ照合 API | `no-store`（常に最新） | `lib/stamp/booths.ts` の `getStampBoothSlugSet` など |
+| スタンプ照合・獲得 | 企画一覧と同じタグ付き fetch | `lib/stamp/booths.ts` |
+| microCMS の画像 | ビルド時に静的ファイル化。最適化はしない | `scripts/mirror-cms-images.mjs` |
 | ランキング API | `no-store` | `app/api/ranking/route.ts` |
 | ランキングページ | `force-dynamic` | `app/(site)/ranking/page.tsx` |
 
 公開中コンテンツの変更は `POST /api/revalidate` が受けます。microCMS の API 設定 → Webhook → カスタム通知で、`events` / `news` / `parts` / `sponsors` の 4 つから同じ URL に送ってください。シークレットは `MICROCMS_WEBHOOK_SECRET` と同じ値です。
 
 既存ページの編集・削除・公開終了は、関係するタグとパスだけを無効化します。企画やお知らせを**新規公開**したとき、または企画の slug・お知らせの ID が変わったときは、`VERCEL_DEPLOY_HOOK_URL` で本番を再ビルドします（`dynamicParams = false` のため、ビルド時に無かった URL はこの再ビルドまで 404 です）。下書きだけの保存では何もしません。
+
+画像ファイルは再ビルドの成果物です。祭の前に写真やアイコンを変えるときは、管理画面を保存したあとに Vercel で Redeploy するか、新規公開と同じ Deploy Hook を一度叩いてください。このミラーをやめて従来の直配信に戻すときは、当該の変更を revert して再デプロイします。ローカルなど API キーの無いビルドはミラーをスキップしますが、キーが無いとページ生成自体が失敗します。本番の再デプロイには従来どおり `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が必要です。
 
 ---
 

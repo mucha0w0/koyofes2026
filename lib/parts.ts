@@ -1,6 +1,7 @@
 import type { MicroCMSPart } from '@/lib/microcms/types';
 
 import { fetchMicroCMSList } from '@/lib/microcms/client';
+import { deliverCmsImage } from '@/lib/microcms/delivered-image';
 import {
   PART_CATEGORY_CONFIG,
   type PartCategory,
@@ -42,7 +43,7 @@ export function transformMicroCMSPart(part: MicroCMSPart): PartItem {
   return {
     id: part.id,
     name: part.name,
-    icon: part.icon?.url ?? '',
+    icon: deliverCmsImage(part.icon?.url),
     description: part.explanation,
     social,
     category: getPartCategory(part),

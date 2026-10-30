@@ -4,6 +4,7 @@ import type { MicroCMSEvent } from '@/lib/microcms/types';
 
 import { formatTimeFromNumber } from '@/lib/event-time';
 import { fetchMicroCMSList, type MicroCMSFetchCache } from '@/lib/microcms/client';
+import { deliverCmsHtml, deliverCmsImage } from '@/lib/microcms/delivered-image';
 import { eventSlugTag } from '@/lib/microcms/tags';
 import { parseEventCategory, type Event } from '@/lib/types/event';
 
@@ -15,8 +16,8 @@ function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     slug: event.slug,
     title: event.title,
     catchphrase: event.catchphrase ?? '',
-    icon: event.icon?.url ?? '',
-    images: (event.images ?? []).map((img) => img.url).filter((url) => url && url.length > 0),
+    icon: deliverCmsImage(event.icon?.url),
+    images: (event.images ?? []).map((img) => deliverCmsImage(img.url)).filter((url) => url.length > 0),
     organization: event.organization,
     location: Array.isArray(event.location) ? event.location[0] || '' : event.location,
     floor: Array.isArray(event.floor) ? event.floor[0] || '' : event.floor,
@@ -26,8 +27,8 @@ function transformMicroCMSEvent(event: MicroCMSEvent): Event {
     duration: event.duration ?? 0,
     participantsUL: event.participantsUL,
     participantsLL: event.participantsLL ?? 1,
-    description: event.description,
-    'organ-description': event['organ-description'],
+    description: deliverCmsHtml(event.description),
+    'organ-description': deliverCmsHtml(event['organ-description']),
     author: event.author,
     category: parseEventCategory(event.category, { slug: event.slug }),
   };
