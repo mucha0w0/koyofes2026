@@ -8,7 +8,7 @@ import { RelatedLinks } from '@/components/layout/related-links';
 import { HelpButton } from '@/components/ui/help-button';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
-import { isRankingAggregationOpen, isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isRankingEnabled } from '@/lib/config/rankingConfig';
 import { formatDaySchedule, formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { getEventBySlug, getEvents } from '@/lib/events';
 
@@ -68,21 +68,21 @@ export default async function EventPage({ params }: PageProps) {
 
       <div className="mx-auto w-full max-w-7xl px-4 py-8 md:py-16">
         <div className="mb-12 md:mb-16">
-          <div className="mb-6 flex items-start gap-4 md:gap-8">
-            <InkPhoto alt={event.title} className="size-16 md:size-24" size={96} src={event.icon} />
+          <div className="mb-6">
+            <div className="flex items-start gap-4 md:gap-8">
+              <InkPhoto alt={event.title} className="size-16 md:size-24" size={96} src={event.icon} />
 
-            <div className="flex-1">
-              <div className="mb-2 flex items-center gap-1">
-                <h1 className="min-w-0 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
-                <HelpButton className="shrink-0" title="掲載内容について">
-                  <p>掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。</p>
-                </HelpButton>
+              <div className="flex-1">
+                <div className="mb-2 flex items-center gap-1">
+                  <h1 className="min-w-0 text-2xl font-bold text-foreground md:text-3xl">{event.title}</h1>
+                  <HelpButton className="shrink-0" title="掲載内容について">
+                    <p>掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。</p>
+                  </HelpButton>
+                </div>
+                <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
               </div>
-              <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
-              {isRankingEnabled() ? (
-                <EventRankingBadge serverOpen={isRankingAggregationOpen()} slug={event.slug} />
-              ) : null}
             </div>
+            {isRankingEnabled() ? <EventRankingBadge slug={event.slug} /> : null}
           </div>
 
           <p className="text-lg font-medium text-foreground md:text-xl">{event.catchphrase}</p>

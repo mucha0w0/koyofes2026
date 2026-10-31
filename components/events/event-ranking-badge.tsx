@@ -1,25 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { RankingPodiumResponse } from '@/lib/types/ranking';
 
-import { RANKING_AGGREGATION_START_MS, RANKING_CONFIG, isRankingAggregationOpen } from '@/lib/config/rankingConfig';
+import { RANKING_CONFIG, isRankingAggregationOpen } from '@/lib/config/rankingConfig';
 
 const PLACE_DIGITS = ['', '１', '２', '３'] as const;
-
-function subscribeRankingAggregation(onStoreChange: () => void) {
-  const remaining = RANKING_AGGREGATION_START_MS - Date.now();
-  if (remaining <= 0) {
-    return () => {};
-  }
-  const timer = window.setTimeout(onStoreChange, remaining);
-  return () => window.clearTimeout(timer);
-}
-
-function getRankingAggregationClientSnapshot() {
-  return isRankingAggregationOpen();
-}
 
 function currentRankingLabel(kind: 'overall' | 'trend', rank: number): string | null {
   const digit = PLACE_DIGITS[rank];
@@ -40,30 +27,24 @@ function rankForSlug(entries: RankingPodiumResponse['overall'], slug: string): n
   return found.rank;
 }
 
-export function EventRankingBadge({ slug, serverOpen }: { slug: string; serverOpen: boolean }) {
-  const getServerSnapshot = useCallback(() => serverOpen, [serverOpen]);
-  const open = useSyncExternalStore(
-    subscribeRankingAggregation,
-    getRankingAggregationClientSnapshot,
-    getServerSnapshot,
-  );
+export function EventRankingBadge({ slug }: { slug: string }) {
   const [labels, setLabels] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!open) {
+    if (!isRankingAggregationOpen()) {
       return;
     }
 
     const controller = new AbortController();
 
-    async function load(signal?: AbortSignal) {
+    async function load() {
       try {
-        const response = await fetch('/api/ranking/podium', { cache: 'no-store', signal });
+        const response = await fetch('/api/ranking/podium', { cache: 'no-store', signal: controller.signal });
         if (!response.ok) {
           return;
         }
         const body = (await response.json()) as RankingPodiumResponse;
-        if (signal?.aborted || !Array.isArray(body.overall) || !Array.isArray(body.trend)) {
+        if (controller.signal.aborted || !Array.isArray(body.overall) || !Array.isArray(body.trend)) {
           return;
         }
         const overallRank = rankForSlug(body.overall, slug);
@@ -74,33 +55,25 @@ export function EventRankingBadge({ slug, serverOpen }: { slug: string; serverOp
         ].filter((label): label is string => label !== null);
         setLabels(next);
       } catch (error) {
-        if (signal?.aborted || (error instanceof DOMException && error.name === 'AbortError')) {
+        if (controller.signal.aborted || (error instanceof DOMException && error.name === 'AbortError')) {
           return;
         }
       }
     }
 
-    void load(controller.signal);
-
-    const timer = window.setInterval(() => {
-      if (document.visibilityState !== 'visible') {
-        return;
-      }
-      void load(controller.signal);
-    }, RANKING_CONFIG.pollIntervalMs);
+    void load();
 
     return () => {
       controller.abort();
-      window.clearInterval(timer);
     };
-  }, [open, slug]);
+  }, [slug]);
 
-  if (!open || labels.length === 0) {
+  if (labels.length === 0) {
     return null;
   }
 
   return (
-    <p className="mt-1 flex flex-wrap gap-x-3 text-xs text-muted-foreground">
+    <p className="mt-3 flex flex-wrap gap-x-3 text-xs text-muted-foreground">
       {labels.map((label) => (
         <span key={label}>{label}</span>
       ))}
