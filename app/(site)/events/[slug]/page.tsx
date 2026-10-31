@@ -79,10 +79,12 @@ export default async function EventPage({ params }: PageProps) {
                     <p>掲載内容は執筆当時のものです。開催当日までに、内容や仕様が変わることがあります。</p>
                   </HelpButton>
                 </div>
-                <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
+                  {isRankingEnabled() ? <EventRankingBadge slug={event.slug} /> : null}
+                </div>
               </div>
             </div>
-            {isRankingEnabled() ? <EventRankingBadge slug={event.slug} /> : null}
           </div>
 
           <p className="text-lg font-medium text-foreground md:text-xl">{event.catchphrase}</p>

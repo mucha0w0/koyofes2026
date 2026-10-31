@@ -73,7 +73,7 @@ export function EventRankingBadge({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="mt-3 flex flex-wrap gap-x-3 gap-y-2">
+    <div className="flex flex-wrap gap-x-3 gap-y-2">
       {labels.map((label) => (
         <span
           key={label}
