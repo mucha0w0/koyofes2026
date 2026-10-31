@@ -16,7 +16,12 @@ import type {
   RankingWaitItem,
 } from '@/lib/types/ranking';
 
-import { RANKING_CONFIG, getWaitLevelLabel, isRankingAggregationOpen, type RankingTab } from '@/lib/config/rankingConfig';
+import {
+  RANKING_CONFIG,
+  getWaitLevelLabel,
+  isRankingAggregationOpen,
+  type RankingTab,
+} from '@/lib/config/rankingConfig';
 import { formatWaitAgo } from '@/lib/ranking/score';
 
 function formatAverage(value: number): string {
@@ -166,6 +171,14 @@ export function RankingBoard() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
+      <div className="rounded-md bg-paper-2 p-6">
+        <p className="text-muted-foreground">
+          このランキングは、ホームページのアルゴリズムによって独自に算出したものです。
+          フィナーレ時に発表される、優秀賞などの審査基準とは別であることにご注意ください。
+          <br />
+          また、このランキングで入賞したことによる特典はありません。
+        </p>
+      </div>
       <div className="flex items-center justify-between gap-2">
         <div className="flex flex-wrap gap-2">
           <Button
