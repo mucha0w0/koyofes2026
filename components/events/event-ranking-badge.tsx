@@ -73,10 +73,15 @@ export function EventRankingBadge({ slug }: { slug: string }) {
   }
 
   return (
-    <p className="mt-3 flex flex-wrap gap-x-3 text-xs text-muted-foreground">
+    <div className="mt-3 flex flex-wrap gap-x-3 gap-y-2">
       {labels.map((label) => (
-        <span key={label}>{label}</span>
+        <span
+          key={label}
+          className="inline-flex items-center rounded-(--radius) border-[2.5px] border-ink bg-card px-2 py-0.5 text-xs leading-snug whitespace-nowrap text-ink shadow-[2px_3px_0_0_var(--ink)]"
+        >
+          {label}
+        </span>
       ))}
-    </p>
+    </div>
   );
 }
