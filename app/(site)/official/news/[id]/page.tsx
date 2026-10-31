@@ -6,6 +6,7 @@ import { InkTextLink } from '@/components/ui/ink-text-link';
 
 import type { Metadata } from 'next';
 
+import { DEFAULT_SHARE_IMAGE, shareMetadata } from '@/lib/metadata/share';
 import { getNews, getNewsByID } from '@/lib/news';
 
 interface NewsDetailPageProps {
@@ -43,13 +44,15 @@ export async function generateMetadata({ params }: NewsDetailPageProps): Promise
   return {
     title: `${news.title} | お知らせ | こうよう祭`,
     description,
-    openGraph: {
-      title: news.title,
-      description,
-      type: 'article',
-      publishedTime: news.publishedAt,
-      modifiedTime: news.updatedAt,
-    },
+    ...shareMetadata(DEFAULT_SHARE_IMAGE, {
+      openGraph: {
+        title: news.title,
+        description,
+        type: 'article',
+        publishedTime: news.publishedAt,
+        modifiedTime: news.updatedAt,
+      },
+    }),
   };
 }
 

@@ -2,6 +2,10 @@ import { Analytics } from '@vercel/analytics/next';
 import { Zen_Kaku_Gothic_New, Zen_Maru_Gothic } from 'next/font/google';
 
 import type { Metadata } from 'next';
+
+import { SITE_ORIGIN } from '@/lib/config/site';
+import { DEFAULT_SHARE_IMAGE, shareMetadata } from '@/lib/metadata/share';
+
 import './globals.css';
 
 // 日本語フォントは unicode-range ごとに100個以上のファイルになる。
@@ -22,8 +26,10 @@ const zenMaruGothic = Zen_Maru_Gothic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_ORIGIN),
   title: 'こうよう祭 2026 | 公式ウェブサイト',
   description: '令和8年度 こうよう祭の公式ウェブサイトです。企画情報、来場案内など。',
+  ...shareMetadata(DEFAULT_SHARE_IMAGE),
   icons: {
     icon: [
       {

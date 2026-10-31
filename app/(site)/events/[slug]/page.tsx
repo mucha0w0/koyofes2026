@@ -11,6 +11,7 @@ import { InkPhoto } from '@/components/ui/ink-photo';
 import { isRankingEnabled } from '@/lib/config/rankingConfig';
 import { formatDaySchedule, formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { getEventBySlug, getEvents } from '@/lib/events';
+import { DEFAULT_SHARE_IMAGE, shareIcon, shareMetadata } from '@/lib/metadata/share';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -42,9 +43,15 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
+  const description = event.catchphrase || event.description.split('\n')[0];
+  const icon = shareIcon(event.icon, event.title);
+
   return {
     title: `${event.title} | こうよう祭`,
-    description: event.catchphrase || event.description.split('\n')[0],
+    description,
+    ...shareMetadata(icon ?? DEFAULT_SHARE_IMAGE, {
+      card: icon ? 'summary' : 'summary_large_image',
+    }),
   };
 }
 
