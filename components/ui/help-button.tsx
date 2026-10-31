@@ -2,13 +2,10 @@
 
 import { HelpCircle } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -58,11 +55,8 @@ export function HelpButton({ title, children, description, className }: HelpButt
           <HelpCircle aria-hidden className="size-5" />
         </button>
       </DialogTrigger>
-      <DialogContent
-        className="flex max-h-[min(90dvh,40rem)] flex-col gap-5 overflow-hidden"
-        showCloseButton={false}
-      >
-        <DialogHeader className="shrink-0 text-left">
+      <DialogContent className="flex max-h-[min(90dvh,40rem)] flex-col gap-5 overflow-hidden">
+        <DialogHeader className="shrink-0 pr-12 text-left">
           <DialogTitle className="font-display text-xl leading-snug font-medium">{title}</DialogTitle>
           {description ? (
             <DialogDescription className="text-left text-sm leading-relaxed text-ink-soft">
@@ -73,13 +67,6 @@ export function HelpButton({ title, children, description, className }: HelpButt
           )}
         </DialogHeader>
         <div className={helpBodyClassName}>{children}</div>
-        <DialogFooter className="shrink-0">
-          <DialogClose asChild>
-            <Button className="w-full sm:w-auto" type="button" variant="secondary">
-              閉じる
-            </Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
