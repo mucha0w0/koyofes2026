@@ -1,22 +1,10 @@
 import { NextResponse } from 'next/server';
 
-import type {
-  RankingApiError,
-  RankingOverallItem,
-  RankingResponse,
-  RankingTrendItem,
-  RankingWaitItem,
-} from '@/lib/types/ranking';
+import type { RankingApiError, RankingResponse } from '@/lib/types/ranking';
 
-import { RANKING_CONFIG, isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
-import {
-  getTrendAggregates,
-  getVoteAggregates,
-  getWaitAggregates,
-  RankingDatabaseUnavailableError,
-} from '@/lib/ranking/queries';
-import { averageStars, bayesianScore } from '@/lib/ranking/score';
-import { getStampBooths } from '@/lib/stamp/booths';
+import { isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
+import { listOverallRanking, listTrendRanking, listWaitRanking, loadRankingBooths } from '@/lib/ranking/board';
+import { RankingDatabaseUnavailableError } from '@/lib/ranking/queries';
 
 function errorResponse(status: number, error: string, code: RankingApiError['code']) {
   const body: RankingApiError = { error, code };
@@ -40,119 +28,28 @@ export async function GET(request: Request) {
   const tabParam = searchParams.get('tab');
   const tab = tabParam === 'trend' ? 'trend' : tabParam === 'wait' ? 'wait' : 'overall';
 
-  let booths;
+  let boothBySlug;
   try {
-    booths = await getStampBooths();
+    boothBySlug = await loadRankingBooths();
   } catch (error) {
     console.error('ランキングブース取得エラー:', error);
     return errorResponse(500, '企画情報の取得に失敗しました', 'SERVER_ERROR');
   }
 
-  const boothBySlug = new Map(booths.map((booth) => [booth.slug, booth]));
   const generatedAt = new Date().toISOString();
 
   try {
     if (tab === 'trend') {
-      const since = new Date(Date.now() - RANKING_CONFIG.trendWindowMs);
-      const aggregates = await getTrendAggregates(since);
-      const items: RankingTrendItem[] = aggregates
-        .map((row) => {
-          const booth = boothBySlug.get(row.slug);
-          if (!booth || row.uniqueVisitors <= 0) {
-            return null;
-          }
-          return {
-            rank: 0,
-            slug: booth.slug,
-            title: booth.title,
-            organization: booth.organization,
-            icon: booth.icon,
-            uniqueVisitors: row.uniqueVisitors,
-          };
-        })
-        .filter((item): item is RankingTrendItem => item !== null)
-        .sort((a, b) => {
-          if (b.uniqueVisitors !== a.uniqueVisitors) {
-            return b.uniqueVisitors - a.uniqueVisitors;
-          }
-          return a.title.localeCompare(b.title, 'ja');
-        })
-        .map((item, index) => ({ ...item, rank: index + 1 }));
-
+      const items = await listTrendRanking(boothBySlug);
       return noStore({ tab: 'trend', generatedAt, items });
     }
 
     if (tab === 'wait') {
-      const since = new Date(Date.now() - RANKING_CONFIG.waitWindowMs);
-      const aggregates = await getWaitAggregates(since);
-      const items: RankingWaitItem[] = aggregates
-        .map((row) => {
-          const booth = boothBySlug.get(row.slug);
-          if (!booth || row.voteCount <= 0) {
-            return null;
-          }
-          return {
-            rank: 0,
-            slug: booth.slug,
-            title: booth.title,
-            organization: booth.organization,
-            icon: booth.icon,
-            level: row.level,
-            score: row.score,
-            voteCount: row.voteCount,
-            lastVotedAt: row.lastVotedAt.toISOString(),
-          };
-        })
-        .filter((item): item is RankingWaitItem => item !== null)
-        .sort((a, b) => {
-          if (b.score !== a.score) {
-            return b.score - a.score;
-          }
-          const timeDiff = new Date(b.lastVotedAt).getTime() - new Date(a.lastVotedAt).getTime();
-          if (timeDiff !== 0) {
-            return timeDiff;
-          }
-          if (b.voteCount !== a.voteCount) {
-            return b.voteCount - a.voteCount;
-          }
-          return a.title.localeCompare(b.title, 'ja');
-        })
-        .map((item, index) => ({ ...item, rank: index + 1 }));
-
+      const items = await listWaitRanking(boothBySlug);
       return noStore({ tab: 'wait', generatedAt, items });
     }
 
-    const aggregates = await getVoteAggregates();
-    const items: RankingOverallItem[] = aggregates
-      .map((row) => {
-        const booth = boothBySlug.get(row.slug);
-        if (!booth || row.voteCount <= 0) {
-          return null;
-        }
-        const average = averageStars(row.starSum, row.voteCount);
-        return {
-          rank: 0,
-          slug: booth.slug,
-          title: booth.title,
-          organization: booth.organization,
-          icon: booth.icon,
-          score: bayesianScore(row.starSum, row.voteCount),
-          average,
-          voteCount: row.voteCount,
-        };
-      })
-      .filter((item): item is RankingOverallItem => item !== null)
-      .sort((a, b) => {
-        if (b.score !== a.score) {
-          return b.score - a.score;
-        }
-        if (b.voteCount !== a.voteCount) {
-          return b.voteCount - a.voteCount;
-        }
-        return a.title.localeCompare(b.title, 'ja');
-      })
-      .map((item, index) => ({ ...item, rank: index + 1 }));
-
+    const items = await listOverallRanking(boothBySlug);
     return noStore({ tab: 'overall', generatedAt, items });
   } catch (error) {
     if (error instanceof RankingDatabaseUnavailableError) {

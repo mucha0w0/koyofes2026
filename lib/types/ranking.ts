@@ -70,6 +70,16 @@ export interface RankingWaitResponse {
 
 export type RankingResponse = RankingOverallResponse | RankingTrendResponse | RankingWaitResponse;
 
+export interface RankingPodiumEntry {
+  slug: string;
+  rank: number;
+}
+
+export interface RankingPodiumResponse {
+  overall: RankingPodiumEntry[];
+  trend: RankingPodiumEntry[];
+}
+
 export interface RankingApiError {
   error: string;
   code: 'RANKING_DISABLED' | 'DB_UNAVAILABLE' | 'BAD_REQUEST' | 'SERVER_ERROR';
