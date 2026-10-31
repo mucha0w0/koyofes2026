@@ -10,6 +10,8 @@ export const RANKING_CONFIG = {
   voteDebounceMs: 30 * 1000,
   waitWindowMs: 15 * 60 * 1000,
   pollIntervalMs: 60 * 1000,
+  /** 展示ページに「現在総合１位！」などを出す順位の下限 */
+  podiumSize: 3,
   bayes: {
     priorMean: 3.5,
     priorCount: 8,

@@ -2,11 +2,13 @@ import { notFound } from 'next/navigation';
 
 import { EventCarousel } from '@/components/events/event-carousel';
 import { EventMarkdown } from '@/components/events/event-markdown';
+import { EventRankingBadge } from '@/components/events/event-ranking-badge';
 import { EventSearchSection } from '@/components/events/event-search';
 import { RelatedLinks } from '@/components/layout/related-links';
 import { HelpButton } from '@/components/ui/help-button';
 import { InkPhoto } from '@/components/ui/ink-photo';
 
+import { isRankingAggregationOpen, isRankingEnabled } from '@/lib/config/rankingConfig';
 import { formatDaySchedule, formatDuration, formatLocation, formatParticipants } from '@/lib/event-display';
 import { getEventBySlug, getEvents } from '@/lib/events';
 
@@ -77,6 +79,9 @@ export default async function EventPage({ params }: PageProps) {
                 </HelpButton>
               </div>
               <p className="text-base text-muted-foreground md:text-lg">{event.organization}</p>
+              {isRankingEnabled() ? (
+                <EventRankingBadge serverOpen={isRankingAggregationOpen()} slug={event.slug} />
+              ) : null}
             </div>
           </div>
 
