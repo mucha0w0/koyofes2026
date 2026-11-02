@@ -38,18 +38,22 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object';
 }
 
+function isRankingSnapshot(value: unknown): value is RankingSnapshot {
+  return (
+    isRecord(value) &&
+    typeof value.exportedAt === 'string' &&
+    !Number.isNaN(Date.parse(value.exportedAt)) &&
+    Array.isArray(value.votes) &&
+    Array.isArray(value.visits) &&
+    Array.isArray(value.waits)
+  );
+}
+
 function parseSnapshot(raw: unknown): RankingSnapshot {
-  if (
-    !isRecord(raw) ||
-    typeof raw.exportedAt !== 'string' ||
-    Number.isNaN(Date.parse(raw.exportedAt)) ||
-    !Array.isArray(raw.votes) ||
-    !Array.isArray(raw.visits) ||
-    !Array.isArray(raw.waits)
-  ) {
+  if (!isRankingSnapshot(raw)) {
     throw new Error('data/ranking/snapshot.json の形が不正です');
   }
-  return raw as RankingSnapshot;
+  return raw;
 }
 
 /** DATABASE_URL が無いときの読み取り元。来場者 ID は連番に置き換わっている。 */
