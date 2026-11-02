@@ -3,12 +3,13 @@
  * 来場者のブラウザは images.microcms-assets.io を叩かず、Vercel の静的ファイルを読む。
  * 画像最適化（/_next/image）は通さない。転送先を Image Optimization の従量課金に移さないため。
  *
- * 認証情報が無いときは空のマニフェストを書き、従来どおり microCMS 直配信に落とす。
+ * 認証情報が無いときは何もしない。コミット済みの public/cms-images を消さない。
+ * `--from-local` は data/cms の URL から画像を保存する（API キー不要）。失敗が 1 件でもあれば終了コード 1。
  * 一覧 API が失敗したとき、または URL があるのに 1 件も保存できなかったときは終了コード 1。
- * 一部の画像だけ失敗したときはマニフェストから外し、その URL だけ直配信のままビルドを続ける。
+ * ライブ取得で一部の画像だけ失敗したときはマニフェストから外し、その URL だけ直配信のままビルドを続ける。
  */
 import { createHash } from 'node:crypto';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -17,6 +18,7 @@ import { canonicalMicroCmsImageKey, decodeHtmlImageUrl } from '../lib/microcms/i
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_IMAGE_DIR = path.join(ROOT, 'public/cms-images');
 const DEFAULT_MANIFEST_PATH = path.join(ROOT, 'lib/microcms/image-manifest.json');
+const DEFAULT_DATA_DIR = path.join(ROOT, 'data/cms');
 
 const ENDPOINTS = ['events', 'news', 'parts', 'sponsors'];
 const PAGE_LIMIT = 100;
@@ -237,27 +239,18 @@ async function runPool(items, limit, worker) {
 }
 
 /**
+ * @param {unknown[]} documents
  * @param {{
- *   apiKey: string;
- *   serviceDomain: string;
  *   fetchImpl?: typeof fetch;
  *   imageDir?: string;
  *   manifestPath?: string;
- * }} options
+ *   strict?: boolean;
+ * }} [options]
  */
-export async function mirrorCmsImages({
-  apiKey,
-  serviceDomain,
-  fetchImpl = globalThis.fetch,
-  imageDir = DEFAULT_IMAGE_DIR,
-  manifestPath = DEFAULT_MANIFEST_PATH,
-}) {
-  const documents = [];
-  for (const endpoint of ENDPOINTS) {
-    const contents = await fetchEndpoint(endpoint, apiKey, serviceDomain, fetchImpl);
-    documents.push(...contents);
-  }
-
+export async function mirrorDocuments(documents, options = {}) {
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch;
+  const imageDir = options.imageDir ?? DEFAULT_IMAGE_DIR;
+  const manifestPath = options.manifestPath ?? DEFAULT_MANIFEST_PATH;
   const roles = collectImageRoles(documents);
   await rm(imageDir, { recursive: true, force: true });
   await mkdir(imageDir, { recursive: true });
@@ -287,6 +280,9 @@ export async function mirrorCmsImages({
     await writeManifest(manifestPath, {});
     throw new Error(`画像を1件も保存できませんでした。例: ${failures[0] ?? 'unknown'}`);
   }
+  if (options.strict && failures.length > 0) {
+    throw new Error(`画像を保存しきれませんでした (${failures.length} 件)。例: ${failures[0]}`);
+  }
 
   const sorted = Object.fromEntries(Object.entries(images).sort(([left], [right]) => left.localeCompare(right)));
   await writeManifest(manifestPath, sorted);
@@ -298,20 +294,50 @@ export async function mirrorCmsImages({
   };
 }
 
-async function main() {
-  const apiKey = process.env.MICROCMS_API_KEY;
-  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
-
-  if (!apiKey || !serviceDomain) {
-    await writeManifest(DEFAULT_MANIFEST_PATH, {});
-    await rm(DEFAULT_IMAGE_DIR, { recursive: true, force: true });
-    console.warn(
-      'microCMS images: MICROCMS_API_KEY / MICROCMS_SERVICE_DOMAIN が無いためミラーをスキップします。画像は microCMS から直接配信されます。',
-    );
-    return;
+/**
+ * @param {{
+ *   apiKey: string;
+ *   serviceDomain: string;
+ *   fetchImpl?: typeof fetch;
+ *   imageDir?: string;
+ *   manifestPath?: string;
+ * }} options
+ */
+export async function mirrorCmsImages({
+  apiKey,
+  serviceDomain,
+  fetchImpl = globalThis.fetch,
+  imageDir = DEFAULT_IMAGE_DIR,
+  manifestPath = DEFAULT_MANIFEST_PATH,
+}) {
+  const documents = [];
+  for (const endpoint of ENDPOINTS) {
+    const contents = await fetchEndpoint(endpoint, apiKey, serviceDomain, fetchImpl);
+    documents.push(...contents);
   }
+  return mirrorDocuments(documents, { fetchImpl, imageDir, manifestPath });
+}
 
-  const result = await mirrorCmsImages({ apiKey, serviceDomain });
+/**
+ * @param {{
+ *   dataDir?: string;
+ *   fetchImpl?: typeof fetch;
+ *   imageDir?: string;
+ *   manifestPath?: string;
+ * }} [options]
+ */
+export async function mirrorLocalCmsImages(options = {}) {
+  const dataDir = options.dataDir ?? DEFAULT_DATA_DIR;
+  const documents = [];
+  for (const endpoint of ENDPOINTS) {
+    const raw = await readFile(path.join(dataDir, `${endpoint}.json`), 'utf8');
+    const data = JSON.parse(raw);
+    if (Array.isArray(data.contents)) documents.push(...data.contents);
+  }
+  return mirrorDocuments(documents, { ...options, strict: true });
+}
+
+function reportMirrorResult(result) {
   const megabytes = (result.bytes / (1024 * 1024)).toFixed(1);
   console.info(
     `microCMS images: ${result.mirrored}/${result.total} 件を静的ファイルに保存しました (${megabytes} MB)。アイコンは幅 ${ICON_WIDTH}px、写真と本文画像は幅 ${LARGE_WIDTH}px・q=${QUALITY}。`,
@@ -322,6 +348,27 @@ async function main() {
     );
     for (const failure of result.failed) console.warn(`  ${failure}`);
   }
+}
+
+async function main() {
+  if (process.argv.includes('--from-local')) {
+    const result = await mirrorLocalCmsImages();
+    reportMirrorResult(result);
+    return;
+  }
+
+  const apiKey = process.env.MICROCMS_API_KEY?.trim();
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN?.trim();
+
+  if (!apiKey || !serviceDomain) {
+    console.info(
+      'microCMS images: API キーが無いためライブ取得はスキップします。コミット済みの public/cms-images を使います。',
+    );
+    return;
+  }
+
+  const result = await mirrorCmsImages({ apiKey, serviceDomain });
+  reportMirrorResult(result);
 }
 
 const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;

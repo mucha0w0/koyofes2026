@@ -1,0 +1,32 @@
+{
+  "service": "koyofes2026",
+  "exportedAt": "2026-11-02T11:09:00+09:00",
+  "depth": 3,
+  "note": "Published content snapshot. stamps was probed and does not exist; stamp booths are derived from events.",
+  "endpoints": [
+    {
+      "endpoint": "events",
+      "type": "list",
+      "count": 65,
+      "file": "events.json"
+    },
+    {
+      "endpoint": "news",
+      "type": "list",
+      "count": 27,
+      "file": "news.json"
+    },
+    {
+      "endpoint": "parts",
+      "type": "list",
+      "count": 10,
+      "file": "parts.json"
+    },
+    {
+      "endpoint": "sponsors",
+      "type": "list",
+      "count": 21,
+      "file": "sponsors.json"
+    }
+  ]
+}

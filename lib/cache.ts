@@ -11,9 +11,10 @@
  * - `/official/news` は `searchParams` でページ番号を読むため、
  *   クエリごとに ISR エントリを作らないようページ側で `revalidate = 0`
  *   （お知らせ JSON 自体はタグ付き fetch キャッシュ）
- * - microCMS の画像はビルド時に `public/cms-images` へ保存し、来場者には静的ファイルとして出す。
- *   `next/image` の最適化は通さない。画像の追加・差し替えは再デプロイで取り直す。
- *   マニフェストに無い URL だけは、従来どおり images.microcms-assets.io から直接配信する
+ * - `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が両方あれば microCMS。
+ *   両方無ければ `data/cms` と `public/cms-images` のスナップショット（API も画像も叩かない）
+ * - 画像は `public/cms-images` の静的ファイル。`next/image` の最適化は通さない。
+ *   マニフェストに無い URL だけは images.microcms-assets.io に落ちる
  *
  * ページの revalidate は `app/(site)/layout.tsx` で `false`。
  * ここを正の秒数に戻すと、配下の全ページがその間隔で書き直される。
