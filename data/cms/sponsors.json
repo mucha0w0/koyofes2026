@@ -1,0 +1,278 @@
+{
+  "contents": [
+    {
+      "id": "tz7vaz0t4x",
+      "createdAt": "2026-10-10T02:47:37.481Z",
+      "updatedAt": "2026-10-10T03:01:38.646Z",
+      "publishedAt": "2026-10-10T02:47:37.481Z",
+      "revisedAt": "2026-10-10T03:01:38.646Z",
+      "name": "デンパーク",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c4808f76b324447d9b6e5acf99015e0c/denpark.png",
+        "height": 581,
+        "width": 2157
+      }
+    },
+    {
+      "id": "u0hpgmiml",
+      "createdAt": "2026-10-10T02:47:27.992Z",
+      "updatedAt": "2026-10-20T05:25:00.428Z",
+      "publishedAt": "2026-10-10T02:47:27.992Z",
+      "revisedAt": "2026-10-20T05:25:00.428Z",
+      "name": "ナレッジスター",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/eca51e45d23948259b661b1368f41836/Logo_r-1.png.webp",
+        "height": 200,
+        "width": 840
+      }
+    },
+    {
+      "id": "cr3htpo306",
+      "createdAt": "2026-10-10T02:47:21.475Z",
+      "updatedAt": "2026-10-10T03:01:18.191Z",
+      "publishedAt": "2026-10-10T02:47:21.475Z",
+      "revisedAt": "2026-10-10T03:01:18.191Z",
+      "name": "明楽時運",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c64860877ab7479dba3e7383747369a2/akira-jiun.png",
+        "height": 763,
+        "width": 1424
+      }
+    },
+    {
+      "id": "8awkik95_ez",
+      "createdAt": "2026-10-10T02:47:14.732Z",
+      "updatedAt": "2026-10-20T05:04:57.961Z",
+      "publishedAt": "2026-10-10T02:47:14.732Z",
+      "revisedAt": "2026-10-20T05:04:57.961Z",
+      "name": "ひまわりネットワーク",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ae32a4ff30b245eda21f051523072f60/himawari_logo.png",
+        "height": 153,
+        "width": 553
+      }
+    },
+    {
+      "id": "qhlu5b8cm",
+      "createdAt": "2026-10-10T02:47:07.951Z",
+      "updatedAt": "2026-10-20T05:23:52.954Z",
+      "publishedAt": "2026-10-10T02:47:07.951Z",
+      "revisedAt": "2026-10-20T05:23:52.954Z",
+      "name": "asahi sports",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/05ad75b184e84df8b72d86c3435b49bf/logo_20261020_142224.svg",
+        "height": 65,
+        "width": 383
+      }
+    },
+    {
+      "id": "oj-g7vqpua",
+      "createdAt": "2026-10-10T02:46:58.206Z",
+      "updatedAt": "2026-10-20T05:25:13.909Z",
+      "publishedAt": "2026-10-10T02:46:58.206Z",
+      "revisedAt": "2026-10-20T05:25:13.909Z",
+      "name": "アイ工務店",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/44a7cfdb7ed74323bd32c766b500dee1/logo_20261020_142435.png",
+        "height": 85,
+        "width": 426
+      }
+    },
+    {
+      "id": "3ne0aoi_9j",
+      "createdAt": "2026-10-10T02:46:51.076Z",
+      "updatedAt": "2026-10-20T05:05:57.229Z",
+      "publishedAt": "2026-10-10T02:46:51.076Z",
+      "revisedAt": "2026-10-20T05:05:57.229Z",
+      "name": "竜泉寺の湯",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/93e73e6bdf8340a195baaf49f409126a/logo.png",
+        "height": 193,
+        "width": 390
+      }
+    },
+    {
+      "id": "vb96hkgps9zy",
+      "createdAt": "2026-10-10T02:46:44.214Z",
+      "updatedAt": "2026-10-20T05:07:34.295Z",
+      "publishedAt": "2026-10-10T02:46:44.214Z",
+      "revisedAt": "2026-10-20T05:07:34.295Z",
+      "name": "柴宗呉服店",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/84af85751ec54f9fbb15e30a8a5c8b08/logo_top.png",
+        "height": 72,
+        "width": 110
+      }
+    },
+    {
+      "id": "abwemyxy2",
+      "createdAt": "2026-10-10T02:46:36.939Z",
+      "updatedAt": "2026-10-10T03:00:04.878Z",
+      "publishedAt": "2026-10-10T02:46:36.939Z",
+      "revisedAt": "2026-10-10T03:00:04.878Z",
+      "name": "じゅんちゃんラーメン",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/45f2890e79d640708f45b75e778b6399/junchan-ramen.png",
+        "height": 141,
+        "width": 447
+      }
+    },
+    {
+      "id": "hr-fxgmkin2",
+      "createdAt": "2026-10-10T02:46:27.315Z",
+      "updatedAt": "2026-10-10T02:59:57.278Z",
+      "publishedAt": "2026-10-10T02:46:27.315Z",
+      "revisedAt": "2026-10-10T02:59:57.278Z",
+      "name": "Dominoピザ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/61ae440d0e984adaa33761c1c664b8c5/dominos.jpg",
+        "height": 274,
+        "width": 280
+      }
+    },
+    {
+      "id": "xy52dyulffk",
+      "createdAt": "2026-10-10T02:46:20.930Z",
+      "updatedAt": "2026-10-20T05:08:24.019Z",
+      "publishedAt": "2026-10-10T02:46:20.930Z",
+      "revisedAt": "2026-10-20T05:08:24.019Z",
+      "name": "トヨタ中央自動車学校",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/df7793ebdbff476995c3c074a1c013b0/logo_20261020_140815.png",
+        "height": 100,
+        "width": 680
+      }
+    },
+    {
+      "id": "isevxez95",
+      "createdAt": "2026-10-10T02:46:14.164Z",
+      "updatedAt": "2026-10-20T05:10:45.182Z",
+      "publishedAt": "2026-10-10T02:46:14.164Z",
+      "revisedAt": "2026-10-20T05:10:45.182Z",
+      "name": "メディア総研",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/938dbe3263844ecfbf5b204528bc29e7/logo.svg",
+        "height": 71,
+        "width": 340
+      }
+    },
+    {
+      "id": "5blmupgmm6fx",
+      "createdAt": "2026-10-10T02:46:07.511Z",
+      "updatedAt": "2026-10-20T05:12:21.535Z",
+      "publishedAt": "2026-10-10T02:46:07.511Z",
+      "revisedAt": "2026-10-20T05:12:21.535Z",
+      "name": "花成",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/9540a4f1644e4887838170065e9d48ea/1428388761-resize-640x120.png",
+        "height": 90,
+        "width": 180
+      }
+    },
+    {
+      "id": "xpj4lstqf",
+      "createdAt": "2026-10-10T02:45:57.091Z",
+      "updatedAt": "2026-10-20T05:13:00.568Z",
+      "publishedAt": "2026-10-10T02:45:57.091Z",
+      "revisedAt": "2026-10-20T05:13:00.568Z",
+      "name": "牛次郎",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/69bb63945a0c4943925ffba5d6b3f420/img20220808110338188329.png",
+        "height": 265,
+        "width": 800
+      }
+    },
+    {
+      "id": "c5tvvcoifs0",
+      "createdAt": "2026-10-10T02:45:50.217Z",
+      "updatedAt": "2026-10-20T05:13:47.431Z",
+      "publishedAt": "2026-10-10T02:45:50.217Z",
+      "revisedAt": "2026-10-20T05:13:47.431Z",
+      "name": "光映写真館",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/7b5e644ea2494d3c848b305f77835a54/koei_logo_00.png",
+        "height": 300,
+        "width": 1800
+      }
+    },
+    {
+      "id": "t5ecc4irm",
+      "createdAt": "2026-10-10T02:45:43.480Z",
+      "updatedAt": "2026-10-10T02:58:58.713Z",
+      "publishedAt": "2026-10-10T02:45:43.480Z",
+      "revisedAt": "2026-10-10T02:58:58.713Z",
+      "name": "佐藤建築",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1c35c442b93d4578aecd5e75e840b914/sato-kenchiku.jpg",
+        "height": 800,
+        "width": 800
+      }
+    },
+    {
+      "id": "nve_d1g0vlmy",
+      "createdAt": "2026-10-10T02:45:36.268Z",
+      "updatedAt": "2026-10-20T05:22:02.698Z",
+      "publishedAt": "2026-10-10T02:45:36.268Z",
+      "revisedAt": "2026-10-20T05:22:02.698Z",
+      "name": "三好自動車学校",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/9c931be72d904b91a0150f297b1deb58/logo_20261020_141535.png",
+        "height": 94,
+        "width": 558
+      }
+    },
+    {
+      "id": "bhc811-lizn",
+      "createdAt": "2026-10-10T02:45:24.801Z",
+      "updatedAt": "2026-10-10T02:58:37.223Z",
+      "publishedAt": "2026-10-10T02:45:24.801Z",
+      "revisedAt": "2026-10-10T02:58:37.223Z",
+      "name": "柴田新聞店",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/59c0b0e500cf4a1297a83ca7475eb3de/shibata-shinbun.png",
+        "height": 948,
+        "width": 1006
+      }
+    },
+    {
+      "id": "2bvo8c2e3",
+      "createdAt": "2026-10-10T02:45:17.398Z",
+      "updatedAt": "2026-10-20T05:22:02.714Z",
+      "publishedAt": "2026-10-10T02:45:17.398Z",
+      "revisedAt": "2026-10-20T05:22:02.714Z",
+      "name": "瀬戸自動車学校",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/9827b80aead44f6dbe43df9c59ea2403/logo--light.svg",
+        "height": 128,
+        "width": 524
+      }
+    },
+    {
+      "id": "pma4hi9jogzq",
+      "createdAt": "2026-10-10T02:45:10.406Z",
+      "updatedAt": "2026-10-20T05:22:02.712Z",
+      "publishedAt": "2026-10-10T02:45:10.406Z",
+      "revisedAt": "2026-10-20T05:22:02.712Z",
+      "name": "トヨタホーム＆LiFE株式会社",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1b2f56b5799e436b931045f0645d6275/logo_20261020_142038.svg",
+        "height": 71,
+        "width": 314
+      }
+    },
+    {
+      "id": "npk0wnvve",
+      "createdAt": "2026-10-10T02:44:50.091Z",
+      "updatedAt": "2026-10-20T05:21:38.100Z",
+      "publishedAt": "2026-10-10T02:44:50.091Z",
+      "revisedAt": "2026-10-20T05:21:38.100Z",
+      "name": "豊田自動車学校",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f74891465c8c44bab09599367bbbd45e/footer_logo.png",
+        "height": 48,
+        "width": 384
+      }
+    }
+  ],
+  "totalCount": 21
+}

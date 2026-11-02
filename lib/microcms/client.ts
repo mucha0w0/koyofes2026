@@ -1,5 +1,6 @@
 import type { MicroCMSListResponse } from '@/lib/microcms/types';
 
+import { readLocalMicroCMSContent, readLocalMicroCMSList } from '@/lib/microcms/local-source';
 import { cmsEndpointTag } from '@/lib/microcms/tags';
 
 export type MicroCMSFetchCache = 'default' | 'no-store';
@@ -13,15 +14,21 @@ export interface MicroCMSListQuery {
   filters?: string;
 }
 
-function getMicroCMSConfig() {
-  const apiKey = process.env.MICROCMS_API_KEY;
-  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
+/**
+ * 両方あれば microCMS。両方なければ data/cms のスナップショット。
+ * 片方だけだと設定ミスなので、静的データに黙って落ちない。
+ */
+function getMicroCMSConfig(): { apiKey: string; serviceDomain: string } | null {
+  const apiKey = process.env.MICROCMS_API_KEY?.trim();
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN?.trim();
 
-  if (!apiKey || !serviceDomain) {
-    throw new Error('microCMS 環境変数が設定されていません');
+  if (apiKey && serviceDomain) {
+    return { apiKey, serviceDomain };
   }
-
-  return { apiKey, serviceDomain };
+  if (apiKey || serviceDomain) {
+    throw new Error('MICROCMS_API_KEY と MICROCMS_SERVICE_DOMAIN は両方セットしてください');
+  }
+  return null;
 }
 
 function resolveCacheTags(endpoint: string, tags: readonly string[] | undefined): string[] {
@@ -53,7 +60,11 @@ async function fetchMicroCMSListPage<T>(
   query: MicroCMSListQuery,
   tags?: readonly string[],
 ): Promise<MicroCMSListResponse<T>> {
-  const { apiKey, serviceDomain } = getMicroCMSConfig();
+  const config = getMicroCMSConfig();
+  if (!config) {
+    return readLocalMicroCMSList<T>(endpoint, query);
+  }
+  const { apiKey, serviceDomain } = config;
   const params = new URLSearchParams();
   params.set('limit', String(query.limit ?? MICROCMS_MAX_LIMIT));
   if (query.offset !== undefined) {
@@ -134,7 +145,11 @@ export async function fetchMicroCMSContent<T>(
   cacheMode: MicroCMSFetchCache = 'default',
   tags?: readonly string[],
 ): Promise<T | null> {
-  const { apiKey, serviceDomain } = getMicroCMSConfig();
+  const config = getMicroCMSConfig();
+  if (!config) {
+    return readLocalMicroCMSContent<T & { id: string }>(endpoint, contentId);
+  }
+  const { apiKey, serviceDomain } = config;
   const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}/${contentId}`;
 
   const response = await fetch(url, {

@@ -1,0 +1,2816 @@
+{
+  "contents": [
+    {
+      "id": "jso-f7z7nzf",
+      "createdAt": "2026-10-27T00:56:53.448Z",
+      "updatedAt": "2026-10-30T11:48:21.425Z",
+      "publishedAt": "2026-10-27T00:56:53.448Z",
+      "revisedAt": "2026-10-30T11:48:21.425Z",
+      "slug": "event-bingo",
+      "title": "Special BINGO",
+      "catchphrase": "ビンゴに参加して景品ゲット！！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/4ededf587d8c4e4ba6a2af66b2581f94/IMG_2834_%E8%B0%B7%20%E6%B5%B7%E6%88%90.jpeg",
+        "height": 1168,
+        "width": 1179
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/89524d39b0164ec4836bd8d2bd7996f7/IMG_2269_%E8%B0%B7%20%E6%B5%B7%E6%88%90.jpeg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8705485f341041f396fec43666008c7e/IMG_2256_%E8%B0%B7%20%E6%B5%B7%E6%88%90.jpeg",
+          "height": 4284,
+          "width": 5712
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 14301530,
+      "duration": 60,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>豪華景品をかけて挑戦する、毎年恒例のビッグイベント！<br>司会者オリジナルのビンゴコールで、会場全体が盛り上がること間違いなし！今年もぜひ参加して、豪華景品をゲットしよう！</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "イベントパーリー",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "bjdhhu4sm5rb",
+      "createdAt": "2026-10-26T12:01:43.254Z",
+      "updatedAt": "2026-10-29T00:38:07.101Z",
+      "publishedAt": "2026-10-28T13:24:52.377Z",
+      "revisedAt": "2026-10-29T00:38:07.101Z",
+      "slug": "kanmidokoro",
+      "title": "甘味処ゆいちゃん",
+      "catchphrase": "おいしい団子食べに来てください！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/bba7c35ff67c4b3da18786806a3df8ec/IMG_0502_%E4%B8%8A%E6%9D%89%20%E9%A2%AF%E9%9F%B3.png",
+        "height": 2622,
+        "width": 1206
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/bba7c35ff67c4b3da18786806a3df8ec/IMG_0502_%E4%B8%8A%E6%9D%89%20%E9%A2%AF%E9%9F%B3.png",
+          "height": 2622,
+          "width": 1206
+        }
+      ],
+      "organization": "元幹部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>過去のこうよう祭の元幹部たちが、甘味処を開きます♪</p><p>おいしいお団子、食べに来てください🍡🍡</p>",
+      "organ-description": "<p>過去のこうよう祭の元幹部たちです。</p>",
+      "author": "システムパート代筆",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "06c7ck5wjux",
+      "createdAt": "2026-10-25T12:24:13.981Z",
+      "updatedAt": "2026-10-28T13:26:07.289Z",
+      "publishedAt": "2026-10-26T11:56:07.766Z",
+      "revisedAt": "2026-10-28T13:26:07.289Z",
+      "slug": "club-hard-tennis",
+      "title": "硬テの揚げたこ",
+      "catchphrase": "この一球(揚げたこ)に全てを賭ける！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/aa2bc7c96b654f35a973dfad38d81062/IMG_2896_%E5%AE%89%E9%96%93%20%E5%8B%87.jpeg",
+        "height": 1045,
+        "width": 1567
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/57cba587219648b192b797dc285852e8/IMG_2899_%E5%AE%89%E9%96%93%20%E5%8B%87.jpeg",
+          "height": 1045,
+          "width": 1567
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/59fda7707ea24150961d99364625c58c/IMG_2897_%E5%AE%89%E9%96%93%20%E5%8B%87.jpeg",
+          "height": 1045,
+          "width": 1567
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/bc9b76d2fac24760831d97d0fed6a533/IMG_2898_%E5%AE%89%E9%96%93%20%E5%8B%87.jpeg",
+          "height": 1567,
+          "width": 1045
+        }
+      ],
+      "organization": "硬式テニス部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "description": "<p>揚げたこ焼きです。外はサクッと中はじゅわっとを目指して作ります。たくさん買ってください！</p>",
+      "organ-description": "<p>硬式テニス部です。毎週、月・火・水・金・土曜日にテニスコートで活動しています。高校生大会に出場したいので、顧問募集中です。目指せ全国！</p>",
+      "author": "金子・安間",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "8v-bfh_xmlx3",
+      "createdAt": "2026-10-25T12:18:57.286Z",
+      "updatedAt": "2026-10-29T00:38:07.109Z",
+      "publishedAt": "2026-10-26T12:30:51.702Z",
+      "revisedAt": "2026-10-29T00:38:07.109Z",
+      "slug": "event-hatati",
+      "title": "二十歳の品格",
+      "catchphrase": "はたひん",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/85aca26e497b40d896567a964a6053ac/IMG_3475_%E6%B5%85%E4%BA%95%20%E5%AD%9D%E5%9F%BA.JPG",
+        "height": 4032,
+        "width": 3024
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/85aca26e497b40d896567a964a6053ac/IMG_3475_%E6%B5%85%E4%BA%95%20%E5%AD%9D%E5%9F%BA.JPG",
+          "height": 4032,
+          "width": 3024
+        }
+      ],
+      "organization": "二十歳",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "duration": 45,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>人生100年の時代と言われるこの頃。もしそうだとしたら私たちはその5分の1を生きたことになる。豊田高専の学生のなかでは最年長、4月になれば社会人1年目。そんな私達は何を思い、何を伝えたいのか。二十歳の品格。お楽しみください。</p>",
+      "organ-description": "<p>二十歳</p>",
+      "author": "二十歳+1",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "id20rpqaq",
+      "createdAt": "2026-10-21T05:46:55.032Z",
+      "updatedAt": "2026-10-29T00:38:07.098Z",
+      "publishedAt": "2026-10-21T05:46:55.032Z",
+      "revisedAt": "2026-10-29T00:38:07.098Z",
+      "slug": "iryouzaka",
+      "title": "医療坂46",
+      "catchphrase": "医療坂46",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/39ed62de039942edb0809f09ef47f0e7/S__126476301.jpg",
+        "height": 402,
+        "width": 409
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/39ed62de039942edb0809f09ef47f0e7/S__126476301.jpg",
+          "height": 402,
+          "width": 409
+        }
+      ],
+      "organization": "指導寮生",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 16001630,
+      "duration": 30,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>今年も医療坂29人で去年からパワーアップしたパフォーマンスをできるように頑張ります！みなさんもぜひ一緒に楽しんでください！！</p>",
+      "organ-description": "<p> 各寮の指導寮生たちです。</p>",
+      "author": "せきののか",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "9njbx0dsx5fx",
+      "createdAt": "2026-10-18T05:56:22.188Z",
+      "updatedAt": "2026-10-29T00:38:07.06Z",
+      "publishedAt": "2026-10-18T05:56:22.188Z",
+      "revisedAt": "2026-10-29T00:38:07.06Z",
+      "slug": "special-guest",
+      "title": "スペシャルゲスト",
+      "catchphrase": "サツマカワRPGさんに会おう！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1d9b349273f5490388c1ede0af853c38/satsumakawa-rpg-portrait.webp",
+        "height": 631,
+        "width": 750
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1d9b349273f5490388c1ede0af853c38/satsumakawa-rpg-portrait.webp",
+          "height": 631,
+          "width": 750
+        }
+      ],
+      "organization": "マネジメントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 12001330,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>今年のスペシャルゲストは、サツマカワRPGさん！！</p><p></p><p>マッシュルームヘアの髪型がトレードマーク。主にコントやピンネタを得意とし、ハイテンションかつ狂気や不条理を感じさせる独特な世界観のネタで高い評価を得ています。R-1グランプリでは2022年から3年連続で決勝に進出するなど、実力派ピン芸人として確固たる地位を築きました。</p><p>ピン芸としての活動に加え、芸人仲間のどんぐりたけし、Yes!アキトとともに「怪奇!YesどんぐりRPG」を結成。息の合ったギャグ連発のスタイルでM-1グランプリでも話題を集めました。</p>",
+      "organ-description": "<p>マネジメントパートはこうよう祭の体育館ステージを設営したり、キッチンカーを決めたり、模擬店の運営をしたりします！大変だけどやりがいのある仕事です!ファイヤーもマネジメントの一部で毎日練習してます。</p>",
+      "author": "システムパート代筆",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "q2ph-nvxo",
+      "createdAt": "2026-10-18T05:53:20.762Z",
+      "updatedAt": "2026-10-29T00:38:07.077Z",
+      "publishedAt": "2026-10-18T05:53:20.762Z",
+      "revisedAt": "2026-10-29T00:38:07.077Z",
+      "slug": "finale",
+      "title": "ドローンショー",
+      "catchphrase": "フィナーレ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/41a55e5c66cb48579b324d2b0997d200/IMG_6958_%E9%88%B4%E6%9C%A8%20%E6%A2%A8%E5%A4%AE.jpeg",
+        "height": 1101,
+        "width": 960
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/41a55e5c66cb48579b324d2b0997d200/IMG_6958_%E9%88%B4%E6%9C%A8%20%E6%A2%A8%E5%A4%AE.jpeg",
+          "height": 1101,
+          "width": 960
+        }
+      ],
+      "organization": "こうよう祭幹部",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 16451800,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>こうよう祭のフィナーレを飾る、特別なドローンショー！体育館の中で繰り広げられる光の演出を、ぜひお楽しみください。こうよう祭の最後を彩る、忘れられないひとときを一緒に過ごしましょう！</p>",
+      "organ-description": "<p>こうよう祭幹部です。</p>",
+      "author": "こうよう祭幹部フィナーレ担当",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "m4msd_7sd",
+      "createdAt": "2026-10-14T12:04:12.740Z",
+      "updatedAt": "2026-10-21T06:06:31.333Z",
+      "publishedAt": "2026-10-14T12:04:12.740Z",
+      "revisedAt": "2026-10-21T06:06:31.333Z",
+      "slug": "club-band",
+      "title": "ステージ披露",
+      "catchphrase": "軽音部、生演奏！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a9cc827aa8d849cc86ee7136057a989e/iIBKYJQOkY2iA2d1792218503_1792218539.jpg",
+        "height": 578,
+        "width": 578
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5070b5fb5a36446191eed60cd1d03378/LINE_ALBUM_%E3%81%93%E3%81%86%E3%82%88%E3%81%86%E7%A5%AD2025_261017_1_20261017_154435.jpg",
+          "height": 960,
+          "width": 1280
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/78cdc837be804f36be4f147270fc28a3/LINE_ALBUM_%E3%81%93%E3%81%86%E3%82%88%E3%81%86%E7%A5%AD2025_261017_1_20261017_154527.jpg",
+          "height": 960,
+          "width": 1280
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0c891a29a8c54cb182fdc3836609e4a4/LINE_ALBUM_%E7%85%A7%E6%98%8E%E5%86%99%E7%9C%9F_261017_1.jpg",
+          "height": 1280,
+          "width": 960
+        }
+      ],
+      "organization": "軽音楽部",
+      "location": [
+        "図書館"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "多目的ホール",
+      "time-day1": 12001500,
+      "duration": 20,
+      "description": "<h1 id=\"h36c0d8b296\">軽音部 文化祭ステージライブ 2026</h1><p>みなさん、こんにちは！軽音部です！</p><p>今年もついにやってきました「こうよう祭」！部員一同、この日のために思いを込めて練習を重ねてきました。</p><p>当日は、世代を超えて愛される定番のロックナンバーから、チャートを賑わせる最新のヒット曲まで、バリエーション豊かな楽曲を次々とお届けします。<br>各バンドがそれぞれの個性を全開にして、観客のみなさんの心を揺さぶる最高の演奏を披露します！</p><p>音楽の力で会場をひとつにし、最高の盛り上がりを作り出したいと思っています。ぜひ手拍子や声援で、僕たちのステージに参加してください！<br>会場でお待ちしています。一緒に忘れられない熱いライブを作り上げましょう！<br></p><p><strong>【公演情報】</strong></p><ul><li><strong>場所:</strong> 多目的ホール（図書館棟１階）</li><li><strong>時間:</strong> 12:00~15:00（予定）</li></ul>",
+      "organ-description": "<h2 id=\"hca97e7805c\">団体紹介</h2><p>私たち軽音部は、音楽が好きな仲間が集まり、日々楽しく真剣に活動している部活です！<br>初心者から経験者まで幅広く所属しており、ボーカル、ギター、ベース、ドラム、キーボードなど、それぞれのパートで技術向上を目指して練習に励んでいます。</p><p>普段の活動では、自分たちでバンドを組み、ロック、ポップス、アニソンなど多岐にわたるジャンルの曲に挑戦しています。<br>互いにアドバイスを送り合いながら演奏を磨くことで、音を合わせる楽しさや表現する喜びを学んでいます。</p><h2 id=\"h1e8999396a\">こうよう祭に向けた意気込み</h2><p>「こうよう祭」のステージは、日頃の練習成果をみなさんに披露する最大の晴れ舞台です！<br>聴いてくださる方々に最高の笑顔と感動を届けられるよう、部員一丸となって準備を進めてきました。</p><p>会場のみなさんと音楽を通してひとつになれる特別な時間を心待ちにしています。ぜひ私たちの熱いパフォーマンスをご覧ください！</p>",
+      "author": "軽音部部長",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "o4nc-rg8buco",
+      "createdAt": "2026-10-14T05:22:36.549Z",
+      "updatedAt": "2026-10-29T00:38:07.084Z",
+      "publishedAt": "2026-10-14T05:22:36.549Z",
+      "revisedAt": "2026-10-29T00:38:07.084Z",
+      "slug": "event-janken-carnival",
+      "title": "じゃんけんカーニバル",
+      "catchphrase": "じゃんけん✊️✌️🖐️",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/79413db4e7de4ca2a690470c55356d71/event-janken-carnival.jpeg",
+        "height": 1280,
+        "width": 1280
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e05d2df7c1354841b82d5b0213b4f6a5/event-janken-carnival.jpeg",
+          "height": 1280,
+          "width": 1280
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 10301120,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>みんなでじゃんけん✊️✌️🖐️</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "システムパート代筆",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "90yyb17le3d",
+      "createdAt": "2026-10-14T05:22:02.084Z",
+      "updatedAt": "2026-10-29T00:38:07.043Z",
+      "publishedAt": "2026-10-14T05:22:02.084Z",
+      "revisedAt": "2026-10-29T00:38:07.043Z",
+      "slug": "event-asagopa",
+      "title": "朝ごパ",
+      "catchphrase": "朝はパン",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/deba4c78d5f24cd4a3dce3962e52b46c/event-asagopa.jpeg",
+        "height": 1024,
+        "width": 1024
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/423e9a14229e4649a38eead24a22cc27/event-asagopa.jpeg",
+          "height": 1024,
+          "width": 1024
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 9150940,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>毎年恒例、朝ごパです🥖🥖</p><p>みんなでパン食べよう</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "システムパート代筆",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "4h0guoc0l1",
+      "createdAt": "2026-10-14T05:21:25.706Z",
+      "updatedAt": "2026-10-28T05:06:35.113Z",
+      "publishedAt": "2026-10-14T05:21:25.706Z",
+      "revisedAt": "2026-10-28T05:06:35.113Z",
+      "slug": "event-youtuber",
+      "title": "YouTube決定戦",
+      "catchphrase": "高専で一番のYouTuberを決める！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/96d678c331f44a7ea49922bf1ee5095f/event-youtuber.jpeg",
+        "height": 768,
+        "width": 1408
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/96d678c331f44a7ea49922bf1ee5095f/event-youtuber.jpeg",
+          "height": 768,
+          "width": 1408
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 14151315,
+      "duration": 60,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>高専生で一番のYouTuberを決める!</p><p><br></p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "きよもと",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "vc450tv9h",
+      "createdAt": "2026-10-14T05:20:24.560Z",
+      "updatedAt": "2026-10-28T05:06:35.151Z",
+      "publishedAt": "2026-10-14T05:20:24.560Z",
+      "revisedAt": "2026-10-28T05:06:35.151Z",
+      "slug": "event-hiphop",
+      "title": "高専生Hip-Hop選手権",
+      "catchphrase": "高専でいちばんのhiphoperを決める！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/aa471decc9dd4008ab0a9507683ba751/IMG_1562_%E6%B8%85%E6%9C%AC%20%E6%82%A0%E4%B8%96.jpeg",
+        "height": 606,
+        "width": 1170
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2071b3396d9a4f0ca5b7b4c8d86f7d96/IMG_1523_%E6%B8%85%E6%9C%AC%20%E6%82%A0%E4%B8%96.jpeg",
+          "height": 4284,
+          "width": 5712
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 15001600,
+      "duration": 60,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>高専でいちばんのhiphoperを決める！</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "きよもと",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "ux7l1wy8v-hu",
+      "createdAt": "2026-10-14T05:18:28.709Z",
+      "updatedAt": "2026-10-28T05:06:35.121Z",
+      "publishedAt": "2026-10-14T05:18:28.709Z",
+      "revisedAt": "2026-10-28T05:06:35.121Z",
+      "slug": "event-kakuzuke-check",
+      "title": "高専生格付けチェック",
+      "catchphrase": "違いを見せつけろ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1bd197d8ec3341fda574e008f27c3faa/event-kakuzuke-check.jpg",
+        "height": 1254,
+        "width": 1254
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e6c06b22a8e64e098e43614622c1ecd6/event-kakuzuke-check.jpg",
+          "height": 1254,
+          "width": 1254
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 9151010,
+      "duration": 50,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>芸能人格付けチェックをオマージュした企画です。4人の参加者がクイズ、食べ比べ、大喜利で勝負します。愚かな高専生には下劣な称号と酷い仕打ちが待っています。誰が1番高貴な高専生なのか、その目に焼き付けてください！</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "1Iのしょた",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "2gpxgntx3hm",
+      "createdAt": "2026-10-14T05:17:40.418Z",
+      "updatedAt": "2026-10-28T05:06:35.105Z",
+      "publishedAt": "2026-10-14T05:17:40.418Z",
+      "revisedAt": "2026-10-28T05:06:35.105Z",
+      "slug": "event-anti-diversity",
+      "title": "アンチ多様性",
+      "catchphrase": "アンチ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b55e7ff12d7d4c9399d73777ea40587b/event-anti-diversity.png",
+        "height": 245,
+        "width": 255
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c862fb57b237420aaa1d9ae61da63c03/event-anti-diversity.png",
+          "height": 245,
+          "width": 255
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/369cef886d554b719f342bc074a15ff3/%E6%BA%96%E5%82%99%E4%B8%AD%E3%83%BB%E3%81%98%E3%82%85%E3%82%93%E3%81%B3%E3%81%A1%E3%82%85%E3%81%86%E3%83%BBzyu%E3%83%BBju.png",
+          "height": 400,
+          "width": 400
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 11001130,
+      "duration": 25,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>　私たちはアンチ多様性を行います。内容はマイノリティを排除するというものです。私たちは事前に一部の豊田高専生たちに、とある2択のアンケートを実施しました。それは回答がおよそ5:5に分かれるような問題です。例えば朝はパン派かご飯派などの問いです。参加者には、どちらの選択肢の方が豊田高専生に多く選ばれたのかを当ててもらいます。また、少数派を選択してしまった人たちは、その時点で脱落となります。そして、見事一定の問題まで勝ち残った人たちには豪華な景品が用意されています。</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "いっしー",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "2ilgy41asjy",
+      "createdAt": "2026-10-14T05:17:18.713Z",
+      "updatedAt": "2026-10-29T00:38:07.113Z",
+      "publishedAt": "2026-10-14T05:17:18.713Z",
+      "revisedAt": "2026-10-29T00:38:07.113Z",
+      "slug": "event-greatest-onna-gp",
+      "title": "Greatest女-1GP",
+      "catchphrase": "高専一の\"女\"は誰だ ──",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/067e0416215342139c81b0eb30c5a7f5/event-greatest-onna-gp.jpg",
+        "height": 1280,
+        "width": 1280
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/feb924c7264549168e9c8a77426c2cca/event-greatest-onna-gp.jpg",
+          "height": 1280,
+          "width": 1280
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 11201245,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>高専一の&quot;女&quot;は誰だ ───</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "システムパート代筆",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "f0fm8yhct2g",
+      "createdAt": "2026-10-14T05:16:41.709Z",
+      "updatedAt": "2026-10-28T05:06:35.117Z",
+      "publishedAt": "2026-10-14T05:16:41.709Z",
+      "revisedAt": "2026-10-28T05:06:35.117Z",
+      "slug": "event-toyorinpic",
+      "title": "トヨリンピック",
+      "catchphrase": "目指すは金メダル",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a6cb84b7d56143068abc58a7a10897a8/IMG_2657_%E6%9F%B4%E7%94%B0%20%E6%A5%93%E9%A6%AC.jpeg",
+        "height": 2048,
+        "width": 2048
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0d27aa3046254cc5a394a9b5b67657a7/event-toyorinpic.jpeg",
+          "height": 4284,
+          "width": 5712
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day2": 9401030,
+      "duration": 50,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>🏆豊田高専のNo.1金メダリストを決めるイベント🏆<br>🥇運動に自信がある人、ない人誰でも大歓迎🥇<br>❣️ぜひ来てください❣️</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "しばふ",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "28ff4zofu1y",
+      "createdAt": "2026-10-14T05:14:23.595Z",
+      "updatedAt": "2026-10-28T05:06:35.109Z",
+      "publishedAt": "2026-10-14T05:14:23.595Z",
+      "revisedAt": "2026-10-28T05:06:35.109Z",
+      "slug": "event-nikoichi",
+      "title": "No.1ニコイチ決定戦",
+      "catchphrase": "高専一心の通いあったニコイチは誰だ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3b62991868f6432eb15d0f2fdd56f820/event-nikoichi.jpg",
+        "height": 429,
+        "width": 430
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3b62991868f6432eb15d0f2fdd56f820/event-nikoichi.jpg",
+          "height": 429,
+          "width": 430
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 10101100,
+      "duration": 45,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>カップル系、友達系、ホンモノ系…様々なニコイチの中から最も心の通いあった真のニコイチを決めろ！</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "ゆのたろう",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "s45vhuehd",
+      "createdAt": "2026-10-14T05:11:15.113Z",
+      "updatedAt": "2026-10-28T05:06:35.092Z",
+      "publishedAt": "2026-10-14T05:11:15.113Z",
+      "revisedAt": "2026-10-28T05:06:35.092Z",
+      "slug": "event-utaou",
+      "title": "高専1の歌うまは誰だ！歌王",
+      "catchphrase": "高専1のうたうまは誰だ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/faba10d4039e41eda3cd3f38da8ce226/event-utaou.jpg",
+        "height": 459,
+        "width": 612
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8ef6acc18b984f54b92ecbacce204451/event-utaou.jpg",
+          "height": 459,
+          "width": 612
+        }
+      ],
+      "organization": "イベントパート",
+      "location": [
+        "ステージ"
+      ],
+      "floor": [],
+      "time-day1": 13301415,
+      "duration": 40,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>高専1のうたうまを決めます。歌王で歌おう！！</p>",
+      "organ-description": "<p>私たちイベントパートは、ステージイベントの企画や運営を行っています。</p><p>今年はたくさんの1年生が参加してくれました！何ヶ月も前から、みんなで協力しながら準備を進めてきました。</p><p>司会や音響など、他のパートとも連携しながら、来場者の皆さんに楽しんでもらえるイベントを目指して頑張っています。</p><p>ぜひ、私たちが作り上げたステージイベントを楽しんでいってください！</p>",
+      "author": "藤原櫻輔",
+      "category": [
+        "stage"
+      ]
+    },
+    {
+      "id": "2p6-n1dm56",
+      "createdAt": "2026-10-14T04:51:20.211Z",
+      "updatedAt": "2026-10-30T12:04:08.845Z",
+      "publishedAt": "2026-10-14T04:51:20.211Z",
+      "revisedAt": "2026-10-30T12:04:08.845Z",
+      "slug": "club-computer",
+      "title": "制作物展示・LT会",
+      "catchphrase": ">>++++++++[>+++++++++++<-]>-.<+++[>++++<-]>[->+>+<<]>++.[-<+<+>>]<+++++++.>>.<<+++.--.<.<+++++[<++++++>-]<+++.",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f8d1ea8d388d46af8fc55ce714f6acc5/NITTC-Computer-Club_logo_%E6%98%A5%E9%A7%88%20%E6%B7%B1%E8%B0%B7.png",
+        "height": 7808,
+        "width": 7808
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/63ba98a6dc7d4e58ac962c8f06e081e6/computer-bu3_%E6%98%A5%E9%A7%88%20%E6%B7%B1%E8%B0%B7%201.jpg",
+          "height": 2268,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/42496799aba24d638a0dbf4e208bb820/computer-bu2_%E6%98%A5%E9%A7%88%20%E6%B7%B1%E8%B0%B7%201.jpg",
+          "height": 2268,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f5b0adc929944dc1aa933f79ca8c4453/computer-bu_%E6%98%A5%E9%A7%88%20%E6%B7%B1%E8%B0%B7%201.jpg",
+          "height": 2268,
+          "width": 4032
+        }
+      ],
+      "organization": "コンピュータ部",
+      "location": [
+        "情報工学科棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "321教室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>コンピュータ部では、部員が制作したアプリやゲームなどを実際に触って体験できます！<br>また、部員によるLT発表（カジュアルな短いプレゼン会）も開催します！ゲーム開発、プログラミング、Linux、OSなど、コンピュータに関するさまざまなテーマについて発表します。</p><p>展示・LT発表ともに321教室で行います。</p><p>コンピュータに詳しい方も、興味を持ち始めたばかりの方も、ぜひお気軽にお越しください！</p><p></p><p>《LT会 発表プログラム》</p><p>■ 1日目</p><p>【11:00～】</p><ul><li>えむでおかねをかせぐほうほう～ソシャゲで学ぶ資金決済法～</li><li>AIコーディングって何？〜Unityでゲームを作ってみよう！〜</li><li>パーティションを分けずにLinux同士をデュアルブートする</li><li>古のシステム向けの化石言語でゲームエンジンを無理やり動かした話</li><li>Rustによるvimプラグイン開発</li><li>自宅サーバーを宣言しよう！ NixOSで始めるおうちインフラ</li></ul><p>【15:00～】</p><ul><li>初心者でもゲームは作れるっ！〜初心者の今のゲーム開発事情〜</li><li>AIコーディングって何？〜Unityでゲームを作ってみよう！〜</li><li>ともだちに唆されて謎のOSに移行した話</li><li>モテる！Linuxディストリビューションランキング！（独断）</li><li>Rustによるvimプラグイン開発</li><li>自宅サーバーを宣言しよう！ NixOSで始めるおうちインフラ</li></ul><p>■ 2日目</p><p>【10:00～】</p><ul><li>古のシステム向けの化石言語でゲームエンジンを無理やり動かした話</li><li>ともだちに唆されて謎のOSに移行した話</li><li>情報工学科ってぶっちゃけどんなところ？ --ゆる高専学ラジオ--</li><li>Rustによるvimプラグイン開発</li></ul><p>【12:00～】</p><ul><li>パーティションを分けずにLinux同士をデュアルブートする</li><li>私の愛するツールを紹介するだけ</li><li>自宅サーバーを宣言しよう！ NixOSで始めるおうちインフラ</li></ul><p>※発表内容や順番は変更になる場合があります。</p>",
+      "organ-description": "<p>高専プログラミングコンテスト・パソコン甲子園などのコンテストにむけた活動や、その他アプリ制作・ゲーム制作など、コンピュータに関わる幅広い活動を行っています。<br>授業だけでは物足りない学生たちが集って、技術を学んだり、作品を作ったり……そんな意欲的な学生たちが、高専生ならではの発想を持ち寄って活動しています。</p>",
+      "author": "コンピュータ部一同",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "hwf0swp82",
+      "createdAt": "2026-10-05T12:09:15.057Z",
+      "updatedAt": "2026-10-27T05:05:51.256Z",
+      "publishedAt": "2026-10-05T12:09:15.057Z",
+      "revisedAt": "2026-10-27T05:05:51.256Z",
+      "slug": "kitchen-hangurun",
+      "title": "はんぐるん",
+      "catchphrase": "Korean food",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ed8c6f4929bc440ba6421fcd3969aa17/%E3%81%AF%E3%82%93%E3%81%90%E3%82%8B%E3%82%93.jpg",
+        "height": 1049,
+        "width": 1061
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ed8c6f4929bc440ba6421fcd3969aa17/%E3%81%AF%E3%82%93%E3%81%90%E3%82%8B%E3%82%93.jpg",
+          "height": 1049,
+          "width": 1061
+        }
+      ],
+      "organization": "はんぐるん",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9001600,
+      "time-day2": 9001600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>当店はにんにく不使用で提供してます。</p><p>素材や油までこだわり全て自家製で老若男女どなたでも食べていただける韓国料理を韓国人である私店主が真心こめて作っております。</p><p>他では味わえないオリジナル韓国料理を是非一度ご賞味くださいませ。</p>",
+      "organ-description": "<p>当店はにんにく不使用で提供してます。</p><p>素材や油までこだわり全て自家製で老若男女どなたでも食べていただける韓国料理を韓国人である私店主が真心こめて作っております。</p><p>他では味わえないオリジナル韓国料理を是非一度ご賞味くださいませ。</p>",
+      "author": "はんぐるん",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "3dvxupf_l",
+      "createdAt": "2026-10-05T12:09:02.591Z",
+      "updatedAt": "2026-10-29T00:43:23.097Z",
+      "publishedAt": "2026-10-05T12:09:02.591Z",
+      "revisedAt": "2026-10-29T00:43:23.097Z",
+      "slug": "kitchen-ashiiro",
+      "title": "あしいろキッチンカー",
+      "catchphrase": "写真映えスイーツ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5e955530355345819984e19bf1e7392e/%E3%81%82%E3%81%84%E3%81%97%E3%82%8D%E3%82%AD%E3%83%81%E3%83%B3%E3%82%AB%E3%83%BC.png",
+        "height": 676,
+        "width": 958
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5e955530355345819984e19bf1e7392e/%E3%81%82%E3%81%84%E3%81%97%E3%82%8D%E3%82%AD%E3%83%81%E3%83%B3%E3%82%AB%E3%83%BC.png",
+          "height": 676,
+          "width": 958
+        }
+      ],
+      "organization": "あしいろキッチンカー",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9001500,
+      "time-day2": 9001600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>香港発祥のバブルワッフルをメインに商品を展開しております。もちっとした食感が特徴で、若い方に好評です。</p>",
+      "organ-description": "<p><a href=\"https://www.instagram.com/ashiiro.kitchencar?cplk=ODVyOHpubTd5cnMy&amp;utm_source=qr\">https://www.instagram.com/ashiiro.kitchencar?cplk=ODVyOHpubTd5cnMy&amp;utm_source=qr</a></p>",
+      "author": "あしいろキッチンカー",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "bk-glyndqq",
+      "createdAt": "2026-10-05T12:08:47.319Z",
+      "updatedAt": "2026-10-29T00:43:23.093Z",
+      "publishedAt": "2026-10-05T12:08:47.319Z",
+      "revisedAt": "2026-10-29T00:43:23.093Z",
+      "slug": "jerrys-uno-express",
+      "title": "jerry’s UNO Express",
+      "catchphrase": "メキシコ産まれ名古屋育ちUNOのタコス",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/7becf32d18714416ab2e47199c86c910/messageImage_1792314993608.jpg",
+        "height": 814,
+        "width": 828
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/7becf32d18714416ab2e47199c86c910/messageImage_1792314993608.jpg",
+          "height": 814,
+          "width": 828
+        }
+      ],
+      "organization": "jerry’s UNO Express",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9001700,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>野菜たっぷりヘルシーなタコスとタコライス、とり～りチーズのナチョスなど自家製フレッシュサルサとの相性も抜群です！</p><p>店舗は鶴舞と大須にございます。</p><p>メキシコ生まれ名古屋育ちのタコスを是非お試しください!</p>",
+      "organ-description": "<p>公式Instagram<br><a href=\"https://www.instagram.com/foodtruck_uno_express/\" target=\"_blank\" rel=\"noopener noreferrer\">@foodtruck_uno_express</a></p>",
+      "author": "jerry’s UNO Express",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "aaxsgab7hp",
+      "createdAt": "2026-10-05T12:08:34.956Z",
+      "updatedAt": "2026-10-29T00:43:23.089Z",
+      "publishedAt": "2026-10-05T12:08:34.956Z",
+      "revisedAt": "2026-10-29T00:43:23.089Z",
+      "slug": "nagomi",
+      "title": "なごみこまどや",
+      "catchphrase": "みんなでニコニコ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/fd95ec12e495434184ae3ce4c70e1546/messageImage_1792315517867.jpg",
+        "height": 953,
+        "width": 960
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/fd95ec12e495434184ae3ce4c70e1546/messageImage_1792315517867.jpg",
+          "height": 953,
+          "width": 960
+        }
+      ],
+      "organization": "なごみこまどや",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day2": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>食べたらみんなニコニコ笑顔。老若男女幅広い世代で楽しんで頂ける季節に合ったお団子＆和菓子をご提供致します。</p>",
+      "organ-description": "<p><a href=\"https://kitchencars-japan.com/k/komadoya\">https://kitchencars-japan.com/k/komadoya</a></p>",
+      "author": "なごみこまどや",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "wumoogb3r",
+      "createdAt": "2026-10-05T12:08:22.957Z",
+      "updatedAt": "2026-10-29T00:43:23.079Z",
+      "publishedAt": "2026-10-05T12:08:22.957Z",
+      "revisedAt": "2026-10-29T00:43:23.079Z",
+      "slug": "cotamacafe",
+      "title": "樹神cafe",
+      "catchphrase": "食べても 飲んでも 楽しい 美味しい ハイブリッドシェイク",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2f6fba31ebd34e47be7ce7e975d35ef4/%E6%A8%B9%E7%A5%9E%E3%82%AB%E3%83%95%E3%82%A7.jpg",
+        "height": 343,
+        "width": 342
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2f6fba31ebd34e47be7ce7e975d35ef4/%E6%A8%B9%E7%A5%9E%E3%82%AB%E3%83%95%E3%82%A7.jpg",
+          "height": 343,
+          "width": 342
+        }
+      ],
+      "organization": "樹神cafe",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>ハイブリッドシェイク専門<br>樹神cafe<br><br>ミルクソフトは長野県の良質な湧き水と水牧で育った牛からの新鮮で濃厚な牛乳を使用<br>ミルクソフトにあなた好みのフレーバーをお選びください<br>食べても 飲んでも <br>楽しい 美味しい<br>ハイブリッドシェイク</p>",
+      "organ-description": "<p>樹神cafeは、<br>PRISM designer ATSUSHI YOSHIDA が監修でスタートし、その後<br>ヴィナスコレクション<br>20歳〜100歳までの方の人生観や美学をランウェイで表していただくファッションショーを企画、およびエステティシャンのスタッフが引き継いでおります。<br>食べても 飲んでも 楽しい 美味しい<br>ハイブリッドシェイク<br>ぜひ、お楽しみいただけたらと思います。</p>",
+      "author": "樹神cafe",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "ya_q8l1not5",
+      "createdAt": "2026-10-05T12:08:11.258Z",
+      "updatedAt": "2026-10-29T00:43:23.084Z",
+      "publishedAt": "2026-10-05T12:08:11.258Z",
+      "revisedAt": "2026-10-29T00:43:23.084Z",
+      "slug": "nicotto",
+      "title": "ニコット",
+      "catchphrase": "焼きたては究極のトロトロ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/02437c16104b480e9fdbaf162709bce5/nicotto.jpg",
+        "height": 757,
+        "width": 715
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/02437c16104b480e9fdbaf162709bce5/nicotto.jpg",
+          "height": 757,
+          "width": 715
+        }
+      ],
+      "organization": "ニコット",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9001700,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>７種類のお出汁生地に作手高原の美味しいお水、卵、新鮮な山芋、ねぎを使用しています。</p><p>ソースはnicotto特性オリジナルソース<br>焼き立ては究極のトロトロです。</p><p>大阪出身店主が作る本場大阪の味。</p>",
+      "organ-description": "<p>本場大阪の味をお届けするキッチンカー「nicotto（ニコット）」です🐙 焼きたてのおいしさにこだわっています！ </p><p>Instagram→<a href=\"https://www.instagram.com/nicotto1230?vrfl=MTcyY3c4ZnBkMWxoNw%3D%3D&amp;utm_source=qr\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.instagram.com/nicotto1230</a></p>",
+      "author": "ニコット",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "94wzs0b6u4_1",
+      "createdAt": "2026-10-05T12:07:59.413Z",
+      "updatedAt": "2026-10-29T00:43:23.056Z",
+      "publishedAt": "2026-10-05T12:07:59.413Z",
+      "revisedAt": "2026-10-29T00:43:23.056Z",
+      "slug": "ichi",
+      "title": "壱-ichi-",
+      "catchphrase": "一口でわかる、壱番の味！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e02c4dea8c9d4a94b32bdbe851628dc0/messageImage_1792315469898.jpg",
+        "height": 960,
+        "width": 960
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e02c4dea8c9d4a94b32bdbe851628dc0/messageImage_1792315469898.jpg",
+          "height": 960,
+          "width": 960
+        }
+      ],
+      "organization": "壱ichi",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9001600,
+      "time-day2": 9001600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>ジューシーなケバブサンドや、大人気のタンフルやひんやり冷凍みかんなどのスイーツまで大集合。</p><p>食べ歩きにぴったりな美味しいメニューをご用意して、皆様のご来店をお待ちしています！</p>",
+      "organ-description": "<p>ジューシーなケバブサンドや、大人気のタンフルやひんやり冷凍みかんなどのスイーツまで大集合。</p><p>食べ歩きにぴったりな美味しいメニューをご用意して、皆様のご来店をお待ちしています！</p>",
+      "author": "壱-ichi-",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "0b8ubo3cg",
+      "createdAt": "2026-10-05T12:07:47.272Z",
+      "updatedAt": "2026-10-29T00:43:23.047Z",
+      "publishedAt": "2026-10-05T12:07:47.272Z",
+      "revisedAt": "2026-10-29T00:43:23.047Z",
+      "slug": "westend",
+      "title": "うえすとえんど",
+      "catchphrase": "主食からスイーツまで揃います。",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2740b96b73724904bc6f6bce422ddf65/%E3%81%86%E3%81%88%E3%81%99%E3%81%A8%E3%82%89%E3%82%93%E3%81%A9.jpg",
+        "height": 2673,
+        "width": 2691
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2740b96b73724904bc6f6bce422ddf65/%E3%81%86%E3%81%88%E3%81%99%E3%81%A8%E3%82%89%E3%82%93%E3%81%A9.jpg",
+          "height": 2673,
+          "width": 2691
+        }
+      ],
+      "organization": "うえすとえんど",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 10001600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>豊田高専祭守山区でパン屋さんを営む「うえすとえんど」です。<br>@panya_westend</p><p>主食からスイーツまで幅広く揃えてお待ち申し上げます。<br>時間を変えてリピートして頂き、当店自慢のオリジナルfoodsをお楽しみください。</p>",
+      "organ-description": "<p>街のパン屋さんとして、アメリカでの食の勉強を活かしたオリジナルメニューの数々を開発中のオーナーです。</p>",
+      "author": "うえすとえんど",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "wodyaky9hsqe",
+      "createdAt": "2026-10-05T12:07:35.088Z",
+      "updatedAt": "2026-10-29T00:43:23.064Z",
+      "publishedAt": "2026-10-05T12:07:35.088Z",
+      "revisedAt": "2026-10-29T00:43:23.064Z",
+      "slug": "kitchen-karaage178",
+      "title": "karaage178",
+      "catchphrase": "178のからあげで全ての人をhappyに",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1ad254e043b34e38a90a1c992899d40f/messageImage_1792314946169_0.jpg",
+        "height": 960,
+        "width": 960
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1ad254e043b34e38a90a1c992899d40f/messageImage_1792314946169_0.jpg",
+          "height": 960,
+          "width": 960
+        }
+      ],
+      "organization": "karaage178",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day2": 9001700,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>2011年創業のからあげ178はキッチンカーグランプリ優勝8回・準優勝3回を誇り東海地区No.1の行列必至の人気店へと成長。</p><p>24時間以上漬け込んだ秘伝ダレで旨味を引き出しサクッとジューシーに揚げた熱々のからあげに特製タレをたっぷりかけて提供。</p><p>2019年にはHALAL認定を取得し、日本を超えて世界一のからあげ屋を目指します。</p>",
+      "organ-description": "<p>2011年創業のからあげ178はキッチンカーグランプリ優勝8回・準優勝3回を誇り東海地区No.1の行列必至の人気店へと成長。</p><p>24時間以上漬け込んだ秘伝ダレで旨味を引き出しサクッとジューシーに揚げた熱々のからあげに特製タレをたっぷりかけて提供。</p><p>2019年にはHALAL認定を取得し、日本を超えて世界一のからあげ屋を目指します。</p>",
+      "author": "karaage178",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "zgpenh-na_74",
+      "createdAt": "2026-10-05T12:07:22.931Z",
+      "updatedAt": "2026-10-29T00:43:23.075Z",
+      "publishedAt": "2026-10-05T12:07:22.931Z",
+      "revisedAt": "2026-10-29T00:43:23.075Z",
+      "slug": "peacecafe",
+      "title": "peacecafe",
+      "catchphrase": "焼きたてクロワッサンのサンドイッチ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b65a0e26bcac40cea0c6433646b76547/peacecafe.jpg",
+        "height": 2000,
+        "width": 2000
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b65a0e26bcac40cea0c6433646b76547/peacecafe.jpg",
+          "height": 2000,
+          "width": 2000
+        }
+      ],
+      "organization": "peacecafe",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>フランス産発酵バターのクロワッサンをキッチンカーの中で焼き上げてサンドイッチにしています。<br>スモークサーモンやローストビーフなどのご褒美サンドやクロワッサンソフトやクリームクロワッサンなどのスイーツもオススメです。</p>",
+      "organ-description": "<p>名古屋を拠点に愛知・岐阜・三重をキッチンカーで移動しています。<br>ピース・カフェです。<br><a href=\"http://www.instagram.com/kitchen.car_peacecafe\">http://www.instagram.com/kitchen.car_peacecafe</a><br>で出店情報などをあげています。<br>見てね。</p>",
+      "author": "peacecafe",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "82vb_sn8u461",
+      "createdAt": "2026-10-05T12:07:11.030Z",
+      "updatedAt": "2026-10-29T00:43:23.06Z",
+      "publishedAt": "2026-10-05T12:07:11.030Z",
+      "revisedAt": "2026-10-29T00:43:23.06Z",
+      "slug": "kitchen-yorimichi-cafe",
+      "title": "よりみちCafe",
+      "catchphrase": "究極の天使のあげぱん！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ff25139f71f14d708d20b82a0e976b1b/messageImage_1792315118560.jpg",
+        "height": 960,
+        "width": 960
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ff25139f71f14d708d20b82a0e976b1b/messageImage_1792315118560.jpg",
+          "height": 960,
+          "width": 960
+        }
+      ],
+      "organization": "よりみちCafe",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day2": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>当店のこだわりの&quot;あげぱん&quot;は、外はサクッと中はふわふわ！<br>究極の軽い口どけで、まるで天使のよう！今までのあげぱんの概念が変わります！！！</p><p>給食を思い出す懐かしいメニューなのに、給食とは違う&quot;あげぱん&quot;</p><p>ぜひご賞味ください！</p>",
+      "organ-description": "<p>Instagramのチェックをぜひお願いします！<br><a href=\"https://www.instagram.com/yorimichi_cafe_/\" target=\"_blank\" rel=\"noopener noreferrer\">@yorimichi_cafe_</a><br>アカウントはこちら！↖️</p>",
+      "author": "よりみちCafe",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "2k24ptigf7",
+      "createdAt": "2026-10-05T12:06:58.451Z",
+      "updatedAt": "2026-10-29T00:43:23.034Z",
+      "publishedAt": "2026-10-05T12:06:58.451Z",
+      "revisedAt": "2026-10-29T00:43:23.034Z",
+      "slug": "karadeniz",
+      "title": "KARADENIZ",
+      "catchphrase": "本場トルコケバブ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e9f53f4ca9234af3a6269f905d66b3b4/KARADENIS.jpg",
+        "height": 1254,
+        "width": 1254
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e9f53f4ca9234af3a6269f905d66b3b4/KARADENIS.jpg",
+          "height": 1254,
+          "width": 1254
+        }
+      ],
+      "organization": "KARADENIZ",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9301600,
+      "time-day2": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>トルコ・黒海地方の伝統を感じる、こだわりの本格ケバブ！香ばしく焼き上げたジューシーなお肉と、新鮮な野菜、オリジナルソースが織りなす絶妙なハーモニー。一口食べればやみつきになる、本場の味をお届けします。<br><br>黒海地方のこだわりと本場トルコの美味しさを、ぜひご賞味ください！</p>",
+      "organ-description": "<p><a href=\"https://www.instagram.com/karadeniiz.restaurant\">https://www.instagram.com/karadeniiz.restaurant</a></p>",
+      "author": "KARADENIZ",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "2det_znns",
+      "createdAt": "2026-10-05T12:06:46.111Z",
+      "updatedAt": "2026-10-29T00:43:23.07Z",
+      "publishedAt": "2026-10-05T12:06:46.111Z",
+      "revisedAt": "2026-10-29T00:43:23.07Z",
+      "slug": "kskitchen",
+      "title": "K’skitchen",
+      "catchphrase": "災害対応車両の看護師キッチンカー",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f50e005c7c14456e8b02d02966bc547d/K's%20%E3%82%AD%E3%83%83%E3%83%81%E3%83%B3.jpg",
+        "height": 1024,
+        "width": 1024
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f50e005c7c14456e8b02d02966bc547d/K's%20%E3%82%AD%E3%83%83%E3%83%81%E3%83%B3.jpg",
+          "height": 1024,
+          "width": 1024
+        }
+      ],
+      "organization": "K’skitchen",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day2": 9001700,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>メインメニューｈあ、素材にこだわり素材の相性にもこだわった究極のふわとろオムレツサンドです。</p><p>味GOODS、見た目GOOD、ボリュームGOODのオムレツサンドです！</p><p>食事の後のスイーツ＆ドリンクもご用意しています。<br>是非お立ち寄りください。</p><p>また当キッチンカーは、災害車両登録された看護師キッチンカーです。</p>",
+      "organ-description": "<p>愛知、岐阜、三重、滋賀でキッチンカーの営業をしています。お問い合わせはホームページやInstagramでお願いします！<br>●ホームページ<br><a href=\"https://kskitchen2024.jimdofree.com/\">https://kskitchen2024.jimdofree.com/</a><br>●Instagram<br><a href=\"https://www.instagram.com/ks_kitchen2023/\">https://www.instagram.com/ks_kitchen2023/</a></p>",
+      "author": "K’skitchen",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "mpyw-hu5xzg",
+      "createdAt": "2026-10-05T12:06:33.686Z",
+      "updatedAt": "2026-10-29T00:43:23.101Z",
+      "publishedAt": "2026-10-05T12:06:33.686Z",
+      "revisedAt": "2026-10-29T00:43:23.101Z",
+      "slug": "kitchen-inoten-gyoza",
+      "title": "猪天餃子",
+      "catchphrase": "濃厚薄皮生餃子",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/16e58084dd1542aeaf01e270ceb8405d/messageImage_1792315479545.jpg",
+        "height": 543,
+        "width": 543
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/16e58084dd1542aeaf01e270ceb8405d/messageImage_1792315479545.jpg",
+          "height": 543,
+          "width": 543
+        }
+      ],
+      "organization": "猪天餃子",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>創業40年の歴史を引き継いだ、愛知県春日井市発祥の猪天餃子。人気の生餃子は特注の薄皮により、外はパリパリ、中はジューシーな餃子で【タレなし餃子】として好評をいただいております。ここでしか食べられない自慢の一品を、ぜひご堪能ください。</p>",
+      "organ-description": "<p>創業40年の歴史を引き継いだ、愛知県春日井市発祥の猪天餃子。人気の生餃子は特注の薄皮により、外はパリパリ、中はジューシーな餃子で【タレなし餃子】として好評をいただいております。ここでしか食べられない自慢の一品を、ぜひご堪能ください。</p>",
+      "author": "猪天餃子",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "bw80tz09s6fo",
+      "createdAt": "2026-10-05T12:06:21.254Z",
+      "updatedAt": "2026-10-29T00:43:23.052Z",
+      "publishedAt": "2026-10-05T12:06:21.254Z",
+      "revisedAt": "2026-10-29T00:43:23.052Z",
+      "slug": "kitchen-juju-de-sweet",
+      "title": "juju de sweet",
+      "catchphrase": "米粉チュロスとクリスピーポテトのお店",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0aca9f818c4c4b42acc747add8f2a199/juju_de_sweets.jpg",
+        "height": 931,
+        "width": 1242
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0aca9f818c4c4b42acc747add8f2a199/juju_de_sweets.jpg",
+          "height": 931,
+          "width": 1242
+        }
+      ],
+      "organization": "juju de sweet",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day2": 9301600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>フライドポテトアンバサダーが作るクリスピーポテトと手作り米粉チュロスが自慢のお店です。<br>静岡県磐田市から参加です。</p>",
+      "organ-description": "<p><a href=\"https://www.instagram.com/juju_de_sweets/\" target=\"_blank\" rel=\"noopener noreferrer\">@juju_de_sweets</a></p>",
+      "author": "juju de sweet",
+      "category": [
+        "food-truck"
+      ]
+    },
+    {
+      "id": "yfp-3472l68",
+      "createdAt": "2026-10-05T11:56:20.947Z",
+      "updatedAt": "2026-10-29T00:38:07.081Z",
+      "publishedAt": "2026-10-05T11:56:20.947Z",
+      "revisedAt": "2026-10-29T00:38:07.081Z",
+      "slug": "club-badminton",
+      "title": "ポテトをスマッシュ！",
+      "catchphrase": "バド部のポテト",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b90a8f66060848559da153dbc471e23b/IMG_7416_%E5%A4%8F%E7%9B%AE%20%E7%B5%90%E5%A5%88.png",
+        "height": 1024,
+        "width": 1536
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/9de49282127b4a1a959cedd2547a27c8/IMG_7896_%E5%A4%8F%E7%9B%AE%20%E7%B5%90%E5%A5%88.jpeg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/72dda03992594f638eaa4b87f3a1331a/IMG_8239_%E5%A4%8F%E7%9B%AE%20%E7%B5%90%E5%A5%88.jpeg",
+          "height": 4284,
+          "width": 5712
+        }
+      ],
+      "organization": "バドミントン部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>バド部が一緒懸命あげまーす！</p>",
+      "organ-description": "<p>インスタ　toyota.kosenbadminton</p>",
+      "author": "なっつ",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "umvyismm7",
+      "createdAt": "2026-10-05T11:56:07.861Z",
+      "updatedAt": "2026-10-29T00:38:07.105Z",
+      "publishedAt": "2026-10-05T11:56:07.861Z",
+      "revisedAt": "2026-10-29T00:38:07.105Z",
+      "slug": "club-barbar-iwama",
+      "title": "barbar岩間",
+      "catchphrase": "お手つき禁止のジュース！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/214ecd838cda4a36830bab695a4bdef3/IMG_1778_%E5%90%89%E5%B7%9D%20%E7%91%9E%E8%A6%8F.jpeg",
+        "height": 1280,
+        "width": 959
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8f5c9bd9b3e34ef3a4b0624440ffed65/IMG_1900_%E5%90%89%E5%B7%9D%20%E7%91%9E%E8%A6%8F.jpeg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/4758e503ea89473599f578ffcb7c5651/IMG_1897_%E5%90%89%E5%B7%9D%20%E7%91%9E%E8%A6%8F.jpeg",
+          "height": 900,
+          "width": 900
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/4d6b7558b6e84f739ec4d1507d860241/IMG_1899_%E5%90%89%E5%B7%9D%20%E7%91%9E%E8%A6%8F.jpeg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/bafd823287084548b11a63e60400c93b/IMG_1898_%E5%90%89%E5%B7%9D%20%E7%91%9E%E8%A6%8F.jpeg",
+          "height": 2560,
+          "width": 1139
+        }
+      ],
+      "organization": "おうきのにっきさぶ",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<figure><img src=\"https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/06a89ca9a03e4b15b78c34c71e9cb26a/1000004930.png\" alt=\"\" width=\"1500\" height=\"150\"></figure>",
+      "organ-description": "<p>おうきのにっきさぶ</p>",
+      "author": "吉川",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "xk21-_3fen5",
+      "createdAt": "2026-10-05T11:55:52.109Z",
+      "updatedAt": "2026-10-29T00:38:07.093Z",
+      "publishedAt": "2026-10-05T11:55:52.109Z",
+      "revisedAt": "2026-10-29T00:38:07.093Z",
+      "slug": "club-volleyball",
+      "title": "バレー部の焼き鳥スパイク",
+      "catchphrase": "バレー部の焼き鳥",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2775915cdab8442cbcf4e65b1f8df13a/IMG_3677_%E4%B8%AD%E6%9D%91%20%E3%81%8B%E3%81%AE%E3%82%93.jpeg",
+        "height": 1254,
+        "width": 1254
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2775915cdab8442cbcf4e65b1f8df13a/IMG_3677_%E4%B8%AD%E6%9D%91%20%E3%81%8B%E3%81%AE%E3%82%93.jpeg",
+          "height": 1254,
+          "width": 1254
+        }
+      ],
+      "organization": "バレーボール部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 4,
+      "participantsLL": 1,
+      "description": "<p>バレー部で作る焼き鳥！！<br>おいしいよ！！みんなきて！！<br><br>バレー部のチキン達は普段よく飛びますが今日はこのチキン共をフライではなくグリルにしていきます✨🕊️</p>",
+      "organ-description": "<p>男子バレー部は毎週月、水、木、土曜日に、<br>女子バレー部は木・金・土曜日に第1体育館で活動しています！<br>興味ある方はぜひ来てね！</p>",
+      "author": "中村・山田",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "oxs7f7p67",
+      "createdAt": "2026-10-05T11:55:38.699Z",
+      "updatedAt": "2026-10-29T00:38:07.056Z",
+      "publishedAt": "2026-10-05T11:55:38.699Z",
+      "revisedAt": "2026-10-29T00:38:07.056Z",
+      "slug": "club-soft-tennis",
+      "title": "ソフテニのたません！",
+      "catchphrase": "ソフテニのたません",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/7997f95dba9f4bceb1877403a6e84faf/IMG_1192_%E6%B8%85%E6%9C%AC%20%E6%82%A0%E4%B8%96.jpeg",
+        "height": 639,
+        "width": 1170
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/57c11b0321394e16a48f5aa53fa4185e/IMG_1192_%E6%B8%85%E6%9C%AC%20%E6%82%A0%E4%B8%96.jpeg",
+          "height": 639,
+          "width": 1170
+        }
+      ],
+      "organization": "ソフトテニス",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "participantsUL": 3,
+      "participantsLL": 3,
+      "description": "<p>ソフテニのたません！</p>",
+      "organ-description": "<p>ソフテニのたません！</p>",
+      "author": "きよちゃん",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "av22i42dv",
+      "createdAt": "2026-10-05T11:55:24.504Z",
+      "updatedAt": "2026-10-29T00:38:07.064Z",
+      "publishedAt": "2026-10-05T11:55:24.504Z",
+      "revisedAt": "2026-10-29T00:38:07.064Z",
+      "slug": "club-girls-basketball",
+      "title": "女バスのchuロス",
+      "catchphrase": "女バスのチュロス",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8f5f6b4e0d344450be164b13cacac363/IMG_1545_%E7%AB%8B%E9%81%93%20%E9%99%BD%E8%8E%89.jpeg",
+        "height": 1040,
+        "width": 1400
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/faf6e02a54dd4ba1ad522294e83bd157/IMG_0039_%E7%AB%8B%E9%81%93%20%E9%99%BD%E8%8E%89.jpeg",
+          "height": 720,
+          "width": 1280
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ff48528de6e342ccafc4274b28036760/IMG_0038_%E7%AB%8B%E9%81%93%20%E9%99%BD%E8%8E%89.jpeg",
+          "height": 1280,
+          "width": 960
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d718ae54a18845568e3893ff4206da6d/IMG_0041_%E7%AB%8B%E9%81%93%20%E9%99%BD%E8%8E%89.jpeg",
+          "height": 960,
+          "width": 1706
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/38b3517ca3e1422c98a0c22eb5ae103f/IMG_1587_%E7%AB%8B%E9%81%93%20%E9%99%BD%E8%8E%89.jpeg",
+          "height": 1477,
+          "width": 1108
+        }
+      ],
+      "organization": "女子バスケットボール部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>女バスがつくる美味しいチュロスはいかが？味はシュガーとココアから選べて一本150円です！！部員一同、精一杯の愛を込めて作ります💝</p>",
+      "organ-description": "<p>女バスのInstagramはこちら↓</p><p><a href=\"https://www.instagram.com/nittc._.basket\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.instagram.com/nittc._.basket</a></p>",
+      "author": "女バス模擬店代表",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "r54if1b37e",
+      "createdAt": "2026-10-05T11:55:07.801Z",
+      "updatedAt": "2026-10-29T00:38:07.073Z",
+      "publishedAt": "2026-10-05T11:55:07.801Z",
+      "revisedAt": "2026-10-29T00:38:07.073Z",
+      "slug": "team-grade2",
+      "title": "あげあげ餃子",
+      "catchphrase": "2年有志の餃子",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/cf66725b57c5479da2acb0c36c734ccc/BEB5802E-B1EA-4520-B191-380BF9CAE6BD_%E5%A5%A5%E6%9D%91%20%E5%B9%B8%E4%B9%85.png",
+        "height": 1070,
+        "width": 1470
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/cf66725b57c5479da2acb0c36c734ccc/BEB5802E-B1EA-4520-B191-380BF9CAE6BD_%E5%A5%A5%E6%9D%91%20%E5%B9%B8%E4%B9%85.png",
+          "height": 1070,
+          "width": 1470
+        }
+      ],
+      "organization": "2年有志",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>２年生でつくる揚げ餃子です！！人生かけてつくったのでいっぱい食べてください。</p>",
+      "organ-description": "<p>２年生でつくる揚げ餃子です！！人生かけてつくったのでいっぱい食べてください。</p>",
+      "author": "松村悠貴",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "q_7bdf0or",
+      "createdAt": "2026-10-05T11:54:46.955Z",
+      "updatedAt": "2026-10-30T12:04:36.785Z",
+      "publishedAt": "2026-10-05T11:54:46.955Z",
+      "revisedAt": "2026-10-30T12:04:36.785Z",
+      "slug": "club-interact",
+      "title": "インターアクトクラブ",
+      "catchphrase": "かりんとうの販売をします！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0c50c6bc33614d4ea6ae4b889763ba53/IMG_4133_%E9%BA%BB%E7%94%9F%20%E6%98%8E%E8%89%AF.jpeg",
+        "height": 578,
+        "width": 564
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/132d4f8aabac4143801a20e1429ee213/IMG_3962_%E9%BA%BB%E7%94%9F%20%E6%98%8E%E8%89%AF.jpeg",
+          "height": 1108,
+          "width": 1477
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a8f9fa5b2da14cfd9ff8a6d9572a5b32/IMG_3966_%E9%BA%BB%E7%94%9F%20%E6%98%8E%E8%89%AF.jpeg",
+          "height": 1477,
+          "width": 1108
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/139a85e85c914a7f9b374110277a3aba/IMG_4134_%E9%BA%BB%E7%94%9F%20%E6%98%8E%E8%89%AF.jpeg",
+          "height": 960,
+          "width": 1706
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/201af226b62941879cedcd56cb5e5be2/IMG_3970_%E9%BA%BB%E7%94%9F%20%E6%98%8E%E8%89%AF.jpeg",
+          "height": 1074,
+          "width": 1108
+        }
+      ],
+      "organization": "インターアクトクラブ",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>障害者支援センターのけやきワークスさんで皆さんが作っているかりんとう4種類と障がい福祉と地域を結ぶアンテナショップきらりさんで作られているお菓子を販売します！<br>また模擬店以外にも募金を行い、高専近くにある児童養護施設の梅ヶ丘学園に全額寄付します！寄付してくださった方には糸をよるところから始めた手作りのミサンガをプレゼントします！<br>ぜひみなさん来てみてください！</p>",
+      "organ-description": "<p>毎週の活動ではミサンガを編んだり、おしゃべりしたり仲良く活動しています！<br>また土日にはボランティアや清掃活動などに参加しています！<br>活動日は毎週火曜日の放課後、活動場所はです！<br>興味があったらぜひ見にきてください！</p>",
+      "author": "麻生明良",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "r94pjlwq4f",
+      "createdAt": "2026-10-05T11:54:23.742Z",
+      "updatedAt": "2026-10-30T12:04:48.582Z",
+      "publishedAt": "2026-10-05T11:54:23.742Z",
+      "revisedAt": "2026-10-30T12:04:48.582Z",
+      "slug": "club-fortune-telling",
+      "title": "占いの館",
+      "catchphrase": "マッチング・タロット・手相など！全部占っちゃうよ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/cba7a43638914161bfe527995c453273/IMG_4870_%E6%B1%9F%E9%83%B7%20%E6%9F%9A%E5%B8%8C%201.jpeg",
+        "height": 1193,
+        "width": 896
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/48f02c2313dd4493a42f88319393b4c7/no-image.png",
+          "height": 1024,
+          "width": 1024
+        }
+      ],
+      "organization": "4.5年女子",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>マッチング・タロット・手相など！全部占っちゃうよ！飲み物もあるので気軽に来てください！</p>",
+      "organ-description": "<p>4.5年女子の友達同士です</p>",
+      "author": "4.5年女子",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "w8jrtwap2g7u",
+      "createdAt": "2026-10-05T11:47:41.263Z",
+      "updatedAt": "2026-10-29T00:38:07.089Z",
+      "publishedAt": "2026-10-05T11:47:41.263Z",
+      "revisedAt": "2026-10-29T00:38:07.089Z",
+      "slug": "club-brassband2",
+      "title": "吹奏楽部の焼きそば",
+      "catchphrase": "吹奏楽部の焼きそば",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ece4bc02e1a845ecabc7cd4b2f8ab691/1681372577745%20(2)_%E8%A5%BF%E6%A3%AE%20%E8%81%96%E6%B5%81.jpg",
+        "height": 512,
+        "width": 512
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ece4bc02e1a845ecabc7cd4b2f8ab691/1681372577745%20(2)_%E8%A5%BF%E6%A3%AE%20%E8%81%96%E6%B5%81.jpg",
+          "height": 512,
+          "width": 512
+        }
+      ],
+      "organization": "吹奏楽部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>毎年恒例の吹奏楽部によるイカ入りソース焼きそばです。部員が鉄板を使って皆様の目の前で焼き上げるので、熱々出来立ての焼きそばを頂けます。<br>ぜひぜひ食べに来てください!</p>",
+      "organ-description": "<p>日曜日の午後に第1体育館にて演奏しますのでぜひ聴きに来てください！</p>",
+      "author": "焼きそば代表",
+      "category": [
+        "booth"
+      ]
+    },
+    {
+      "id": "kh29lakeatnv",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:05:00.706Z",
+      "publishedAt": "2026-08-29T09:03:12.24Z",
+      "revisedAt": "2026-10-30T12:05:00.706Z",
+      "slug": "club-drama",
+      "title": "映像上映",
+      "catchphrase": "何度も楽しめる！短編コメディ二本立て！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a294ae8e1f534d09912109d833de3e3e/form1_r1_q4__%E3%82%8D%E3%81%94_%E6%9E%97%E7%94%B0%20%E6%80%9C%E5%A5%88.jpg",
+        "height": 1279,
+        "width": 1279
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a294ae8e1f534d09912109d833de3e3e/form1_r1_q4__%E3%82%8D%E3%81%94_%E6%9E%97%E7%94%B0%20%E6%80%9C%E5%A5%88.jpg",
+          "height": 1279,
+          "width": 1279
+        }
+      ],
+      "organization": "演劇部",
+      "location": [
+        "一般管理棟"
+      ],
+      "floor": [
+        "3階"
+      ],
+      "classroom": "CALL教室",
+      "time-day1": 9001645,
+      "time-day2": 9001330,
+      "duration": 15,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>今年はコメディ短編を制作しました！まとめて2本セットで上映するので、時間によって異なる作品集が楽しめます！ぜひ何回も訪れてみてください！</p>",
+      "organ-description": "<p>こうよう祭で上映する映像を撮影しています。常時活動では演劇の練習としてTRPGをやっています。</p>",
+      "author": "演劇部部長",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "n6ojht43tbam",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:05:11.645Z",
+      "publishedAt": "2026-08-29T09:03:12.232Z",
+      "revisedAt": "2026-10-30T12:05:11.645Z",
+      "slug": "club-astronomy",
+      "title": "天文同好会展示",
+      "catchphrase": "無料のプラネタリウム！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5c760e3f8edc4d239d2e7ac91bf5bfdf/%E5%A4%A9%E6%96%87%20%E5%90%8C%E5%A5%BD%E4%BC%9A_%E6%99%83%E5%BC%98%20%E5%B1%B1%E5%8F%A3.png",
+        "height": 720,
+        "width": 720
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b0cf015c8d6340d9a521214cf5ffccd0/PXL_20241101_035412365_%E6%99%83%E5%BC%98%20%E5%B1%B1%E5%8F%A3.jpg",
+          "height": 3072,
+          "width": 4080
+        }
+      ],
+      "organization": "天文同好会",
+      "location": [
+        "第２講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "422教室",
+      "time-day1": 9151600,
+      "time-day2": 9151330,
+      "duration": 20,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>今年も段ボールでドームを<strong>手作り</strong>しました！（前日完成予定）<br>約15分かけて、一年間の星空を楽しく解説します！<br>また、初心者から上級者まで楽しめる天文クイズも作成しました。<br>ぜひご来場ください！！</p>",
+      "organ-description": "<p>天文同好会では文化祭のプラネタリウム展示の他にも、望遠鏡で天体観測をしたり、山奥に合宿に行き満点の星空を眺めたりしています。</p>",
+      "author": "天文同好会次期代表",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "rwor5faj6hs2",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:05:21.188Z",
+      "publishedAt": "2026-08-29T09:03:12.214Z",
+      "revisedAt": "2026-10-30T12:05:21.188Z",
+      "slug": "club-railway",
+      "title": "鉄航研展示 2026",
+      "catchphrase": "鉄道趣味を作り、楽しむ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/55bd2f9c6c6b4d6ea19d75926cf26a4a/form2_r2_q4__aikon_%E4%BD%90%E8%97%A4%20%E5%AD%9D%E6%A8%B9.png",
+        "height": 2048,
+        "width": 2048
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a51c4c75804c4d249cabd2485c70cb3c/form2_r2_q5__%E7%B4%A0%E6%9D%901_%E4%BD%90%E8%97%A4%20%E5%AD%9D%E6%A8%B9.jpg",
+          "height": 680,
+          "width": 383
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3086b183cae546049f9e2c3991fe788d/form2_r2_q5__%E7%B4%A0%E6%9D%903_%E4%BD%90%E8%97%A4%20%E5%AD%9D%E6%A8%B9.jpg",
+          "height": 680,
+          "width": 510
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d55b46b1fa6a45cf88b4c6abf3642099/form2_r2_q5__%E7%B4%A0%E6%9D%902_%E4%BD%90%E8%97%A4%20%E5%AD%9D%E6%A8%B9.jpg",
+          "height": 720,
+          "width": 1280
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e0cfc7b4c20e46fb92f808ff2edfc0f4/logo_satou.png",
+          "height": 180,
+          "width": 839
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8bac704253e74dc1945c999b465037a0/form2_r2_q5__IMG_4377_%E4%BD%90%E8%97%A4%20%E5%AD%9D%E6%A8%B9.JPG",
+          "height": 1980,
+          "width": 3520
+        }
+      ],
+      "organization": "鉄道航空研究同好会",
+      "location": [
+        "情報工学科棟"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "312教室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 5,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>2026年度の鉄道航空研究同好会の展示です。</p><p>ジオラマ、ミニ電車両方あります！<br>今年は新規に作成したジオラマと一部リニューアルしたジオラマがあります！乞うご期待！<br>ミニ電車は中身を更新しました！より快適な乗車体験を皆様にご提供します！</p><p>場所は312講義室と噴水周辺です！ぜひお越しください！</p><p>鉄航研OBの方はぜひ現会員との交流も積極的にお楽しみください！</p>",
+      "organ-description": "<p>鉄道航空研究同好会です。</p><p>活動内容など詳しくは以下のサイトからどうぞ！ぜひフォローもお願いします！</p><p>ブログからは色々な活動記録も閲覧できます！</p><p>公式サイト <a href=\"https://tekkouken.pgw.jp/about/\" target=\"_blank\" rel=\"noopener noreferrer\">https://tekkouken.pgw.jp/about/</a><br>公式X <a href=\"https://x.com/nittc_RAclub\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">https://x.com/nittc_RAclub</a><br>公式インスタグラム <a href=\"https://www.instagram.com/tekkoken/\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.instagram.com/tekkoken/</a><br>公式ブログ <a href=\"https://tekken.boo-log.com/\" target=\"_blank\" rel=\"noopener noreferrer\">https://tekken.boo-log.com/</a></p>",
+      "author": "会長 佐藤 孝樹",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "vr28syqsjihx",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:07:01.779Z",
+      "publishedAt": "2026-10-28T04:44:02.027Z",
+      "revisedAt": "2026-10-29T01:07:01.779Z",
+      "slug": "club-photo",
+      "title": "写真部展示",
+      "catchphrase": " 素敵な写真を見にきてください",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3665279b41944ea3b2ece554b3dac2bb/Image_20261028_134145.jpg",
+        "height": 533,
+        "width": 532
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3665279b41944ea3b2ece554b3dac2bb/Image_20261028_134145.jpg",
+          "height": 533,
+          "width": 532
+        }
+      ],
+      "organization": "写真部",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "111教室",
+      "time-day1": 9001700,
+      "time-day2": 9001330,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>写真部がこの一年で撮影した写真などを展示しています。<br>素敵な写真ばかりなので、ぜひ見にきてください！</p>",
+      "organ-description": "<p> </p>",
+      "author": "写真部展示代表",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "9oboc4aq7mt8",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:05:36.086Z",
+      "publishedAt": "2026-08-29T09:03:12.247Z",
+      "revisedAt": "2026-10-30T12:05:36.086Z",
+      "slug": "club-brassband1",
+      "title": "吹奏楽部の演奏",
+      "catchphrase": "迫力ある演奏をお届けします！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2f663afd851540af959f52b72c7556c8/form1_r2_q4__logo_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+        "height": 1600,
+        "width": 1600
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/28396444441a4d8380eaf1e60041c7bb/form1_r2_q5__wide_shot_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+          "height": 1980,
+          "width": 3520
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a63617e8564846c9932d7f009137fafc/form1_r2_q5__trombone_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+          "height": 1046,
+          "width": 1568
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/62f481e2e6f047fa833b0d8b36e14244/form1_r2_q5__flute_ensemble_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+          "height": 1108,
+          "width": 1477
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/00e8e373fa5a436c97dd5c3b07067f00/form1_r2_q5__street_promoting_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+          "height": 1477,
+          "width": 1108
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a034a87578f84b7cb8fe994bcfa01b37/form1_r2_q5__poster_47th_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89%201.png",
+          "height": 1235,
+          "width": 877
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/23eb16d7b5974fea93041bef8b5a3edb/form1_r2_q5__mogiten_%E6%97%A5%E7%AB%8E%20%E8%92%BC%E8%91%89.jpg",
+          "height": 1477,
+          "width": 1108
+        }
+      ],
+      "organization": "吹奏楽部",
+      "location": [
+        "第１体育館"
+      ],
+      "floor": [],
+      "time-day2": 10301400,
+      "duration": 30,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>こうよう祭<strong>2日目</strong>に、<strong>第一体育館</strong>のステージでアンサンブルと合奏をお届けします<br><br>ベンチもあるので、ゆっくりとお楽しみいただけます！<br><br>また、<strong>2日間とも</strong>噴水周辺の模擬店で焼きそばの販売もしています。</p><h1 id=\"h30239d6b24\">アンサンブルステージ</h1><p>以下の5曲を演奏する予定です</p><ul><li>NINTENDOメドレー（フルート四重奏）</li><li>タイタニック（フルート、クラリネット、ピアノ三重奏）</li><li> ピクサーメドレー（木金打六重奏）</li><li> ディズニーメドレー（打楽器四重奏）</li><li> 花になって（クラリネット四重奏）</li></ul><h1 id=\"h92004be4c0\">合奏ステージ</h1><p>以下の3曲を演奏する予定です</p><ul><li>吹奏楽による「ドラゴンクエストI」より　序曲</li><li> 「名探偵コナン」メイン・テーマ&apos;07</li><li> 爆裂愛してる</li></ul><h1 id=\"hf626024557\">模擬店</h1><p>屋外の噴水周辺では、**2日間とも**焼きそばを販売しています！<br>毎年売り切れの大人気商品なので、こちらも演奏と合わせて是非お楽しみください！</p>",
+      "organ-description": "<h1 id=\"h49c8fc73c3\">吹奏楽部について</h1><p>私たち吹奏楽部には1年生から5年生の31名が所属していて、楽器を通して仲間と一緒に音楽を楽しみながら活動しています！<br>普段は、より良い演奏を目指して基礎練習やパート練習、合奏などに取り組んでいます。<br>学校行事や地域のイベントへの出演、定期演奏会など、さまざまな場で演奏しています。</p><table><tbody><tr><th colspan=\"1\" rowspan=\"1\"><p>時期</p></th><th colspan=\"1\" rowspan=\"1\"><p>イベント</p></th></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>４月</p></td><td colspan=\"1\" rowspan=\"1\"><p>入学式</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>８月</p></td><td colspan=\"1\" rowspan=\"1\"><p>コンクール</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>１１月</p></td><td colspan=\"1\" rowspan=\"1\"><p>こうよう祭</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>１月</p></td><td colspan=\"1\" rowspan=\"1\"><p>定期演奏会</p></td></tr><tr><td colspan=\"1\" rowspan=\"1\"><p>３月</p></td><td colspan=\"1\" rowspan=\"1\"><p>卒業式</p></td></tr></tbody></table><h1 id=\"h6993ffa0df\">定期演奏会</h1><p>来年の1月17日に定期演奏会を開催します！<br><br>盛りだくさんな内容になっているので、こうよう祭の演奏を聴かれた方も、聴けなかった方も、楽しんでいただけると思います <br>ぜひお越しください😊</p><p></p><p><strong>定期演奏会のお知らせ🎺</strong>  </p><p>来年の1月17日(日)、豊田市民文化会館にて第47回定期演奏会を開催します！  </p><p>シンフォニックステージとポップスステージの二部構成でお届けします🎶  </p><p>今年のテーマは「Japanese Culture」です🗾  </p><p>全12曲の演奏を予定しております、ぜひお越しください！ </p><p>— <a href=\"https://x.com/NittcWind/status/2105309552099086693\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">豊田高専 吹奏楽部 (@NittcWind) [September 30, 2026]</a>)</p><h1 id=\"ha395409bc4\">公式SNS・HP</h1><p>各種公式SNS・HPはこちらです <br>演奏会の情報や活動予定について随時更新しています <br>是非フォローしてご確認ください♪ </p><ul><li><a href=\"https://www.instagram.com/nittcwind\" target=\"_blank\" rel=\"noopener noreferrer\">公式instagram</a></li><li><a href=\"https://x.com/NittcWind\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">公式X</a></li><li><a href=\"https://nittc-windor.web.app\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">公式HP</a></li></ul>",
+      "author": "吹奏楽部 会計",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "8wjkd64eynar",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:05:53.348Z",
+      "publishedAt": "2026-08-29T08:57:57.337Z",
+      "revisedAt": "2026-10-30T12:05:53.348Z",
+      "slug": "class-4a",
+      "title": "過渡庵",
+      "catchphrase": "私たちのこれまでとこれから",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ddd88520e59a4ea2bd6cba02b063e121/%E3%81%93%E3%81%86%E3%82%88%E3%81%86%E7%A5%AD%E3%83%91%E3%83%B3%E3%83%95%E3%83%AC%E3%83%83%E3%83%88%E5%86%99%E7%9C%9F_%E5%B0%8F%E9%87%8E%20%E5%A4%AA%E9%99%BD.jpg",
+        "height": 3072,
+        "width": 3072
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/cbefc275878149c69230ca0a9507357c/Image_%E5%B0%8F%E9%87%8E%20%E5%A4%AA%E9%99%BD.jpg",
+          "height": 768,
+          "width": 1024
+        }
+      ],
+      "organization": "4A",
+      "location": [
+        "一般管理棟"
+      ],
+      "floor": [],
+      "classroom": "中庭",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 5,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>進学や就職を間近に控え、この豊田高専から新たな学びのステージへの過渡期にある我々の中間報告となる建築物を、2026年のこうよう祭の展示物として発表する。</p>",
+      "organ-description": "<p> </p>",
+      "author": "4A学科展展示代表",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "xrcgoy46atcc",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-28T05:00:15.833Z",
+      "publishedAt": "2026-08-29T08:57:57.359Z",
+      "revisedAt": "2026-10-28T05:00:15.833Z",
+      "slug": "class-4c",
+      "title": "新宝Cま",
+      "catchphrase": "伝説の鍵を見つけ出せ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f216a1be2320463a9f05b23d6aa6dab8/S__126443533.jpg",
+        "height": 1200,
+        "width": 896
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a944a816fd82469eac6b9a09a5f31030/form2_r1_q5__IMG_8241_%E6%9C%AC%E7%94%B0%20%E7%A9%BA%E4%BA%9C.jpeg",
+          "height": 3024,
+          "width": 4032
+        }
+      ],
+      "organization": "4C",
+      "location": [
+        "環境都市工学科棟"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "環境科棟外",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 10,
+      "participantsUL": 3,
+      "participantsLL": 2,
+      "description": "<p>C科を愛する者だけがたどり着ける「新宝Cま」。ここには数々の宝が眠り、名高いトレジャーハンター達が探し求めた伝説の「鍵」も眠っている。さあ、君も砂を掘り進め、宝と鍵を見つけ出そう！</p>",
+      "organ-description": "<p>インスタ koyoufes_nittc4c </p><p>環境都市工学科4年学科展豊田高専のフォローお願いします！</p>",
+      "author": "世紀のトレジャーハンターC",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "63gag57k1b1w",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-26T12:10:34.651Z",
+      "publishedAt": "2026-08-29T08:57:57.33Z",
+      "revisedAt": "2026-10-26T12:10:34.651Z",
+      "slug": "class-2i",
+      "title": "高専GO",
+      "catchphrase": "あるいて、さがして、つれてって。",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3f01ce145cdc4b62b6f31f2a5705959e/form2_r3_q4__%E3%83%AD%E3%82%B4_%E9%80%8F%E9%81%8E(1)_%E5%A4%AA%E7%94%B0%20%E6%83%B3.png",
+        "height": 925,
+        "width": 925
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/01ea4029559f4a2bb6651a580d2ca2dc/form2_r3_q5__1636_20261011025519-1_%E5%A4%AA%E7%94%B0%20%E6%83%B3.png",
+          "height": 1564,
+          "width": 2010
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/4355fe273807452fa6f77fabbb239174/form2_r3_q5__20261008_175031_%E5%A4%AA%E7%94%B0%20%E6%83%B3.jpg",
+          "height": 3096,
+          "width": 4128
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e1181fe387fa47ea9ba028cdbf7415bf/form2_r3_q5__image_%E5%A4%AA%E7%94%B0%20%E6%83%B3.png",
+          "height": 600,
+          "width": 900
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f90ce062b1824e02904a387e11ee5cef/form2_r3_q5__IMG_20261011_215019_%E5%A4%AA%E7%94%B0%20%E6%83%B3.jpg",
+          "height": 2160,
+          "width": 2880
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/36187af9112f4359b7adaf9940b7edc9/form2_r3_q5__2026-10-11_213336_%E5%A4%AA%E7%94%B0%20%E6%83%B3.png",
+          "height": 1254,
+          "width": 2560
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/9ee0c51e40cc4b9795a27ca5303efea5/form2_r3_q5__Screenshot_20261011-233819~2_%E5%A4%AA%E7%94%B0%20%E6%83%B3.jpg",
+          "height": 1751,
+          "width": 864
+        }
+      ],
+      "organization": "2I",
+      "location": [
+        "情報工学科棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "322講義室",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 5,
+      "participantsUL": 4,
+      "participantsLL": 1,
+      "description": "<p>この豊田高専では、日々モンスターたちがデジタル空間の中ではたらいている。<br>しかし何者かのサイバー攻撃によって、外の世界へ追い出されてしまった！<br>モンスターたちと共に戦い、奪われた居場所を取り戻せ！<br><br>予約はいりません。情報科棟2階の322講義室に来てください！<br><br><a href=\"https://kosen-go.monster\" target=\"_blank\" rel=\"noopener noreferrer\">高専GO ウェブサイト</a><br><a href=\"https://app.kosen-go.monster\" target=\"_blank\" rel=\"noopener noreferrer\">高専GO アプリ</a></p>",
+      "organ-description": "<p>2年情報工学科です！<br>私たちのクラスにはイラストや3Dモデリング、ウェブアプリ開発、ゲーム制作などさまざまな分野に熱中している仲間たちがいます。<br>それぞれが学んできたことや得意なことを持ち寄り、一つのクラス展を作り上げました。<br>アイデア自体が大きかったこともあり、分担と統合のバランスが難しく、議論が白熱してなかなか先へ進めないこともありました。<br>それでも、よりよいものを目指して試行錯誤を重ねてきました。<br>そんな私たちが作った「キャラクター×散策・収集×アクションゲーム」のクラス展へぜひ来てください！<br><br><strong>今までの活動風景はこちら！</strong><br><a href=\"https://www.instagram.com/koyo_fes20262i\" target=\"_blank\" rel=\"noopener noreferrer\">2iクラス展Instagram</a><br></p>",
+      "author": "2Iクラス展代表、おたそー",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "ol519y39okqd",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-27T00:43:45.999Z",
+      "publishedAt": "2026-08-29T09:03:12.207Z",
+      "revisedAt": "2026-10-27T00:43:45.999Z",
+      "slug": "club-automobile",
+      "title": "自動車部　車両展示",
+      "catchphrase": "唯一無二の車両展示！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3070259681d84b7ab929f36b690e84a8/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-19%20164849_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.png",
+        "height": 640,
+        "width": 640
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b8e040bf27274b8f944f2a1296e4a26d/20260727_150543_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.jpg",
+          "height": 2252,
+          "width": 4000
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2968ada7c59942b8966aa9c3b736c8fe/IMG20260727150356_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a47fad6da84c4b47a8dd83a4e15f6ca3/IMG_20260620_164255350_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.jpg",
+          "height": 3444,
+          "width": 4238
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/52c49b902ebd4b789c059d155286c202/IMG_20260524_115914267_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.jpg",
+          "height": 3444,
+          "width": 4238
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/99c6ce6a0c114b749a2fac5f231e1262/IMG_20260620_164342794_%E9%A7%92%E5%B4%8E%20%E5%92%8C%E7%9C%9F.jpg",
+          "height": 3444,
+          "width": 4238
+        }
+      ],
+      "organization": "自動車部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151600,
+      "time-day2": 9151330,
+      "duration": 5,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>今年も自動車部は車両展示を行います！<br>おなじみのエコラン車両から学生フォーミュラ出場車両まで様々な車両を用意してお待ちしています！<br>コックピットへの乗車体験もできるかも！？ぜひ遊びに来てください！！</p>",
+      "organ-description": "<p>自動車部はエコランと学生フォーミュラの2つの大会に参加しています。<br>HP：<a href=\"https://nit-toyota-mvc.mystrikingly.com/\">https://nit-toyota-mvc.mystrikingly.com/</a><br>X：<a href=\"https://x.com/NIT_Toyota_MVC\">https://x.com/NIT_Toyota_MVC</a><br>インスタ：<a href=\"https://www.instagram.com/nittc.automobile/\">https://www.instagram.com/nittc.automobile/</a></p>",
+      "author": "権限のない部長・4M駒崎",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "124mbvo487hq",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.584Z",
+      "publishedAt": "2026-08-29T08:57:57.306Z",
+      "revisedAt": "2026-10-29T01:03:39.584Z",
+      "slug": "class-2c",
+      "title": "知。−防災の真理について−",
+      "catchphrase": "もし明日地球が機嫌をそこねたら......",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/66ae88f8e78a4e16a1135b2adc6336a4/8966266f-ec09-4276-a801-4a4f07064db5_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6%202.png",
+        "height": 1080,
+        "width": 1080
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/4edbdfd3fb8d4e61aa882b2e3e77a8d8/form2_r6_q5__5b7c3807-2065-48b9-9966-0aea72f4a294_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6.png",
+          "height": 1080,
+          "width": 1080
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ed26a1772b79480fbad145d008361b1a/form2_r6_q5__IMG_20261013_235645_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/be0c8232fee24c899086693b6be49a31/form2_r6_q5__IMG_20261013_235717_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e6caa62130984963b908b18c93c1aec1/form2_r6_q5__IMG_20260820_162206_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d88913549cbe4279ab90c9b676356882/form2_r6_q5__IMG_20260818_100440_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6%201.jpg",
+          "height": 4096,
+          "width": 3072
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ba664cd608d947148e60a88f31e9e03c/form2_r6_q5__IMG_20261013_164931_%E6%A8%AA%E4%BA%95%20%E7%A7%80%E6%AD%A6.jpg",
+          "height": 4096,
+          "width": 3072
+        }
+      ],
+      "organization": "2C",
+      "location": [
+        "第２講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "412教室",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 12,
+      "participantsUL": 3,
+      "participantsLL": 1,
+      "description": "<p>もし明日地球が機嫌をそこねたら...... あなたは災害への備えができていますか?</p><p>私たち2C のクラス展示では、防災に関するクイズと、いざという時に役立つロープワークや組み立てトイレを体験できます。<br>ぜひ一緒に防災を学びましょう!</p><p>最後に、私たちがこれまで過ごしてきた学生生活の様子をまとめた紹介コーナーもご覧いただけます。</p>",
+      "organ-description": "<p>2025年に入学した、担任の京極先生率いる環境科学生たち。</p><p>去年のクラスTシャツ「京極T」が思いがけず好評であった。2年後期に入り授業がいっそう難しくなるなか、<br>私たち2C はこれまでの学びを活かし、初めてのクラス展示に臨む。</p><p>↓公式Instagramです↓<br><a href=\"https://www.instagram.com/kosen_2c\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.instagram.com/kosen_2c</a></p>",
+      "author": "ピーターとジェームズ",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "90lpjwh3aovh",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.573Z",
+      "publishedAt": "2026-08-29T08:58:03.563Z",
+      "revisedAt": "2026-10-29T01:03:39.573Z",
+      "slug": "class-4m",
+      "title": "M-ZERO",
+      "catchphrase": "教室の中で1番浮いてて早く帰るやつの勝ち",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/226b8ebd9275472aafd976d13ba6ccb5/1_20260708161802_%E6%9D%BE%E5%B0%BE%20%E7%9B%B4%E8%BC%9D.png",
+        "height": 2160,
+        "width": 2160
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f4a727f217444081bfff2a53c8b57fe4/Image.jpg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/03ca0b6adb0a4ebf91dc3b1888b143ae/Image%20(1).jpg",
+          "height": 3840,
+          "width": 2160
+        }
+      ],
+      "organization": "4M",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "123教室",
+      "time-day1": 9151600,
+      "time-day2": 9151330,
+      "duration": 5,
+      "participantsUL": 4,
+      "participantsLL": 1,
+      "description": "<p>日本人が技術者を育成するようになってすでに半世紀が過ぎていた。<br>豊田のそこそこな位置にある国立高専は高専生の第二の故郷となり、人々はそこで学び、遊び、そして減っていった。<br><br>NITT.C.0063年(ナショナル・インスティチュート・オブ・テクノロジー・豊田・センチュリー)。<br>優等生から最も遠い機械工学科４年生は、エンジニアを名乗りこうよう祭に挑んできた。<br>たった数週間の内容決めで機械工学科４年生は、やる気のほとんどを灰燼に帰した<br>人々は、自らの怠惰さに恐怖した。<br>製作は膠着状態に入り、4ヶ月余りが過ぎた。<br><br>「ラジコン？エンジン？オットーサイクル...うっ、頭が...」<br>「タイヤで動く機械とか、時代遅れだよナー」<br>「ドーパミンが足りないZE！」<br><br>そして、試行錯誤の末、機械工学科４年生が生み出した、超絶面白モータースポーツこそが──<br><br>──M-Zero──！</p>",
+      "organ-description": "<p>私達4Mが4年間学んできた知識や経験を大いにふるって半年間取り組みました。ぜひ来てください。</p>",
+      "author": "4M学科展展示代表",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "4i5qujra34kz",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-30T12:06:09.103Z",
+      "publishedAt": "2026-08-29T08:57:57.367Z",
+      "revisedAt": "2026-10-30T12:06:09.103Z",
+      "slug": "class-2e",
+      "title": "トータルトーク",
+      "catchphrase": "最高だぜー！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/40496632790e4bcb93757ca2b5c78c88/1783575711487_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+        "height": 768,
+        "width": 768
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1ef3a4e0ce434a51aef647a42dbda6c6/IMG_20260910_164204_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1e035942cab3423bb7aaae9675f63471/IMG_20260903_153640_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/b60004957f614d5793e51b6d20bafcc8/IMG_20260908_130303_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 4096,
+          "width": 3072
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/fd0a54c3cc884072993d449dfa5d6a51/IMG_20260907_125518_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 3072,
+          "width": 4096
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e85deaeb70794a44b6f1066aecf7217c/IMG_20261005_163807_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 4096,
+          "width": 3072
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/286c8738c44f4c0781b7e0f7abb30e11/IMG_20260908_130454_%E5%B1%B1%E4%B8%8B%20%E8%81%A1%E5%A4%AA%E9%83%8E.jpg",
+          "height": 3072,
+          "width": 4096
+        }
+      ],
+      "organization": "2E",
+      "location": [
+        "第２講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "421教室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 15,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>はっはー　お前たち〜オレを呼んだか〜!?</p><p>オレの名は高専ガメのトータル。生まれてこの方、高専を出たことがない根っからの高専生だ！オレのBAR★トータルトーク★にお前たちを歓迎するぜ。広い広い、外の世界のこと、オレにいっぱいおしえてくれ！　お前たち〜、最高だぜー！</p>",
+      "organ-description": "<p>はっはー　オレのクラス、2年電気科の仲間がもてなすぜ。最高にアツいバーテンだからよ、楽しんでくれよ！<br>オレらのインスタ、フォローしてくれよな<br><a href=\"https://www.instagram.com/koyofes2026_2e_totaltalk?xtok=MmhrZDl6bmNwZ2tq\">https://www.instagram.com/koyofes2026_2e_totaltalk</a></p>",
+      "author": "2Eクラス展代表 トータル・サイコウ",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "fyy57x6g9dcr",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.595Z",
+      "publishedAt": "2026-08-29T08:57:57.323Z",
+      "revisedAt": "2026-10-29T01:03:39.595Z",
+      "slug": "class-4e",
+      "title": "沈没！かみなりサンダース",
+      "catchphrase": "大砲を打って相手の海賊船を沈めろ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ee0ef3b77f4c4c738025b8bac6d7989d/IMG_4221_%E6%88%B8%E7%94%B0%20%E9%99%BD%E5%A4%AA.jpeg",
+        "height": 1722,
+        "width": 2435
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a9d308eb9cbd47979fe7b21807a92722/IMG_4149_%E6%88%B8%E7%94%B0%20%E9%99%BD%E5%A4%AA.jpeg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ee0ef3b77f4c4c738025b8bac6d7989d/IMG_4221_%E6%88%B8%E7%94%B0%20%E9%99%BD%E5%A4%AA.jpeg",
+          "height": 1722,
+          "width": 2435
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/74b9661eb67447a78e0beacff02a5ac1/IMG_4262_%E6%88%B8%E7%94%B0%20%E9%99%BD%E5%A4%AA.jpeg",
+          "height": 3024,
+          "width": 4032
+        }
+      ],
+      "organization": "4E",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "3階"
+      ],
+      "classroom": "133教室",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 5,
+      "participantsUL": 4,
+      "participantsLL": 1,
+      "description": "<p>4年電気電子システム工学科です！<br><br>私たちのクラスには、電気回路や電子工作、プログラミングなど、電気電子分野のさまざまなことに取り組んできた仲間たちがいます。<br><br>そんな私たちが、それぞれの知識や技術、アイデアを持ち寄り、試行錯誤を重ねながら一つの学科展を作り上げました。<br><br>電気電子システム工学科ならではの技術と、私たちのこだわりが詰まった学科展に、ぜひ遊びに来てください！<br><br>今までの活動風景はこちら！<a href=\"https://instagram.com/4e_yusho?exln=ZXEzZHQ4MHZhN2t3&amp;utm_source=qr\">https://instagram.com/4e_yusho?exln=ZXEzZHQ4MHZhN2t3&amp;utm_source=qr</a></p>",
+      "organ-description": "<p><a href=\"https://instagram.com/4e_yusho?exln=ZXEzZHQ4MHZhN2t3&amp;utm_source=qr\">https://instagram.com/4e_yusho?exln=ZXEzZHQ4MHZhN2t3&amp;utm_source=qr</a></p>",
+      "author": "4E学科展代表",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "wksaxm3wzwmq",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.589Z",
+      "publishedAt": "2026-08-29T08:57:57.351Z",
+      "revisedAt": "2026-10-29T01:03:39.589Z",
+      "slug": "class-2m",
+      "title": "ピタゴラスソウチ",
+      "catchphrase": "ピタゴラスなサーキットをあなたに",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/be914dc8d3894dc2a1d0e8f3563ed1c6/2026_2mclass_logo_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.png",
+        "height": 802,
+        "width": 860
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c68cfa4305cd4525aa70c668cd378048/IMG_0043_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.jpeg",
+          "height": 4284,
+          "width": 5712
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/03b0b389d81a40d7b1ae21d8bd5bdbf4/IMG_2853_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.jpeg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/908543ccd90a4bcd9f55465bedd08397/IMG_0133_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.jpeg",
+          "height": 4284,
+          "width": 5712
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5910ee8720084677907f5799d10ce746/IMG_0127_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.jpeg",
+          "height": 3024,
+          "width": 4032
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d3a095abbf1e4ced97412dd13fe4d435/IMG_0018_%E6%88%90%E7%94%B0%20%E5%B0%9A%E7%9D%A6.jpeg",
+          "height": 4284,
+          "width": 5712
+        }
+      ],
+      "organization": "2M",
+      "location": [
+        "一般管理棟"
+      ],
+      "floor": [
+        "3階"
+      ],
+      "classroom": "135講義室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 5,
+      "participantsUL": 5,
+      "participantsLL": 1,
+      "description": "<p>某N市にある科学館にインスパイアされて作り始め、いろいろな問題に当たりながらもなんとか形になった有志たちによる3ヶ月の努力の結晶です！ドパガキやそうでない人にも楽しんでもらえるよう、様々な仕掛けも用意しました！工夫した所や質問などは制作者ができる範囲で喜んで答えるので是非質問してください！</p>",
+      "organ-description": "<p>2年機械工学科による展示です！<br>公式インスタ→ <a href=\"https://instagram.com/2m_koyofes_official2026?exln=MTRpbzM1cWVkcHdxMQ%3D%3D\" target=\"_blank\" rel=\"noopener noreferrer\">https://instagram.com/2m_koyofes_official2026</a></p>",
+      "author": "2Mクラス展展示代表の成田",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "jerq4e5231ki",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-27T00:44:42.815Z",
+      "publishedAt": "2026-08-29T09:03:12.2Z",
+      "revisedAt": "2026-10-27T00:44:42.815Z",
+      "slug": "club-teaceremony",
+      "title": "茶道部展示",
+      "catchphrase": "秋、ひらく。",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3cf8e68c33c84ae3aa39ee5d44fefc37/form1_r3_q4__sado_icon_%E7%AF%89%E5%B1%B1%20%E8%8E%89%E6%9D%8F.png",
+        "height": 418,
+        "width": 418
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/329a71aad9bf4fb38e153e233423414f/form1_r3_q5__S__157032452_%E7%AF%89%E5%B1%B1%20%E8%8E%89%E6%9D%8F.jpg",
+          "height": 1448,
+          "width": 1099
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/fac6c6117ce5467db7b1ba14debd62e0/form1_r3_q5__S__157032453_%E7%AF%89%E5%B1%B1%20%E8%8E%89%E6%9D%8F.jpg",
+          "height": 1448,
+          "width": 1094
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/0b20e8a6f1ee45f5ad0f1b97648f4850/form1_r3_q5__S__157032454_%E7%AF%89%E5%B1%B1%20%E8%8E%89%E6%9D%8F.jpg",
+          "height": 1442,
+          "width": 1097
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/246b322330384cb89626d0ae243d0452/form1_r3_q5__S__38748164_%E7%AF%89%E5%B1%B1%20%E8%8E%89%E6%9D%8F.jpg",
+          "height": 1254,
+          "width": 1254
+        }
+      ],
+      "organization": "茶道部",
+      "location": [
+        "豊田記念会館"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "和室",
+      "time-day1": 10001545,
+      "time-day2": 10001330,
+      "duration": 30,
+      "participantsUL": 4,
+      "participantsLL": 1,
+      "description": "<p>豊田高専茶道部は、今年もこうよう祭で出し物を行います！</p><p>今年は大きな変更点がありますので、ご来場を予定されている方は、必ずご確認ください。</p><p>今年の茶道部展示は、完全予約制となっております。<br>下記URLからフォームにアクセスし、10月17日（土）12:00までに、ご希望の時間帯を選択してご予約をお願いします。</p><p>今年は教室ではなく、豊田記念会館の新和室にて、お点前とお茶・お菓子の提供を行います。<br>例年の場所からそれほど離れてはいませんが、場所が変更となっておりますので、地図をご確認のうえお越しください。<br>また、昨年は日曜日のみお点前を行い、土曜日は見学とスタンプラリーのみとしていましたが、今年は両日ともお点前を行います。<br>なお、見学のみでのご参加はできませんので、あらかじめご了承ください。</p><p>その他、ご不明な点がございましたら、お手数ですが茶道部公式InstagramのDMまでご連絡いただくか、部員にお声掛けください。</p><p>当日、皆さまにお会いできますことを楽しみにしております！</p><p>【予約フォームURL】<a href=\"https://forms.gle/KY3sGPdahoDCmXDS6\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">https://forms.gle/KY3sGPdahoDCmXDS6</a><br>【公式Instagram】<a href=\"https://www.instagram.com/nittc_sadoubu\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">https://www.instagram.com/nittc_sadoubu</a></p>",
+      "organ-description": "<p>毎週水曜日、豊田記念会館1Fの和室で活動しています！</p><p>お茶のお稽古を中心に、その一環としてお菓子やお茶をいただいています🍵</p><p>部員は随時募集中です！<br>直接見学に来ていただくか、DMからお気軽にご連絡ください。<br>兼部もしやすい部活なので、少しでも興味のある方はぜひお気軽にお越しください！</p><p>【公式Instagram】<a href=\"https://www.instagram.com/nittc_sadoubu\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.instagram.com/nittc_sadoubu</a></p>",
+      "author": "茶道部会計",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "g3xrkriino4h",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:07:01.79Z",
+      "publishedAt": "2026-08-29T09:03:12.253Z",
+      "revisedAt": "2026-10-29T01:07:01.79Z",
+      "slug": "club-igoshogi",
+      "title": "囲碁将棋の交流対局の場",
+      "catchphrase": "経験者でも未経験者でも楽しめる",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e87d2ec5b4d24daca773a2f0c1d9867b/Screenshot_20260709-233414_%E6%B0%B4%E6%BE%A4%20%E4%BD%B3%E6%9F%BE.png",
+        "height": 442,
+        "width": 437
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c13deb75f9324ceeb8d4f709fcf23da2/%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2.jpg",
+          "height": 2827,
+          "width": 2819
+        }
+      ],
+      "organization": "囲碁将棋部",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "122教室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 25,
+      "participantsUL": 2,
+      "participantsLL": 1,
+      "description": "<p>囲碁及び将棋の体験・交流対局が行えます。未経験・初心者でも楽しめるように部員がサポートします。</p>",
+      "organ-description": "<p>囲碁・将棋部は大会に向けて、日々部員や教員と練習をしています。<br>部員同士で仲良く活動しています。</p>",
+      "author": "部長",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "aimu309u03qa",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.578Z",
+      "publishedAt": "2026-08-29T08:57:57.345Z",
+      "revisedAt": "2026-10-29T01:03:39.578Z",
+      "slug": "class-2a",
+      "title": "謎屋敷",
+      "catchphrase": "その屋敷に真実は眠る。",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3e6779d99ade4345aac0605adabd0f08/1783604797405_%E7%94%B0%E5%8F%A3%20%E7%B6%BE%E5%A4%8F.jpg",
+        "height": 1254,
+        "width": 1254
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c2647f72cb914152935a02e532047047/images%20(5)_%E7%B6%BE%E5%A4%8F%20%E7%94%B0%E5%8F%A3.jpeg",
+          "height": 607,
+          "width": 505
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2381522b46bf4a2a883ded2a106de909/Screenshot_20261014-121718_%E7%B6%BE%E5%A4%8F%20%E7%94%B0%E5%8F%A3.png",
+          "height": 1151,
+          "width": 1079
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d33a9654c79e4ea98b5a0c4dd08adf62/%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2_20261027_200321.jpg",
+          "height": 626,
+          "width": 1000
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d8df2b465bc24de49d9f014396933367/%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2%20(1).jpg",
+          "height": 886,
+          "width": 1027
+        }
+      ],
+      "organization": "2A",
+      "location": [
+        "一般管理棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "125講義室",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 8,
+      "participantsUL": 3,
+      "participantsLL": 1,
+      "description": "<p>平和だったお屋敷で起きた突然の殺人事件。あなたは探偵となり、部屋に隠された数々の謎を解き明かしながら真犯人を追う。最後に明かされる驚きの事実とは…？</p>",
+      "organ-description": "<p><a href=\"https://instagram.com/nittc_20262a?mdxt=MWZkaXJjNjRkYmt4bA%3D%3D\">https://instagram.com/nittc_20262a</a></p>",
+      "author": "2Aクラス展代表",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "2ddn4gqn7d0u",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:07:01.729Z",
+      "publishedAt": "2026-08-29T09:03:12.22Z",
+      "revisedAt": "2026-10-29T01:07:01.729Z",
+      "slug": "club-creative",
+      "title": "作品展示及び頒布",
+      "catchphrase": "創作。それだけ。それが良い。",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/bebb4e179a504baeba784f904f2f8bda/form1_r5_q4__Image%20(1)_%E7%94%B0%E4%B8%AD%20%E9%99%BD%E5%9F%BA.jpg",
+        "height": 1500,
+        "width": 1500
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/d49e5fb172e74498bdbd7d59d2f374f3/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-26%20234459.png",
+          "height": 922,
+          "width": 1912
+        }
+      ],
+      "organization": "総合創作部",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "2階"
+      ],
+      "classroom": "121講義室",
+      "time-day1": 9151600,
+      "time-day2": 9151330,
+      "duration": 5,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>総合創作部では各々の興味に基づいて創作したものを展示しています。</p><p>今年の展示テーマは「退廃的」です。自由な解釈で創られた様々な作品たちを是非ご覧ください！数量に限りはありますが作品の配布も行っていますのでぜひいらしてください！</p>",
+      "organ-description": "<p>様々な創作が集う部活です。イラスト、音楽、動画、コスプレ、何でもござれ!!</p>",
+      "author": "総合創作部部長 田中",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "kkj2w5slqs4i",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-26T13:13:25.121Z",
+      "publishedAt": "2026-08-29T09:03:12.259Z",
+      "revisedAt": "2026-10-26T13:13:25.121Z",
+      "slug": "club-robocon",
+      "title": "ロボコン",
+      "catchphrase": "アイデアと技術力で観客を魅了します！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/3ae43abbf7cf4cb69ea79ade529b0e02/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-25%20133728_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.png",
+        "height": 836,
+        "width": 829
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/78367a93922646cf94c405ae0e12e1df/20261022soumukikaku9_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.jpg",
+          "height": 800,
+          "width": 600
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5574a8693fc04d3b8077d870e02302fa/20261022soumukikaku11_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.jpg",
+          "height": 800,
+          "width": 600
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/879791e2589d45878f90fa2088eddcef/20261022soumukikaku10-1-768x576_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.jpg",
+          "height": 576,
+          "width": 768
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8e9f2f5a2fbc4e0cbf753592194dd5ef/20261022soumukikaku8-768x576_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.jpg",
+          "height": 576,
+          "width": 768
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/985f9a5238504af3b9796af86fc4d399/20261022soumukikaku7_%E5%9D%82%E6%9C%AC%20%E7%A9%BA%E4%B9%8B%E5%BF%83.jpg",
+          "height": 800,
+          "width": 600
+        }
+      ],
+      "organization": "ロボコン",
+      "location": [
+        "第２体育館"
+      ],
+      "floor": [],
+      "time-day1": 9001600,
+      "time-day2": 9001600,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>高専といったらやっぱりロボコン！<br>高専ロボコン・学生ロボコンどちらも出場している豊田高専のロボコンでは、部員みんなでロボットを楽しく製作しています！<br>大会出場ロボットの展示や試合のデモンストレーション、操縦体験も行っています！<br>「ロボットのことあまりしらないなぁ」という人でも大丈夫！<br>スタッフが親切丁寧にご案内いたします！<br>第二体育館で展示を行っていますので、ぜひお立ち寄りくださいませ！(⋈◍＞◡＜◍)。✧♡</p>",
+      "organ-description": "<p><a href=\"https://www.instagram.com/robocon_nittc_a/\">https://www.instagram.com/robocon_nittc_a/</a><br><a href=\"https://www.instagram.com/nittc_roboconb/\">https://www.instagram.com/nittc_roboconb/</a><br><a href=\"https://x.com/tnct_roboconb\">https://x.com/tnct_roboconb</a><br><a href=\"https://x.com/tnct_RoboconA?s=20\">https://x.com/tnct_RoboconA?s=20</a></p>",
+      "author": "このちゃｎ",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "nvdri59wpdny",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:07:01.785Z",
+      "publishedAt": "2026-08-29T09:03:12.187Z",
+      "revisedAt": "2026-10-29T01:07:01.785Z",
+      "slug": "club-airplane",
+      "title": "体験しよう！ラジコン飛行機",
+      "catchphrase": "体験しよう!見てみよう!ラジコン飛行機",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/e30c85158e54418a84e2a03c8b28c4e0/%E3%81%93%E3%81%86%E3%82%88%E3%81%86%E7%A5%AD%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3_%E4%B8%89%E5%A5%BD%20%E7%85%8C%E8%BC%9D.png",
+        "height": 1000,
+        "width": 1000
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2634f50c06a44a09a14de63c03bfcf94/Image%20(1).png",
+          "height": 1024,
+          "width": 740
+        }
+      ],
+      "organization": "総合航空技術研究同好会",
+      "location": [
+        "第１講義棟"
+      ],
+      "floor": [
+        "3階"
+      ],
+      "classroom": "131教室",
+      "time-day1": 9001600,
+      "time-day2": 9001330,
+      "duration": 5,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>ラジコン飛行機を展示しています！<br>シミュレータ体験から、3Dプリンタ、機体展示、展示飛行を予定しています！<br>展示飛行は11:00と13:00、天気であれば、グラウンドにて行います！<br>大会にて実際に飛行した期待も展示します！<br>ぜひ一度見に来てください！<br>過去大会の映像 : <a href=\"https://www.youtube.com/live/TEiKNVNE6Tk?si=cLqOJE4wgSMthH1m&amp;t=15439\">https://www.youtube.com/live/TEiKNVNE6Tk?si=cLqOJE4wgSMthH1m&amp;t=15439</a></p>",
+      "organ-description": "<p>アットホームな部活です!<br>新入部員募集中！<br>未経験者、経験者、やる気がある人、兼部したい人、モノづくりが好きな人、だれでも大歓迎！<br>工作初心者でも、先輩が優しく教えるので安心安全！<br>一年目は部費無料！焼肉無料！<br>毎年全国大会出場している実績ある部活動です！<br>ぜひ、飛行機を一緒に作りましょう！お待ちしています！<br>twitter : <a href=\"https://x.com/NITTC_soukouken?s=20\">https://x.com/NITTC_soukouken?s=20</a></p>",
+      "author": "総航研掃除担当",
+      "category": [
+        "volunteer-exhibit"
+      ]
+    },
+    {
+      "id": "iyan53rgkvs5",
+      "createdAt": "2026-08-29T08:42:45.194Z",
+      "updatedAt": "2026-10-29T01:03:39.604Z",
+      "publishedAt": "2026-08-29T08:45:59.708Z",
+      "revisedAt": "2026-10-29T01:03:39.604Z",
+      "slug": "class-4i",
+      "title": "じゃすとうぉー",
+      "catchphrase": "ヒサネリアを手に入れろ！",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ce3b01cbed61485c8cee2a5f06b9e505/77C1BF99-5362-4E5C-AF10-C51E8971ADD7_%E8%A5%BF%E5%B3%B6%20%E5%B0%86%E5%A4%AA%E9%83%8E.png",
+        "height": 1254,
+        "width": 1254
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/2c5f9775ca024c4e88b587ea8af91159/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-27%20154605.png",
+          "height": 777,
+          "width": 1369
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c1fe7b4d81214ec691d80e7cc958892d/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-27%20154634.png",
+          "height": 742,
+          "width": 1366
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/a9c494e123bd4b4494219b02e438df94/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202026-10-27%20154715.png",
+          "height": 769,
+          "width": 1369
+        }
+      ],
+      "organization": "4I",
+      "location": [
+        "情報工学科棟"
+      ],
+      "floor": [
+        "1階"
+      ],
+      "classroom": "311教室",
+      "time-day1": 9301600,
+      "time-day2": 9301330,
+      "duration": 5,
+      "participantsUL": 4,
+      "participantsLL": 2,
+      "description": "<p>悪の親玉じゃすが仕掛けた数々のトラップをかいくぐり、伝説の秘宝「ヒサネリア」を目指すアクションゲーム。巧みに配置された罠や仕掛けを突破しながら進み、最後に待ち受ける試練を乗り越えて秘宝を手に入れよう。君は無事に生還できるか。</p>",
+      "organ-description": "<p>このゲームは、AR技術を使って、現実の空間にゲームの映像を重ねて遊べるようにしました。</p><p>情報工学科で学んだプログラミングや画像処理などの知識を活かし、プログラム班が夏休みから協力して制作してきたものです。また、プログラムだけでなく、ゲームの世界観を楽しめるように会場の装飾にもこだわりました。技術と装飾の両方から楽しめるゲームになっているので、ぜひ遊んでみてください！</p>",
+      "author": "4I 西島将太郎",
+      "category": [
+        "class-exhibit"
+      ]
+    },
+    {
+      "id": "qb-tb2tyx",
+      "createdAt": "2026-05-25T12:08:29.509Z",
+      "updatedAt": "2026-10-29T00:38:07.069Z",
+      "publishedAt": "2026-05-25T12:08:29.509Z",
+      "revisedAt": "2026-10-29T00:38:07.069Z",
+      "slug": "kyudo-club",
+      "title": "きゅうどーなつ",
+      "catchphrase": "弓道部のドーナツ",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/1f1fe9c6736f42e0b46c0b11a0232f3f/IMG_20261002_000028_%E5%B7%9D%E5%8F%A3%20%E5%87%9B%E8%8A%B1.png",
+        "height": 903,
+        "width": 896
+      },
+      "images": [
+        {
+          "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/21d9bcbddd5d4638984541d12dd3751e/IMG20251101102841_%E5%B7%9D%E5%8F%A3%20%E5%87%9B%E8%8A%B1.jpg",
+          "height": 4624,
+          "width": 3468
+        }
+      ],
+      "organization": "弓道部",
+      "location": [
+        "噴水周り"
+      ],
+      "floor": [],
+      "time-day1": 9151500,
+      "time-day2": 9151400,
+      "duration": 10,
+      "participantsUL": 20,
+      "participantsLL": 1,
+      "description": "<p>弓道部によるドーナツ販売、その名も「きゅうどーなつ」！おいしいドーナツを販売します。ぜひお気軽にお立ち寄りください！皆さんのお越しをお待ちしています！</p>",
+      "organ-description": "<p>私たち弓道部は、日々の練習を通して技術の向上を目指し、仲間とともに活動しています。弓道は、集中力や精神力だけでなく、礼儀作法も大切にする日本の伝統武道です。一つ一つの動作を大切にしながら、自分自身と向き合い、日々練習に励んでいます。これからも部員同士で支え合いながら、成長していけるよう頑張ります！</p>",
+      "author": "弓道部模擬店代表",
+      "category": [
+        "booth"
+      ]
+    }
+  ],
+  "totalCount": 65
+}

@@ -223,7 +223,7 @@ npm run dev
 
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認します。
 
-> **注意**: microCMS の環境変数が未設定の場合、企画・お知らせ・協賛など CMS 連携ページはエラーになります。スタンプラリー機能を使う場合は、スタンプ関連の環境変数も必要です。
+> **注意**: microCMS の環境変数が未設定でも、リポジトリのスナップショット（`data/cms` と `public/cms-images`）でページはビルドできます。スタンプラリーの署名を試す場合は、スタンプ関連の環境変数も必要です。
 
 ---
 
@@ -231,7 +231,7 @@ npm run dev
 
 プロジェクト直下に `.env.local` を作成し、以下を設定します。`.env.local` は git 管理外です（`.gitignore` 参照）。
 
-### microCMS（必須: CMS ページを動かす場合）
+### microCMS（任意: ライブの CMS に繋ぐ場合）
 
 | 変数名 | 説明 | 例 |
 |--------|------|-----|
@@ -300,8 +300,11 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST/DB?sslmode=require
 | コマンド | 説明 |
 |----------|------|
 | `npm run dev` | 開発サーバーを起動（ホットリロード有効） |
-| `npm run build` | 画像を静的ファイルへ写してから本番ビルド |
-| `npm run cms:mirror-images` | microCMS の画像だけを `public/cms-images` に保存 |
+| `npm run build` | API キーがあるときだけ画像を取り直し、本番ビルド |
+| `npm run cms:export` | microCMS の公開コンテンツを `data/cms` に書き出す |
+| `npm run cms:mirror-local` | `data/cms` の画像を `public/cms-images` に保存 |
+| `npm run cms:mirror-images` | API キーで microCMS から画像を取り直す |
+| `npm run test:cms-images` | 画像ミラーとローカル filters のテスト |
 | `npm run start` | 本番ビルド後のサーバー起動 |
 | `npm run lint` | ESLint によるコードチェック |
 | `npm run lint:fix` | ESLint の自動修正 |
@@ -493,7 +496,7 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 | お知らせ一覧 | クエリごとにキャッシュしない | `app/(site)/official/news/page.tsx` の `revalidate = 0` |
 | 企画・お知らせの未知の URL | ページを作らない | `dynamicParams = false` |
 | スタンプ照合・獲得 | 企画一覧と同じタグ付き fetch | `lib/stamp/booths.ts` |
-| microCMS の画像 | ビルド時に静的ファイル化。最適化はしない | `scripts/mirror-cms-images.mjs` |
+| microCMS の画像 | コミット済みの静的ファイル。キーがあるビルドだけ取り直す | `public/cms-images`、`scripts/mirror-cms-images.mjs` |
 | ランキング API | `no-store` | `app/api/ranking/route.ts` |
 | ランキングページ | `force-dynamic` | `app/(site)/ranking/page.tsx` |
 
@@ -501,7 +504,73 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 
 既存ページの編集・削除・公開終了は、関係するタグとパスだけを無効化します。企画やお知らせを**新規公開**したとき、または企画の slug・お知らせの ID が変わったときは、`VERCEL_DEPLOY_HOOK_URL` で本番を再ビルドします（`dynamicParams = false` のため、ビルド時に無かった URL はこの再ビルドまで 404 です）。下書きだけの保存では何もしません。
 
-画像ファイルは再ビルドの成果物です。祭の前に写真やアイコンを変えるときは、管理画面を保存したあとに Vercel で Redeploy するか、新規公開と同じ Deploy Hook を一度叩いてください。このミラーをやめて従来の直配信に戻すときは、当該の変更を revert して再デプロイします。ローカルなど API キーの無いビルドはミラーをスキップしますが、キーが無いとページ生成自体が失敗します。本番の再デプロイには従来どおり `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が必要です。
+画像ファイルは `public/cms-images` にあります。API キーがあるビルドは、これまでどおり microCMS から取り直してこのディレクトリを上書きします。キーが無いビルドはコミット済みのファイルをそのまま使います。
+
+---
+
+## 次の代へ: microCMS と静的スナップショット
+
+祭が終わったあともサイトは公開したままにします。microCMS のコード（クライアント、Webhook、再検証）は残してあります。データの出どころだけが切り替わります。
+
+| 状態 | 動き |
+|------|------|
+| `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が**両方ある** | 今までどおり microCMS から取得する。ビルド時に画像も取り直す |
+| **両方ない** | `data/cms` の JSON と `public/cms-images` の画像だけを使う。ビルドも表示も microCMS に接続しない |
+| **片方だけ** | 設定ミスとしてビルドを止める。静的データには落ちない |
+
+空文字は未設定と同じです。スタンプラリーの対象ブースは企画（`events`）から作るので、どちらのモードでも同じ関数で動きます。ランキングの Neon はそのままです。
+
+祭後の公開では、Vercel の `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` を外してください。残っていると、デプロイのたびに microCMS へ取りに行きます。
+
+スナップショットの中身は公開済みの一覧 API レスポンスです（`{"contents":[...],"totalCount":N}`、`depth=3`）。
+
+| ファイル | 件数 |
+|----------|------|
+| `data/cms/events.json` | 企画 65 |
+| `data/cms/news.json` | お知らせ 27 |
+| `data/cms/parts.json` | パート 10 |
+| `data/cms/sponsors.json` | 協賛 21 |
+
+`stamps` というエンドポイントはありません。スタンプ帳は企画のカテゴリから導きます。
+
+画像 URL は JSON の中では `images.microcms-assets.io` のままです。表示する直前に `lib/microcms/image-manifest.json` が `/cms-images/...` へ差し替えます。マニフェストに無い URL だけ、従来どおり microCMS の画像を直接取りに行きます。
+
+### microCMS に戻す
+
+1. Vercel（または `.env.local`）に `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` を入れる
+2. 記事の更新を自動反映するなら `MICROCMS_WEBHOOK_SECRET` と、新しい URL 用の `VERCEL_DEPLOY_HOOK_URL` も戻す
+3. 再デプロイする
+
+コードの削除や分岐の書き換えは要りません。キーがあるビルドはライブの API を読み、画像もその場で取り直します。
+
+### スナップショットを microCMS から更新する
+
+管理画面の内容をリポジトリに取り込み直すときです。
+
+```bash
+# .env.local に API キーとサービスドメインを書いてから
+npm run cms:export
+npm run cms:mirror-local
+```
+
+`cms:export` が `data/cms` を上書きします。`cms:mirror-local` が本文中の画像も含めて `public/cms-images` とマニフェストを作り直します。画像が 1 枚でも失敗したらコマンドは失敗します。成功したら `data/cms`、`public/cms-images`、`lib/microcms/image-manifest.json` をコミットしてください。
+
+### 静的モードで文章や画像を直す
+
+API を使わずに直すときは、JSON を編集します。フィールド名は microCMS のレスポンスのままです。
+
+- 企画のタイトルや本文: `data/cms/events.json` の `title`、`description`、`organ-description`
+- お知らせ: `data/cms/news.json` の `title`、`content`、`date`
+- パート: `data/cms/parts.json`
+- 協賛: `data/cms/sponsors.json`
+
+本文の HTML に新しい `images.microcms-assets.io` の URL を足したら、`npm run cms:mirror-local` を実行して画像をローカルに置いてください。実行しないと、その画像だけ microCMS へ取りに行きます。
+
+すでにマニフェストにある画像の絵だけ替えるときは、対応する `public/cms-images/` のファイルを同じ名前で差し替えます。JSON の URL は変えません。
+
+開発サーバーは JSON の import をキャッシュすることがあります。編集したあとに反映されなければ、`npm run dev` を起動し直してください。
+
+企画・お知らせの新しい URL（新しい `slug` やお知らせ `id`）は、静的ビルドでは `dynamicParams = false` のままです。JSON に足したあとに再ビルドするとページができます。
 
 ---
 

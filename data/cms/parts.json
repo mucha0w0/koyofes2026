@@ -1,0 +1,201 @@
+{
+  "contents": [
+    {
+      "id": "pbmu9a81e",
+      "createdAt": "2026-10-07T02:21:51.535Z",
+      "updatedAt": "2026-10-27T00:49:30.685Z",
+      "publishedAt": "2026-10-07T02:21:51.535Z",
+      "revisedAt": "2026-10-27T00:49:30.685Z",
+      "name": "実行委員",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/ce29bfc3e0f24886be5f09493c082315/omote-masanari.jpeg",
+        "height": 2730,
+        "width": 1536
+      },
+      "instaID": "massa_0610",
+      "explanation": "こうようさいの1番偉い人です。みんなを見てます",
+      "category": [
+        "EXECUTIVE"
+      ],
+      "recommend": "event-youtuber",
+      "whyrecom": "YouTube決定戦 ぼくがYouTube好きなので"
+    },
+    {
+      "id": "mktgv88r6fq",
+      "createdAt": "2026-06-24T04:30:34.763Z",
+      "updatedAt": "2026-10-07T02:19:29.114Z",
+      "publishedAt": "2026-06-24T04:30:34.763Z",
+      "revisedAt": "2026-10-07T02:19:29.114Z",
+      "name": "システムパート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8aae019037674c9abd1a2f1c9c688758/fujishiro-tetsuki.jpeg",
+        "height": 1254,
+        "width": 1254
+      },
+      "explanation": "ホームページの作成運用や、学校から物を借りたりする影で活躍するパートです！！",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "club-barbar-iwama",
+      "whyrecom": "バーバー岩間 暇な時は僕がいます！！！"
+    },
+    {
+      "id": "as4zbuh2ic",
+      "createdAt": "2026-06-24T04:30:22.004Z",
+      "updatedAt": "2026-10-07T02:19:03.345Z",
+      "publishedAt": "2026-06-24T04:30:22.004Z",
+      "revisedAt": "2026-10-07T02:19:03.345Z",
+      "name": "展示パート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/fa6ec4b4304e484c9484e4d0d73f5acd/matsura-miri.png",
+        "height": 1254,
+        "width": 1254
+      },
+      "explanation": "展示代表者会の資料作成、運営や購入物品、借用物品の受け渡しなどをしています❕",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "club-badminton",
+      "whyrecom": "全展示！！！！全部回ります！楽しみです！\nバド部のポテトも買いにきてください❤️❤️"
+    },
+    {
+      "id": "tlwpfpvvba-w",
+      "createdAt": "2026-06-24T04:30:07.324Z",
+      "updatedAt": "2026-10-28T13:22:34.856Z",
+      "publishedAt": "2026-06-24T04:30:07.324Z",
+      "revisedAt": "2026-10-28T13:22:34.856Z",
+      "name": "電源パート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/f44b672e722b4a86b38e1e1f04317216/image_%E6%99%A6%E6%97%A5%20%E7%A7%80%E7%BF%94.jpg",
+        "height": 3024,
+        "width": 4032
+      },
+      "instaID": "yamahununu",
+      "explanation": "クラス展示や模擬店、毎日の準備で使う電源申請を取りまとめて管理しています！さらにリハーサルや当日の安全なコード配線、ファイヤーやはたひんのハロゲンも担当してます！",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "event-hiphop",
+      "whyrecom": "それはヒップホップ決定戦です！一番盛り上がる企画です！"
+    },
+    {
+      "id": "uoek3jgtc",
+      "createdAt": "2026-06-24T04:29:32.523Z",
+      "updatedAt": "2026-10-27T00:49:48.945Z",
+      "publishedAt": "2026-06-24T04:29:32.523Z",
+      "revisedAt": "2026-10-27T00:49:48.945Z",
+      "name": "広報パート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/8604bc1c210e450183ca2c0c71e858b6/honda-subaru.jpeg",
+        "height": 4284,
+        "width": 5712
+      },
+      "explanation": "こうよう祭の魅力を、たくさんの人に知ってもらうために活動しています!!\n\nパンフレットやポスター、PR動画など、こうよう祭を盛り上げるための広報物を制作しています📣✨\n\nそして当日は、メイキャンを連れて校内を歩き回っています!!\n運が良ければ、メイキャンに会えるかも……!?",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "class-4e",
+      "whyrecom": "「4E」電気科が学科展で優勝してるところをまだ見たことないから。"
+    },
+    {
+      "id": "2ynyt20a74",
+      "createdAt": "2026-06-24T04:29:18.877Z",
+      "updatedAt": "2026-10-28T13:22:22.538Z",
+      "publishedAt": "2026-06-24T04:29:18.877Z",
+      "revisedAt": "2026-10-28T13:22:22.538Z",
+      "name": "マネジメントパート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/38f53ef91da4488cb71202bf64f92ae2/S__14303328.jpg",
+        "height": 1108,
+        "width": 1477
+      },
+      "instaID": "karimon0kis",
+      "explanation": "マネジメントパートはこうよう祭の体育館ステージを設営したり、キッチンカーを決めたり、模擬店の運営をしたりします！大変だけどやりがいのある仕事です!ファイヤーもマネジメントの一部で毎日練習してます。",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "event-utaou",
+      "whyrecom": "パーリーの活躍を見ていてください"
+    },
+    {
+      "id": "ml41ypj9v",
+      "createdAt": "2026-06-24T04:29:00.111Z",
+      "updatedAt": "2026-10-07T02:48:18.798Z",
+      "publishedAt": "2026-06-24T04:29:00.111Z",
+      "revisedAt": "2026-10-07T02:48:18.798Z",
+      "name": "装飾パート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/c2ed2bf865984e6b9c2d7f794626829f/kawabe-keita.jpeg",
+        "height": 2508,
+        "width": 1672
+      },
+      "instaID": "sosyoku2026",
+      "explanation": "こうよう祭のステージに建っているバックボードや垂れ幕、みんなな休憩できるようなベンチを作ってます‼️\n今年のバックボードは色の種類が多く20色もあります❗️めちゃくちゃかわいいバックボードなので皆んな写真を撮ってください‼️",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "kyudo-club",
+      "whyrecom": "弓道部のドーナツ 自分が弓道部で普段食べててめちゃくちゃ美味しいから。"
+    },
+    {
+      "id": "by-d06tkwjiy",
+      "createdAt": "2026-06-24T04:27:25.220Z",
+      "updatedAt": "2026-10-27T00:53:42.999Z",
+      "publishedAt": "2026-06-24T04:27:25.220Z",
+      "revisedAt": "2026-10-27T00:53:42.999Z",
+      "name": "音響パート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/13222e762eea47f8b3461d828244270b/hayashi-shion.jpg",
+        "height": 500,
+        "width": 500
+      },
+      "instaID": "onkyo_2026",
+      "explanation": "音響パートはその名のとおり音響に関わる仕事をするパートです！イベント、ファイヤーなどをBGMや効果音で支えます。こうよう祭当日はステージ横のテント下か体育館のまんなかで活動しているのでぜひ見つけてみてください！！",
+      "category": [
+        "PARTS"
+      ],
+      "recommend": "event-hiphop",
+      "whyrecom": "おすすめは「Hip-Hop選手権」というイベントです。イケてる参加者と一緒に盛り上がろう！参加者同士のラップバトルは必見！！"
+    },
+    {
+      "id": "2lud9x9q7",
+      "createdAt": "2026-06-23T14:22:58.234Z",
+      "updatedAt": "2026-10-07T02:19:56.189Z",
+      "publishedAt": "2026-06-23T14:22:58.234Z",
+      "revisedAt": "2026-10-07T02:19:56.189Z",
+      "name": "イベントパート",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/5e0975b8ca5c457580f96bc9cc1faf8d/tani-kaisei.jpeg",
+        "height": 3024,
+        "width": 4032
+      },
+      "instaID": "event.taro.jp",
+      "explanation": "イベントパートは、こうよう祭を盛り上げるステージイベントの企画や運営を行っています。\n今年も、最高のメンバーが最高のイベントを考えてくれました。",
+      "category": [
+        "PARTS"
+      ],
+      "whyrecom": "僕がおすすめするのは、ビンゴです。紹介するまでもないと思いますが、毎年恒例の大人気イベントです！ビンゴコールで司会が盛り上げてくれるので、最高に楽しいです。ぜひ参加しましょう！"
+    },
+    {
+      "id": "ul_7andvyt",
+      "createdAt": "2026-06-23T14:20:50.526Z",
+      "updatedAt": "2026-10-07T02:19:15.496Z",
+      "publishedAt": "2026-06-23T14:20:50.526Z",
+      "revisedAt": "2026-10-07T02:19:15.496Z",
+      "name": "司会",
+      "icon": {
+        "url": "https://images.microcms-assets.io/assets/2879c06a74ef4ffd9832bd38217fbefe/872745d43e6f4580a35558377e644474/nakajo-rina.jpeg",
+        "height": 1477,
+        "width": 1108
+      },
+      "instaID": "koyofes_mc",
+      "explanation": "私たちは、これまで誰よりもこうようさいを楽しみに待ち望んでいました！！みなさんに最高の思い出を届けられるよう、私たち司会が、会場にいるみんなを誰よりも盛り上げます！！\n1dearland司会4人全力で頑張ります！！",
+      "category": [
+        "MC"
+      ],
+      "recommend": "club-barbar-iwama",
+      "whyrecom": "私たちの衣装を作ってくれたjorry_costumeさん(模擬店)‼️ 司会いわまそうくんの模擬店barbar岩間 当日は忙しくていわまそうはいないかもですがぜひ行ってみてください‼️"
+    }
+  ],
+  "totalCount": 10
+}
