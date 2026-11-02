@@ -48,7 +48,7 @@ export interface StampCollectSuccess {
 /** POST /api/stamp エラーレスポンス */
 export interface StampCollectError {
   error: string;
-  code?: 'INVALID_TOKEN' | 'MISCONFIGURED' | 'BAD_REQUEST' | 'SERVER_ERROR';
+  code?: 'INVALID_TOKEN' | 'MISCONFIGURED' | 'BAD_REQUEST' | 'SERVER_ERROR' | 'PERIOD_ENDED';
 }
 
 /** POST /api/stamp/verify 成功レスポンス */

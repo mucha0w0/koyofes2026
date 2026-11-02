@@ -11,10 +11,11 @@ import { Button } from '@/components/ui/button';
 
 import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
+import { isStampCollectionOpen } from '@/lib/config/stampConfig';
 import { isInAppBrowser } from '@/lib/stamp/in-app-browser';
 import { addStampEntry, readStampStorage, writeStampStorage } from '@/lib/stamp/storage';
 
-type CollectStatus = 'idle' | 'loading' | 'error';
+type CollectStatus = 'idle' | 'loading' | 'error' | 'closed';
 
 export function StampCollectClient() {
   const searchParams = useSearchParams();
@@ -33,6 +34,13 @@ export function StampCollectClient() {
   useEffect(() => {
     // replaceState で token を URL から消すと searchParams が変わり effect が再実行される。
     // 獲得処理中の再実行ではエラーにせず、ローディング表示を維持する。
+    if (!isStampCollectionOpen()) {
+      started.current = true;
+      window.history.replaceState({}, '', '/stamp/collect');
+      setStatus('closed');
+      return;
+    }
+
     if (!token) {
       if (started.current) {
         return;
@@ -60,6 +68,10 @@ export function StampCollectClient() {
 
         if (!response.ok) {
           const data = (await response.json().catch(() => null)) as StampCollectError | null;
+          if (data?.code === 'PERIOD_ENDED') {
+            setStatus('closed');
+            return;
+          }
           setStatus('error');
           setErrorMessage(data?.error ?? 'スタンプの獲得に失敗しました。');
           return;
@@ -99,6 +111,12 @@ export function StampCollectClient() {
           <p className="text-sm text-muted-foreground leading-relaxed">スタンプを確認しています…</p>
         </div>
       ) : null}
+
+      {status === 'closed' && (
+        <div className="ink-shell bg-card p-6">
+          <p className="text-sm leading-relaxed text-muted-foreground">スタンプ集計期間は終了しました</p>
+        </div>
+      )}
 
       {status === 'error' && (
         <Alert variant="destructive">

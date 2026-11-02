@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
 import { isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isStampCollectionOpen } from '@/lib/config/stampConfig';
 import { recordVisit } from '@/lib/ranking/queries';
 import { getOrCreateVisitorId } from '@/lib/ranking/visitor';
 import { getStampBoothBySlug } from '@/lib/stamp/booths';
@@ -15,6 +16,10 @@ function errorResponse(status: number, error: string, code: StampCollectError['c
 }
 
 export async function POST(request: Request) {
+  if (!isStampCollectionOpen()) {
+    return errorResponse(403, 'スタンプ集計期間は終了しました', 'PERIOD_ENDED');
+  }
+
   let body: unknown;
   try {
     body = await request.json();

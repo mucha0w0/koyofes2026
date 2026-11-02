@@ -26,3 +26,10 @@ export const STAMP_CONFIG = {
   },
   storageKey: 'koyosai_stamp_data_2026',
 } as const;
+
+/** 文化祭の終了（日本時間 2026-11-01 17:00）。これ以降はスタンプを発行しない。 */
+export const STAMP_COLLECTION_END_MS = Date.parse('2026-11-01T17:00:00+09:00');
+
+export function isStampCollectionOpen(now = Date.now()): boolean {
+  return now < STAMP_COLLECTION_END_MS;
+}
