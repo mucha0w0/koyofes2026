@@ -6,6 +6,7 @@ import { RANKING_CONFIG, isWaitLevel, type WaitLevel } from '@/lib/config/rankin
 import { getDb } from '@/lib/ranking/db';
 import { rankingVisits, rankingVotes, rankingWaits } from '@/lib/ranking/schema';
 import { roundWaitLevel, weightedWaitScore } from '@/lib/ranking/score';
+import { rankingSnapshotTime, readRankingSnapshot } from '@/lib/ranking/snapshot';
 
 export class RankingDatabaseUnavailableError extends Error {
   constructor() {
@@ -101,8 +102,29 @@ export interface VoteAggregate {
   starSum: number;
 }
 
+function votesFromSnapshot(): VoteAggregate[] {
+  const grouped = new Map<string, { voteCount: number; starSum: number }>();
+  for (const row of readRankingSnapshot().votes) {
+    if (typeof row.slug !== 'string' || !Number.isInteger(row.stars)) {
+      continue;
+    }
+    const current = grouped.get(row.slug) ?? { voteCount: 0, starSum: 0 };
+    current.voteCount += 1;
+    current.starSum += row.stars;
+    grouped.set(row.slug, current);
+  }
+  return [...grouped].map(([slug, value]) => ({
+    slug,
+    voteCount: value.voteCount,
+    starSum: value.starSum,
+  }));
+}
+
 export async function getVoteAggregates(): Promise<VoteAggregate[]> {
-  const db = await requireDb();
+  const db = await getDb();
+  if (!db) {
+    return votesFromSnapshot();
+  }
   const rows = await db
     .select({
       slug: rankingVotes.slug,
@@ -124,8 +146,26 @@ export interface TrendAggregate {
   uniqueVisitors: number;
 }
 
+function trendsFromSnapshot(): TrendAggregate[] {
+  const sinceMs = rankingSnapshotTime().getTime() - RANKING_CONFIG.trendWindowMs;
+  const grouped = new Map<string, Set<string>>();
+  for (const row of readRankingSnapshot().visits) {
+    const createdMs = Date.parse(row.createdAt);
+    if (!Number.isFinite(createdMs) || createdMs < sinceMs || typeof row.slug !== 'string' || row.visitorKey === '') {
+      continue;
+    }
+    const visitors = grouped.get(row.slug) ?? new Set<string>();
+    visitors.add(row.visitorKey);
+    grouped.set(row.slug, visitors);
+  }
+  return [...grouped].map(([slug, visitors]) => ({ slug, uniqueVisitors: visitors.size }));
+}
+
 export async function getTrendAggregates(since: Date): Promise<TrendAggregate[]> {
-  const db = await requireDb();
+  const db = await getDb();
+  if (!db) {
+    return trendsFromSnapshot();
+  }
   const rows = await db
     .select({
       slug: rankingVisits.slug,
@@ -149,17 +189,7 @@ export interface WaitAggregate {
   lastVotedAt: Date;
 }
 
-export async function getWaitAggregates(since: Date, now = new Date()): Promise<WaitAggregate[]> {
-  const db = await requireDb();
-  const rows = await db
-    .select({
-      slug: rankingWaits.slug,
-      level: rankingWaits.level,
-      createdAt: rankingWaits.createdAt,
-    })
-    .from(rankingWaits)
-    .where(gte(rankingWaits.createdAt, since));
-
+function aggregateWaitRows(rows: { slug: string; level: number; createdAt: Date }[], now: Date): WaitAggregate[] {
   const grouped = new Map<string, { level: number; createdAt: Date }[]>();
   for (const row of rows) {
     if (!isWaitLevel(row.level)) {
@@ -205,4 +235,35 @@ export async function getWaitAggregates(since: Date, now = new Date()): Promise<
   }
 
   return aggregates;
+}
+
+function waitsFromSnapshot(): WaitAggregate[] {
+  const now = rankingSnapshotTime();
+  const sinceMs = now.getTime() - RANKING_CONFIG.waitWindowMs;
+  const rows: { slug: string; level: number; createdAt: Date }[] = [];
+  for (const row of readRankingSnapshot().waits) {
+    const createdAt = new Date(row.createdAt);
+    if (!Number.isFinite(createdAt.getTime()) || createdAt.getTime() < sinceMs || typeof row.slug !== 'string') {
+      continue;
+    }
+    rows.push({ slug: row.slug, level: row.level, createdAt });
+  }
+  return aggregateWaitRows(rows, now);
+}
+
+export async function getWaitAggregates(since: Date, now = new Date()): Promise<WaitAggregate[]> {
+  const db = await getDb();
+  if (!db) {
+    return waitsFromSnapshot();
+  }
+  const rows = await db
+    .select({
+      slug: rankingWaits.slug,
+      level: rankingWaits.level,
+      createdAt: rankingWaits.createdAt,
+    })
+    .from(rankingWaits)
+    .where(gte(rankingWaits.createdAt, since));
+
+  return aggregateWaitRows(rows, now);
 }

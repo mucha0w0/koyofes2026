@@ -24,6 +24,11 @@ const nextConfig = {
     ];
   },
   serverExternalPackages: ['@electric-sql/pglite', 'postgres'],
+  outputFileTracingIncludes: {
+    '/api/ranking': ['./data/ranking/snapshot.json'],
+    '/api/ranking/podium': ['./data/ranking/snapshot.json'],
+    '/api/stamp': ['./data/ranking/snapshot.json'],
+  },
   images: {
     remotePatterns: [
       {

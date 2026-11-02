@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/mirror-cms-images.mjs && next build",
     "cms:export": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-cms.mjs",
+    "ranking:export": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-ranking.mjs",
     "cms:mirror-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/mirror-cms-images.mjs",
     "cms:mirror-local": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/mirror-cms-images.mjs --from-local",
     "test:cms-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/mirror-cms-images.test.mjs scripts/cms-content-filter.test.mjs",

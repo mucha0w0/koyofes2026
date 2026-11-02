@@ -274,7 +274,7 @@ Neon の手順:
 
 ローカルで Neon を使わずに動かす場合は `DATABASE_URL=pglite` でも可（プロセス内メモリ。再起動で消える。本番では使わない）。
 
-`DATABASE_URL` が無いときはスタンプは従来どおり動き、ランキング API は 503 を返します。接続文字列は Git に置かないでください。
+`DATABASE_URL` があるときは Neon から読み書きします。無いときは `data/ranking/snapshot.json` を読み、投票の保存は 503 になります。空文字は未設定と同じです。接続文字列は Git に置かないでください。
 
 ### 設定例（`.env.local`）
 
@@ -481,7 +481,7 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 4. 投票は毎回新しい票。連打防止のため同一企画は約 30 秒空ける
 5. `/ranking` で総合（ベイズ平均）、トレンド（直近 20 分のユニーク来訪）、待ち（直近 15 分・時間荷重）を見る。表示は 60 秒ごとに自動更新する（企画一覧のランキング順も同じ間隔）
 
-開催が終わったら `RANKING_ENABLED` を外すか `false` にして、Neon を起こし続けないようにしてください。
+開催が終わったら `npm run ranking:export` でスナップショットを更新し、Vercel の `DATABASE_URL` を外してください。読み取りは JSON になり、Neon へは繋がりません。来年 `DATABASE_URL` を戻せば、同じコードが再び Neon に読み書きします。順位の画面ごと消すときは `RANKING_ENABLED` を外すか `false` にします。
 
 ---
 
@@ -497,7 +497,7 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 | 企画・お知らせの未知の URL | ページを作らない | `dynamicParams = false` |
 | スタンプ照合・獲得 | 企画一覧と同じタグ付き fetch | `lib/stamp/booths.ts` |
 | microCMS の画像 | コミット済みの静的ファイル。キーがあるビルドだけ取り直す | `public/cms-images`、`scripts/mirror-cms-images.mjs` |
-| ランキング API | `no-store` | `app/api/ranking/route.ts` |
+| ランキング API | `DATABASE_URL` があるときは Neon。無いときは `data/ranking` | `lib/ranking/queries.ts` |
 | ランキングページ | `force-dynamic` | `app/(site)/ranking/page.tsx` |
 
 公開中コンテンツの変更は `POST /api/revalidate` が受けます。microCMS の API 設定 → Webhook → カスタム通知で、`events` / `news` / `parts` / `sponsors` の 4 つから同じ URL に送ってください。シークレットは `MICROCMS_WEBHOOK_SECRET` と同じ値です。
@@ -518,7 +518,7 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 | **両方ない** | `data/cms` の JSON と `public/cms-images` の画像だけを使う。ビルドも表示も microCMS に接続しない |
 | **片方だけ** | 設定ミスとしてビルドを止める。静的データには落ちない |
 
-空文字は未設定と同じです。スタンプラリーの対象ブースは企画（`events`）から作るので、どちらのモードでも同じ関数で動きます。ランキングの Neon はそのままです。
+空文字は未設定と同じです。スタンプラリーの対象ブースは企画（`events`）から作るので、どちらのモードでも同じ関数で動きます。ランキングは別変数 `DATABASE_URL` で、同じように Neon と `data/ranking` を切り替えます。
 
 祭後の公開では、Vercel の `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` を外してください。残っていると、デプロイのたびに microCMS へ取りに行きます。
 

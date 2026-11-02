@@ -1,0 +1,7 @@
+{
+  "exportedAt": "2026-11-02T04:23:30.857Z",
+  "votes": 8391,
+  "visits": 10366,
+  "waits": 8390,
+  "note": "visitor_id はファイル内の連番に置き換え済み。DATABASE_URL が無いときは snapshot.json を読む。"
+}

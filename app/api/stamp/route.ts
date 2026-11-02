@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import type { StampCollectError, StampCollectSuccess } from '@/lib/types/stamp';
 
-import { isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
 import { recordVisit } from '@/lib/ranking/queries';
 import { getOrCreateVisitorId } from '@/lib/ranking/visitor';
 import { getStampBoothBySlug } from '@/lib/stamp/booths';
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     return errorResponse(503, 'スタンプラリーの設定が完了していません', 'MISCONFIGURED');
   }
 
-  if (isRankingEnabled()) {
+  if (isRankingEnabled() && isRankingDatabaseConfigured()) {
     try {
       const visitorId = await getOrCreateVisitorId();
       await recordVisit(visitorId, booth.slug);

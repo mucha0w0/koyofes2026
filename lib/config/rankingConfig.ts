@@ -48,6 +48,7 @@ export function isRankingEnabled(): boolean {
   return value.toLowerCase() === 'true' || value === '1';
 }
 
+/** 接続文字列があるときだけ Neon。無いときは data/ranking のスナップショットを読む。 */
 export function isRankingDatabaseConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL?.trim());
 }

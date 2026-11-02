@@ -7,7 +7,7 @@ import { RelatedLinks } from '@/components/layout/related-links';
 import { StampBook } from '@/components/stamp/stamp-book';
 import { StampSuggestions } from '@/components/stamp/stamp-suggestions';
 
-import { isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
 import { getStampBoothGroups } from '@/lib/stamp/booths';
 
 export const metadata = {
@@ -18,7 +18,7 @@ export const metadata = {
 
 export default async function StampPage() {
   const groups = await getStampBoothGroups();
-  const rankingEnabled = isRankingEnabled();
+  const rankingEnabled = isRankingEnabled() && isRankingDatabaseConfigured();
   const booths = groups.flatMap((group) => group.booths);
 
   return (

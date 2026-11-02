@@ -13,6 +13,8 @@
  *   （お知らせ JSON 自体はタグ付き fetch キャッシュ）
  * - `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が両方あれば microCMS。
  *   両方無ければ `data/cms` と `public/cms-images` のスナップショット（API も画像も叩かない）
+ * - ランキングは `DATABASE_URL` があれば Neon。無ければ `data/ranking/snapshot.json`。
+ *   投票の書き込みは URL があるときだけ
  * - 画像は `public/cms-images` の静的ファイル。`next/image` の最適化は通さない。
  *   マニフェストに無い URL だけは images.microcms-assets.io に落ちる
  *

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import type { RankingApiError, RankingPodiumResponse } from '@/lib/types/ranking';
 
-import { isRankingAggregationOpen, isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
+import { isRankingAggregationOpen, isRankingEnabled } from '@/lib/config/rankingConfig';
 import { getRankingPodium } from '@/lib/ranking/board';
 import { RankingDatabaseUnavailableError } from '@/lib/ranking/queries';
 
@@ -55,10 +55,6 @@ async function readPodium(): Promise<RankingPodiumResponse> {
 export async function GET() {
   if (!isRankingEnabled()) {
     return errorResponse(403, 'ランキングは現在公開していません', 'RANKING_DISABLED');
-  }
-
-  if (!isRankingDatabaseConfigured()) {
-    return errorResponse(503, 'ランキングの保存先が設定されていません', 'DB_UNAVAILABLE');
   }
 
   if (!isRankingAggregationOpen()) {

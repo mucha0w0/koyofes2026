@@ -5,6 +5,7 @@ import type { RankingApiError, RankingResponse } from '@/lib/types/ranking';
 import { isRankingDatabaseConfigured, isRankingEnabled } from '@/lib/config/rankingConfig';
 import { listOverallRanking, listTrendRanking, listWaitRanking, loadRankingBooths } from '@/lib/ranking/board';
 import { RankingDatabaseUnavailableError } from '@/lib/ranking/queries';
+import { rankingSnapshotTime } from '@/lib/ranking/snapshot';
 
 function errorResponse(status: number, error: string, code: RankingApiError['code']) {
   const body: RankingApiError = { error, code };
@@ -20,10 +21,6 @@ export async function GET(request: Request) {
     return errorResponse(403, 'ランキングは現在公開していません', 'RANKING_DISABLED');
   }
 
-  if (!isRankingDatabaseConfigured()) {
-    return errorResponse(503, 'ランキングの保存先が設定されていません', 'DB_UNAVAILABLE');
-  }
-
   const { searchParams } = new URL(request.url);
   const tabParam = searchParams.get('tab');
   const tab = tabParam === 'trend' ? 'trend' : tabParam === 'wait' ? 'wait' : 'overall';
@@ -36,7 +33,7 @@ export async function GET(request: Request) {
     return errorResponse(500, '企画情報の取得に失敗しました', 'SERVER_ERROR');
   }
 
-  const generatedAt = new Date().toISOString();
+  const generatedAt = (isRankingDatabaseConfigured() ? new Date() : rankingSnapshotTime()).toISOString();
 
   try {
     if (tab === 'trend') {
