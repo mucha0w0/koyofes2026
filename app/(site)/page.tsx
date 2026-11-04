@@ -1,6 +1,7 @@
 import { EventSearchSection } from '@/components/events/event-search';
 import { CategoryEvents } from '@/components/home/category-events';
 import { FestivalCountdown } from '@/components/home/festival-countdown';
+import { FestivalEndedNotice } from '@/components/home/festival-ended-notice';
 import { FestivalTicker } from '@/components/home/festival-ticker';
 import { HeroSection } from '@/components/home/hero-section';
 import { LinksSection } from '@/components/home/links-section';
@@ -16,6 +17,7 @@ import { NewsSection } from '@/components/news/news-section';
 export default function HomePage() {
   return (
     <main>
+      <FestivalEndedNotice />
       <HeroSection />
       <FestivalCountdown />
       <EventSearchSection variant="prominent" />
