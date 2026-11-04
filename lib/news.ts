@@ -44,7 +44,11 @@ export const getNewsByID = cache(
     try {
       const idTag = newsIdTag(id);
       const news = await fetchMicroCMSContent<MicroCMSNews>('news', id, cacheMode, idTag ? [idTag] : undefined);
-      return news ? deliverNews(news) : null;
+      if (news) {
+        return deliverNews(news);
+      }
+      const fromList = (await fetchNewsFromMicroCMS(cacheMode)).find((item) => item.id === id);
+      return fromList ? deliverNews(fromList) : null;
     } catch (error) {
       console.error(`ニュース取得に失敗しました (id=${id}):`, error);
       throw error;

@@ -17,7 +17,17 @@ export interface MicroCMSListQuery {
 /**
  * 両方あれば microCMS。両方なければ data/cms のスナップショット。
  * 片方だけだと設定ミスなので、静的データに黙って落ちない。
+ * 両方あっても API が 404 などで失敗したら、そのプロセスはスナップショットに切り替える。
  */
+let usingLocalSnapshot = false;
+
+function fallbackToLocalSnapshot(reason: string): void {
+  if (!usingLocalSnapshot) {
+    console.warn(`microCMS を使えないため data/cms を読みます (${reason})`);
+  }
+  usingLocalSnapshot = true;
+}
+
 function getMicroCMSConfig(): { apiKey: string; serviceDomain: string } | null {
   const apiKey = process.env.MICROCMS_API_KEY?.trim();
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN?.trim();
@@ -61,7 +71,7 @@ async function fetchMicroCMSListPage<T>(
   tags?: readonly string[],
 ): Promise<MicroCMSListResponse<T>> {
   const config = getMicroCMSConfig();
-  if (!config) {
+  if (!config || usingLocalSnapshot) {
     return readLocalMicroCMSList<T>(endpoint, query);
   }
   const { apiKey, serviceDomain } = config;
@@ -75,13 +85,21 @@ async function fetchMicroCMSListPage<T>(
   }
   const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}?${params.toString()}`;
 
-  const response = await fetch(url, {
-    headers: { 'X-MICROCMS-API-KEY': apiKey },
-    ...resolveFetchCache(cacheMode, endpoint, tags),
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: { 'X-MICROCMS-API-KEY': apiKey },
+      ...resolveFetchCache(cacheMode, endpoint, tags),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'fetch failed';
+    fallbackToLocalSnapshot(`${endpoint} ${message}`);
+    return readLocalMicroCMSList<T>(endpoint, query);
+  }
 
   if (!response.ok) {
-    throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
+    fallbackToLocalSnapshot(`${endpoint} ${response.status}`);
+    return readLocalMicroCMSList<T>(endpoint, query);
   }
 
   return response.json() as Promise<MicroCMSListResponse<T>>;
@@ -146,23 +164,31 @@ export async function fetchMicroCMSContent<T>(
   tags?: readonly string[],
 ): Promise<T | null> {
   const config = getMicroCMSConfig();
-  if (!config) {
+  if (!config || usingLocalSnapshot) {
     return readLocalMicroCMSContent<T & { id: string }>(endpoint, contentId);
   }
   const { apiKey, serviceDomain } = config;
   const url = `https://${serviceDomain}.microcms.io/api/v1/${endpoint}/${contentId}`;
 
-  const response = await fetch(url, {
-    headers: { 'X-MICROCMS-API-KEY': apiKey },
-    ...resolveFetchCache(cacheMode, endpoint, tags),
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: { 'X-MICROCMS-API-KEY': apiKey },
+      ...resolveFetchCache(cacheMode, endpoint, tags),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'fetch failed';
+    fallbackToLocalSnapshot(`${endpoint}/${contentId} ${message}`);
+    return readLocalMicroCMSContent<T & { id: string }>(endpoint, contentId);
+  }
 
   if (response.status === 404) {
     return null;
   }
 
   if (!response.ok) {
-    throw new Error(`microCMS API エラー: ${response.status} ${response.statusText}`);
+    fallbackToLocalSnapshot(`${endpoint}/${contentId} ${response.status}`);
+    return readLocalMicroCMSContent<T & { id: string }>(endpoint, contentId);
   }
 
   return response.json() as Promise<T>;

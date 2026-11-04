@@ -514,13 +514,13 @@ node scripts/generate-stamp-tokens.mjs --force-rotate
 
 | 状態 | 動き |
 |------|------|
-| `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が**両方ある** | 今までどおり microCMS から取得する。ビルド時に画像も取り直す |
-| **両方ない** | `data/cms` の JSON と `public/cms-images` の画像だけを使う。ビルドも表示も microCMS に接続しない |
+| `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` が**両方ある** | 今までどおり microCMS から取得する。ビルド時に画像も取り直す。API が 404 などで失敗したときは `data/cms` とコミット済み画像に落ち、ビルドは止めない |
+| **両方ない**（空文字も未設定） | `data/cms` の JSON と `public/cms-images` の画像だけを使う。ビルドも表示も microCMS に接続しない |
 | **片方だけ** | 設定ミスとしてビルドを止める。静的データには落ちない |
 
 空文字は未設定と同じです。スタンプラリーの対象ブースは企画（`events`）から作るので、どちらのモードでも同じ関数で動きます。ランキングは別変数 `DATABASE_URL` で、同じように Neon と `data/ranking` を切り替えます。
 
-祭後の公開では、Vercel の `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` を外してください。残っていると、デプロイのたびに microCMS へ取りに行きます。
+祭後の公開では、Vercel の `MICROCMS_API_KEY` と `MICROCMS_SERVICE_DOMAIN` を**変数ごと削除**してください。値の欄を空にして保存しても、Sensitive の変数は前の値が残ります。残っているとデプロイのたびに microCMS へ取りに行きます。取りに行って失敗した場合は、ビルドを止めずにスナップショットを使います。
 
 スナップショットの中身は公開済みの一覧 API レスポンスです（`{"contents":[...],"totalCount":N}`、`depth=3`）。
 

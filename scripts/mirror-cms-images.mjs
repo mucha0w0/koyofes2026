@@ -367,8 +367,15 @@ async function main() {
     return;
   }
 
-  const result = await mirrorCmsImages({ apiKey, serviceDomain });
-  reportMirrorResult(result);
+  try {
+    const result = await mirrorCmsImages({ apiKey, serviceDomain });
+    reportMirrorResult(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(
+      `microCMS images: ライブ取得に失敗しました (${message})。コミット済みの public/cms-images を使います。`,
+    );
+  }
 }
 
 const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
