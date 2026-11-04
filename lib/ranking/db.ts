@@ -3,6 +3,7 @@ import 'server-only';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { sql } from 'drizzle-orm';
 import { drizzle as drizzlePg, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
@@ -39,13 +40,38 @@ async function createPgliteDb(): Promise<RankingDatabase> {
   return drizzle(client, { schema }) as unknown as RankingDatabase;
 }
 
-function createPostgresDb(url: string): RankingDatabase {
+const CONNECT_TIMEOUT_MS = 3000;
+
+async function connectPostgres(url: string): Promise<RankingDatabase | null> {
   const client = postgres(url, {
     max: 1,
     idle_timeout: 20,
-    connect_timeout: 10,
+    connect_timeout: CONNECT_TIMEOUT_MS / 1000,
   });
-  return drizzlePg(client, { schema });
+  const db = drizzlePg(client, { schema });
+  const probe = db.execute(sql`select 1`);
+  void probe.catch(() => undefined);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    await Promise.race([
+      probe,
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new Error('DATABASE_URL への接続がタイムアウトしました')), CONNECT_TIMEOUT_MS);
+      }),
+    ]);
+    return db;
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : 'connection failed';
+    console.error(
+      `DATABASE_URL へ接続できないためランキングはスナップショットを使います: ${detail.replace(/postgres(?:ql)?:\/\/\S+/gi, 'postgresql://…')}`,
+    );
+    void client.end({ timeout: 1 });
+    return null;
+  } finally {
+    if (timer) {
+      clearTimeout(timer);
+    }
+  }
 }
 
 async function connect(): Promise<RankingDatabase | null> {
@@ -56,10 +82,10 @@ async function connect(): Promise<RankingDatabase | null> {
   if (isPgliteUrl(url)) {
     return createPgliteDb();
   }
-  return createPostgresDb(url);
+  return connectPostgres(url);
 }
 
-/** DATABASE_URL 未設定なら null。呼び出し側で 503 / スキップする。 */
+/** DATABASE_URL が無い、または接続できないときは null。読み取りはスナップショットに落ちる。 */
 export function getDb(): Promise<RankingDatabase | null> {
   if (!globalForRanking.koyofesRankingDb) {
     globalForRanking.koyofesRankingDb = connect().catch((error) => {

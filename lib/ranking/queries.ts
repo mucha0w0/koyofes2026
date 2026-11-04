@@ -3,7 +3,7 @@ import 'server-only';
 import { and, count, countDistinct, eq, gte, sum } from 'drizzle-orm';
 
 import { RANKING_CONFIG, isWaitLevel, type WaitLevel } from '@/lib/config/rankingConfig';
-import { getDb } from '@/lib/ranking/db';
+import { getDb, type RankingDatabase } from '@/lib/ranking/db';
 import { rankingVisits, rankingVotes, rankingWaits } from '@/lib/ranking/schema';
 import { roundWaitLevel, weightedWaitScore } from '@/lib/ranking/score';
 import { rankingSnapshotTime, readRankingSnapshot } from '@/lib/ranking/snapshot';
@@ -125,6 +125,15 @@ export async function getVoteAggregates(): Promise<VoteAggregate[]> {
   if (!db) {
     return votesFromSnapshot();
   }
+  try {
+    return await voteAggregatesFromDb(db);
+  } catch (error) {
+    console.error('ランキングDBの読み取りに失敗したためスナップショットを使います', error);
+    return votesFromSnapshot();
+  }
+}
+
+async function voteAggregatesFromDb(db: RankingDatabase): Promise<VoteAggregate[]> {
   const rows = await db
     .select({
       slug: rankingVotes.slug,
@@ -166,6 +175,15 @@ export async function getTrendAggregates(since: Date): Promise<TrendAggregate[]>
   if (!db) {
     return trendsFromSnapshot();
   }
+  try {
+    return await trendAggregatesFromDb(db, since);
+  } catch (error) {
+    console.error('ランキングDBの読み取りに失敗したためスナップショットを使います', error);
+    return trendsFromSnapshot();
+  }
+}
+
+async function trendAggregatesFromDb(db: RankingDatabase, since: Date): Promise<TrendAggregate[]> {
   const rows = await db
     .select({
       slug: rankingVisits.slug,
@@ -256,6 +274,15 @@ export async function getWaitAggregates(since: Date, now = new Date()): Promise<
   if (!db) {
     return waitsFromSnapshot();
   }
+  try {
+    return await waitAggregatesFromDb(db, since, now);
+  } catch (error) {
+    console.error('ランキングDBの読み取りに失敗したためスナップショットを使います', error);
+    return waitsFromSnapshot();
+  }
+}
+
+async function waitAggregatesFromDb(db: RankingDatabase, since: Date, now: Date): Promise<WaitAggregate[]> {
   const rows = await db
     .select({
       slug: rankingWaits.slug,
